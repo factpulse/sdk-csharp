@@ -9,10 +9,10 @@ Name | Type | Description | Notes
 **Denomination** | **string** |  | 
 **Quantite** | [**Quantite**](Quantite.md) |  | 
 **Unite** | **Unite** |  | 
-**MontantUnitaireHt** | [**Montantunitaireht**](Montantunitaireht.md) |  | 
+**MontantUnitaireHt** | [**MontantUnitaireHt**](MontantUnitaireHt.md) |  | 
 **Reference** | **string** |  | [optional] 
 **MontantRemiseHt** | [**LigneDePosteMontantRemiseHt**](LigneDePosteMontantRemiseHt.md) |  | [optional] 
-**MontantTotalLigneHt** | [**LigneDePosteMontantTotalLigneHt**](LigneDePosteMontantTotalLigneHt.md) |  | [optional] 
+**MontantTotalLigneHt** | [**MontantTotalLigneHt**](MontantTotalLigneHt.md) |  | [optional] 
 **TauxTva** | **string** |  | [optional] 
 **TauxTvaManuel** | [**LigneDePosteTauxTvaManuel**](LigneDePosteTauxTvaManuel.md) |  | [optional] 
 **CategorieTva** | **CategorieTVA** |  | [optional] 

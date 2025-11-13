@@ -1,5 +1,5 @@
-# FactPulse.SDK.Model.Montanthttotal
-Montant total HT.
+# FactPulse.SDK.Model.MontantTotalLigneHt
+Montant total HT de la ligne (quantité × prix unitaire - remise).
 
 ## Properties
 

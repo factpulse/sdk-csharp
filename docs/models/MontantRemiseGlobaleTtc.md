@@ -1,5 +1,5 @@
-# FactPulse.SDK.Model.Montantunitaireht
-Montant unitaire Hors Taxes de l'article.
+# FactPulse.SDK.Model.MontantRemiseGlobaleTtc
+Montant de la remise globale TTC.
 
 ## Properties
 

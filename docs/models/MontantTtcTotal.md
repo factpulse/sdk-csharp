@@ -1,4 +1,5 @@
 # FactPulse.SDK.Model.MontantTtcTotal
+Montant total TTC.
 
 ## Properties
 

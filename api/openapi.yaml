@@ -4404,11 +4404,11 @@ components:
         unite:
           $ref: "#/components/schemas/Unite"
         montantUnitaireHt:
-          $ref: "#/components/schemas/Montantunitaireht"
+          $ref: "#/components/schemas/MontantUnitaireHt"
         montantRemiseHt:
           $ref: "#/components/schemas/LigneDePoste_montantRemiseHt"
         montantTotalLigneHt:
-          $ref: "#/components/schemas/LigneDePoste_montantTotalLigneHt"
+          $ref: "#/components/schemas/MontantTotalLigneHt"
         tauxTva:
           nullable: true
           type: string
@@ -4438,9 +4438,9 @@ components:
       description: Représente une ligne de totalisation par taux de TVA.
       properties:
         montantBaseHt:
-          $ref: "#/components/schemas/Montantbaseht"
+          $ref: "#/components/schemas/MontantBaseHt"
         montantTva:
-          $ref: "#/components/schemas/Montanttva"
+          $ref: "#/components/schemas/MontantTva"
         taux:
           nullable: true
           type: string
@@ -4475,17 +4475,17 @@ components:
       description: Contient tous les montants totaux de la facture.
       properties:
         montantHtTotal:
-          $ref: "#/components/schemas/Montanthttotal"
+          $ref: "#/components/schemas/MontantHtTotal"
         montantTva:
-          $ref: "#/components/schemas/Montanttva_1"
+          $ref: "#/components/schemas/MontantTva_1"
         montantTtcTotal:
-          $ref: "#/components/schemas/Montantttctotal"
+          $ref: "#/components/schemas/MontantTtcTotal"
         montantAPayer:
-          $ref: "#/components/schemas/Montantapayer"
+          $ref: "#/components/schemas/MontantAPayer"
         acompte:
           $ref: "#/components/schemas/MontantTotal_acompte"
         montantRemiseGlobaleTtc:
-          $ref: "#/components/schemas/MontantTotal_montantRemiseGlobaleTtc"
+          $ref: "#/components/schemas/MontantRemiseGlobaleTtc"
         motifRemiseGlobaleTtc:
           nullable: true
           type: string
@@ -5077,14 +5077,14 @@ components:
         type: string
       description: Quantité facturée pour cette ligne.
       title: Quantite
-    Montantunitaireht:
+    MontantUnitaireHt:
       anyOf:
       - type: number
       - pattern: "^(?!^[-+.]*$)[+-]?0*(?:\\d{0,8}|(?=[\\d.]{1,13}0*$)\\d{0,8}\\.\\\
           d{0,4}0*$)"
         type: string
       description: Montant unitaire Hors Taxes de l'article.
-      title: Montantunitaireht
+      title: MontantUnitaireHt
     LigneDePoste_montantRemiseHt:
       anyOf:
       - minimum: 0.0
@@ -5094,7 +5094,7 @@ components:
         type: string
       description: Montant de la remise HT.
       nullable: true
-    LigneDePoste_montantTotalLigneHt:
+    MontantTotalLigneHt:
       anyOf:
       - minimum: 0.0
         type: number
@@ -5103,6 +5103,7 @@ components:
         type: string
       description: Montant total HT de la ligne (quantité × prix unitaire - remise).
       nullable: true
+      title: MontantTotalLigneHt
     LigneDePoste_tauxTvaManuel:
       anyOf:
       - minimum: 0.0
@@ -5112,7 +5113,7 @@ components:
         type: string
       description: Taux de TVA avec valeur manuelle.
       nullable: true
-    Montantbaseht:
+    MontantBaseHt:
       anyOf:
       - minimum: 0.0
         type: number
@@ -5120,8 +5121,8 @@ components:
           d{0,4}0*$)"
         type: string
       description: Montant de la base HT pour cette ligne de TVA.
-      title: Montantbaseht
-    Montanttva:
+      title: MontantBaseHt
+    MontantTva:
       anyOf:
       - minimum: 0.0
         type: number
@@ -5129,7 +5130,7 @@ components:
           d{0,4}0*$)"
         type: string
       description: Montant de la TVA pour cette ligne.
-      title: Montanttva
+      title: MontantTva
     Tauxmanuel:
       anyOf:
       - minimum: 0.0
@@ -5139,7 +5140,7 @@ components:
         type: string
       description: Taux de TVA avec valeur manuelle.
       title: Tauxmanuel
-    Montanthttotal:
+    MontantHtTotal:
       anyOf:
       - minimum: 0.0
         type: number
@@ -5147,8 +5148,8 @@ components:
           d{0,4}0*$)"
         type: string
       description: Montant total HT.
-      title: Montanthttotal
-    Montanttva_1:
+      title: MontantHtTotal
+    MontantTva_1:
       anyOf:
       - minimum: 0.0
         type: number
@@ -5156,8 +5157,8 @@ components:
           d{0,4}0*$)"
         type: string
       description: Montant total de la TVA.
-      title: Montanttva
-    Montantttctotal:
+      title: MontantTva
+    MontantTtcTotal:
       anyOf:
       - minimum: 0.0
         type: number
@@ -5165,8 +5166,8 @@ components:
           d{0,4}0*$)"
         type: string
       description: Montant total TTC.
-      title: Montantttctotal
-    Montantapayer:
+      title: MontantTtcTotal
+    MontantAPayer:
       anyOf:
       - minimum: 0.0
         type: number
@@ -5174,7 +5175,7 @@ components:
           d{0,4}0*$)"
         type: string
       description: Montant à payer.
-      title: Montantapayer
+      title: MontantAPayer
     MontantTotal_acompte:
       anyOf:
       - minimum: 0.0
@@ -5184,7 +5185,7 @@ components:
         type: string
       description: Acompte versé.
       nullable: true
-    MontantTotal_montantRemiseGlobaleTtc:
+    MontantRemiseGlobaleTtc:
       anyOf:
       - minimum: 0.0
         type: number
@@ -5193,6 +5194,7 @@ components:
         type: string
       description: Montant de la remise globale TTC.
       nullable: true
+      title: MontantRemiseGlobaleTtc
   securitySchemes:
     HTTPBearer:
       scheme: bearer

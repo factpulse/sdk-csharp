@@ -26,16 +26,16 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Montant de la TVA pour cette ligne.
+    /// Montant à payer.
     /// </summary>
-    public partial class Montanttva : IValidatableObject
+    public partial class MontantAPayer : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Montanttva" /> class.
+        /// Initializes a new instance of the <see cref="MontantAPayer" /> class.
         /// </summary>
         /// <param name="decimal"></param>
         /// <param name="string"></param>
-        internal Montanttva(Option<decimal?> @decimal, Option<string?> @string)
+        internal MontantAPayer(Option<decimal?> @decimal, Option<string?> @string)
         {
             DecimalOption = @decimal;
             StringOption = @string;
@@ -75,7 +75,7 @@ namespace FactPulse.SDK.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class Montanttva {\n");
+            sb.Append("class MontantAPayer {\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -92,19 +92,19 @@ namespace FactPulse.SDK.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="Montanttva" />
+    /// A Json converter for type <see cref="MontantAPayer" />
     /// </summary>
-    public class MontanttvaJsonConverter : JsonConverter<Montanttva>
+    public class MontantAPayerJsonConverter : JsonConverter<MontantAPayer>
     {
         /// <summary>
-        /// Deserializes json to <see cref="Montanttva" />
+        /// Deserializes json to <see cref="MontantAPayer" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override Montanttva Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override MontantAPayer Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -163,38 +163,38 @@ namespace FactPulse.SDK.Model
                 ? default
                 : new Option<string?>(varString);
 
-            return new Montanttva(varDecimalParsedValue, varStringParsedValue);
+            return new MontantAPayer(varDecimalParsedValue, varStringParsedValue);
         }
 
         /// <summary>
-        /// Serializes a <see cref="Montanttva" />
+        /// Serializes a <see cref="MontantAPayer" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="montanttva"></param>
+        /// <param name="montantAPayer"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, Montanttva montanttva, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, MontantAPayer montantAPayer, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            if (montanttva.DecimalOption.IsSet && montanttva.DecimalOption.Value != null)
-                writer.WriteNumber("Tauxmanuel", montanttva.DecimalOption.Value.Value);
+            if (montantAPayer.DecimalOption.IsSet && montantAPayer.DecimalOption.Value != null)
+                writer.WriteNumber("Tauxmanuel", montantAPayer.DecimalOption.Value.Value);
 
-            if (montanttva.StringOption.IsSet && montanttva.StringOption.Value != null)
-                writer.WriteString("Tauxmanuel", montanttva.StringOption.Value);
+            if (montantAPayer.StringOption.IsSet && montantAPayer.StringOption.Value != null)
+                writer.WriteString("Tauxmanuel", montantAPayer.StringOption.Value);
 
-            WriteProperties(writer, montanttva, jsonSerializerOptions);
+            WriteProperties(writer, montantAPayer, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="Montanttva" />
+        /// Serializes the properties of <see cref="MontantAPayer" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="montanttva"></param>
+        /// <param name="montantAPayer"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, Montanttva montanttva, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, MontantAPayer montantAPayer, JsonSerializerOptions jsonSerializerOptions)
         {
 
         }

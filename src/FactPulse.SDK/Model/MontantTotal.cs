@@ -41,7 +41,7 @@ namespace FactPulse.SDK.Model
         /// <param name="montantRemiseGlobaleTtc">montantRemiseGlobaleTtc</param>
         /// <param name="motifRemiseGlobaleTtc">motifRemiseGlobaleTtc</param>
         [JsonConstructor]
-        public MontantTotal(Montanthttotal montantHtTotal, Montanttva1 montantTva, Montantttctotal montantTtcTotal, Montantapayer montantAPayer, Option<MontantTotalAcompte?> acompte = default, Option<MontantTotalMontantRemiseGlobaleTtc?> montantRemiseGlobaleTtc = default, Option<string?> motifRemiseGlobaleTtc = default)
+        public MontantTotal(MontantHtTotal montantHtTotal, MontantTva1 montantTva, MontantTtcTotal montantTtcTotal, MontantAPayer montantAPayer, Option<MontantTotalAcompte?> acompte = default, Option<MontantRemiseGlobaleTtc?> montantRemiseGlobaleTtc = default, Option<string?> motifRemiseGlobaleTtc = default)
         {
             MontantHtTotal = montantHtTotal;
             MontantTva = montantTva;
@@ -59,25 +59,25 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets MontantHtTotal
         /// </summary>
         [JsonPropertyName("montantHtTotal")]
-        public Montanthttotal MontantHtTotal { get; set; }
+        public MontantHtTotal MontantHtTotal { get; set; }
 
         /// <summary>
         /// Gets or Sets MontantTva
         /// </summary>
         [JsonPropertyName("montantTva")]
-        public Montanttva1 MontantTva { get; set; }
+        public MontantTva1 MontantTva { get; set; }
 
         /// <summary>
         /// Gets or Sets MontantTtcTotal
         /// </summary>
         [JsonPropertyName("montantTtcTotal")]
-        public Montantttctotal MontantTtcTotal { get; set; }
+        public MontantTtcTotal MontantTtcTotal { get; set; }
 
         /// <summary>
         /// Gets or Sets MontantAPayer
         /// </summary>
         [JsonPropertyName("montantAPayer")]
-        public Montantapayer MontantAPayer { get; set; }
+        public MontantAPayer MontantAPayer { get; set; }
 
         /// <summary>
         /// Used to track the state of Acompte
@@ -97,13 +97,13 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<MontantTotalMontantRemiseGlobaleTtc?> MontantRemiseGlobaleTtcOption { get; private set; }
+        public Option<MontantRemiseGlobaleTtc?> MontantRemiseGlobaleTtcOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets MontantRemiseGlobaleTtc
         /// </summary>
         [JsonPropertyName("montantRemiseGlobaleTtc")]
-        public MontantTotalMontantRemiseGlobaleTtc? MontantRemiseGlobaleTtc { get { return this.MontantRemiseGlobaleTtcOption; } set { this.MontantRemiseGlobaleTtcOption = new(value); } }
+        public MontantRemiseGlobaleTtc? MontantRemiseGlobaleTtc { get { return this.MontantRemiseGlobaleTtcOption; } set { this.MontantRemiseGlobaleTtcOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of MotifRemiseGlobaleTtc
@@ -170,12 +170,12 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<Montanthttotal?> montantHtTotal = default;
-            Option<Montanttva1?> montantTva = default;
-            Option<Montantttctotal?> montantTtcTotal = default;
-            Option<Montantapayer?> montantAPayer = default;
+            Option<MontantHtTotal?> montantHtTotal = default;
+            Option<MontantTva1?> montantTva = default;
+            Option<MontantTtcTotal?> montantTtcTotal = default;
+            Option<MontantAPayer?> montantAPayer = default;
             Option<MontantTotalAcompte?> acompte = default;
-            Option<MontantTotalMontantRemiseGlobaleTtc?> montantRemiseGlobaleTtc = default;
+            Option<MontantRemiseGlobaleTtc?> montantRemiseGlobaleTtc = default;
             Option<string?> motifRemiseGlobaleTtc = default;
 
             while (utf8JsonReader.Read())
@@ -194,22 +194,22 @@ namespace FactPulse.SDK.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "montantHtTotal":
-                            montantHtTotal = new Option<Montanthttotal?>(JsonSerializer.Deserialize<Montanthttotal>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            montantHtTotal = new Option<MontantHtTotal?>(JsonSerializer.Deserialize<MontantHtTotal>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "montantTva":
-                            montantTva = new Option<Montanttva1?>(JsonSerializer.Deserialize<Montanttva1>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            montantTva = new Option<MontantTva1?>(JsonSerializer.Deserialize<MontantTva1>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "montantTtcTotal":
-                            montantTtcTotal = new Option<Montantttctotal?>(JsonSerializer.Deserialize<Montantttctotal>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            montantTtcTotal = new Option<MontantTtcTotal?>(JsonSerializer.Deserialize<MontantTtcTotal>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "montantAPayer":
-                            montantAPayer = new Option<Montantapayer?>(JsonSerializer.Deserialize<Montantapayer>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            montantAPayer = new Option<MontantAPayer?>(JsonSerializer.Deserialize<MontantAPayer>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "acompte":
                             acompte = new Option<MontantTotalAcompte?>(JsonSerializer.Deserialize<MontantTotalAcompte>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "montantRemiseGlobaleTtc":
-                            montantRemiseGlobaleTtc = new Option<MontantTotalMontantRemiseGlobaleTtc?>(JsonSerializer.Deserialize<MontantTotalMontantRemiseGlobaleTtc>(ref utf8JsonReader, jsonSerializerOptions));
+                            montantRemiseGlobaleTtc = new Option<MontantRemiseGlobaleTtc?>(JsonSerializer.Deserialize<MontantRemiseGlobaleTtc>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "motifRemiseGlobaleTtc":
                             motifRemiseGlobaleTtc = new Option<string?>(utf8JsonReader.GetString());

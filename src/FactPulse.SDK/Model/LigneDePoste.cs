@@ -49,7 +49,7 @@ namespace FactPulse.SDK.Model
         /// <param name="codeRaisonReduction">codeRaisonReduction</param>
         /// <param name="raisonReduction">raisonReduction</param>
         [JsonConstructor]
-        public LigneDePoste(int numero, string denomination, Quantite quantite, Unite unite, Montantunitaireht montantUnitaireHt, Option<string?> reference = default, Option<LigneDePosteMontantRemiseHt?> montantRemiseHt = default, Option<LigneDePosteMontantTotalLigneHt?> montantTotalLigneHt = default, Option<string?> tauxTva = default, Option<LigneDePosteTauxTvaManuel?> tauxTvaManuel = default, Option<CategorieTVA?> categorieTva = default, Option<string?> dateDebutPeriode = default, Option<string?> dateFinPeriode = default, Option<CodeRaisonReduction?> codeRaisonReduction = default, Option<string?> raisonReduction = default)
+        public LigneDePoste(int numero, string denomination, Quantite quantite, Unite unite, MontantUnitaireHt montantUnitaireHt, Option<string?> reference = default, Option<LigneDePosteMontantRemiseHt?> montantRemiseHt = default, Option<MontantTotalLigneHt?> montantTotalLigneHt = default, Option<string?> tauxTva = default, Option<LigneDePosteTauxTvaManuel?> tauxTvaManuel = default, Option<CategorieTVA?> categorieTva = default, Option<string?> dateDebutPeriode = default, Option<string?> dateFinPeriode = default, Option<CodeRaisonReduction?> codeRaisonReduction = default, Option<string?> raisonReduction = default)
         {
             Numero = numero;
             Denomination = denomination;
@@ -125,7 +125,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets MontantUnitaireHt
         /// </summary>
         [JsonPropertyName("montantUnitaireHt")]
-        public Montantunitaireht MontantUnitaireHt { get; set; }
+        public MontantUnitaireHt MontantUnitaireHt { get; set; }
 
         /// <summary>
         /// Used to track the state of Reference
@@ -158,13 +158,13 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<LigneDePosteMontantTotalLigneHt?> MontantTotalLigneHtOption { get; private set; }
+        public Option<MontantTotalLigneHt?> MontantTotalLigneHtOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets MontantTotalLigneHt
         /// </summary>
         [JsonPropertyName("montantTotalLigneHt")]
-        public LigneDePosteMontantTotalLigneHt? MontantTotalLigneHt { get { return this.MontantTotalLigneHtOption; } set { this.MontantTotalLigneHtOption = new(value); } }
+        public MontantTotalLigneHt? MontantTotalLigneHt { get { return this.MontantTotalLigneHtOption; } set { this.MontantTotalLigneHtOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of TauxTva
@@ -295,10 +295,10 @@ namespace FactPulse.SDK.Model
             Option<string?> denomination = default;
             Option<Quantite?> quantite = default;
             Option<Unite?> unite = default;
-            Option<Montantunitaireht?> montantUnitaireHt = default;
+            Option<MontantUnitaireHt?> montantUnitaireHt = default;
             Option<string?> reference = default;
             Option<LigneDePosteMontantRemiseHt?> montantRemiseHt = default;
-            Option<LigneDePosteMontantTotalLigneHt?> montantTotalLigneHt = default;
+            Option<MontantTotalLigneHt?> montantTotalLigneHt = default;
             Option<string?> tauxTva = default;
             Option<LigneDePosteTauxTvaManuel?> tauxTvaManuel = default;
             Option<CategorieTVA?> categorieTva = default;
@@ -337,7 +337,7 @@ namespace FactPulse.SDK.Model
                                 unite = new Option<Unite?>(UniteValueConverter.FromStringOrDefault(uniteRawValue));
                             break;
                         case "montantUnitaireHt":
-                            montantUnitaireHt = new Option<Montantunitaireht?>(JsonSerializer.Deserialize<Montantunitaireht>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            montantUnitaireHt = new Option<MontantUnitaireHt?>(JsonSerializer.Deserialize<MontantUnitaireHt>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "reference":
                             reference = new Option<string?>(utf8JsonReader.GetString());
@@ -346,7 +346,7 @@ namespace FactPulse.SDK.Model
                             montantRemiseHt = new Option<LigneDePosteMontantRemiseHt?>(JsonSerializer.Deserialize<LigneDePosteMontantRemiseHt>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "montantTotalLigneHt":
-                            montantTotalLigneHt = new Option<LigneDePosteMontantTotalLigneHt?>(JsonSerializer.Deserialize<LigneDePosteMontantTotalLigneHt>(ref utf8JsonReader, jsonSerializerOptions));
+                            montantTotalLigneHt = new Option<MontantTotalLigneHt?>(JsonSerializer.Deserialize<MontantTotalLigneHt>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "tauxTva":
                             tauxTva = new Option<string?>(utf8JsonReader.GetString());

@@ -1,5 +1,5 @@
-# FactPulse.SDK.Model.Montanttva
-Montant de la TVA pour cette ligne.
+# FactPulse.SDK.Model.MontantUnitaireHt
+Montant unitaire Hors Taxes de l'article.
 
 ## Properties
 

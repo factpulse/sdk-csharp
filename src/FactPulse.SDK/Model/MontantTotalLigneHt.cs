@@ -26,16 +26,16 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Montant de la base HT pour cette ligne de TVA.
+    /// Montant total HT de la ligne (quantité × prix unitaire - remise).
     /// </summary>
-    public partial class Montantbaseht : IValidatableObject
+    public partial class MontantTotalLigneHt : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Montantbaseht" /> class.
+        /// Initializes a new instance of the <see cref="MontantTotalLigneHt" /> class.
         /// </summary>
         /// <param name="decimal"></param>
         /// <param name="string"></param>
-        internal Montantbaseht(Option<decimal?> @decimal, Option<string?> @string)
+        internal MontantTotalLigneHt(Option<decimal?> @decimal, Option<string?> @string)
         {
             DecimalOption = @decimal;
             StringOption = @string;
@@ -75,7 +75,7 @@ namespace FactPulse.SDK.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class Montantbaseht {\n");
+            sb.Append("class MontantTotalLigneHt {\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -92,19 +92,19 @@ namespace FactPulse.SDK.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="Montantbaseht" />
+    /// A Json converter for type <see cref="MontantTotalLigneHt" />
     /// </summary>
-    public class MontantbasehtJsonConverter : JsonConverter<Montantbaseht>
+    public class MontantTotalLigneHtJsonConverter : JsonConverter<MontantTotalLigneHt>
     {
         /// <summary>
-        /// Deserializes json to <see cref="Montantbaseht" />
+        /// Deserializes json to <see cref="MontantTotalLigneHt" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override Montantbaseht Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override MontantTotalLigneHt Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -163,38 +163,38 @@ namespace FactPulse.SDK.Model
                 ? default
                 : new Option<string?>(varString);
 
-            return new Montantbaseht(varDecimalParsedValue, varStringParsedValue);
+            return new MontantTotalLigneHt(varDecimalParsedValue, varStringParsedValue);
         }
 
         /// <summary>
-        /// Serializes a <see cref="Montantbaseht" />
+        /// Serializes a <see cref="MontantTotalLigneHt" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="montantbaseht"></param>
+        /// <param name="montantTotalLigneHt"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, Montantbaseht montantbaseht, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, MontantTotalLigneHt montantTotalLigneHt, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            if (montantbaseht.DecimalOption.IsSet && montantbaseht.DecimalOption.Value != null)
-                writer.WriteNumber("Tauxmanuel", montantbaseht.DecimalOption.Value.Value);
+            if (montantTotalLigneHt.DecimalOption.IsSet && montantTotalLigneHt.DecimalOption.Value != null)
+                writer.WriteNumber("Tauxmanuel", montantTotalLigneHt.DecimalOption.Value.Value);
 
-            if (montantbaseht.StringOption.IsSet && montantbaseht.StringOption.Value != null)
-                writer.WriteString("Tauxmanuel", montantbaseht.StringOption.Value);
+            if (montantTotalLigneHt.StringOption.IsSet && montantTotalLigneHt.StringOption.Value != null)
+                writer.WriteString("MontantTotalLigneHt", montantTotalLigneHt.StringOption.Value);
 
-            WriteProperties(writer, montantbaseht, jsonSerializerOptions);
+            WriteProperties(writer, montantTotalLigneHt, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="Montantbaseht" />
+        /// Serializes the properties of <see cref="MontantTotalLigneHt" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="montantbaseht"></param>
+        /// <param name="montantTotalLigneHt"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, Montantbaseht montantbaseht, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, MontantTotalLigneHt montantTotalLigneHt, JsonSerializerOptions jsonSerializerOptions)
         {
 
         }

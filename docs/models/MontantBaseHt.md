@@ -1,5 +1,5 @@
-# FactPulse.SDK.Model.Montanttva1
-Montant total de la TVA.
+# FactPulse.SDK.Model.MontantBaseHt
+Montant de la base HT pour cette ligne de TVA.
 
 ## Properties
 

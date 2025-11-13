@@ -39,7 +39,7 @@ namespace FactPulse.SDK.Model
         /// <param name="tauxManuel">tauxManuel</param>
         /// <param name="categorie">categorie</param>
         [JsonConstructor]
-        public LigneDeTVA(Montantbaseht montantBaseHt, Montanttva montantTva, Option<string?> taux = default, Option<Tauxmanuel?> tauxManuel = default, Option<CategorieTVA?> categorie = default)
+        public LigneDeTVA(MontantBaseHt montantBaseHt, MontantTva montantTva, Option<string?> taux = default, Option<Tauxmanuel?> tauxManuel = default, Option<CategorieTVA?> categorie = default)
         {
             MontantBaseHt = montantBaseHt;
             MontantTva = montantTva;
@@ -68,13 +68,13 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets MontantBaseHt
         /// </summary>
         [JsonPropertyName("montantBaseHt")]
-        public Montantbaseht MontantBaseHt { get; set; }
+        public MontantBaseHt MontantBaseHt { get; set; }
 
         /// <summary>
         /// Gets or Sets MontantTva
         /// </summary>
         [JsonPropertyName("montantTva")]
-        public Montanttva MontantTva { get; set; }
+        public MontantTva MontantTva { get; set; }
 
         /// <summary>
         /// Used to track the state of Taux
@@ -152,8 +152,8 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<Montantbaseht?> montantBaseHt = default;
-            Option<Montanttva?> montantTva = default;
+            Option<MontantBaseHt?> montantBaseHt = default;
+            Option<MontantTva?> montantTva = default;
             Option<string?> taux = default;
             Option<Tauxmanuel?> tauxManuel = default;
             Option<CategorieTVA?> categorie = default;
@@ -174,10 +174,10 @@ namespace FactPulse.SDK.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "montantBaseHt":
-                            montantBaseHt = new Option<Montantbaseht?>(JsonSerializer.Deserialize<Montantbaseht>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            montantBaseHt = new Option<MontantBaseHt?>(JsonSerializer.Deserialize<MontantBaseHt>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "montantTva":
-                            montantTva = new Option<Montanttva?>(JsonSerializer.Deserialize<Montanttva>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            montantTva = new Option<MontantTva?>(JsonSerializer.Deserialize<MontantTva>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "taux":
                             taux = new Option<string?>(utf8JsonReader.GetString());

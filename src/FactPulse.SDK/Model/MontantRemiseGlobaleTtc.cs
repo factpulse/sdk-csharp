@@ -28,14 +28,14 @@ namespace FactPulse.SDK.Model
     /// <summary>
     /// Montant de la remise globale TTC.
     /// </summary>
-    public partial class MontantTotalMontantRemiseGlobaleTtc : IValidatableObject
+    public partial class MontantRemiseGlobaleTtc : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MontantTotalMontantRemiseGlobaleTtc" /> class.
+        /// Initializes a new instance of the <see cref="MontantRemiseGlobaleTtc" /> class.
         /// </summary>
         /// <param name="decimal"></param>
         /// <param name="string"></param>
-        internal MontantTotalMontantRemiseGlobaleTtc(Option<decimal?> @decimal, Option<string?> @string)
+        internal MontantRemiseGlobaleTtc(Option<decimal?> @decimal, Option<string?> @string)
         {
             DecimalOption = @decimal;
             StringOption = @string;
@@ -75,7 +75,7 @@ namespace FactPulse.SDK.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class MontantTotalMontantRemiseGlobaleTtc {\n");
+            sb.Append("class MontantRemiseGlobaleTtc {\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -92,19 +92,19 @@ namespace FactPulse.SDK.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="MontantTotalMontantRemiseGlobaleTtc" />
+    /// A Json converter for type <see cref="MontantRemiseGlobaleTtc" />
     /// </summary>
-    public class MontantTotalMontantRemiseGlobaleTtcJsonConverter : JsonConverter<MontantTotalMontantRemiseGlobaleTtc>
+    public class MontantRemiseGlobaleTtcJsonConverter : JsonConverter<MontantRemiseGlobaleTtc>
     {
         /// <summary>
-        /// Deserializes json to <see cref="MontantTotalMontantRemiseGlobaleTtc" />
+        /// Deserializes json to <see cref="MontantRemiseGlobaleTtc" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override MontantTotalMontantRemiseGlobaleTtc Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override MontantRemiseGlobaleTtc Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -163,38 +163,38 @@ namespace FactPulse.SDK.Model
                 ? default
                 : new Option<string?>(varString);
 
-            return new MontantTotalMontantRemiseGlobaleTtc(varDecimalParsedValue, varStringParsedValue);
+            return new MontantRemiseGlobaleTtc(varDecimalParsedValue, varStringParsedValue);
         }
 
         /// <summary>
-        /// Serializes a <see cref="MontantTotalMontantRemiseGlobaleTtc" />
+        /// Serializes a <see cref="MontantRemiseGlobaleTtc" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="montantTotalMontantRemiseGlobaleTtc"></param>
+        /// <param name="montantRemiseGlobaleTtc"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, MontantTotalMontantRemiseGlobaleTtc montantTotalMontantRemiseGlobaleTtc, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, MontantRemiseGlobaleTtc montantRemiseGlobaleTtc, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            if (montantTotalMontantRemiseGlobaleTtc.DecimalOption.IsSet && montantTotalMontantRemiseGlobaleTtc.DecimalOption.Value != null)
-                writer.WriteNumber("Tauxmanuel", montantTotalMontantRemiseGlobaleTtc.DecimalOption.Value.Value);
+            if (montantRemiseGlobaleTtc.DecimalOption.IsSet && montantRemiseGlobaleTtc.DecimalOption.Value != null)
+                writer.WriteNumber("Tauxmanuel", montantRemiseGlobaleTtc.DecimalOption.Value.Value);
 
-            if (montantTotalMontantRemiseGlobaleTtc.StringOption.IsSet && montantTotalMontantRemiseGlobaleTtc.StringOption.Value != null)
-                writer.WriteString("Tauxmanuel", montantTotalMontantRemiseGlobaleTtc.StringOption.Value);
+            if (montantRemiseGlobaleTtc.StringOption.IsSet && montantRemiseGlobaleTtc.StringOption.Value != null)
+                writer.WriteString("Tauxmanuel", montantRemiseGlobaleTtc.StringOption.Value);
 
-            WriteProperties(writer, montantTotalMontantRemiseGlobaleTtc, jsonSerializerOptions);
+            WriteProperties(writer, montantRemiseGlobaleTtc, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="MontantTotalMontantRemiseGlobaleTtc" />
+        /// Serializes the properties of <see cref="MontantRemiseGlobaleTtc" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="montantTotalMontantRemiseGlobaleTtc"></param>
+        /// <param name="montantRemiseGlobaleTtc"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, MontantTotalMontantRemiseGlobaleTtc montantTotalMontantRemiseGlobaleTtc, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, MontantRemiseGlobaleTtc montantRemiseGlobaleTtc, JsonSerializerOptions jsonSerializerOptions)
         {
 
         }
