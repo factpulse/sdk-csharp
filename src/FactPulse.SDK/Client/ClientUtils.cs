@@ -133,8 +133,6 @@ namespace FactPulse.SDK.Client
                 return ModeDepotValueConverter.ToJsonValue(modeDepot);
             if (obj is ModePaiement modePaiement)
                 return ModePaiementValueConverter.ToJsonValue(modePaiement);
-            if (obj is OptionsProcessing.ProfilFacturxEnum optionsProcessingProfilFacturxEnum)
-                return OptionsProcessing.ProfilFacturxEnumToJsonValue(optionsProcessingProfilFacturxEnum);
             if (obj is ProfilAPI profilAPI)
                 return ProfilAPIValueConverter.ToJsonValue(profilAPI);
             if (obj is ProfilFlux profilFlux)

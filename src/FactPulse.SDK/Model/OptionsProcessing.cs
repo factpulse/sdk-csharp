@@ -33,12 +33,12 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="OptionsProcessing" /> class.
         /// </summary>
-        /// <param name="profilFacturx">Profil Factur-X à utiliser (default to ProfilFacturxEnum.EN16931)</param>
+        /// <param name="profilFacturx">Profil Factur-X à utiliser</param>
         /// <param name="autoEnrichir">Auto-enrichir les données (APIs Entreprises, Chorus Pro, etc.) (default to true)</param>
         /// <param name="valider">Valider le XML Factur-X avec Schematron (default to true)</param>
         /// <param name="verifierParametresDestination">Vérifier les paramètres requis par la destination (ex: code_service pour Chorus) (default to true)</param>
         [JsonConstructor]
-        public OptionsProcessing(Option<ProfilFacturxEnum?> profilFacturx = default, Option<bool?> autoEnrichir = default, Option<bool?> valider = default, Option<bool?> verifierParametresDestination = default)
+        public OptionsProcessing(Option<ProfilAPI?> profilFacturx = default, Option<bool?> autoEnrichir = default, Option<bool?> valider = default, Option<bool?> verifierParametresDestination = default)
         {
             ProfilFacturxOption = profilFacturx;
             AutoEnrichirOption = autoEnrichir;
@@ -50,113 +50,18 @@ namespace FactPulse.SDK.Model
         partial void OnCreated();
 
         /// <summary>
-        /// Profil Factur-X à utiliser
-        /// </summary>
-        /// <value>Profil Factur-X à utiliser</value>
-        public enum ProfilFacturxEnum
-        {
-            /// <summary>
-            /// Enum MINIMUM for value: MINIMUM
-            /// </summary>
-            MINIMUM = 1,
-
-            /// <summary>
-            /// Enum BASIC for value: BASIC
-            /// </summary>
-            BASIC = 2,
-
-            /// <summary>
-            /// Enum EN16931 for value: EN16931
-            /// </summary>
-            EN16931 = 3,
-
-            /// <summary>
-            /// Enum EXTENDED for value: EXTENDED
-            /// </summary>
-            EXTENDED = 4
-        }
-
-        /// <summary>
-        /// Returns a <see cref="ProfilFacturxEnum"/>
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public static ProfilFacturxEnum ProfilFacturxEnumFromString(string value)
-        {
-            if (value.Equals("MINIMUM"))
-                return ProfilFacturxEnum.MINIMUM;
-
-            if (value.Equals("BASIC"))
-                return ProfilFacturxEnum.BASIC;
-
-            if (value.Equals("EN16931"))
-                return ProfilFacturxEnum.EN16931;
-
-            if (value.Equals("EXTENDED"))
-                return ProfilFacturxEnum.EXTENDED;
-
-            throw new NotImplementedException($"Could not convert value to type ProfilFacturxEnum: '{value}'");
-        }
-
-        /// <summary>
-        /// Returns a <see cref="ProfilFacturxEnum"/>
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        public static ProfilFacturxEnum? ProfilFacturxEnumFromStringOrDefault(string value)
-        {
-            if (value.Equals("MINIMUM"))
-                return ProfilFacturxEnum.MINIMUM;
-
-            if (value.Equals("BASIC"))
-                return ProfilFacturxEnum.BASIC;
-
-            if (value.Equals("EN16931"))
-                return ProfilFacturxEnum.EN16931;
-
-            if (value.Equals("EXTENDED"))
-                return ProfilFacturxEnum.EXTENDED;
-
-            return null;
-        }
-
-        /// <summary>
-        /// Converts the <see cref="ProfilFacturxEnum"/> to the json value
-        /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public static string ProfilFacturxEnumToJsonValue(ProfilFacturxEnum? value)
-        {
-            if (value == ProfilFacturxEnum.MINIMUM)
-                return "MINIMUM";
-
-            if (value == ProfilFacturxEnum.BASIC)
-                return "BASIC";
-
-            if (value == ProfilFacturxEnum.EN16931)
-                return "EN16931";
-
-            if (value == ProfilFacturxEnum.EXTENDED)
-                return "EXTENDED";
-
-            throw new NotImplementedException($"Value could not be handled: '{value}'");
-        }
-
-        /// <summary>
         /// Used to track the state of ProfilFacturx
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<ProfilFacturxEnum?> ProfilFacturxOption { get; private set; }
+        public Option<ProfilAPI?> ProfilFacturxOption { get; private set; }
 
         /// <summary>
         /// Profil Factur-X à utiliser
         /// </summary>
         /// <value>Profil Factur-X à utiliser</value>
         [JsonPropertyName("profil_facturx")]
-        public ProfilFacturxEnum? ProfilFacturx { get { return this.ProfilFacturxOption; } set { this.ProfilFacturxOption = new(value); } }
+        public ProfilAPI? ProfilFacturx { get { return this.ProfilFacturxOption; } set { this.ProfilFacturxOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of AutoEnrichir
@@ -249,7 +154,7 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<OptionsProcessing.ProfilFacturxEnum?> profilFacturx = default;
+            Option<ProfilAPI?> profilFacturx = default;
             Option<bool?> autoEnrichir = default;
             Option<bool?> valider = default;
             Option<bool?> verifierParametresDestination = default;
@@ -272,7 +177,7 @@ namespace FactPulse.SDK.Model
                         case "profil_facturx":
                             string? profilFacturxRawValue = utf8JsonReader.GetString();
                             if (profilFacturxRawValue != null)
-                                profilFacturx = new Option<OptionsProcessing.ProfilFacturxEnum?>(OptionsProcessing.ProfilFacturxEnumFromStringOrDefault(profilFacturxRawValue));
+                                profilFacturx = new Option<ProfilAPI?>(ProfilAPIValueConverter.FromStringOrDefault(profilFacturxRawValue));
                             break;
                         case "auto_enrichir":
                             autoEnrichir = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
@@ -328,8 +233,11 @@ namespace FactPulse.SDK.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, OptionsProcessing optionsProcessing, JsonSerializerOptions jsonSerializerOptions)
         {
-            var profilFacturxRawValue = OptionsProcessing.ProfilFacturxEnumToJsonValue(optionsProcessing.ProfilFacturxOption.Value!.Value);
-            writer.WriteString("profil_facturx", profilFacturxRawValue);
+            if (optionsProcessing.ProfilFacturxOption.IsSet)
+            {
+                var profilFacturxRawValue = ProfilAPIValueConverter.ToJsonValue(optionsProcessing.ProfilFacturx!.Value);
+                writer.WriteString("profil_facturx", profilFacturxRawValue);
+            }
             if (optionsProcessing.AutoEnrichirOption.IsSet)
                 writer.WriteBoolean("auto_enrichir", optionsProcessing.AutoEnrichirOption.Value!.Value);
 

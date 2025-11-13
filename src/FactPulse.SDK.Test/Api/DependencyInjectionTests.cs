@@ -82,14 +82,8 @@ namespace FactPulse.SDK.Test.Api
             var chorusProApi = _hostUsingConfigureWithAClient.Services.GetRequiredService<IChorusProApi>();
             Assert.True(chorusProApi.HttpClient.BaseAddress != null);
 
-            var processingEndpointsUnifisApi = _hostUsingConfigureWithAClient.Services.GetRequiredService<IProcessingEndpointsUnifisApi>();
-            Assert.True(processingEndpointsUnifisApi.HttpClient.BaseAddress != null);
-
             var santApi = _hostUsingConfigureWithAClient.Services.GetRequiredService<ISantApi>();
             Assert.True(santApi.HttpClient.BaseAddress != null);
-
-            var signatureLectroniqueApi = _hostUsingConfigureWithAClient.Services.GetRequiredService<ISignatureLectroniqueApi>();
-            Assert.True(signatureLectroniqueApi.HttpClient.BaseAddress != null);
 
             var traitementFactureApi = _hostUsingConfigureWithAClient.Services.GetRequiredService<ITraitementFactureApi>();
             Assert.True(traitementFactureApi.HttpClient.BaseAddress != null);
@@ -116,14 +110,8 @@ namespace FactPulse.SDK.Test.Api
             var chorusProApi = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<IChorusProApi>();
             Assert.True(chorusProApi.HttpClient.BaseAddress != null);
 
-            var processingEndpointsUnifisApi = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<IProcessingEndpointsUnifisApi>();
-            Assert.True(processingEndpointsUnifisApi.HttpClient.BaseAddress != null);
-
             var santApi = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<ISantApi>();
             Assert.True(santApi.HttpClient.BaseAddress != null);
-
-            var signatureLectroniqueApi = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<ISignatureLectroniqueApi>();
-            Assert.True(signatureLectroniqueApi.HttpClient.BaseAddress != null);
 
             var traitementFactureApi = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<ITraitementFactureApi>();
             Assert.True(traitementFactureApi.HttpClient.BaseAddress != null);
@@ -150,14 +138,8 @@ namespace FactPulse.SDK.Test.Api
             var chorusProApi = _hostUsingAddWithAClient.Services.GetRequiredService<IChorusProApi>();
             Assert.True(chorusProApi.HttpClient.BaseAddress != null);
             
-            var processingEndpointsUnifisApi = _hostUsingAddWithAClient.Services.GetRequiredService<IProcessingEndpointsUnifisApi>();
-            Assert.True(processingEndpointsUnifisApi.HttpClient.BaseAddress != null);
-            
             var santApi = _hostUsingAddWithAClient.Services.GetRequiredService<ISantApi>();
             Assert.True(santApi.HttpClient.BaseAddress != null);
-            
-            var signatureLectroniqueApi = _hostUsingAddWithAClient.Services.GetRequiredService<ISignatureLectroniqueApi>();
-            Assert.True(signatureLectroniqueApi.HttpClient.BaseAddress != null);
             
             var traitementFactureApi = _hostUsingAddWithAClient.Services.GetRequiredService<ITraitementFactureApi>();
             Assert.True(traitementFactureApi.HttpClient.BaseAddress != null);
@@ -184,14 +166,8 @@ namespace FactPulse.SDK.Test.Api
             var chorusProApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<IChorusProApi>();
             Assert.True(chorusProApi.HttpClient.BaseAddress != null);
 
-            var processingEndpointsUnifisApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<IProcessingEndpointsUnifisApi>();
-            Assert.True(processingEndpointsUnifisApi.HttpClient.BaseAddress != null);
-
             var santApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<ISantApi>();
             Assert.True(santApi.HttpClient.BaseAddress != null);
-
-            var signatureLectroniqueApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<ISignatureLectroniqueApi>();
-            Assert.True(signatureLectroniqueApi.HttpClient.BaseAddress != null);
 
             var traitementFactureApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<ITraitementFactureApi>();
             Assert.True(traitementFactureApi.HttpClient.BaseAddress != null);

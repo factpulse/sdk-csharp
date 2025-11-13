@@ -332,6 +332,36 @@ namespace FactPulse.SDK.Api
     }
 
     /// <summary>
+    /// The <see cref="IGenererCertificatTestApiV1TraitementGenererCertificatTestPostApiResponse"/>
+    /// </summary>
+    public interface IGenererCertificatTestApiV1TraitementGenererCertificatTestPostApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.GenerateCertificateResponse?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 400 BadRequest
+        /// </summary>
+        /// <returns></returns>
+        bool IsBadRequest { get; }
+
+        /// <summary>
+        /// Returns true if the response is 500 InternalServerError
+        /// </summary>
+        /// <returns></returns>
+        bool IsInternalServerError { get; }
+
+        /// <summary>
+        /// Returns true if the response is 422 UnprocessableContent
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnprocessableContent { get; }
+    }
+
+    /// <summary>
     /// The <see cref="IGenererFactureApiV1TraitementGenererFacturePostApiResponse"/>
     /// </summary>
     public interface IGenererFactureApiV1TraitementGenererFacturePostApiResponse : FactPulse.SDK.Client.IApiResponse, IAccepted<FactPulse.SDK.Model.ReponseTache?>
@@ -365,6 +395,120 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <returns></returns>
         bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 422 UnprocessableContent
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnprocessableContent { get; }
+    }
+
+    /// <summary>
+    /// The <see cref="ISignerPdfApiV1TraitementSignerPdfPostApiResponse"/>
+    /// </summary>
+    public interface ISignerPdfApiV1TraitementSignerPdfPostApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<Object?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 400 BadRequest
+        /// </summary>
+        /// <returns></returns>
+        bool IsBadRequest { get; }
+
+        /// <summary>
+        /// Returns true if the response is 404 NotFound
+        /// </summary>
+        /// <returns></returns>
+        bool IsNotFound { get; }
+
+        /// <summary>
+        /// Returns true if the response is 401 Unauthorized
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnauthorized { get; }
+
+        /// <summary>
+        /// Returns true if the response is 503 ServiceUnavailable
+        /// </summary>
+        /// <returns></returns>
+        bool IsServiceUnavailable { get; }
+
+        /// <summary>
+        /// Returns true if the response is 422 UnprocessableContent
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnprocessableContent { get; }
+    }
+
+    /// <summary>
+    /// The <see cref="ISignerPdfAsyncApiV1TraitementSignerPdfAsyncPostApiResponse"/>
+    /// </summary>
+    public interface ISignerPdfAsyncApiV1TraitementSignerPdfAsyncPostApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<Object?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 202 Accepted
+        /// </summary>
+        /// <returns></returns>
+        bool IsAccepted { get; }
+
+        /// <summary>
+        /// Returns true if the response is 400 BadRequest
+        /// </summary>
+        /// <returns></returns>
+        bool IsBadRequest { get; }
+
+        /// <summary>
+        /// Returns true if the response is 401 Unauthorized
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnauthorized { get; }
+
+        /// <summary>
+        /// Returns true if the response is 422 UnprocessableContent
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnprocessableContent { get; }
+    }
+
+    /// <summary>
+    /// The <see cref="ISoumettreFactureCompleteApiV1TraitementFacturesSoumettreCompletePostApiResponse"/>
+    /// </summary>
+    public interface ISoumettreFactureCompleteApiV1TraitementFacturesSoumettreCompletePostApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.SoumettreFactureCompleteResponse?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 422 UnprocessableContent
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnprocessableContent { get; }
+    }
+
+    /// <summary>
+    /// The <see cref="ISoumettreFactureCompleteAsyncApiV1TraitementFacturesSoumettreCompleteAsyncPostApiResponse"/>
+    /// </summary>
+    public interface ISoumettreFactureCompleteAsyncApiV1TraitementFacturesSoumettreCompleteAsyncPostApiResponse : FactPulse.SDK.Client.IApiResponse, IAccepted<FactPulse.SDK.Model.ReponseTache?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>
+    {
+        /// <summary>
+        /// Returns true if the response is 202 Accepted
+        /// </summary>
+        /// <returns></returns>
+        bool IsAccepted { get; }
 
         /// <summary>
         /// Returns true if the response is 422 UnprocessableContent
@@ -422,6 +566,30 @@ namespace FactPulse.SDK.Api
     }
 
     /// <summary>
+    /// The <see cref="IValiderSignaturePdfEndpointApiV1TraitementValiderSignaturePdfPostApiResponse"/>
+    /// </summary>
+    public interface IValiderSignaturePdfEndpointApiV1TraitementValiderSignaturePdfPostApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<Object?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 400 BadRequest
+        /// </summary>
+        /// <returns></returns>
+        bool IsBadRequest { get; }
+
+        /// <summary>
+        /// Returns true if the response is 422 UnprocessableContent
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnprocessableContent { get; }
+    }
+
+    /// <summary>
     /// The <see cref="IValiderXmlApiV1TraitementValiderXmlPostApiResponse"/>
     /// </summary>
     public interface IValiderXmlApiV1TraitementValiderXmlPostApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.ReponseValidationSucces?>, IBadRequest<FactPulse.SDK.Model.ReponseValidationErreur?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>
@@ -460,7 +628,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGenererCertificatTestApiV1TraitementGenererCertificatTestPost;
 
-        internal void ExecuteOnGenererCertificatTestApiV1TraitementGenererCertificatTestPost(SignatureLectroniqueApi.GenererCertificatTestApiV1TraitementGenererCertificatTestPostApiResponse apiResponse)
+        internal void ExecuteOnGenererCertificatTestApiV1TraitementGenererCertificatTestPost(TraitementFactureApi.GenererCertificatTestApiV1TraitementGenererCertificatTestPostApiResponse apiResponse)
         {
             OnGenererCertificatTestApiV1TraitementGenererCertificatTestPost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -520,7 +688,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorSignerPdfApiV1TraitementSignerPdfPost;
 
-        internal void ExecuteOnSignerPdfApiV1TraitementSignerPdfPost(SignatureLectroniqueApi.SignerPdfApiV1TraitementSignerPdfPostApiResponse apiResponse)
+        internal void ExecuteOnSignerPdfApiV1TraitementSignerPdfPost(TraitementFactureApi.SignerPdfApiV1TraitementSignerPdfPostApiResponse apiResponse)
         {
             OnSignerPdfApiV1TraitementSignerPdfPost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -540,7 +708,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorSignerPdfAsyncApiV1TraitementSignerPdfAsyncPost;
 
-        internal void ExecuteOnSignerPdfAsyncApiV1TraitementSignerPdfAsyncPost(SignatureLectroniqueApi.SignerPdfAsyncApiV1TraitementSignerPdfAsyncPostApiResponse apiResponse)
+        internal void ExecuteOnSignerPdfAsyncApiV1TraitementSignerPdfAsyncPost(TraitementFactureApi.SignerPdfAsyncApiV1TraitementSignerPdfAsyncPostApiResponse apiResponse)
         {
             OnSignerPdfAsyncApiV1TraitementSignerPdfAsyncPost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -560,7 +728,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorSoumettreFactureCompleteApiV1TraitementFacturesSoumettreCompletePost;
 
-        internal void ExecuteOnSoumettreFactureCompleteApiV1TraitementFacturesSoumettreCompletePost(ProcessingEndpointsUnifisApi.SoumettreFactureCompleteApiV1TraitementFacturesSoumettreCompletePostApiResponse apiResponse)
+        internal void ExecuteOnSoumettreFactureCompleteApiV1TraitementFacturesSoumettreCompletePost(TraitementFactureApi.SoumettreFactureCompleteApiV1TraitementFacturesSoumettreCompletePostApiResponse apiResponse)
         {
             OnSoumettreFactureCompleteApiV1TraitementFacturesSoumettreCompletePost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -580,7 +748,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorSoumettreFactureCompleteAsyncApiV1TraitementFacturesSoumettreCompleteAsyncPost;
 
-        internal void ExecuteOnSoumettreFactureCompleteAsyncApiV1TraitementFacturesSoumettreCompleteAsyncPost(ProcessingEndpointsUnifisApi.SoumettreFactureCompleteAsyncApiV1TraitementFacturesSoumettreCompleteAsyncPostApiResponse apiResponse)
+        internal void ExecuteOnSoumettreFactureCompleteAsyncApiV1TraitementFacturesSoumettreCompleteAsyncPost(TraitementFactureApi.SoumettreFactureCompleteAsyncApiV1TraitementFacturesSoumettreCompleteAsyncPostApiResponse apiResponse)
         {
             OnSoumettreFactureCompleteAsyncApiV1TraitementFacturesSoumettreCompleteAsyncPost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -640,7 +808,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorValiderSignaturePdfEndpointApiV1TraitementValiderSignaturePdfPost;
 
-        internal void ExecuteOnValiderSignaturePdfEndpointApiV1TraitementValiderSignaturePdfPost(SignatureLectroniqueApi.ValiderSignaturePdfEndpointApiV1TraitementValiderSignaturePdfPostApiResponse apiResponse)
+        internal void ExecuteOnValiderSignaturePdfEndpointApiV1TraitementValiderSignaturePdfPost(TraitementFactureApi.ValiderSignaturePdfEndpointApiV1TraitementValiderSignaturePdfPostApiResponse apiResponse)
         {
             OnValiderSignaturePdfEndpointApiV1TraitementValiderSignaturePdfPost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -858,8 +1026,8 @@ namespace FactPulse.SDK.Api
 
                     using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
                     {
-                        ILogger<SignatureLectroniqueApi.GenererCertificatTestApiV1TraitementGenererCertificatTestPostApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<SignatureLectroniqueApi.GenererCertificatTestApiV1TraitementGenererCertificatTestPostApiResponse>();
-                        SignatureLectroniqueApi.GenererCertificatTestApiV1TraitementGenererCertificatTestPostApiResponse apiResponseLocalVar;
+                        ILogger<GenererCertificatTestApiV1TraitementGenererCertificatTestPostApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<GenererCertificatTestApiV1TraitementGenererCertificatTestPostApiResponse>();
+                        GenererCertificatTestApiV1TraitementGenererCertificatTestPostApiResponse apiResponseLocalVar;
 
                         switch ((int)httpResponseMessageLocalVar.StatusCode) {
                             default: {
@@ -888,6 +1056,149 @@ namespace FactPulse.SDK.Api
                 Events.ExecuteOnErrorGenererCertificatTestApiV1TraitementGenererCertificatTestPost(e);
                 throw;
             }
+        }
+
+        /// <summary>
+        /// The <see cref="GenererCertificatTestApiV1TraitementGenererCertificatTestPostApiResponse"/>
+        /// </summary>
+        public partial class GenererCertificatTestApiV1TraitementGenererCertificatTestPostApiResponse : FactPulse.SDK.Client.ApiResponse, IGenererCertificatTestApiV1TraitementGenererCertificatTestPostApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<GenererCertificatTestApiV1TraitementGenererCertificatTestPostApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="GenererCertificatTestApiV1TraitementGenererCertificatTestPostApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public GenererCertificatTestApiV1TraitementGenererCertificatTestPostApiResponse(ILogger<GenererCertificatTestApiV1TraitementGenererCertificatTestPostApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            /// <summary>
+            /// The <see cref="GenererCertificatTestApiV1TraitementGenererCertificatTestPostApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="contentStream"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public GenererCertificatTestApiV1TraitementGenererCertificatTestPostApiResponse(ILogger<GenererCertificatTestApiV1TraitementGenererCertificatTestPostApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.GenerateCertificateResponse? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.GenerateCertificateResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out FactPulse.SDK.Model.GenerateCertificateResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 400 BadRequest
+            /// </summary>
+            /// <returns></returns>
+            public bool IsBadRequest => 400 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 500 InternalServerError
+            /// </summary>
+            /// <returns></returns>
+            public bool IsInternalServerError => 500 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnprocessableContent => 422 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.HTTPValidationError? UnprocessableContent()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsUnprocessableContent
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.HTTPValidationError>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryUnprocessableContent([NotNullWhen(true)]out FactPulse.SDK.Model.HTTPValidationError? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = UnprocessableContent();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)422);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
         partial void FormatGenererFactureApiV1TraitementGenererFacturePost(ref string donneesFacture, ref Option<ProfilAPI> profil, ref Option<FormatSortie> formatSortie, ref Option<bool> autoEnrichir, ref Option<System.IO.Stream?> sourcePdf);
@@ -1702,8 +2013,8 @@ namespace FactPulse.SDK.Api
 
                     using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
                     {
-                        ILogger<SignatureLectroniqueApi.SignerPdfApiV1TraitementSignerPdfPostApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<SignatureLectroniqueApi.SignerPdfApiV1TraitementSignerPdfPostApiResponse>();
-                        SignatureLectroniqueApi.SignerPdfApiV1TraitementSignerPdfPostApiResponse apiResponseLocalVar;
+                        ILogger<SignerPdfApiV1TraitementSignerPdfPostApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<SignerPdfApiV1TraitementSignerPdfPostApiResponse>();
+                        SignerPdfApiV1TraitementSignerPdfPostApiResponse apiResponseLocalVar;
 
                         switch ((int)httpResponseMessageLocalVar.StatusCode) {
                             default: {
@@ -1732,6 +2043,161 @@ namespace FactPulse.SDK.Api
                 Events.ExecuteOnErrorSignerPdfApiV1TraitementSignerPdfPost(e);
                 throw;
             }
+        }
+
+        /// <summary>
+        /// The <see cref="SignerPdfApiV1TraitementSignerPdfPostApiResponse"/>
+        /// </summary>
+        public partial class SignerPdfApiV1TraitementSignerPdfPostApiResponse : FactPulse.SDK.Client.ApiResponse, ISignerPdfApiV1TraitementSignerPdfPostApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<SignerPdfApiV1TraitementSignerPdfPostApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="SignerPdfApiV1TraitementSignerPdfPostApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public SignerPdfApiV1TraitementSignerPdfPostApiResponse(ILogger<SignerPdfApiV1TraitementSignerPdfPostApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            /// <summary>
+            /// The <see cref="SignerPdfApiV1TraitementSignerPdfPostApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="contentStream"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public SignerPdfApiV1TraitementSignerPdfPostApiResponse(ILogger<SignerPdfApiV1TraitementSignerPdfPostApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public Object? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<Object>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out Object? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 400 BadRequest
+            /// </summary>
+            /// <returns></returns>
+            public bool IsBadRequest => 400 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 404 NotFound
+            /// </summary>
+            /// <returns></returns>
+            public bool IsNotFound => 404 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 401 Unauthorized
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnauthorized => 401 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 503 ServiceUnavailable
+            /// </summary>
+            /// <returns></returns>
+            public bool IsServiceUnavailable => 503 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnprocessableContent => 422 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.HTTPValidationError? UnprocessableContent()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsUnprocessableContent
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.HTTPValidationError>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryUnprocessableContent([NotNullWhen(true)]out FactPulse.SDK.Model.HTTPValidationError? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = UnprocessableContent();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)422);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
         partial void FormatSignerPdfAsyncApiV1TraitementSignerPdfAsyncPost(ref System.IO.Stream fichierPdf, ref Option<string?> raison, ref Option<string?> localisation, ref Option<string?> contact, ref Option<string> fieldName, ref Option<bool> usePadesLt, ref Option<bool> useTimestamp);
@@ -1936,8 +2402,8 @@ namespace FactPulse.SDK.Api
 
                     using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
                     {
-                        ILogger<SignatureLectroniqueApi.SignerPdfAsyncApiV1TraitementSignerPdfAsyncPostApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<SignatureLectroniqueApi.SignerPdfAsyncApiV1TraitementSignerPdfAsyncPostApiResponse>();
-                        SignatureLectroniqueApi.SignerPdfAsyncApiV1TraitementSignerPdfAsyncPostApiResponse apiResponseLocalVar;
+                        ILogger<SignerPdfAsyncApiV1TraitementSignerPdfAsyncPostApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<SignerPdfAsyncApiV1TraitementSignerPdfAsyncPostApiResponse>();
+                        SignerPdfAsyncApiV1TraitementSignerPdfAsyncPostApiResponse apiResponseLocalVar;
 
                         switch ((int)httpResponseMessageLocalVar.StatusCode) {
                             default: {
@@ -1966,6 +2432,155 @@ namespace FactPulse.SDK.Api
                 Events.ExecuteOnErrorSignerPdfAsyncApiV1TraitementSignerPdfAsyncPost(e);
                 throw;
             }
+        }
+
+        /// <summary>
+        /// The <see cref="SignerPdfAsyncApiV1TraitementSignerPdfAsyncPostApiResponse"/>
+        /// </summary>
+        public partial class SignerPdfAsyncApiV1TraitementSignerPdfAsyncPostApiResponse : FactPulse.SDK.Client.ApiResponse, ISignerPdfAsyncApiV1TraitementSignerPdfAsyncPostApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<SignerPdfAsyncApiV1TraitementSignerPdfAsyncPostApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="SignerPdfAsyncApiV1TraitementSignerPdfAsyncPostApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public SignerPdfAsyncApiV1TraitementSignerPdfAsyncPostApiResponse(ILogger<SignerPdfAsyncApiV1TraitementSignerPdfAsyncPostApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            /// <summary>
+            /// The <see cref="SignerPdfAsyncApiV1TraitementSignerPdfAsyncPostApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="contentStream"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public SignerPdfAsyncApiV1TraitementSignerPdfAsyncPostApiResponse(ILogger<SignerPdfAsyncApiV1TraitementSignerPdfAsyncPostApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public Object? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<Object>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out Object? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 202 Accepted
+            /// </summary>
+            /// <returns></returns>
+            public bool IsAccepted => 202 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 400 BadRequest
+            /// </summary>
+            /// <returns></returns>
+            public bool IsBadRequest => 400 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 401 Unauthorized
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnauthorized => 401 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnprocessableContent => 422 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.HTTPValidationError? UnprocessableContent()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsUnprocessableContent
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.HTTPValidationError>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryUnprocessableContent([NotNullWhen(true)]out FactPulse.SDK.Model.HTTPValidationError? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = UnprocessableContent();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)422);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
         partial void FormatSoumettreFactureCompleteApiV1TraitementFacturesSoumettreCompletePost(SoumettreFactureCompleteRequest soumettreFactureCompleteRequest);
@@ -2108,8 +2723,8 @@ namespace FactPulse.SDK.Api
 
                     using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
                     {
-                        ILogger<ProcessingEndpointsUnifisApi.SoumettreFactureCompleteApiV1TraitementFacturesSoumettreCompletePostApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<ProcessingEndpointsUnifisApi.SoumettreFactureCompleteApiV1TraitementFacturesSoumettreCompletePostApiResponse>();
-                        ProcessingEndpointsUnifisApi.SoumettreFactureCompleteApiV1TraitementFacturesSoumettreCompletePostApiResponse apiResponseLocalVar;
+                        ILogger<SoumettreFactureCompleteApiV1TraitementFacturesSoumettreCompletePostApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<SoumettreFactureCompleteApiV1TraitementFacturesSoumettreCompletePostApiResponse>();
+                        SoumettreFactureCompleteApiV1TraitementFacturesSoumettreCompletePostApiResponse apiResponseLocalVar;
 
                         switch ((int)httpResponseMessageLocalVar.StatusCode) {
                             default: {
@@ -2138,6 +2753,137 @@ namespace FactPulse.SDK.Api
                 Events.ExecuteOnErrorSoumettreFactureCompleteApiV1TraitementFacturesSoumettreCompletePost(e);
                 throw;
             }
+        }
+
+        /// <summary>
+        /// The <see cref="SoumettreFactureCompleteApiV1TraitementFacturesSoumettreCompletePostApiResponse"/>
+        /// </summary>
+        public partial class SoumettreFactureCompleteApiV1TraitementFacturesSoumettreCompletePostApiResponse : FactPulse.SDK.Client.ApiResponse, ISoumettreFactureCompleteApiV1TraitementFacturesSoumettreCompletePostApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<SoumettreFactureCompleteApiV1TraitementFacturesSoumettreCompletePostApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="SoumettreFactureCompleteApiV1TraitementFacturesSoumettreCompletePostApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public SoumettreFactureCompleteApiV1TraitementFacturesSoumettreCompletePostApiResponse(ILogger<SoumettreFactureCompleteApiV1TraitementFacturesSoumettreCompletePostApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            /// <summary>
+            /// The <see cref="SoumettreFactureCompleteApiV1TraitementFacturesSoumettreCompletePostApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="contentStream"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public SoumettreFactureCompleteApiV1TraitementFacturesSoumettreCompletePostApiResponse(ILogger<SoumettreFactureCompleteApiV1TraitementFacturesSoumettreCompletePostApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.SoumettreFactureCompleteResponse? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.SoumettreFactureCompleteResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out FactPulse.SDK.Model.SoumettreFactureCompleteResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnprocessableContent => 422 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.HTTPValidationError? UnprocessableContent()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsUnprocessableContent
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.HTTPValidationError>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryUnprocessableContent([NotNullWhen(true)]out FactPulse.SDK.Model.HTTPValidationError? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = UnprocessableContent();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)422);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
         partial void FormatSoumettreFactureCompleteAsyncApiV1TraitementFacturesSoumettreCompleteAsyncPost(SoumettreFactureCompleteRequest soumettreFactureCompleteRequest);
@@ -2280,8 +3026,8 @@ namespace FactPulse.SDK.Api
 
                     using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
                     {
-                        ILogger<ProcessingEndpointsUnifisApi.SoumettreFactureCompleteAsyncApiV1TraitementFacturesSoumettreCompleteAsyncPostApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<ProcessingEndpointsUnifisApi.SoumettreFactureCompleteAsyncApiV1TraitementFacturesSoumettreCompleteAsyncPostApiResponse>();
-                        ProcessingEndpointsUnifisApi.SoumettreFactureCompleteAsyncApiV1TraitementFacturesSoumettreCompleteAsyncPostApiResponse apiResponseLocalVar;
+                        ILogger<SoumettreFactureCompleteAsyncApiV1TraitementFacturesSoumettreCompleteAsyncPostApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<SoumettreFactureCompleteAsyncApiV1TraitementFacturesSoumettreCompleteAsyncPostApiResponse>();
+                        SoumettreFactureCompleteAsyncApiV1TraitementFacturesSoumettreCompleteAsyncPostApiResponse apiResponseLocalVar;
 
                         switch ((int)httpResponseMessageLocalVar.StatusCode) {
                             default: {
@@ -2310,6 +3056,137 @@ namespace FactPulse.SDK.Api
                 Events.ExecuteOnErrorSoumettreFactureCompleteAsyncApiV1TraitementFacturesSoumettreCompleteAsyncPost(e);
                 throw;
             }
+        }
+
+        /// <summary>
+        /// The <see cref="SoumettreFactureCompleteAsyncApiV1TraitementFacturesSoumettreCompleteAsyncPostApiResponse"/>
+        /// </summary>
+        public partial class SoumettreFactureCompleteAsyncApiV1TraitementFacturesSoumettreCompleteAsyncPostApiResponse : FactPulse.SDK.Client.ApiResponse, ISoumettreFactureCompleteAsyncApiV1TraitementFacturesSoumettreCompleteAsyncPostApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<SoumettreFactureCompleteAsyncApiV1TraitementFacturesSoumettreCompleteAsyncPostApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="SoumettreFactureCompleteAsyncApiV1TraitementFacturesSoumettreCompleteAsyncPostApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public SoumettreFactureCompleteAsyncApiV1TraitementFacturesSoumettreCompleteAsyncPostApiResponse(ILogger<SoumettreFactureCompleteAsyncApiV1TraitementFacturesSoumettreCompleteAsyncPostApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            /// <summary>
+            /// The <see cref="SoumettreFactureCompleteAsyncApiV1TraitementFacturesSoumettreCompleteAsyncPostApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="contentStream"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public SoumettreFactureCompleteAsyncApiV1TraitementFacturesSoumettreCompleteAsyncPostApiResponse(ILogger<SoumettreFactureCompleteAsyncApiV1TraitementFacturesSoumettreCompleteAsyncPostApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 202 Accepted
+            /// </summary>
+            /// <returns></returns>
+            public bool IsAccepted => 202 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 202 Accepted
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.ReponseTache? Accepted()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsAccepted
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.ReponseTache>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 202 Accepted and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryAccepted([NotNullWhen(true)]out FactPulse.SDK.Model.ReponseTache? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Accepted();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)202);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnprocessableContent => 422 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.HTTPValidationError? UnprocessableContent()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsUnprocessableContent
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.HTTPValidationError>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryUnprocessableContent([NotNullWhen(true)]out FactPulse.SDK.Model.HTTPValidationError? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = UnprocessableContent();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)422);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
         partial void FormatValiderPdfFacturxApiV1TraitementValiderPdfFacturxPost(ref System.IO.Stream fichierPdf, ref Option<ProfilAPI?> profil, ref Option<bool> useVerapdf);
@@ -3118,8 +3995,8 @@ namespace FactPulse.SDK.Api
 
                     using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
                     {
-                        ILogger<SignatureLectroniqueApi.ValiderSignaturePdfEndpointApiV1TraitementValiderSignaturePdfPostApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<SignatureLectroniqueApi.ValiderSignaturePdfEndpointApiV1TraitementValiderSignaturePdfPostApiResponse>();
-                        SignatureLectroniqueApi.ValiderSignaturePdfEndpointApiV1TraitementValiderSignaturePdfPostApiResponse apiResponseLocalVar;
+                        ILogger<ValiderSignaturePdfEndpointApiV1TraitementValiderSignaturePdfPostApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<ValiderSignaturePdfEndpointApiV1TraitementValiderSignaturePdfPostApiResponse>();
+                        ValiderSignaturePdfEndpointApiV1TraitementValiderSignaturePdfPostApiResponse apiResponseLocalVar;
 
                         switch ((int)httpResponseMessageLocalVar.StatusCode) {
                             default: {
@@ -3148,6 +4025,143 @@ namespace FactPulse.SDK.Api
                 Events.ExecuteOnErrorValiderSignaturePdfEndpointApiV1TraitementValiderSignaturePdfPost(e);
                 throw;
             }
+        }
+
+        /// <summary>
+        /// The <see cref="ValiderSignaturePdfEndpointApiV1TraitementValiderSignaturePdfPostApiResponse"/>
+        /// </summary>
+        public partial class ValiderSignaturePdfEndpointApiV1TraitementValiderSignaturePdfPostApiResponse : FactPulse.SDK.Client.ApiResponse, IValiderSignaturePdfEndpointApiV1TraitementValiderSignaturePdfPostApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<ValiderSignaturePdfEndpointApiV1TraitementValiderSignaturePdfPostApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="ValiderSignaturePdfEndpointApiV1TraitementValiderSignaturePdfPostApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public ValiderSignaturePdfEndpointApiV1TraitementValiderSignaturePdfPostApiResponse(ILogger<ValiderSignaturePdfEndpointApiV1TraitementValiderSignaturePdfPostApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            /// <summary>
+            /// The <see cref="ValiderSignaturePdfEndpointApiV1TraitementValiderSignaturePdfPostApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="contentStream"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public ValiderSignaturePdfEndpointApiV1TraitementValiderSignaturePdfPostApiResponse(ILogger<ValiderSignaturePdfEndpointApiV1TraitementValiderSignaturePdfPostApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public Object? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<Object>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out Object? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 400 BadRequest
+            /// </summary>
+            /// <returns></returns>
+            public bool IsBadRequest => 400 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnprocessableContent => 422 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.HTTPValidationError? UnprocessableContent()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsUnprocessableContent
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.HTTPValidationError>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryUnprocessableContent([NotNullWhen(true)]out FactPulse.SDK.Model.HTTPValidationError? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = UnprocessableContent();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)422);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
         partial void FormatValiderXmlApiV1TraitementValiderXmlPost(ref System.IO.Stream fichierXml, ref Option<ProfilAPI> profil);

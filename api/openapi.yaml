@@ -946,7 +946,6 @@ paths:
       summary: Signer un PDF avec le certificat du client (PAdES-B-LT)
       tags:
       - Traitement Facture
-      - Signature électronique
   /api/v1/traitement/signer-pdf-async:
     post:
       description: |-
@@ -1001,7 +1000,6 @@ paths:
       summary: Signer un PDF de manière asynchrone (Celery)
       tags:
       - Traitement Facture
-      - Signature électronique
   /api/v1/traitement/valider-signature-pdf:
     post:
       description: |-
@@ -1059,7 +1057,6 @@ paths:
       summary: Valider les signatures électroniques d'un PDF
       tags:
       - Traitement Facture
-      - Signature électronique
   /api/v1/traitement/generer-certificat-test:
     post:
       description: |-
@@ -1161,7 +1158,6 @@ paths:
       summary: Générer un certificat X.509 auto-signé de test
       tags:
       - Traitement Facture
-      - Signature électronique
   /api/v1/traitement/factures/soumettre-complete:
     post:
       description: |-
@@ -1232,7 +1228,6 @@ paths:
       summary: Soumettre une facture complète (génération + signature + soumission)
       tags:
       - Traitement Facture
-      - Processing - Endpoints unifiés
   /api/v1/traitement/factures/soumettre-complete-async:
     post:
       description: |-
@@ -1286,7 +1281,6 @@ paths:
       summary: Soumettre une facture complète (asynchrone avec Celery)
       tags:
       - Traitement Facture
-      - Processing - Endpoints unifiés
   /api/v1/afnor/oauth/token:
     post:
       description: Endpoint proxy OAuth2 pour obtenir un token d'accès AFNOR. Fait
@@ -3020,11 +3014,11 @@ components:
           title: Nom Destinataire
           type: string
         montant_ht_total:
-          $ref: "#/components/schemas/Montant_Ht_Total"
+          $ref: "#/components/schemas/MontantHtTotal"
         montant_tva:
-          $ref: "#/components/schemas/Montant_Tva"
+          $ref: "#/components/schemas/MontantTva"
         montant_ttc_total:
-          $ref: "#/components/schemas/Montant_Ttc_Total"
+          $ref: "#/components/schemas/MontantTtcTotal"
       required:
       - montant_ht_total
       - montant_ttc_total
@@ -3053,15 +3047,15 @@ components:
           type: string
         montant_ht_total:
           pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
-          title: Montant Ht Total
+          title: MontantHtTotal
           type: string
         montant_tva:
           pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
-          title: Montant Tva
+          title: MontantTva
           type: string
         montant_ttc_total:
           pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
-          title: Montant Ttc Total
+          title: MontantTtcTotal
           type: string
       required:
       - montant_ht_total
@@ -3347,15 +3341,7 @@ components:
         verifier_parametres_destination: true
       properties:
         profil_facturx:
-          default: EN16931
-          description: Profil Factur-X à utiliser
-          enum:
-          - MINIMUM
-          - BASIC
-          - EN16931
-          - EXTENDED
-          title: Profil Facturx
-          type: string
+          $ref: "#/components/schemas/ProfilAPI"
         auto_enrichir:
           default: true
           description: "Auto-enrichir les données (APIs Entreprises, Chorus Pro, etc.)"
@@ -4052,15 +4038,15 @@ components:
           type: string
         montant_ht_total:
           description: Montant HT total
-          title: Montant Ht Total
+          title: MontantHtTotal
           type: string
         montant_tva:
           description: Montant TVA
-          title: Montant Tva
+          title: MontantTva
           type: string
         montant_ttc_total:
           description: Montant TTC total
-          title: Montant Ttc Total
+          title: MontantTtcTotal
           type: string
         piece_jointe_principale_id:
           nullable: true
@@ -5020,24 +5006,24 @@ components:
       title: ReponseHealthcheckAFNOR
     generer_facture_api_v1_traitement_generer_facture_post_request:
       $ref: "#/components/schemas/Body_generer_facture_api_v1_traitement_generer_facture_post"
-    Montant_Ht_Total:
+    MontantHtTotal:
       anyOf:
       - type: number
       - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
         type: string
-      title: Montant Ht Total
-    Montant_Tva:
+      title: MontantHtTotal
+    MontantTva:
       anyOf:
       - type: number
       - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
         type: string
-      title: Montant Tva
-    Montant_Ttc_Total:
+      title: MontantTva
+    MontantTtcTotal:
       anyOf:
       - type: number
       - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
         type: string
-      title: Montant Ttc Total
+      title: MontantTtcTotal
     Destination:
       description: Configuration de la destination (Chorus Pro ou AFNOR)
       discriminator:

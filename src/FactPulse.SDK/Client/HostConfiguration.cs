@@ -174,9 +174,7 @@ namespace FactPulse.SDK.Client
             _services.AddSingleton<AFNORPDPPADirectoryServiceApiEvents>();
             _services.AddSingleton<AFNORPDPPAFlowServiceApiEvents>();
             _services.AddSingleton<ChorusProApiEvents>();
-            _services.AddSingleton<ProcessingEndpointsUnifisApiEvents>();
             _services.AddSingleton<SantApiEvents>();
-            _services.AddSingleton<SignatureLectroniqueApiEvents>();
             _services.AddSingleton<TraitementFactureApiEvents>();
             _services.AddSingleton<UtilisateurApiEvents>();
         }
@@ -200,9 +198,7 @@ namespace FactPulse.SDK.Client
             builders.Add(_services.AddHttpClient<IAFNORPDPPADirectoryServiceApi, AFNORPDPPADirectoryServiceApi>(client));
             builders.Add(_services.AddHttpClient<IAFNORPDPPAFlowServiceApi, AFNORPDPPAFlowServiceApi>(client));
             builders.Add(_services.AddHttpClient<IChorusProApi, ChorusProApi>(client));
-            builders.Add(_services.AddHttpClient<IProcessingEndpointsUnifisApi, ProcessingEndpointsUnifisApi>(client));
             builders.Add(_services.AddHttpClient<ISantApi, SantApi>(client));
-            builders.Add(_services.AddHttpClient<ISignatureLectroniqueApi, SignatureLectroniqueApi>(client));
             builders.Add(_services.AddHttpClient<ITraitementFactureApi, TraitementFactureApi>(client));
             builders.Add(_services.AddHttpClient<IUtilisateurApi, UtilisateurApi>(client));
             
