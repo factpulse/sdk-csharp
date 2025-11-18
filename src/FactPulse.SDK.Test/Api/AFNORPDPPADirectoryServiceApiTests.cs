@@ -51,6 +51,40 @@ namespace FactPulse.SDK.Test.Api
         }
 
         /// <summary>
+        /// Test CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePost
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostAsyncTest()
+        {
+            var response = await _instance.CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostAsync();
+            var model = response.Ok();
+            Assert.IsType<Object>(model);
+        }
+
+        /// <summary>
+        /// Test CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePost
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostAsyncTest()
+        {
+            var response = await _instance.CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostAsync();
+            var model = response.Ok();
+            Assert.IsType<Object>(model);
+        }
+
+        /// <summary>
+        /// Test DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteAsyncTest()
+        {
+            string idInstance = default!;
+            var response = await _instance.DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteAsync(idInstance);
+            var model = response.Ok();
+            Assert.IsType<Object>(model);
+        }
+
+        /// <summary>
         /// Test DirectoryHealthcheckProxyApiV1AfnorDirectoryV1HealthcheckGet
         /// </summary>
         [Fact (Skip = "not implemented")]
@@ -62,24 +96,178 @@ namespace FactPulse.SDK.Test.Api
         }
 
         /// <summary>
-        /// Test GetCompanyProxyApiV1AfnorDirectoryV1CompaniesSirenGet
+        /// Test GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet
         /// </summary>
         [Fact (Skip = "not implemented")]
-        public async Task GetCompanyProxyApiV1AfnorDirectoryV1CompaniesSirenGetAsyncTest()
+        public async Task GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetAsyncTest()
         {
-            string siren = default!;
-            var response = await _instance.GetCompanyProxyApiV1AfnorDirectoryV1CompaniesSirenGetAsync(siren);
+            string addressingIdentifier = default!;
+            var response = await _instance.GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetAsync(addressingIdentifier);
             var model = response.Ok();
             Assert.IsType<Object>(model);
         }
 
         /// <summary>
-        /// Test SearchCompaniesProxyApiV1AfnorDirectoryV1CompaniesSearchPost
+        /// Test GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet
         /// </summary>
         [Fact (Skip = "not implemented")]
-        public async Task SearchCompaniesProxyApiV1AfnorDirectoryV1CompaniesSearchPostAsyncTest()
+        public async Task GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetAsyncTest()
         {
-            var response = await _instance.SearchCompaniesProxyApiV1AfnorDirectoryV1CompaniesSearchPostAsync();
+            string idInstance = default!;
+            var response = await _instance.GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetAsync(idInstance);
+            var model = response.Ok();
+            Assert.IsType<Object>(model);
+        }
+
+        /// <summary>
+        /// Test GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetAsyncTest()
+        {
+            string idInstance = default!;
+            var response = await _instance.GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetAsync(idInstance);
+            var model = response.Ok();
+            Assert.IsType<Object>(model);
+        }
+
+        /// <summary>
+        /// Test GetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task GetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetAsyncTest()
+        {
+            string siret = default!;
+            string routingIdentifier = default!;
+            var response = await _instance.GetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetAsync(siret, routingIdentifier);
+            var model = response.Ok();
+            Assert.IsType<Object>(model);
+        }
+
+        /// <summary>
+        /// Test GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetAsyncTest()
+        {
+            string siren = default!;
+            var response = await _instance.GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetAsync(siren);
+            var model = response.Ok();
+            Assert.IsType<Object>(model);
+        }
+
+        /// <summary>
+        /// Test GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetAsyncTest()
+        {
+            string idInstance = default!;
+            var response = await _instance.GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetAsync(idInstance);
+            var model = response.Ok();
+            Assert.IsType<Object>(model);
+        }
+
+        /// <summary>
+        /// Test GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetAsyncTest()
+        {
+            string siret = default!;
+            var response = await _instance.GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetAsync(siret);
+            var model = response.Ok();
+            Assert.IsType<Object>(model);
+        }
+
+        /// <summary>
+        /// Test GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetAsyncTest()
+        {
+            string idInstance = default!;
+            var response = await _instance.GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetAsync(idInstance);
+            var model = response.Ok();
+            Assert.IsType<Object>(model);
+        }
+
+        /// <summary>
+        /// Test PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchAsyncTest()
+        {
+            string idInstance = default!;
+            var response = await _instance.PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchAsync(idInstance);
+            var model = response.Ok();
+            Assert.IsType<Object>(model);
+        }
+
+        /// <summary>
+        /// Test PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchAsyncTest()
+        {
+            string idInstance = default!;
+            var response = await _instance.PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchAsync(idInstance);
+            var model = response.Ok();
+            Assert.IsType<Object>(model);
+        }
+
+        /// <summary>
+        /// Test PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutAsyncTest()
+        {
+            string idInstance = default!;
+            var response = await _instance.PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutAsync(idInstance);
+            var model = response.Ok();
+            Assert.IsType<Object>(model);
+        }
+
+        /// <summary>
+        /// Test SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPost
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostAsyncTest()
+        {
+            var response = await _instance.SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostAsync();
+            var model = response.Ok();
+            Assert.IsType<Object>(model);
+        }
+
+        /// <summary>
+        /// Test SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPost
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostAsyncTest()
+        {
+            var response = await _instance.SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostAsync();
+            var model = response.Ok();
+            Assert.IsType<Object>(model);
+        }
+
+        /// <summary>
+        /// Test SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPost
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostAsyncTest()
+        {
+            var response = await _instance.SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostAsync();
+            var model = response.Ok();
+            Assert.IsType<Object>(model);
+        }
+
+        /// <summary>
+        /// Test SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPost
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostAsyncTest()
+        {
+            var response = await _instance.SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostAsync();
             var model = response.Ok();
             Assert.IsType<Object>(model);
         }
