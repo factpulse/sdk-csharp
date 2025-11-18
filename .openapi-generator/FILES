@@ -4,6 +4,7 @@ FactPulse.SDK.sln
 README.md
 api/openapi.yaml
 appveyor.yml
+docs/apis/AFNORDirectoryServiceMtierApi.md
 docs/apis/AFNORPDPPAApi.md
 docs/apis/AFNORPDPPADirectoryServiceApi.md
 docs/apis/AFNORPDPPAFlowServiceApi.md
@@ -19,6 +20,8 @@ docs/models/BodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppSer
 docs/models/BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost.md
 docs/models/BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost.md
 docs/models/BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost.md
+docs/models/BodySearchSirenMetierApiV1AfnorDirectorySirenSearchPost.md
+docs/models/BodySearchSiretMetierApiV1AfnorDirectorySiretSearchPost.md
 docs/models/BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost.md
 docs/models/BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost.md
 docs/models/BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost.md
@@ -120,6 +123,7 @@ docs/models/ValidationError.md
 docs/models/ValidationErrorLocInner.md
 docs/scripts/git_push.ps1
 docs/scripts/git_push.sh
+src/FactPulse.SDK.Test/Api/AFNORDirectoryServiceMtierApiTests.cs
 src/FactPulse.SDK.Test/Api/AFNORPDPPAApiTests.cs
 src/FactPulse.SDK.Test/Api/AFNORPDPPADirectoryServiceApiTests.cs
 src/FactPulse.SDK.Test/Api/AFNORPDPPAFlowServiceApiTests.cs
@@ -138,6 +142,8 @@ src/FactPulse.SDK.Test/Model/BodyListerServicesStructureApiV1ChorusProStructures
 src/FactPulse.SDK.Test/Model/BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostTests.cs
 src/FactPulse.SDK.Test/Model/BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostTests.cs
 src/FactPulse.SDK.Test/Model/BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPostTests.cs
+src/FactPulse.SDK.Test/Model/BodySearchSirenMetierApiV1AfnorDirectorySirenSearchPostTests.cs
+src/FactPulse.SDK.Test/Model/BodySearchSiretMetierApiV1AfnorDirectorySiretSearchPostTests.cs
 src/FactPulse.SDK.Test/Model/BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostTests.cs
 src/FactPulse.SDK.Test/Model/BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostTests.cs
 src/FactPulse.SDK.Test/Model/BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostTests.cs
@@ -238,6 +244,7 @@ src/FactPulse.SDK.Test/Model/UtilisateurTests.cs
 src/FactPulse.SDK.Test/Model/ValidationErrorLocInnerTests.cs
 src/FactPulse.SDK.Test/Model/ValidationErrorTests.cs
 src/FactPulse.SDK.Test/README.md
+src/FactPulse.SDK/Api/AFNORDirectoryServiceMtierApi.cs
 src/FactPulse.SDK/Api/AFNORPDPPAApi.cs
 src/FactPulse.SDK/Api/AFNORPDPPADirectoryServiceApi.cs
 src/FactPulse.SDK/Api/AFNORPDPPAFlowServiceApi.cs
@@ -277,6 +284,8 @@ src/FactPulse.SDK/Model/BodyListerServicesStructureApiV1ChorusProStructuresIdStr
 src/FactPulse.SDK/Model/BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost.cs
 src/FactPulse.SDK/Model/BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost.cs
 src/FactPulse.SDK/Model/BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost.cs
+src/FactPulse.SDK/Model/BodySearchSirenMetierApiV1AfnorDirectorySirenSearchPost.cs
+src/FactPulse.SDK/Model/BodySearchSiretMetierApiV1AfnorDirectorySiretSearchPost.cs
 src/FactPulse.SDK/Model/BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost.cs
 src/FactPulse.SDK/Model/BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost.cs
 src/FactPulse.SDK/Model/BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost.cs

@@ -11,7 +11,7 @@ outputDir: out
 
 # https://openapi-generator.tech/docs/generators/csharp
 additionalProperties:
-  packageGuid: '{8FB4F459-8D81-4C5E-ADBB-023D12DDE9BC}'
+  packageGuid: '{0B4D89C3-7B7B-4286-AA17-01AEFA64750E}'
 
 # https://openapi-generator.tech/docs/integrations/#github-integration
 # gitHost:
@@ -54,8 +54,8 @@ namespace YourProject
         public static async Task Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
-            var api = host.Services.GetRequiredService<IAFNORPDPPAApi>();
-            IOauthTokenProxyApiV1AfnorOauthTokenPostApiResponse apiResponse = await api.OauthTokenProxyApiV1AfnorOauthTokenPostAsync("todo");
+            var api = host.Services.GetRequiredService<IAFNORDirectoryServiceMtierApi>();
+            IGetSirenMetierApiV1AfnorDirectorySirenSirenGetApiResponse apiResponse = await api.GetSirenMetierApiV1AfnorDirectorySirenSirenGetAsync("todo");
             Object? model = apiResponse.Ok();
         }
 
