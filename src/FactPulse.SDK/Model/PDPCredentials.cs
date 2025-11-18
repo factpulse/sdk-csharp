@@ -37,13 +37,15 @@ namespace FactPulse.SDK.Model
         /// <param name="tokenUrl">URL du serveur OAuth2</param>
         /// <param name="clientId">Client ID OAuth2</param>
         /// <param name="clientSecret">Client Secret OAuth2 (sensible)</param>
+        /// <param name="directoryServiceUrl">directoryServiceUrl</param>
         [JsonConstructor]
-        public PDPCredentials(string flowServiceUrl, string tokenUrl, string clientId, string clientSecret)
+        public PDPCredentials(string flowServiceUrl, string tokenUrl, string clientId, string clientSecret, Option<string?> directoryServiceUrl = default)
         {
             FlowServiceUrl = flowServiceUrl;
             TokenUrl = tokenUrl;
             ClientId = clientId;
             ClientSecret = clientSecret;
+            DirectoryServiceUrlOption = directoryServiceUrl;
             OnCreated();
         }
 
@@ -82,6 +84,19 @@ namespace FactPulse.SDK.Model
         public string ClientSecret { get; set; }
 
         /// <summary>
+        /// Used to track the state of DirectoryServiceUrl
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> DirectoryServiceUrlOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets DirectoryServiceUrl
+        /// </summary>
+        [JsonPropertyName("directory_service_url")]
+        public string? DirectoryServiceUrl { get { return this.DirectoryServiceUrlOption; } set { this.DirectoryServiceUrlOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -93,6 +108,7 @@ namespace FactPulse.SDK.Model
             sb.Append("  TokenUrl: ").Append(TokenUrl).Append("\n");
             sb.Append("  ClientId: ").Append(ClientId).Append("\n");
             sb.Append("  ClientSecret: ").Append(ClientSecret).Append("\n");
+            sb.Append("  DirectoryServiceUrl: ").Append(DirectoryServiceUrl).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -134,6 +150,7 @@ namespace FactPulse.SDK.Model
             Option<string?> tokenUrl = default;
             Option<string?> clientId = default;
             Option<string?> clientSecret = default;
+            Option<string?> directoryServiceUrl = default;
 
             while (utf8JsonReader.Read())
             {
@@ -161,6 +178,9 @@ namespace FactPulse.SDK.Model
                             break;
                         case "client_secret":
                             clientSecret = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
+                        case "directory_service_url":
+                            directoryServiceUrl = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -192,7 +212,7 @@ namespace FactPulse.SDK.Model
             if (clientSecret.IsSet && clientSecret.Value == null)
                 throw new ArgumentNullException(nameof(clientSecret), "Property is not nullable for class PDPCredentials.");
 
-            return new PDPCredentials(flowServiceUrl.Value!, tokenUrl.Value!, clientId.Value!, clientSecret.Value!);
+            return new PDPCredentials(flowServiceUrl.Value!, tokenUrl.Value!, clientId.Value!, clientSecret.Value!, directoryServiceUrl);
         }
 
         /// <summary>
@@ -238,6 +258,12 @@ namespace FactPulse.SDK.Model
             writer.WriteString("client_id", pDPCredentials.ClientId);
 
             writer.WriteString("client_secret", pDPCredentials.ClientSecret);
+
+            if (pDPCredentials.DirectoryServiceUrlOption.IsSet)
+                if (pDPCredentials.DirectoryServiceUrlOption.Value != null)
+                    writer.WriteString("directory_service_url", pDPCredentials.DirectoryServiceUrl);
+                else
+                    writer.WriteNull("directory_service_url");
         }
     }
 }

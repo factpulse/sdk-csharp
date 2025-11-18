@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **TokenUrl** | **string** | URL du serveur OAuth2 | 
 **ClientId** | **string** | Client ID OAuth2 | 
 **ClientSecret** | **string** | Client Secret OAuth2 (sensible) | 
+**DirectoryServiceUrl** | **string** |  | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

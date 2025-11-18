@@ -88,5 +88,14 @@ namespace FactPulse.SDK.Test.Model
         {
             // TODO unit test for the property 'ClientSecret'
         }
+
+        /// <summary>
+        /// Test the property 'DirectoryServiceUrl'
+        /// </summary>
+        [Fact]
+        public void DirectoryServiceUrlTest()
+        {
+            // TODO unit test for the property 'DirectoryServiceUrl'
+        }
     }
 }
