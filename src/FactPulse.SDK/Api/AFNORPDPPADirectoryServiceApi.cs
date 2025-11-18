@@ -1484,7 +1484,14 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/afnor/directory/v1/directory-line"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/directory-line");
 
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+
+                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -1516,6 +1523,10 @@ namespace FactPulse.SDK.Api
                         AfterCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostDefaultImplementation(apiResponseLocalVar);
 
                         Events.ExecuteOnCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePost(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -1720,7 +1731,14 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/afnor/directory/v1/routing-code"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/routing-code");
 
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+
+                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -1752,6 +1770,10 @@ namespace FactPulse.SDK.Api
                         AfterCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostDefaultImplementation(apiResponseLocalVar);
 
                         Events.ExecuteOnCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePost(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -1980,7 +2002,14 @@ namespace FactPulse.SDK.Api
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/directory-line/id-instance:{id_instance}");
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bid_instance%7D", Uri.EscapeDataString(idInstance.ToString()));
 
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+
+                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -2012,6 +2041,10 @@ namespace FactPulse.SDK.Api
                         AfterDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteDefaultImplementation(apiResponseLocalVar, idInstance);
 
                         Events.ExecuteOnDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -2496,7 +2529,14 @@ namespace FactPulse.SDK.Api
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/directory-line/code:{addressing_identifier}");
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Baddressing_identifier%7D", Uri.EscapeDataString(addressingIdentifier.ToString()));
 
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+
+                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -2528,6 +2568,10 @@ namespace FactPulse.SDK.Api
                         AfterGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetDefaultImplementation(apiResponseLocalVar, addressingIdentifier);
 
                         Events.ExecuteOnGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -2788,7 +2832,14 @@ namespace FactPulse.SDK.Api
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/directory-line/id-instance:{id_instance}");
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bid_instance%7D", Uri.EscapeDataString(idInstance.ToString()));
 
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+
+                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -2820,6 +2871,10 @@ namespace FactPulse.SDK.Api
                         AfterGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetDefaultImplementation(apiResponseLocalVar, idInstance);
 
                         Events.ExecuteOnGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -3080,7 +3135,14 @@ namespace FactPulse.SDK.Api
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/routing-code/id-instance:{id_instance}");
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bid_instance%7D", Uri.EscapeDataString(idInstance.ToString()));
 
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+
+                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -3112,6 +3174,10 @@ namespace FactPulse.SDK.Api
                         AfterGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetDefaultImplementation(apiResponseLocalVar, idInstance);
 
                         Events.ExecuteOnGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -3383,7 +3449,14 @@ namespace FactPulse.SDK.Api
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bsiret%7D", Uri.EscapeDataString(siret.ToString()));
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Brouting_identifier%7D", Uri.EscapeDataString(routingIdentifier.ToString()));
 
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+
+                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -3415,6 +3488,10 @@ namespace FactPulse.SDK.Api
                         AfterGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetDefaultImplementation(apiResponseLocalVar, siret, routingIdentifier);
 
                         Events.ExecuteOnGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -3675,7 +3752,14 @@ namespace FactPulse.SDK.Api
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/siren/code-insee:{siren}");
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bsiren%7D", Uri.EscapeDataString(siren.ToString()));
 
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+
+                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -3707,6 +3791,10 @@ namespace FactPulse.SDK.Api
                         AfterGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetDefaultImplementation(apiResponseLocalVar, siren);
 
                         Events.ExecuteOnGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -3967,7 +4055,14 @@ namespace FactPulse.SDK.Api
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/siren/id-instance:{id_instance}");
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bid_instance%7D", Uri.EscapeDataString(idInstance.ToString()));
 
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+
+                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -3999,6 +4094,10 @@ namespace FactPulse.SDK.Api
                         AfterGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetDefaultImplementation(apiResponseLocalVar, idInstance);
 
                         Events.ExecuteOnGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -4259,7 +4358,14 @@ namespace FactPulse.SDK.Api
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/siret/code-insee:{siret}");
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bsiret%7D", Uri.EscapeDataString(siret.ToString()));
 
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+
+                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -4291,6 +4397,10 @@ namespace FactPulse.SDK.Api
                         AfterGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetDefaultImplementation(apiResponseLocalVar, siret);
 
                         Events.ExecuteOnGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -4551,7 +4661,14 @@ namespace FactPulse.SDK.Api
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/siret/id-instance:{id_instance}");
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bid_instance%7D", Uri.EscapeDataString(idInstance.ToString()));
 
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+
+                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -4583,6 +4700,10 @@ namespace FactPulse.SDK.Api
                         AfterGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetDefaultImplementation(apiResponseLocalVar, idInstance);
 
                         Events.ExecuteOnGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -4843,7 +4964,14 @@ namespace FactPulse.SDK.Api
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/directory-line/id-instance:{id_instance}");
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bid_instance%7D", Uri.EscapeDataString(idInstance.ToString()));
 
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+
+                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -4875,6 +5003,10 @@ namespace FactPulse.SDK.Api
                         AfterPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchDefaultImplementation(apiResponseLocalVar, idInstance);
 
                         Events.ExecuteOnPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -5135,7 +5267,14 @@ namespace FactPulse.SDK.Api
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/routing-code/id-instance:{id_instance}");
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bid_instance%7D", Uri.EscapeDataString(idInstance.ToString()));
 
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+
+                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -5167,6 +5306,10 @@ namespace FactPulse.SDK.Api
                         AfterPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchDefaultImplementation(apiResponseLocalVar, idInstance);
 
                         Events.ExecuteOnPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -5427,7 +5570,14 @@ namespace FactPulse.SDK.Api
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/routing-code/id-instance:{id_instance}");
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bid_instance%7D", Uri.EscapeDataString(idInstance.ToString()));
 
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+
+                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -5459,6 +5609,10 @@ namespace FactPulse.SDK.Api
                         AfterPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutDefaultImplementation(apiResponseLocalVar, idInstance);
 
                         Events.ExecuteOnPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -5695,7 +5849,14 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/afnor/directory/v1/directory-line/search"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/directory-line/search");
 
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+
+                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -5727,6 +5888,10 @@ namespace FactPulse.SDK.Api
                         AfterSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostDefaultImplementation(apiResponseLocalVar);
 
                         Events.ExecuteOnSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPost(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -5919,7 +6084,14 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/afnor/directory/v1/routing-code/search"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/routing-code/search");
 
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+
+                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -5951,6 +6123,10 @@ namespace FactPulse.SDK.Api
                         AfterSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostDefaultImplementation(apiResponseLocalVar);
 
                         Events.ExecuteOnSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPost(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -6143,7 +6319,14 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/afnor/directory/v1/siren/search"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/siren/search");
 
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+
+                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -6175,6 +6358,10 @@ namespace FactPulse.SDK.Api
                         AfterSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostDefaultImplementation(apiResponseLocalVar);
 
                         Events.ExecuteOnSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPost(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -6367,7 +6554,14 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/afnor/directory/v1/siret/search"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/siret/search");
 
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+
+                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -6399,6 +6593,10 @@ namespace FactPulse.SDK.Api
                         AfterSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostDefaultImplementation(apiResponseLocalVar);
 
                         Events.ExecuteOnSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPost(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }

@@ -51,8 +51,6 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostJsonConverter());
             _jsonOptions.Converters.Add(new BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostJsonConverter());
             _jsonOptions.Converters.Add(new BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPostJsonConverter());
-            _jsonOptions.Converters.Add(new BodySearchSirenMetierApiV1AfnorDirectorySirenSearchPostJsonConverter());
-            _jsonOptions.Converters.Add(new BodySearchSiretMetierApiV1AfnorDirectorySiretSearchPostJsonConverter());
             _jsonOptions.Converters.Add(new BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostJsonConverter());
             _jsonOptions.Converters.Add(new BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostJsonConverter());
             _jsonOptions.Converters.Add(new BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostJsonConverter());
@@ -171,7 +169,6 @@ namespace FactPulse.SDK.Client
             JsonSerializerOptionsProvider jsonSerializerOptionsProvider = new(_jsonOptions);
             _services.AddSingleton(jsonSerializerOptionsProvider);
             _services.AddSingleton<IApiFactory, ApiFactory>();
-            _services.AddSingleton<AFNORDirectoryServiceMtierApiEvents>();
             _services.AddSingleton<AFNORPDPPAApiEvents>();
             _services.AddSingleton<AFNORPDPPADirectoryServiceApiEvents>();
             _services.AddSingleton<AFNORPDPPAFlowServiceApiEvents>();
@@ -196,7 +193,6 @@ namespace FactPulse.SDK.Client
 
             List<IHttpClientBuilder> builders = new List<IHttpClientBuilder>();
 
-            builders.Add(_services.AddHttpClient<IAFNORDirectoryServiceMtierApi, AFNORDirectoryServiceMtierApi>(client));
             builders.Add(_services.AddHttpClient<IAFNORPDPPAApi, AFNORPDPPAApi>(client));
             builders.Add(_services.AddHttpClient<IAFNORPDPPADirectoryServiceApi, AFNORPDPPADirectoryServiceApi>(client));
             builders.Add(_services.AddHttpClient<IAFNORPDPPAFlowServiceApi, AFNORPDPPAFlowServiceApi>(client));

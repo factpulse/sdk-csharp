@@ -70,9 +70,6 @@ namespace FactPulse.SDK.Test.Api
         [Fact]
         public void ConfigureApiWithAClientTest()
         {
-            var aFNORDirectoryServiceMtierApi = _hostUsingConfigureWithAClient.Services.GetRequiredService<IAFNORDirectoryServiceMtierApi>();
-            Assert.True(aFNORDirectoryServiceMtierApi.HttpClient.BaseAddress != null);
-
             var aFNORPDPPAApi = _hostUsingConfigureWithAClient.Services.GetRequiredService<IAFNORPDPPAApi>();
             Assert.True(aFNORPDPPAApi.HttpClient.BaseAddress != null);
 
@@ -101,9 +98,6 @@ namespace FactPulse.SDK.Test.Api
         [Fact]
         public void ConfigureApiWithoutAClientTest()
         {
-            var aFNORDirectoryServiceMtierApi = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<IAFNORDirectoryServiceMtierApi>();
-            Assert.True(aFNORDirectoryServiceMtierApi.HttpClient.BaseAddress != null);
-
             var aFNORPDPPAApi = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<IAFNORPDPPAApi>();
             Assert.True(aFNORPDPPAApi.HttpClient.BaseAddress != null);
 
@@ -132,9 +126,6 @@ namespace FactPulse.SDK.Test.Api
         [Fact]
         public void AddApiWithAClientTest()
         {
-            var aFNORDirectoryServiceMtierApi = _hostUsingAddWithAClient.Services.GetRequiredService<IAFNORDirectoryServiceMtierApi>();
-            Assert.True(aFNORDirectoryServiceMtierApi.HttpClient.BaseAddress != null);
-            
             var aFNORPDPPAApi = _hostUsingAddWithAClient.Services.GetRequiredService<IAFNORPDPPAApi>();
             Assert.True(aFNORPDPPAApi.HttpClient.BaseAddress != null);
             
@@ -163,9 +154,6 @@ namespace FactPulse.SDK.Test.Api
         [Fact]
         public void AddApiWithoutAClientTest()
         {
-            var aFNORDirectoryServiceMtierApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<IAFNORDirectoryServiceMtierApi>();
-            Assert.True(aFNORDirectoryServiceMtierApi.HttpClient.BaseAddress != null);
-
             var aFNORPDPPAApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<IAFNORPDPPAApi>();
             Assert.True(aFNORPDPPAApi.HttpClient.BaseAddress != null);
 
