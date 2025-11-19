@@ -68,6 +68,8 @@ docs/models/MontantTtcTotal.md
 docs/models/MontantTtcTotal1.md
 docs/models/MontantTva.md
 docs/models/MontantTva1.md
+docs/models/MontantTvaLigne.md
+docs/models/MontantTvaTotal.md
 docs/models/MontantUnitaireHt.md
 docs/models/ObtenirIdChorusProRequest.md
 docs/models/ObtenirIdChorusProResponse.md
@@ -96,6 +98,7 @@ docs/models/SoumettreFactureCompleteRequest.md
 docs/models/SoumettreFactureCompleteResponse.md
 docs/models/SoumettreFactureRequest.md
 docs/models/SoumettreFactureResponse.md
+docs/models/StatutCelery.md
 docs/models/StatutFacture.md
 docs/models/StatutTache.md
 docs/models/StructureInfo.md
@@ -174,7 +177,9 @@ src/FactPulse.SDK.Test/Model/MontantTotalTests.cs
 src/FactPulse.SDK.Test/Model/MontantTtcTotal1Tests.cs
 src/FactPulse.SDK.Test/Model/MontantTtcTotalTests.cs
 src/FactPulse.SDK.Test/Model/MontantTva1Tests.cs
+src/FactPulse.SDK.Test/Model/MontantTvaLigneTests.cs
 src/FactPulse.SDK.Test/Model/MontantTvaTests.cs
+src/FactPulse.SDK.Test/Model/MontantTvaTotalTests.cs
 src/FactPulse.SDK.Test/Model/MontantUnitaireHtTests.cs
 src/FactPulse.SDK.Test/Model/ObtenirIdChorusProRequestTests.cs
 src/FactPulse.SDK.Test/Model/ObtenirIdChorusProResponseTests.cs
@@ -203,6 +208,7 @@ src/FactPulse.SDK.Test/Model/SoumettreFactureCompleteRequestTests.cs
 src/FactPulse.SDK.Test/Model/SoumettreFactureCompleteResponseTests.cs
 src/FactPulse.SDK.Test/Model/SoumettreFactureRequestTests.cs
 src/FactPulse.SDK.Test/Model/SoumettreFactureResponseTests.cs
+src/FactPulse.SDK.Test/Model/StatutCeleryTests.cs
 src/FactPulse.SDK.Test/Model/StatutFactureTests.cs
 src/FactPulse.SDK.Test/Model/StatutTacheTests.cs
 src/FactPulse.SDK.Test/Model/StructureInfoTests.cs
@@ -302,6 +308,8 @@ src/FactPulse.SDK/Model/MontantTtcTotal.cs
 src/FactPulse.SDK/Model/MontantTtcTotal1.cs
 src/FactPulse.SDK/Model/MontantTva.cs
 src/FactPulse.SDK/Model/MontantTva1.cs
+src/FactPulse.SDK/Model/MontantTvaLigne.cs
+src/FactPulse.SDK/Model/MontantTvaTotal.cs
 src/FactPulse.SDK/Model/MontantUnitaireHt.cs
 src/FactPulse.SDK/Model/ObtenirIdChorusProRequest.cs
 src/FactPulse.SDK/Model/ObtenirIdChorusProResponse.cs
@@ -330,6 +338,7 @@ src/FactPulse.SDK/Model/SoumettreFactureCompleteRequest.cs
 src/FactPulse.SDK/Model/SoumettreFactureCompleteResponse.cs
 src/FactPulse.SDK/Model/SoumettreFactureRequest.cs
 src/FactPulse.SDK/Model/SoumettreFactureResponse.cs
+src/FactPulse.SDK/Model/StatutCelery.cs
 src/FactPulse.SDK/Model/StatutFacture.cs
 src/FactPulse.SDK/Model/StatutTache.cs
 src/FactPulse.SDK/Model/StructureInfo.cs

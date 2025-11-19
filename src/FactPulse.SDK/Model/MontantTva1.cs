@@ -26,7 +26,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Montant total de la TVA.
+    /// Montant TVA
     /// </summary>
     public partial class MontantTva1 : IValidatableObject
     {
@@ -178,10 +178,10 @@ namespace FactPulse.SDK.Model
             writer.WriteStartObject();
 
             if (montantTva1.DecimalOption.IsSet && montantTva1.DecimalOption.Value != null)
-                writer.WriteNumber("Tauxmanuel", montantTva1.DecimalOption.Value.Value);
+                writer.WriteNumber("1", montantTva1.DecimalOption.Value.Value);
 
             if (montantTva1.StringOption.IsSet && montantTva1.StringOption.Value != null)
-                writer.WriteString("Tauxmanuel", montantTva1.StringOption.Value);
+                writer.WriteString("1", montantTva1.StringOption.Value);
 
             WriteProperties(writer, montantTva1, jsonSerializerOptions);
             writer.WriteEndObject();

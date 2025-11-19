@@ -26,177 +26,193 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// MontantTva
+    /// Statuts possibles d&#39;une tâche Celery lors du polling.  **Valeurs possibles :** - &#x60;PENDING&#x60; : Tâche en attente de traitement - &#x60;STARTED&#x60; : Tâche en cours d&#39;exécution - &#x60;SUCCESS&#x60; : Tâche terminée avec succès (vérifier &#x60;resultat.statut&#x60; pour le résultat métier) - &#x60;FAILURE&#x60; : Erreur système lors de l&#39;exécution (crash, exception non gérée) - &#x60;RETRY&#x60; : Tentative de ré-exécution en cours (après un échec temporaire)
     /// </summary>
-    public partial class MontantTva : IValidatableObject
+    /// <value>Statuts possibles d&#39;une tâche Celery lors du polling.  **Valeurs possibles :** - &#x60;PENDING&#x60; : Tâche en attente de traitement - &#x60;STARTED&#x60; : Tâche en cours d&#39;exécution - &#x60;SUCCESS&#x60; : Tâche terminée avec succès (vérifier &#x60;resultat.statut&#x60; pour le résultat métier) - &#x60;FAILURE&#x60; : Erreur système lors de l&#39;exécution (crash, exception non gérée) - &#x60;RETRY&#x60; : Tentative de ré-exécution en cours (après un échec temporaire)</value>
+    public enum StatutCelery
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MontantTva" /> class.
+        /// Enum PENDING for value: PENDING
         /// </summary>
-        /// <param name="decimal"></param>
-        /// <param name="string"></param>
-        internal MontantTva(Option<decimal?> @decimal, Option<string?> @string)
+        PENDING = 1,
+
+        /// <summary>
+        /// Enum STARTED for value: STARTED
+        /// </summary>
+        STARTED = 2,
+
+        /// <summary>
+        /// Enum SUCCESS for value: SUCCESS
+        /// </summary>
+        SUCCESS = 3,
+
+        /// <summary>
+        /// Enum FAILURE for value: FAILURE
+        /// </summary>
+        FAILURE = 4,
+
+        /// <summary>
+        /// Enum RETRY for value: RETRY
+        /// </summary>
+        RETRY = 5
+    }
+
+    /// <summary>
+    /// Converts <see cref="StatutCelery"/> to and from the JSON value
+    /// </summary>
+    public static class StatutCeleryValueConverter
+    {
+        /// <summary>
+        /// Parses a given value to <see cref="StatutCelery"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static StatutCelery FromString(string value)
         {
-            DecimalOption = @decimal;
-            StringOption = @string;
-            OnCreated();
+            if (value.Equals("PENDING"))
+                return StatutCelery.PENDING;
+
+            if (value.Equals("STARTED"))
+                return StatutCelery.STARTED;
+
+            if (value.Equals("SUCCESS"))
+                return StatutCelery.SUCCESS;
+
+            if (value.Equals("FAILURE"))
+                return StatutCelery.FAILURE;
+
+            if (value.Equals("RETRY"))
+                return StatutCelery.RETRY;
+
+            throw new NotImplementedException($"Could not convert value to type StatutCelery: '{value}'");
         }
 
-        partial void OnCreated();
-
         /// <summary>
-        /// Used to track the state of Decimal
+        /// Parses a given value to <see cref="StatutCelery"/>
         /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<decimal?> DecimalOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets Decimal
-        /// </summary>
-        public decimal? Decimal { get { return this.DecimalOption; } set { this.DecimalOption = new(value); } }
-
-        /// <summary>
-        /// Used to track the state of String
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> StringOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets String
-        /// </summary>
-        public string? String { get { return this.StringOption; } set { this.StringOption = new(value); } }
-
-        /// <summary>
-        /// Returns the string presentation of the object
-        /// </summary>
-        /// <returns>String presentation of the object</returns>
-        public override string ToString()
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static StatutCelery? FromStringOrDefault(string value)
         {
-            StringBuilder sb = new StringBuilder();
-            sb.Append("class MontantTva {\n");
-            sb.Append("}\n");
-            return sb.ToString();
+            if (value.Equals("PENDING"))
+                return StatutCelery.PENDING;
+
+            if (value.Equals("STARTED"))
+                return StatutCelery.STARTED;
+
+            if (value.Equals("SUCCESS"))
+                return StatutCelery.SUCCESS;
+
+            if (value.Equals("FAILURE"))
+                return StatutCelery.FAILURE;
+
+            if (value.Equals("RETRY"))
+                return StatutCelery.RETRY;
+
+            return null;
         }
 
         /// <summary>
-        /// To validate all properties of the instance
+        /// Converts the <see cref="StatutCelery"/> to the json value
         /// </summary>
-        /// <param name="validationContext">Validation context</param>
-        /// <returns>Validation Result</returns>
-        IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static string ToJsonValue(StatutCelery value)
         {
-            yield break;
+            if (value == StatutCelery.PENDING)
+                return "PENDING";
+
+            if (value == StatutCelery.STARTED)
+                return "STARTED";
+
+            if (value == StatutCelery.SUCCESS)
+                return "SUCCESS";
+
+            if (value == StatutCelery.FAILURE)
+                return "FAILURE";
+
+            if (value == StatutCelery.RETRY)
+                return "RETRY";
+
+            throw new NotImplementedException($"Value could not be handled: '{value}'");
         }
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="MontantTva" />
+    /// A Json converter for type <see cref="StatutCelery"/>
     /// </summary>
-    public class MontantTvaJsonConverter : JsonConverter<MontantTva>
+    /// <exception cref="NotImplementedException"></exception>
+    public class StatutCeleryJsonConverter : JsonConverter<StatutCelery>
     {
         /// <summary>
-        /// Deserializes json to <see cref="MontantTva" />
+        /// Returns a  from the Json object
         /// </summary>
-        /// <param name="utf8JsonReader"></param>
+        /// <param name="reader"></param>
         /// <param name="typeToConvert"></param>
-        /// <param name="jsonSerializerOptions"></param>
+        /// <param name="options"></param>
         /// <returns></returns>
-        /// <exception cref="JsonException"></exception>
-        public override MontantTva Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override StatutCelery Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
-            int currentDepth = utf8JsonReader.CurrentDepth;
+            string? rawValue = reader.GetString();
 
-            if (utf8JsonReader.TokenType != JsonTokenType.StartObject && utf8JsonReader.TokenType != JsonTokenType.StartArray)
-                throw new JsonException();
+            StatutCelery? result = rawValue == null
+                ? null
+                : StatutCeleryValueConverter.FromStringOrDefault(rawValue);
 
-            JsonTokenType startingTokenType = utf8JsonReader.TokenType;
+            if (result != null)
+                return result.Value;
 
-            decimal? varDecimal = default;
-            string? varString = default;
-
-            Utf8JsonReader utf8JsonReaderAnyOf = utf8JsonReader;
-            while (utf8JsonReaderAnyOf.Read())
-            {
-                if (startingTokenType == JsonTokenType.StartObject && utf8JsonReaderAnyOf.TokenType == JsonTokenType.EndObject && currentDepth == utf8JsonReaderAnyOf.CurrentDepth)
-                    break;
-
-                if (startingTokenType == JsonTokenType.StartArray && utf8JsonReaderAnyOf.TokenType == JsonTokenType.EndArray && currentDepth == utf8JsonReaderAnyOf.CurrentDepth)
-                    break;
-
-                if (utf8JsonReaderAnyOf.TokenType == JsonTokenType.PropertyName && currentDepth == utf8JsonReaderAnyOf.CurrentDepth - 1)
-                {
-                    Utf8JsonReader utf8JsonReaderDecimal = utf8JsonReader;
-                    ClientUtils.TryDeserialize<decimal?>(ref utf8JsonReaderDecimal, jsonSerializerOptions, out varDecimal);
-
-                    Utf8JsonReader utf8JsonReaderString = utf8JsonReader;
-                    ClientUtils.TryDeserialize<string?>(ref utf8JsonReaderString, jsonSerializerOptions, out varString);
-                }
-            }
-
-            while (utf8JsonReader.Read())
-            {
-                if (startingTokenType == JsonTokenType.StartObject && utf8JsonReader.TokenType == JsonTokenType.EndObject && currentDepth == utf8JsonReader.CurrentDepth)
-                    break;
-
-                if (startingTokenType == JsonTokenType.StartArray && utf8JsonReader.TokenType == JsonTokenType.EndArray && currentDepth == utf8JsonReader.CurrentDepth)
-                    break;
-
-                if (utf8JsonReader.TokenType == JsonTokenType.PropertyName && currentDepth == utf8JsonReader.CurrentDepth - 1)
-                {
-                    string? localVarJsonPropertyName = utf8JsonReader.GetString();
-                    utf8JsonReader.Read();
-
-                    switch (localVarJsonPropertyName)
-                    {
-                        default:
-                            break;
-                    }
-                }
-            }
-
-            Option<decimal?> varDecimalParsedValue = varDecimal == null
-                ? default
-                : new Option<decimal?>(varDecimal);
-            Option<string?> varStringParsedValue = varString == null
-                ? default
-                : new Option<string?>(varString);
-
-            return new MontantTva(varDecimalParsedValue, varStringParsedValue);
+            throw new JsonException();
         }
 
         /// <summary>
-        /// Serializes a <see cref="MontantTva" />
+        /// Writes the StatutCelery to the json writer
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="montantTva"></param>
-        /// <param name="jsonSerializerOptions"></param>
-        /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, MontantTva montantTva, JsonSerializerOptions jsonSerializerOptions)
+        /// <param name="statutCelery"></param>
+        /// <param name="options"></param>
+        public override void Write(Utf8JsonWriter writer, StatutCelery statutCelery, JsonSerializerOptions options)
         {
-            writer.WriteStartObject();
+            writer.WriteStringValue(StatutCeleryValueConverter.ToJsonValue(statutCelery).ToString());
+        }
+    }
 
-            if (montantTva.DecimalOption.IsSet && montantTva.DecimalOption.Value != null)
-                writer.WriteNumber("1", montantTva.DecimalOption.Value.Value);
+    /// <summary>
+    /// A Json converter for type <see cref="StatutCelery"/>
+    /// </summary>
+    public class StatutCeleryNullableJsonConverter : JsonConverter<StatutCelery?>
+    {
+        /// <summary>
+        /// Returns a StatutCelery from the Json object
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <param name="typeToConvert"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public override StatutCelery? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        {
+            string? rawValue = reader.GetString();
 
-            if (montantTva.StringOption.IsSet && montantTva.StringOption.Value != null)
-                writer.WriteString("1", montantTva.StringOption.Value);
+            StatutCelery? result = rawValue == null
+                ? null
+                : StatutCeleryValueConverter.FromStringOrDefault(rawValue);
 
-            WriteProperties(writer, montantTva, jsonSerializerOptions);
-            writer.WriteEndObject();
+            if (result != null)
+                return result.Value;
+
+            throw new JsonException();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="MontantTva" />
+        /// Writes the StatutCelery to the json writer
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="montantTva"></param>
-        /// <param name="jsonSerializerOptions"></param>
-        /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, MontantTva montantTva, JsonSerializerOptions jsonSerializerOptions)
+        /// <param name="statutCelery"></param>
+        /// <param name="options"></param>
+        public override void Write(Utf8JsonWriter writer, StatutCelery? statutCelery, JsonSerializerOptions options)
         {
-
+            writer.WriteStringValue(statutCelery.HasValue ? StatutCeleryValueConverter.ToJsonValue(statutCelery.Value).ToString() : "null");
         }
     }
 }

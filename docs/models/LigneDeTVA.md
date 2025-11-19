@@ -6,7 +6,7 @@ Représente une ligne de totalisation par taux de TVA.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **MontantBaseHt** | [**MontantBaseHt**](MontantBaseHt.md) |  | 
-**MontantTva** | [**MontantTva**](MontantTva.md) |  | 
+**MontantTva** | [**MontantTvaLigne**](MontantTvaLigne.md) |  | 
 **Taux** | **string** |  | [optional] 
 **TauxManuel** | [**Tauxmanuel**](Tauxmanuel.md) |  | [optional] 
 **Categorie** | **CategorieTVA** |  | [optional] 

@@ -106,6 +106,8 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new MontantTtcTotal1JsonConverter());
             _jsonOptions.Converters.Add(new MontantTvaJsonConverter());
             _jsonOptions.Converters.Add(new MontantTva1JsonConverter());
+            _jsonOptions.Converters.Add(new MontantTvaLigneJsonConverter());
+            _jsonOptions.Converters.Add(new MontantTvaTotalJsonConverter());
             _jsonOptions.Converters.Add(new MontantUnitaireHtJsonConverter());
             _jsonOptions.Converters.Add(new ObtenirIdChorusProRequestJsonConverter());
             _jsonOptions.Converters.Add(new ObtenirIdChorusProResponseJsonConverter());
@@ -136,6 +138,8 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new SoumettreFactureCompleteResponseJsonConverter());
             _jsonOptions.Converters.Add(new SoumettreFactureRequestJsonConverter());
             _jsonOptions.Converters.Add(new SoumettreFactureResponseJsonConverter());
+            _jsonOptions.Converters.Add(new StatutCeleryJsonConverter());
+            _jsonOptions.Converters.Add(new StatutCeleryNullableJsonConverter());
             _jsonOptions.Converters.Add(new StatutFactureJsonConverter());
             _jsonOptions.Converters.Add(new StatutTacheJsonConverter());
             _jsonOptions.Converters.Add(new StructureInfoJsonConverter());

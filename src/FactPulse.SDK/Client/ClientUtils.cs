@@ -137,6 +137,8 @@ namespace FactPulse.SDK.Client
                 return SchemeIDValueConverter.ToJsonValue(schemeID);
             if (obj is SoumettreFactureCompleteResponse.DestinationTypeEnum soumettreFactureCompleteResponseDestinationTypeEnum)
                 return SoumettreFactureCompleteResponse.DestinationTypeEnumToJsonValue(soumettreFactureCompleteResponseDestinationTypeEnum);
+            if (obj is StatutCelery statutCelery)
+                return StatutCeleryValueConverter.ToJsonValue(statutCelery);
             if (obj is TypeFacture typeFacture)
                 return TypeFactureValueConverter.ToJsonValue(typeFacture);
             if (obj is TypeTVA typeTVA)

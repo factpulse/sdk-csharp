@@ -41,7 +41,7 @@ namespace FactPulse.SDK.Model
         /// <param name="montantRemiseGlobaleTtc">montantRemiseGlobaleTtc</param>
         /// <param name="motifRemiseGlobaleTtc">motifRemiseGlobaleTtc</param>
         [JsonConstructor]
-        public MontantTotal(MontantHtTotal montantHtTotal, MontantTva1 montantTva, MontantTtcTotal montantTtcTotal, MontantAPayer montantAPayer, Option<MontantTotalAcompte?> acompte = default, Option<MontantRemiseGlobaleTtc?> montantRemiseGlobaleTtc = default, Option<string?> motifRemiseGlobaleTtc = default)
+        public MontantTotal(MontantHtTotal montantHtTotal, MontantTvaTotal montantTva, MontantTtcTotal montantTtcTotal, MontantAPayer montantAPayer, Option<MontantTotalAcompte?> acompte = default, Option<MontantRemiseGlobaleTtc?> montantRemiseGlobaleTtc = default, Option<string?> motifRemiseGlobaleTtc = default)
         {
             MontantHtTotal = montantHtTotal;
             MontantTva = montantTva;
@@ -65,7 +65,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets MontantTva
         /// </summary>
         [JsonPropertyName("montantTva")]
-        public MontantTva1 MontantTva { get; set; }
+        public MontantTvaTotal MontantTva { get; set; }
 
         /// <summary>
         /// Gets or Sets MontantTtcTotal
@@ -171,7 +171,7 @@ namespace FactPulse.SDK.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<MontantHtTotal?> montantHtTotal = default;
-            Option<MontantTva1?> montantTva = default;
+            Option<MontantTvaTotal?> montantTva = default;
             Option<MontantTtcTotal?> montantTtcTotal = default;
             Option<MontantAPayer?> montantAPayer = default;
             Option<MontantTotalAcompte?> acompte = default;
@@ -197,7 +197,7 @@ namespace FactPulse.SDK.Model
                             montantHtTotal = new Option<MontantHtTotal?>(JsonSerializer.Deserialize<MontantHtTotal>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "montantTva":
-                            montantTva = new Option<MontantTva1?>(JsonSerializer.Deserialize<MontantTva1>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            montantTva = new Option<MontantTvaTotal?>(JsonSerializer.Deserialize<MontantTvaTotal>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "montantTtcTotal":
                             montantTtcTotal = new Option<MontantTtcTotal?>(JsonSerializer.Deserialize<MontantTtcTotal>(ref utf8JsonReader, jsonSerializerOptions)!);

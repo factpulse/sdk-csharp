@@ -26,52 +26,47 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Description complète du statut d&#39;une tâche asynchrone.  Le champ &#x60;statut&#x60; indique l&#39;état Celery de la tâche. Quand &#x60;statut&#x3D;\&quot;SUCCESS\&quot;&#x60;, consultez &#x60;resultat.statut&#x60; pour le résultat métier (\&quot;SUCCES\&quot; ou \&quot;ERREUR\&quot;).
+    /// Montant de la TVA pour cette ligne.
     /// </summary>
-    public partial class StatutTache : IValidatableObject
+    public partial class MontantTvaLigne : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="StatutTache" /> class.
+        /// Initializes a new instance of the <see cref="MontantTvaLigne" /> class.
         /// </summary>
-        /// <param name="idTache">idTache</param>
-        /// <param name="statut">Statut Celery de la tâche (PENDING, STARTED, SUCCESS, FAILURE, RETRY)</param>
-        /// <param name="resultat">resultat</param>
-        [JsonConstructor]
-        public StatutTache(string idTache, StatutCelery statut, Option<Dictionary<string, Object>?> resultat = default)
+        /// <param name="decimal"></param>
+        /// <param name="string"></param>
+        internal MontantTvaLigne(Option<decimal?> @decimal, Option<string?> @string)
         {
-            IdTache = idTache;
-            Statut = statut;
-            ResultatOption = resultat;
+            DecimalOption = @decimal;
+            StringOption = @string;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Statut Celery de la tâche (PENDING, STARTED, SUCCESS, FAILURE, RETRY)
-        /// </summary>
-        /// <value>Statut Celery de la tâche (PENDING, STARTED, SUCCESS, FAILURE, RETRY)</value>
-        [JsonPropertyName("statut")]
-        public StatutCelery Statut { get; set; }
-
-        /// <summary>
-        /// Gets or Sets IdTache
-        /// </summary>
-        [JsonPropertyName("id_tache")]
-        public string IdTache { get; set; }
-
-        /// <summary>
-        /// Used to track the state of Resultat
+        /// Used to track the state of Decimal
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<Dictionary<string, Object>?> ResultatOption { get; private set; }
+        public Option<decimal?> DecimalOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Resultat
+        /// Gets or Sets Decimal
         /// </summary>
-        [JsonPropertyName("resultat")]
-        public Dictionary<string, Object>? Resultat { get { return this.ResultatOption; } set { this.ResultatOption = new(value); } }
+        public decimal? Decimal { get { return this.DecimalOption; } set { this.DecimalOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of String
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> StringOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets String
+        /// </summary>
+        public string? String { get { return this.StringOption; } set { this.StringOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -80,10 +75,7 @@ namespace FactPulse.SDK.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class StatutTache {\n");
-            sb.Append("  IdTache: ").Append(IdTache).Append("\n");
-            sb.Append("  Statut: ").Append(Statut).Append("\n");
-            sb.Append("  Resultat: ").Append(Resultat).Append("\n");
+            sb.Append("class MontantTvaLigne {\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -100,19 +92,19 @@ namespace FactPulse.SDK.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="StatutTache" />
+    /// A Json converter for type <see cref="MontantTvaLigne" />
     /// </summary>
-    public class StatutTacheJsonConverter : JsonConverter<StatutTache>
+    public class MontantTvaLigneJsonConverter : JsonConverter<MontantTvaLigne>
     {
         /// <summary>
-        /// Deserializes json to <see cref="StatutTache" />
+        /// Deserializes json to <see cref="MontantTvaLigne" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override StatutTache Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override MontantTvaLigne Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -121,9 +113,27 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<string?> idTache = default;
-            Option<StatutCelery?> statut = default;
-            Option<Dictionary<string, Object>?> resultat = default;
+            decimal? varDecimal = default;
+            string? varString = default;
+
+            Utf8JsonReader utf8JsonReaderAnyOf = utf8JsonReader;
+            while (utf8JsonReaderAnyOf.Read())
+            {
+                if (startingTokenType == JsonTokenType.StartObject && utf8JsonReaderAnyOf.TokenType == JsonTokenType.EndObject && currentDepth == utf8JsonReaderAnyOf.CurrentDepth)
+                    break;
+
+                if (startingTokenType == JsonTokenType.StartArray && utf8JsonReaderAnyOf.TokenType == JsonTokenType.EndArray && currentDepth == utf8JsonReaderAnyOf.CurrentDepth)
+                    break;
+
+                if (utf8JsonReaderAnyOf.TokenType == JsonTokenType.PropertyName && currentDepth == utf8JsonReaderAnyOf.CurrentDepth - 1)
+                {
+                    Utf8JsonReader utf8JsonReaderDecimal = utf8JsonReader;
+                    ClientUtils.TryDeserialize<decimal?>(ref utf8JsonReaderDecimal, jsonSerializerOptions, out varDecimal);
+
+                    Utf8JsonReader utf8JsonReaderString = utf8JsonReader;
+                    ClientUtils.TryDeserialize<string?>(ref utf8JsonReaderString, jsonSerializerOptions, out varString);
+                }
+            }
 
             while (utf8JsonReader.Read())
             {
@@ -140,78 +150,53 @@ namespace FactPulse.SDK.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "id_tache":
-                            idTache = new Option<string?>(utf8JsonReader.GetString()!);
-                            break;
-                        case "statut":
-                            string? statutRawValue = utf8JsonReader.GetString();
-                            if (statutRawValue != null)
-                                statut = new Option<StatutCelery?>(StatutCeleryValueConverter.FromStringOrDefault(statutRawValue));
-                            break;
-                        case "resultat":
-                            resultat = new Option<Dictionary<string, Object>?>(JsonSerializer.Deserialize<Dictionary<string, Object>>(ref utf8JsonReader, jsonSerializerOptions));
-                            break;
                         default:
                             break;
                     }
                 }
             }
 
-            if (!idTache.IsSet)
-                throw new ArgumentException("Property is required for class StatutTache.", nameof(idTache));
+            Option<decimal?> varDecimalParsedValue = varDecimal == null
+                ? default
+                : new Option<decimal?>(varDecimal);
+            Option<string?> varStringParsedValue = varString == null
+                ? default
+                : new Option<string?>(varString);
 
-            if (!statut.IsSet)
-                throw new ArgumentException("Property is required for class StatutTache.", nameof(statut));
-
-            if (idTache.IsSet && idTache.Value == null)
-                throw new ArgumentNullException(nameof(idTache), "Property is not nullable for class StatutTache.");
-
-            if (statut.IsSet && statut.Value == null)
-                throw new ArgumentNullException(nameof(statut), "Property is not nullable for class StatutTache.");
-
-            return new StatutTache(idTache.Value!, statut.Value!.Value!, resultat);
+            return new MontantTvaLigne(varDecimalParsedValue, varStringParsedValue);
         }
 
         /// <summary>
-        /// Serializes a <see cref="StatutTache" />
+        /// Serializes a <see cref="MontantTvaLigne" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="statutTache"></param>
+        /// <param name="montantTvaLigne"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, StatutTache statutTache, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, MontantTvaLigne montantTvaLigne, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, statutTache, jsonSerializerOptions);
+            if (montantTvaLigne.DecimalOption.IsSet && montantTvaLigne.DecimalOption.Value != null)
+                writer.WriteNumber("Tauxmanuel", montantTvaLigne.DecimalOption.Value.Value);
+
+            if (montantTvaLigne.StringOption.IsSet && montantTvaLigne.StringOption.Value != null)
+                writer.WriteString("Tauxmanuel", montantTvaLigne.StringOption.Value);
+
+            WriteProperties(writer, montantTvaLigne, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="StatutTache" />
+        /// Serializes the properties of <see cref="MontantTvaLigne" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="statutTache"></param>
+        /// <param name="montantTvaLigne"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, StatutTache statutTache, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, MontantTvaLigne montantTvaLigne, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (statutTache.IdTache == null)
-                throw new ArgumentNullException(nameof(statutTache.IdTache), "Property is required for class StatutTache.");
 
-            writer.WriteString("id_tache", statutTache.IdTache);
-
-            var statutRawValue = StatutCeleryValueConverter.ToJsonValue(statutTache.Statut);
-            writer.WriteString("statut", statutRawValue);
-
-            if (statutTache.ResultatOption.IsSet)
-                if (statutTache.ResultatOption.Value != null)
-                {
-                    writer.WritePropertyName("resultat");
-                    JsonSerializer.Serialize(writer, statutTache.Resultat, jsonSerializerOptions);
-                }
-                else
-                    writer.WriteNull("resultat");
         }
     }
 }

@@ -39,7 +39,7 @@ namespace FactPulse.SDK.Model
         /// <param name="tauxManuel">tauxManuel</param>
         /// <param name="categorie">categorie</param>
         [JsonConstructor]
-        public LigneDeTVA(MontantBaseHt montantBaseHt, MontantTva montantTva, Option<string?> taux = default, Option<Tauxmanuel?> tauxManuel = default, Option<CategorieTVA?> categorie = default)
+        public LigneDeTVA(MontantBaseHt montantBaseHt, MontantTvaLigne montantTva, Option<string?> taux = default, Option<Tauxmanuel?> tauxManuel = default, Option<CategorieTVA?> categorie = default)
         {
             MontantBaseHt = montantBaseHt;
             MontantTva = montantTva;
@@ -74,7 +74,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets MontantTva
         /// </summary>
         [JsonPropertyName("montantTva")]
-        public MontantTva MontantTva { get; set; }
+        public MontantTvaLigne MontantTva { get; set; }
 
         /// <summary>
         /// Used to track the state of Taux
@@ -153,7 +153,7 @@ namespace FactPulse.SDK.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<MontantBaseHt?> montantBaseHt = default;
-            Option<MontantTva?> montantTva = default;
+            Option<MontantTvaLigne?> montantTva = default;
             Option<string?> taux = default;
             Option<Tauxmanuel?> tauxManuel = default;
             Option<CategorieTVA?> categorie = default;
@@ -177,7 +177,7 @@ namespace FactPulse.SDK.Model
                             montantBaseHt = new Option<MontantBaseHt?>(JsonSerializer.Deserialize<MontantBaseHt>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "montantTva":
-                            montantTva = new Option<MontantTva?>(JsonSerializer.Deserialize<MontantTva>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            montantTva = new Option<MontantTvaLigne?>(JsonSerializer.Deserialize<MontantTvaLigne>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "taux":
                             taux = new Option<string?>(utf8JsonReader.GetString());
