@@ -125,8 +125,6 @@ namespace FactPulse.SDK.Client
                 return DestinationAFNOR.FlowSyntaxEnumToJsonValue(destinationAFNORFlowSyntaxEnum);
             if (obj is DestinationChorusPro.TypeEnum destinationChorusProTypeEnum)
                 return DestinationChorusPro.TypeEnumToJsonValue(destinationChorusProTypeEnum);
-            if (obj is DirectionFlux directionFlux)
-                return DirectionFluxValueConverter.ToJsonValue(directionFlux);
             if (obj is FormatSortie formatSortie)
                 return FormatSortieValueConverter.ToJsonValue(formatSortie);
             if (obj is ModeDepot modeDepot)
@@ -135,20 +133,12 @@ namespace FactPulse.SDK.Client
                 return ModePaiementValueConverter.ToJsonValue(modePaiement);
             if (obj is ProfilAPI profilAPI)
                 return ProfilAPIValueConverter.ToJsonValue(profilAPI);
-            if (obj is ProfilFlux profilFlux)
-                return ProfilFluxValueConverter.ToJsonValue(profilFlux);
             if (obj is SchemeID schemeID)
                 return SchemeIDValueConverter.ToJsonValue(schemeID);
             if (obj is SoumettreFactureCompleteResponse.DestinationTypeEnum soumettreFactureCompleteResponseDestinationTypeEnum)
                 return SoumettreFactureCompleteResponse.DestinationTypeEnumToJsonValue(soumettreFactureCompleteResponseDestinationTypeEnum);
-            if (obj is StatutAcquittement statutAcquittement)
-                return StatutAcquittementValueConverter.ToJsonValue(statutAcquittement);
-            if (obj is SyntaxeFlux syntaxeFlux)
-                return SyntaxeFluxValueConverter.ToJsonValue(syntaxeFlux);
             if (obj is TypeFacture typeFacture)
                 return TypeFactureValueConverter.ToJsonValue(typeFacture);
-            if (obj is TypeFlux typeFlux)
-                return TypeFluxValueConverter.ToJsonValue(typeFlux);
             if (obj is TypeTVA typeTVA)
                 return TypeTVAValueConverter.ToJsonValue(typeTVA);
             if (obj is Unite unite)

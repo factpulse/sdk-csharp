@@ -26,55 +26,55 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Catégories de TVA standardisées pour Factur-X.
+    /// Catégories de TVA standardisées pour Factur-X (norme EN 16931).  **Valeurs possibles :** - &#x60;S&#x60; : STANDARD - TVA au taux standard - &#x60;Z&#x60; : ZERO - TVA à taux zéro - &#x60;E&#x60; : EXONEREE - Exonération de TVA - &#x60;AE&#x60; : AUTO_LIQUIDATION - Auto-liquidation (reverse charge) - &#x60;K&#x60; : INTRA_COMMUNAUTAIRE - Livraison intracommunautaire - &#x60;G&#x60; : EXPORT - Export hors UE - &#x60;O&#x60; : HORS_CHAMP - Hors champ de la TVA - &#x60;L&#x60; : CANARIES - TVA Canaries - &#x60;M&#x60; : CEUTA_MELILLA - TVA Ceuta/Melilla
     /// </summary>
-    /// <value>Catégories de TVA standardisées pour Factur-X.</value>
+    /// <value>Catégories de TVA standardisées pour Factur-X (norme EN 16931).  **Valeurs possibles :** - &#x60;S&#x60; : STANDARD - TVA au taux standard - &#x60;Z&#x60; : ZERO - TVA à taux zéro - &#x60;E&#x60; : EXONEREE - Exonération de TVA - &#x60;AE&#x60; : AUTO_LIQUIDATION - Auto-liquidation (reverse charge) - &#x60;K&#x60; : INTRA_COMMUNAUTAIRE - Livraison intracommunautaire - &#x60;G&#x60; : EXPORT - Export hors UE - &#x60;O&#x60; : HORS_CHAMP - Hors champ de la TVA - &#x60;L&#x60; : CANARIES - TVA Canaries - &#x60;M&#x60; : CEUTA_MELILLA - TVA Ceuta/Melilla</value>
     public enum CategorieTVA
     {
         /// <summary>
-        /// Enum S for value: S
+        /// Enum STANDARD for value: S
         /// </summary>
-        S = 1,
+        STANDARD = 1,
 
         /// <summary>
-        /// Enum Z for value: Z
+        /// Enum ZERO for value: Z
         /// </summary>
-        Z = 2,
+        ZERO = 2,
 
         /// <summary>
-        /// Enum E for value: E
+        /// Enum EXONEREE for value: E
         /// </summary>
-        E = 3,
+        EXONEREE = 3,
 
         /// <summary>
-        /// Enum AE for value: AE
+        /// Enum AUTO_LIQUIDATION for value: AE
         /// </summary>
-        AE = 4,
+        AUTO_LIQUIDATION = 4,
 
         /// <summary>
-        /// Enum K for value: K
+        /// Enum INTRA_COMMUNAUTAIRE for value: K
         /// </summary>
-        K = 5,
+        INTRA_COMMUNAUTAIRE = 5,
 
         /// <summary>
-        /// Enum G for value: G
+        /// Enum EXPORT for value: G
         /// </summary>
-        G = 6,
+        EXPORT = 6,
 
         /// <summary>
-        /// Enum O for value: O
+        /// Enum HORS_CHAMP for value: O
         /// </summary>
-        O = 7,
+        HORS_CHAMP = 7,
 
         /// <summary>
-        /// Enum L for value: L
+        /// Enum CANARIES for value: L
         /// </summary>
-        L = 8,
+        CANARIES = 8,
 
         /// <summary>
-        /// Enum M for value: M
+        /// Enum CEUTA_MELILLA for value: M
         /// </summary>
-        M = 9
+        CEUTA_MELILLA = 9
     }
 
     /// <summary>
@@ -90,31 +90,31 @@ namespace FactPulse.SDK.Model
         public static CategorieTVA FromString(string value)
         {
             if (value.Equals("S"))
-                return CategorieTVA.S;
+                return CategorieTVA.STANDARD;
 
             if (value.Equals("Z"))
-                return CategorieTVA.Z;
+                return CategorieTVA.ZERO;
 
             if (value.Equals("E"))
-                return CategorieTVA.E;
+                return CategorieTVA.EXONEREE;
 
             if (value.Equals("AE"))
-                return CategorieTVA.AE;
+                return CategorieTVA.AUTO_LIQUIDATION;
 
             if (value.Equals("K"))
-                return CategorieTVA.K;
+                return CategorieTVA.INTRA_COMMUNAUTAIRE;
 
             if (value.Equals("G"))
-                return CategorieTVA.G;
+                return CategorieTVA.EXPORT;
 
             if (value.Equals("O"))
-                return CategorieTVA.O;
+                return CategorieTVA.HORS_CHAMP;
 
             if (value.Equals("L"))
-                return CategorieTVA.L;
+                return CategorieTVA.CANARIES;
 
             if (value.Equals("M"))
-                return CategorieTVA.M;
+                return CategorieTVA.CEUTA_MELILLA;
 
             throw new NotImplementedException($"Could not convert value to type CategorieTVA: '{value}'");
         }
@@ -127,31 +127,31 @@ namespace FactPulse.SDK.Model
         public static CategorieTVA? FromStringOrDefault(string value)
         {
             if (value.Equals("S"))
-                return CategorieTVA.S;
+                return CategorieTVA.STANDARD;
 
             if (value.Equals("Z"))
-                return CategorieTVA.Z;
+                return CategorieTVA.ZERO;
 
             if (value.Equals("E"))
-                return CategorieTVA.E;
+                return CategorieTVA.EXONEREE;
 
             if (value.Equals("AE"))
-                return CategorieTVA.AE;
+                return CategorieTVA.AUTO_LIQUIDATION;
 
             if (value.Equals("K"))
-                return CategorieTVA.K;
+                return CategorieTVA.INTRA_COMMUNAUTAIRE;
 
             if (value.Equals("G"))
-                return CategorieTVA.G;
+                return CategorieTVA.EXPORT;
 
             if (value.Equals("O"))
-                return CategorieTVA.O;
+                return CategorieTVA.HORS_CHAMP;
 
             if (value.Equals("L"))
-                return CategorieTVA.L;
+                return CategorieTVA.CANARIES;
 
             if (value.Equals("M"))
-                return CategorieTVA.M;
+                return CategorieTVA.CEUTA_MELILLA;
 
             return null;
         }
@@ -164,31 +164,31 @@ namespace FactPulse.SDK.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string ToJsonValue(CategorieTVA value)
         {
-            if (value == CategorieTVA.S)
+            if (value == CategorieTVA.STANDARD)
                 return "S";
 
-            if (value == CategorieTVA.Z)
+            if (value == CategorieTVA.ZERO)
                 return "Z";
 
-            if (value == CategorieTVA.E)
+            if (value == CategorieTVA.EXONEREE)
                 return "E";
 
-            if (value == CategorieTVA.AE)
+            if (value == CategorieTVA.AUTO_LIQUIDATION)
                 return "AE";
 
-            if (value == CategorieTVA.K)
+            if (value == CategorieTVA.INTRA_COMMUNAUTAIRE)
                 return "K";
 
-            if (value == CategorieTVA.G)
+            if (value == CategorieTVA.EXPORT)
                 return "G";
 
-            if (value == CategorieTVA.O)
+            if (value == CategorieTVA.HORS_CHAMP)
                 return "O";
 
-            if (value == CategorieTVA.L)
+            if (value == CategorieTVA.CANARIES)
                 return "L";
 
-            if (value == CategorieTVA.M)
+            if (value == CategorieTVA.CEUTA_MELILLA)
                 return "M";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");

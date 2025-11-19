@@ -26,45 +26,45 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Codes standardisés pour justifier une réduction ou une charge.
+    /// Codes standardisés pour justifier une réduction ou une charge supplémentaire (norme EN 16931).  **Valeurs possibles :** - &#x60;AA&#x60; : REMISE_PUBLICITAIRE - Remise ou rabais publicitaire - &#x60;ABL&#x60; : SUPPLEMENT_EMBALLAGE - Supplément d&#39;emballage - &#x60;ADR&#x60; : AUTRES_SERVICES - Autres services - &#x60;ADT&#x60; : ENLEVEMENT - Coût d&#39;enlèvement - &#x60;FC&#x60; : COUTS_TRANSPORT - Coûts de transport - &#x60;FI&#x60; : FRAIS_FINANCIERS - Frais de financement - &#x60;LA&#x60; : ETIQUETAGE - Étiquetage
     /// </summary>
-    /// <value>Codes standardisés pour justifier une réduction ou une charge.</value>
+    /// <value>Codes standardisés pour justifier une réduction ou une charge supplémentaire (norme EN 16931).  **Valeurs possibles :** - &#x60;AA&#x60; : REMISE_PUBLICITAIRE - Remise ou rabais publicitaire - &#x60;ABL&#x60; : SUPPLEMENT_EMBALLAGE - Supplément d&#39;emballage - &#x60;ADR&#x60; : AUTRES_SERVICES - Autres services - &#x60;ADT&#x60; : ENLEVEMENT - Coût d&#39;enlèvement - &#x60;FC&#x60; : COUTS_TRANSPORT - Coûts de transport - &#x60;FI&#x60; : FRAIS_FINANCIERS - Frais de financement - &#x60;LA&#x60; : ETIQUETAGE - Étiquetage</value>
     public enum CodeRaisonReduction
     {
         /// <summary>
-        /// Enum AA for value: AA
+        /// Enum REMISE_PUBLICITAIRE for value: AA
         /// </summary>
-        AA = 1,
+        REMISE_PUBLICITAIRE = 1,
 
         /// <summary>
-        /// Enum ABL for value: ABL
+        /// Enum SUPPLEMENT_EMBALLAGE for value: ABL
         /// </summary>
-        ABL = 2,
+        SUPPLEMENT_EMBALLAGE = 2,
 
         /// <summary>
-        /// Enum ADR for value: ADR
+        /// Enum AUTRES_SERVICES for value: ADR
         /// </summary>
-        ADR = 3,
+        AUTRES_SERVICES = 3,
 
         /// <summary>
-        /// Enum ADT for value: ADT
+        /// Enum ENLEVEMENT for value: ADT
         /// </summary>
-        ADT = 4,
+        ENLEVEMENT = 4,
 
         /// <summary>
-        /// Enum FC for value: FC
+        /// Enum COUTS_TRANSPORT for value: FC
         /// </summary>
-        FC = 5,
+        COUTS_TRANSPORT = 5,
 
         /// <summary>
-        /// Enum FI for value: FI
+        /// Enum FRAIS_FINANCIERS for value: FI
         /// </summary>
-        FI = 6,
+        FRAIS_FINANCIERS = 6,
 
         /// <summary>
-        /// Enum LA for value: LA
+        /// Enum ETIQUETAGE for value: LA
         /// </summary>
-        LA = 7
+        ETIQUETAGE = 7
     }
 
     /// <summary>
@@ -80,25 +80,25 @@ namespace FactPulse.SDK.Model
         public static CodeRaisonReduction FromString(string value)
         {
             if (value.Equals("AA"))
-                return CodeRaisonReduction.AA;
+                return CodeRaisonReduction.REMISE_PUBLICITAIRE;
 
             if (value.Equals("ABL"))
-                return CodeRaisonReduction.ABL;
+                return CodeRaisonReduction.SUPPLEMENT_EMBALLAGE;
 
             if (value.Equals("ADR"))
-                return CodeRaisonReduction.ADR;
+                return CodeRaisonReduction.AUTRES_SERVICES;
 
             if (value.Equals("ADT"))
-                return CodeRaisonReduction.ADT;
+                return CodeRaisonReduction.ENLEVEMENT;
 
             if (value.Equals("FC"))
-                return CodeRaisonReduction.FC;
+                return CodeRaisonReduction.COUTS_TRANSPORT;
 
             if (value.Equals("FI"))
-                return CodeRaisonReduction.FI;
+                return CodeRaisonReduction.FRAIS_FINANCIERS;
 
             if (value.Equals("LA"))
-                return CodeRaisonReduction.LA;
+                return CodeRaisonReduction.ETIQUETAGE;
 
             throw new NotImplementedException($"Could not convert value to type CodeRaisonReduction: '{value}'");
         }
@@ -111,25 +111,25 @@ namespace FactPulse.SDK.Model
         public static CodeRaisonReduction? FromStringOrDefault(string value)
         {
             if (value.Equals("AA"))
-                return CodeRaisonReduction.AA;
+                return CodeRaisonReduction.REMISE_PUBLICITAIRE;
 
             if (value.Equals("ABL"))
-                return CodeRaisonReduction.ABL;
+                return CodeRaisonReduction.SUPPLEMENT_EMBALLAGE;
 
             if (value.Equals("ADR"))
-                return CodeRaisonReduction.ADR;
+                return CodeRaisonReduction.AUTRES_SERVICES;
 
             if (value.Equals("ADT"))
-                return CodeRaisonReduction.ADT;
+                return CodeRaisonReduction.ENLEVEMENT;
 
             if (value.Equals("FC"))
-                return CodeRaisonReduction.FC;
+                return CodeRaisonReduction.COUTS_TRANSPORT;
 
             if (value.Equals("FI"))
-                return CodeRaisonReduction.FI;
+                return CodeRaisonReduction.FRAIS_FINANCIERS;
 
             if (value.Equals("LA"))
-                return CodeRaisonReduction.LA;
+                return CodeRaisonReduction.ETIQUETAGE;
 
             return null;
         }
@@ -142,25 +142,25 @@ namespace FactPulse.SDK.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string ToJsonValue(CodeRaisonReduction value)
         {
-            if (value == CodeRaisonReduction.AA)
+            if (value == CodeRaisonReduction.REMISE_PUBLICITAIRE)
                 return "AA";
 
-            if (value == CodeRaisonReduction.ABL)
+            if (value == CodeRaisonReduction.SUPPLEMENT_EMBALLAGE)
                 return "ABL";
 
-            if (value == CodeRaisonReduction.ADR)
+            if (value == CodeRaisonReduction.AUTRES_SERVICES)
                 return "ADR";
 
-            if (value == CodeRaisonReduction.ADT)
+            if (value == CodeRaisonReduction.ENLEVEMENT)
                 return "ADT";
 
-            if (value == CodeRaisonReduction.FC)
+            if (value == CodeRaisonReduction.COUTS_TRANSPORT)
                 return "FC";
 
-            if (value == CodeRaisonReduction.FI)
+            if (value == CodeRaisonReduction.FRAIS_FINANCIERS)
                 return "FI";
 
-            if (value == CodeRaisonReduction.LA)
+            if (value == CodeRaisonReduction.ETIQUETAGE)
                 return "LA";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
