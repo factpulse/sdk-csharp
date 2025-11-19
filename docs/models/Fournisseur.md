@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **CodeCoordonneesBancairesFournisseur** | **int** |  | [optional] 
 **IdServiceFournisseur** | **int** |  | [optional] 
 **Nom** | **string** |  | [optional] 
+**Siren** | **string** |  | [optional] 
 **Siret** | **string** |  | [optional] 
 **NumeroTvaIntra** | **string** |  | [optional] 
 **Iban** | **string** |  | [optional] 

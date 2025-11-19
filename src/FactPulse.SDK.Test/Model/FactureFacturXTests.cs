@@ -153,6 +153,15 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'Notes'
+        /// </summary>
+        [Fact]
+        public void NotesTest()
+        {
+            // TODO unit test for the property 'Notes'
+        }
+
+        /// <summary>
         /// Test the property 'Commentaire'
         /// </summary>
         [Fact]

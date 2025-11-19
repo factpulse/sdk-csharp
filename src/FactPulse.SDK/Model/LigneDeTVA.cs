@@ -33,13 +33,13 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="LigneDeTVA" /> class.
         /// </summary>
-        /// <param name="montantBaseHt">montantBaseHt</param>
-        /// <param name="montantTva">montantTva</param>
+        /// <param name="montantBaseHt">Montant de la base HT pour cette ligne de TVA.</param>
+        /// <param name="montantTva">Montant de la TVA pour cette ligne.</param>
         /// <param name="taux">taux</param>
-        /// <param name="tauxManuel">tauxManuel</param>
+        /// <param name="tauxManuel">Taux de TVA avec valeur manuelle.</param>
         /// <param name="categorie">categorie</param>
         [JsonConstructor]
-        public LigneDeTVA(MontantBaseHt montantBaseHt, MontantTvaLigne montantTva, Option<string?> taux = default, Option<Tauxmanuel?> tauxManuel = default, Option<CategorieTVA?> categorie = default)
+        public LigneDeTVA(decimal montantBaseHt, decimal montantTva, Option<string?> taux = default, Option<decimal?> tauxManuel = default, Option<CategorieTVA?> categorie = default)
         {
             MontantBaseHt = montantBaseHt;
             MontantTva = montantTva;
@@ -65,16 +65,20 @@ namespace FactPulse.SDK.Model
         public CategorieTVA? Categorie { get { return this.CategorieOption; } set { this.CategorieOption = new(value); } }
 
         /// <summary>
-        /// Gets or Sets MontantBaseHt
+        /// Montant de la base HT pour cette ligne de TVA.
         /// </summary>
+        /// <value>Montant de la base HT pour cette ligne de TVA.</value>
+        /* <example>1000.50</example> */
         [JsonPropertyName("montantBaseHt")]
-        public MontantBaseHt MontantBaseHt { get; set; }
+        public decimal MontantBaseHt { get; set; }
 
         /// <summary>
-        /// Gets or Sets MontantTva
+        /// Montant de la TVA pour cette ligne.
         /// </summary>
+        /// <value>Montant de la TVA pour cette ligne.</value>
+        /* <example>1000.50</example> */
         [JsonPropertyName("montantTva")]
-        public MontantTvaLigne MontantTva { get; set; }
+        public decimal MontantTva { get; set; }
 
         /// <summary>
         /// Used to track the state of Taux
@@ -94,13 +98,15 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<Tauxmanuel?> TauxManuelOption { get; private set; }
+        public Option<decimal?> TauxManuelOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets TauxManuel
+        /// Taux de TVA avec valeur manuelle.
         /// </summary>
+        /// <value>Taux de TVA avec valeur manuelle.</value>
+        /* <example>1000.50</example> */
         [JsonPropertyName("tauxManuel")]
-        public Tauxmanuel? TauxManuel { get { return this.TauxManuelOption; } set { this.TauxManuelOption = new(value); } }
+        public decimal? TauxManuel { get { return this.TauxManuelOption; } set { this.TauxManuelOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -126,6 +132,27 @@ namespace FactPulse.SDK.Model
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // MontantBaseHt (decimal) pattern
+            Regex regexMontantBaseHt = new Regex(@"^(?!^[-+.]*$)[+-]?0*(?:\d{0,8}|(?=[\d.]{1,13}0*$)\d{0,8}\.\d{0,4}0*$)", RegexOptions.CultureInvariant);
+
+            if (!regexMontantBaseHt.Match(this.MontantBaseHt).Success)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for MontantBaseHt, must match a pattern of " + regexMontantBaseHt, new [] { "MontantBaseHt" });
+            }
+            // MontantTva (decimal) pattern
+            Regex regexMontantTva = new Regex(@"^(?!^[-+.]*$)[+-]?0*(?:\d{0,8}|(?=[\d.]{1,13}0*$)\d{0,8}\.\d{0,4}0*$)", RegexOptions.CultureInvariant);
+
+            if (!regexMontantTva.Match(this.MontantTva).Success)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for MontantTva, must match a pattern of " + regexMontantTva, new [] { "MontantTva" });
+            }
+            // TauxManuel (decimal) pattern
+            Regex regexTauxManuel = new Regex(@"^(?!^[-+.]*$)[+-]?0*(?:\d{0,8}|(?=[\d.]{1,13}0*$)\d{0,8}\.\d{0,4}0*$)", RegexOptions.CultureInvariant);
+
+            if (this.TauxManuelOption.Value != null &&!regexTauxManuel.Match(this.TauxManuelOption.Value).Success)
+            {
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for TauxManuel, must match a pattern of " + regexTauxManuel, new [] { "TauxManuel" });
+            }
             yield break;
         }
     }
@@ -152,10 +179,10 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<MontantBaseHt?> montantBaseHt = default;
-            Option<MontantTvaLigne?> montantTva = default;
+            Option<decimal?> montantBaseHt = default;
+            Option<decimal?> montantTva = default;
             Option<string?> taux = default;
-            Option<Tauxmanuel?> tauxManuel = default;
+            Option<decimal?> tauxManuel = default;
             Option<CategorieTVA?> categorie = default;
 
             while (utf8JsonReader.Read())
@@ -174,16 +201,16 @@ namespace FactPulse.SDK.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "montantBaseHt":
-                            montantBaseHt = new Option<MontantBaseHt?>(JsonSerializer.Deserialize<MontantBaseHt>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            montantBaseHt = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "montantTva":
-                            montantTva = new Option<MontantTvaLigne?>(JsonSerializer.Deserialize<MontantTvaLigne>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            montantTva = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "taux":
                             taux = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "tauxManuel":
-                            tauxManuel = new Option<Tauxmanuel?>(JsonSerializer.Deserialize<Tauxmanuel>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            tauxManuel = new Option<decimal?>(utf8JsonReader.GetDecimal());
                             break;
                         case "categorie":
                             string? categorieRawValue = utf8JsonReader.GetString();
@@ -211,7 +238,7 @@ namespace FactPulse.SDK.Model
             if (tauxManuel.IsSet && tauxManuel.Value == null)
                 throw new ArgumentNullException(nameof(tauxManuel), "Property is not nullable for class LigneDeTVA.");
 
-            return new LigneDeTVA(montantBaseHt.Value!, montantTva.Value!, taux, tauxManuel, categorie);
+            return new LigneDeTVA(montantBaseHt.Value!.Value!, montantTva.Value!.Value!, taux, tauxManuel, categorie);
         }
 
         /// <summary>
@@ -238,19 +265,10 @@ namespace FactPulse.SDK.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, LigneDeTVA ligneDeTVA, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (ligneDeTVA.MontantBaseHt == null)
-                throw new ArgumentNullException(nameof(ligneDeTVA.MontantBaseHt), "Property is required for class LigneDeTVA.");
+            writer.WriteString("montantBaseHt", ligneDeTVA.MontantBaseHt.ToString());
 
-            if (ligneDeTVA.MontantTva == null)
-                throw new ArgumentNullException(nameof(ligneDeTVA.MontantTva), "Property is required for class LigneDeTVA.");
+            writer.WriteString("montantTva", ligneDeTVA.MontantTva.ToString());
 
-            if (ligneDeTVA.TauxManuelOption.IsSet && ligneDeTVA.TauxManuel == null)
-                throw new ArgumentNullException(nameof(ligneDeTVA.TauxManuel), "Property is required for class LigneDeTVA.");
-
-            writer.WritePropertyName("montantBaseHt");
-            JsonSerializer.Serialize(writer, ligneDeTVA.MontantBaseHt, jsonSerializerOptions);
-            writer.WritePropertyName("montantTva");
-            JsonSerializer.Serialize(writer, ligneDeTVA.MontantTva, jsonSerializerOptions);
             if (ligneDeTVA.TauxOption.IsSet)
                 if (ligneDeTVA.TauxOption.Value != null)
                     writer.WriteString("taux", ligneDeTVA.Taux);
@@ -258,10 +276,8 @@ namespace FactPulse.SDK.Model
                     writer.WriteNull("taux");
 
             if (ligneDeTVA.TauxManuelOption.IsSet)
-            {
-                writer.WritePropertyName("tauxManuel");
-                JsonSerializer.Serialize(writer, ligneDeTVA.TauxManuel, jsonSerializerOptions);
-            }
+                writer.WriteString("tauxManuel", ligneDeTVA.TauxManuel.ToString());
+
             if (ligneDeTVA.CategorieOption.IsSet)
                 if (ligneDeTVA.CategorieOption!.Value != null)
                 {

@@ -1,5 +1,4 @@
 # FactPulse.SDK.Model.MontantHtTotal
-Montant total HT.
 
 ## Properties
 

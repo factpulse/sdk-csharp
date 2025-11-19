@@ -26,47 +26,43 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Montant total HT de la ligne (quantité × prix unitaire - remise).
+    /// Note de facture (IncludedNote en Factur-X).  Les notes obligatoires pour BR-FR-05 sont : - PMT : Indemnité forfaitaire pour frais de recouvrement - PMD : Pénalités de retard - AAB : Escompte pour paiement anticipé
     /// </summary>
-    public partial class MontantTotalLigneHt : IValidatableObject
+    public partial class Note : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="MontantTotalLigneHt" /> class.
+        /// Initializes a new instance of the <see cref="Note" /> class.
         /// </summary>
-        /// <param name="decimal"></param>
-        /// <param name="string"></param>
-        internal MontantTotalLigneHt(Option<decimal?> @decimal, Option<string?> @string)
+        /// <param name="content">content</param>
+        /// <param name="subjectCode">subjectCode</param>
+        [JsonConstructor]
+        public Note(string content, Option<string?> subjectCode = default)
         {
-            DecimalOption = @decimal;
-            StringOption = @string;
+            Content = content;
+            SubjectCodeOption = subjectCode;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Used to track the state of Decimal
+        /// Gets or Sets Content
+        /// </summary>
+        [JsonPropertyName("content")]
+        public string Content { get; set; }
+
+        /// <summary>
+        /// Used to track the state of SubjectCode
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<decimal?> DecimalOption { get; private set; }
+        public Option<string?> SubjectCodeOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Decimal
+        /// Gets or Sets SubjectCode
         /// </summary>
-        public decimal? Decimal { get { return this.DecimalOption; } set { this.DecimalOption = new(value); } }
-
-        /// <summary>
-        /// Used to track the state of String
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> StringOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets String
-        /// </summary>
-        public string? String { get { return this.StringOption; } set { this.StringOption = new(value); } }
+        [JsonPropertyName("subjectCode")]
+        public string? SubjectCode { get { return this.SubjectCodeOption; } set { this.SubjectCodeOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -75,7 +71,9 @@ namespace FactPulse.SDK.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class MontantTotalLigneHt {\n");
+            sb.Append("class Note {\n");
+            sb.Append("  Content: ").Append(Content).Append("\n");
+            sb.Append("  SubjectCode: ").Append(SubjectCode).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -92,19 +90,19 @@ namespace FactPulse.SDK.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="MontantTotalLigneHt" />
+    /// A Json converter for type <see cref="Note" />
     /// </summary>
-    public class MontantTotalLigneHtJsonConverter : JsonConverter<MontantTotalLigneHt>
+    public class NoteJsonConverter : JsonConverter<Note>
     {
         /// <summary>
-        /// Deserializes json to <see cref="MontantTotalLigneHt" />
+        /// Deserializes json to <see cref="Note" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override MontantTotalLigneHt Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override Note Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -113,27 +111,8 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            decimal? varDecimal = default;
-            string? varString = default;
-
-            Utf8JsonReader utf8JsonReaderAnyOf = utf8JsonReader;
-            while (utf8JsonReaderAnyOf.Read())
-            {
-                if (startingTokenType == JsonTokenType.StartObject && utf8JsonReaderAnyOf.TokenType == JsonTokenType.EndObject && currentDepth == utf8JsonReaderAnyOf.CurrentDepth)
-                    break;
-
-                if (startingTokenType == JsonTokenType.StartArray && utf8JsonReaderAnyOf.TokenType == JsonTokenType.EndArray && currentDepth == utf8JsonReaderAnyOf.CurrentDepth)
-                    break;
-
-                if (utf8JsonReaderAnyOf.TokenType == JsonTokenType.PropertyName && currentDepth == utf8JsonReaderAnyOf.CurrentDepth - 1)
-                {
-                    Utf8JsonReader utf8JsonReaderDecimal = utf8JsonReader;
-                    ClientUtils.TryDeserialize<decimal?>(ref utf8JsonReaderDecimal, jsonSerializerOptions, out varDecimal);
-
-                    Utf8JsonReader utf8JsonReaderString = utf8JsonReader;
-                    ClientUtils.TryDeserialize<string?>(ref utf8JsonReaderString, jsonSerializerOptions, out varString);
-                }
-            }
+            Option<string?> content = default;
+            Option<string?> subjectCode = default;
 
             while (utf8JsonReader.Read())
             {
@@ -150,53 +129,61 @@ namespace FactPulse.SDK.Model
 
                     switch (localVarJsonPropertyName)
                     {
+                        case "content":
+                            content = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
+                        case "subjectCode":
+                            subjectCode = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         default:
                             break;
                     }
                 }
             }
 
-            Option<decimal?> varDecimalParsedValue = varDecimal == null
-                ? default
-                : new Option<decimal?>(varDecimal);
-            Option<string?> varStringParsedValue = varString == null
-                ? default
-                : new Option<string?>(varString);
+            if (!content.IsSet)
+                throw new ArgumentException("Property is required for class Note.", nameof(content));
 
-            return new MontantTotalLigneHt(varDecimalParsedValue, varStringParsedValue);
+            if (content.IsSet && content.Value == null)
+                throw new ArgumentNullException(nameof(content), "Property is not nullable for class Note.");
+
+            return new Note(content.Value!, subjectCode);
         }
 
         /// <summary>
-        /// Serializes a <see cref="MontantTotalLigneHt" />
+        /// Serializes a <see cref="Note" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="montantTotalLigneHt"></param>
+        /// <param name="note"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, MontantTotalLigneHt montantTotalLigneHt, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, Note note, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            if (montantTotalLigneHt.DecimalOption.IsSet && montantTotalLigneHt.DecimalOption.Value != null)
-                writer.WriteNumber("Tauxmanuel", montantTotalLigneHt.DecimalOption.Value.Value);
-
-            if (montantTotalLigneHt.StringOption.IsSet && montantTotalLigneHt.StringOption.Value != null)
-                writer.WriteString("MontantTotalLigneHt", montantTotalLigneHt.StringOption.Value);
-
-            WriteProperties(writer, montantTotalLigneHt, jsonSerializerOptions);
+            WriteProperties(writer, note, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="MontantTotalLigneHt" />
+        /// Serializes the properties of <see cref="Note" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="montantTotalLigneHt"></param>
+        /// <param name="note"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, MontantTotalLigneHt montantTotalLigneHt, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, Note note, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (note.Content == null)
+                throw new ArgumentNullException(nameof(note.Content), "Property is required for class Note.");
 
+            writer.WriteString("content", note.Content);
+
+            if (note.SubjectCodeOption.IsSet)
+                if (note.SubjectCodeOption.Value != null)
+                    writer.WriteString("subjectCode", note.SubjectCode);
+                else
+                    writer.WriteNull("subjectCode");
         }
     }
 }

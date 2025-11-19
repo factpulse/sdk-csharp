@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **DateFacture** | **string** |  | [optional] 
 **LignesDePoste** | [**List&lt;LigneDePoste&gt;**](LigneDePoste.md) |  | [optional] 
 **LignesDeTva** | [**List&lt;LigneDeTVA&gt;**](LigneDeTVA.md) |  | [optional] 
+**Notes** | [**List&lt;Note&gt;**](Note.md) |  | [optional] 
 **Commentaire** | **string** |  | [optional] 
 **IdUtilisateurCourant** | **int** |  | [optional] 
 **PiecesJointesComplementaires** | [**List&lt;PieceJointeComplementaire&gt;**](PieceJointeComplementaire.md) |  | [optional] 

@@ -99,6 +99,15 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'Siren'
+        /// </summary>
+        [Fact]
+        public void SirenTest()
+        {
+            // TODO unit test for the property 'Siren'
+        }
+
+        /// <summary>
         /// Test the property 'Siret'
         /// </summary>
         [Fact]

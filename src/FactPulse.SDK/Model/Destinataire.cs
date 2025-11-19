@@ -36,13 +36,17 @@ namespace FactPulse.SDK.Model
         /// <param name="adresseElectronique">adresseElectronique</param>
         /// <param name="codeServiceExecutant">codeServiceExecutant</param>
         /// <param name="nom">nom</param>
+        /// <param name="siren">siren</param>
+        /// <param name="siret">siret</param>
         /// <param name="adressePostale">adressePostale</param>
         [JsonConstructor]
-        public Destinataire(AdresseElectronique adresseElectronique, Option<string?> codeServiceExecutant = default, Option<string?> nom = default, Option<AdressePostale?> adressePostale = default)
+        public Destinataire(AdresseElectronique adresseElectronique, Option<string?> codeServiceExecutant = default, Option<string?> nom = default, Option<string?> siren = default, Option<string?> siret = default, Option<AdressePostale?> adressePostale = default)
         {
             AdresseElectronique = adresseElectronique;
             CodeServiceExecutantOption = codeServiceExecutant;
             NomOption = nom;
+            SirenOption = siren;
+            SiretOption = siret;
             AdressePostaleOption = adressePostale;
             OnCreated();
         }
@@ -82,6 +86,32 @@ namespace FactPulse.SDK.Model
         public string? Nom { get { return this.NomOption; } set { this.NomOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of Siren
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> SirenOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Siren
+        /// </summary>
+        [JsonPropertyName("siren")]
+        public string? Siren { get { return this.SirenOption; } set { this.SirenOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Siret
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> SiretOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Siret
+        /// </summary>
+        [JsonPropertyName("siret")]
+        public string? Siret { get { return this.SiretOption; } set { this.SiretOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of AdressePostale
         /// </summary>
         [JsonIgnore]
@@ -105,6 +135,8 @@ namespace FactPulse.SDK.Model
             sb.Append("  AdresseElectronique: ").Append(AdresseElectronique).Append("\n");
             sb.Append("  CodeServiceExecutant: ").Append(CodeServiceExecutant).Append("\n");
             sb.Append("  Nom: ").Append(Nom).Append("\n");
+            sb.Append("  Siren: ").Append(Siren).Append("\n");
+            sb.Append("  Siret: ").Append(Siret).Append("\n");
             sb.Append("  AdressePostale: ").Append(AdressePostale).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -146,6 +178,8 @@ namespace FactPulse.SDK.Model
             Option<AdresseElectronique?> adresseElectronique = default;
             Option<string?> codeServiceExecutant = default;
             Option<string?> nom = default;
+            Option<string?> siren = default;
+            Option<string?> siret = default;
             Option<AdressePostale?> adressePostale = default;
 
             while (utf8JsonReader.Read())
@@ -172,6 +206,12 @@ namespace FactPulse.SDK.Model
                         case "nom":
                             nom = new Option<string?>(utf8JsonReader.GetString());
                             break;
+                        case "siren":
+                            siren = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "siret":
+                            siret = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         case "adressePostale":
                             adressePostale = new Option<AdressePostale?>(JsonSerializer.Deserialize<AdressePostale>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
@@ -187,7 +227,7 @@ namespace FactPulse.SDK.Model
             if (adresseElectronique.IsSet && adresseElectronique.Value == null)
                 throw new ArgumentNullException(nameof(adresseElectronique), "Property is not nullable for class Destinataire.");
 
-            return new Destinataire(adresseElectronique.Value!, codeServiceExecutant, nom, adressePostale);
+            return new Destinataire(adresseElectronique.Value!, codeServiceExecutant, nom, siren, siret, adressePostale);
         }
 
         /// <summary>
@@ -230,6 +270,18 @@ namespace FactPulse.SDK.Model
                     writer.WriteString("nom", destinataire.Nom);
                 else
                     writer.WriteNull("nom");
+
+            if (destinataire.SirenOption.IsSet)
+                if (destinataire.SirenOption.Value != null)
+                    writer.WriteString("siren", destinataire.Siren);
+                else
+                    writer.WriteNull("siren");
+
+            if (destinataire.SiretOption.IsSet)
+                if (destinataire.SiretOption.Value != null)
+                    writer.WriteString("siret", destinataire.Siret);
+                else
+                    writer.WriteNull("siret");
 
             if (destinataire.AdressePostaleOption.IsSet)
                 if (destinataire.AdressePostaleOption.Value != null)

@@ -38,18 +38,20 @@ namespace FactPulse.SDK.Model
         /// <param name="codeCoordonneesBancairesFournisseur">codeCoordonneesBancairesFournisseur</param>
         /// <param name="idServiceFournisseur">idServiceFournisseur</param>
         /// <param name="nom">nom</param>
+        /// <param name="siren">siren</param>
         /// <param name="siret">siret</param>
         /// <param name="numeroTvaIntra">numeroTvaIntra</param>
         /// <param name="iban">iban</param>
         /// <param name="adressePostale">adressePostale</param>
         [JsonConstructor]
-        public Fournisseur(AdresseElectronique adresseElectronique, int idFournisseur, Option<int?> codeCoordonneesBancairesFournisseur = default, Option<int?> idServiceFournisseur = default, Option<string?> nom = default, Option<string?> siret = default, Option<string?> numeroTvaIntra = default, Option<string?> iban = default, Option<AdressePostale?> adressePostale = default)
+        public Fournisseur(AdresseElectronique adresseElectronique, int idFournisseur, Option<int?> codeCoordonneesBancairesFournisseur = default, Option<int?> idServiceFournisseur = default, Option<string?> nom = default, Option<string?> siren = default, Option<string?> siret = default, Option<string?> numeroTvaIntra = default, Option<string?> iban = default, Option<AdressePostale?> adressePostale = default)
         {
             AdresseElectronique = adresseElectronique;
             IdFournisseur = idFournisseur;
             CodeCoordonneesBancairesFournisseurOption = codeCoordonneesBancairesFournisseur;
             IdServiceFournisseurOption = idServiceFournisseur;
             NomOption = nom;
+            SirenOption = siren;
             SiretOption = siret;
             NumeroTvaIntraOption = numeroTvaIntra;
             IbanOption = iban;
@@ -109,6 +111,19 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonPropertyName("nom")]
         public string? Nom { get { return this.NomOption; } set { this.NomOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Siren
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> SirenOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Siren
+        /// </summary>
+        [JsonPropertyName("siren")]
+        public string? Siren { get { return this.SirenOption; } set { this.SirenOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Siret
@@ -175,6 +190,7 @@ namespace FactPulse.SDK.Model
             sb.Append("  CodeCoordonneesBancairesFournisseur: ").Append(CodeCoordonneesBancairesFournisseur).Append("\n");
             sb.Append("  IdServiceFournisseur: ").Append(IdServiceFournisseur).Append("\n");
             sb.Append("  Nom: ").Append(Nom).Append("\n");
+            sb.Append("  Siren: ").Append(Siren).Append("\n");
             sb.Append("  Siret: ").Append(Siret).Append("\n");
             sb.Append("  NumeroTvaIntra: ").Append(NumeroTvaIntra).Append("\n");
             sb.Append("  Iban: ").Append(Iban).Append("\n");
@@ -221,6 +237,7 @@ namespace FactPulse.SDK.Model
             Option<int?> codeCoordonneesBancairesFournisseur = default;
             Option<int?> idServiceFournisseur = default;
             Option<string?> nom = default;
+            Option<string?> siren = default;
             Option<string?> siret = default;
             Option<string?> numeroTvaIntra = default;
             Option<string?> iban = default;
@@ -256,6 +273,9 @@ namespace FactPulse.SDK.Model
                         case "nom":
                             nom = new Option<string?>(utf8JsonReader.GetString());
                             break;
+                        case "siren":
+                            siren = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         case "siret":
                             siret = new Option<string?>(utf8JsonReader.GetString());
                             break;
@@ -286,7 +306,7 @@ namespace FactPulse.SDK.Model
             if (idFournisseur.IsSet && idFournisseur.Value == null)
                 throw new ArgumentNullException(nameof(idFournisseur), "Property is not nullable for class Fournisseur.");
 
-            return new Fournisseur(adresseElectronique.Value!, idFournisseur.Value!.Value!, codeCoordonneesBancairesFournisseur, idServiceFournisseur, nom, siret, numeroTvaIntra, iban, adressePostale);
+            return new Fournisseur(adresseElectronique.Value!, idFournisseur.Value!.Value!, codeCoordonneesBancairesFournisseur, idServiceFournisseur, nom, siren, siret, numeroTvaIntra, iban, adressePostale);
         }
 
         /// <summary>
@@ -337,6 +357,12 @@ namespace FactPulse.SDK.Model
                     writer.WriteString("nom", fournisseur.Nom);
                 else
                     writer.WriteNull("nom");
+
+            if (fournisseur.SirenOption.IsSet)
+                if (fournisseur.SirenOption.Value != null)
+                    writer.WriteString("siren", fournisseur.Siren);
+                else
+                    writer.WriteNull("siren");
 
             if (fournisseur.SiretOption.IsSet)
                 if (fournisseur.SiretOption.Value != null)

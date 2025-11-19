@@ -181,7 +181,7 @@ namespace FactPulse.SDK.Model
                 writer.WriteNumber("Quantite", montantUnitaireHt.DecimalOption.Value.Value);
 
             if (montantUnitaireHt.StringOption.IsSet && montantUnitaireHt.StringOption.Value != null)
-                writer.WriteString("Tauxmanuel", montantUnitaireHt.StringOption.Value);
+                writer.WriteString("Quantite", montantUnitaireHt.StringOption.Value);
 
             WriteProperties(writer, montantUnitaireHt, jsonSerializerOptions);
             writer.WriteEndObject();

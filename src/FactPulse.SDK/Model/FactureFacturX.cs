@@ -44,11 +44,12 @@ namespace FactPulse.SDK.Model
         /// <param name="dateFacture">dateFacture</param>
         /// <param name="lignesDePoste">lignesDePoste</param>
         /// <param name="lignesDeTva">lignesDeTva</param>
+        /// <param name="notes">notes</param>
         /// <param name="commentaire">commentaire</param>
         /// <param name="idUtilisateurCourant">idUtilisateurCourant</param>
         /// <param name="piecesJointesComplementaires">piecesJointesComplementaires</param>
         [JsonConstructor]
-        public FactureFacturX(string numeroFacture, string dateEcheancePaiement, ModeDepot modeDepot, Destinataire destinataire, Fournisseur fournisseur, CadreDeFacturation cadreDeFacturation, References references, MontantTotal montantTotal, Option<string?> dateFacture = default, Option<List<LigneDePoste>?> lignesDePoste = default, Option<List<LigneDeTVA>?> lignesDeTva = default, Option<string?> commentaire = default, Option<int?> idUtilisateurCourant = default, Option<List<PieceJointeComplementaire>?> piecesJointesComplementaires = default)
+        public FactureFacturX(string numeroFacture, string dateEcheancePaiement, ModeDepot modeDepot, Destinataire destinataire, Fournisseur fournisseur, CadreDeFacturation cadreDeFacturation, References references, MontantTotal montantTotal, Option<string?> dateFacture = default, Option<List<LigneDePoste>?> lignesDePoste = default, Option<List<LigneDeTVA>?> lignesDeTva = default, Option<List<Note>?> notes = default, Option<string?> commentaire = default, Option<int?> idUtilisateurCourant = default, Option<List<PieceJointeComplementaire>?> piecesJointesComplementaires = default)
         {
             NumeroFacture = numeroFacture;
             DateEcheancePaiement = dateEcheancePaiement;
@@ -61,6 +62,7 @@ namespace FactPulse.SDK.Model
             DateFactureOption = dateFacture;
             LignesDePosteOption = lignesDePoste;
             LignesDeTvaOption = lignesDeTva;
+            NotesOption = notes;
             CommentaireOption = commentaire;
             IdUtilisateurCourantOption = idUtilisateurCourant;
             PiecesJointesComplementairesOption = piecesJointesComplementaires;
@@ -157,6 +159,19 @@ namespace FactPulse.SDK.Model
         public List<LigneDeTVA>? LignesDeTva { get { return this.LignesDeTvaOption; } set { this.LignesDeTvaOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of Notes
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<Note>?> NotesOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Notes
+        /// </summary>
+        [JsonPropertyName("notes")]
+        public List<Note>? Notes { get { return this.NotesOption; } set { this.NotesOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of Commentaire
         /// </summary>
         [JsonIgnore]
@@ -214,6 +229,7 @@ namespace FactPulse.SDK.Model
             sb.Append("  DateFacture: ").Append(DateFacture).Append("\n");
             sb.Append("  LignesDePoste: ").Append(LignesDePoste).Append("\n");
             sb.Append("  LignesDeTva: ").Append(LignesDeTva).Append("\n");
+            sb.Append("  Notes: ").Append(Notes).Append("\n");
             sb.Append("  Commentaire: ").Append(Commentaire).Append("\n");
             sb.Append("  IdUtilisateurCourant: ").Append(IdUtilisateurCourant).Append("\n");
             sb.Append("  PiecesJointesComplementaires: ").Append(PiecesJointesComplementaires).Append("\n");
@@ -265,6 +281,7 @@ namespace FactPulse.SDK.Model
             Option<string?> dateFacture = default;
             Option<List<LigneDePoste>?> lignesDePoste = default;
             Option<List<LigneDeTVA>?> lignesDeTva = default;
+            Option<List<Note>?> notes = default;
             Option<string?> commentaire = default;
             Option<int?> idUtilisateurCourant = default;
             Option<List<PieceJointeComplementaire>?> piecesJointesComplementaires = default;
@@ -318,6 +335,9 @@ namespace FactPulse.SDK.Model
                             break;
                         case "lignesDeTva":
                             lignesDeTva = new Option<List<LigneDeTVA>?>(JsonSerializer.Deserialize<List<LigneDeTVA>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
+                        case "notes":
+                            notes = new Option<List<Note>?>(JsonSerializer.Deserialize<List<Note>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "commentaire":
                             commentaire = new Option<string?>(utf8JsonReader.GetString());
@@ -391,7 +411,10 @@ namespace FactPulse.SDK.Model
             if (lignesDeTva.IsSet && lignesDeTva.Value == null)
                 throw new ArgumentNullException(nameof(lignesDeTva), "Property is not nullable for class FactureFacturX.");
 
-            return new FactureFacturX(numeroFacture.Value!, dateEcheancePaiement.Value!, modeDepot.Value!.Value!, destinataire.Value!, fournisseur.Value!, cadreDeFacturation.Value!, references.Value!, montantTotal.Value!, dateFacture, lignesDePoste, lignesDeTva, commentaire, idUtilisateurCourant, piecesJointesComplementaires);
+            if (notes.IsSet && notes.Value == null)
+                throw new ArgumentNullException(nameof(notes), "Property is not nullable for class FactureFacturX.");
+
+            return new FactureFacturX(numeroFacture.Value!, dateEcheancePaiement.Value!, modeDepot.Value!.Value!, destinataire.Value!, fournisseur.Value!, cadreDeFacturation.Value!, references.Value!, montantTotal.Value!, dateFacture, lignesDePoste, lignesDeTva, notes, commentaire, idUtilisateurCourant, piecesJointesComplementaires);
         }
 
         /// <summary>
@@ -448,6 +471,9 @@ namespace FactPulse.SDK.Model
             if (factureFacturX.LignesDeTvaOption.IsSet && factureFacturX.LignesDeTva == null)
                 throw new ArgumentNullException(nameof(factureFacturX.LignesDeTva), "Property is required for class FactureFacturX.");
 
+            if (factureFacturX.NotesOption.IsSet && factureFacturX.Notes == null)
+                throw new ArgumentNullException(nameof(factureFacturX.Notes), "Property is required for class FactureFacturX.");
+
             writer.WriteString("numeroFacture", factureFacturX.NumeroFacture);
 
             writer.WriteString("dateEcheancePaiement", factureFacturX.DateEcheancePaiement);
@@ -477,6 +503,11 @@ namespace FactPulse.SDK.Model
             {
                 writer.WritePropertyName("lignesDeTva");
                 JsonSerializer.Serialize(writer, factureFacturX.LignesDeTva, jsonSerializerOptions);
+            }
+            if (factureFacturX.NotesOption.IsSet)
+            {
+                writer.WritePropertyName("notes");
+                JsonSerializer.Serialize(writer, factureFacturX.Notes, jsonSerializerOptions);
             }
             if (factureFacturX.CommentaireOption.IsSet)
                 if (factureFacturX.CommentaireOption.Value != null)
