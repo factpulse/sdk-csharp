@@ -1,4 +1,4 @@
-using System; using System.Collections.Generic; using System.Net.Http; using System.Net.Http.Headers;
+using System; using System.Collections.Generic; using System.IO; using System.Net.Http; using System.Net.Http.Headers;
 using System.Text; using System.Text.Json; using System.Threading.Tasks;
 namespace FactPulse.SDK.Helpers {
     /// <summary>Credentials Chorus Pro pour le mode Zero-Trust.</summary>
@@ -126,7 +126,7 @@ namespace FactPulse.SDK.Helpers {
             while (true) {
                 if (DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() - startTime > timeoutMs) throw new FactPulsePollingTimeoutException(taskId, timeoutMs);
                 await EnsureAuthenticatedAsync();
-                var request = new HttpRequestMessage(HttpMethod.Get, $"{_apiUrl}/api/facturation/v1/traitement/taches/{taskId}/statut");
+                var request = new HttpRequestMessage(HttpMethod.Get, $"{_apiUrl}/api/v1/traitement/taches/{taskId}/statut");
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _accessToken);
                 var response = await _httpClient.SendAsync(request);
                 if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized) { ResetAuth(); continue; }
@@ -139,6 +139,58 @@ namespace FactPulse.SDK.Helpers {
         }
 
         public static string FormatMontant(object? m) => MontantHelpers.Montant(m);
+
+        /// <summary>Génère une facture Factur-X à partir d'un dictionnaire et d'un PDF source.</summary>
+        public async Task<byte[]> GenererFacturxAsync(object factureData, string pdfPath, string profil = "EN16931", string formatSortie = "pdf", bool sync = true, long? timeout = null) {
+            // Conversion des données en JSON string
+            string jsonData;
+            if (factureData is string str) jsonData = str;
+            else if (factureData is Dictionary<string, object> dict) jsonData = JsonSerializer.Serialize(dict);
+            else jsonData = JsonSerializer.Serialize(factureData);
+
+            // Lecture du fichier PDF
+            var pdfContent = await File.ReadAllBytesAsync(pdfPath);
+            var pdfFilename = Path.GetFileName(pdfPath);
+
+            await EnsureAuthenticatedAsync();
+
+            // Construire la requête multipart
+            using var content = new MultipartFormDataContent();
+            content.Add(new StringContent(jsonData), "donnees_facture");
+            content.Add(new StringContent(profil), "profil");
+            content.Add(new StringContent(formatSortie), "format_sortie");
+            content.Add(new ByteArrayContent(pdfContent), "source_pdf", pdfFilename);
+
+            var request = new HttpRequestMessage(HttpMethod.Post, $"{_apiUrl}/api/v1/traitement/generer-facture") { Content = content };
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _accessToken);
+
+            var response = await _httpClient.SendAsync(request);
+
+            if (response.StatusCode == System.Net.HttpStatusCode.Unauthorized) {
+                ResetAuth();
+                await EnsureAuthenticatedAsync();
+                request = new HttpRequestMessage(HttpMethod.Post, $"{_apiUrl}/api/v1/traitement/generer-facture") { Content = content };
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _accessToken);
+                response = await _httpClient.SendAsync(request);
+            }
+
+            var responseBody = await response.Content.ReadAsStringAsync();
+            if (!response.IsSuccessStatusCode) throw new FactPulseValidationException($"Erreur API ({(int)response.StatusCode}): {responseBody}");
+
+            var data = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(responseBody);
+
+            if (sync && data!.TryGetValue("id_tache", out var taskIdElement)) {
+                var taskId = taskIdElement.GetString()!;
+                var result = await PollTaskAsync(taskId, timeout);
+                if (result.TryGetValue("contenu_b64", out var contenuB64) && contenuB64 is string base64Str)
+                    return Convert.FromBase64String(base64Str);
+                if (result.TryGetValue("contenu_xml", out var xml) && xml is string xmlStr)
+                    return Encoding.UTF8.GetBytes(xmlStr);
+                throw new FactPulseValidationException("Résultat inattendu");
+            }
+
+            return Encoding.UTF8.GetBytes(responseBody);
+        }
 
         public void Dispose() { _httpClient?.Dispose(); GC.SuppressFinalize(this); }
     }
