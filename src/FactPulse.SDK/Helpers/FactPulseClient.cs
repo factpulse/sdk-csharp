@@ -74,8 +74,8 @@ namespace FactPulse.SDK.Helpers {
         public static Dictionary<string, object> LigneDeTva(object taux, object baseHt, object montantTva,
             string categorie = "S", string? motifExoneration = null) {
             var result = new Dictionary<string, object> {
-                ["tauxTvaManuel"] = Montant(taux), ["montantBaseHt"] = Montant(baseHt),
-                ["montantTva"] = Montant(montantTva), ["categorieTva"] = categorie
+                ["tauxManuel"] = Montant(taux), ["montantBaseHt"] = Montant(baseHt),
+                ["montantTva"] = Montant(montantTva), ["categorie"] = categorie
             };
             if (motifExoneration != null) result["motifExoneration"] = motifExoneration;
             return result;
