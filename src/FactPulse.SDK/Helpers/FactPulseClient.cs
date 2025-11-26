@@ -95,6 +95,9 @@ namespace FactPulse.SDK.Helpers {
 
         public Dictionary<string, object>? GetChorusCredentialsForApi() => ChorusCredentials?.ToDict();
         public Dictionary<string, object>? GetAfnorCredentialsForApi() => AfnorCredentials?.ToDict();
+        // Alias plus courts
+        public Dictionary<string, object>? GetChorusProCredentials() => GetChorusCredentialsForApi();
+        public Dictionary<string, object>? GetAfnorCredentials() => GetAfnorCredentialsForApi();
 
         public async Task EnsureAuthenticatedAsync(bool forceRefresh = false) {
             var now = DateTimeOffset.UtcNow.ToUnixTimeMilliseconds();
