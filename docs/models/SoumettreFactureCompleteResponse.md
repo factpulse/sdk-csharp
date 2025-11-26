@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Succes** | **bool** | La facture a été soumise avec succès | 
 **DestinationType** | **string** | Type de destination | 
-**FactureEnrichie** | [**FactureEnrichieInfoOutput**](FactureEnrichieInfoOutput.md) | Données de la facture enrichie | 
+**FactureEnrichie** | [**FactureEnrichieInfo**](FactureEnrichieInfo.md) | Données de la facture enrichie | 
 **PdfFacturx** | [**PDFFacturXInfo**](PDFFacturXInfo.md) | Informations sur le PDF généré | 
 **PdfBase64** | **string** | PDF Factur-X généré (et signé si demandé) encodé en base64 | 
 **Message** | **string** | Message de retour | 

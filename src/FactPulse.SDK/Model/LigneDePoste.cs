@@ -39,17 +39,17 @@ namespace FactPulse.SDK.Model
         /// <param name="unite">unite</param>
         /// <param name="montantUnitaireHt">montantUnitaireHt</param>
         /// <param name="reference">reference</param>
-        /// <param name="montantRemiseHt">Montant de la remise HT.</param>
-        /// <param name="montantTotalLigneHt">Montant total HT de la ligne (quantité × prix unitaire - remise).</param>
+        /// <param name="montantRemiseHt">montantRemiseHt</param>
+        /// <param name="montantTotalLigneHt">montantTotalLigneHt</param>
         /// <param name="tauxTva">tauxTva</param>
-        /// <param name="tauxTvaManuel">Taux de TVA avec valeur manuelle.</param>
+        /// <param name="tauxTvaManuel">tauxTvaManuel</param>
         /// <param name="categorieTva">categorieTva</param>
         /// <param name="dateDebutPeriode">dateDebutPeriode</param>
         /// <param name="dateFinPeriode">dateFinPeriode</param>
         /// <param name="codeRaisonReduction">codeRaisonReduction</param>
         /// <param name="raisonReduction">raisonReduction</param>
         [JsonConstructor]
-        public LigneDePoste(int numero, string denomination, Quantite quantite, Unite unite, MontantUnitaireHt montantUnitaireHt, Option<string?> reference = default, Option<decimal?> montantRemiseHt = default, Option<decimal?> montantTotalLigneHt = default, Option<string?> tauxTva = default, Option<decimal?> tauxTvaManuel = default, Option<CategorieTVA?> categorieTva = default, Option<string?> dateDebutPeriode = default, Option<string?> dateFinPeriode = default, Option<CodeRaisonReduction?> codeRaisonReduction = default, Option<string?> raisonReduction = default)
+        public LigneDePoste(int numero, string denomination, Quantite quantite, Unite unite, MontantUnitaireHt montantUnitaireHt, Option<string?> reference = default, Option<LigneDePosteMontantRemiseHt?> montantRemiseHt = default, Option<MontantTotalLigneHt?> montantTotalLigneHt = default, Option<string?> tauxTva = default, Option<LigneDePosteTauxTvaManuel?> tauxTvaManuel = default, Option<CategorieTVA?> categorieTva = default, Option<string?> dateDebutPeriode = default, Option<string?> dateFinPeriode = default, Option<CodeRaisonReduction?> codeRaisonReduction = default, Option<string?> raisonReduction = default)
         {
             Numero = numero;
             Denomination = denomination;
@@ -145,30 +145,26 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<decimal?> MontantRemiseHtOption { get; private set; }
+        public Option<LigneDePosteMontantRemiseHt?> MontantRemiseHtOption { get; private set; }
 
         /// <summary>
-        /// Montant de la remise HT.
+        /// Gets or Sets MontantRemiseHt
         /// </summary>
-        /// <value>Montant de la remise HT.</value>
-        /* <example>1000.50</example> */
         [JsonPropertyName("montantRemiseHt")]
-        public decimal? MontantRemiseHt { get { return this.MontantRemiseHtOption; } set { this.MontantRemiseHtOption = new(value); } }
+        public LigneDePosteMontantRemiseHt? MontantRemiseHt { get { return this.MontantRemiseHtOption; } set { this.MontantRemiseHtOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of MontantTotalLigneHt
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<decimal?> MontantTotalLigneHtOption { get; private set; }
+        public Option<MontantTotalLigneHt?> MontantTotalLigneHtOption { get; private set; }
 
         /// <summary>
-        /// Montant total HT de la ligne (quantité × prix unitaire - remise).
+        /// Gets or Sets MontantTotalLigneHt
         /// </summary>
-        /// <value>Montant total HT de la ligne (quantité × prix unitaire - remise).</value>
-        /* <example>1000.50</example> */
         [JsonPropertyName("montantTotalLigneHt")]
-        public decimal? MontantTotalLigneHt { get { return this.MontantTotalLigneHtOption; } set { this.MontantTotalLigneHtOption = new(value); } }
+        public MontantTotalLigneHt? MontantTotalLigneHt { get { return this.MontantTotalLigneHtOption; } set { this.MontantTotalLigneHtOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of TauxTva
@@ -188,15 +184,13 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<decimal?> TauxTvaManuelOption { get; private set; }
+        public Option<LigneDePosteTauxTvaManuel?> TauxTvaManuelOption { get; private set; }
 
         /// <summary>
-        /// Taux de TVA avec valeur manuelle.
+        /// Gets or Sets TauxTvaManuel
         /// </summary>
-        /// <value>Taux de TVA avec valeur manuelle.</value>
-        /* <example>1000.50</example> */
         [JsonPropertyName("tauxTvaManuel")]
-        public decimal? TauxTvaManuel { get { return this.TauxTvaManuelOption; } set { this.TauxTvaManuelOption = new(value); } }
+        public LigneDePosteTauxTvaManuel? TauxTvaManuel { get { return this.TauxTvaManuelOption; } set { this.TauxTvaManuelOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of DateDebutPeriode
@@ -271,33 +265,6 @@ namespace FactPulse.SDK.Model
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            if (this.MontantRemiseHtOption.Value != null){
-                // MontantRemiseHt (decimal) pattern
-                Regex regexMontantRemiseHt = new Regex(@"^(?!^[-+.]*$)[+-]?0*(?:\d{0,8}|(?=[\d.]{1,13}0*$)\d{0,8}\.\d{0,4}0*$)", RegexOptions.CultureInvariant);
-
-                if (this.MontantRemiseHtOption.Value != null &&!regexMontantRemiseHt.Match(this.MontantRemiseHtOption.Value).Success)
-                {
-                    yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for MontantRemiseHt, must match a pattern of " + regexMontantRemiseHt, new [] { "MontantRemiseHt" });
-                }
-            }
-
-            // MontantTotalLigneHt (decimal) pattern
-            Regex regexMontantTotalLigneHt = new Regex(@"^(?!^[-+.]*$)[+-]?0*(?:\d{0,10}|(?=[\d.]{1,13}0*$)\d{0,10}\.\d{0,2}0*$)", RegexOptions.CultureInvariant);
-
-            if (this.MontantTotalLigneHtOption.Value != null &&!regexMontantTotalLigneHt.Match(this.MontantTotalLigneHtOption.Value).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for MontantTotalLigneHt, must match a pattern of " + regexMontantTotalLigneHt, new [] { "MontantTotalLigneHt" });
-            }
-            if (this.TauxTvaManuelOption.Value != null){
-                // TauxTvaManuel (decimal) pattern
-                Regex regexTauxTvaManuel = new Regex(@"^(?!^[-+.]*$)[+-]?0*(?:\d{0,8}|(?=[\d.]{1,13}0*$)\d{0,8}\.\d{0,4}0*$)", RegexOptions.CultureInvariant);
-
-                if (this.TauxTvaManuelOption.Value != null &&!regexTauxTvaManuel.Match(this.TauxTvaManuelOption.Value).Success)
-                {
-                    yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for TauxTvaManuel, must match a pattern of " + regexTauxTvaManuel, new [] { "TauxTvaManuel" });
-                }
-            }
-
             yield break;
         }
     }
@@ -330,10 +297,10 @@ namespace FactPulse.SDK.Model
             Option<Unite?> unite = default;
             Option<MontantUnitaireHt?> montantUnitaireHt = default;
             Option<string?> reference = default;
-            Option<decimal?> montantRemiseHt = default;
-            Option<decimal?> montantTotalLigneHt = default;
+            Option<LigneDePosteMontantRemiseHt?> montantRemiseHt = default;
+            Option<MontantTotalLigneHt?> montantTotalLigneHt = default;
             Option<string?> tauxTva = default;
-            Option<decimal?> tauxTvaManuel = default;
+            Option<LigneDePosteTauxTvaManuel?> tauxTvaManuel = default;
             Option<CategorieTVA?> categorieTva = default;
             Option<string?> dateDebutPeriode = default;
             Option<string?> dateFinPeriode = default;
@@ -376,16 +343,16 @@ namespace FactPulse.SDK.Model
                             reference = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "montantRemiseHt":
-                            montantRemiseHt = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                            montantRemiseHt = new Option<LigneDePosteMontantRemiseHt?>(JsonSerializer.Deserialize<LigneDePosteMontantRemiseHt>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "montantTotalLigneHt":
-                            montantTotalLigneHt = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                            montantTotalLigneHt = new Option<MontantTotalLigneHt?>(JsonSerializer.Deserialize<MontantTotalLigneHt>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "tauxTva":
                             tauxTva = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "tauxTvaManuel":
-                            tauxTvaManuel = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                            tauxTvaManuel = new Option<LigneDePosteTauxTvaManuel?>(JsonSerializer.Deserialize<LigneDePosteTauxTvaManuel>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "categorieTva":
                             string? categorieTvaRawValue = utf8JsonReader.GetString();
@@ -481,6 +448,9 @@ namespace FactPulse.SDK.Model
             if (ligneDePoste.MontantUnitaireHt == null)
                 throw new ArgumentNullException(nameof(ligneDePoste.MontantUnitaireHt), "Property is required for class LigneDePoste.");
 
+            if (ligneDePoste.MontantTotalLigneHtOption.IsSet && ligneDePoste.MontantTotalLigneHt == null)
+                throw new ArgumentNullException(nameof(ligneDePoste.MontantTotalLigneHt), "Property is required for class LigneDePoste.");
+
             writer.WriteNumber("numero", ligneDePoste.Numero);
 
             writer.WriteString("denomination", ligneDePoste.Denomination);
@@ -500,13 +470,17 @@ namespace FactPulse.SDK.Model
 
             if (ligneDePoste.MontantRemiseHtOption.IsSet)
                 if (ligneDePoste.MontantRemiseHtOption.Value != null)
-                    writer.WriteString("montantRemiseHt", ligneDePoste.MontantRemiseHt.ToString());
+                {
+                    writer.WritePropertyName("montantRemiseHt");
+                    JsonSerializer.Serialize(writer, ligneDePoste.MontantRemiseHt, jsonSerializerOptions);
+                }
                 else
                     writer.WriteNull("montantRemiseHt");
-
             if (ligneDePoste.MontantTotalLigneHtOption.IsSet)
-                writer.WriteString("montantTotalLigneHt", ligneDePoste.MontantTotalLigneHt.ToString());
-
+            {
+                writer.WritePropertyName("montantTotalLigneHt");
+                JsonSerializer.Serialize(writer, ligneDePoste.MontantTotalLigneHt, jsonSerializerOptions);
+            }
             if (ligneDePoste.TauxTvaOption.IsSet)
                 if (ligneDePoste.TauxTvaOption.Value != null)
                     writer.WriteString("tauxTva", ligneDePoste.TauxTva);
@@ -515,10 +489,12 @@ namespace FactPulse.SDK.Model
 
             if (ligneDePoste.TauxTvaManuelOption.IsSet)
                 if (ligneDePoste.TauxTvaManuelOption.Value != null)
-                    writer.WriteString("tauxTvaManuel", ligneDePoste.TauxTvaManuel.ToString());
+                {
+                    writer.WritePropertyName("tauxTvaManuel");
+                    JsonSerializer.Serialize(writer, ligneDePoste.TauxTvaManuel, jsonSerializerOptions);
+                }
                 else
                     writer.WriteNull("tauxTvaManuel");
-
             if (ligneDePoste.CategorieTvaOption.IsSet)
                 if (ligneDePoste.CategorieTvaOption!.Value != null)
                 {

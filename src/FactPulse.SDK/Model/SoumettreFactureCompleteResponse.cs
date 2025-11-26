@@ -43,7 +43,7 @@ namespace FactPulse.SDK.Model
         /// <param name="resultatAfnor">resultatAfnor</param>
         /// <param name="signature">signature</param>
         [JsonConstructor]
-        public SoumettreFactureCompleteResponse(bool succes, DestinationTypeEnum destinationType, FactureEnrichieInfoOutput factureEnrichie, PDFFacturXInfo pdfFacturx, string pdfBase64, string message, Option<ResultatChorusPro?> resultatChorus = default, Option<ResultatAFNOR?> resultatAfnor = default, Option<SignatureInfo?> signature = default)
+        public SoumettreFactureCompleteResponse(bool succes, DestinationTypeEnum destinationType, FactureEnrichieInfo factureEnrichie, PDFFacturXInfo pdfFacturx, string pdfBase64, string message, Option<ResultatChorusPro?> resultatChorus = default, Option<ResultatAFNOR?> resultatAfnor = default, Option<SignatureInfo?> signature = default)
         {
             Succes = succes;
             DestinationType = destinationType;
@@ -145,7 +145,7 @@ namespace FactPulse.SDK.Model
         /// </summary>
         /// <value>Données de la facture enrichie</value>
         [JsonPropertyName("facture_enrichie")]
-        public FactureEnrichieInfoOutput FactureEnrichie { get; set; }
+        public FactureEnrichieInfo FactureEnrichie { get; set; }
 
         /// <summary>
         /// Informations sur le PDF généré
@@ -263,7 +263,7 @@ namespace FactPulse.SDK.Model
 
             Option<bool?> succes = default;
             Option<SoumettreFactureCompleteResponse.DestinationTypeEnum?> destinationType = default;
-            Option<FactureEnrichieInfoOutput?> factureEnrichie = default;
+            Option<FactureEnrichieInfo?> factureEnrichie = default;
             Option<PDFFacturXInfo?> pdfFacturx = default;
             Option<string?> pdfBase64 = default;
             Option<string?> message = default;
@@ -295,7 +295,7 @@ namespace FactPulse.SDK.Model
                                 destinationType = new Option<SoumettreFactureCompleteResponse.DestinationTypeEnum?>(SoumettreFactureCompleteResponse.DestinationTypeEnumFromStringOrDefault(destinationTypeRawValue));
                             break;
                         case "facture_enrichie":
-                            factureEnrichie = new Option<FactureEnrichieInfoOutput?>(JsonSerializer.Deserialize<FactureEnrichieInfoOutput>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            factureEnrichie = new Option<FactureEnrichieInfo?>(JsonSerializer.Deserialize<FactureEnrichieInfo>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "pdf_facturx":
                             pdfFacturx = new Option<PDFFacturXInfo?>(JsonSerializer.Deserialize<PDFFacturXInfo>(ref utf8JsonReader, jsonSerializerOptions)!);

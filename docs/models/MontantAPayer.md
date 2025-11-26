@@ -1,5 +1,5 @@
-# FactPulse.SDK.Model.MontantTva
-Montant TVA
+# FactPulse.SDK.Model.MontantAPayer
+Montant à payer. (Accepte number, string ou integer)
 
 ## Properties
 

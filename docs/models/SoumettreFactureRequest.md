@@ -8,9 +8,9 @@ Name | Type | Description | Notes
 **NumeroFacture** | **string** | Numéro de la facture | 
 **DateFacture** | **string** | Date de facture (format ISO: YYYY-MM-DD) | 
 **IdStructureCpp** | **int** | ID Chorus Pro de la structure destinataire | 
-**MontantHtTotal** | [**MontantHtTotal1**](MontantHtTotal1.md) |  | 
-**MontantTva** | [**MontantTva1**](MontantTva1.md) |  | 
-**MontantTtcTotal** | [**MontantTtcTotal1**](MontantTtcTotal1.md) |  | 
+**MontantHtTotal** | [**MontantHtTotal**](MontantHtTotal.md) |  | 
+**MontantTva** | [**MontantTva**](MontantTva.md) |  | 
+**MontantTtcTotal** | [**MontantTtcTotal**](MontantTtcTotal.md) |  | 
 **Credentials** | [**ChorusProCredentials**](ChorusProCredentials.md) |  | [optional] 
 **DateEcheancePaiement** | **string** |  | [optional] 
 **CodeService** | **string** |  | [optional] 

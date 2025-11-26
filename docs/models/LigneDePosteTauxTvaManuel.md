@@ -1,5 +1,5 @@
-# FactPulse.SDK.Model.MontantTva1
-Montant TVA
+# FactPulse.SDK.Model.LigneDePosteTauxTvaManuel
+Taux de TVA avec valeur manuelle. (Accepte number, string ou integer)
 
 ## Properties
 

@@ -33,15 +33,15 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="MontantTotal" /> class.
         /// </summary>
-        /// <param name="montantHtTotal">Montant total HT.</param>
-        /// <param name="montantTva">Montant total de la TVA.</param>
-        /// <param name="montantTtcTotal">Montant total TTC.</param>
-        /// <param name="montantAPayer">Montant à payer.</param>
-        /// <param name="acompte">Acompte versé.</param>
-        /// <param name="montantRemiseGlobaleTtc">Montant de la remise globale TTC.</param>
+        /// <param name="montantHtTotal">montantHtTotal</param>
+        /// <param name="montantTva">montantTva</param>
+        /// <param name="montantTtcTotal">montantTtcTotal</param>
+        /// <param name="montantAPayer">montantAPayer</param>
+        /// <param name="acompte">acompte</param>
+        /// <param name="montantRemiseGlobaleTtc">montantRemiseGlobaleTtc</param>
         /// <param name="motifRemiseGlobaleTtc">motifRemiseGlobaleTtc</param>
         [JsonConstructor]
-        public MontantTotal(decimal montantHtTotal, decimal montantTva, decimal montantTtcTotal, decimal montantAPayer, Option<decimal?> acompte = default, Option<decimal?> montantRemiseGlobaleTtc = default, Option<string?> motifRemiseGlobaleTtc = default)
+        public MontantTotal(MontantHtTotal montantHtTotal, MontantTvaTotal montantTva, MontantTtcTotal montantTtcTotal, MontantAPayer montantAPayer, Option<MontantTotalAcompte?> acompte = default, Option<MontantRemiseGlobaleTtc?> montantRemiseGlobaleTtc = default, Option<string?> motifRemiseGlobaleTtc = default)
         {
             MontantHtTotal = montantHtTotal;
             MontantTva = montantTva;
@@ -56,66 +56,54 @@ namespace FactPulse.SDK.Model
         partial void OnCreated();
 
         /// <summary>
-        /// Montant total HT.
+        /// Gets or Sets MontantHtTotal
         /// </summary>
-        /// <value>Montant total HT.</value>
-        /* <example>1000.50</example> */
         [JsonPropertyName("montantHtTotal")]
-        public decimal MontantHtTotal { get; set; }
+        public MontantHtTotal MontantHtTotal { get; set; }
 
         /// <summary>
-        /// Montant total de la TVA.
+        /// Gets or Sets MontantTva
         /// </summary>
-        /// <value>Montant total de la TVA.</value>
-        /* <example>1000.50</example> */
         [JsonPropertyName("montantTva")]
-        public decimal MontantTva { get; set; }
+        public MontantTvaTotal MontantTva { get; set; }
 
         /// <summary>
-        /// Montant total TTC.
+        /// Gets or Sets MontantTtcTotal
         /// </summary>
-        /// <value>Montant total TTC.</value>
-        /* <example>1000.50</example> */
         [JsonPropertyName("montantTtcTotal")]
-        public decimal MontantTtcTotal { get; set; }
+        public MontantTtcTotal MontantTtcTotal { get; set; }
 
         /// <summary>
-        /// Montant à payer.
+        /// Gets or Sets MontantAPayer
         /// </summary>
-        /// <value>Montant à payer.</value>
-        /* <example>1000.50</example> */
         [JsonPropertyName("montantAPayer")]
-        public decimal MontantAPayer { get; set; }
+        public MontantAPayer MontantAPayer { get; set; }
 
         /// <summary>
         /// Used to track the state of Acompte
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<decimal?> AcompteOption { get; private set; }
+        public Option<MontantTotalAcompte?> AcompteOption { get; private set; }
 
         /// <summary>
-        /// Acompte versé.
+        /// Gets or Sets Acompte
         /// </summary>
-        /// <value>Acompte versé.</value>
-        /* <example>1000.50</example> */
         [JsonPropertyName("acompte")]
-        public decimal? Acompte { get { return this.AcompteOption; } set { this.AcompteOption = new(value); } }
+        public MontantTotalAcompte? Acompte { get { return this.AcompteOption; } set { this.AcompteOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of MontantRemiseGlobaleTtc
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<decimal?> MontantRemiseGlobaleTtcOption { get; private set; }
+        public Option<MontantRemiseGlobaleTtc?> MontantRemiseGlobaleTtcOption { get; private set; }
 
         /// <summary>
-        /// Montant de la remise globale TTC.
+        /// Gets or Sets MontantRemiseGlobaleTtc
         /// </summary>
-        /// <value>Montant de la remise globale TTC.</value>
-        /* <example>1000.50</example> */
         [JsonPropertyName("montantRemiseGlobaleTtc")]
-        public decimal? MontantRemiseGlobaleTtc { get { return this.MontantRemiseGlobaleTtcOption; } set { this.MontantRemiseGlobaleTtcOption = new(value); } }
+        public MontantRemiseGlobaleTtc? MontantRemiseGlobaleTtc { get { return this.MontantRemiseGlobaleTtcOption; } set { this.MontantRemiseGlobaleTtcOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of MotifRemiseGlobaleTtc
@@ -156,51 +144,6 @@ namespace FactPulse.SDK.Model
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // MontantHtTotal (decimal) pattern
-            Regex regexMontantHtTotal = new Regex(@"^(?!^[-+.]*$)[+-]?0*(?:\d{0,8}|(?=[\d.]{1,13}0*$)\d{0,8}\.\d{0,4}0*$)", RegexOptions.CultureInvariant);
-
-            if (!regexMontantHtTotal.Match(this.MontantHtTotal).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for MontantHtTotal, must match a pattern of " + regexMontantHtTotal, new [] { "MontantHtTotal" });
-            }
-            // MontantTva (decimal) pattern
-            Regex regexMontantTva = new Regex(@"^(?!^[-+.]*$)[+-]?0*(?:\d{0,8}|(?=[\d.]{1,13}0*$)\d{0,8}\.\d{0,4}0*$)", RegexOptions.CultureInvariant);
-
-            if (!regexMontantTva.Match(this.MontantTva).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for MontantTva, must match a pattern of " + regexMontantTva, new [] { "MontantTva" });
-            }
-            // MontantTtcTotal (decimal) pattern
-            Regex regexMontantTtcTotal = new Regex(@"^(?!^[-+.]*$)[+-]?0*(?:\d{0,8}|(?=[\d.]{1,13}0*$)\d{0,8}\.\d{0,4}0*$)", RegexOptions.CultureInvariant);
-
-            if (!regexMontantTtcTotal.Match(this.MontantTtcTotal).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for MontantTtcTotal, must match a pattern of " + regexMontantTtcTotal, new [] { "MontantTtcTotal" });
-            }
-            // MontantAPayer (decimal) pattern
-            Regex regexMontantAPayer = new Regex(@"^(?!^[-+.]*$)[+-]?0*(?:\d{0,8}|(?=[\d.]{1,13}0*$)\d{0,8}\.\d{0,4}0*$)", RegexOptions.CultureInvariant);
-
-            if (!regexMontantAPayer.Match(this.MontantAPayer).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for MontantAPayer, must match a pattern of " + regexMontantAPayer, new [] { "MontantAPayer" });
-            }
-            if (this.AcompteOption.Value != null){
-                // Acompte (decimal) pattern
-                Regex regexAcompte = new Regex(@"^(?!^[-+.]*$)[+-]?0*(?:\d{0,8}|(?=[\d.]{1,13}0*$)\d{0,8}\.\d{0,4}0*$)", RegexOptions.CultureInvariant);
-
-                if (this.AcompteOption.Value != null &&!regexAcompte.Match(this.AcompteOption.Value).Success)
-                {
-                    yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Acompte, must match a pattern of " + regexAcompte, new [] { "Acompte" });
-                }
-            }
-
-            // MontantRemiseGlobaleTtc (decimal) pattern
-            Regex regexMontantRemiseGlobaleTtc = new Regex(@"^(?!^[-+.]*$)[+-]?0*(?:\d{0,8}|(?=[\d.]{1,13}0*$)\d{0,8}\.\d{0,4}0*$)", RegexOptions.CultureInvariant);
-
-            if (this.MontantRemiseGlobaleTtcOption.Value != null &&!regexMontantRemiseGlobaleTtc.Match(this.MontantRemiseGlobaleTtcOption.Value).Success)
-            {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for MontantRemiseGlobaleTtc, must match a pattern of " + regexMontantRemiseGlobaleTtc, new [] { "MontantRemiseGlobaleTtc" });
-            }
             yield break;
         }
     }
@@ -227,12 +170,12 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<decimal?> montantHtTotal = default;
-            Option<decimal?> montantTva = default;
-            Option<decimal?> montantTtcTotal = default;
-            Option<decimal?> montantAPayer = default;
-            Option<decimal?> acompte = default;
-            Option<decimal?> montantRemiseGlobaleTtc = default;
+            Option<MontantHtTotal?> montantHtTotal = default;
+            Option<MontantTvaTotal?> montantTva = default;
+            Option<MontantTtcTotal?> montantTtcTotal = default;
+            Option<MontantAPayer?> montantAPayer = default;
+            Option<MontantTotalAcompte?> acompte = default;
+            Option<MontantRemiseGlobaleTtc?> montantRemiseGlobaleTtc = default;
             Option<string?> motifRemiseGlobaleTtc = default;
 
             while (utf8JsonReader.Read())
@@ -251,22 +194,22 @@ namespace FactPulse.SDK.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "montantHtTotal":
-                            montantHtTotal = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                            montantHtTotal = new Option<MontantHtTotal?>(JsonSerializer.Deserialize<MontantHtTotal>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "montantTva":
-                            montantTva = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                            montantTva = new Option<MontantTvaTotal?>(JsonSerializer.Deserialize<MontantTvaTotal>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "montantTtcTotal":
-                            montantTtcTotal = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                            montantTtcTotal = new Option<MontantTtcTotal?>(JsonSerializer.Deserialize<MontantTtcTotal>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "montantAPayer":
-                            montantAPayer = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                            montantAPayer = new Option<MontantAPayer?>(JsonSerializer.Deserialize<MontantAPayer>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "acompte":
-                            acompte = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                            acompte = new Option<MontantTotalAcompte?>(JsonSerializer.Deserialize<MontantTotalAcompte>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "montantRemiseGlobaleTtc":
-                            montantRemiseGlobaleTtc = new Option<decimal?>(utf8JsonReader.GetDecimal());
+                            montantRemiseGlobaleTtc = new Option<MontantRemiseGlobaleTtc?>(JsonSerializer.Deserialize<MontantRemiseGlobaleTtc>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "motifRemiseGlobaleTtc":
                             motifRemiseGlobaleTtc = new Option<string?>(utf8JsonReader.GetString());
@@ -304,7 +247,7 @@ namespace FactPulse.SDK.Model
             if (montantRemiseGlobaleTtc.IsSet && montantRemiseGlobaleTtc.Value == null)
                 throw new ArgumentNullException(nameof(montantRemiseGlobaleTtc), "Property is not nullable for class MontantTotal.");
 
-            return new MontantTotal(montantHtTotal.Value!.Value!, montantTva.Value!.Value!, montantTtcTotal.Value!.Value!, montantAPayer.Value!.Value!, acompte, montantRemiseGlobaleTtc, motifRemiseGlobaleTtc);
+            return new MontantTotal(montantHtTotal.Value!, montantTva.Value!, montantTtcTotal.Value!, montantAPayer.Value!, acompte, montantRemiseGlobaleTtc, motifRemiseGlobaleTtc);
         }
 
         /// <summary>
@@ -331,23 +274,42 @@ namespace FactPulse.SDK.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, MontantTotal montantTotal, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WriteString("montantHtTotal", montantTotal.MontantHtTotal.ToString());
+            if (montantTotal.MontantHtTotal == null)
+                throw new ArgumentNullException(nameof(montantTotal.MontantHtTotal), "Property is required for class MontantTotal.");
 
-            writer.WriteString("montantTva", montantTotal.MontantTva.ToString());
+            if (montantTotal.MontantTva == null)
+                throw new ArgumentNullException(nameof(montantTotal.MontantTva), "Property is required for class MontantTotal.");
 
-            writer.WriteString("montantTtcTotal", montantTotal.MontantTtcTotal.ToString());
+            if (montantTotal.MontantTtcTotal == null)
+                throw new ArgumentNullException(nameof(montantTotal.MontantTtcTotal), "Property is required for class MontantTotal.");
 
-            writer.WriteString("montantAPayer", montantTotal.MontantAPayer.ToString());
+            if (montantTotal.MontantAPayer == null)
+                throw new ArgumentNullException(nameof(montantTotal.MontantAPayer), "Property is required for class MontantTotal.");
 
+            if (montantTotal.MontantRemiseGlobaleTtcOption.IsSet && montantTotal.MontantRemiseGlobaleTtc == null)
+                throw new ArgumentNullException(nameof(montantTotal.MontantRemiseGlobaleTtc), "Property is required for class MontantTotal.");
+
+            writer.WritePropertyName("montantHtTotal");
+            JsonSerializer.Serialize(writer, montantTotal.MontantHtTotal, jsonSerializerOptions);
+            writer.WritePropertyName("montantTva");
+            JsonSerializer.Serialize(writer, montantTotal.MontantTva, jsonSerializerOptions);
+            writer.WritePropertyName("montantTtcTotal");
+            JsonSerializer.Serialize(writer, montantTotal.MontantTtcTotal, jsonSerializerOptions);
+            writer.WritePropertyName("montantAPayer");
+            JsonSerializer.Serialize(writer, montantTotal.MontantAPayer, jsonSerializerOptions);
             if (montantTotal.AcompteOption.IsSet)
                 if (montantTotal.AcompteOption.Value != null)
-                    writer.WriteString("acompte", montantTotal.Acompte.ToString());
+                {
+                    writer.WritePropertyName("acompte");
+                    JsonSerializer.Serialize(writer, montantTotal.Acompte, jsonSerializerOptions);
+                }
                 else
                     writer.WriteNull("acompte");
-
             if (montantTotal.MontantRemiseGlobaleTtcOption.IsSet)
-                writer.WriteString("montantRemiseGlobaleTtc", montantTotal.MontantRemiseGlobaleTtc.ToString());
-
+            {
+                writer.WritePropertyName("montantRemiseGlobaleTtc");
+                JsonSerializer.Serialize(writer, montantTotal.MontantRemiseGlobaleTtc, jsonSerializerOptions);
+            }
             if (montantTotal.MotifRemiseGlobaleTtcOption.IsSet)
                 if (montantTotal.MotifRemiseGlobaleTtcOption.Value != null)
                     writer.WriteString("motifRemiseGlobaleTtc", montantTotal.MotifRemiseGlobaleTtc);

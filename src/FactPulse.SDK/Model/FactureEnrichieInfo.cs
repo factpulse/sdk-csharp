@@ -28,10 +28,10 @@ namespace FactPulse.SDK.Model
     /// <summary>
     /// Informations sur la facture enrichie.
     /// </summary>
-    public partial class FactureEnrichieInfoInput : IValidatableObject
+    public partial class FactureEnrichieInfo : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="FactureEnrichieInfoInput" /> class.
+        /// Initializes a new instance of the <see cref="FactureEnrichieInfo" /> class.
         /// </summary>
         /// <param name="numeroFacture">numeroFacture</param>
         /// <param name="nomEmetteur">nomEmetteur</param>
@@ -42,7 +42,7 @@ namespace FactPulse.SDK.Model
         /// <param name="idEmetteur">idEmetteur</param>
         /// <param name="idDestinataire">idDestinataire</param>
         [JsonConstructor]
-        public FactureEnrichieInfoInput(string numeroFacture, string nomEmetteur, string nomDestinataire, MontantHtTotal montantHtTotal, MontantTva montantTva, MontantTtcTotal montantTtcTotal, Option<int?> idEmetteur = default, Option<int?> idDestinataire = default)
+        public FactureEnrichieInfo(string numeroFacture, string nomEmetteur, string nomDestinataire, string montantHtTotal, string montantTva, string montantTtcTotal, Option<int?> idEmetteur = default, Option<int?> idDestinataire = default)
         {
             NumeroFacture = numeroFacture;
             NomEmetteur = nomEmetteur;
@@ -79,19 +79,19 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets MontantHtTotal
         /// </summary>
         [JsonPropertyName("montant_ht_total")]
-        public MontantHtTotal MontantHtTotal { get; set; }
+        public string MontantHtTotal { get; set; }
 
         /// <summary>
         /// Gets or Sets MontantTva
         /// </summary>
         [JsonPropertyName("montant_tva")]
-        public MontantTva MontantTva { get; set; }
+        public string MontantTva { get; set; }
 
         /// <summary>
         /// Gets or Sets MontantTtcTotal
         /// </summary>
         [JsonPropertyName("montant_ttc_total")]
-        public MontantTtcTotal MontantTtcTotal { get; set; }
+        public string MontantTtcTotal { get; set; }
 
         /// <summary>
         /// Used to track the state of IdEmetteur
@@ -126,7 +126,7 @@ namespace FactPulse.SDK.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class FactureEnrichieInfoInput {\n");
+            sb.Append("class FactureEnrichieInfo {\n");
             sb.Append("  NumeroFacture: ").Append(NumeroFacture).Append("\n");
             sb.Append("  NomEmetteur: ").Append(NomEmetteur).Append("\n");
             sb.Append("  NomDestinataire: ").Append(NomDestinataire).Append("\n");
@@ -146,24 +146,54 @@ namespace FactPulse.SDK.Model
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            if (this.MontantHtTotal != null) {
+                // MontantHtTotal (string) pattern
+                Regex regexMontantHtTotal = new Regex(@"^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$", RegexOptions.CultureInvariant);
+
+                if (!regexMontantHtTotal.Match(this.MontantHtTotal).Success)
+                {
+                    yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for MontantHtTotal, must match a pattern of " + regexMontantHtTotal, new [] { "MontantHtTotal" });
+                }
+            }
+
+            if (this.MontantTva != null) {
+                // MontantTva (string) pattern
+                Regex regexMontantTva = new Regex(@"^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$", RegexOptions.CultureInvariant);
+
+                if (!regexMontantTva.Match(this.MontantTva).Success)
+                {
+                    yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for MontantTva, must match a pattern of " + regexMontantTva, new [] { "MontantTva" });
+                }
+            }
+
+            if (this.MontantTtcTotal != null) {
+                // MontantTtcTotal (string) pattern
+                Regex regexMontantTtcTotal = new Regex(@"^(?!^[-+.]*$)[+-]?0*\d*\.?\d*$", RegexOptions.CultureInvariant);
+
+                if (!regexMontantTtcTotal.Match(this.MontantTtcTotal).Success)
+                {
+                    yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for MontantTtcTotal, must match a pattern of " + regexMontantTtcTotal, new [] { "MontantTtcTotal" });
+                }
+            }
+
             yield break;
         }
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="FactureEnrichieInfoInput" />
+    /// A Json converter for type <see cref="FactureEnrichieInfo" />
     /// </summary>
-    public class FactureEnrichieInfoInputJsonConverter : JsonConverter<FactureEnrichieInfoInput>
+    public class FactureEnrichieInfoJsonConverter : JsonConverter<FactureEnrichieInfo>
     {
         /// <summary>
-        /// Deserializes json to <see cref="FactureEnrichieInfoInput" />
+        /// Deserializes json to <see cref="FactureEnrichieInfo" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override FactureEnrichieInfoInput Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override FactureEnrichieInfo Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -175,9 +205,9 @@ namespace FactPulse.SDK.Model
             Option<string?> numeroFacture = default;
             Option<string?> nomEmetteur = default;
             Option<string?> nomDestinataire = default;
-            Option<MontantHtTotal?> montantHtTotal = default;
-            Option<MontantTva?> montantTva = default;
-            Option<MontantTtcTotal?> montantTtcTotal = default;
+            Option<string?> montantHtTotal = default;
+            Option<string?> montantTva = default;
+            Option<string?> montantTtcTotal = default;
             Option<int?> idEmetteur = default;
             Option<int?> idDestinataire = default;
 
@@ -206,13 +236,13 @@ namespace FactPulse.SDK.Model
                             nomDestinataire = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "montant_ht_total":
-                            montantHtTotal = new Option<MontantHtTotal?>(JsonSerializer.Deserialize<MontantHtTotal>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            montantHtTotal = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "montant_tva":
-                            montantTva = new Option<MontantTva?>(JsonSerializer.Deserialize<MontantTva>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            montantTva = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "montant_ttc_total":
-                            montantTtcTotal = new Option<MontantTtcTotal?>(JsonSerializer.Deserialize<MontantTtcTotal>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            montantTtcTotal = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "id_emetteur":
                             idEmetteur = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
@@ -227,107 +257,107 @@ namespace FactPulse.SDK.Model
             }
 
             if (!numeroFacture.IsSet)
-                throw new ArgumentException("Property is required for class FactureEnrichieInfoInput.", nameof(numeroFacture));
+                throw new ArgumentException("Property is required for class FactureEnrichieInfo.", nameof(numeroFacture));
 
             if (!nomEmetteur.IsSet)
-                throw new ArgumentException("Property is required for class FactureEnrichieInfoInput.", nameof(nomEmetteur));
+                throw new ArgumentException("Property is required for class FactureEnrichieInfo.", nameof(nomEmetteur));
 
             if (!nomDestinataire.IsSet)
-                throw new ArgumentException("Property is required for class FactureEnrichieInfoInput.", nameof(nomDestinataire));
+                throw new ArgumentException("Property is required for class FactureEnrichieInfo.", nameof(nomDestinataire));
 
             if (!montantHtTotal.IsSet)
-                throw new ArgumentException("Property is required for class FactureEnrichieInfoInput.", nameof(montantHtTotal));
+                throw new ArgumentException("Property is required for class FactureEnrichieInfo.", nameof(montantHtTotal));
 
             if (!montantTva.IsSet)
-                throw new ArgumentException("Property is required for class FactureEnrichieInfoInput.", nameof(montantTva));
+                throw new ArgumentException("Property is required for class FactureEnrichieInfo.", nameof(montantTva));
 
             if (!montantTtcTotal.IsSet)
-                throw new ArgumentException("Property is required for class FactureEnrichieInfoInput.", nameof(montantTtcTotal));
+                throw new ArgumentException("Property is required for class FactureEnrichieInfo.", nameof(montantTtcTotal));
 
             if (numeroFacture.IsSet && numeroFacture.Value == null)
-                throw new ArgumentNullException(nameof(numeroFacture), "Property is not nullable for class FactureEnrichieInfoInput.");
+                throw new ArgumentNullException(nameof(numeroFacture), "Property is not nullable for class FactureEnrichieInfo.");
 
             if (nomEmetteur.IsSet && nomEmetteur.Value == null)
-                throw new ArgumentNullException(nameof(nomEmetteur), "Property is not nullable for class FactureEnrichieInfoInput.");
+                throw new ArgumentNullException(nameof(nomEmetteur), "Property is not nullable for class FactureEnrichieInfo.");
 
             if (nomDestinataire.IsSet && nomDestinataire.Value == null)
-                throw new ArgumentNullException(nameof(nomDestinataire), "Property is not nullable for class FactureEnrichieInfoInput.");
+                throw new ArgumentNullException(nameof(nomDestinataire), "Property is not nullable for class FactureEnrichieInfo.");
 
             if (montantHtTotal.IsSet && montantHtTotal.Value == null)
-                throw new ArgumentNullException(nameof(montantHtTotal), "Property is not nullable for class FactureEnrichieInfoInput.");
+                throw new ArgumentNullException(nameof(montantHtTotal), "Property is not nullable for class FactureEnrichieInfo.");
 
             if (montantTva.IsSet && montantTva.Value == null)
-                throw new ArgumentNullException(nameof(montantTva), "Property is not nullable for class FactureEnrichieInfoInput.");
+                throw new ArgumentNullException(nameof(montantTva), "Property is not nullable for class FactureEnrichieInfo.");
 
             if (montantTtcTotal.IsSet && montantTtcTotal.Value == null)
-                throw new ArgumentNullException(nameof(montantTtcTotal), "Property is not nullable for class FactureEnrichieInfoInput.");
+                throw new ArgumentNullException(nameof(montantTtcTotal), "Property is not nullable for class FactureEnrichieInfo.");
 
-            return new FactureEnrichieInfoInput(numeroFacture.Value!, nomEmetteur.Value!, nomDestinataire.Value!, montantHtTotal.Value!, montantTva.Value!, montantTtcTotal.Value!, idEmetteur, idDestinataire);
+            return new FactureEnrichieInfo(numeroFacture.Value!, nomEmetteur.Value!, nomDestinataire.Value!, montantHtTotal.Value!, montantTva.Value!, montantTtcTotal.Value!, idEmetteur, idDestinataire);
         }
 
         /// <summary>
-        /// Serializes a <see cref="FactureEnrichieInfoInput" />
+        /// Serializes a <see cref="FactureEnrichieInfo" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="factureEnrichieInfoInput"></param>
+        /// <param name="factureEnrichieInfo"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, FactureEnrichieInfoInput factureEnrichieInfoInput, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, FactureEnrichieInfo factureEnrichieInfo, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, factureEnrichieInfoInput, jsonSerializerOptions);
+            WriteProperties(writer, factureEnrichieInfo, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="FactureEnrichieInfoInput" />
+        /// Serializes the properties of <see cref="FactureEnrichieInfo" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="factureEnrichieInfoInput"></param>
+        /// <param name="factureEnrichieInfo"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, FactureEnrichieInfoInput factureEnrichieInfoInput, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, FactureEnrichieInfo factureEnrichieInfo, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (factureEnrichieInfoInput.NumeroFacture == null)
-                throw new ArgumentNullException(nameof(factureEnrichieInfoInput.NumeroFacture), "Property is required for class FactureEnrichieInfoInput.");
+            if (factureEnrichieInfo.NumeroFacture == null)
+                throw new ArgumentNullException(nameof(factureEnrichieInfo.NumeroFacture), "Property is required for class FactureEnrichieInfo.");
 
-            if (factureEnrichieInfoInput.NomEmetteur == null)
-                throw new ArgumentNullException(nameof(factureEnrichieInfoInput.NomEmetteur), "Property is required for class FactureEnrichieInfoInput.");
+            if (factureEnrichieInfo.NomEmetteur == null)
+                throw new ArgumentNullException(nameof(factureEnrichieInfo.NomEmetteur), "Property is required for class FactureEnrichieInfo.");
 
-            if (factureEnrichieInfoInput.NomDestinataire == null)
-                throw new ArgumentNullException(nameof(factureEnrichieInfoInput.NomDestinataire), "Property is required for class FactureEnrichieInfoInput.");
+            if (factureEnrichieInfo.NomDestinataire == null)
+                throw new ArgumentNullException(nameof(factureEnrichieInfo.NomDestinataire), "Property is required for class FactureEnrichieInfo.");
 
-            if (factureEnrichieInfoInput.MontantHtTotal == null)
-                throw new ArgumentNullException(nameof(factureEnrichieInfoInput.MontantHtTotal), "Property is required for class FactureEnrichieInfoInput.");
+            if (factureEnrichieInfo.MontantHtTotal == null)
+                throw new ArgumentNullException(nameof(factureEnrichieInfo.MontantHtTotal), "Property is required for class FactureEnrichieInfo.");
 
-            if (factureEnrichieInfoInput.MontantTva == null)
-                throw new ArgumentNullException(nameof(factureEnrichieInfoInput.MontantTva), "Property is required for class FactureEnrichieInfoInput.");
+            if (factureEnrichieInfo.MontantTva == null)
+                throw new ArgumentNullException(nameof(factureEnrichieInfo.MontantTva), "Property is required for class FactureEnrichieInfo.");
 
-            if (factureEnrichieInfoInput.MontantTtcTotal == null)
-                throw new ArgumentNullException(nameof(factureEnrichieInfoInput.MontantTtcTotal), "Property is required for class FactureEnrichieInfoInput.");
+            if (factureEnrichieInfo.MontantTtcTotal == null)
+                throw new ArgumentNullException(nameof(factureEnrichieInfo.MontantTtcTotal), "Property is required for class FactureEnrichieInfo.");
 
-            writer.WriteString("numero_facture", factureEnrichieInfoInput.NumeroFacture);
+            writer.WriteString("numero_facture", factureEnrichieInfo.NumeroFacture);
 
-            writer.WriteString("nom_emetteur", factureEnrichieInfoInput.NomEmetteur);
+            writer.WriteString("nom_emetteur", factureEnrichieInfo.NomEmetteur);
 
-            writer.WriteString("nom_destinataire", factureEnrichieInfoInput.NomDestinataire);
+            writer.WriteString("nom_destinataire", factureEnrichieInfo.NomDestinataire);
 
-            writer.WritePropertyName("montant_ht_total");
-            JsonSerializer.Serialize(writer, factureEnrichieInfoInput.MontantHtTotal, jsonSerializerOptions);
-            writer.WritePropertyName("montant_tva");
-            JsonSerializer.Serialize(writer, factureEnrichieInfoInput.MontantTva, jsonSerializerOptions);
-            writer.WritePropertyName("montant_ttc_total");
-            JsonSerializer.Serialize(writer, factureEnrichieInfoInput.MontantTtcTotal, jsonSerializerOptions);
-            if (factureEnrichieInfoInput.IdEmetteurOption.IsSet)
-                if (factureEnrichieInfoInput.IdEmetteurOption.Value != null)
-                    writer.WriteNumber("id_emetteur", factureEnrichieInfoInput.IdEmetteurOption.Value!.Value);
+            writer.WriteString("montant_ht_total", factureEnrichieInfo.MontantHtTotal);
+
+            writer.WriteString("montant_tva", factureEnrichieInfo.MontantTva);
+
+            writer.WriteString("montant_ttc_total", factureEnrichieInfo.MontantTtcTotal);
+
+            if (factureEnrichieInfo.IdEmetteurOption.IsSet)
+                if (factureEnrichieInfo.IdEmetteurOption.Value != null)
+                    writer.WriteNumber("id_emetteur", factureEnrichieInfo.IdEmetteurOption.Value!.Value);
                 else
                     writer.WriteNull("id_emetteur");
 
-            if (factureEnrichieInfoInput.IdDestinataireOption.IsSet)
-                if (factureEnrichieInfoInput.IdDestinataireOption.Value != null)
-                    writer.WriteNumber("id_destinataire", factureEnrichieInfoInput.IdDestinataireOption.Value!.Value);
+            if (factureEnrichieInfo.IdDestinataireOption.IsSet)
+                if (factureEnrichieInfo.IdDestinataireOption.Value != null)
+                    writer.WriteNumber("id_destinataire", factureEnrichieInfo.IdDestinataireOption.Value!.Value);
                 else
                     writer.WriteNull("id_destinataire");
         }

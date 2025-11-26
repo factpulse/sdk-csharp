@@ -1,5 +1,5 @@
-# FactPulse.SDK.Model.MontantTva
-Montant TVA
+# FactPulse.SDK.Model.LigneDePosteMontantRemiseHt
+Montant de la remise HT. (Accepte number, string ou integer)
 
 ## Properties
 

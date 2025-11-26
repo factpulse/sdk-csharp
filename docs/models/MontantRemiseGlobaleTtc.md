@@ -1,5 +1,5 @@
-# FactPulse.SDK.Model.MontantTtcTotal1
-Montant TTC total
+# FactPulse.SDK.Model.MontantRemiseGlobaleTtc
+Montant de la remise globale TTC. (Accepte number, string ou integer)
 
 ## Properties
 

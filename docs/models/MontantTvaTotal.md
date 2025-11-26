@@ -1,5 +1,5 @@
-# FactPulse.SDK.Model.MontantHtTotal1
-Montant HT total
+# FactPulse.SDK.Model.MontantTvaTotal
+Montant total de la TVA. (Accepte number, string ou integer)
 
 ## Properties
 

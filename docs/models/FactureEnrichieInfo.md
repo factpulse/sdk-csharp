@@ -1,4 +1,4 @@
-# FactPulse.SDK.Model.FactureEnrichieInfoOutput
+# FactPulse.SDK.Model.FactureEnrichieInfo
 Informations sur la facture enrichie.
 
 ## Properties

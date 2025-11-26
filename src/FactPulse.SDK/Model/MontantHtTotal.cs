@@ -26,7 +26,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// MontantHtTotal
+    /// Montant total HT. (Accepte number, string ou integer)
     /// </summary>
     public partial class MontantHtTotal : IValidatableObject
     {
@@ -178,10 +178,10 @@ namespace FactPulse.SDK.Model
             writer.WriteStartObject();
 
             if (montantHtTotal.DecimalOption.IsSet && montantHtTotal.DecimalOption.Value != null)
-                writer.WriteNumber("1", montantHtTotal.DecimalOption.Value.Value);
+                writer.WriteNumber("Tauxmanuel", montantHtTotal.DecimalOption.Value.Value);
 
             if (montantHtTotal.StringOption.IsSet && montantHtTotal.StringOption.Value != null)
-                writer.WriteString("1", montantHtTotal.StringOption.Value);
+                writer.WriteString("Tauxmanuel", montantHtTotal.StringOption.Value);
 
             WriteProperties(writer, montantHtTotal, jsonSerializerOptions);
             writer.WriteEndObject();

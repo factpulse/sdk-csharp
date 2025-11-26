@@ -49,7 +49,7 @@ namespace FactPulse.SDK.Model
         /// <param name="numeroBonCommande">numeroBonCommande</param>
         /// <param name="numeroMarche">numeroMarche</param>
         [JsonConstructor]
-        public SoumettreFactureRequest(string numeroFacture, string dateFacture, int idStructureCpp, MontantHtTotal1 montantHtTotal, MontantTva1 montantTva, MontantTtcTotal1 montantTtcTotal, Option<ChorusProCredentials?> credentials = default, Option<string?> dateEcheancePaiement = default, Option<string?> codeService = default, Option<string?> numeroEngagement = default, Option<int?> pieceJointePrincipaleId = default, Option<string?> pieceJointePrincipaleDesignation = default, Option<string?> commentaire = default, Option<string?> numeroBonCommande = default, Option<string?> numeroMarche = default)
+        public SoumettreFactureRequest(string numeroFacture, string dateFacture, int idStructureCpp, MontantHtTotal montantHtTotal, MontantTva montantTva, MontantTtcTotal montantTtcTotal, Option<ChorusProCredentials?> credentials = default, Option<string?> dateEcheancePaiement = default, Option<string?> codeService = default, Option<string?> numeroEngagement = default, Option<int?> pieceJointePrincipaleId = default, Option<string?> pieceJointePrincipaleDesignation = default, Option<string?> commentaire = default, Option<string?> numeroBonCommande = default, Option<string?> numeroMarche = default)
         {
             NumeroFacture = numeroFacture;
             DateFacture = dateFacture;
@@ -96,19 +96,19 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets MontantHtTotal
         /// </summary>
         [JsonPropertyName("montant_ht_total")]
-        public MontantHtTotal1 MontantHtTotal { get; set; }
+        public MontantHtTotal MontantHtTotal { get; set; }
 
         /// <summary>
         /// Gets or Sets MontantTva
         /// </summary>
         [JsonPropertyName("montant_tva")]
-        public MontantTva1 MontantTva { get; set; }
+        public MontantTva MontantTva { get; set; }
 
         /// <summary>
         /// Gets or Sets MontantTtcTotal
         /// </summary>
         [JsonPropertyName("montant_ttc_total")]
-        public MontantTtcTotal1 MontantTtcTotal { get; set; }
+        public MontantTtcTotal MontantTtcTotal { get; set; }
 
         /// <summary>
         /// Used to track the state of Credentials
@@ -290,9 +290,9 @@ namespace FactPulse.SDK.Model
             Option<string?> numeroFacture = default;
             Option<string?> dateFacture = default;
             Option<int?> idStructureCpp = default;
-            Option<MontantHtTotal1?> montantHtTotal = default;
-            Option<MontantTva1?> montantTva = default;
-            Option<MontantTtcTotal1?> montantTtcTotal = default;
+            Option<MontantHtTotal?> montantHtTotal = default;
+            Option<MontantTva?> montantTva = default;
+            Option<MontantTtcTotal?> montantTtcTotal = default;
             Option<ChorusProCredentials?> credentials = default;
             Option<string?> dateEcheancePaiement = default;
             Option<string?> codeService = default;
@@ -328,13 +328,13 @@ namespace FactPulse.SDK.Model
                             idStructureCpp = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "montant_ht_total":
-                            montantHtTotal = new Option<MontantHtTotal1?>(JsonSerializer.Deserialize<MontantHtTotal1>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            montantHtTotal = new Option<MontantHtTotal?>(JsonSerializer.Deserialize<MontantHtTotal>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "montant_tva":
-                            montantTva = new Option<MontantTva1?>(JsonSerializer.Deserialize<MontantTva1>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            montantTva = new Option<MontantTva?>(JsonSerializer.Deserialize<MontantTva>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "montant_ttc_total":
-                            montantTtcTotal = new Option<MontantTtcTotal1?>(JsonSerializer.Deserialize<MontantTtcTotal1>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            montantTtcTotal = new Option<MontantTtcTotal?>(JsonSerializer.Deserialize<MontantTtcTotal>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "credentials":
                             credentials = new Option<ChorusProCredentials?>(JsonSerializer.Deserialize<ChorusProCredentials>(ref utf8JsonReader, jsonSerializerOptions));
