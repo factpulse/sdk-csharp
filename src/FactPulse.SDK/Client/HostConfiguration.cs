@@ -43,6 +43,7 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new DateTimeNullableJsonConverter());
             _jsonOptions.Converters.Add(new DateOnlyJsonConverter());
             _jsonOptions.Converters.Add(new DateOnlyNullableJsonConverter());
+            _jsonOptions.Converters.Add(new APIErrorJsonConverter());
             _jsonOptions.Converters.Add(new AdresseElectroniqueJsonConverter());
             _jsonOptions.Converters.Add(new AdressePostaleJsonConverter());
             _jsonOptions.Converters.Add(new BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPostJsonConverter());
@@ -76,6 +77,10 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new DestinationAFNORJsonConverter());
             _jsonOptions.Converters.Add(new DestinationChorusProJsonConverter());
             _jsonOptions.Converters.Add(new DonneesFactureSimplifieesJsonConverter());
+            _jsonOptions.Converters.Add(new ErrorLevelJsonConverter());
+            _jsonOptions.Converters.Add(new ErrorLevelNullableJsonConverter());
+            _jsonOptions.Converters.Add(new ErrorSourceJsonConverter());
+            _jsonOptions.Converters.Add(new ErrorSourceNullableJsonConverter());
             _jsonOptions.Converters.Add(new FactureEnrichieInfoJsonConverter());
             _jsonOptions.Converters.Add(new FactureFacturXJsonConverter());
             _jsonOptions.Converters.Add(new FormatSortieJsonConverter());
@@ -149,6 +154,7 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new UniteNullableJsonConverter());
             _jsonOptions.Converters.Add(new UtilisateurJsonConverter());
             _jsonOptions.Converters.Add(new ValidationErrorJsonConverter());
+            _jsonOptions.Converters.Add(new ValidationErrorDetailJsonConverter());
             _jsonOptions.Converters.Add(new ValidationErrorLocInnerJsonConverter());
             JsonSerializerOptionsProvider jsonSerializerOptionsProvider = new(_jsonOptions);
             _services.AddSingleton(jsonSerializerOptionsProvider);

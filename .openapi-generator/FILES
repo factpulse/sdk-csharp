@@ -11,6 +11,7 @@ docs/apis/ChorusProApi.md
 docs/apis/SantApi.md
 docs/apis/TraitementFactureApi.md
 docs/apis/UtilisateurApi.md
+docs/models/APIError.md
 docs/models/AdresseElectronique.md
 docs/models/AdressePostale.md
 docs/models/BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost.md
@@ -41,6 +42,8 @@ docs/models/Destination.md
 docs/models/DestinationAFNOR.md
 docs/models/DestinationChorusPro.md
 docs/models/DonneesFactureSimplifiees.md
+docs/models/ErrorLevel.md
+docs/models/ErrorSource.md
 docs/models/FactureEnrichieInfo.md
 docs/models/FactureFacturX.md
 docs/models/FormatSortie.md
@@ -105,6 +108,7 @@ docs/models/TypeTVA.md
 docs/models/Unite.md
 docs/models/Utilisateur.md
 docs/models/ValidationError.md
+docs/models/ValidationErrorDetail.md
 docs/models/ValidationErrorLocInner.md
 docs/scripts/git_push.ps1
 docs/scripts/git_push.sh
@@ -118,6 +122,7 @@ src/FactPulse.SDK.Test/Api/SantApiTests.cs
 src/FactPulse.SDK.Test/Api/TraitementFactureApiTests.cs
 src/FactPulse.SDK.Test/Api/UtilisateurApiTests.cs
 src/FactPulse.SDK.Test/FactPulse.SDK.Test.csproj
+src/FactPulse.SDK.Test/Model/APIErrorTests.cs
 src/FactPulse.SDK.Test/Model/AdresseElectroniqueTests.cs
 src/FactPulse.SDK.Test/Model/AdressePostaleTests.cs
 src/FactPulse.SDK.Test/Model/BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPostTests.cs
@@ -148,6 +153,8 @@ src/FactPulse.SDK.Test/Model/DestinationAFNORTests.cs
 src/FactPulse.SDK.Test/Model/DestinationChorusProTests.cs
 src/FactPulse.SDK.Test/Model/DestinationTests.cs
 src/FactPulse.SDK.Test/Model/DonneesFactureSimplifieesTests.cs
+src/FactPulse.SDK.Test/Model/ErrorLevelTests.cs
+src/FactPulse.SDK.Test/Model/ErrorSourceTests.cs
 src/FactPulse.SDK.Test/Model/FactureEnrichieInfoTests.cs
 src/FactPulse.SDK.Test/Model/FactureFacturXTests.cs
 src/FactPulse.SDK.Test/Model/FormatSortieTests.cs
@@ -211,6 +218,7 @@ src/FactPulse.SDK.Test/Model/TypeFactureTests.cs
 src/FactPulse.SDK.Test/Model/TypeTVATests.cs
 src/FactPulse.SDK.Test/Model/UniteTests.cs
 src/FactPulse.SDK.Test/Model/UtilisateurTests.cs
+src/FactPulse.SDK.Test/Model/ValidationErrorDetailTests.cs
 src/FactPulse.SDK.Test/Model/ValidationErrorLocInnerTests.cs
 src/FactPulse.SDK.Test/Model/ValidationErrorTests.cs
 src/FactPulse.SDK.Test/README.md
@@ -245,6 +253,7 @@ src/FactPulse.SDK/Extensions/IHostBuilderExtensions.cs
 src/FactPulse.SDK/Extensions/IHttpClientBuilderExtensions.cs
 src/FactPulse.SDK/Extensions/IServiceCollectionExtensions.cs
 src/FactPulse.SDK/FactPulse.SDK.csproj
+src/FactPulse.SDK/Model/APIError.cs
 src/FactPulse.SDK/Model/AdresseElectronique.cs
 src/FactPulse.SDK/Model/AdressePostale.cs
 src/FactPulse.SDK/Model/BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost.cs
@@ -275,6 +284,8 @@ src/FactPulse.SDK/Model/Destination.cs
 src/FactPulse.SDK/Model/DestinationAFNOR.cs
 src/FactPulse.SDK/Model/DestinationChorusPro.cs
 src/FactPulse.SDK/Model/DonneesFactureSimplifiees.cs
+src/FactPulse.SDK/Model/ErrorLevel.cs
+src/FactPulse.SDK/Model/ErrorSource.cs
 src/FactPulse.SDK/Model/FactureEnrichieInfo.cs
 src/FactPulse.SDK/Model/FactureFacturX.cs
 src/FactPulse.SDK/Model/FormatSortie.cs
@@ -339,5 +350,6 @@ src/FactPulse.SDK/Model/TypeTVA.cs
 src/FactPulse.SDK/Model/Unite.cs
 src/FactPulse.SDK/Model/Utilisateur.cs
 src/FactPulse.SDK/Model/ValidationError.cs
+src/FactPulse.SDK/Model/ValidationErrorDetail.cs
 src/FactPulse.SDK/Model/ValidationErrorLocInner.cs
 src/FactPulse.SDK/README.md

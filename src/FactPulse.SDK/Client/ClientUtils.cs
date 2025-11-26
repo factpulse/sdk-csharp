@@ -125,6 +125,10 @@ namespace FactPulse.SDK.Client
                 return DestinationAFNOR.FlowSyntaxEnumToJsonValue(destinationAFNORFlowSyntaxEnum);
             if (obj is DestinationChorusPro.TypeEnum destinationChorusProTypeEnum)
                 return DestinationChorusPro.TypeEnumToJsonValue(destinationChorusProTypeEnum);
+            if (obj is ErrorLevel errorLevel)
+                return ErrorLevelValueConverter.ToJsonValue(errorLevel);
+            if (obj is ErrorSource errorSource)
+                return ErrorSourceValueConverter.ToJsonValue(errorSource);
             if (obj is FormatSortie formatSortie)
                 return FormatSortieValueConverter.ToJsonValue(formatSortie);
             if (obj is ModeDepot modeDepot)
