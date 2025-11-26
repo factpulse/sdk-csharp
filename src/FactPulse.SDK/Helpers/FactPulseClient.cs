@@ -50,18 +50,23 @@ namespace FactPulse.SDK.Helpers {
         }
 
         public static Dictionary<string, object> LigneDePoste(int numero, string denomination, object quantite,
-            object montantUnitaireHt, object montantLigneHt, string tauxTva = "20.00", string unite = "C62",
-            object? montantTvaLigne = null, object? montantRemiseHt = null, string? codeRaisonRemise = null,
-            string? motifRemise = null, string? description = null) {
+            object montantUnitaireHt, object montantLigneHt, string tauxTva = "20.00", string categorieTva = "S", string unite = "C62",
+            string? reference = null, object? montantTvaLigne = null, object? montantRemiseHt = null,
+            string? codeRaisonReduction = null, string? raisonReduction = null, string? motifExoneration = null,
+            string? dateDebutPeriode = null, string? dateFinPeriode = null, string? description = null) {
             var result = new Dictionary<string, object> {
                 ["numero"] = numero, ["denomination"] = denomination, ["quantite"] = Montant(quantite),
                 ["montantUnitaireHt"] = Montant(montantUnitaireHt), ["montantTotalLigneHt"] = Montant(montantLigneHt),
-                ["tauxTva"] = Montant(tauxTva), ["unite"] = unite
+                ["tauxTva"] = Montant(tauxTva), ["categorieTva"] = categorieTva, ["unite"] = unite
             };
+            if (reference != null) result["reference"] = reference;
             if (montantTvaLigne != null) result["montantTvaLigne"] = Montant(montantTvaLigne);
             if (montantRemiseHt != null) result["montantRemiseHt"] = Montant(montantRemiseHt);
-            if (codeRaisonRemise != null) result["codeRaisonReduction"] = codeRaisonRemise;
-            if (motifRemise != null) result["motifRemise"] = motifRemise;
+            if (codeRaisonReduction != null) result["codeRaisonReduction"] = codeRaisonReduction;
+            if (raisonReduction != null) result["raisonReduction"] = raisonReduction;
+            if (motifExoneration != null) result["motifExoneration"] = motifExoneration;
+            if (dateDebutPeriode != null) result["dateDebutPeriode"] = dateDebutPeriode;
+            if (dateFinPeriode != null) result["dateFinPeriode"] = dateFinPeriode;
             if (description != null) result["description"] = description;
             return result;
         }
