@@ -57,7 +57,7 @@ namespace FactPulse.SDK.Helpers {
             var result = new Dictionary<string, object> {
                 ["numero"] = numero, ["denomination"] = denomination, ["quantite"] = Montant(quantite),
                 ["montantUnitaireHt"] = Montant(montantUnitaireHt), ["montantTotalLigneHt"] = Montant(montantLigneHt),
-                ["tauxTva"] = Montant(tauxTva), ["categorieTva"] = categorieTva, ["unite"] = unite
+                ["tauxTvaManuel"] = Montant(tauxTva), ["categorieTva"] = categorieTva, ["unite"] = unite
             };
             if (reference != null) result["reference"] = reference;
             if (montantTvaLigne != null) result["montantTvaLigne"] = Montant(montantTvaLigne);
@@ -74,7 +74,7 @@ namespace FactPulse.SDK.Helpers {
         public static Dictionary<string, object> LigneDeTva(object taux, object baseHt, object montantTva,
             string categorie = "S", string? motifExoneration = null) {
             var result = new Dictionary<string, object> {
-                ["tauxTva"] = Montant(taux), ["montantBaseHt"] = Montant(baseHt),
+                ["tauxTvaManuel"] = Montant(taux), ["montantBaseHt"] = Montant(baseHt),
                 ["montantTva"] = Montant(montantTva), ["categorieTva"] = categorie
             };
             if (motifExoneration != null) result["motifExoneration"] = motifExoneration;
