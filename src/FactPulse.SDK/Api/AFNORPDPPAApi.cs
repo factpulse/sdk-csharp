@@ -35,6 +35,27 @@ namespace FactPulse.SDK.Api
         AFNORPDPPAApiEvents Events { get; }
 
         /// <summary>
+        /// Récupérer les credentials AFNOR stockés
+        /// </summary>
+        /// <remarks>
+        /// Récupère les credentials AFNOR/PDP stockés pour le client_uid du JWT. Cet endpoint est utilisé par le SDK en mode &#39;stored&#39; pour récupérer les credentials avant de faire l&#39;OAuth AFNOR lui-même.
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse"/>&gt;</returns>
+        Task<IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse> GetAfnorCredentialsApiV1AfnorCredentialsGetAsync(System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Récupérer les credentials AFNOR stockés
+        /// </summary>
+        /// <remarks>
+        /// Récupère les credentials AFNOR/PDP stockés pour le client_uid du JWT. Cet endpoint est utilisé par le SDK en mode &#39;stored&#39; pour récupérer les credentials avant de faire l&#39;OAuth AFNOR lui-même.
+        /// </remarks>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse"/>?&gt;</returns>
+        Task<IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse?> GetAfnorCredentialsApiV1AfnorCredentialsGetOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Endpoint OAuth2 pour authentification AFNOR
         /// </summary>
         /// <remarks>
@@ -54,6 +75,36 @@ namespace FactPulse.SDK.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IOauthTokenProxyApiV1AfnorOauthTokenPostApiResponse"/>?&gt;</returns>
         Task<IOauthTokenProxyApiV1AfnorOauthTokenPostApiResponse?> OauthTokenProxyApiV1AfnorOauthTokenPostOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default);
+    }
+
+    /// <summary>
+    /// The <see cref="IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse"/>
+    /// </summary>
+    public interface IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<Object?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 400 BadRequest
+        /// </summary>
+        /// <returns></returns>
+        bool IsBadRequest { get; }
+
+        /// <summary>
+        /// Returns true if the response is 401 Unauthorized
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnauthorized { get; }
+
+        /// <summary>
+        /// Returns true if the response is 404 NotFound
+        /// </summary>
+        /// <returns></returns>
+        bool IsNotFound { get; }
     }
 
     /// <summary>
@@ -79,6 +130,26 @@ namespace FactPulse.SDK.Api
     /// </summary>
     public class AFNORPDPPAApiEvents
     {
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
+        public event EventHandler<ApiResponseEventArgs>? OnGetAfnorCredentialsApiV1AfnorCredentialsGet;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs>? OnErrorGetAfnorCredentialsApiV1AfnorCredentialsGet;
+
+        internal void ExecuteOnGetAfnorCredentialsApiV1AfnorCredentialsGet(AFNORPDPPAApi.GetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse apiResponse)
+        {
+            OnGetAfnorCredentialsApiV1AfnorCredentialsGet?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorGetAfnorCredentialsApiV1AfnorCredentialsGet(Exception exception)
+        {
+            OnErrorGetAfnorCredentialsApiV1AfnorCredentialsGet?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
         /// <summary>
         /// The event raised after the server response
         /// </summary>
@@ -145,6 +216,253 @@ namespace FactPulse.SDK.Api
             HttpClient = httpClient;
             Events = aFNORPDPPAApiEvents;
             BearerTokenProvider = bearerTokenProvider;
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        private void AfterGetAfnorCredentialsApiV1AfnorCredentialsGetDefaultImplementation(IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse apiResponseLocalVar)
+        {
+            bool suppressDefaultLog = false;
+            AfterGetAfnorCredentialsApiV1AfnorCredentialsGet(ref suppressDefaultLog, apiResponseLocalVar);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        partial void AfterGetAfnorCredentialsApiV1AfnorCredentialsGet(ref bool suppressDefaultLog, IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse apiResponseLocalVar);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        private void OnErrorGetAfnorCredentialsApiV1AfnorCredentialsGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar)
+        {
+            bool suppressDefaultLogLocalVar = false;
+            OnErrorGetAfnorCredentialsApiV1AfnorCredentialsGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar);
+            if (!suppressDefaultLogLocalVar)
+                Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLogLocalVar"></param>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        partial void OnErrorGetAfnorCredentialsApiV1AfnorCredentialsGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar);
+
+        /// <summary>
+        /// Récupérer les credentials AFNOR stockés Récupère les credentials AFNOR/PDP stockés pour le client_uid du JWT. Cet endpoint est utilisé par le SDK en mode &#39;stored&#39; pour récupérer les credentials avant de faire l&#39;OAuth AFNOR lui-même.
+        /// </summary>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse"/>&gt;</returns>
+        public async Task<IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse?> GetAfnorCredentialsApiV1AfnorCredentialsGetOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await GetAfnorCredentialsApiV1AfnorCredentialsGetAsync(cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Récupérer les credentials AFNOR stockés Récupère les credentials AFNOR/PDP stockés pour le client_uid du JWT. Cet endpoint est utilisé par le SDK en mode &#39;stored&#39; pour récupérer les credentials avant de faire l&#39;OAuth AFNOR lui-même.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse"/>&gt;</returns>
+        public async Task<IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse> GetAfnorCredentialsApiV1AfnorCredentialsGetAsync(System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
+                        ? "/api/v1/afnor/credentials"
+                        : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/credentials");
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+
+                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+
+                    if (acceptLocalVar != null)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Get;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        ILogger<GetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<GetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse>();
+                        GetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse apiResponseLocalVar;
+
+                        switch ((int)httpResponseMessageLocalVar.StatusCode) {
+                            default: {
+                                string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+                                apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/api/v1/afnor/credentials", requestedAtLocalVar, _jsonSerializerOptions);
+
+                                break;
+                            }
+                        }
+
+                        AfterGetAfnorCredentialsApiV1AfnorCredentialsGetDefaultImplementation(apiResponseLocalVar);
+
+                        Events.ExecuteOnGetAfnorCredentialsApiV1AfnorCredentialsGet(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorGetAfnorCredentialsApiV1AfnorCredentialsGetDefaultImplementation(e, "/api/v1/afnor/credentials", uriBuilderLocalVar.Path);
+                Events.ExecuteOnErrorGetAfnorCredentialsApiV1AfnorCredentialsGet(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="GetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse"/>
+        /// </summary>
+        public partial class GetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse : FactPulse.SDK.Client.ApiResponse, IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<GetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="GetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public GetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse(ILogger<GetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            /// <summary>
+            /// The <see cref="GetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="contentStream"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public GetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse(ILogger<GetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public Object? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<Object>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out Object? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 400 BadRequest
+            /// </summary>
+            /// <returns></returns>
+            public bool IsBadRequest => 400 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 401 Unauthorized
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnauthorized => 401 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 404 NotFound
+            /// </summary>
+            /// <returns></returns>
+            public bool IsNotFound => 404 == (int)StatusCode;
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
         /// <summary>

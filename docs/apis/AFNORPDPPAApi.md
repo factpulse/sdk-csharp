@@ -4,7 +4,43 @@ All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
+| [**GetAfnorCredentialsApiV1AfnorCredentialsGet**](AFNORPDPPAApi.md#getafnorcredentialsapiv1afnorcredentialsget) | **GET** /api/v1/afnor/credentials | Récupérer les credentials AFNOR stockés |
 | [**OauthTokenProxyApiV1AfnorOauthTokenPost**](AFNORPDPPAApi.md#oauthtokenproxyapiv1afnoroauthtokenpost) | **POST** /api/v1/afnor/oauth/token | Endpoint OAuth2 pour authentification AFNOR |
+
+<a id="getafnorcredentialsapiv1afnorcredentialsget"></a>
+# **GetAfnorCredentialsApiV1AfnorCredentialsGet**
+> Object GetAfnorCredentialsApiV1AfnorCredentialsGet ()
+
+Récupérer les credentials AFNOR stockés
+
+Récupère les credentials AFNOR/PDP stockés pour le client_uid du JWT. Cet endpoint est utilisé par le SDK en mode 'stored' pour récupérer les credentials avant de faire l'OAuth AFNOR lui-même.
+
+
+### Parameters
+This endpoint does not need any parameter.
+### Return type
+
+**Object**
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Credentials AFNOR récupérés avec succès |  -  |
+| **400** | Aucun client_uid dans le JWT |  -  |
+| **401** | Non authentifié - Token JWT manquant ou invalide |  -  |
+| **404** | Client non trouvé ou pas de credentials AFNOR configurés |  -  |
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
 <a id="oauthtokenproxyapiv1afnoroauthtokenpost"></a>
 # **OauthTokenProxyApiV1AfnorOauthTokenPost**

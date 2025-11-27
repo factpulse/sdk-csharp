@@ -50,6 +50,17 @@ namespace FactPulse.SDK.Test.Api
         }
 
         /// <summary>
+        /// Test GetAfnorCredentialsApiV1AfnorCredentialsGet
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task GetAfnorCredentialsApiV1AfnorCredentialsGetAsyncTest()
+        {
+            var response = await _instance.GetAfnorCredentialsApiV1AfnorCredentialsGetAsync();
+            var model = response.Ok();
+            Assert.IsType<Object>(model);
+        }
+
+        /// <summary>
         /// Test OauthTokenProxyApiV1AfnorOauthTokenPost
         /// </summary>
         [Fact (Skip = "not implemented")]
