@@ -23,7 +23,7 @@ All URIs are relative to *http://localhost*
 
 <a id="ajouterfichierapiv1chorusprotransversesajouterfichierpost"></a>
 # **AjouterFichierApiV1ChorusProTransversesAjouterFichierPost**
-> Object AjouterFichierApiV1ChorusProTransversesAjouterFichierPost (BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost)
+> Object AjouterFichierApiV1ChorusProTransversesAjouterFichierPost (Dictionary<string, Object> requestBody)
 
 Ajouter une pièce jointe
 
@@ -34,7 +34,7 @@ Ajoute une pièce jointe au compte utilisateur courant.      **Taille max** : 10
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost** | [**BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost**](BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost.md) |  |  |
+| **requestBody** | [**Dictionary&lt;string, Object&gt;**](Object.md) |  |  |
 
 ### Return type
 
@@ -60,7 +60,7 @@ Ajoute une pièce jointe au compte utilisateur courant.      **Taille max** : 10
 
 <a id="completerfactureapiv1chorusprofacturescompleterpost"></a>
 # **CompleterFactureApiV1ChorusProFacturesCompleterPost**
-> Object CompleterFactureApiV1ChorusProFacturesCompleterPost (BodyCompleterFactureApiV1ChorusProFacturesCompleterPost bodyCompleterFactureApiV1ChorusProFacturesCompleterPost)
+> Object CompleterFactureApiV1ChorusProFacturesCompleterPost (Dictionary<string, Object> requestBody)
 
 Compléter une facture suspendue (Fournisseur)
 
@@ -71,7 +71,7 @@ Complète une facture au statut SUSPENDUE en ajoutant des pièces jointes ou un 
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **bodyCompleterFactureApiV1ChorusProFacturesCompleterPost** | [**BodyCompleterFactureApiV1ChorusProFacturesCompleterPost**](BodyCompleterFactureApiV1ChorusProFacturesCompleterPost.md) |  |  |
+| **requestBody** | [**Dictionary&lt;string, Object&gt;**](Object.md) |  |  |
 
 ### Return type
 
@@ -171,7 +171,7 @@ Récupère les informations détaillées d'une structure Chorus Pro.       **Ret
 
 <a id="listerservicesstructureapiv1chorusprostructuresidstructurecppservicesget"></a>
 # **ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet**
-> RechercherServicesResponse ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet (int idStructureCpp, BodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet)
+> RechercherServicesResponse ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet (int idStructureCpp)
 
 Lister les services d'une structure
 
@@ -183,7 +183,6 @@ Récupère la liste des services actifs d'une structure publique.      **Cas d'u
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **idStructureCpp** | **int** |  |  |
-| **bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet** | [**BodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet**](BodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet.md) |  |  |
 
 ### Return type
 
@@ -195,7 +194,7 @@ Récupère la liste des services actifs d'une structure publique.      **Cas d'u
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
+ - **Content-Type**: Not defined
  - **Accept**: application/json
 
 
@@ -246,7 +245,7 @@ Utilitaire : Obtenir l'ID Chorus Pro depuis un SIRET
 
 <a id="rechercherfacturesdestinataireapiv1chorusprofacturesrechercherdestinatairepost"></a>
 # **RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost**
-> Object RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost (BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost)
+> Object RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost (Dictionary<string, Object> requestBody)
 
 Rechercher factures reçues (Destinataire)
 
@@ -257,7 +256,7 @@ Recherche les factures reçues par le destinataire connecté.      **Filtres** :
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost** | [**BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost**](BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost.md) |  |  |
+| **requestBody** | [**Dictionary&lt;string, Object&gt;**](Object.md) |  |  |
 
 ### Return type
 
@@ -283,7 +282,7 @@ Recherche les factures reçues par le destinataire connecté.      **Filtres** :
 
 <a id="rechercherfacturesfournisseurapiv1chorusprofacturesrechercherfournisseurpost"></a>
 # **RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost**
-> Object RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost (BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost)
+> Object RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost (Dictionary<string, Object> requestBody)
 
 Rechercher factures émises (Fournisseur)
 
@@ -294,7 +293,7 @@ Recherche les factures émises par le fournisseur connecté.      **Filtres disp
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost** | [**BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost**](BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost.md) |  |  |
+| **requestBody** | [**Dictionary&lt;string, Object&gt;**](Object.md) |  |  |
 
 ### Return type
 
@@ -357,7 +356,7 @@ Recherche des structures (entreprises, administrations) enregistrées sur Chorus
 
 <a id="recyclerfactureapiv1chorusprofacturesrecyclerpost"></a>
 # **RecyclerFactureApiV1ChorusProFacturesRecyclerPost**
-> Object RecyclerFactureApiV1ChorusProFacturesRecyclerPost (BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost)
+> Object RecyclerFactureApiV1ChorusProFacturesRecyclerPost (Dictionary<string, Object> requestBody)
 
 Recycler une facture (Fournisseur)
 
@@ -368,7 +367,7 @@ Recycle une facture au statut A_RECYCLER en modifiant les données d'acheminemen
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost** | [**BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost**](BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost.md) |  |  |
+| **requestBody** | [**Dictionary&lt;string, Object&gt;**](Object.md) |  |  |
 
 ### Return type
 
@@ -431,7 +430,7 @@ Soumet une facture électronique à une structure publique via Chorus Pro.      
 
 <a id="telechargergroupefacturesapiv1chorusprofacturestelechargergroupepost"></a>
 # **TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost**
-> Object TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost (BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost)
+> Object TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost (Dictionary<string, Object> requestBody)
 
 Télécharger un groupe de factures
 
@@ -442,7 +441,7 @@ Télécharge une ou plusieurs factures (max 10 recommandé) avec leurs pièces j
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost** | [**BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost**](BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost.md) |  |  |
+| **requestBody** | [**Dictionary&lt;string, Object&gt;**](Object.md) |  |  |
 
 ### Return type
 
@@ -468,7 +467,7 @@ Télécharge une ou plusieurs factures (max 10 recommandé) avec leurs pièces j
 
 <a id="traiterfacturerecueapiv1chorusprofacturestraiterfacturerecuepost"></a>
 # **TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost**
-> Object TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost (BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost)
+> Object TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost (Dictionary<string, Object> requestBody)
 
 Traiter une facture reçue (Destinataire)
 
@@ -479,7 +478,7 @@ Change le statut d'une facture reçue.      **Statuts possibles** :     - MISE_A
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost** | [**BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost**](BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost.md) |  |  |
+| **requestBody** | [**Dictionary&lt;string, Object&gt;**](Object.md) |  |  |
 
 ### Return type
 
@@ -505,18 +504,16 @@ Change le statut d'une facture reçue.      **Statuts possibles** :     - MISE_A
 
 <a id="valideurconsulterfactureapiv1chorusprofacturesvalideurconsulterpost"></a>
 # **ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost**
-> Object ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost (BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost)
+> Object ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost (Dictionary<string, Object> requestBody)
 
 Consulter une facture (Valideur)
-
-Consulte facture (valideur).
 
 
 ### Parameters
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost** | [**BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost**](BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost.md) |  |  |
+| **requestBody** | [**Dictionary&lt;string, Object&gt;**](Object.md) |  |  |
 
 ### Return type
 
@@ -542,7 +539,7 @@ Consulte facture (valideur).
 
 <a id="valideurrechercherfacturesapiv1chorusprofacturesvalideurrechercherpost"></a>
 # **ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost**
-> Object ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost (BodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost)
+> Object ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost (Dictionary<string, Object> requestBody)
 
 Rechercher factures à valider (Valideur)
 
@@ -553,7 +550,7 @@ Recherche les factures en attente de validation par le valideur connecté.      
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost** | [**BodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost**](BodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost.md) |  |  |
+| **requestBody** | [**Dictionary&lt;string, Object&gt;**](Object.md) |  |  |
 
 ### Return type
 
@@ -579,7 +576,7 @@ Recherche les factures en attente de validation par le valideur connecté.      
 
 <a id="valideurtraiterfactureapiv1chorusprofacturesvalideurtraiterpost"></a>
 # **ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost**
-> Object ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost (BodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost)
+> Object ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost (Dictionary<string, Object> requestBody)
 
 Valider ou refuser une facture (Valideur)
 
@@ -590,7 +587,7 @@ Valide ou refuse une facture en attente de validation.      **Actions** :     - 
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost** | [**BodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost**](BodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost.md) |  |  |
+| **requestBody** | [**Dictionary&lt;string, Object&gt;**](Object.md) |  |  |
 
 ### Return type
 

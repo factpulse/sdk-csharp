@@ -42,10 +42,10 @@ namespace FactPulse.SDK.Api
         /// Ajoute une pièce jointe au compte utilisateur courant.      **Taille max** : 10 Mo par fichier      **Payload exemple** :     &#x60;&#x60;&#x60;json     {       \&quot;pieceJointeFichier\&quot;: \&quot;JVBERi0xLjQKJeLjz9MKNSAwIG9iago8P...\&quot;,       \&quot;pieceJointeNom\&quot;: \&quot;bon_commande.pdf\&quot;,       \&quot;pieceJointeTypeMime\&quot;: \&quot;application/pdf\&quot;,       \&quot;pieceJointeExtension\&quot;: \&quot;PDF\&quot;     }     &#x60;&#x60;&#x60;      **Retour** : L&#39;ID de la pièce jointe (&#x60;pieceJointeIdFichier&#x60;) à utiliser ensuite dans &#x60;/factures/completer&#x60;.      **Extensions acceptées** : PDF, JPG, PNG, ZIP, XML, etc.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IAjouterFichierApiV1ChorusProTransversesAjouterFichierPostApiResponse"/>&gt;</returns>
-        Task<IAjouterFichierApiV1ChorusProTransversesAjouterFichierPostApiResponse> AjouterFichierApiV1ChorusProTransversesAjouterFichierPostAsync(BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost, System.Threading.CancellationToken cancellationToken = default);
+        Task<IAjouterFichierApiV1ChorusProTransversesAjouterFichierPostApiResponse> AjouterFichierApiV1ChorusProTransversesAjouterFichierPostAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Ajouter une pièce jointe
@@ -53,10 +53,10 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Ajoute une pièce jointe au compte utilisateur courant.      **Taille max** : 10 Mo par fichier      **Payload exemple** :     &#x60;&#x60;&#x60;json     {       \&quot;pieceJointeFichier\&quot;: \&quot;JVBERi0xLjQKJeLjz9MKNSAwIG9iago8P...\&quot;,       \&quot;pieceJointeNom\&quot;: \&quot;bon_commande.pdf\&quot;,       \&quot;pieceJointeTypeMime\&quot;: \&quot;application/pdf\&quot;,       \&quot;pieceJointeExtension\&quot;: \&quot;PDF\&quot;     }     &#x60;&#x60;&#x60;      **Retour** : L&#39;ID de la pièce jointe (&#x60;pieceJointeIdFichier&#x60;) à utiliser ensuite dans &#x60;/factures/completer&#x60;.      **Extensions acceptées** : PDF, JPG, PNG, ZIP, XML, etc.
         /// </remarks>
-        /// <param name="bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IAjouterFichierApiV1ChorusProTransversesAjouterFichierPostApiResponse"/>?&gt;</returns>
-        Task<IAjouterFichierApiV1ChorusProTransversesAjouterFichierPostApiResponse?> AjouterFichierApiV1ChorusProTransversesAjouterFichierPostOrDefaultAsync(BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost, System.Threading.CancellationToken cancellationToken = default);
+        Task<IAjouterFichierApiV1ChorusProTransversesAjouterFichierPostApiResponse?> AjouterFichierApiV1ChorusProTransversesAjouterFichierPostOrDefaultAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Compléter une facture suspendue (Fournisseur)
@@ -65,10 +65,10 @@ namespace FactPulse.SDK.Api
         /// Complète une facture au statut SUSPENDUE en ajoutant des pièces jointes ou un commentaire.      **Statut requis** : SUSPENDUE      **Actions possibles** :     - Ajouter des pièces jointes (justificatifs, bons de commande, etc.)     - Modifier le commentaire      **Payload exemple** :     &#x60;&#x60;&#x60;json     {       \&quot;identifiantFactureCPP\&quot;: 12345,       \&quot;commentaire\&quot;: \&quot;Voici les justificatifs demandés\&quot;,       \&quot;listePiecesJointes\&quot;: [         {           \&quot;pieceJointeIdFichier\&quot;: 98765,           \&quot;pieceJointeNom\&quot;: \&quot;bon_commande.pdf\&quot;         }       ]     }     &#x60;&#x60;&#x60;      **Note** : Les pièces jointes doivent d&#39;abord être uploadées via &#x60;/transverses/ajouter-fichier&#x60;.      **Après complétion** : La facture repasse au statut MISE_A_DISPOSITION.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bodyCompleterFactureApiV1ChorusProFacturesCompleterPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICompleterFactureApiV1ChorusProFacturesCompleterPostApiResponse"/>&gt;</returns>
-        Task<ICompleterFactureApiV1ChorusProFacturesCompleterPostApiResponse> CompleterFactureApiV1ChorusProFacturesCompleterPostAsync(BodyCompleterFactureApiV1ChorusProFacturesCompleterPost bodyCompleterFactureApiV1ChorusProFacturesCompleterPost, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICompleterFactureApiV1ChorusProFacturesCompleterPostApiResponse> CompleterFactureApiV1ChorusProFacturesCompleterPostAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Compléter une facture suspendue (Fournisseur)
@@ -76,10 +76,10 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Complète une facture au statut SUSPENDUE en ajoutant des pièces jointes ou un commentaire.      **Statut requis** : SUSPENDUE      **Actions possibles** :     - Ajouter des pièces jointes (justificatifs, bons de commande, etc.)     - Modifier le commentaire      **Payload exemple** :     &#x60;&#x60;&#x60;json     {       \&quot;identifiantFactureCPP\&quot;: 12345,       \&quot;commentaire\&quot;: \&quot;Voici les justificatifs demandés\&quot;,       \&quot;listePiecesJointes\&quot;: [         {           \&quot;pieceJointeIdFichier\&quot;: 98765,           \&quot;pieceJointeNom\&quot;: \&quot;bon_commande.pdf\&quot;         }       ]     }     &#x60;&#x60;&#x60;      **Note** : Les pièces jointes doivent d&#39;abord être uploadées via &#x60;/transverses/ajouter-fichier&#x60;.      **Après complétion** : La facture repasse au statut MISE_A_DISPOSITION.
         /// </remarks>
-        /// <param name="bodyCompleterFactureApiV1ChorusProFacturesCompleterPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICompleterFactureApiV1ChorusProFacturesCompleterPostApiResponse"/>?&gt;</returns>
-        Task<ICompleterFactureApiV1ChorusProFacturesCompleterPostApiResponse?> CompleterFactureApiV1ChorusProFacturesCompleterPostOrDefaultAsync(BodyCompleterFactureApiV1ChorusProFacturesCompleterPost bodyCompleterFactureApiV1ChorusProFacturesCompleterPost, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICompleterFactureApiV1ChorusProFacturesCompleterPostApiResponse?> CompleterFactureApiV1ChorusProFacturesCompleterPostOrDefaultAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Consulter le statut d&#39;une facture
@@ -135,10 +135,9 @@ namespace FactPulse.SDK.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idStructureCpp"></param>
-        /// <param name="bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetApiResponse"/>&gt;</returns>
-        Task<IListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetApiResponse> ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetAsync(int idStructureCpp, BodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet, System.Threading.CancellationToken cancellationToken = default);
+        Task<IListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetApiResponse> ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetAsync(int idStructureCpp, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Lister les services d&#39;une structure
@@ -147,10 +146,9 @@ namespace FactPulse.SDK.Api
         /// Récupère la liste des services actifs d&#39;une structure publique.      **Cas d&#39;usage** :     - Lister les services disponibles pour une administration     - Vérifier qu&#39;un code service existe avant de soumettre une facture      **Retour** :     - Liste des services avec leur code, libellé et statut (actif/inactif)
         /// </remarks>
         /// <param name="idStructureCpp"></param>
-        /// <param name="bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetApiResponse"/>?&gt;</returns>
-        Task<IListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetApiResponse?> ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetOrDefaultAsync(int idStructureCpp, BodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet, System.Threading.CancellationToken cancellationToken = default);
+        Task<IListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetApiResponse?> ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetOrDefaultAsync(int idStructureCpp, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Utilitaire : Obtenir l&#39;ID Chorus Pro depuis un SIRET
@@ -182,10 +180,10 @@ namespace FactPulse.SDK.Api
         /// Recherche les factures reçues par le destinataire connecté.      **Filtres** :     - Téléchargée / non téléchargée     - Dates de réception     - Statut (MISE_A_DISPOSITION, SUSPENDUE, etc.)     - Fournisseur      **Indicateur utile** : &#x60;factureTelechargeeParDestinataire&#x60; permet de savoir si la facture a déjà été téléchargée.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostApiResponse"/>&gt;</returns>
-        Task<IRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostApiResponse> RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostAsync(BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost, System.Threading.CancellationToken cancellationToken = default);
+        Task<IRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostApiResponse> RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Rechercher factures reçues (Destinataire)
@@ -193,10 +191,10 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Recherche les factures reçues par le destinataire connecté.      **Filtres** :     - Téléchargée / non téléchargée     - Dates de réception     - Statut (MISE_A_DISPOSITION, SUSPENDUE, etc.)     - Fournisseur      **Indicateur utile** : &#x60;factureTelechargeeParDestinataire&#x60; permet de savoir si la facture a déjà été téléchargée.
         /// </remarks>
-        /// <param name="bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostApiResponse"/>?&gt;</returns>
-        Task<IRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostApiResponse?> RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostOrDefaultAsync(BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost, System.Threading.CancellationToken cancellationToken = default);
+        Task<IRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostApiResponse?> RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostOrDefaultAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Rechercher factures émises (Fournisseur)
@@ -205,10 +203,10 @@ namespace FactPulse.SDK.Api
         /// Recherche les factures émises par le fournisseur connecté.      **Filtres disponibles** :     - Numéro de facture     - Dates (début/fin)     - Statut     - Structure destinataire     - Montant      **Cas d&#39;usage** :     - Suivi des factures émises     - Vérification des statuts     - Export pour comptabilité
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostApiResponse"/>&gt;</returns>
-        Task<IRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostApiResponse> RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostAsync(BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost, System.Threading.CancellationToken cancellationToken = default);
+        Task<IRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostApiResponse> RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Rechercher factures émises (Fournisseur)
@@ -216,10 +214,10 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Recherche les factures émises par le fournisseur connecté.      **Filtres disponibles** :     - Numéro de facture     - Dates (début/fin)     - Statut     - Structure destinataire     - Montant      **Cas d&#39;usage** :     - Suivi des factures émises     - Vérification des statuts     - Export pour comptabilité
         /// </remarks>
-        /// <param name="bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostApiResponse"/>?&gt;</returns>
-        Task<IRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostApiResponse?> RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostOrDefaultAsync(BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost, System.Threading.CancellationToken cancellationToken = default);
+        Task<IRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostApiResponse?> RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostOrDefaultAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Rechercher des structures Chorus Pro
@@ -251,10 +249,10 @@ namespace FactPulse.SDK.Api
         /// Recycle une facture au statut A_RECYCLER en modifiant les données d&#39;acheminement.      **Statut requis** : A_RECYCLER      **Champs modifiables** :     - Destinataire (&#x60;idStructureCPP&#x60;)     - Code service     - Numéro d&#39;engagement      **Cas d&#39;usage** :     - Erreur de destinataire     - Changement de service facturation     - Mise à jour du numéro d&#39;engagement      **Payload exemple** :     &#x60;&#x60;&#x60;json     {       \&quot;identifiantFactureCPP\&quot;: 12345,       \&quot;idStructureCPP\&quot;: 67890,       \&quot;codeService\&quot;: \&quot;SERVICE_01\&quot;,       \&quot;numeroEngagement\&quot;: \&quot;ENG2024001\&quot;     }     &#x60;&#x60;&#x60;      **Note** : La facture conserve son numéro et ses montants, seuls les champs d&#39;acheminement changent.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRecyclerFactureApiV1ChorusProFacturesRecyclerPostApiResponse"/>&gt;</returns>
-        Task<IRecyclerFactureApiV1ChorusProFacturesRecyclerPostApiResponse> RecyclerFactureApiV1ChorusProFacturesRecyclerPostAsync(BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost, System.Threading.CancellationToken cancellationToken = default);
+        Task<IRecyclerFactureApiV1ChorusProFacturesRecyclerPostApiResponse> RecyclerFactureApiV1ChorusProFacturesRecyclerPostAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Recycler une facture (Fournisseur)
@@ -262,10 +260,10 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Recycle une facture au statut A_RECYCLER en modifiant les données d&#39;acheminement.      **Statut requis** : A_RECYCLER      **Champs modifiables** :     - Destinataire (&#x60;idStructureCPP&#x60;)     - Code service     - Numéro d&#39;engagement      **Cas d&#39;usage** :     - Erreur de destinataire     - Changement de service facturation     - Mise à jour du numéro d&#39;engagement      **Payload exemple** :     &#x60;&#x60;&#x60;json     {       \&quot;identifiantFactureCPP\&quot;: 12345,       \&quot;idStructureCPP\&quot;: 67890,       \&quot;codeService\&quot;: \&quot;SERVICE_01\&quot;,       \&quot;numeroEngagement\&quot;: \&quot;ENG2024001\&quot;     }     &#x60;&#x60;&#x60;      **Note** : La facture conserve son numéro et ses montants, seuls les champs d&#39;acheminement changent.
         /// </remarks>
-        /// <param name="bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRecyclerFactureApiV1ChorusProFacturesRecyclerPostApiResponse"/>?&gt;</returns>
-        Task<IRecyclerFactureApiV1ChorusProFacturesRecyclerPostApiResponse?> RecyclerFactureApiV1ChorusProFacturesRecyclerPostOrDefaultAsync(BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost, System.Threading.CancellationToken cancellationToken = default);
+        Task<IRecyclerFactureApiV1ChorusProFacturesRecyclerPostApiResponse?> RecyclerFactureApiV1ChorusProFacturesRecyclerPostOrDefaultAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Soumettre une facture à Chorus Pro
@@ -297,10 +295,10 @@ namespace FactPulse.SDK.Api
         /// Télécharge une ou plusieurs factures (max 10 recommandé) avec leurs pièces jointes.      **Formats disponibles** :     - PDF : Fichier PDF uniquement     - XML : Fichier XML uniquement     - ZIP : Archive contenant PDF + XML + pièces jointes      **Taille maximale** : 120 Mo par téléchargement      **Payload exemple** :     &#x60;&#x60;&#x60;json     {       \&quot;listeIdentifiantsFactureCPP\&quot;: [12345, 12346],       \&quot;inclurePiecesJointes\&quot;: true,       \&quot;formatFichier\&quot;: \&quot;ZIP\&quot;     }     &#x60;&#x60;&#x60;      **Retour** : Le fichier est encodé en base64 dans le champ &#x60;fichierBase64&#x60;.      **Note** : Le flag &#x60;factureTelechargeeParDestinataire&#x60; est mis à jour automatiquement.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostApiResponse"/>&gt;</returns>
-        Task<ITelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostApiResponse> TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostAsync(BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost, System.Threading.CancellationToken cancellationToken = default);
+        Task<ITelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostApiResponse> TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Télécharger un groupe de factures
@@ -308,10 +306,10 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Télécharge une ou plusieurs factures (max 10 recommandé) avec leurs pièces jointes.      **Formats disponibles** :     - PDF : Fichier PDF uniquement     - XML : Fichier XML uniquement     - ZIP : Archive contenant PDF + XML + pièces jointes      **Taille maximale** : 120 Mo par téléchargement      **Payload exemple** :     &#x60;&#x60;&#x60;json     {       \&quot;listeIdentifiantsFactureCPP\&quot;: [12345, 12346],       \&quot;inclurePiecesJointes\&quot;: true,       \&quot;formatFichier\&quot;: \&quot;ZIP\&quot;     }     &#x60;&#x60;&#x60;      **Retour** : Le fichier est encodé en base64 dans le champ &#x60;fichierBase64&#x60;.      **Note** : Le flag &#x60;factureTelechargeeParDestinataire&#x60; est mis à jour automatiquement.
         /// </remarks>
-        /// <param name="bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostApiResponse"/>?&gt;</returns>
-        Task<ITelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostApiResponse?> TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostOrDefaultAsync(BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost, System.Threading.CancellationToken cancellationToken = default);
+        Task<ITelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostApiResponse?> TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostOrDefaultAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Traiter une facture reçue (Destinataire)
@@ -320,10 +318,10 @@ namespace FactPulse.SDK.Api
         /// Change le statut d&#39;une facture reçue.      **Statuts possibles** :     - MISE_A_DISPOSITION : Facture acceptée     - SUSPENDUE : En attente d&#39;informations complémentaires (motif obligatoire)     - REJETEE : Facture refusée (motif obligatoire)     - MANDATEE : Facture mandatée     - MISE_EN_PAIEMENT : Facture en cours de paiement     - COMPTABILISEE : Facture comptabilisée     - MISE_A_DISPOSITION_COMPTABLE : Mise à disposition comptable     - A_RECYCLER : À recycler     - COMPLETEE : Complétée     - SERVICE-FAIT : Service fait     - PRISE_EN_COMPTE_DESTINATAIRE : Prise en compte     - TRANSMISE_MOA : Transmise à la MOA      **Payload exemple** :     &#x60;&#x60;&#x60;json     {       \&quot;identifiantFactureCPP\&quot;: 12345,       \&quot;nouveauStatut\&quot;: \&quot;REJETEE\&quot;,       \&quot;motifRejet\&quot;: \&quot;Facture en double\&quot;,       \&quot;commentaire\&quot;: \&quot;Facture déjà reçue sous la référence ABC123\&quot;     }     &#x60;&#x60;&#x60;      **Règles** :     - Un motif est **obligatoire** pour SUSPENDUE et REJETEE     - Seuls certains statuts sont autorisés selon le statut actuel de la facture
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostApiResponse"/>&gt;</returns>
-        Task<ITraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostApiResponse> TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostAsync(BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost, System.Threading.CancellationToken cancellationToken = default);
+        Task<ITraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostApiResponse> TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Traiter une facture reçue (Destinataire)
@@ -331,33 +329,33 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Change le statut d&#39;une facture reçue.      **Statuts possibles** :     - MISE_A_DISPOSITION : Facture acceptée     - SUSPENDUE : En attente d&#39;informations complémentaires (motif obligatoire)     - REJETEE : Facture refusée (motif obligatoire)     - MANDATEE : Facture mandatée     - MISE_EN_PAIEMENT : Facture en cours de paiement     - COMPTABILISEE : Facture comptabilisée     - MISE_A_DISPOSITION_COMPTABLE : Mise à disposition comptable     - A_RECYCLER : À recycler     - COMPLETEE : Complétée     - SERVICE-FAIT : Service fait     - PRISE_EN_COMPTE_DESTINATAIRE : Prise en compte     - TRANSMISE_MOA : Transmise à la MOA      **Payload exemple** :     &#x60;&#x60;&#x60;json     {       \&quot;identifiantFactureCPP\&quot;: 12345,       \&quot;nouveauStatut\&quot;: \&quot;REJETEE\&quot;,       \&quot;motifRejet\&quot;: \&quot;Facture en double\&quot;,       \&quot;commentaire\&quot;: \&quot;Facture déjà reçue sous la référence ABC123\&quot;     }     &#x60;&#x60;&#x60;      **Règles** :     - Un motif est **obligatoire** pour SUSPENDUE et REJETEE     - Seuls certains statuts sont autorisés selon le statut actuel de la facture
         /// </remarks>
-        /// <param name="bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostApiResponse"/>?&gt;</returns>
-        Task<ITraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostApiResponse?> TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostOrDefaultAsync(BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost, System.Threading.CancellationToken cancellationToken = default);
+        Task<ITraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostApiResponse?> TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostOrDefaultAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Consulter une facture (Valideur)
         /// </summary>
         /// <remarks>
-        /// Consulte facture (valideur).
+        /// 
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostApiResponse"/>&gt;</returns>
-        Task<IValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostApiResponse> ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostAsync(BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost, System.Threading.CancellationToken cancellationToken = default);
+        Task<IValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostApiResponse> ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Consulter une facture (Valideur)
         /// </summary>
         /// <remarks>
-        /// Consulte facture (valideur).
+        /// 
         /// </remarks>
-        /// <param name="bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostApiResponse"/>?&gt;</returns>
-        Task<IValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostApiResponse?> ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostOrDefaultAsync(BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost, System.Threading.CancellationToken cancellationToken = default);
+        Task<IValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostApiResponse?> ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostOrDefaultAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Rechercher factures à valider (Valideur)
@@ -366,10 +364,10 @@ namespace FactPulse.SDK.Api
         /// Recherche les factures en attente de validation par le valideur connecté.      **Rôle** : Valideur dans le circuit de validation interne.      **Filtres** : Dates, structure, service, etc.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostApiResponse"/>&gt;</returns>
-        Task<IValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostApiResponse> ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostAsync(BodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost, System.Threading.CancellationToken cancellationToken = default);
+        Task<IValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostApiResponse> ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Rechercher factures à valider (Valideur)
@@ -377,10 +375,10 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Recherche les factures en attente de validation par le valideur connecté.      **Rôle** : Valideur dans le circuit de validation interne.      **Filtres** : Dates, structure, service, etc.
         /// </remarks>
-        /// <param name="bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostApiResponse"/>?&gt;</returns>
-        Task<IValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostApiResponse?> ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostOrDefaultAsync(BodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost, System.Threading.CancellationToken cancellationToken = default);
+        Task<IValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostApiResponse?> ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostOrDefaultAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Valider ou refuser une facture (Valideur)
@@ -389,10 +387,10 @@ namespace FactPulse.SDK.Api
         /// Valide ou refuse une facture en attente de validation.      **Actions** :     - Valider : La facture passe au statut suivant du circuit     - Refuser : La facture est rejetée (motif obligatoire)
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostApiResponse"/>&gt;</returns>
-        Task<IValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostApiResponse> ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostAsync(BodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost, System.Threading.CancellationToken cancellationToken = default);
+        Task<IValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostApiResponse> ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Valider ou refuser une facture (Valideur)
@@ -400,10 +398,10 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Valide ou refuse une facture en attente de validation.      **Actions** :     - Valider : La facture passe au statut suivant du circuit     - Refuser : La facture est rejetée (motif obligatoire)
         /// </remarks>
-        /// <param name="bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostApiResponse"/>?&gt;</returns>
-        Task<IValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostApiResponse?> ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostOrDefaultAsync(BodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost, System.Threading.CancellationToken cancellationToken = default);
+        Task<IValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostApiResponse?> ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostOrDefaultAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -1067,28 +1065,28 @@ namespace FactPulse.SDK.Api
             BearerTokenProvider = bearerTokenProvider;
         }
 
-        partial void FormatAjouterFichierApiV1ChorusProTransversesAjouterFichierPost(BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost);
+        partial void FormatAjouterFichierApiV1ChorusProTransversesAjouterFichierPost(Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost"></param>
+        /// <param name="requestBody"></param>
         /// <returns></returns>
-        private void ValidateAjouterFichierApiV1ChorusProTransversesAjouterFichierPost(BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost)
+        private void ValidateAjouterFichierApiV1ChorusProTransversesAjouterFichierPost(Dictionary<string, Object> requestBody)
         {
-            if (bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost == null)
-                throw new ArgumentNullException(nameof(bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost));
+            if (requestBody == null)
+                throw new ArgumentNullException(nameof(requestBody));
         }
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost"></param>
-        private void AfterAjouterFichierApiV1ChorusProTransversesAjouterFichierPostDefaultImplementation(IAjouterFichierApiV1ChorusProTransversesAjouterFichierPostApiResponse apiResponseLocalVar, BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost)
+        /// <param name="requestBody"></param>
+        private void AfterAjouterFichierApiV1ChorusProTransversesAjouterFichierPostDefaultImplementation(IAjouterFichierApiV1ChorusProTransversesAjouterFichierPostApiResponse apiResponseLocalVar, Dictionary<string, Object> requestBody)
         {
             bool suppressDefaultLog = false;
-            AfterAjouterFichierApiV1ChorusProTransversesAjouterFichierPost(ref suppressDefaultLog, apiResponseLocalVar, bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost);
+            AfterAjouterFichierApiV1ChorusProTransversesAjouterFichierPost(ref suppressDefaultLog, apiResponseLocalVar, requestBody);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -1098,8 +1096,8 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost"></param>
-        partial void AfterAjouterFichierApiV1ChorusProTransversesAjouterFichierPost(ref bool suppressDefaultLog, IAjouterFichierApiV1ChorusProTransversesAjouterFichierPostApiResponse apiResponseLocalVar, BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost);
+        /// <param name="requestBody"></param>
+        partial void AfterAjouterFichierApiV1ChorusProTransversesAjouterFichierPost(ref bool suppressDefaultLog, IAjouterFichierApiV1ChorusProTransversesAjouterFichierPostApiResponse apiResponseLocalVar, Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1107,11 +1105,11 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost"></param>
-        private void OnErrorAjouterFichierApiV1ChorusProTransversesAjouterFichierPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost)
+        /// <param name="requestBody"></param>
+        private void OnErrorAjouterFichierApiV1ChorusProTransversesAjouterFichierPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Dictionary<string, Object> requestBody)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorAjouterFichierApiV1ChorusProTransversesAjouterFichierPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost);
+            OnErrorAjouterFichierApiV1ChorusProTransversesAjouterFichierPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, requestBody);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -1123,20 +1121,20 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost"></param>
-        partial void OnErrorAjouterFichierApiV1ChorusProTransversesAjouterFichierPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost);
+        /// <param name="requestBody"></param>
+        partial void OnErrorAjouterFichierApiV1ChorusProTransversesAjouterFichierPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Ajouter une pièce jointe Ajoute une pièce jointe au compte utilisateur courant.      **Taille max** : 10 Mo par fichier      **Payload exemple** :     &#x60;&#x60;&#x60;json     {       \&quot;pieceJointeFichier\&quot;: \&quot;JVBERi0xLjQKJeLjz9MKNSAwIG9iago8P...\&quot;,       \&quot;pieceJointeNom\&quot;: \&quot;bon_commande.pdf\&quot;,       \&quot;pieceJointeTypeMime\&quot;: \&quot;application/pdf\&quot;,       \&quot;pieceJointeExtension\&quot;: \&quot;PDF\&quot;     }     &#x60;&#x60;&#x60;      **Retour** : L&#39;ID de la pièce jointe (&#x60;pieceJointeIdFichier&#x60;) à utiliser ensuite dans &#x60;/factures/completer&#x60;.      **Extensions acceptées** : PDF, JPG, PNG, ZIP, XML, etc.
         /// </summary>
-        /// <param name="bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IAjouterFichierApiV1ChorusProTransversesAjouterFichierPostApiResponse"/>&gt;</returns>
-        public async Task<IAjouterFichierApiV1ChorusProTransversesAjouterFichierPostApiResponse?> AjouterFichierApiV1ChorusProTransversesAjouterFichierPostOrDefaultAsync(BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IAjouterFichierApiV1ChorusProTransversesAjouterFichierPostApiResponse?> AjouterFichierApiV1ChorusProTransversesAjouterFichierPostOrDefaultAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await AjouterFichierApiV1ChorusProTransversesAjouterFichierPostAsync(bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost, cancellationToken).ConfigureAwait(false);
+                return await AjouterFichierApiV1ChorusProTransversesAjouterFichierPostAsync(requestBody, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -1148,18 +1146,18 @@ namespace FactPulse.SDK.Api
         /// Ajouter une pièce jointe Ajoute une pièce jointe au compte utilisateur courant.      **Taille max** : 10 Mo par fichier      **Payload exemple** :     &#x60;&#x60;&#x60;json     {       \&quot;pieceJointeFichier\&quot;: \&quot;JVBERi0xLjQKJeLjz9MKNSAwIG9iago8P...\&quot;,       \&quot;pieceJointeNom\&quot;: \&quot;bon_commande.pdf\&quot;,       \&quot;pieceJointeTypeMime\&quot;: \&quot;application/pdf\&quot;,       \&quot;pieceJointeExtension\&quot;: \&quot;PDF\&quot;     }     &#x60;&#x60;&#x60;      **Retour** : L&#39;ID de la pièce jointe (&#x60;pieceJointeIdFichier&#x60;) à utiliser ensuite dans &#x60;/factures/completer&#x60;.      **Extensions acceptées** : PDF, JPG, PNG, ZIP, XML, etc.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IAjouterFichierApiV1ChorusProTransversesAjouterFichierPostApiResponse"/>&gt;</returns>
-        public async Task<IAjouterFichierApiV1ChorusProTransversesAjouterFichierPostApiResponse> AjouterFichierApiV1ChorusProTransversesAjouterFichierPostAsync(BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IAjouterFichierApiV1ChorusProTransversesAjouterFichierPostApiResponse> AjouterFichierApiV1ChorusProTransversesAjouterFichierPostAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateAjouterFichierApiV1ChorusProTransversesAjouterFichierPost(bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost);
+                ValidateAjouterFichierApiV1ChorusProTransversesAjouterFichierPost(requestBody);
 
-                FormatAjouterFichierApiV1ChorusProTransversesAjouterFichierPost(bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost);
+                FormatAjouterFichierApiV1ChorusProTransversesAjouterFichierPost(requestBody);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -1170,9 +1168,9 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/chorus-pro/transverses/ajouter-fichier"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/chorus-pro/transverses/ajouter-fichier");
 
-                    httpRequestMessageLocalVar.Content = (bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (requestBody as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(requestBody, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
@@ -1219,7 +1217,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterAjouterFichierApiV1ChorusProTransversesAjouterFichierPostDefaultImplementation(apiResponseLocalVar, bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost);
+                        AfterAjouterFichierApiV1ChorusProTransversesAjouterFichierPostDefaultImplementation(apiResponseLocalVar, requestBody);
 
                         Events.ExecuteOnAjouterFichierApiV1ChorusProTransversesAjouterFichierPost(apiResponseLocalVar);
 
@@ -1233,7 +1231,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorAjouterFichierApiV1ChorusProTransversesAjouterFichierPostDefaultImplementation(e, "/api/v1/chorus-pro/transverses/ajouter-fichier", uriBuilderLocalVar.Path, bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost);
+                OnErrorAjouterFichierApiV1ChorusProTransversesAjouterFichierPostDefaultImplementation(e, "/api/v1/chorus-pro/transverses/ajouter-fichier", uriBuilderLocalVar.Path, requestBody);
                 Events.ExecuteOnErrorAjouterFichierApiV1ChorusProTransversesAjouterFichierPost(e);
                 throw;
             }
@@ -1370,28 +1368,28 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatCompleterFactureApiV1ChorusProFacturesCompleterPost(BodyCompleterFactureApiV1ChorusProFacturesCompleterPost bodyCompleterFactureApiV1ChorusProFacturesCompleterPost);
+        partial void FormatCompleterFactureApiV1ChorusProFacturesCompleterPost(Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="bodyCompleterFactureApiV1ChorusProFacturesCompleterPost"></param>
+        /// <param name="requestBody"></param>
         /// <returns></returns>
-        private void ValidateCompleterFactureApiV1ChorusProFacturesCompleterPost(BodyCompleterFactureApiV1ChorusProFacturesCompleterPost bodyCompleterFactureApiV1ChorusProFacturesCompleterPost)
+        private void ValidateCompleterFactureApiV1ChorusProFacturesCompleterPost(Dictionary<string, Object> requestBody)
         {
-            if (bodyCompleterFactureApiV1ChorusProFacturesCompleterPost == null)
-                throw new ArgumentNullException(nameof(bodyCompleterFactureApiV1ChorusProFacturesCompleterPost));
+            if (requestBody == null)
+                throw new ArgumentNullException(nameof(requestBody));
         }
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="bodyCompleterFactureApiV1ChorusProFacturesCompleterPost"></param>
-        private void AfterCompleterFactureApiV1ChorusProFacturesCompleterPostDefaultImplementation(ICompleterFactureApiV1ChorusProFacturesCompleterPostApiResponse apiResponseLocalVar, BodyCompleterFactureApiV1ChorusProFacturesCompleterPost bodyCompleterFactureApiV1ChorusProFacturesCompleterPost)
+        /// <param name="requestBody"></param>
+        private void AfterCompleterFactureApiV1ChorusProFacturesCompleterPostDefaultImplementation(ICompleterFactureApiV1ChorusProFacturesCompleterPostApiResponse apiResponseLocalVar, Dictionary<string, Object> requestBody)
         {
             bool suppressDefaultLog = false;
-            AfterCompleterFactureApiV1ChorusProFacturesCompleterPost(ref suppressDefaultLog, apiResponseLocalVar, bodyCompleterFactureApiV1ChorusProFacturesCompleterPost);
+            AfterCompleterFactureApiV1ChorusProFacturesCompleterPost(ref suppressDefaultLog, apiResponseLocalVar, requestBody);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -1401,8 +1399,8 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="bodyCompleterFactureApiV1ChorusProFacturesCompleterPost"></param>
-        partial void AfterCompleterFactureApiV1ChorusProFacturesCompleterPost(ref bool suppressDefaultLog, ICompleterFactureApiV1ChorusProFacturesCompleterPostApiResponse apiResponseLocalVar, BodyCompleterFactureApiV1ChorusProFacturesCompleterPost bodyCompleterFactureApiV1ChorusProFacturesCompleterPost);
+        /// <param name="requestBody"></param>
+        partial void AfterCompleterFactureApiV1ChorusProFacturesCompleterPost(ref bool suppressDefaultLog, ICompleterFactureApiV1ChorusProFacturesCompleterPostApiResponse apiResponseLocalVar, Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1410,11 +1408,11 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="bodyCompleterFactureApiV1ChorusProFacturesCompleterPost"></param>
-        private void OnErrorCompleterFactureApiV1ChorusProFacturesCompleterPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, BodyCompleterFactureApiV1ChorusProFacturesCompleterPost bodyCompleterFactureApiV1ChorusProFacturesCompleterPost)
+        /// <param name="requestBody"></param>
+        private void OnErrorCompleterFactureApiV1ChorusProFacturesCompleterPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Dictionary<string, Object> requestBody)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorCompleterFactureApiV1ChorusProFacturesCompleterPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, bodyCompleterFactureApiV1ChorusProFacturesCompleterPost);
+            OnErrorCompleterFactureApiV1ChorusProFacturesCompleterPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, requestBody);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -1426,20 +1424,20 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="bodyCompleterFactureApiV1ChorusProFacturesCompleterPost"></param>
-        partial void OnErrorCompleterFactureApiV1ChorusProFacturesCompleterPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, BodyCompleterFactureApiV1ChorusProFacturesCompleterPost bodyCompleterFactureApiV1ChorusProFacturesCompleterPost);
+        /// <param name="requestBody"></param>
+        partial void OnErrorCompleterFactureApiV1ChorusProFacturesCompleterPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Compléter une facture suspendue (Fournisseur) Complète une facture au statut SUSPENDUE en ajoutant des pièces jointes ou un commentaire.      **Statut requis** : SUSPENDUE      **Actions possibles** :     - Ajouter des pièces jointes (justificatifs, bons de commande, etc.)     - Modifier le commentaire      **Payload exemple** :     &#x60;&#x60;&#x60;json     {       \&quot;identifiantFactureCPP\&quot;: 12345,       \&quot;commentaire\&quot;: \&quot;Voici les justificatifs demandés\&quot;,       \&quot;listePiecesJointes\&quot;: [         {           \&quot;pieceJointeIdFichier\&quot;: 98765,           \&quot;pieceJointeNom\&quot;: \&quot;bon_commande.pdf\&quot;         }       ]     }     &#x60;&#x60;&#x60;      **Note** : Les pièces jointes doivent d&#39;abord être uploadées via &#x60;/transverses/ajouter-fichier&#x60;.      **Après complétion** : La facture repasse au statut MISE_A_DISPOSITION.
         /// </summary>
-        /// <param name="bodyCompleterFactureApiV1ChorusProFacturesCompleterPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICompleterFactureApiV1ChorusProFacturesCompleterPostApiResponse"/>&gt;</returns>
-        public async Task<ICompleterFactureApiV1ChorusProFacturesCompleterPostApiResponse?> CompleterFactureApiV1ChorusProFacturesCompleterPostOrDefaultAsync(BodyCompleterFactureApiV1ChorusProFacturesCompleterPost bodyCompleterFactureApiV1ChorusProFacturesCompleterPost, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICompleterFactureApiV1ChorusProFacturesCompleterPostApiResponse?> CompleterFactureApiV1ChorusProFacturesCompleterPostOrDefaultAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await CompleterFactureApiV1ChorusProFacturesCompleterPostAsync(bodyCompleterFactureApiV1ChorusProFacturesCompleterPost, cancellationToken).ConfigureAwait(false);
+                return await CompleterFactureApiV1ChorusProFacturesCompleterPostAsync(requestBody, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -1451,18 +1449,18 @@ namespace FactPulse.SDK.Api
         /// Compléter une facture suspendue (Fournisseur) Complète une facture au statut SUSPENDUE en ajoutant des pièces jointes ou un commentaire.      **Statut requis** : SUSPENDUE      **Actions possibles** :     - Ajouter des pièces jointes (justificatifs, bons de commande, etc.)     - Modifier le commentaire      **Payload exemple** :     &#x60;&#x60;&#x60;json     {       \&quot;identifiantFactureCPP\&quot;: 12345,       \&quot;commentaire\&quot;: \&quot;Voici les justificatifs demandés\&quot;,       \&quot;listePiecesJointes\&quot;: [         {           \&quot;pieceJointeIdFichier\&quot;: 98765,           \&quot;pieceJointeNom\&quot;: \&quot;bon_commande.pdf\&quot;         }       ]     }     &#x60;&#x60;&#x60;      **Note** : Les pièces jointes doivent d&#39;abord être uploadées via &#x60;/transverses/ajouter-fichier&#x60;.      **Après complétion** : La facture repasse au statut MISE_A_DISPOSITION.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bodyCompleterFactureApiV1ChorusProFacturesCompleterPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICompleterFactureApiV1ChorusProFacturesCompleterPostApiResponse"/>&gt;</returns>
-        public async Task<ICompleterFactureApiV1ChorusProFacturesCompleterPostApiResponse> CompleterFactureApiV1ChorusProFacturesCompleterPostAsync(BodyCompleterFactureApiV1ChorusProFacturesCompleterPost bodyCompleterFactureApiV1ChorusProFacturesCompleterPost, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICompleterFactureApiV1ChorusProFacturesCompleterPostApiResponse> CompleterFactureApiV1ChorusProFacturesCompleterPostAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateCompleterFactureApiV1ChorusProFacturesCompleterPost(bodyCompleterFactureApiV1ChorusProFacturesCompleterPost);
+                ValidateCompleterFactureApiV1ChorusProFacturesCompleterPost(requestBody);
 
-                FormatCompleterFactureApiV1ChorusProFacturesCompleterPost(bodyCompleterFactureApiV1ChorusProFacturesCompleterPost);
+                FormatCompleterFactureApiV1ChorusProFacturesCompleterPost(requestBody);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -1473,9 +1471,9 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/chorus-pro/factures/completer"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/chorus-pro/factures/completer");
 
-                    httpRequestMessageLocalVar.Content = (bodyCompleterFactureApiV1ChorusProFacturesCompleterPost as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (requestBody as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(bodyCompleterFactureApiV1ChorusProFacturesCompleterPost, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(requestBody, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
@@ -1522,7 +1520,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterCompleterFactureApiV1ChorusProFacturesCompleterPostDefaultImplementation(apiResponseLocalVar, bodyCompleterFactureApiV1ChorusProFacturesCompleterPost);
+                        AfterCompleterFactureApiV1ChorusProFacturesCompleterPostDefaultImplementation(apiResponseLocalVar, requestBody);
 
                         Events.ExecuteOnCompleterFactureApiV1ChorusProFacturesCompleterPost(apiResponseLocalVar);
 
@@ -1536,7 +1534,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorCompleterFactureApiV1ChorusProFacturesCompleterPostDefaultImplementation(e, "/api/v1/chorus-pro/factures/completer", uriBuilderLocalVar.Path, bodyCompleterFactureApiV1ChorusProFacturesCompleterPost);
+                OnErrorCompleterFactureApiV1ChorusProFacturesCompleterPostDefaultImplementation(e, "/api/v1/chorus-pro/factures/completer", uriBuilderLocalVar.Path, requestBody);
                 Events.ExecuteOnErrorCompleterFactureApiV1ChorusProFacturesCompleterPost(e);
                 throw;
             }
@@ -2279,29 +2277,17 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet(ref int idStructureCpp, BodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet);
-
-        /// <summary>
-        /// Validates the request parameters
-        /// </summary>
-        /// <param name="bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet"></param>
-        /// <returns></returns>
-        private void ValidateListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet(BodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet)
-        {
-            if (bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet == null)
-                throw new ArgumentNullException(nameof(bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet));
-        }
+        partial void FormatListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet(ref int idStructureCpp);
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="idStructureCpp"></param>
-        /// <param name="bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet"></param>
-        private void AfterListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetDefaultImplementation(IListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetApiResponse apiResponseLocalVar, int idStructureCpp, BodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet)
+        private void AfterListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetDefaultImplementation(IListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetApiResponse apiResponseLocalVar, int idStructureCpp)
         {
             bool suppressDefaultLog = false;
-            AfterListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet(ref suppressDefaultLog, apiResponseLocalVar, idStructureCpp, bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet);
+            AfterListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet(ref suppressDefaultLog, apiResponseLocalVar, idStructureCpp);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -2312,8 +2298,7 @@ namespace FactPulse.SDK.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="idStructureCpp"></param>
-        /// <param name="bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet"></param>
-        partial void AfterListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet(ref bool suppressDefaultLog, IListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetApiResponse apiResponseLocalVar, int idStructureCpp, BodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet);
+        partial void AfterListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet(ref bool suppressDefaultLog, IListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetApiResponse apiResponseLocalVar, int idStructureCpp);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -2322,11 +2307,10 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="idStructureCpp"></param>
-        /// <param name="bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet"></param>
-        private void OnErrorListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, int idStructureCpp, BodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet)
+        private void OnErrorListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, int idStructureCpp)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, idStructureCpp, bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet);
+            OnErrorListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, idStructureCpp);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -2339,21 +2323,19 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="idStructureCpp"></param>
-        /// <param name="bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet"></param>
-        partial void OnErrorListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, int idStructureCpp, BodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet);
+        partial void OnErrorListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, int idStructureCpp);
 
         /// <summary>
         /// Lister les services d&#39;une structure Récupère la liste des services actifs d&#39;une structure publique.      **Cas d&#39;usage** :     - Lister les services disponibles pour une administration     - Vérifier qu&#39;un code service existe avant de soumettre une facture      **Retour** :     - Liste des services avec leur code, libellé et statut (actif/inactif)
         /// </summary>
         /// <param name="idStructureCpp"></param>
-        /// <param name="bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetApiResponse"/>&gt;</returns>
-        public async Task<IListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetApiResponse?> ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetOrDefaultAsync(int idStructureCpp, BodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetApiResponse?> ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetOrDefaultAsync(int idStructureCpp, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetAsync(idStructureCpp, bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet, cancellationToken).ConfigureAwait(false);
+                return await ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetAsync(idStructureCpp, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -2366,18 +2348,15 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idStructureCpp"></param>
-        /// <param name="bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetApiResponse"/>&gt;</returns>
-        public async Task<IListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetApiResponse> ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetAsync(int idStructureCpp, BodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetApiResponse> ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetAsync(int idStructureCpp, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet(bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet);
-
-                FormatListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet(ref idStructureCpp, bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet);
+                FormatListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet(ref idStructureCpp);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -2389,10 +2368,6 @@ namespace FactPulse.SDK.Api
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/chorus-pro/structures/{id_structure_cpp}/services");
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bid_structure_cpp%7D", Uri.EscapeDataString(idStructureCpp.ToString()));
 
-                    httpRequestMessageLocalVar.Content = (bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet as object) is System.IO.Stream stream
-                        ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet, _jsonSerializerOptions));
-
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
@@ -2401,15 +2376,6 @@ namespace FactPulse.SDK.Api
                     tokenBaseLocalVars.Add(bearerTokenLocalVar1);
 
                     bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
-
-                    string[] contentTypes = new string[] {
-                        "application/json"
-                    };
-
-                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
-
-                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
-                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -2438,7 +2404,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetDefaultImplementation(apiResponseLocalVar, idStructureCpp, bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet);
+                        AfterListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetDefaultImplementation(apiResponseLocalVar, idStructureCpp);
 
                         Events.ExecuteOnListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet(apiResponseLocalVar);
 
@@ -2452,7 +2418,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetDefaultImplementation(e, "/api/v1/chorus-pro/structures/{id_structure_cpp}/services", uriBuilderLocalVar.Path, idStructureCpp, bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet);
+                OnErrorListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetDefaultImplementation(e, "/api/v1/chorus-pro/structures/{id_structure_cpp}/services", uriBuilderLocalVar.Path, idStructureCpp);
                 Events.ExecuteOnErrorListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet(e);
                 throw;
             }
@@ -2892,28 +2858,28 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost);
+        partial void FormatRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost"></param>
+        /// <param name="requestBody"></param>
         /// <returns></returns>
-        private void ValidateRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost)
+        private void ValidateRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(Dictionary<string, Object> requestBody)
         {
-            if (bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost == null)
-                throw new ArgumentNullException(nameof(bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost));
+            if (requestBody == null)
+                throw new ArgumentNullException(nameof(requestBody));
         }
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost"></param>
-        private void AfterRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostDefaultImplementation(IRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostApiResponse apiResponseLocalVar, BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost)
+        /// <param name="requestBody"></param>
+        private void AfterRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostDefaultImplementation(IRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostApiResponse apiResponseLocalVar, Dictionary<string, Object> requestBody)
         {
             bool suppressDefaultLog = false;
-            AfterRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(ref suppressDefaultLog, apiResponseLocalVar, bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost);
+            AfterRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(ref suppressDefaultLog, apiResponseLocalVar, requestBody);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -2923,8 +2889,8 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost"></param>
-        partial void AfterRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(ref bool suppressDefaultLog, IRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostApiResponse apiResponseLocalVar, BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost);
+        /// <param name="requestBody"></param>
+        partial void AfterRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(ref bool suppressDefaultLog, IRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostApiResponse apiResponseLocalVar, Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -2932,11 +2898,11 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost"></param>
-        private void OnErrorRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost)
+        /// <param name="requestBody"></param>
+        private void OnErrorRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Dictionary<string, Object> requestBody)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost);
+            OnErrorRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, requestBody);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -2948,20 +2914,20 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost"></param>
-        partial void OnErrorRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost);
+        /// <param name="requestBody"></param>
+        partial void OnErrorRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Rechercher factures reçues (Destinataire) Recherche les factures reçues par le destinataire connecté.      **Filtres** :     - Téléchargée / non téléchargée     - Dates de réception     - Statut (MISE_A_DISPOSITION, SUSPENDUE, etc.)     - Fournisseur      **Indicateur utile** : &#x60;factureTelechargeeParDestinataire&#x60; permet de savoir si la facture a déjà été téléchargée.
         /// </summary>
-        /// <param name="bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostApiResponse"/>&gt;</returns>
-        public async Task<IRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostApiResponse?> RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostOrDefaultAsync(BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostApiResponse?> RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostOrDefaultAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostAsync(bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost, cancellationToken).ConfigureAwait(false);
+                return await RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostAsync(requestBody, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -2973,18 +2939,18 @@ namespace FactPulse.SDK.Api
         /// Rechercher factures reçues (Destinataire) Recherche les factures reçues par le destinataire connecté.      **Filtres** :     - Téléchargée / non téléchargée     - Dates de réception     - Statut (MISE_A_DISPOSITION, SUSPENDUE, etc.)     - Fournisseur      **Indicateur utile** : &#x60;factureTelechargeeParDestinataire&#x60; permet de savoir si la facture a déjà été téléchargée.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostApiResponse"/>&gt;</returns>
-        public async Task<IRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostApiResponse> RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostAsync(BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostApiResponse> RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost);
+                ValidateRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(requestBody);
 
-                FormatRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost);
+                FormatRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(requestBody);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -2995,9 +2961,9 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/chorus-pro/factures/rechercher-destinataire"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/chorus-pro/factures/rechercher-destinataire");
 
-                    httpRequestMessageLocalVar.Content = (bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (requestBody as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(requestBody, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
@@ -3044,7 +3010,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostDefaultImplementation(apiResponseLocalVar, bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost);
+                        AfterRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostDefaultImplementation(apiResponseLocalVar, requestBody);
 
                         Events.ExecuteOnRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(apiResponseLocalVar);
 
@@ -3058,7 +3024,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostDefaultImplementation(e, "/api/v1/chorus-pro/factures/rechercher-destinataire", uriBuilderLocalVar.Path, bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost);
+                OnErrorRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostDefaultImplementation(e, "/api/v1/chorus-pro/factures/rechercher-destinataire", uriBuilderLocalVar.Path, requestBody);
                 Events.ExecuteOnErrorRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost(e);
                 throw;
             }
@@ -3195,28 +3161,28 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost);
+        partial void FormatRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost"></param>
+        /// <param name="requestBody"></param>
         /// <returns></returns>
-        private void ValidateRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost)
+        private void ValidateRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(Dictionary<string, Object> requestBody)
         {
-            if (bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost == null)
-                throw new ArgumentNullException(nameof(bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost));
+            if (requestBody == null)
+                throw new ArgumentNullException(nameof(requestBody));
         }
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost"></param>
-        private void AfterRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostDefaultImplementation(IRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostApiResponse apiResponseLocalVar, BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost)
+        /// <param name="requestBody"></param>
+        private void AfterRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostDefaultImplementation(IRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostApiResponse apiResponseLocalVar, Dictionary<string, Object> requestBody)
         {
             bool suppressDefaultLog = false;
-            AfterRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(ref suppressDefaultLog, apiResponseLocalVar, bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost);
+            AfterRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(ref suppressDefaultLog, apiResponseLocalVar, requestBody);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -3226,8 +3192,8 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost"></param>
-        partial void AfterRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(ref bool suppressDefaultLog, IRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostApiResponse apiResponseLocalVar, BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost);
+        /// <param name="requestBody"></param>
+        partial void AfterRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(ref bool suppressDefaultLog, IRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostApiResponse apiResponseLocalVar, Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -3235,11 +3201,11 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost"></param>
-        private void OnErrorRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost)
+        /// <param name="requestBody"></param>
+        private void OnErrorRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Dictionary<string, Object> requestBody)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost);
+            OnErrorRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, requestBody);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -3251,20 +3217,20 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost"></param>
-        partial void OnErrorRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost);
+        /// <param name="requestBody"></param>
+        partial void OnErrorRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Rechercher factures émises (Fournisseur) Recherche les factures émises par le fournisseur connecté.      **Filtres disponibles** :     - Numéro de facture     - Dates (début/fin)     - Statut     - Structure destinataire     - Montant      **Cas d&#39;usage** :     - Suivi des factures émises     - Vérification des statuts     - Export pour comptabilité
         /// </summary>
-        /// <param name="bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostApiResponse"/>&gt;</returns>
-        public async Task<IRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostApiResponse?> RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostOrDefaultAsync(BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostApiResponse?> RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostOrDefaultAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostAsync(bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost, cancellationToken).ConfigureAwait(false);
+                return await RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostAsync(requestBody, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -3276,18 +3242,18 @@ namespace FactPulse.SDK.Api
         /// Rechercher factures émises (Fournisseur) Recherche les factures émises par le fournisseur connecté.      **Filtres disponibles** :     - Numéro de facture     - Dates (début/fin)     - Statut     - Structure destinataire     - Montant      **Cas d&#39;usage** :     - Suivi des factures émises     - Vérification des statuts     - Export pour comptabilité
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostApiResponse"/>&gt;</returns>
-        public async Task<IRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostApiResponse> RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostAsync(BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostApiResponse> RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost);
+                ValidateRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(requestBody);
 
-                FormatRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost);
+                FormatRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(requestBody);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -3298,9 +3264,9 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/chorus-pro/factures/rechercher-fournisseur"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/chorus-pro/factures/rechercher-fournisseur");
 
-                    httpRequestMessageLocalVar.Content = (bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (requestBody as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(requestBody, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
@@ -3347,7 +3313,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostDefaultImplementation(apiResponseLocalVar, bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost);
+                        AfterRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostDefaultImplementation(apiResponseLocalVar, requestBody);
 
                         Events.ExecuteOnRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(apiResponseLocalVar);
 
@@ -3361,7 +3327,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostDefaultImplementation(e, "/api/v1/chorus-pro/factures/rechercher-fournisseur", uriBuilderLocalVar.Path, bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost);
+                OnErrorRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostDefaultImplementation(e, "/api/v1/chorus-pro/factures/rechercher-fournisseur", uriBuilderLocalVar.Path, requestBody);
                 Events.ExecuteOnErrorRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost(e);
                 throw;
             }
@@ -3801,28 +3767,28 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatRecyclerFactureApiV1ChorusProFacturesRecyclerPost(BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost);
+        partial void FormatRecyclerFactureApiV1ChorusProFacturesRecyclerPost(Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost"></param>
+        /// <param name="requestBody"></param>
         /// <returns></returns>
-        private void ValidateRecyclerFactureApiV1ChorusProFacturesRecyclerPost(BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost)
+        private void ValidateRecyclerFactureApiV1ChorusProFacturesRecyclerPost(Dictionary<string, Object> requestBody)
         {
-            if (bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost == null)
-                throw new ArgumentNullException(nameof(bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost));
+            if (requestBody == null)
+                throw new ArgumentNullException(nameof(requestBody));
         }
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost"></param>
-        private void AfterRecyclerFactureApiV1ChorusProFacturesRecyclerPostDefaultImplementation(IRecyclerFactureApiV1ChorusProFacturesRecyclerPostApiResponse apiResponseLocalVar, BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost)
+        /// <param name="requestBody"></param>
+        private void AfterRecyclerFactureApiV1ChorusProFacturesRecyclerPostDefaultImplementation(IRecyclerFactureApiV1ChorusProFacturesRecyclerPostApiResponse apiResponseLocalVar, Dictionary<string, Object> requestBody)
         {
             bool suppressDefaultLog = false;
-            AfterRecyclerFactureApiV1ChorusProFacturesRecyclerPost(ref suppressDefaultLog, apiResponseLocalVar, bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost);
+            AfterRecyclerFactureApiV1ChorusProFacturesRecyclerPost(ref suppressDefaultLog, apiResponseLocalVar, requestBody);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -3832,8 +3798,8 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost"></param>
-        partial void AfterRecyclerFactureApiV1ChorusProFacturesRecyclerPost(ref bool suppressDefaultLog, IRecyclerFactureApiV1ChorusProFacturesRecyclerPostApiResponse apiResponseLocalVar, BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost);
+        /// <param name="requestBody"></param>
+        partial void AfterRecyclerFactureApiV1ChorusProFacturesRecyclerPost(ref bool suppressDefaultLog, IRecyclerFactureApiV1ChorusProFacturesRecyclerPostApiResponse apiResponseLocalVar, Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -3841,11 +3807,11 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost"></param>
-        private void OnErrorRecyclerFactureApiV1ChorusProFacturesRecyclerPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost)
+        /// <param name="requestBody"></param>
+        private void OnErrorRecyclerFactureApiV1ChorusProFacturesRecyclerPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Dictionary<string, Object> requestBody)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorRecyclerFactureApiV1ChorusProFacturesRecyclerPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost);
+            OnErrorRecyclerFactureApiV1ChorusProFacturesRecyclerPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, requestBody);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -3857,20 +3823,20 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost"></param>
-        partial void OnErrorRecyclerFactureApiV1ChorusProFacturesRecyclerPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost);
+        /// <param name="requestBody"></param>
+        partial void OnErrorRecyclerFactureApiV1ChorusProFacturesRecyclerPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Recycler une facture (Fournisseur) Recycle une facture au statut A_RECYCLER en modifiant les données d&#39;acheminement.      **Statut requis** : A_RECYCLER      **Champs modifiables** :     - Destinataire (&#x60;idStructureCPP&#x60;)     - Code service     - Numéro d&#39;engagement      **Cas d&#39;usage** :     - Erreur de destinataire     - Changement de service facturation     - Mise à jour du numéro d&#39;engagement      **Payload exemple** :     &#x60;&#x60;&#x60;json     {       \&quot;identifiantFactureCPP\&quot;: 12345,       \&quot;idStructureCPP\&quot;: 67890,       \&quot;codeService\&quot;: \&quot;SERVICE_01\&quot;,       \&quot;numeroEngagement\&quot;: \&quot;ENG2024001\&quot;     }     &#x60;&#x60;&#x60;      **Note** : La facture conserve son numéro et ses montants, seuls les champs d&#39;acheminement changent.
         /// </summary>
-        /// <param name="bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRecyclerFactureApiV1ChorusProFacturesRecyclerPostApiResponse"/>&gt;</returns>
-        public async Task<IRecyclerFactureApiV1ChorusProFacturesRecyclerPostApiResponse?> RecyclerFactureApiV1ChorusProFacturesRecyclerPostOrDefaultAsync(BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IRecyclerFactureApiV1ChorusProFacturesRecyclerPostApiResponse?> RecyclerFactureApiV1ChorusProFacturesRecyclerPostOrDefaultAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await RecyclerFactureApiV1ChorusProFacturesRecyclerPostAsync(bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost, cancellationToken).ConfigureAwait(false);
+                return await RecyclerFactureApiV1ChorusProFacturesRecyclerPostAsync(requestBody, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -3882,18 +3848,18 @@ namespace FactPulse.SDK.Api
         /// Recycler une facture (Fournisseur) Recycle une facture au statut A_RECYCLER en modifiant les données d&#39;acheminement.      **Statut requis** : A_RECYCLER      **Champs modifiables** :     - Destinataire (&#x60;idStructureCPP&#x60;)     - Code service     - Numéro d&#39;engagement      **Cas d&#39;usage** :     - Erreur de destinataire     - Changement de service facturation     - Mise à jour du numéro d&#39;engagement      **Payload exemple** :     &#x60;&#x60;&#x60;json     {       \&quot;identifiantFactureCPP\&quot;: 12345,       \&quot;idStructureCPP\&quot;: 67890,       \&quot;codeService\&quot;: \&quot;SERVICE_01\&quot;,       \&quot;numeroEngagement\&quot;: \&quot;ENG2024001\&quot;     }     &#x60;&#x60;&#x60;      **Note** : La facture conserve son numéro et ses montants, seuls les champs d&#39;acheminement changent.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRecyclerFactureApiV1ChorusProFacturesRecyclerPostApiResponse"/>&gt;</returns>
-        public async Task<IRecyclerFactureApiV1ChorusProFacturesRecyclerPostApiResponse> RecyclerFactureApiV1ChorusProFacturesRecyclerPostAsync(BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IRecyclerFactureApiV1ChorusProFacturesRecyclerPostApiResponse> RecyclerFactureApiV1ChorusProFacturesRecyclerPostAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateRecyclerFactureApiV1ChorusProFacturesRecyclerPost(bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost);
+                ValidateRecyclerFactureApiV1ChorusProFacturesRecyclerPost(requestBody);
 
-                FormatRecyclerFactureApiV1ChorusProFacturesRecyclerPost(bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost);
+                FormatRecyclerFactureApiV1ChorusProFacturesRecyclerPost(requestBody);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -3904,9 +3870,9 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/chorus-pro/factures/recycler"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/chorus-pro/factures/recycler");
 
-                    httpRequestMessageLocalVar.Content = (bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (requestBody as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(requestBody, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
@@ -3953,7 +3919,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterRecyclerFactureApiV1ChorusProFacturesRecyclerPostDefaultImplementation(apiResponseLocalVar, bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost);
+                        AfterRecyclerFactureApiV1ChorusProFacturesRecyclerPostDefaultImplementation(apiResponseLocalVar, requestBody);
 
                         Events.ExecuteOnRecyclerFactureApiV1ChorusProFacturesRecyclerPost(apiResponseLocalVar);
 
@@ -3967,7 +3933,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorRecyclerFactureApiV1ChorusProFacturesRecyclerPostDefaultImplementation(e, "/api/v1/chorus-pro/factures/recycler", uriBuilderLocalVar.Path, bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost);
+                OnErrorRecyclerFactureApiV1ChorusProFacturesRecyclerPostDefaultImplementation(e, "/api/v1/chorus-pro/factures/recycler", uriBuilderLocalVar.Path, requestBody);
                 Events.ExecuteOnErrorRecyclerFactureApiV1ChorusProFacturesRecyclerPost(e);
                 throw;
             }
@@ -4407,28 +4373,28 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost);
+        partial void FormatTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost"></param>
+        /// <param name="requestBody"></param>
         /// <returns></returns>
-        private void ValidateTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost)
+        private void ValidateTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(Dictionary<string, Object> requestBody)
         {
-            if (bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost == null)
-                throw new ArgumentNullException(nameof(bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost));
+            if (requestBody == null)
+                throw new ArgumentNullException(nameof(requestBody));
         }
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost"></param>
-        private void AfterTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostDefaultImplementation(ITelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostApiResponse apiResponseLocalVar, BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost)
+        /// <param name="requestBody"></param>
+        private void AfterTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostDefaultImplementation(ITelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostApiResponse apiResponseLocalVar, Dictionary<string, Object> requestBody)
         {
             bool suppressDefaultLog = false;
-            AfterTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(ref suppressDefaultLog, apiResponseLocalVar, bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost);
+            AfterTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(ref suppressDefaultLog, apiResponseLocalVar, requestBody);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -4438,8 +4404,8 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost"></param>
-        partial void AfterTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(ref bool suppressDefaultLog, ITelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostApiResponse apiResponseLocalVar, BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost);
+        /// <param name="requestBody"></param>
+        partial void AfterTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(ref bool suppressDefaultLog, ITelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostApiResponse apiResponseLocalVar, Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -4447,11 +4413,11 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost"></param>
-        private void OnErrorTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost)
+        /// <param name="requestBody"></param>
+        private void OnErrorTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Dictionary<string, Object> requestBody)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost);
+            OnErrorTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, requestBody);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -4463,20 +4429,20 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost"></param>
-        partial void OnErrorTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost);
+        /// <param name="requestBody"></param>
+        partial void OnErrorTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Télécharger un groupe de factures Télécharge une ou plusieurs factures (max 10 recommandé) avec leurs pièces jointes.      **Formats disponibles** :     - PDF : Fichier PDF uniquement     - XML : Fichier XML uniquement     - ZIP : Archive contenant PDF + XML + pièces jointes      **Taille maximale** : 120 Mo par téléchargement      **Payload exemple** :     &#x60;&#x60;&#x60;json     {       \&quot;listeIdentifiantsFactureCPP\&quot;: [12345, 12346],       \&quot;inclurePiecesJointes\&quot;: true,       \&quot;formatFichier\&quot;: \&quot;ZIP\&quot;     }     &#x60;&#x60;&#x60;      **Retour** : Le fichier est encodé en base64 dans le champ &#x60;fichierBase64&#x60;.      **Note** : Le flag &#x60;factureTelechargeeParDestinataire&#x60; est mis à jour automatiquement.
         /// </summary>
-        /// <param name="bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostApiResponse"/>&gt;</returns>
-        public async Task<ITelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostApiResponse?> TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostOrDefaultAsync(BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ITelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostApiResponse?> TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostOrDefaultAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostAsync(bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost, cancellationToken).ConfigureAwait(false);
+                return await TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostAsync(requestBody, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -4488,18 +4454,18 @@ namespace FactPulse.SDK.Api
         /// Télécharger un groupe de factures Télécharge une ou plusieurs factures (max 10 recommandé) avec leurs pièces jointes.      **Formats disponibles** :     - PDF : Fichier PDF uniquement     - XML : Fichier XML uniquement     - ZIP : Archive contenant PDF + XML + pièces jointes      **Taille maximale** : 120 Mo par téléchargement      **Payload exemple** :     &#x60;&#x60;&#x60;json     {       \&quot;listeIdentifiantsFactureCPP\&quot;: [12345, 12346],       \&quot;inclurePiecesJointes\&quot;: true,       \&quot;formatFichier\&quot;: \&quot;ZIP\&quot;     }     &#x60;&#x60;&#x60;      **Retour** : Le fichier est encodé en base64 dans le champ &#x60;fichierBase64&#x60;.      **Note** : Le flag &#x60;factureTelechargeeParDestinataire&#x60; est mis à jour automatiquement.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostApiResponse"/>&gt;</returns>
-        public async Task<ITelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostApiResponse> TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostAsync(BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ITelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostApiResponse> TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost);
+                ValidateTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(requestBody);
 
-                FormatTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost);
+                FormatTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(requestBody);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -4510,9 +4476,9 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/chorus-pro/factures/telecharger-groupe"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/chorus-pro/factures/telecharger-groupe");
 
-                    httpRequestMessageLocalVar.Content = (bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (requestBody as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(requestBody, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
@@ -4559,7 +4525,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostDefaultImplementation(apiResponseLocalVar, bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost);
+                        AfterTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostDefaultImplementation(apiResponseLocalVar, requestBody);
 
                         Events.ExecuteOnTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(apiResponseLocalVar);
 
@@ -4573,7 +4539,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostDefaultImplementation(e, "/api/v1/chorus-pro/factures/telecharger-groupe", uriBuilderLocalVar.Path, bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost);
+                OnErrorTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostDefaultImplementation(e, "/api/v1/chorus-pro/factures/telecharger-groupe", uriBuilderLocalVar.Path, requestBody);
                 Events.ExecuteOnErrorTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost(e);
                 throw;
             }
@@ -4710,28 +4676,28 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost);
+        partial void FormatTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost"></param>
+        /// <param name="requestBody"></param>
         /// <returns></returns>
-        private void ValidateTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost)
+        private void ValidateTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(Dictionary<string, Object> requestBody)
         {
-            if (bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost == null)
-                throw new ArgumentNullException(nameof(bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost));
+            if (requestBody == null)
+                throw new ArgumentNullException(nameof(requestBody));
         }
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost"></param>
-        private void AfterTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostDefaultImplementation(ITraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostApiResponse apiResponseLocalVar, BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost)
+        /// <param name="requestBody"></param>
+        private void AfterTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostDefaultImplementation(ITraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostApiResponse apiResponseLocalVar, Dictionary<string, Object> requestBody)
         {
             bool suppressDefaultLog = false;
-            AfterTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(ref suppressDefaultLog, apiResponseLocalVar, bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost);
+            AfterTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(ref suppressDefaultLog, apiResponseLocalVar, requestBody);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -4741,8 +4707,8 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost"></param>
-        partial void AfterTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(ref bool suppressDefaultLog, ITraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostApiResponse apiResponseLocalVar, BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost);
+        /// <param name="requestBody"></param>
+        partial void AfterTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(ref bool suppressDefaultLog, ITraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostApiResponse apiResponseLocalVar, Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -4750,11 +4716,11 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost"></param>
-        private void OnErrorTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost)
+        /// <param name="requestBody"></param>
+        private void OnErrorTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Dictionary<string, Object> requestBody)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost);
+            OnErrorTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, requestBody);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -4766,20 +4732,20 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost"></param>
-        partial void OnErrorTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost);
+        /// <param name="requestBody"></param>
+        partial void OnErrorTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Traiter une facture reçue (Destinataire) Change le statut d&#39;une facture reçue.      **Statuts possibles** :     - MISE_A_DISPOSITION : Facture acceptée     - SUSPENDUE : En attente d&#39;informations complémentaires (motif obligatoire)     - REJETEE : Facture refusée (motif obligatoire)     - MANDATEE : Facture mandatée     - MISE_EN_PAIEMENT : Facture en cours de paiement     - COMPTABILISEE : Facture comptabilisée     - MISE_A_DISPOSITION_COMPTABLE : Mise à disposition comptable     - A_RECYCLER : À recycler     - COMPLETEE : Complétée     - SERVICE-FAIT : Service fait     - PRISE_EN_COMPTE_DESTINATAIRE : Prise en compte     - TRANSMISE_MOA : Transmise à la MOA      **Payload exemple** :     &#x60;&#x60;&#x60;json     {       \&quot;identifiantFactureCPP\&quot;: 12345,       \&quot;nouveauStatut\&quot;: \&quot;REJETEE\&quot;,       \&quot;motifRejet\&quot;: \&quot;Facture en double\&quot;,       \&quot;commentaire\&quot;: \&quot;Facture déjà reçue sous la référence ABC123\&quot;     }     &#x60;&#x60;&#x60;      **Règles** :     - Un motif est **obligatoire** pour SUSPENDUE et REJETEE     - Seuls certains statuts sont autorisés selon le statut actuel de la facture
         /// </summary>
-        /// <param name="bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostApiResponse"/>&gt;</returns>
-        public async Task<ITraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostApiResponse?> TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostOrDefaultAsync(BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ITraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostApiResponse?> TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostOrDefaultAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostAsync(bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost, cancellationToken).ConfigureAwait(false);
+                return await TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostAsync(requestBody, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -4791,18 +4757,18 @@ namespace FactPulse.SDK.Api
         /// Traiter une facture reçue (Destinataire) Change le statut d&#39;une facture reçue.      **Statuts possibles** :     - MISE_A_DISPOSITION : Facture acceptée     - SUSPENDUE : En attente d&#39;informations complémentaires (motif obligatoire)     - REJETEE : Facture refusée (motif obligatoire)     - MANDATEE : Facture mandatée     - MISE_EN_PAIEMENT : Facture en cours de paiement     - COMPTABILISEE : Facture comptabilisée     - MISE_A_DISPOSITION_COMPTABLE : Mise à disposition comptable     - A_RECYCLER : À recycler     - COMPLETEE : Complétée     - SERVICE-FAIT : Service fait     - PRISE_EN_COMPTE_DESTINATAIRE : Prise en compte     - TRANSMISE_MOA : Transmise à la MOA      **Payload exemple** :     &#x60;&#x60;&#x60;json     {       \&quot;identifiantFactureCPP\&quot;: 12345,       \&quot;nouveauStatut\&quot;: \&quot;REJETEE\&quot;,       \&quot;motifRejet\&quot;: \&quot;Facture en double\&quot;,       \&quot;commentaire\&quot;: \&quot;Facture déjà reçue sous la référence ABC123\&quot;     }     &#x60;&#x60;&#x60;      **Règles** :     - Un motif est **obligatoire** pour SUSPENDUE et REJETEE     - Seuls certains statuts sont autorisés selon le statut actuel de la facture
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ITraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostApiResponse"/>&gt;</returns>
-        public async Task<ITraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostApiResponse> TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostAsync(BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ITraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostApiResponse> TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost);
+                ValidateTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(requestBody);
 
-                FormatTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost);
+                FormatTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(requestBody);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -4813,9 +4779,9 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/chorus-pro/factures/traiter-facture-recue"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/chorus-pro/factures/traiter-facture-recue");
 
-                    httpRequestMessageLocalVar.Content = (bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (requestBody as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(requestBody, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
@@ -4862,7 +4828,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostDefaultImplementation(apiResponseLocalVar, bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost);
+                        AfterTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostDefaultImplementation(apiResponseLocalVar, requestBody);
 
                         Events.ExecuteOnTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(apiResponseLocalVar);
 
@@ -4876,7 +4842,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostDefaultImplementation(e, "/api/v1/chorus-pro/factures/traiter-facture-recue", uriBuilderLocalVar.Path, bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost);
+                OnErrorTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostDefaultImplementation(e, "/api/v1/chorus-pro/factures/traiter-facture-recue", uriBuilderLocalVar.Path, requestBody);
                 Events.ExecuteOnErrorTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost(e);
                 throw;
             }
@@ -5013,28 +4979,28 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost);
+        partial void FormatValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost"></param>
+        /// <param name="requestBody"></param>
         /// <returns></returns>
-        private void ValidateValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost)
+        private void ValidateValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(Dictionary<string, Object> requestBody)
         {
-            if (bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost == null)
-                throw new ArgumentNullException(nameof(bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost));
+            if (requestBody == null)
+                throw new ArgumentNullException(nameof(requestBody));
         }
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost"></param>
-        private void AfterValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostDefaultImplementation(IValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostApiResponse apiResponseLocalVar, BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost)
+        /// <param name="requestBody"></param>
+        private void AfterValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostDefaultImplementation(IValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostApiResponse apiResponseLocalVar, Dictionary<string, Object> requestBody)
         {
             bool suppressDefaultLog = false;
-            AfterValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(ref suppressDefaultLog, apiResponseLocalVar, bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost);
+            AfterValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(ref suppressDefaultLog, apiResponseLocalVar, requestBody);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -5044,8 +5010,8 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost"></param>
-        partial void AfterValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(ref bool suppressDefaultLog, IValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostApiResponse apiResponseLocalVar, BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost);
+        /// <param name="requestBody"></param>
+        partial void AfterValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(ref bool suppressDefaultLog, IValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostApiResponse apiResponseLocalVar, Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -5053,11 +5019,11 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost"></param>
-        private void OnErrorValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost)
+        /// <param name="requestBody"></param>
+        private void OnErrorValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Dictionary<string, Object> requestBody)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost);
+            OnErrorValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, requestBody);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -5069,20 +5035,20 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost"></param>
-        partial void OnErrorValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost);
+        /// <param name="requestBody"></param>
+        partial void OnErrorValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Dictionary<string, Object> requestBody);
 
         /// <summary>
-        /// Consulter une facture (Valideur) Consulte facture (valideur).
+        /// Consulter une facture (Valideur) 
         /// </summary>
-        /// <param name="bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostApiResponse"/>&gt;</returns>
-        public async Task<IValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostApiResponse?> ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostOrDefaultAsync(BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostApiResponse?> ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostOrDefaultAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostAsync(bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost, cancellationToken).ConfigureAwait(false);
+                return await ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostAsync(requestBody, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -5091,21 +5057,21 @@ namespace FactPulse.SDK.Api
         }
 
         /// <summary>
-        /// Consulter une facture (Valideur) Consulte facture (valideur).
+        /// Consulter une facture (Valideur) 
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostApiResponse"/>&gt;</returns>
-        public async Task<IValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostApiResponse> ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostAsync(BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostApiResponse> ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost);
+                ValidateValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(requestBody);
 
-                FormatValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost);
+                FormatValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(requestBody);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -5116,9 +5082,9 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/chorus-pro/factures/valideur/consulter"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/chorus-pro/factures/valideur/consulter");
 
-                    httpRequestMessageLocalVar.Content = (bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (requestBody as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(requestBody, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
@@ -5165,7 +5131,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostDefaultImplementation(apiResponseLocalVar, bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost);
+                        AfterValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostDefaultImplementation(apiResponseLocalVar, requestBody);
 
                         Events.ExecuteOnValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(apiResponseLocalVar);
 
@@ -5179,7 +5145,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostDefaultImplementation(e, "/api/v1/chorus-pro/factures/valideur/consulter", uriBuilderLocalVar.Path, bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost);
+                OnErrorValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostDefaultImplementation(e, "/api/v1/chorus-pro/factures/valideur/consulter", uriBuilderLocalVar.Path, requestBody);
                 Events.ExecuteOnErrorValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost(e);
                 throw;
             }
@@ -5316,28 +5282,28 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(BodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost);
+        partial void FormatValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost"></param>
+        /// <param name="requestBody"></param>
         /// <returns></returns>
-        private void ValidateValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(BodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost)
+        private void ValidateValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(Dictionary<string, Object> requestBody)
         {
-            if (bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost == null)
-                throw new ArgumentNullException(nameof(bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost));
+            if (requestBody == null)
+                throw new ArgumentNullException(nameof(requestBody));
         }
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost"></param>
-        private void AfterValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostDefaultImplementation(IValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostApiResponse apiResponseLocalVar, BodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost)
+        /// <param name="requestBody"></param>
+        private void AfterValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostDefaultImplementation(IValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostApiResponse apiResponseLocalVar, Dictionary<string, Object> requestBody)
         {
             bool suppressDefaultLog = false;
-            AfterValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(ref suppressDefaultLog, apiResponseLocalVar, bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost);
+            AfterValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(ref suppressDefaultLog, apiResponseLocalVar, requestBody);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -5347,8 +5313,8 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost"></param>
-        partial void AfterValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(ref bool suppressDefaultLog, IValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostApiResponse apiResponseLocalVar, BodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost);
+        /// <param name="requestBody"></param>
+        partial void AfterValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(ref bool suppressDefaultLog, IValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostApiResponse apiResponseLocalVar, Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -5356,11 +5322,11 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost"></param>
-        private void OnErrorValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, BodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost)
+        /// <param name="requestBody"></param>
+        private void OnErrorValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Dictionary<string, Object> requestBody)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost);
+            OnErrorValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, requestBody);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -5372,20 +5338,20 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost"></param>
-        partial void OnErrorValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, BodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost);
+        /// <param name="requestBody"></param>
+        partial void OnErrorValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Rechercher factures à valider (Valideur) Recherche les factures en attente de validation par le valideur connecté.      **Rôle** : Valideur dans le circuit de validation interne.      **Filtres** : Dates, structure, service, etc.
         /// </summary>
-        /// <param name="bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostApiResponse"/>&gt;</returns>
-        public async Task<IValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostApiResponse?> ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostOrDefaultAsync(BodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostApiResponse?> ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostOrDefaultAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostAsync(bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost, cancellationToken).ConfigureAwait(false);
+                return await ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostAsync(requestBody, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -5397,18 +5363,18 @@ namespace FactPulse.SDK.Api
         /// Rechercher factures à valider (Valideur) Recherche les factures en attente de validation par le valideur connecté.      **Rôle** : Valideur dans le circuit de validation interne.      **Filtres** : Dates, structure, service, etc.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostApiResponse"/>&gt;</returns>
-        public async Task<IValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostApiResponse> ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostAsync(BodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostApiResponse> ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost);
+                ValidateValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(requestBody);
 
-                FormatValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost);
+                FormatValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(requestBody);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -5419,9 +5385,9 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/chorus-pro/factures/valideur/rechercher"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/chorus-pro/factures/valideur/rechercher");
 
-                    httpRequestMessageLocalVar.Content = (bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (requestBody as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(requestBody, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
@@ -5468,7 +5434,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostDefaultImplementation(apiResponseLocalVar, bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost);
+                        AfterValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostDefaultImplementation(apiResponseLocalVar, requestBody);
 
                         Events.ExecuteOnValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(apiResponseLocalVar);
 
@@ -5482,7 +5448,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostDefaultImplementation(e, "/api/v1/chorus-pro/factures/valideur/rechercher", uriBuilderLocalVar.Path, bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost);
+                OnErrorValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostDefaultImplementation(e, "/api/v1/chorus-pro/factures/valideur/rechercher", uriBuilderLocalVar.Path, requestBody);
                 Events.ExecuteOnErrorValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost(e);
                 throw;
             }
@@ -5619,28 +5585,28 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(BodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost);
+        partial void FormatValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost"></param>
+        /// <param name="requestBody"></param>
         /// <returns></returns>
-        private void ValidateValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(BodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost)
+        private void ValidateValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(Dictionary<string, Object> requestBody)
         {
-            if (bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost == null)
-                throw new ArgumentNullException(nameof(bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost));
+            if (requestBody == null)
+                throw new ArgumentNullException(nameof(requestBody));
         }
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost"></param>
-        private void AfterValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostDefaultImplementation(IValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostApiResponse apiResponseLocalVar, BodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost)
+        /// <param name="requestBody"></param>
+        private void AfterValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostDefaultImplementation(IValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostApiResponse apiResponseLocalVar, Dictionary<string, Object> requestBody)
         {
             bool suppressDefaultLog = false;
-            AfterValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(ref suppressDefaultLog, apiResponseLocalVar, bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost);
+            AfterValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(ref suppressDefaultLog, apiResponseLocalVar, requestBody);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -5650,8 +5616,8 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost"></param>
-        partial void AfterValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(ref bool suppressDefaultLog, IValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostApiResponse apiResponseLocalVar, BodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost);
+        /// <param name="requestBody"></param>
+        partial void AfterValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(ref bool suppressDefaultLog, IValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostApiResponse apiResponseLocalVar, Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -5659,11 +5625,11 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost"></param>
-        private void OnErrorValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, BodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost)
+        /// <param name="requestBody"></param>
+        private void OnErrorValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Dictionary<string, Object> requestBody)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost);
+            OnErrorValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, requestBody);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -5675,20 +5641,20 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost"></param>
-        partial void OnErrorValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, BodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost);
+        /// <param name="requestBody"></param>
+        partial void OnErrorValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Dictionary<string, Object> requestBody);
 
         /// <summary>
         /// Valider ou refuser une facture (Valideur) Valide ou refuse une facture en attente de validation.      **Actions** :     - Valider : La facture passe au statut suivant du circuit     - Refuser : La facture est rejetée (motif obligatoire)
         /// </summary>
-        /// <param name="bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostApiResponse"/>&gt;</returns>
-        public async Task<IValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostApiResponse?> ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostOrDefaultAsync(BodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostApiResponse?> ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostOrDefaultAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostAsync(bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost, cancellationToken).ConfigureAwait(false);
+                return await ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostAsync(requestBody, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -5700,18 +5666,18 @@ namespace FactPulse.SDK.Api
         /// Valider ou refuser une facture (Valideur) Valide ou refuse une facture en attente de validation.      **Actions** :     - Valider : La facture passe au statut suivant du circuit     - Refuser : La facture est rejetée (motif obligatoire)
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost"></param>
+        /// <param name="requestBody"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostApiResponse"/>&gt;</returns>
-        public async Task<IValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostApiResponse> ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostAsync(BodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostApiResponse> ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostAsync(Dictionary<string, Object> requestBody, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost);
+                ValidateValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(requestBody);
 
-                FormatValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost);
+                FormatValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(requestBody);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -5722,9 +5688,9 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/chorus-pro/factures/valideur/traiter"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/chorus-pro/factures/valideur/traiter");
 
-                    httpRequestMessageLocalVar.Content = (bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (requestBody as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(requestBody, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
@@ -5771,7 +5737,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostDefaultImplementation(apiResponseLocalVar, bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost);
+                        AfterValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostDefaultImplementation(apiResponseLocalVar, requestBody);
 
                         Events.ExecuteOnValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(apiResponseLocalVar);
 
@@ -5785,7 +5751,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostDefaultImplementation(e, "/api/v1/chorus-pro/factures/valideur/traiter", uriBuilderLocalVar.Path, bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost);
+                OnErrorValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostDefaultImplementation(e, "/api/v1/chorus-pro/factures/valideur/traiter", uriBuilderLocalVar.Path, requestBody);
                 Events.ExecuteOnErrorValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost(e);
                 throw;
             }

@@ -46,17 +46,6 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new APIErrorJsonConverter());
             _jsonOptions.Converters.Add(new AdresseElectroniqueJsonConverter());
             _jsonOptions.Converters.Add(new AdressePostaleJsonConverter());
-            _jsonOptions.Converters.Add(new BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPostJsonConverter());
-            _jsonOptions.Converters.Add(new BodyCompleterFactureApiV1ChorusProFacturesCompleterPostJsonConverter());
-            _jsonOptions.Converters.Add(new BodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetJsonConverter());
-            _jsonOptions.Converters.Add(new BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostJsonConverter());
-            _jsonOptions.Converters.Add(new BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostJsonConverter());
-            _jsonOptions.Converters.Add(new BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPostJsonConverter());
-            _jsonOptions.Converters.Add(new BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostJsonConverter());
-            _jsonOptions.Converters.Add(new BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostJsonConverter());
-            _jsonOptions.Converters.Add(new BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostJsonConverter());
-            _jsonOptions.Converters.Add(new BodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostJsonConverter());
-            _jsonOptions.Converters.Add(new BodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostJsonConverter());
             _jsonOptions.Converters.Add(new CadreDeFacturationJsonConverter());
             _jsonOptions.Converters.Add(new CategorieTVAJsonConverter());
             _jsonOptions.Converters.Add(new CategorieTVANullableJsonConverter());
@@ -121,7 +110,6 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new ProfilAPIJsonConverter());
             _jsonOptions.Converters.Add(new ProfilAPINullableJsonConverter());
             _jsonOptions.Converters.Add(new QuantiteJsonConverter());
-            _jsonOptions.Converters.Add(new QuotaInfoJsonConverter());
             _jsonOptions.Converters.Add(new RechercherServicesResponseJsonConverter());
             _jsonOptions.Converters.Add(new RechercherStructureRequestJsonConverter());
             _jsonOptions.Converters.Add(new RechercherStructureResponseJsonConverter());
@@ -152,7 +140,6 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new TypeTVANullableJsonConverter());
             _jsonOptions.Converters.Add(new UniteJsonConverter());
             _jsonOptions.Converters.Add(new UniteNullableJsonConverter());
-            _jsonOptions.Converters.Add(new UtilisateurJsonConverter());
             _jsonOptions.Converters.Add(new ValidationErrorJsonConverter());
             _jsonOptions.Converters.Add(new ValidationErrorDetailJsonConverter());
             _jsonOptions.Converters.Add(new ValidationErrorLocInnerJsonConverter());

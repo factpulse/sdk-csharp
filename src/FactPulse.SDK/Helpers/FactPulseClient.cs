@@ -17,17 +17,24 @@ namespace FactPulse.SDK.Helpers {
         };
     }
 
-    /// <summary>Credentials AFNOR PDP pour le mode Zero-Trust.</summary>
+    /// <summary>Credentials AFNOR PDP pour le mode Zero-Trust. L'API FactPulse utilise ces credentials pour s'authentifier auprès de la PDP AFNOR.</summary>
     public class AFNORCredentials {
+        public string FlowServiceUrl { get; }
+        public string TokenUrl { get; }
         public string ClientId { get; }
         public string ClientSecret { get; }
-        public string FlowServiceUrl { get; }
-        public AFNORCredentials(string clientId, string clientSecret, string flowServiceUrl) {
-            ClientId = clientId; ClientSecret = clientSecret; FlowServiceUrl = flowServiceUrl;
+        public string? DirectoryServiceUrl { get; }
+        public AFNORCredentials(string flowServiceUrl, string tokenUrl, string clientId, string clientSecret, string? directoryServiceUrl = null) {
+            FlowServiceUrl = flowServiceUrl; TokenUrl = tokenUrl; ClientId = clientId; ClientSecret = clientSecret; DirectoryServiceUrl = directoryServiceUrl;
         }
-        public Dictionary<string, object> ToDict() => new() {
-            ["client_id"] = ClientId, ["client_secret"] = ClientSecret, ["flow_service_url"] = FlowServiceUrl
-        };
+        public Dictionary<string, object> ToDict() {
+            var dict = new Dictionary<string, object> {
+                ["flow_service_url"] = FlowServiceUrl, ["token_url"] = TokenUrl,
+                ["client_id"] = ClientId, ["client_secret"] = ClientSecret
+            };
+            if (DirectoryServiceUrl != null) dict["directory_service_url"] = DirectoryServiceUrl;
+            return dict;
+        }
     }
 
     /// <summary>Helpers pour créer des montants simplifiés.</summary>
@@ -49,35 +56,84 @@ namespace FactPulse.SDK.Helpers {
             return result;
         }
 
+        /// <summary>Crée une ligne de poste (aligné sur LigneDePoste de models.py).</summary>
         public static Dictionary<string, object> LigneDePoste(int numero, string denomination, object quantite,
-            object montantUnitaireHt, object montantLigneHt, string tauxTva = "20.00", string categorieTva = "S", string unite = "C62",
-            string? reference = null, object? montantTvaLigne = null, object? montantRemiseHt = null,
-            string? codeRaisonReduction = null, string? raisonReduction = null, string? motifExoneration = null,
-            string? dateDebutPeriode = null, string? dateFinPeriode = null, string? description = null) {
+            object montantUnitaireHt, object montantTotalLigneHt, string tauxTva = "20.00", string categorieTva = "S", string unite = "FORFAIT",
+            string? reference = null, object? montantRemiseHt = null,
+            string? codeRaisonReduction = null, string? raisonReduction = null,
+            string? dateDebutPeriode = null, string? dateFinPeriode = null) {
             var result = new Dictionary<string, object> {
                 ["numero"] = numero, ["denomination"] = denomination, ["quantite"] = Montant(quantite),
-                ["montantUnitaireHt"] = Montant(montantUnitaireHt), ["montantTotalLigneHt"] = Montant(montantLigneHt),
-                ["tauxTvaManuel"] = Montant(tauxTva), ["categorieTva"] = categorieTva, ["unite"] = unite
+                ["montantUnitaireHt"] = Montant(montantUnitaireHt), ["montantTotalLigneHt"] = Montant(montantTotalLigneHt),
+                ["tauxTva"] = Montant(tauxTva), ["categorieTva"] = categorieTva, ["unite"] = unite
             };
             if (reference != null) result["reference"] = reference;
-            if (montantTvaLigne != null) result["montantTvaLigne"] = Montant(montantTvaLigne);
             if (montantRemiseHt != null) result["montantRemiseHt"] = Montant(montantRemiseHt);
             if (codeRaisonReduction != null) result["codeRaisonReduction"] = codeRaisonReduction;
             if (raisonReduction != null) result["raisonReduction"] = raisonReduction;
-            if (motifExoneration != null) result["motifExoneration"] = motifExoneration;
             if (dateDebutPeriode != null) result["dateDebutPeriode"] = dateDebutPeriode;
             if (dateFinPeriode != null) result["dateFinPeriode"] = dateFinPeriode;
-            if (description != null) result["description"] = description;
             return result;
         }
 
-        public static Dictionary<string, object> LigneDeTva(object taux, object baseHt, object montantTva,
-            string categorie = "S", string? motifExoneration = null) {
-            var result = new Dictionary<string, object> {
-                ["tauxManuel"] = Montant(taux), ["montantBaseHt"] = Montant(baseHt),
+        /// <summary>Crée une ligne de TVA (aligné sur LigneDeTVA de models.py).</summary>
+        public static Dictionary<string, object> LigneDeTva(object tauxManuel, object montantBaseHt, object montantTva, string categorie = "S") {
+            return new Dictionary<string, object> {
+                ["tauxManuel"] = Montant(tauxManuel), ["montantBaseHt"] = Montant(montantBaseHt),
                 ["montantTva"] = Montant(montantTva), ["categorie"] = categorie
             };
-            if (motifExoneration != null) result["motifExoneration"] = motifExoneration;
+        }
+
+        /// <summary>Crée une adresse postale pour l'API FactPulse.</summary>
+        public static Dictionary<string, object> AdressePostale(string ligne1, string codePostal, string ville, string pays = "FR", string? ligne2 = null, string? ligne3 = null) {
+            var result = new Dictionary<string, object> { ["ligneUn"] = ligne1, ["codePostal"] = codePostal, ["nomVille"] = ville, ["paysCodeIso"] = pays };
+            if (ligne2 != null) result["ligneDeux"] = ligne2;
+            if (ligne3 != null) result["ligneTrois"] = ligne3;
+            return result;
+        }
+
+        /// <summary>Crée une adresse électronique. schemeId: "0009"=SIREN, "0225"=SIRET</summary>
+        public static Dictionary<string, object> AdresseElectronique(string identifiant, string schemeId = "0009") {
+            return new Dictionary<string, object> { ["identifiant"] = identifiant, ["schemeId"] = schemeId };
+        }
+
+        /// <summary>Calcule le numéro TVA intracommunautaire français depuis un SIREN.</summary>
+        private static string? CalculerTvaIntra(string siren) {
+            if (siren.Length != 9 || !long.TryParse(siren, out var sirenNum)) return null;
+            var cle = (12 + 3 * (sirenNum % 97)) % 97;
+            return $"FR{cle:D2}{siren}";
+        }
+
+        /// <summary>Crée un fournisseur (émetteur) avec auto-calcul SIREN, TVA intracommunautaire et adresses.</summary>
+        public static Dictionary<string, object> Fournisseur(string nom, string siret, string adresseLigne1, string codePostal, string ville,
+            int idFournisseur = 0, string? siren = null, string? numeroTvaIntra = null, string? iban = null, string pays = "FR",
+            string? adresseLigne2 = null, int? codeService = null, int? codeCoordonnesBancaires = null) {
+            siren ??= siret.Length == 14 ? siret[..9] : null;
+            numeroTvaIntra ??= siren != null ? CalculerTvaIntra(siren) : null;
+            var result = new Dictionary<string, object> {
+                ["nom"] = nom, ["idFournisseur"] = idFournisseur, ["siret"] = siret,
+                ["adresseElectronique"] = AdresseElectronique(siret, "0225"),
+                ["adressePostale"] = AdressePostale(adresseLigne1, codePostal, ville, pays, adresseLigne2)
+            };
+            if (siren != null) result["siren"] = siren;
+            if (numeroTvaIntra != null) result["numeroTvaIntra"] = numeroTvaIntra;
+            if (iban != null) result["iban"] = iban;
+            if (codeService != null) result["idServiceFournisseur"] = codeService;
+            if (codeCoordonnesBancaires != null) result["codeCoordonnesBancairesFournisseur"] = codeCoordonnesBancaires;
+            return result;
+        }
+
+        /// <summary>Crée un destinataire (client) avec auto-calcul SIREN et adresses.</summary>
+        public static Dictionary<string, object> Destinataire(string nom, string siret, string adresseLigne1, string codePostal, string ville,
+            string? siren = null, string pays = "FR", string? adresseLigne2 = null, string? codeServiceExecutant = null) {
+            siren ??= siret.Length == 14 ? siret[..9] : null;
+            var result = new Dictionary<string, object> {
+                ["nom"] = nom, ["siret"] = siret,
+                ["adresseElectronique"] = AdresseElectronique(siret, "0225"),
+                ["adressePostale"] = AdressePostale(adresseLigne1, codePostal, ville, pays, adresseLigne2)
+            };
+            if (siren != null) result["siren"] = siren;
+            if (codeServiceExecutant != null) result["codeServiceExecutant"] = codeServiceExecutant;
             return result;
         }
     }

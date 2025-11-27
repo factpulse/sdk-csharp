@@ -56,8 +56,8 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task AjouterFichierApiV1ChorusProTransversesAjouterFichierPostAsyncTest()
         {
-            BodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost = default!;
-            var response = await _instance.AjouterFichierApiV1ChorusProTransversesAjouterFichierPostAsync(bodyAjouterFichierApiV1ChorusProTransversesAjouterFichierPost);
+            Dictionary<string, Object> requestBody = default!;
+            var response = await _instance.AjouterFichierApiV1ChorusProTransversesAjouterFichierPostAsync(requestBody);
             var model = response.Ok();
             Assert.IsType<Object>(model);
         }
@@ -68,8 +68,8 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task CompleterFactureApiV1ChorusProFacturesCompleterPostAsyncTest()
         {
-            BodyCompleterFactureApiV1ChorusProFacturesCompleterPost bodyCompleterFactureApiV1ChorusProFacturesCompleterPost = default!;
-            var response = await _instance.CompleterFactureApiV1ChorusProFacturesCompleterPostAsync(bodyCompleterFactureApiV1ChorusProFacturesCompleterPost);
+            Dictionary<string, Object> requestBody = default!;
+            var response = await _instance.CompleterFactureApiV1ChorusProFacturesCompleterPostAsync(requestBody);
             var model = response.Ok();
             Assert.IsType<Object>(model);
         }
@@ -105,8 +105,7 @@ namespace FactPulse.SDK.Test.Api
         public async Task ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetAsyncTest()
         {
             int idStructureCpp = default!;
-            BodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet = default!;
-            var response = await _instance.ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetAsync(idStructureCpp, bodyListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGet);
+            var response = await _instance.ListerServicesStructureApiV1ChorusProStructuresIdStructureCppServicesGetAsync(idStructureCpp);
             var model = response.Ok();
             Assert.IsType<RechercherServicesResponse>(model);
         }
@@ -129,8 +128,8 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostAsyncTest()
         {
-            BodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost = default!;
-            var response = await _instance.RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostAsync(bodyRechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePost);
+            Dictionary<string, Object> requestBody = default!;
+            var response = await _instance.RechercherFacturesDestinataireApiV1ChorusProFacturesRechercherDestinatairePostAsync(requestBody);
             var model = response.Ok();
             Assert.IsType<Object>(model);
         }
@@ -141,8 +140,8 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostAsyncTest()
         {
-            BodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost = default!;
-            var response = await _instance.RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostAsync(bodyRechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPost);
+            Dictionary<string, Object> requestBody = default!;
+            var response = await _instance.RechercherFacturesFournisseurApiV1ChorusProFacturesRechercherFournisseurPostAsync(requestBody);
             var model = response.Ok();
             Assert.IsType<Object>(model);
         }
@@ -165,8 +164,8 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task RecyclerFactureApiV1ChorusProFacturesRecyclerPostAsyncTest()
         {
-            BodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost = default!;
-            var response = await _instance.RecyclerFactureApiV1ChorusProFacturesRecyclerPostAsync(bodyRecyclerFactureApiV1ChorusProFacturesRecyclerPost);
+            Dictionary<string, Object> requestBody = default!;
+            var response = await _instance.RecyclerFactureApiV1ChorusProFacturesRecyclerPostAsync(requestBody);
             var model = response.Ok();
             Assert.IsType<Object>(model);
         }
@@ -189,8 +188,8 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostAsyncTest()
         {
-            BodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost = default!;
-            var response = await _instance.TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostAsync(bodyTelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePost);
+            Dictionary<string, Object> requestBody = default!;
+            var response = await _instance.TelechargerGroupeFacturesApiV1ChorusProFacturesTelechargerGroupePostAsync(requestBody);
             var model = response.Ok();
             Assert.IsType<Object>(model);
         }
@@ -201,8 +200,8 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostAsyncTest()
         {
-            BodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost = default!;
-            var response = await _instance.TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostAsync(bodyTraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePost);
+            Dictionary<string, Object> requestBody = default!;
+            var response = await _instance.TraiterFactureRecueApiV1ChorusProFacturesTraiterFactureRecuePostAsync(requestBody);
             var model = response.Ok();
             Assert.IsType<Object>(model);
         }
@@ -213,8 +212,8 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostAsyncTest()
         {
-            BodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost = default!;
-            var response = await _instance.ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostAsync(bodyValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPost);
+            Dictionary<string, Object> requestBody = default!;
+            var response = await _instance.ValideurConsulterFactureApiV1ChorusProFacturesValideurConsulterPostAsync(requestBody);
             var model = response.Ok();
             Assert.IsType<Object>(model);
         }
@@ -225,8 +224,8 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostAsyncTest()
         {
-            BodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost = default!;
-            var response = await _instance.ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostAsync(bodyValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPost);
+            Dictionary<string, Object> requestBody = default!;
+            var response = await _instance.ValideurRechercherFacturesApiV1ChorusProFacturesValideurRechercherPostAsync(requestBody);
             var model = response.Ok();
             Assert.IsType<Object>(model);
         }
@@ -237,8 +236,8 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostAsyncTest()
         {
-            BodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost = default!;
-            var response = await _instance.ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostAsync(bodyValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPost);
+            Dictionary<string, Object> requestBody = default!;
+            var response = await _instance.ValideurTraiterFactureApiV1ChorusProFacturesValideurTraiterPostAsync(requestBody);
             var model = response.Ok();
             Assert.IsType<Object>(model);
         }
