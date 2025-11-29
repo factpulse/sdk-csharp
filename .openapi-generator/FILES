@@ -34,9 +34,12 @@ docs/models/DonneesFactureSimplifiees.md
 docs/models/ErrorLevel.md
 docs/models/ErrorSource.md
 docs/models/FactureEnrichieInfo.md
+docs/models/FactureEntrante.md
 docs/models/FactureFacturX.md
+docs/models/FormatFacture.md
 docs/models/FormatSortie.md
 docs/models/Fournisseur.md
+docs/models/FournisseurEntrant.md
 docs/models/GenerateCertificateRequest.md
 docs/models/GenerateCertificateResponse.md
 docs/models/HTTPValidationError.md
@@ -91,6 +94,7 @@ docs/models/StatutFacture.md
 docs/models/StatutTache.md
 docs/models/StructureInfo.md
 docs/models/Tauxmanuel.md
+docs/models/TypeDocument.md
 docs/models/TypeFacture.md
 docs/models/TypeTVA.md
 docs/models/Unite.md
@@ -132,8 +136,11 @@ src/FactPulse.SDK.Test/Model/DonneesFactureSimplifieesTests.cs
 src/FactPulse.SDK.Test/Model/ErrorLevelTests.cs
 src/FactPulse.SDK.Test/Model/ErrorSourceTests.cs
 src/FactPulse.SDK.Test/Model/FactureEnrichieInfoTests.cs
+src/FactPulse.SDK.Test/Model/FactureEntranteTests.cs
 src/FactPulse.SDK.Test/Model/FactureFacturXTests.cs
+src/FactPulse.SDK.Test/Model/FormatFactureTests.cs
 src/FactPulse.SDK.Test/Model/FormatSortieTests.cs
+src/FactPulse.SDK.Test/Model/FournisseurEntrantTests.cs
 src/FactPulse.SDK.Test/Model/FournisseurTests.cs
 src/FactPulse.SDK.Test/Model/GenerateCertificateRequestTests.cs
 src/FactPulse.SDK.Test/Model/GenerateCertificateResponseTests.cs
@@ -189,6 +196,7 @@ src/FactPulse.SDK.Test/Model/StatutFactureTests.cs
 src/FactPulse.SDK.Test/Model/StatutTacheTests.cs
 src/FactPulse.SDK.Test/Model/StructureInfoTests.cs
 src/FactPulse.SDK.Test/Model/TauxmanuelTests.cs
+src/FactPulse.SDK.Test/Model/TypeDocumentTests.cs
 src/FactPulse.SDK.Test/Model/TypeFactureTests.cs
 src/FactPulse.SDK.Test/Model/TypeTVATests.cs
 src/FactPulse.SDK.Test/Model/UniteTests.cs
@@ -250,9 +258,12 @@ src/FactPulse.SDK/Model/DonneesFactureSimplifiees.cs
 src/FactPulse.SDK/Model/ErrorLevel.cs
 src/FactPulse.SDK/Model/ErrorSource.cs
 src/FactPulse.SDK/Model/FactureEnrichieInfo.cs
+src/FactPulse.SDK/Model/FactureEntrante.cs
 src/FactPulse.SDK/Model/FactureFacturX.cs
+src/FactPulse.SDK/Model/FormatFacture.cs
 src/FactPulse.SDK/Model/FormatSortie.cs
 src/FactPulse.SDK/Model/Fournisseur.cs
+src/FactPulse.SDK/Model/FournisseurEntrant.cs
 src/FactPulse.SDK/Model/GenerateCertificateRequest.cs
 src/FactPulse.SDK/Model/GenerateCertificateResponse.cs
 src/FactPulse.SDK/Model/HTTPValidationError.cs
@@ -307,6 +318,7 @@ src/FactPulse.SDK/Model/StatutFacture.cs
 src/FactPulse.SDK/Model/StatutTache.cs
 src/FactPulse.SDK/Model/StructureInfo.cs
 src/FactPulse.SDK/Model/Tauxmanuel.cs
+src/FactPulse.SDK/Model/TypeDocument.cs
 src/FactPulse.SDK/Model/TypeFacture.cs
 src/FactPulse.SDK/Model/TypeTVA.cs
 src/FactPulse.SDK/Model/Unite.cs

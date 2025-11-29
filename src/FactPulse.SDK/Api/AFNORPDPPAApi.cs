@@ -19,6 +19,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using FactPulse.SDK.Client;
+using FactPulse.SDK.Model;
 using System.Diagnostics.CodeAnalysis;
 
 namespace FactPulse.SDK.Api
@@ -54,6 +55,29 @@ namespace FactPulse.SDK.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse"/>?&gt;</returns>
         Task<IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse?> GetAfnorCredentialsApiV1AfnorCredentialsGetOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Récupérer et extraire une facture entrante
+        /// </summary>
+        /// <remarks>
+        /// Télécharge un flux entrant depuis la PDP AFNOR et extrait les métadonnées de la facture vers un format JSON unifié. Supporte les formats Factur-X, CII et UBL.
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="flowId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse"/>&gt;</returns>
+        Task<IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse> GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetAsync(string flowId, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Récupérer et extraire une facture entrante
+        /// </summary>
+        /// <remarks>
+        /// Télécharge un flux entrant depuis la PDP AFNOR et extrait les métadonnées de la facture vers un format JSON unifié. Supporte les formats Factur-X, CII et UBL.
+        /// </remarks>
+        /// <param name="flowId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse"/>?&gt;</returns>
+        Task<IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse?> GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetOrDefaultAsync(string flowId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Endpoint OAuth2 pour authentification AFNOR
@@ -108,6 +132,48 @@ namespace FactPulse.SDK.Api
     }
 
     /// <summary>
+    /// The <see cref="IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse"/>
+    /// </summary>
+    public interface IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.FactureEntrante?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 400 BadRequest
+        /// </summary>
+        /// <returns></returns>
+        bool IsBadRequest { get; }
+
+        /// <summary>
+        /// Returns true if the response is 401 Unauthorized
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnauthorized { get; }
+
+        /// <summary>
+        /// Returns true if the response is 404 NotFound
+        /// </summary>
+        /// <returns></returns>
+        bool IsNotFound { get; }
+
+        /// <summary>
+        /// Returns true if the response is 503 ServiceUnavailable
+        /// </summary>
+        /// <returns></returns>
+        bool IsServiceUnavailable { get; }
+
+        /// <summary>
+        /// Returns true if the response is 422 UnprocessableContent
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnprocessableContent { get; }
+    }
+
+    /// <summary>
     /// The <see cref="IOauthTokenProxyApiV1AfnorOauthTokenPostApiResponse"/>
     /// </summary>
     public interface IOauthTokenProxyApiV1AfnorOauthTokenPostApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<Object?>
@@ -148,6 +214,26 @@ namespace FactPulse.SDK.Api
         internal void ExecuteOnErrorGetAfnorCredentialsApiV1AfnorCredentialsGet(Exception exception)
         {
             OnErrorGetAfnorCredentialsApiV1AfnorCredentialsGet?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
+        public event EventHandler<ApiResponseEventArgs>? OnGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs>? OnErrorGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet;
+
+        internal void ExecuteOnGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(AFNORPDPPAApi.GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse apiResponse)
+        {
+            OnGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(Exception exception)
+        {
+            OnErrorGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet?.Invoke(this, new ExceptionEventArgs(exception));
         }
 
         /// <summary>
@@ -453,6 +539,321 @@ namespace FactPulse.SDK.Api
             /// </summary>
             /// <returns></returns>
             public bool IsNotFound => 404 == (int)StatusCode;
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
+        partial void FormatGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(ref string flowId);
+
+        /// <summary>
+        /// Validates the request parameters
+        /// </summary>
+        /// <param name="flowId"></param>
+        /// <returns></returns>
+        private void ValidateGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(string flowId)
+        {
+            if (flowId == null)
+                throw new ArgumentNullException(nameof(flowId));
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="flowId"></param>
+        private void AfterGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetDefaultImplementation(IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse apiResponseLocalVar, string flowId)
+        {
+            bool suppressDefaultLog = false;
+            AfterGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(ref suppressDefaultLog, apiResponseLocalVar, flowId);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="flowId"></param>
+        partial void AfterGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(ref bool suppressDefaultLog, IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse apiResponseLocalVar, string flowId);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="flowId"></param>
+        private void OnErrorGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string flowId)
+        {
+            bool suppressDefaultLogLocalVar = false;
+            OnErrorGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, flowId);
+            if (!suppressDefaultLogLocalVar)
+                Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLogLocalVar"></param>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="flowId"></param>
+        partial void OnErrorGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string flowId);
+
+        /// <summary>
+        /// Récupérer et extraire une facture entrante Télécharge un flux entrant depuis la PDP AFNOR et extrait les métadonnées de la facture vers un format JSON unifié. Supporte les formats Factur-X, CII et UBL.
+        /// </summary>
+        /// <param name="flowId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse"/>&gt;</returns>
+        public async Task<IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse?> GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetOrDefaultAsync(string flowId, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetAsync(flowId, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Récupérer et extraire une facture entrante Télécharge un flux entrant depuis la PDP AFNOR et extrait les métadonnées de la facture vers un format JSON unifié. Supporte les formats Factur-X, CII et UBL.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="flowId"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse"/>&gt;</returns>
+        public async Task<IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse> GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetAsync(string flowId, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                ValidateGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(flowId);
+
+                FormatGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(ref flowId);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
+                        ? "/api/v1/afnor/flux-entrants/{flow_id}"
+                        : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/flux-entrants/{flow_id}");
+                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bflow_id%7D", Uri.EscapeDataString(flowId.ToString()));
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+
+                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+
+                    if (acceptLocalVar != null)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Get;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        ILogger<GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse>();
+                        GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse apiResponseLocalVar;
+
+                        switch ((int)httpResponseMessageLocalVar.StatusCode) {
+                            default: {
+                                string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+                                apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/api/v1/afnor/flux-entrants/{flow_id}", requestedAtLocalVar, _jsonSerializerOptions);
+
+                                break;
+                            }
+                        }
+
+                        AfterGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetDefaultImplementation(apiResponseLocalVar, flowId);
+
+                        Events.ExecuteOnGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetDefaultImplementation(e, "/api/v1/afnor/flux-entrants/{flow_id}", uriBuilderLocalVar.Path, flowId);
+                Events.ExecuteOnErrorGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse"/>
+        /// </summary>
+        public partial class GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse : FactPulse.SDK.Client.ApiResponse, IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse(ILogger<GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            /// <summary>
+            /// The <see cref="GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="contentStream"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse(ILogger<GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.FactureEntrante? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.FactureEntrante>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out FactPulse.SDK.Model.FactureEntrante? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 400 BadRequest
+            /// </summary>
+            /// <returns></returns>
+            public bool IsBadRequest => 400 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 401 Unauthorized
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnauthorized => 401 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 404 NotFound
+            /// </summary>
+            /// <returns></returns>
+            public bool IsNotFound => 404 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 503 ServiceUnavailable
+            /// </summary>
+            /// <returns></returns>
+            public bool IsServiceUnavailable => 503 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnprocessableContent => 422 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.HTTPValidationError? UnprocessableContent()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsUnprocessableContent
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.HTTPValidationError>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryUnprocessableContent([NotNullWhen(true)]out FactPulse.SDK.Model.HTTPValidationError? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = UnprocessableContent();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)422);
+                }
+
+                return result != null;
+            }
 
             private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
             {

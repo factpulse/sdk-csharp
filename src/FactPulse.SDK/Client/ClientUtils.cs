@@ -129,6 +129,8 @@ namespace FactPulse.SDK.Client
                 return ErrorLevelValueConverter.ToJsonValue(errorLevel);
             if (obj is ErrorSource errorSource)
                 return ErrorSourceValueConverter.ToJsonValue(errorSource);
+            if (obj is FormatFacture formatFacture)
+                return FormatFactureValueConverter.ToJsonValue(formatFacture);
             if (obj is FormatSortie formatSortie)
                 return FormatSortieValueConverter.ToJsonValue(formatSortie);
             if (obj is ModeDepot modeDepot)
@@ -143,6 +145,8 @@ namespace FactPulse.SDK.Client
                 return SoumettreFactureCompleteResponse.DestinationTypeEnumToJsonValue(soumettreFactureCompleteResponseDestinationTypeEnum);
             if (obj is StatutCelery statutCelery)
                 return StatutCeleryValueConverter.ToJsonValue(statutCelery);
+            if (obj is TypeDocument typeDocument)
+                return TypeDocumentValueConverter.ToJsonValue(typeDocument);
             if (obj is TypeFacture typeFacture)
                 return TypeFactureValueConverter.ToJsonValue(typeFacture);
             if (obj is TypeTVA typeTVA)

@@ -71,10 +71,14 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new ErrorSourceJsonConverter());
             _jsonOptions.Converters.Add(new ErrorSourceNullableJsonConverter());
             _jsonOptions.Converters.Add(new FactureEnrichieInfoJsonConverter());
+            _jsonOptions.Converters.Add(new FactureEntranteJsonConverter());
             _jsonOptions.Converters.Add(new FactureFacturXJsonConverter());
+            _jsonOptions.Converters.Add(new FormatFactureJsonConverter());
+            _jsonOptions.Converters.Add(new FormatFactureNullableJsonConverter());
             _jsonOptions.Converters.Add(new FormatSortieJsonConverter());
             _jsonOptions.Converters.Add(new FormatSortieNullableJsonConverter());
             _jsonOptions.Converters.Add(new FournisseurJsonConverter());
+            _jsonOptions.Converters.Add(new FournisseurEntrantJsonConverter());
             _jsonOptions.Converters.Add(new GenerateCertificateRequestJsonConverter());
             _jsonOptions.Converters.Add(new GenerateCertificateResponseJsonConverter());
             _jsonOptions.Converters.Add(new HTTPValidationErrorJsonConverter());
@@ -134,6 +138,8 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new StatutTacheJsonConverter());
             _jsonOptions.Converters.Add(new StructureInfoJsonConverter());
             _jsonOptions.Converters.Add(new TauxmanuelJsonConverter());
+            _jsonOptions.Converters.Add(new TypeDocumentJsonConverter());
+            _jsonOptions.Converters.Add(new TypeDocumentNullableJsonConverter());
             _jsonOptions.Converters.Add(new TypeFactureJsonConverter());
             _jsonOptions.Converters.Add(new TypeFactureNullableJsonConverter());
             _jsonOptions.Converters.Add(new TypeTVAJsonConverter());
