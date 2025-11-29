@@ -64,9 +64,10 @@ namespace FactPulse.SDK.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="flowId"></param>
+        /// <param name="includeDocument"> (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse"/>&gt;</returns>
-        Task<IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse> GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetAsync(string flowId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse> GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetAsync(string flowId, Option<bool> includeDocument = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Récupérer et extraire une facture entrante
@@ -75,9 +76,10 @@ namespace FactPulse.SDK.Api
         /// Télécharge un flux entrant depuis la PDP AFNOR et extrait les métadonnées de la facture vers un format JSON unifié. Supporte les formats Factur-X, CII et UBL.
         /// </remarks>
         /// <param name="flowId"></param>
+        /// <param name="includeDocument"> (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse"/>?&gt;</returns>
-        Task<IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse?> GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetOrDefaultAsync(string flowId, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse?> GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetOrDefaultAsync(string flowId, Option<bool> includeDocument = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Endpoint OAuth2 pour authentification AFNOR
@@ -551,7 +553,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(ref string flowId);
+        partial void FormatGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(ref string flowId, ref Option<bool> includeDocument);
 
         /// <summary>
         /// Validates the request parameters
@@ -569,10 +571,11 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="flowId"></param>
-        private void AfterGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetDefaultImplementation(IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse apiResponseLocalVar, string flowId)
+        /// <param name="includeDocument"></param>
+        private void AfterGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetDefaultImplementation(IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse apiResponseLocalVar, string flowId, Option<bool> includeDocument)
         {
             bool suppressDefaultLog = false;
-            AfterGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(ref suppressDefaultLog, apiResponseLocalVar, flowId);
+            AfterGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(ref suppressDefaultLog, apiResponseLocalVar, flowId, includeDocument);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -583,7 +586,8 @@ namespace FactPulse.SDK.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="flowId"></param>
-        partial void AfterGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(ref bool suppressDefaultLog, IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse apiResponseLocalVar, string flowId);
+        /// <param name="includeDocument"></param>
+        partial void AfterGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(ref bool suppressDefaultLog, IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse apiResponseLocalVar, string flowId, Option<bool> includeDocument);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -592,10 +596,11 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="flowId"></param>
-        private void OnErrorGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string flowId)
+        /// <param name="includeDocument"></param>
+        private void OnErrorGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string flowId, Option<bool> includeDocument)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, flowId);
+            OnErrorGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, flowId, includeDocument);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -608,19 +613,21 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="flowId"></param>
-        partial void OnErrorGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string flowId);
+        /// <param name="includeDocument"></param>
+        partial void OnErrorGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string flowId, Option<bool> includeDocument);
 
         /// <summary>
         /// Récupérer et extraire une facture entrante Télécharge un flux entrant depuis la PDP AFNOR et extrait les métadonnées de la facture vers un format JSON unifié. Supporte les formats Factur-X, CII et UBL.
         /// </summary>
         /// <param name="flowId"></param>
+        /// <param name="includeDocument"> (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse"/>&gt;</returns>
-        public async Task<IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse?> GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetOrDefaultAsync(string flowId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse?> GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetOrDefaultAsync(string flowId, Option<bool> includeDocument = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetAsync(flowId, cancellationToken).ConfigureAwait(false);
+                return await GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetAsync(flowId, includeDocument, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -633,9 +640,10 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="flowId"></param>
+        /// <param name="includeDocument"> (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse"/>&gt;</returns>
-        public async Task<IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse> GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetAsync(string flowId, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetApiResponse> GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetAsync(string flowId, Option<bool> includeDocument = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -643,7 +651,7 @@ namespace FactPulse.SDK.Api
             {
                 ValidateGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(flowId);
 
-                FormatGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(ref flowId);
+                FormatGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(ref flowId, ref includeDocument);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -654,6 +662,13 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/afnor/flux-entrants/{flow_id}"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/flux-entrants/{flow_id}");
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bflow_id%7D", Uri.EscapeDataString(flowId.ToString()));
+
+                    System.Collections.Specialized.NameValueCollection parseQueryStringLocalVar = System.Web.HttpUtility.ParseQueryString(string.Empty);
+
+                    if (includeDocument.IsSet)
+                        parseQueryStringLocalVar["include_document"] = ClientUtils.ParameterToString(includeDocument.Value);
+
+                    uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
@@ -691,7 +706,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetDefaultImplementation(apiResponseLocalVar, flowId);
+                        AfterGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetDefaultImplementation(apiResponseLocalVar, flowId, includeDocument);
 
                         Events.ExecuteOnGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(apiResponseLocalVar);
 
@@ -705,7 +720,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetDefaultImplementation(e, "/api/v1/afnor/flux-entrants/{flow_id}", uriBuilderLocalVar.Path, flowId);
+                OnErrorGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetDefaultImplementation(e, "/api/v1/afnor/flux-entrants/{flow_id}", uriBuilderLocalVar.Path, flowId, includeDocument);
                 Events.ExecuteOnErrorGetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet(e);
                 throw;
             }

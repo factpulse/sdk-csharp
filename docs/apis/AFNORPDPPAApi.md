@@ -45,7 +45,7 @@ This endpoint does not need any parameter.
 
 <a id="getfluxentrantapiv1afnorfluxentrantsflowidget"></a>
 # **GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet**
-> FactureEntrante GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet (string flowId)
+> FactureEntrante GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet (string flowId, bool includeDocument = null)
 
 Récupérer et extraire une facture entrante
 
@@ -57,6 +57,7 @@ Télécharge un flux entrant depuis la PDP AFNOR et extrait les métadonnées de
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **flowId** | **string** |  |  |
+| **includeDocument** | **bool** |  | [optional] [default to false] |
 
 ### Return type
 

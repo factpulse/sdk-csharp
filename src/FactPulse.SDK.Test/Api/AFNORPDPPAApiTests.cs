@@ -68,7 +68,8 @@ namespace FactPulse.SDK.Test.Api
         public async Task GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetAsyncTest()
         {
             string flowId = default!;
-            var response = await _instance.GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetAsync(flowId);
+            Client.Option<bool> includeDocument = default!;
+            var response = await _instance.GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGetAsync(flowId, includeDocument);
             var model = response.Ok();
             Assert.IsType<FactureEntrante>(model);
         }

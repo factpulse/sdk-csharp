@@ -21,6 +21,9 @@ Name | Type | Description | Notes
 **NumeroBonCommande** | **string** |  | [optional] 
 **ReferenceContrat** | **string** |  | [optional] 
 **ObjetFacture** | **string** |  | [optional] 
+**DocumentBase64** | **string** |  | [optional] 
+**DocumentContentType** | **string** |  | [optional] 
+**DocumentFilename** | **string** |  | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

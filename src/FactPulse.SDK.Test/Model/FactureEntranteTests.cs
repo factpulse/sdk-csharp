@@ -196,5 +196,32 @@ namespace FactPulse.SDK.Test.Model
         {
             // TODO unit test for the property 'ObjetFacture'
         }
+
+        /// <summary>
+        /// Test the property 'DocumentBase64'
+        /// </summary>
+        [Fact]
+        public void DocumentBase64Test()
+        {
+            // TODO unit test for the property 'DocumentBase64'
+        }
+
+        /// <summary>
+        /// Test the property 'DocumentContentType'
+        /// </summary>
+        [Fact]
+        public void DocumentContentTypeTest()
+        {
+            // TODO unit test for the property 'DocumentContentType'
+        }
+
+        /// <summary>
+        /// Test the property 'DocumentFilename'
+        /// </summary>
+        [Fact]
+        public void DocumentFilenameTest()
+        {
+            // TODO unit test for the property 'DocumentFilename'
+        }
     }
 }

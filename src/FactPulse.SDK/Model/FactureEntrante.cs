@@ -49,8 +49,11 @@ namespace FactPulse.SDK.Model
         /// <param name="numeroBonCommande">numeroBonCommande</param>
         /// <param name="referenceContrat">referenceContrat</param>
         /// <param name="objetFacture">objetFacture</param>
+        /// <param name="documentBase64">documentBase64</param>
+        /// <param name="documentContentType">documentContentType</param>
+        /// <param name="documentFilename">documentFilename</param>
         [JsonConstructor]
-        public FactureEntrante(FormatFacture formatSource, string refFournisseur, FournisseurEntrant fournisseur, string siteFacturationNom, string dateDePiece, string montantHt, string montantTva, string montantTtc, Option<string?> flowId = default, Option<TypeDocument?> typeDocument = default, Option<string?> siteFacturationSiret = default, Option<string?> dateReglement = default, Option<string?> devise = default, Option<string?> numeroBonCommande = default, Option<string?> referenceContrat = default, Option<string?> objetFacture = default)
+        public FactureEntrante(FormatFacture formatSource, string refFournisseur, FournisseurEntrant fournisseur, string siteFacturationNom, string dateDePiece, string montantHt, string montantTva, string montantTtc, Option<string?> flowId = default, Option<TypeDocument?> typeDocument = default, Option<string?> siteFacturationSiret = default, Option<string?> dateReglement = default, Option<string?> devise = default, Option<string?> numeroBonCommande = default, Option<string?> referenceContrat = default, Option<string?> objetFacture = default, Option<string?> documentBase64 = default, Option<string?> documentContentType = default, Option<string?> documentFilename = default)
         {
             FormatSource = formatSource;
             RefFournisseur = refFournisseur;
@@ -68,6 +71,9 @@ namespace FactPulse.SDK.Model
             NumeroBonCommandeOption = numeroBonCommande;
             ReferenceContratOption = referenceContrat;
             ObjetFactureOption = objetFacture;
+            DocumentBase64Option = documentBase64;
+            DocumentContentTypeOption = documentContentType;
+            DocumentFilenameOption = documentFilename;
             OnCreated();
         }
 
@@ -236,6 +242,45 @@ namespace FactPulse.SDK.Model
         public string? ObjetFacture { get { return this.ObjetFactureOption; } set { this.ObjetFactureOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of DocumentBase64
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> DocumentBase64Option { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets DocumentBase64
+        /// </summary>
+        [JsonPropertyName("document_base64")]
+        public string? DocumentBase64 { get { return this.DocumentBase64Option; } set { this.DocumentBase64Option = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of DocumentContentType
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> DocumentContentTypeOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets DocumentContentType
+        /// </summary>
+        [JsonPropertyName("document_content_type")]
+        public string? DocumentContentType { get { return this.DocumentContentTypeOption; } set { this.DocumentContentTypeOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of DocumentFilename
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> DocumentFilenameOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets DocumentFilename
+        /// </summary>
+        [JsonPropertyName("document_filename")]
+        public string? DocumentFilename { get { return this.DocumentFilenameOption; } set { this.DocumentFilenameOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -259,6 +304,9 @@ namespace FactPulse.SDK.Model
             sb.Append("  NumeroBonCommande: ").Append(NumeroBonCommande).Append("\n");
             sb.Append("  ReferenceContrat: ").Append(ReferenceContrat).Append("\n");
             sb.Append("  ObjetFacture: ").Append(ObjetFacture).Append("\n");
+            sb.Append("  DocumentBase64: ").Append(DocumentBase64).Append("\n");
+            sb.Append("  DocumentContentType: ").Append(DocumentContentType).Append("\n");
+            sb.Append("  DocumentFilename: ").Append(DocumentFilename).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -342,6 +390,9 @@ namespace FactPulse.SDK.Model
             Option<string?> numeroBonCommande = default;
             Option<string?> referenceContrat = default;
             Option<string?> objetFacture = default;
+            Option<string?> documentBase64 = default;
+            Option<string?> documentContentType = default;
+            Option<string?> documentFilename = default;
 
             while (utf8JsonReader.Read())
             {
@@ -410,6 +461,15 @@ namespace FactPulse.SDK.Model
                         case "objet_facture":
                             objetFacture = new Option<string?>(utf8JsonReader.GetString());
                             break;
+                        case "document_base64":
+                            documentBase64 = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "document_content_type":
+                            documentContentType = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "document_filename":
+                            documentFilename = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         default:
                             break;
                     }
@@ -470,7 +530,7 @@ namespace FactPulse.SDK.Model
             if (devise.IsSet && devise.Value == null)
                 throw new ArgumentNullException(nameof(devise), "Property is not nullable for class FactureEntrante.");
 
-            return new FactureEntrante(formatSource.Value!.Value!, refFournisseur.Value!, fournisseur.Value!, siteFacturationNom.Value!, dateDePiece.Value!, montantHt.Value!, montantTva.Value!, montantTtc.Value!, flowId, typeDocument, siteFacturationSiret, dateReglement, devise, numeroBonCommande, referenceContrat, objetFacture);
+            return new FactureEntrante(formatSource.Value!.Value!, refFournisseur.Value!, fournisseur.Value!, siteFacturationNom.Value!, dateDePiece.Value!, montantHt.Value!, montantTva.Value!, montantTtc.Value!, flowId, typeDocument, siteFacturationSiret, dateReglement, devise, numeroBonCommande, referenceContrat, objetFacture, documentBase64, documentContentType, documentFilename);
         }
 
         /// <summary>
@@ -581,6 +641,24 @@ namespace FactPulse.SDK.Model
                     writer.WriteString("objet_facture", factureEntrante.ObjetFacture);
                 else
                     writer.WriteNull("objet_facture");
+
+            if (factureEntrante.DocumentBase64Option.IsSet)
+                if (factureEntrante.DocumentBase64Option.Value != null)
+                    writer.WriteString("document_base64", factureEntrante.DocumentBase64);
+                else
+                    writer.WriteNull("document_base64");
+
+            if (factureEntrante.DocumentContentTypeOption.IsSet)
+                if (factureEntrante.DocumentContentTypeOption.Value != null)
+                    writer.WriteString("document_content_type", factureEntrante.DocumentContentType);
+                else
+                    writer.WriteNull("document_content_type");
+
+            if (factureEntrante.DocumentFilenameOption.IsSet)
+                if (factureEntrante.DocumentFilenameOption.Value != null)
+                    writer.WriteString("document_filename", factureEntrante.DocumentFilename);
+                else
+                    writer.WriteNull("document_filename");
         }
     }
 }
