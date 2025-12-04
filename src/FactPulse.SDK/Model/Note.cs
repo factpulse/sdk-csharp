@@ -33,36 +33,36 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Note" /> class.
         /// </summary>
-        /// <param name="content">content</param>
-        /// <param name="subjectCode">subjectCode</param>
+        /// <param name="contenu">contenu</param>
+        /// <param name="codeSujet">codeSujet</param>
         [JsonConstructor]
-        public Note(string content, Option<string?> subjectCode = default)
+        public Note(string contenu, Option<string?> codeSujet = default)
         {
-            Content = content;
-            SubjectCodeOption = subjectCode;
+            Contenu = contenu;
+            CodeSujetOption = codeSujet;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Content
+        /// Gets or Sets Contenu
         /// </summary>
-        [JsonPropertyName("content")]
-        public string Content { get; set; }
+        [JsonPropertyName("contenu")]
+        public string Contenu { get; set; }
 
         /// <summary>
-        /// Used to track the state of SubjectCode
+        /// Used to track the state of CodeSujet
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> SubjectCodeOption { get; private set; }
+        public Option<string?> CodeSujetOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets SubjectCode
+        /// Gets or Sets CodeSujet
         /// </summary>
-        [JsonPropertyName("subjectCode")]
-        public string? SubjectCode { get { return this.SubjectCodeOption; } set { this.SubjectCodeOption = new(value); } }
+        [JsonPropertyName("codeSujet")]
+        public string? CodeSujet { get { return this.CodeSujetOption; } set { this.CodeSujetOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -72,8 +72,8 @@ namespace FactPulse.SDK.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class Note {\n");
-            sb.Append("  Content: ").Append(Content).Append("\n");
-            sb.Append("  SubjectCode: ").Append(SubjectCode).Append("\n");
+            sb.Append("  Contenu: ").Append(Contenu).Append("\n");
+            sb.Append("  CodeSujet: ").Append(CodeSujet).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -111,8 +111,8 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<string?> content = default;
-            Option<string?> subjectCode = default;
+            Option<string?> contenu = default;
+            Option<string?> codeSujet = default;
 
             while (utf8JsonReader.Read())
             {
@@ -129,11 +129,11 @@ namespace FactPulse.SDK.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "content":
-                            content = new Option<string?>(utf8JsonReader.GetString()!);
+                        case "contenu":
+                            contenu = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "subjectCode":
-                            subjectCode = new Option<string?>(utf8JsonReader.GetString());
+                        case "codeSujet":
+                            codeSujet = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -141,13 +141,13 @@ namespace FactPulse.SDK.Model
                 }
             }
 
-            if (!content.IsSet)
-                throw new ArgumentException("Property is required for class Note.", nameof(content));
+            if (!contenu.IsSet)
+                throw new ArgumentException("Property is required for class Note.", nameof(contenu));
 
-            if (content.IsSet && content.Value == null)
-                throw new ArgumentNullException(nameof(content), "Property is not nullable for class Note.");
+            if (contenu.IsSet && contenu.Value == null)
+                throw new ArgumentNullException(nameof(contenu), "Property is not nullable for class Note.");
 
-            return new Note(content.Value!, subjectCode);
+            return new Note(contenu.Value!, codeSujet);
         }
 
         /// <summary>
@@ -174,16 +174,16 @@ namespace FactPulse.SDK.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, Note note, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (note.Content == null)
-                throw new ArgumentNullException(nameof(note.Content), "Property is required for class Note.");
+            if (note.Contenu == null)
+                throw new ArgumentNullException(nameof(note.Contenu), "Property is required for class Note.");
 
-            writer.WriteString("content", note.Content);
+            writer.WriteString("contenu", note.Contenu);
 
-            if (note.SubjectCodeOption.IsSet)
-                if (note.SubjectCodeOption.Value != null)
-                    writer.WriteString("subjectCode", note.SubjectCode);
+            if (note.CodeSujetOption.IsSet)
+                if (note.CodeSujetOption.Value != null)
+                    writer.WriteString("codeSujet", note.CodeSujet);
                 else
-                    writer.WriteNull("subjectCode");
+                    writer.WriteNull("codeSujet");
         }
     }
 }

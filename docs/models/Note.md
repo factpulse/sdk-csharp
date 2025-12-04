@@ -5,8 +5,8 @@ Note de facture (IncludedNote en Factur-X).  Les notes obligatoires pour BR-FR-0
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Content** | **string** |  | 
-**SubjectCode** | **string** |  | [optional] 
+**Contenu** | **string** |  | 
+**CodeSujet** | **string** |  | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 
