@@ -26,7 +26,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Représente une ligne de totalisation par taux de TVA.
+    /// Représente une ligne de totalisation par taux de TVA.  Pour les exonérations (catégories E, AE, K, G, O), les champs &#x60;motif_exoneration&#x60; et &#x60;code_vatex&#x60; sont requis selon EN16931.
     /// </summary>
     public partial class LigneDeTVA : IValidatableObject
     {
@@ -38,14 +38,18 @@ namespace FactPulse.SDK.Model
         /// <param name="taux">taux</param>
         /// <param name="tauxManuel">tauxManuel</param>
         /// <param name="categorie">categorie</param>
+        /// <param name="motifExoneration">motifExoneration</param>
+        /// <param name="codeVatex">codeVatex</param>
         [JsonConstructor]
-        public LigneDeTVA(MontantBaseHt montantBaseHt, MontantTvaLigne montantTva, Option<string?> taux = default, Option<Tauxmanuel?> tauxManuel = default, Option<CategorieTVA?> categorie = default)
+        public LigneDeTVA(MontantBaseHt montantBaseHt, MontantTvaLigne montantTva, Option<string?> taux = default, Option<Tauxmanuel?> tauxManuel = default, Option<CategorieTVA?> categorie = default, Option<string?> motifExoneration = default, Option<string?> codeVatex = default)
         {
             MontantBaseHt = montantBaseHt;
             MontantTva = montantTva;
             TauxOption = taux;
             TauxManuelOption = tauxManuel;
             CategorieOption = categorie;
+            MotifExonerationOption = motifExoneration;
+            CodeVatexOption = codeVatex;
             OnCreated();
         }
 
@@ -103,6 +107,32 @@ namespace FactPulse.SDK.Model
         public Tauxmanuel? TauxManuel { get { return this.TauxManuelOption; } set { this.TauxManuelOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of MotifExoneration
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> MotifExonerationOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets MotifExoneration
+        /// </summary>
+        [JsonPropertyName("motifExoneration")]
+        public string? MotifExoneration { get { return this.MotifExonerationOption; } set { this.MotifExonerationOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of CodeVatex
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> CodeVatexOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets CodeVatex
+        /// </summary>
+        [JsonPropertyName("codeVatex")]
+        public string? CodeVatex { get { return this.CodeVatexOption; } set { this.CodeVatexOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -115,6 +145,8 @@ namespace FactPulse.SDK.Model
             sb.Append("  Taux: ").Append(Taux).Append("\n");
             sb.Append("  TauxManuel: ").Append(TauxManuel).Append("\n");
             sb.Append("  Categorie: ").Append(Categorie).Append("\n");
+            sb.Append("  MotifExoneration: ").Append(MotifExoneration).Append("\n");
+            sb.Append("  CodeVatex: ").Append(CodeVatex).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -157,6 +189,8 @@ namespace FactPulse.SDK.Model
             Option<string?> taux = default;
             Option<Tauxmanuel?> tauxManuel = default;
             Option<CategorieTVA?> categorie = default;
+            Option<string?> motifExoneration = default;
+            Option<string?> codeVatex = default;
 
             while (utf8JsonReader.Read())
             {
@@ -190,6 +224,12 @@ namespace FactPulse.SDK.Model
                             if (categorieRawValue != null)
                                 categorie = new Option<CategorieTVA?>(CategorieTVAValueConverter.FromStringOrDefault(categorieRawValue));
                             break;
+                        case "motifExoneration":
+                            motifExoneration = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "codeVatex":
+                            codeVatex = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         default:
                             break;
                     }
@@ -211,7 +251,7 @@ namespace FactPulse.SDK.Model
             if (tauxManuel.IsSet && tauxManuel.Value == null)
                 throw new ArgumentNullException(nameof(tauxManuel), "Property is not nullable for class LigneDeTVA.");
 
-            return new LigneDeTVA(montantBaseHt.Value!, montantTva.Value!, taux, tauxManuel, categorie);
+            return new LigneDeTVA(montantBaseHt.Value!, montantTva.Value!, taux, tauxManuel, categorie, motifExoneration, codeVatex);
         }
 
         /// <summary>
@@ -270,6 +310,17 @@ namespace FactPulse.SDK.Model
                 }
                 else
                     writer.WriteNull("categorie");
+            if (ligneDeTVA.MotifExonerationOption.IsSet)
+                if (ligneDeTVA.MotifExonerationOption.Value != null)
+                    writer.WriteString("motifExoneration", ligneDeTVA.MotifExoneration);
+                else
+                    writer.WriteNull("motifExoneration");
+
+            if (ligneDeTVA.CodeVatexOption.IsSet)
+                if (ligneDeTVA.CodeVatexOption.Value != null)
+                    writer.WriteString("codeVatex", ligneDeTVA.CodeVatex);
+                else
+                    writer.WriteNull("codeVatex");
         }
     }
 }

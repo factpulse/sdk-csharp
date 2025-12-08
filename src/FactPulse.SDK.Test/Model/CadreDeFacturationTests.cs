@@ -63,6 +63,15 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'NatureOperation'
+        /// </summary>
+        [Fact]
+        public void NatureOperationTest()
+        {
+            // TODO unit test for the property 'NatureOperation'
+        }
+
+        /// <summary>
         /// Test the property 'CodeServiceValideur'
         /// </summary>
         [Fact]

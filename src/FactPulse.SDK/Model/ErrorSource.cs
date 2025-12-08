@@ -26,9 +26,8 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Source de l&#39;erreur pour faciliter le diagnostic.
+    /// Defines ErrorSource
     /// </summary>
-    /// <value>Source de l&#39;erreur pour faciliter le diagnostic.</value>
     public enum ErrorSource
     {
         /// <summary>

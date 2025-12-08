@@ -125,6 +125,8 @@ namespace FactPulse.SDK.Client
                 return DestinationAFNOR.FlowSyntaxEnumToJsonValue(destinationAFNORFlowSyntaxEnum);
             if (obj is DestinationChorusPro.TypeEnum destinationChorusProTypeEnum)
                 return DestinationChorusPro.TypeEnumToJsonValue(destinationChorusProTypeEnum);
+            if (obj is DirectionFlux directionFlux)
+                return DirectionFluxValueConverter.ToJsonValue(directionFlux);
             if (obj is ErrorLevel errorLevel)
                 return ErrorLevelValueConverter.ToJsonValue(errorLevel);
             if (obj is ErrorSource errorSource)
@@ -137,18 +139,30 @@ namespace FactPulse.SDK.Client
                 return ModeDepotValueConverter.ToJsonValue(modeDepot);
             if (obj is ModePaiement modePaiement)
                 return ModePaiementValueConverter.ToJsonValue(modePaiement);
+            if (obj is NatureOperation natureOperation)
+                return NatureOperationValueConverter.ToJsonValue(natureOperation);
             if (obj is ProfilAPI profilAPI)
                 return ProfilAPIValueConverter.ToJsonValue(profilAPI);
+            if (obj is ProfilFlux profilFlux)
+                return ProfilFluxValueConverter.ToJsonValue(profilFlux);
             if (obj is SchemeID schemeID)
                 return SchemeIDValueConverter.ToJsonValue(schemeID);
             if (obj is SoumettreFactureCompleteResponse.DestinationTypeEnum soumettreFactureCompleteResponseDestinationTypeEnum)
                 return SoumettreFactureCompleteResponse.DestinationTypeEnumToJsonValue(soumettreFactureCompleteResponseDestinationTypeEnum);
+            if (obj is StatutAcquittement statutAcquittement)
+                return StatutAcquittementValueConverter.ToJsonValue(statutAcquittement);
             if (obj is StatutCelery statutCelery)
                 return StatutCeleryValueConverter.ToJsonValue(statutCelery);
+            if (obj is StatutChampAPI statutChampAPI)
+                return StatutChampAPIValueConverter.ToJsonValue(statutChampAPI);
+            if (obj is SyntaxeFlux syntaxeFlux)
+                return SyntaxeFluxValueConverter.ToJsonValue(syntaxeFlux);
             if (obj is TypeDocument typeDocument)
                 return TypeDocumentValueConverter.ToJsonValue(typeDocument);
             if (obj is TypeFacture typeFacture)
                 return TypeFactureValueConverter.ToJsonValue(typeFacture);
+            if (obj is TypeFlux typeFlux)
+                return TypeFluxValueConverter.ToJsonValue(typeFlux);
             if (obj is TypeTVA typeTVA)
                 return TypeTVAValueConverter.ToJsonValue(typeTVA);
             if (obj is Unite unite)

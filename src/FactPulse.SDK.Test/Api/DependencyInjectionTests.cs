@@ -90,6 +90,9 @@ namespace FactPulse.SDK.Test.Api
 
             var utilisateurApi = _hostUsingConfigureWithAClient.Services.GetRequiredService<IUtilisateurApi>();
             Assert.True(utilisateurApi.HttpClient.BaseAddress != null);
+
+            var vrificationPDFXMLApi = _hostUsingConfigureWithAClient.Services.GetRequiredService<IVrificationPDFXMLApi>();
+            Assert.True(vrificationPDFXMLApi.HttpClient.BaseAddress != null);
         }
 
         /// <summary>
@@ -118,6 +121,9 @@ namespace FactPulse.SDK.Test.Api
 
             var utilisateurApi = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<IUtilisateurApi>();
             Assert.True(utilisateurApi.HttpClient.BaseAddress != null);
+
+            var vrificationPDFXMLApi = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<IVrificationPDFXMLApi>();
+            Assert.True(vrificationPDFXMLApi.HttpClient.BaseAddress != null);
         }
 
         /// <summary>
@@ -146,6 +152,9 @@ namespace FactPulse.SDK.Test.Api
             
             var utilisateurApi = _hostUsingAddWithAClient.Services.GetRequiredService<IUtilisateurApi>();
             Assert.True(utilisateurApi.HttpClient.BaseAddress != null);
+            
+            var vrificationPDFXMLApi = _hostUsingAddWithAClient.Services.GetRequiredService<IVrificationPDFXMLApi>();
+            Assert.True(vrificationPDFXMLApi.HttpClient.BaseAddress != null);
         }
 
         /// <summary>
@@ -174,6 +183,9 @@ namespace FactPulse.SDK.Test.Api
 
             var utilisateurApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<IUtilisateurApi>();
             Assert.True(utilisateurApi.HttpClient.BaseAddress != null);
+
+            var vrificationPDFXMLApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<IVrificationPDFXMLApi>();
+            Assert.True(vrificationPDFXMLApi.HttpClient.BaseAddress != null);
         }
     }
 }

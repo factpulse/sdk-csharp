@@ -1,4 +1,5 @@
 # FactPulse.SDK.Model.CodeCadreFacturation
+Codes Chorus Pro pour le cadre de facturation (usage B2G).
 
 ## Properties
 

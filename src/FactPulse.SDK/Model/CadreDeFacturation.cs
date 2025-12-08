@@ -26,7 +26,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Définit le cadre de facturation (ex: A1 pour une facture fournisseur).
+    /// Définit le cadre de facturation.  - code_cadre_facturation: Code Chorus Pro (A1, A2, A9, A12) - utilisé pour B2G - nature_operation: Nature de l&#39;opération (B1, S1, M1, etc.) - prioritaire pour Factur-X  Si nature_operation est fourni, il sera utilisé directement dans le XML Factur-X (BT-23). Sinon, le code sera déduit de code_cadre_facturation via un mapping automatique.  Exemple:     &gt;&gt;&gt; cadre &#x3D; CadreDeFacturation(     ...     code_cadre_facturation&#x3D;CodeCadreFacturation.A1_FACTURE_FOURNISSEUR,     ...     nature_operation&#x3D;NatureOperation.BIENS  # Force B1 au lieu de S1     ... )
     /// </summary>
     public partial class CadreDeFacturation : IValidatableObject
     {
@@ -34,12 +34,14 @@ namespace FactPulse.SDK.Model
         /// Initializes a new instance of the <see cref="CadreDeFacturation" /> class.
         /// </summary>
         /// <param name="codeCadreFacturation">codeCadreFacturation</param>
+        /// <param name="natureOperation">natureOperation</param>
         /// <param name="codeServiceValideur">codeServiceValideur</param>
         /// <param name="codeStructureValideur">codeStructureValideur</param>
         [JsonConstructor]
-        public CadreDeFacturation(CodeCadreFacturation codeCadreFacturation, Option<string?> codeServiceValideur = default, Option<string?> codeStructureValideur = default)
+        public CadreDeFacturation(CodeCadreFacturation codeCadreFacturation, Option<NatureOperation?> natureOperation = default, Option<string?> codeServiceValideur = default, Option<string?> codeStructureValideur = default)
         {
             CodeCadreFacturation = codeCadreFacturation;
+            NatureOperationOption = natureOperation;
             CodeServiceValideurOption = codeServiceValideur;
             CodeStructureValideurOption = codeStructureValideur;
             OnCreated();
@@ -52,6 +54,19 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonPropertyName("codeCadreFacturation")]
         public CodeCadreFacturation CodeCadreFacturation { get; set; }
+
+        /// <summary>
+        /// Used to track the state of NatureOperation
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<NatureOperation?> NatureOperationOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets NatureOperation
+        /// </summary>
+        [JsonPropertyName("natureOperation")]
+        public NatureOperation? NatureOperation { get { return this.NatureOperationOption; } set { this.NatureOperationOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of CodeServiceValideur
@@ -88,6 +103,7 @@ namespace FactPulse.SDK.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class CadreDeFacturation {\n");
             sb.Append("  CodeCadreFacturation: ").Append(CodeCadreFacturation).Append("\n");
+            sb.Append("  NatureOperation: ").Append(NatureOperation).Append("\n");
             sb.Append("  CodeServiceValideur: ").Append(CodeServiceValideur).Append("\n");
             sb.Append("  CodeStructureValideur: ").Append(CodeStructureValideur).Append("\n");
             sb.Append("}\n");
@@ -128,6 +144,7 @@ namespace FactPulse.SDK.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<CodeCadreFacturation?> codeCadreFacturation = default;
+            Option<NatureOperation?> natureOperation = default;
             Option<string?> codeServiceValideur = default;
             Option<string?> codeStructureValideur = default;
 
@@ -151,6 +168,11 @@ namespace FactPulse.SDK.Model
                             if (codeCadreFacturationRawValue != null)
                                 codeCadreFacturation = new Option<CodeCadreFacturation?>(CodeCadreFacturationValueConverter.FromStringOrDefault(codeCadreFacturationRawValue));
                             break;
+                        case "natureOperation":
+                            string? natureOperationRawValue = utf8JsonReader.GetString();
+                            if (natureOperationRawValue != null)
+                                natureOperation = new Option<NatureOperation?>(NatureOperationValueConverter.FromStringOrDefault(natureOperationRawValue));
+                            break;
                         case "codeServiceValideur":
                             codeServiceValideur = new Option<string?>(utf8JsonReader.GetString());
                             break;
@@ -169,7 +191,7 @@ namespace FactPulse.SDK.Model
             if (codeCadreFacturation.IsSet && codeCadreFacturation.Value == null)
                 throw new ArgumentNullException(nameof(codeCadreFacturation), "Property is not nullable for class CadreDeFacturation.");
 
-            return new CadreDeFacturation(codeCadreFacturation.Value!.Value!, codeServiceValideur, codeStructureValideur);
+            return new CadreDeFacturation(codeCadreFacturation.Value!.Value!, natureOperation, codeServiceValideur, codeStructureValideur);
         }
 
         /// <summary>
@@ -199,6 +221,14 @@ namespace FactPulse.SDK.Model
             var codeCadreFacturationRawValue = CodeCadreFacturationValueConverter.ToJsonValue(cadreDeFacturation.CodeCadreFacturation);
             writer.WriteString("codeCadreFacturation", codeCadreFacturationRawValue);
 
+            if (cadreDeFacturation.NatureOperationOption.IsSet)
+                if (cadreDeFacturation.NatureOperationOption!.Value != null)
+                {
+                    var natureOperationRawValue = NatureOperationValueConverter.ToJsonValue(cadreDeFacturation.NatureOperationOption.Value!.Value);
+                    writer.WriteString("natureOperation", natureOperationRawValue);
+                }
+                else
+                    writer.WriteNull("natureOperation");
             if (cadreDeFacturation.CodeServiceValideurOption.IsSet)
                 if (cadreDeFacturation.CodeServiceValideurOption.Value != null)
                     writer.WriteString("codeServiceValideur", cadreDeFacturation.CodeServiceValideur);

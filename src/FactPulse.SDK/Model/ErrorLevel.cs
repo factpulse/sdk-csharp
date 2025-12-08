@@ -26,9 +26,8 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Niveau de gravité d&#39;une erreur (aligné sur AFNOR AcknowledgementDetail).
+    /// Defines ErrorLevel
     /// </summary>
-    /// <value>Niveau de gravité d&#39;une erreur (aligné sur AFNOR AcknowledgementDetail).</value>
     public enum ErrorLevel
     {
         /// <summary>

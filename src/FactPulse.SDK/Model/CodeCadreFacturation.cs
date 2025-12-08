@@ -26,8 +26,9 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Defines CodeCadreFacturation
+    /// Codes Chorus Pro pour le cadre de facturation (usage B2G).
     /// </summary>
+    /// <value>Codes Chorus Pro pour le cadre de facturation (usage B2G).</value>
     public enum CodeCadreFacturation
     {
         /// <summary>

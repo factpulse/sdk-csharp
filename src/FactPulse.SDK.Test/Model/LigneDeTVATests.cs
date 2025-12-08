@@ -97,5 +97,23 @@ namespace FactPulse.SDK.Test.Model
         {
             // TODO unit test for the property 'Categorie'
         }
+
+        /// <summary>
+        /// Test the property 'MotifExoneration'
+        /// </summary>
+        [Fact]
+        public void MotifExonerationTest()
+        {
+            // TODO unit test for the property 'MotifExoneration'
+        }
+
+        /// <summary>
+        /// Test the property 'CodeVatex'
+        /// </summary>
+        [Fact]
+        public void CodeVatexTest()
+        {
+            // TODO unit test for the property 'CodeVatex'
+        }
     }
 }

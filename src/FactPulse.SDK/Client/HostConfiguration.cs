@@ -46,10 +46,12 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new APIErrorJsonConverter());
             _jsonOptions.Converters.Add(new AdresseElectroniqueJsonConverter());
             _jsonOptions.Converters.Add(new AdressePostaleJsonConverter());
+            _jsonOptions.Converters.Add(new BoundingBoxSchemaJsonConverter());
             _jsonOptions.Converters.Add(new CadreDeFacturationJsonConverter());
             _jsonOptions.Converters.Add(new CategorieTVAJsonConverter());
             _jsonOptions.Converters.Add(new CategorieTVANullableJsonConverter());
             _jsonOptions.Converters.Add(new CertificateInfoResponseJsonConverter());
+            _jsonOptions.Converters.Add(new ChampVerifieSchemaJsonConverter());
             _jsonOptions.Converters.Add(new ChorusProCredentialsJsonConverter());
             _jsonOptions.Converters.Add(new CodeCadreFacturationJsonConverter());
             _jsonOptions.Converters.Add(new CodeCadreFacturationNullableJsonConverter());
@@ -65,6 +67,9 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new DestinationJsonConverter());
             _jsonOptions.Converters.Add(new DestinationAFNORJsonConverter());
             _jsonOptions.Converters.Add(new DestinationChorusProJsonConverter());
+            _jsonOptions.Converters.Add(new DimensionPageSchemaJsonConverter());
+            _jsonOptions.Converters.Add(new DirectionFluxJsonConverter());
+            _jsonOptions.Converters.Add(new DirectionFluxNullableJsonConverter());
             _jsonOptions.Converters.Add(new DonneesFactureSimplifieesJsonConverter());
             _jsonOptions.Converters.Add(new ErrorLevelJsonConverter());
             _jsonOptions.Converters.Add(new ErrorLevelNullableJsonConverter());
@@ -73,6 +78,7 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new FactureEnrichieInfoJsonConverter());
             _jsonOptions.Converters.Add(new FactureEntranteJsonConverter());
             _jsonOptions.Converters.Add(new FactureFacturXJsonConverter());
+            _jsonOptions.Converters.Add(new FluxResumeJsonConverter());
             _jsonOptions.Converters.Add(new FormatFactureJsonConverter());
             _jsonOptions.Converters.Add(new FormatFactureNullableJsonConverter());
             _jsonOptions.Converters.Add(new FormatSortieJsonConverter());
@@ -103,24 +109,36 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new MontantTvaLigneJsonConverter());
             _jsonOptions.Converters.Add(new MontantTvaTotalJsonConverter());
             _jsonOptions.Converters.Add(new MontantUnitaireHtJsonConverter());
+            _jsonOptions.Converters.Add(new NatureOperationJsonConverter());
+            _jsonOptions.Converters.Add(new NatureOperationNullableJsonConverter());
             _jsonOptions.Converters.Add(new NoteJsonConverter());
+            _jsonOptions.Converters.Add(new NoteObligatoireSchemaJsonConverter());
             _jsonOptions.Converters.Add(new ObtenirIdChorusProRequestJsonConverter());
             _jsonOptions.Converters.Add(new ObtenirIdChorusProResponseJsonConverter());
             _jsonOptions.Converters.Add(new OptionsProcessingJsonConverter());
             _jsonOptions.Converters.Add(new PDFFacturXInfoJsonConverter());
+            _jsonOptions.Converters.Add(new PDPCredentialsJsonConverter());
             _jsonOptions.Converters.Add(new ParametresSignatureJsonConverter());
             _jsonOptions.Converters.Add(new ParametresStructureJsonConverter());
             _jsonOptions.Converters.Add(new PieceJointeComplementaireJsonConverter());
             _jsonOptions.Converters.Add(new ProfilAPIJsonConverter());
             _jsonOptions.Converters.Add(new ProfilAPINullableJsonConverter());
+            _jsonOptions.Converters.Add(new ProfilFluxJsonConverter());
+            _jsonOptions.Converters.Add(new ProfilFluxNullableJsonConverter());
             _jsonOptions.Converters.Add(new QuantiteJsonConverter());
             _jsonOptions.Converters.Add(new RechercherServicesResponseJsonConverter());
             _jsonOptions.Converters.Add(new RechercherStructureRequestJsonConverter());
             _jsonOptions.Converters.Add(new RechercherStructureResponseJsonConverter());
             _jsonOptions.Converters.Add(new ReferencesJsonConverter());
+            _jsonOptions.Converters.Add(new ReponseHealthcheckAFNORJsonConverter());
+            _jsonOptions.Converters.Add(new ReponseRechercheFluxJsonConverter());
+            _jsonOptions.Converters.Add(new ReponseSoumissionFluxJsonConverter());
             _jsonOptions.Converters.Add(new ReponseTacheJsonConverter());
             _jsonOptions.Converters.Add(new ReponseValidationErreurJsonConverter());
             _jsonOptions.Converters.Add(new ReponseValidationSuccesJsonConverter());
+            _jsonOptions.Converters.Add(new ReponseVerificationSuccesJsonConverter());
+            _jsonOptions.Converters.Add(new RequeteRechercheFluxJsonConverter());
+            _jsonOptions.Converters.Add(new RequeteSoumissionFluxJsonConverter());
             _jsonOptions.Converters.Add(new ResultatAFNORJsonConverter());
             _jsonOptions.Converters.Add(new ResultatChorusProJsonConverter());
             _jsonOptions.Converters.Add(new ResultatValidationPDFAPIJsonConverter());
@@ -132,16 +150,24 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new SoumettreFactureCompleteResponseJsonConverter());
             _jsonOptions.Converters.Add(new SoumettreFactureRequestJsonConverter());
             _jsonOptions.Converters.Add(new SoumettreFactureResponseJsonConverter());
+            _jsonOptions.Converters.Add(new StatutAcquittementJsonConverter());
+            _jsonOptions.Converters.Add(new StatutAcquittementNullableJsonConverter());
             _jsonOptions.Converters.Add(new StatutCeleryJsonConverter());
             _jsonOptions.Converters.Add(new StatutCeleryNullableJsonConverter());
+            _jsonOptions.Converters.Add(new StatutChampAPIJsonConverter());
+            _jsonOptions.Converters.Add(new StatutChampAPINullableJsonConverter());
             _jsonOptions.Converters.Add(new StatutFactureJsonConverter());
             _jsonOptions.Converters.Add(new StatutTacheJsonConverter());
             _jsonOptions.Converters.Add(new StructureInfoJsonConverter());
+            _jsonOptions.Converters.Add(new SyntaxeFluxJsonConverter());
+            _jsonOptions.Converters.Add(new SyntaxeFluxNullableJsonConverter());
             _jsonOptions.Converters.Add(new TauxmanuelJsonConverter());
             _jsonOptions.Converters.Add(new TypeDocumentJsonConverter());
             _jsonOptions.Converters.Add(new TypeDocumentNullableJsonConverter());
             _jsonOptions.Converters.Add(new TypeFactureJsonConverter());
             _jsonOptions.Converters.Add(new TypeFactureNullableJsonConverter());
+            _jsonOptions.Converters.Add(new TypeFluxJsonConverter());
+            _jsonOptions.Converters.Add(new TypeFluxNullableJsonConverter());
             _jsonOptions.Converters.Add(new TypeTVAJsonConverter());
             _jsonOptions.Converters.Add(new TypeTVANullableJsonConverter());
             _jsonOptions.Converters.Add(new UniteJsonConverter());
@@ -159,6 +185,7 @@ namespace FactPulse.SDK.Client
             _services.AddSingleton<SantApiEvents>();
             _services.AddSingleton<TraitementFactureApiEvents>();
             _services.AddSingleton<UtilisateurApiEvents>();
+            _services.AddSingleton<VrificationPDFXMLApiEvents>();
         }
 
         /// <summary>
@@ -183,6 +210,7 @@ namespace FactPulse.SDK.Client
             builders.Add(_services.AddHttpClient<ISantApi, SantApi>(client));
             builders.Add(_services.AddHttpClient<ITraitementFactureApi, TraitementFactureApi>(client));
             builders.Add(_services.AddHttpClient<IUtilisateurApi, UtilisateurApi>(client));
+            builders.Add(_services.AddHttpClient<IVrificationPDFXMLApi, VrificationPDFXMLApi>(client));
             
             if (builder != null)
                 foreach (IHttpClientBuilder instance in builders)

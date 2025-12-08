@@ -1,5 +1,4 @@
 # FactPulse.SDK.Model.ErrorSource
-Source de l'erreur pour faciliter le diagnostic.
 
 ## Properties
 
