@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **Commentaire** | **string** |  | [optional] 
 **IdUtilisateurCourant** | **int** |  | [optional] 
 **PiecesJointesComplementaires** | [**List&lt;PieceJointeComplementaire&gt;**](PieceJointeComplementaire.md) |  | [optional] 
+**Beneficiaire** | [**Beneficiaire**](Beneficiaire.md) |  | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

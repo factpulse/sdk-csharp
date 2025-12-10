@@ -187,5 +187,14 @@ namespace FactPulse.SDK.Test.Model
         {
             // TODO unit test for the property 'PiecesJointesComplementaires'
         }
+
+        /// <summary>
+        /// Test the property 'Beneficiaire'
+        /// </summary>
+        [Fact]
+        public void BeneficiaireTest()
+        {
+            // TODO unit test for the property 'Beneficiaire'
+        }
     }
 }

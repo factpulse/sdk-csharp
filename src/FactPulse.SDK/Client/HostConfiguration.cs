@@ -46,6 +46,7 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new APIErrorJsonConverter());
             _jsonOptions.Converters.Add(new AdresseElectroniqueJsonConverter());
             _jsonOptions.Converters.Add(new AdressePostaleJsonConverter());
+            _jsonOptions.Converters.Add(new BeneficiaireJsonConverter());
             _jsonOptions.Converters.Add(new BoundingBoxSchemaJsonConverter());
             _jsonOptions.Converters.Add(new CadreDeFacturationJsonConverter());
             _jsonOptions.Converters.Add(new CategorieTVAJsonConverter());

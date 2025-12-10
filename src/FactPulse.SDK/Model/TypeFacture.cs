@@ -26,20 +26,90 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Type de document (facture ou avoir).
+    /// Type de document selon BR-FR-04 (codes UNTDID 1001).  Cette énumération contient tous les types de factures autorisés par la réforme française de la facturation électronique (BR-FR-04).  Les valeurs correspondent aux codes UNTDID 1001 utilisés dans le XML Factur-X.  Catégories: - Factures simples: 380, 389, 393, 501 - Factures d&#39;acompte: 386, 500 - Factures rectificatives: 384, 471, 472, 473 - Avoirs: 261, 262, 381, 396, 502, 503
     /// </summary>
-    /// <value>Type de document (facture ou avoir).</value>
+    /// <value>Type de document selon BR-FR-04 (codes UNTDID 1001).  Cette énumération contient tous les types de factures autorisés par la réforme française de la facturation électronique (BR-FR-04).  Les valeurs correspondent aux codes UNTDID 1001 utilisés dans le XML Factur-X.  Catégories: - Factures simples: 380, 389, 393, 501 - Factures d&#39;acompte: 386, 500 - Factures rectificatives: 384, 471, 472, 473 - Avoirs: 261, 262, 381, 396, 502, 503</value>
     public enum TypeFacture
     {
         /// <summary>
-        /// Enum FACTURE for value: FACTURE
+        /// Enum _380 for value: 380
         /// </summary>
-        FACTURE = 1,
+        _380 = 1,
 
         /// <summary>
-        /// Enum AVOIR for value: AVOIR
+        /// Enum _389 for value: 389
         /// </summary>
-        AVOIR = 2
+        _389 = 2,
+
+        /// <summary>
+        /// Enum _393 for value: 393
+        /// </summary>
+        _393 = 3,
+
+        /// <summary>
+        /// Enum _501 for value: 501
+        /// </summary>
+        _501 = 4,
+
+        /// <summary>
+        /// Enum _386 for value: 386
+        /// </summary>
+        _386 = 5,
+
+        /// <summary>
+        /// Enum _500 for value: 500
+        /// </summary>
+        _500 = 6,
+
+        /// <summary>
+        /// Enum _384 for value: 384
+        /// </summary>
+        _384 = 7,
+
+        /// <summary>
+        /// Enum _471 for value: 471
+        /// </summary>
+        _471 = 8,
+
+        /// <summary>
+        /// Enum _472 for value: 472
+        /// </summary>
+        _472 = 9,
+
+        /// <summary>
+        /// Enum _473 for value: 473
+        /// </summary>
+        _473 = 10,
+
+        /// <summary>
+        /// Enum _381 for value: 381
+        /// </summary>
+        _381 = 11,
+
+        /// <summary>
+        /// Enum _261 for value: 261
+        /// </summary>
+        _261 = 12,
+
+        /// <summary>
+        /// Enum _262 for value: 262
+        /// </summary>
+        _262 = 13,
+
+        /// <summary>
+        /// Enum _396 for value: 396
+        /// </summary>
+        _396 = 14,
+
+        /// <summary>
+        /// Enum _502 for value: 502
+        /// </summary>
+        _502 = 15,
+
+        /// <summary>
+        /// Enum _503 for value: 503
+        /// </summary>
+        _503 = 16
     }
 
     /// <summary>
@@ -54,11 +124,53 @@ namespace FactPulse.SDK.Model
         /// <returns></returns>
         public static TypeFacture FromString(string value)
         {
-            if (value.Equals("FACTURE"))
-                return TypeFacture.FACTURE;
+            if (value.Equals("380"))
+                return TypeFacture._380;
 
-            if (value.Equals("AVOIR"))
-                return TypeFacture.AVOIR;
+            if (value.Equals("389"))
+                return TypeFacture._389;
+
+            if (value.Equals("393"))
+                return TypeFacture._393;
+
+            if (value.Equals("501"))
+                return TypeFacture._501;
+
+            if (value.Equals("386"))
+                return TypeFacture._386;
+
+            if (value.Equals("500"))
+                return TypeFacture._500;
+
+            if (value.Equals("384"))
+                return TypeFacture._384;
+
+            if (value.Equals("471"))
+                return TypeFacture._471;
+
+            if (value.Equals("472"))
+                return TypeFacture._472;
+
+            if (value.Equals("473"))
+                return TypeFacture._473;
+
+            if (value.Equals("381"))
+                return TypeFacture._381;
+
+            if (value.Equals("261"))
+                return TypeFacture._261;
+
+            if (value.Equals("262"))
+                return TypeFacture._262;
+
+            if (value.Equals("396"))
+                return TypeFacture._396;
+
+            if (value.Equals("502"))
+                return TypeFacture._502;
+
+            if (value.Equals("503"))
+                return TypeFacture._503;
 
             throw new NotImplementedException($"Could not convert value to type TypeFacture: '{value}'");
         }
@@ -70,11 +182,53 @@ namespace FactPulse.SDK.Model
         /// <returns></returns>
         public static TypeFacture? FromStringOrDefault(string value)
         {
-            if (value.Equals("FACTURE"))
-                return TypeFacture.FACTURE;
+            if (value.Equals("380"))
+                return TypeFacture._380;
 
-            if (value.Equals("AVOIR"))
-                return TypeFacture.AVOIR;
+            if (value.Equals("389"))
+                return TypeFacture._389;
+
+            if (value.Equals("393"))
+                return TypeFacture._393;
+
+            if (value.Equals("501"))
+                return TypeFacture._501;
+
+            if (value.Equals("386"))
+                return TypeFacture._386;
+
+            if (value.Equals("500"))
+                return TypeFacture._500;
+
+            if (value.Equals("384"))
+                return TypeFacture._384;
+
+            if (value.Equals("471"))
+                return TypeFacture._471;
+
+            if (value.Equals("472"))
+                return TypeFacture._472;
+
+            if (value.Equals("473"))
+                return TypeFacture._473;
+
+            if (value.Equals("381"))
+                return TypeFacture._381;
+
+            if (value.Equals("261"))
+                return TypeFacture._261;
+
+            if (value.Equals("262"))
+                return TypeFacture._262;
+
+            if (value.Equals("396"))
+                return TypeFacture._396;
+
+            if (value.Equals("502"))
+                return TypeFacture._502;
+
+            if (value.Equals("503"))
+                return TypeFacture._503;
 
             return null;
         }
@@ -87,11 +241,53 @@ namespace FactPulse.SDK.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string ToJsonValue(TypeFacture value)
         {
-            if (value == TypeFacture.FACTURE)
-                return "FACTURE";
+            if (value == TypeFacture._380)
+                return "380";
 
-            if (value == TypeFacture.AVOIR)
-                return "AVOIR";
+            if (value == TypeFacture._389)
+                return "389";
+
+            if (value == TypeFacture._393)
+                return "393";
+
+            if (value == TypeFacture._501)
+                return "501";
+
+            if (value == TypeFacture._386)
+                return "386";
+
+            if (value == TypeFacture._500)
+                return "500";
+
+            if (value == TypeFacture._384)
+                return "384";
+
+            if (value == TypeFacture._471)
+                return "471";
+
+            if (value == TypeFacture._472)
+                return "472";
+
+            if (value == TypeFacture._473)
+                return "473";
+
+            if (value == TypeFacture._381)
+                return "381";
+
+            if (value == TypeFacture._261)
+                return "261";
+
+            if (value == TypeFacture._262)
+                return "262";
+
+            if (value == TypeFacture._396)
+                return "396";
+
+            if (value == TypeFacture._502)
+                return "502";
+
+            if (value == TypeFacture._503)
+                return "503";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }

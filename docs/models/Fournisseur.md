@@ -5,8 +5,8 @@ Informations sur le fournisseur qui émet la facture.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AdresseElectronique** | [**AdresseElectronique**](AdresseElectronique.md) |  | 
 **IdFournisseur** | **int** |  | 
+**AdresseElectronique** | [**AdresseElectronique**](AdresseElectronique.md) |  | 
 **CodeCoordonneesBancairesFournisseur** | **int** |  | [optional] 
 **IdServiceFournisseur** | **int** |  | [optional] 
 **Nom** | **string** |  | [optional] 

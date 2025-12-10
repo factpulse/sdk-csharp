@@ -48,8 +48,9 @@ namespace FactPulse.SDK.Model
         /// <param name="commentaire">commentaire</param>
         /// <param name="idUtilisateurCourant">idUtilisateurCourant</param>
         /// <param name="piecesJointesComplementaires">piecesJointesComplementaires</param>
+        /// <param name="beneficiaire">beneficiaire</param>
         [JsonConstructor]
-        public FactureFacturX(string numeroFacture, string dateEcheancePaiement, ModeDepot modeDepot, Destinataire destinataire, Fournisseur fournisseur, CadreDeFacturation cadreDeFacturation, References references, MontantTotal montantTotal, Option<string?> dateFacture = default, Option<List<LigneDePoste>?> lignesDePoste = default, Option<List<LigneDeTVA>?> lignesDeTva = default, Option<List<Note>?> notes = default, Option<string?> commentaire = default, Option<int?> idUtilisateurCourant = default, Option<List<PieceJointeComplementaire>?> piecesJointesComplementaires = default)
+        public FactureFacturX(string numeroFacture, string dateEcheancePaiement, ModeDepot modeDepot, Destinataire destinataire, Fournisseur fournisseur, CadreDeFacturation cadreDeFacturation, References references, MontantTotal montantTotal, Option<string?> dateFacture = default, Option<List<LigneDePoste>?> lignesDePoste = default, Option<List<LigneDeTVA>?> lignesDeTva = default, Option<List<Note>?> notes = default, Option<string?> commentaire = default, Option<int?> idUtilisateurCourant = default, Option<List<PieceJointeComplementaire>?> piecesJointesComplementaires = default, Option<Beneficiaire?> beneficiaire = default)
         {
             NumeroFacture = numeroFacture;
             DateEcheancePaiement = dateEcheancePaiement;
@@ -66,6 +67,7 @@ namespace FactPulse.SDK.Model
             CommentaireOption = commentaire;
             IdUtilisateurCourantOption = idUtilisateurCourant;
             PiecesJointesComplementairesOption = piecesJointesComplementaires;
+            BeneficiaireOption = beneficiaire;
             OnCreated();
         }
 
@@ -211,6 +213,19 @@ namespace FactPulse.SDK.Model
         public List<PieceJointeComplementaire>? PiecesJointesComplementaires { get { return this.PiecesJointesComplementairesOption; } set { this.PiecesJointesComplementairesOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of Beneficiaire
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<Beneficiaire?> BeneficiaireOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Beneficiaire
+        /// </summary>
+        [JsonPropertyName("beneficiaire")]
+        public Beneficiaire? Beneficiaire { get { return this.BeneficiaireOption; } set { this.BeneficiaireOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -233,6 +248,7 @@ namespace FactPulse.SDK.Model
             sb.Append("  Commentaire: ").Append(Commentaire).Append("\n");
             sb.Append("  IdUtilisateurCourant: ").Append(IdUtilisateurCourant).Append("\n");
             sb.Append("  PiecesJointesComplementaires: ").Append(PiecesJointesComplementaires).Append("\n");
+            sb.Append("  Beneficiaire: ").Append(Beneficiaire).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -285,6 +301,7 @@ namespace FactPulse.SDK.Model
             Option<string?> commentaire = default;
             Option<int?> idUtilisateurCourant = default;
             Option<List<PieceJointeComplementaire>?> piecesJointesComplementaires = default;
+            Option<Beneficiaire?> beneficiaire = default;
 
             while (utf8JsonReader.Read())
             {
@@ -347,6 +364,9 @@ namespace FactPulse.SDK.Model
                             break;
                         case "piecesJointesComplementaires":
                             piecesJointesComplementaires = new Option<List<PieceJointeComplementaire>?>(JsonSerializer.Deserialize<List<PieceJointeComplementaire>>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "beneficiaire":
+                            beneficiaire = new Option<Beneficiaire?>(JsonSerializer.Deserialize<Beneficiaire>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -414,7 +434,7 @@ namespace FactPulse.SDK.Model
             if (notes.IsSet && notes.Value == null)
                 throw new ArgumentNullException(nameof(notes), "Property is not nullable for class FactureFacturX.");
 
-            return new FactureFacturX(numeroFacture.Value!, dateEcheancePaiement.Value!, modeDepot.Value!.Value!, destinataire.Value!, fournisseur.Value!, cadreDeFacturation.Value!, references.Value!, montantTotal.Value!, dateFacture, lignesDePoste, lignesDeTva, notes, commentaire, idUtilisateurCourant, piecesJointesComplementaires);
+            return new FactureFacturX(numeroFacture.Value!, dateEcheancePaiement.Value!, modeDepot.Value!.Value!, destinataire.Value!, fournisseur.Value!, cadreDeFacturation.Value!, references.Value!, montantTotal.Value!, dateFacture, lignesDePoste, lignesDeTva, notes, commentaire, idUtilisateurCourant, piecesJointesComplementaires, beneficiaire);
         }
 
         /// <summary>
@@ -529,6 +549,14 @@ namespace FactPulse.SDK.Model
                 }
                 else
                     writer.WriteNull("piecesJointesComplementaires");
+            if (factureFacturX.BeneficiaireOption.IsSet)
+                if (factureFacturX.BeneficiaireOption.Value != null)
+                {
+                    writer.WritePropertyName("beneficiaire");
+                    JsonSerializer.Serialize(writer, factureFacturX.Beneficiaire, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("beneficiaire");
         }
     }
 }

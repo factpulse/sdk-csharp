@@ -33,8 +33,8 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Fournisseur" /> class.
         /// </summary>
-        /// <param name="adresseElectronique">adresseElectronique</param>
         /// <param name="idFournisseur">idFournisseur</param>
+        /// <param name="adresseElectronique">adresseElectronique</param>
         /// <param name="codeCoordonneesBancairesFournisseur">codeCoordonneesBancairesFournisseur</param>
         /// <param name="idServiceFournisseur">idServiceFournisseur</param>
         /// <param name="nom">nom</param>
@@ -44,10 +44,10 @@ namespace FactPulse.SDK.Model
         /// <param name="iban">iban</param>
         /// <param name="adressePostale">adressePostale</param>
         [JsonConstructor]
-        public Fournisseur(AdresseElectronique adresseElectronique, int idFournisseur, Option<int?> codeCoordonneesBancairesFournisseur = default, Option<int?> idServiceFournisseur = default, Option<string?> nom = default, Option<string?> siren = default, Option<string?> siret = default, Option<string?> numeroTvaIntra = default, Option<string?> iban = default, Option<AdressePostale?> adressePostale = default)
+        public Fournisseur(int idFournisseur, AdresseElectronique? adresseElectronique = default, Option<int?> codeCoordonneesBancairesFournisseur = default, Option<int?> idServiceFournisseur = default, Option<string?> nom = default, Option<string?> siren = default, Option<string?> siret = default, Option<string?> numeroTvaIntra = default, Option<string?> iban = default, Option<AdressePostale?> adressePostale = default)
         {
-            AdresseElectronique = adresseElectronique;
             IdFournisseur = idFournisseur;
+            AdresseElectronique = adresseElectronique;
             CodeCoordonneesBancairesFournisseurOption = codeCoordonneesBancairesFournisseur;
             IdServiceFournisseurOption = idServiceFournisseur;
             NomOption = nom;
@@ -62,16 +62,16 @@ namespace FactPulse.SDK.Model
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets AdresseElectronique
-        /// </summary>
-        [JsonPropertyName("adresseElectronique")]
-        public AdresseElectronique AdresseElectronique { get; set; }
-
-        /// <summary>
         /// Gets or Sets IdFournisseur
         /// </summary>
         [JsonPropertyName("idFournisseur")]
         public int IdFournisseur { get; set; }
+
+        /// <summary>
+        /// Gets or Sets AdresseElectronique
+        /// </summary>
+        [JsonPropertyName("adresseElectronique")]
+        public AdresseElectronique? AdresseElectronique { get; set; }
 
         /// <summary>
         /// Used to track the state of CodeCoordonneesBancairesFournisseur
@@ -185,8 +185,8 @@ namespace FactPulse.SDK.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class Fournisseur {\n");
-            sb.Append("  AdresseElectronique: ").Append(AdresseElectronique).Append("\n");
             sb.Append("  IdFournisseur: ").Append(IdFournisseur).Append("\n");
+            sb.Append("  AdresseElectronique: ").Append(AdresseElectronique).Append("\n");
             sb.Append("  CodeCoordonneesBancairesFournisseur: ").Append(CodeCoordonneesBancairesFournisseur).Append("\n");
             sb.Append("  IdServiceFournisseur: ").Append(IdServiceFournisseur).Append("\n");
             sb.Append("  Nom: ").Append(Nom).Append("\n");
@@ -232,8 +232,8 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<AdresseElectronique?> adresseElectronique = default;
             Option<int?> idFournisseur = default;
+            Option<AdresseElectronique?> adresseElectronique = default;
             Option<int?> codeCoordonneesBancairesFournisseur = default;
             Option<int?> idServiceFournisseur = default;
             Option<string?> nom = default;
@@ -258,11 +258,11 @@ namespace FactPulse.SDK.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "adresseElectronique":
-                            adresseElectronique = new Option<AdresseElectronique?>(JsonSerializer.Deserialize<AdresseElectronique>(ref utf8JsonReader, jsonSerializerOptions)!);
-                            break;
                         case "idFournisseur":
                             idFournisseur = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
+                        case "adresseElectronique":
+                            adresseElectronique = new Option<AdresseElectronique?>(JsonSerializer.Deserialize<AdresseElectronique>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "codeCoordonneesBancairesFournisseur":
                             codeCoordonneesBancairesFournisseur = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
@@ -294,19 +294,16 @@ namespace FactPulse.SDK.Model
                 }
             }
 
-            if (!adresseElectronique.IsSet)
-                throw new ArgumentException("Property is required for class Fournisseur.", nameof(adresseElectronique));
-
             if (!idFournisseur.IsSet)
                 throw new ArgumentException("Property is required for class Fournisseur.", nameof(idFournisseur));
 
-            if (adresseElectronique.IsSet && adresseElectronique.Value == null)
-                throw new ArgumentNullException(nameof(adresseElectronique), "Property is not nullable for class Fournisseur.");
+            if (!adresseElectronique.IsSet)
+                throw new ArgumentException("Property is required for class Fournisseur.", nameof(adresseElectronique));
 
             if (idFournisseur.IsSet && idFournisseur.Value == null)
                 throw new ArgumentNullException(nameof(idFournisseur), "Property is not nullable for class Fournisseur.");
 
-            return new Fournisseur(adresseElectronique.Value!, idFournisseur.Value!.Value!, codeCoordonneesBancairesFournisseur, idServiceFournisseur, nom, siren, siret, numeroTvaIntra, iban, adressePostale);
+            return new Fournisseur(idFournisseur.Value!.Value!, adresseElectronique.Value!, codeCoordonneesBancairesFournisseur, idServiceFournisseur, nom, siren, siret, numeroTvaIntra, iban, adressePostale);
         }
 
         /// <summary>
@@ -333,13 +330,15 @@ namespace FactPulse.SDK.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, Fournisseur fournisseur, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (fournisseur.AdresseElectronique == null)
-                throw new ArgumentNullException(nameof(fournisseur.AdresseElectronique), "Property is required for class Fournisseur.");
-
-            writer.WritePropertyName("adresseElectronique");
-            JsonSerializer.Serialize(writer, fournisseur.AdresseElectronique, jsonSerializerOptions);
             writer.WriteNumber("idFournisseur", fournisseur.IdFournisseur);
 
+            if (fournisseur.AdresseElectronique != null)
+            {
+                writer.WritePropertyName("adresseElectronique");
+                JsonSerializer.Serialize(writer, fournisseur.AdresseElectronique, jsonSerializerOptions);
+            }
+            else
+                writer.WriteNull("adresseElectronique");
             if (fournisseur.CodeCoordonneesBancairesFournisseurOption.IsSet)
                 if (fournisseur.CodeCoordonneesBancairesFournisseurOption.Value != null)
                     writer.WriteNumber("codeCoordonneesBancairesFournisseur", fournisseur.CodeCoordonneesBancairesFournisseurOption.Value!.Value);

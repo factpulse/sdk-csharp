@@ -15,6 +15,7 @@ docs/apis/VrificationPDFXMLApi.md
 docs/models/APIError.md
 docs/models/AdresseElectronique.md
 docs/models/AdressePostale.md
+docs/models/Beneficiaire.md
 docs/models/BoundingBoxSchema.md
 docs/models/CadreDeFacturation.md
 docs/models/CategorieTVA.md
@@ -137,6 +138,7 @@ src/FactPulse.SDK.Test/FactPulse.SDK.Test.csproj
 src/FactPulse.SDK.Test/Model/APIErrorTests.cs
 src/FactPulse.SDK.Test/Model/AdresseElectroniqueTests.cs
 src/FactPulse.SDK.Test/Model/AdressePostaleTests.cs
+src/FactPulse.SDK.Test/Model/BeneficiaireTests.cs
 src/FactPulse.SDK.Test/Model/BoundingBoxSchemaTests.cs
 src/FactPulse.SDK.Test/Model/CadreDeFacturationTests.cs
 src/FactPulse.SDK.Test/Model/CategorieTVATests.cs
@@ -279,6 +281,7 @@ src/FactPulse.SDK/FactPulse.SDK.csproj
 src/FactPulse.SDK/Model/APIError.cs
 src/FactPulse.SDK/Model/AdresseElectronique.cs
 src/FactPulse.SDK/Model/AdressePostale.cs
+src/FactPulse.SDK/Model/Beneficiaire.cs
 src/FactPulse.SDK/Model/BoundingBoxSchema.cs
 src/FactPulse.SDK/Model/CadreDeFacturation.cs
 src/FactPulse.SDK/Model/CategorieTVA.cs

@@ -185,6 +185,37 @@ namespace FactPulse.SDK.Helpers
             if (options.TryGetValue("codeServiceExecutant", out var cse)) result["codeServiceExecutant"] = cse;
             return result;
         }
+
+        /// <summary>
+        /// Crée un bénéficiaire (factor) pour l'affacturage.
+        ///
+        /// Le bénéficiaire (BG-10 / PayeeTradeParty) est utilisé lorsque le paiement
+        /// doit être effectué à un tiers différent du fournisseur, typiquement un
+        /// factor (société d'affacturage).
+        ///
+        /// Pour les factures affacturées, il faut aussi:
+        /// - Utiliser un type de document affacturé (393, 396, 501, 502, 472, 473)
+        /// - Ajouter une note ACC avec la mention de subrogation
+        /// - L'IBAN du bénéficiaire sera utilisé pour le paiement
+        /// </summary>
+        /// <param name="nom">Raison sociale du factor (BT-59)</param>
+        /// <param name="options">Options: siret (BT-60), siren (BT-61), iban, bic</param>
+        /// <returns>Dict prêt à être utilisé dans une facture affacturée</returns>
+        public static Dictionary<string, object> Beneficiaire(string nom, Dictionary<string, object> options = null)
+        {
+            options ??= new Dictionary<string, object>();
+            var siret = options.TryGetValue("siret", out var si) ? si?.ToString() : null;
+            // Auto-calcul SIREN depuis SIRET
+            var siren = options.TryGetValue("siren", out var sr) ? sr?.ToString()
+                : (siret != null && siret.Length == 14 ? siret.Substring(0, 9) : null);
+
+            var result = new Dictionary<string, object> { ["nom"] = nom };
+            if (siret != null) result["siret"] = siret;
+            if (siren != null) result["siren"] = siren;
+            if (options.TryGetValue("iban", out var iban)) result["iban"] = iban;
+            if (options.TryGetValue("bic", out var bic)) result["bic"] = bic;
+            return result;
+        }
     }
 
     // =============================================================================

@@ -26,77 +26,39 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Informations sur le destinataire de la facture (le client).
+    /// Informations sur le bénéficiaire du paiement (BG-10 / PayeeTradeParty).  Le bénéficiaire est la partie qui reçoit le paiement. Ce bloc est utilisé uniquement si le bénéficiaire est différent du vendeur (fournisseur).  **Cas d&#39;usage principal** : Affacturage (factoring) Quand une facture est affacturée, le factor (société d&#39;affacturage) devient le bénéficiaire du paiement à la place du fournisseur.  **Business Terms (EN16931)** : - BT-59 : Nom du bénéficiaire (obligatoire) - BT-60 : Identifiant du bénéficiaire (SIRET avec schemeID 0009) - BT-61 : Identifiant légal du bénéficiaire (SIREN avec schemeID 0002)  **Référence** : docs/guide_affacturage.md
     /// </summary>
-    public partial class Destinataire : IValidatableObject
+    public partial class Beneficiaire : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="Destinataire" /> class.
+        /// Initializes a new instance of the <see cref="Beneficiaire" /> class.
         /// </summary>
-        /// <param name="adresseElectronique">adresseElectronique</param>
-        /// <param name="codeServiceExecutant">codeServiceExecutant</param>
-        /// <param name="nom">nom</param>
-        /// <param name="siren">siren</param>
+        /// <param name="nom">Nom du bénéficiaire (BT-59). Obligatoire.</param>
         /// <param name="siret">siret</param>
-        /// <param name="adressePostale">adressePostale</param>
+        /// <param name="siren">siren</param>
+        /// <param name="adresseElectronique">adresseElectronique</param>
+        /// <param name="iban">iban</param>
+        /// <param name="bic">bic</param>
         [JsonConstructor]
-        public Destinataire(AdresseElectronique? adresseElectronique = default, Option<string?> codeServiceExecutant = default, Option<string?> nom = default, Option<string?> siren = default, Option<string?> siret = default, Option<AdressePostale?> adressePostale = default)
+        public Beneficiaire(string nom, Option<string?> siret = default, Option<string?> siren = default, Option<AdresseElectronique?> adresseElectronique = default, Option<string?> iban = default, Option<string?> bic = default)
         {
-            AdresseElectronique = adresseElectronique;
-            CodeServiceExecutantOption = codeServiceExecutant;
-            NomOption = nom;
-            SirenOption = siren;
+            Nom = nom;
             SiretOption = siret;
-            AdressePostaleOption = adressePostale;
+            SirenOption = siren;
+            AdresseElectroniqueOption = adresseElectronique;
+            IbanOption = iban;
+            BicOption = bic;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets AdresseElectronique
+        /// Nom du bénéficiaire (BT-59). Obligatoire.
         /// </summary>
-        [JsonPropertyName("adresseElectronique")]
-        public AdresseElectronique? AdresseElectronique { get; set; }
-
-        /// <summary>
-        /// Used to track the state of CodeServiceExecutant
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> CodeServiceExecutantOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets CodeServiceExecutant
-        /// </summary>
-        [JsonPropertyName("codeServiceExecutant")]
-        public string? CodeServiceExecutant { get { return this.CodeServiceExecutantOption; } set { this.CodeServiceExecutantOption = new(value); } }
-
-        /// <summary>
-        /// Used to track the state of Nom
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> NomOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets Nom
-        /// </summary>
+        /// <value>Nom du bénéficiaire (BT-59). Obligatoire.</value>
         [JsonPropertyName("nom")]
-        public string? Nom { get { return this.NomOption; } set { this.NomOption = new(value); } }
-
-        /// <summary>
-        /// Used to track the state of Siren
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> SirenOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets Siren
-        /// </summary>
-        [JsonPropertyName("siren")]
-        public string? Siren { get { return this.SirenOption; } set { this.SirenOption = new(value); } }
+        public string Nom { get; set; }
 
         /// <summary>
         /// Used to track the state of Siret
@@ -112,17 +74,56 @@ namespace FactPulse.SDK.Model
         public string? Siret { get { return this.SiretOption; } set { this.SiretOption = new(value); } }
 
         /// <summary>
-        /// Used to track the state of AdressePostale
+        /// Used to track the state of Siren
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<AdressePostale?> AdressePostaleOption { get; private set; }
+        public Option<string?> SirenOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets AdressePostale
+        /// Gets or Sets Siren
         /// </summary>
-        [JsonPropertyName("adressePostale")]
-        public AdressePostale? AdressePostale { get { return this.AdressePostaleOption; } set { this.AdressePostaleOption = new(value); } }
+        [JsonPropertyName("siren")]
+        public string? Siren { get { return this.SirenOption; } set { this.SirenOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of AdresseElectronique
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<AdresseElectronique?> AdresseElectroniqueOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets AdresseElectronique
+        /// </summary>
+        [JsonPropertyName("adresseElectronique")]
+        public AdresseElectronique? AdresseElectronique { get { return this.AdresseElectroniqueOption; } set { this.AdresseElectroniqueOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Iban
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> IbanOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Iban
+        /// </summary>
+        [JsonPropertyName("iban")]
+        public string? Iban { get { return this.IbanOption; } set { this.IbanOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Bic
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> BicOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Bic
+        /// </summary>
+        [JsonPropertyName("bic")]
+        public string? Bic { get { return this.BicOption; } set { this.BicOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -131,13 +132,13 @@ namespace FactPulse.SDK.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class Destinataire {\n");
-            sb.Append("  AdresseElectronique: ").Append(AdresseElectronique).Append("\n");
-            sb.Append("  CodeServiceExecutant: ").Append(CodeServiceExecutant).Append("\n");
+            sb.Append("class Beneficiaire {\n");
             sb.Append("  Nom: ").Append(Nom).Append("\n");
-            sb.Append("  Siren: ").Append(Siren).Append("\n");
             sb.Append("  Siret: ").Append(Siret).Append("\n");
-            sb.Append("  AdressePostale: ").Append(AdressePostale).Append("\n");
+            sb.Append("  Siren: ").Append(Siren).Append("\n");
+            sb.Append("  AdresseElectronique: ").Append(AdresseElectronique).Append("\n");
+            sb.Append("  Iban: ").Append(Iban).Append("\n");
+            sb.Append("  Bic: ").Append(Bic).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -149,24 +150,50 @@ namespace FactPulse.SDK.Model
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // Nom (string) minLength
+            if (this.Nom != null && this.Nom.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for Nom, length must be greater than 1.", new [] { "Nom" });
+            }
+
+            if (this.SiretOption.Value != null) {
+                // Siret (string) pattern
+                Regex regexSiret = new Regex(@"^\d{14}$", RegexOptions.CultureInvariant);
+
+                if (this.SiretOption.Value != null &&!regexSiret.Match(this.SiretOption.Value).Success)
+                {
+                    yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Siret, must match a pattern of " + regexSiret, new [] { "Siret" });
+                }
+            }
+
+            if (this.SirenOption.Value != null) {
+                // Siren (string) pattern
+                Regex regexSiren = new Regex(@"^\d{9}$", RegexOptions.CultureInvariant);
+
+                if (this.SirenOption.Value != null &&!regexSiren.Match(this.SirenOption.Value).Success)
+                {
+                    yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Siren, must match a pattern of " + regexSiren, new [] { "Siren" });
+                }
+            }
+
             yield break;
         }
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="Destinataire" />
+    /// A Json converter for type <see cref="Beneficiaire" />
     /// </summary>
-    public class DestinataireJsonConverter : JsonConverter<Destinataire>
+    public class BeneficiaireJsonConverter : JsonConverter<Beneficiaire>
     {
         /// <summary>
-        /// Deserializes json to <see cref="Destinataire" />
+        /// Deserializes json to <see cref="Beneficiaire" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override Destinataire Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override Beneficiaire Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -175,12 +202,12 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<AdresseElectronique?> adresseElectronique = default;
-            Option<string?> codeServiceExecutant = default;
             Option<string?> nom = default;
-            Option<string?> siren = default;
             Option<string?> siret = default;
-            Option<AdressePostale?> adressePostale = default;
+            Option<string?> siren = default;
+            Option<AdresseElectronique?> adresseElectronique = default;
+            Option<string?> iban = default;
+            Option<string?> bic = default;
 
             while (utf8JsonReader.Read())
             {
@@ -197,23 +224,23 @@ namespace FactPulse.SDK.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "adresseElectronique":
-                            adresseElectronique = new Option<AdresseElectronique?>(JsonSerializer.Deserialize<AdresseElectronique>(ref utf8JsonReader, jsonSerializerOptions));
-                            break;
-                        case "codeServiceExecutant":
-                            codeServiceExecutant = new Option<string?>(utf8JsonReader.GetString());
-                            break;
                         case "nom":
-                            nom = new Option<string?>(utf8JsonReader.GetString());
-                            break;
-                        case "siren":
-                            siren = new Option<string?>(utf8JsonReader.GetString());
+                            nom = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "siret":
                             siret = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "adressePostale":
-                            adressePostale = new Option<AdressePostale?>(JsonSerializer.Deserialize<AdressePostale>(ref utf8JsonReader, jsonSerializerOptions));
+                        case "siren":
+                            siren = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "adresseElectronique":
+                            adresseElectronique = new Option<AdresseElectronique?>(JsonSerializer.Deserialize<AdresseElectronique>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "iban":
+                            iban = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "bic":
+                            bic = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -221,75 +248,75 @@ namespace FactPulse.SDK.Model
                 }
             }
 
-            if (!adresseElectronique.IsSet)
-                throw new ArgumentException("Property is required for class Destinataire.", nameof(adresseElectronique));
+            if (!nom.IsSet)
+                throw new ArgumentException("Property is required for class Beneficiaire.", nameof(nom));
 
-            return new Destinataire(adresseElectronique.Value!, codeServiceExecutant, nom, siren, siret, adressePostale);
+            if (nom.IsSet && nom.Value == null)
+                throw new ArgumentNullException(nameof(nom), "Property is not nullable for class Beneficiaire.");
+
+            return new Beneficiaire(nom.Value!, siret, siren, adresseElectronique, iban, bic);
         }
 
         /// <summary>
-        /// Serializes a <see cref="Destinataire" />
+        /// Serializes a <see cref="Beneficiaire" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="destinataire"></param>
+        /// <param name="beneficiaire"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, Destinataire destinataire, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, Beneficiaire beneficiaire, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, destinataire, jsonSerializerOptions);
+            WriteProperties(writer, beneficiaire, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="Destinataire" />
+        /// Serializes the properties of <see cref="Beneficiaire" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="destinataire"></param>
+        /// <param name="beneficiaire"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, Destinataire destinataire, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, Beneficiaire beneficiaire, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (destinataire.AdresseElectronique != null)
-            {
-                writer.WritePropertyName("adresseElectronique");
-                JsonSerializer.Serialize(writer, destinataire.AdresseElectronique, jsonSerializerOptions);
-            }
-            else
-                writer.WriteNull("adresseElectronique");
-            if (destinataire.CodeServiceExecutantOption.IsSet)
-                if (destinataire.CodeServiceExecutantOption.Value != null)
-                    writer.WriteString("codeServiceExecutant", destinataire.CodeServiceExecutant);
-                else
-                    writer.WriteNull("codeServiceExecutant");
+            if (beneficiaire.Nom == null)
+                throw new ArgumentNullException(nameof(beneficiaire.Nom), "Property is required for class Beneficiaire.");
 
-            if (destinataire.NomOption.IsSet)
-                if (destinataire.NomOption.Value != null)
-                    writer.WriteString("nom", destinataire.Nom);
-                else
-                    writer.WriteNull("nom");
+            writer.WriteString("nom", beneficiaire.Nom);
 
-            if (destinataire.SirenOption.IsSet)
-                if (destinataire.SirenOption.Value != null)
-                    writer.WriteString("siren", destinataire.Siren);
-                else
-                    writer.WriteNull("siren");
-
-            if (destinataire.SiretOption.IsSet)
-                if (destinataire.SiretOption.Value != null)
-                    writer.WriteString("siret", destinataire.Siret);
+            if (beneficiaire.SiretOption.IsSet)
+                if (beneficiaire.SiretOption.Value != null)
+                    writer.WriteString("siret", beneficiaire.Siret);
                 else
                     writer.WriteNull("siret");
 
-            if (destinataire.AdressePostaleOption.IsSet)
-                if (destinataire.AdressePostaleOption.Value != null)
+            if (beneficiaire.SirenOption.IsSet)
+                if (beneficiaire.SirenOption.Value != null)
+                    writer.WriteString("siren", beneficiaire.Siren);
+                else
+                    writer.WriteNull("siren");
+
+            if (beneficiaire.AdresseElectroniqueOption.IsSet)
+                if (beneficiaire.AdresseElectroniqueOption.Value != null)
                 {
-                    writer.WritePropertyName("adressePostale");
-                    JsonSerializer.Serialize(writer, destinataire.AdressePostale, jsonSerializerOptions);
+                    writer.WritePropertyName("adresseElectronique");
+                    JsonSerializer.Serialize(writer, beneficiaire.AdresseElectronique, jsonSerializerOptions);
                 }
                 else
-                    writer.WriteNull("adressePostale");
+                    writer.WriteNull("adresseElectronique");
+            if (beneficiaire.IbanOption.IsSet)
+                if (beneficiaire.IbanOption.Value != null)
+                    writer.WriteString("iban", beneficiaire.Iban);
+                else
+                    writer.WriteNull("iban");
+
+            if (beneficiaire.BicOption.IsSet)
+                if (beneficiaire.BicOption.Value != null)
+                    writer.WriteString("bic", beneficiaire.Bic);
+                else
+                    writer.WriteNull("bic");
         }
     }
 }
