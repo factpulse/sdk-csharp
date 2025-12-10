@@ -32,84 +32,84 @@ namespace FactPulse.SDK.Model
     public enum TypeFacture
     {
         /// <summary>
-        /// Enum _380 for value: 380
+        /// Enum FACTURE for value: 380
         /// </summary>
-        _380 = 1,
+        FACTURE = 1,
 
         /// <summary>
-        /// Enum _389 for value: 389
+        /// Enum FACTURE_AUTOFACTUREE for value: 389
         /// </summary>
-        _389 = 2,
+        FACTURE_AUTOFACTUREE = 2,
 
         /// <summary>
-        /// Enum _393 for value: 393
+        /// Enum FACTURE_AFFACTUREE for value: 393
         /// </summary>
-        _393 = 3,
+        FACTURE_AFFACTUREE = 3,
 
         /// <summary>
-        /// Enum _501 for value: 501
+        /// Enum FACTURE_AUTOFACTUREE_AFFACTUREE for value: 501
         /// </summary>
-        _501 = 4,
+        FACTURE_AUTOFACTUREE_AFFACTUREE = 4,
 
         /// <summary>
-        /// Enum _386 for value: 386
+        /// Enum FACTURE_ACOMPTE for value: 386
         /// </summary>
-        _386 = 5,
+        FACTURE_ACOMPTE = 5,
 
         /// <summary>
-        /// Enum _500 for value: 500
+        /// Enum FACTURE_ACOMPTE_AUTOFACTUREE for value: 500
         /// </summary>
-        _500 = 6,
+        FACTURE_ACOMPTE_AUTOFACTUREE = 6,
 
         /// <summary>
-        /// Enum _384 for value: 384
+        /// Enum FACTURE_RECTIFICATIVE for value: 384
         /// </summary>
-        _384 = 7,
+        FACTURE_RECTIFICATIVE = 7,
 
         /// <summary>
-        /// Enum _471 for value: 471
+        /// Enum FACTURE_RECTIFICATIVE_AUTOFACTUREE for value: 471
         /// </summary>
-        _471 = 8,
+        FACTURE_RECTIFICATIVE_AUTOFACTUREE = 8,
 
         /// <summary>
-        /// Enum _472 for value: 472
+        /// Enum FACTURE_RECTIFICATIVE_AFFACTUREE for value: 472
         /// </summary>
-        _472 = 9,
+        FACTURE_RECTIFICATIVE_AFFACTUREE = 9,
 
         /// <summary>
-        /// Enum _473 for value: 473
+        /// Enum FACTURE_RECTIFICATIVE_AUTOFACTUREE_AFFACTUREE for value: 473
         /// </summary>
-        _473 = 10,
+        FACTURE_RECTIFICATIVE_AUTOFACTUREE_AFFACTUREE = 10,
 
         /// <summary>
-        /// Enum _381 for value: 381
+        /// Enum AVOIR for value: 381
         /// </summary>
-        _381 = 11,
+        AVOIR = 11,
 
         /// <summary>
-        /// Enum _261 for value: 261
+        /// Enum AVOIR_AUTOFACTURE for value: 261
         /// </summary>
-        _261 = 12,
+        AVOIR_AUTOFACTURE = 12,
 
         /// <summary>
-        /// Enum _262 for value: 262
+        /// Enum AVOIR_REMISE_GLOBALE for value: 262
         /// </summary>
-        _262 = 13,
+        AVOIR_REMISE_GLOBALE = 13,
 
         /// <summary>
-        /// Enum _396 for value: 396
+        /// Enum AVOIR_AFFACTURE for value: 396
         /// </summary>
-        _396 = 14,
+        AVOIR_AFFACTURE = 14,
 
         /// <summary>
-        /// Enum _502 for value: 502
+        /// Enum AVOIR_AUTOFACTURE_AFFACTURE for value: 502
         /// </summary>
-        _502 = 15,
+        AVOIR_AUTOFACTURE_AFFACTURE = 15,
 
         /// <summary>
-        /// Enum _503 for value: 503
+        /// Enum AVOIR_ACOMPTE for value: 503
         /// </summary>
-        _503 = 16
+        AVOIR_ACOMPTE = 16
     }
 
     /// <summary>
@@ -125,52 +125,52 @@ namespace FactPulse.SDK.Model
         public static TypeFacture FromString(string value)
         {
             if (value.Equals("380"))
-                return TypeFacture._380;
+                return TypeFacture.FACTURE;
 
             if (value.Equals("389"))
-                return TypeFacture._389;
+                return TypeFacture.FACTURE_AUTOFACTUREE;
 
             if (value.Equals("393"))
-                return TypeFacture._393;
+                return TypeFacture.FACTURE_AFFACTUREE;
 
             if (value.Equals("501"))
-                return TypeFacture._501;
+                return TypeFacture.FACTURE_AUTOFACTUREE_AFFACTUREE;
 
             if (value.Equals("386"))
-                return TypeFacture._386;
+                return TypeFacture.FACTURE_ACOMPTE;
 
             if (value.Equals("500"))
-                return TypeFacture._500;
+                return TypeFacture.FACTURE_ACOMPTE_AUTOFACTUREE;
 
             if (value.Equals("384"))
-                return TypeFacture._384;
+                return TypeFacture.FACTURE_RECTIFICATIVE;
 
             if (value.Equals("471"))
-                return TypeFacture._471;
+                return TypeFacture.FACTURE_RECTIFICATIVE_AUTOFACTUREE;
 
             if (value.Equals("472"))
-                return TypeFacture._472;
+                return TypeFacture.FACTURE_RECTIFICATIVE_AFFACTUREE;
 
             if (value.Equals("473"))
-                return TypeFacture._473;
+                return TypeFacture.FACTURE_RECTIFICATIVE_AUTOFACTUREE_AFFACTUREE;
 
             if (value.Equals("381"))
-                return TypeFacture._381;
+                return TypeFacture.AVOIR;
 
             if (value.Equals("261"))
-                return TypeFacture._261;
+                return TypeFacture.AVOIR_AUTOFACTURE;
 
             if (value.Equals("262"))
-                return TypeFacture._262;
+                return TypeFacture.AVOIR_REMISE_GLOBALE;
 
             if (value.Equals("396"))
-                return TypeFacture._396;
+                return TypeFacture.AVOIR_AFFACTURE;
 
             if (value.Equals("502"))
-                return TypeFacture._502;
+                return TypeFacture.AVOIR_AUTOFACTURE_AFFACTURE;
 
             if (value.Equals("503"))
-                return TypeFacture._503;
+                return TypeFacture.AVOIR_ACOMPTE;
 
             throw new NotImplementedException($"Could not convert value to type TypeFacture: '{value}'");
         }
@@ -183,52 +183,52 @@ namespace FactPulse.SDK.Model
         public static TypeFacture? FromStringOrDefault(string value)
         {
             if (value.Equals("380"))
-                return TypeFacture._380;
+                return TypeFacture.FACTURE;
 
             if (value.Equals("389"))
-                return TypeFacture._389;
+                return TypeFacture.FACTURE_AUTOFACTUREE;
 
             if (value.Equals("393"))
-                return TypeFacture._393;
+                return TypeFacture.FACTURE_AFFACTUREE;
 
             if (value.Equals("501"))
-                return TypeFacture._501;
+                return TypeFacture.FACTURE_AUTOFACTUREE_AFFACTUREE;
 
             if (value.Equals("386"))
-                return TypeFacture._386;
+                return TypeFacture.FACTURE_ACOMPTE;
 
             if (value.Equals("500"))
-                return TypeFacture._500;
+                return TypeFacture.FACTURE_ACOMPTE_AUTOFACTUREE;
 
             if (value.Equals("384"))
-                return TypeFacture._384;
+                return TypeFacture.FACTURE_RECTIFICATIVE;
 
             if (value.Equals("471"))
-                return TypeFacture._471;
+                return TypeFacture.FACTURE_RECTIFICATIVE_AUTOFACTUREE;
 
             if (value.Equals("472"))
-                return TypeFacture._472;
+                return TypeFacture.FACTURE_RECTIFICATIVE_AFFACTUREE;
 
             if (value.Equals("473"))
-                return TypeFacture._473;
+                return TypeFacture.FACTURE_RECTIFICATIVE_AUTOFACTUREE_AFFACTUREE;
 
             if (value.Equals("381"))
-                return TypeFacture._381;
+                return TypeFacture.AVOIR;
 
             if (value.Equals("261"))
-                return TypeFacture._261;
+                return TypeFacture.AVOIR_AUTOFACTURE;
 
             if (value.Equals("262"))
-                return TypeFacture._262;
+                return TypeFacture.AVOIR_REMISE_GLOBALE;
 
             if (value.Equals("396"))
-                return TypeFacture._396;
+                return TypeFacture.AVOIR_AFFACTURE;
 
             if (value.Equals("502"))
-                return TypeFacture._502;
+                return TypeFacture.AVOIR_AUTOFACTURE_AFFACTURE;
 
             if (value.Equals("503"))
-                return TypeFacture._503;
+                return TypeFacture.AVOIR_ACOMPTE;
 
             return null;
         }
@@ -241,52 +241,52 @@ namespace FactPulse.SDK.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string ToJsonValue(TypeFacture value)
         {
-            if (value == TypeFacture._380)
+            if (value == TypeFacture.FACTURE)
                 return "380";
 
-            if (value == TypeFacture._389)
+            if (value == TypeFacture.FACTURE_AUTOFACTUREE)
                 return "389";
 
-            if (value == TypeFacture._393)
+            if (value == TypeFacture.FACTURE_AFFACTUREE)
                 return "393";
 
-            if (value == TypeFacture._501)
+            if (value == TypeFacture.FACTURE_AUTOFACTUREE_AFFACTUREE)
                 return "501";
 
-            if (value == TypeFacture._386)
+            if (value == TypeFacture.FACTURE_ACOMPTE)
                 return "386";
 
-            if (value == TypeFacture._500)
+            if (value == TypeFacture.FACTURE_ACOMPTE_AUTOFACTUREE)
                 return "500";
 
-            if (value == TypeFacture._384)
+            if (value == TypeFacture.FACTURE_RECTIFICATIVE)
                 return "384";
 
-            if (value == TypeFacture._471)
+            if (value == TypeFacture.FACTURE_RECTIFICATIVE_AUTOFACTUREE)
                 return "471";
 
-            if (value == TypeFacture._472)
+            if (value == TypeFacture.FACTURE_RECTIFICATIVE_AFFACTUREE)
                 return "472";
 
-            if (value == TypeFacture._473)
+            if (value == TypeFacture.FACTURE_RECTIFICATIVE_AUTOFACTUREE_AFFACTUREE)
                 return "473";
 
-            if (value == TypeFacture._381)
+            if (value == TypeFacture.AVOIR)
                 return "381";
 
-            if (value == TypeFacture._261)
+            if (value == TypeFacture.AVOIR_AUTOFACTURE)
                 return "261";
 
-            if (value == TypeFacture._262)
+            if (value == TypeFacture.AVOIR_REMISE_GLOBALE)
                 return "262";
 
-            if (value == TypeFacture._396)
+            if (value == TypeFacture.AVOIR_AFFACTURE)
                 return "396";
 
-            if (value == TypeFacture._502)
+            if (value == TypeFacture.AVOIR_AUTOFACTURE_AFFACTURE)
                 return "502";
 
-            if (value == TypeFacture._503)
+            if (value == TypeFacture.AVOIR_ACOMPTE)
                 return "503";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
