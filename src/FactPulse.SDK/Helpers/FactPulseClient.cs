@@ -300,7 +300,50 @@ namespace FactPulse.SDK.Helpers
             }
 
             var json = await response.Content.ReadAsStringAsync();
-            if (!response.IsSuccessStatusCode) throw new FactPulseValidationException($"API error: {json}", null);
+            if (!response.IsSuccessStatusCode)
+            {
+                // Extraire les détails d'erreur du corps de la réponse
+                var errorMsg = $"Erreur API ({(int)response.StatusCode})";
+                var errors = new List<ValidationErrorDetail>();
+
+                try
+                {
+                    using var doc = JsonDocument.Parse(json);
+                    var root = doc.RootElement;
+
+                    // Format FastAPI/Pydantic: {"detail": [{"loc": [...], "msg": "...", "type": "..."}]}
+                    if (root.TryGetProperty("detail", out var detail))
+                    {
+                        if (detail.ValueKind == JsonValueKind.Array)
+                        {
+                            errorMsg = "Erreur de validation";
+                            foreach (var err in detail.EnumerateArray())
+                            {
+                                var loc = "";
+                                if (err.TryGetProperty("loc", out var locArray) && locArray.ValueKind == JsonValueKind.Array)
+                                {
+                                    loc = string.Join(" -> ", locArray.EnumerateArray().Select(l => l.ToString()));
+                                }
+                                var reason = err.TryGetProperty("msg", out var msg) ? msg.GetString() ?? "" : "";
+                                var code = err.TryGetProperty("type", out var type) ? type.GetString() : null;
+                                errors.Add(new ValidationErrorDetail("ERROR", loc, reason, "validation", code));
+                            }
+                        }
+                        else if (detail.ValueKind == JsonValueKind.String)
+                        {
+                            errorMsg = detail.GetString() ?? errorMsg;
+                        }
+                    }
+                    else if (root.TryGetProperty("errorMessage", out var errMsg))
+                    {
+                        errorMsg = errMsg.GetString() ?? errorMsg;
+                    }
+                }
+                catch { /* ignore parsing errors */ }
+
+                Console.Error.WriteLine($"Erreur API {(int)response.StatusCode}: {json}");
+                throw new FactPulseValidationException(errorMsg, errors);
+            }
 
             var data = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(json);
             if (sync && data.TryGetValue("id_tache", out var taskIdElem))
