@@ -37,139 +37,69 @@ namespace FactPulse.SDK.Model
         B1 = 1,
 
         /// <summary>
-        /// Enum B12 for value: B1
-        /// </summary>
-        B12 = 2,
-
-        /// <summary>
         /// Enum S1 for value: S1
         /// </summary>
-        S1 = 3,
-
-        /// <summary>
-        /// Enum S12 for value: S1
-        /// </summary>
-        S12 = 4,
+        S1 = 2,
 
         /// <summary>
         /// Enum M1 for value: M1
         /// </summary>
-        M1 = 5,
-
-        /// <summary>
-        /// Enum M12 for value: M1
-        /// </summary>
-        M12 = 6,
+        M1 = 3,
 
         /// <summary>
         /// Enum B2 for value: B2
         /// </summary>
-        B2 = 7,
-
-        /// <summary>
-        /// Enum B22 for value: B2
-        /// </summary>
-        B22 = 8,
+        B2 = 4,
 
         /// <summary>
         /// Enum S2 for value: S2
         /// </summary>
-        S2 = 9,
-
-        /// <summary>
-        /// Enum S22 for value: S2
-        /// </summary>
-        S22 = 10,
+        S2 = 5,
 
         /// <summary>
         /// Enum M2 for value: M2
         /// </summary>
-        M2 = 11,
-
-        /// <summary>
-        /// Enum M22 for value: M2
-        /// </summary>
-        M22 = 12,
+        M2 = 6,
 
         /// <summary>
         /// Enum B4 for value: B4
         /// </summary>
-        B4 = 13,
-
-        /// <summary>
-        /// Enum B42 for value: B4
-        /// </summary>
-        B42 = 14,
+        B4 = 7,
 
         /// <summary>
         /// Enum S4 for value: S4
         /// </summary>
-        S4 = 15,
-
-        /// <summary>
-        /// Enum S42 for value: S4
-        /// </summary>
-        S42 = 16,
+        S4 = 8,
 
         /// <summary>
         /// Enum M4 for value: M4
         /// </summary>
-        M4 = 17,
-
-        /// <summary>
-        /// Enum M42 for value: M4
-        /// </summary>
-        M42 = 18,
+        M4 = 9,
 
         /// <summary>
         /// Enum S3 for value: S3
         /// </summary>
-        S3 = 19,
-
-        /// <summary>
-        /// Enum S32 for value: S3
-        /// </summary>
-        S32 = 20,
+        S3 = 10,
 
         /// <summary>
         /// Enum S5 for value: S5
         /// </summary>
-        S5 = 21,
-
-        /// <summary>
-        /// Enum S52 for value: S5
-        /// </summary>
-        S52 = 22,
+        S5 = 11,
 
         /// <summary>
         /// Enum S6 for value: S6
         /// </summary>
-        S6 = 23,
-
-        /// <summary>
-        /// Enum S62 for value: S6
-        /// </summary>
-        S62 = 24,
+        S6 = 12,
 
         /// <summary>
         /// Enum B7 for value: B7
         /// </summary>
-        B7 = 25,
-
-        /// <summary>
-        /// Enum B72 for value: B7
-        /// </summary>
-        B72 = 26,
+        B7 = 13,
 
         /// <summary>
         /// Enum S7 for value: S7
         /// </summary>
-        S7 = 27,
-
-        /// <summary>
-        /// Enum S72 for value: S7
-        /// </summary>
-        S72 = 28
+        S7 = 14
     }
 
     /// <summary>
@@ -187,86 +117,44 @@ namespace FactPulse.SDK.Model
             if (value.Equals("B1"))
                 return NatureOperation.B1;
 
-            if (value.Equals("B1"))
-                return NatureOperation.B12;
-
             if (value.Equals("S1"))
                 return NatureOperation.S1;
-
-            if (value.Equals("S1"))
-                return NatureOperation.S12;
 
             if (value.Equals("M1"))
                 return NatureOperation.M1;
 
-            if (value.Equals("M1"))
-                return NatureOperation.M12;
-
             if (value.Equals("B2"))
                 return NatureOperation.B2;
-
-            if (value.Equals("B2"))
-                return NatureOperation.B22;
 
             if (value.Equals("S2"))
                 return NatureOperation.S2;
 
-            if (value.Equals("S2"))
-                return NatureOperation.S22;
-
             if (value.Equals("M2"))
                 return NatureOperation.M2;
-
-            if (value.Equals("M2"))
-                return NatureOperation.M22;
 
             if (value.Equals("B4"))
                 return NatureOperation.B4;
 
-            if (value.Equals("B4"))
-                return NatureOperation.B42;
-
             if (value.Equals("S4"))
                 return NatureOperation.S4;
-
-            if (value.Equals("S4"))
-                return NatureOperation.S42;
 
             if (value.Equals("M4"))
                 return NatureOperation.M4;
 
-            if (value.Equals("M4"))
-                return NatureOperation.M42;
-
             if (value.Equals("S3"))
                 return NatureOperation.S3;
-
-            if (value.Equals("S3"))
-                return NatureOperation.S32;
 
             if (value.Equals("S5"))
                 return NatureOperation.S5;
 
-            if (value.Equals("S5"))
-                return NatureOperation.S52;
-
             if (value.Equals("S6"))
                 return NatureOperation.S6;
-
-            if (value.Equals("S6"))
-                return NatureOperation.S62;
 
             if (value.Equals("B7"))
                 return NatureOperation.B7;
 
-            if (value.Equals("B7"))
-                return NatureOperation.B72;
-
             if (value.Equals("S7"))
                 return NatureOperation.S7;
-
-            if (value.Equals("S7"))
-                return NatureOperation.S72;
 
             throw new NotImplementedException($"Could not convert value to type NatureOperation: '{value}'");
         }
@@ -281,86 +169,44 @@ namespace FactPulse.SDK.Model
             if (value.Equals("B1"))
                 return NatureOperation.B1;
 
-            if (value.Equals("B1"))
-                return NatureOperation.B12;
-
             if (value.Equals("S1"))
                 return NatureOperation.S1;
-
-            if (value.Equals("S1"))
-                return NatureOperation.S12;
 
             if (value.Equals("M1"))
                 return NatureOperation.M1;
 
-            if (value.Equals("M1"))
-                return NatureOperation.M12;
-
             if (value.Equals("B2"))
                 return NatureOperation.B2;
-
-            if (value.Equals("B2"))
-                return NatureOperation.B22;
 
             if (value.Equals("S2"))
                 return NatureOperation.S2;
 
-            if (value.Equals("S2"))
-                return NatureOperation.S22;
-
             if (value.Equals("M2"))
                 return NatureOperation.M2;
-
-            if (value.Equals("M2"))
-                return NatureOperation.M22;
 
             if (value.Equals("B4"))
                 return NatureOperation.B4;
 
-            if (value.Equals("B4"))
-                return NatureOperation.B42;
-
             if (value.Equals("S4"))
                 return NatureOperation.S4;
-
-            if (value.Equals("S4"))
-                return NatureOperation.S42;
 
             if (value.Equals("M4"))
                 return NatureOperation.M4;
 
-            if (value.Equals("M4"))
-                return NatureOperation.M42;
-
             if (value.Equals("S3"))
                 return NatureOperation.S3;
-
-            if (value.Equals("S3"))
-                return NatureOperation.S32;
 
             if (value.Equals("S5"))
                 return NatureOperation.S5;
 
-            if (value.Equals("S5"))
-                return NatureOperation.S52;
-
             if (value.Equals("S6"))
                 return NatureOperation.S6;
-
-            if (value.Equals("S6"))
-                return NatureOperation.S62;
 
             if (value.Equals("B7"))
                 return NatureOperation.B7;
 
-            if (value.Equals("B7"))
-                return NatureOperation.B72;
-
             if (value.Equals("S7"))
                 return NatureOperation.S7;
-
-            if (value.Equals("S7"))
-                return NatureOperation.S72;
 
             return null;
         }
@@ -376,85 +222,43 @@ namespace FactPulse.SDK.Model
             if (value == NatureOperation.B1)
                 return "B1";
 
-            if (value == NatureOperation.B12)
-                return "B1";
-
             if (value == NatureOperation.S1)
-                return "S1";
-
-            if (value == NatureOperation.S12)
                 return "S1";
 
             if (value == NatureOperation.M1)
                 return "M1";
 
-            if (value == NatureOperation.M12)
-                return "M1";
-
             if (value == NatureOperation.B2)
-                return "B2";
-
-            if (value == NatureOperation.B22)
                 return "B2";
 
             if (value == NatureOperation.S2)
                 return "S2";
 
-            if (value == NatureOperation.S22)
-                return "S2";
-
             if (value == NatureOperation.M2)
-                return "M2";
-
-            if (value == NatureOperation.M22)
                 return "M2";
 
             if (value == NatureOperation.B4)
                 return "B4";
 
-            if (value == NatureOperation.B42)
-                return "B4";
-
             if (value == NatureOperation.S4)
-                return "S4";
-
-            if (value == NatureOperation.S42)
                 return "S4";
 
             if (value == NatureOperation.M4)
                 return "M4";
 
-            if (value == NatureOperation.M42)
-                return "M4";
-
             if (value == NatureOperation.S3)
-                return "S3";
-
-            if (value == NatureOperation.S32)
                 return "S3";
 
             if (value == NatureOperation.S5)
                 return "S5";
 
-            if (value == NatureOperation.S52)
-                return "S5";
-
             if (value == NatureOperation.S6)
-                return "S6";
-
-            if (value == NatureOperation.S62)
                 return "S6";
 
             if (value == NatureOperation.B7)
                 return "B7";
 
-            if (value == NatureOperation.B72)
-                return "B7";
-
             if (value == NatureOperation.S7)
-                return "S7";
-
-            if (value == NatureOperation.S72)
                 return "S7";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
