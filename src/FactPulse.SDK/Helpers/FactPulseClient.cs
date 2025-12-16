@@ -551,13 +551,23 @@ namespace FactPulse.SDK.Helpers
         // Validation
         // =========================================================================
 
-        public async Task<Dictionary<string, object>> ValiderPdfFacturxAsync(string pdfPath, string profil = "EN16931")
+        /// <summary>
+        /// Valide un PDF Factur-X.
+        /// </summary>
+        /// <param name="pdfPath">Chemin vers le fichier PDF</param>
+        /// <param name="profil">Profil Factur-X (MINIMUM, BASIC, EN16931, EXTENDED). Si null, auto-détecté.</param>
+        /// <param name="useVerapdf">Active la validation stricte PDF/A avec VeraPDF (défaut: false)</param>
+        public async Task<Dictionary<string, object>> ValiderPdfFacturxAsync(string pdfPath, string? profil = null, bool useVerapdf = false)
         {
             await EnsureAuthenticatedAsync();
             var pdfContent = await File.ReadAllBytesAsync(pdfPath);
             using var content = new MultipartFormDataContent();
             content.Add(new ByteArrayContent(pdfContent), "fichier_pdf", Path.GetFileName(pdfPath));
-            content.Add(new StringContent(profil), "profil");
+            if (profil != null)
+            {
+                content.Add(new StringContent(profil), "profil");
+            }
+            content.Add(new StringContent(useVerapdf.ToString().ToLower()), "use_verapdf");
 
             var request = new HttpRequestMessage(HttpMethod.Post, $"{_apiUrl}/api/v1/traitement/valider-pdf-facturx") { Content = content };
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _accessToken);

@@ -1,5 +1,5 @@
 # FactPulse.SDK.Model.TypeDocument
-Types de documents commerciaux (UNTDID 1001).
+Types de documents commerciaux (UNTDID 1001).  | Code | Nom | Description | |- -- -- -|- -- --|- -- -- -- -- -- --| | 380 | FACTURE | Facture commerciale | | 381 | AVOIR | Avoir | | 384 | FACTURE_RECTIFICATIVE | Facture rectificative | | 386 | ACOMPTE | Facture d'acompte | | 389 | AUTOFACTURATION | Facture auto-facturée |
 
 ## Properties
 

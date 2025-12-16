@@ -26,35 +26,35 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Types de documents commerciaux (UNTDID 1001).
+    /// Types de documents commerciaux (UNTDID 1001).  | Code | Nom | Description | |- -- -- -|- -- --|- -- -- -- -- -- --| | 380 | FACTURE | Facture commerciale | | 381 | AVOIR | Avoir | | 384 | FACTURE_RECTIFICATIVE | Facture rectificative | | 386 | ACOMPTE | Facture d&#39;acompte | | 389 | AUTOFACTURATION | Facture auto-facturée |
     /// </summary>
-    /// <value>Types de documents commerciaux (UNTDID 1001).</value>
+    /// <value>Types de documents commerciaux (UNTDID 1001).  | Code | Nom | Description | |- -- -- -|- -- --|- -- -- -- -- -- --| | 380 | FACTURE | Facture commerciale | | 381 | AVOIR | Avoir | | 384 | FACTURE_RECTIFICATIVE | Facture rectificative | | 386 | ACOMPTE | Facture d&#39;acompte | | 389 | AUTOFACTURATION | Facture auto-facturée |</value>
     public enum TypeDocument
     {
         /// <summary>
-        /// Enum _380 for value: 380
+        /// Enum FACTURE for value: 380
         /// </summary>
-        _380 = 1,
+        FACTURE = 1,
 
         /// <summary>
-        /// Enum _381 for value: 381
+        /// Enum AVOIR for value: 381
         /// </summary>
-        _381 = 2,
+        AVOIR = 2,
 
         /// <summary>
-        /// Enum _384 for value: 384
+        /// Enum FACTURE_RECTIFICATIVE for value: 384
         /// </summary>
-        _384 = 3,
+        FACTURE_RECTIFICATIVE = 3,
 
         /// <summary>
-        /// Enum _386 for value: 386
+        /// Enum ACOMPTE for value: 386
         /// </summary>
-        _386 = 4,
+        ACOMPTE = 4,
 
         /// <summary>
-        /// Enum _389 for value: 389
+        /// Enum AUTOFACTURATION for value: 389
         /// </summary>
-        _389 = 5
+        AUTOFACTURATION = 5
     }
 
     /// <summary>
@@ -70,19 +70,19 @@ namespace FactPulse.SDK.Model
         public static TypeDocument FromString(string value)
         {
             if (value.Equals("380"))
-                return TypeDocument._380;
+                return TypeDocument.FACTURE;
 
             if (value.Equals("381"))
-                return TypeDocument._381;
+                return TypeDocument.AVOIR;
 
             if (value.Equals("384"))
-                return TypeDocument._384;
+                return TypeDocument.FACTURE_RECTIFICATIVE;
 
             if (value.Equals("386"))
-                return TypeDocument._386;
+                return TypeDocument.ACOMPTE;
 
             if (value.Equals("389"))
-                return TypeDocument._389;
+                return TypeDocument.AUTOFACTURATION;
 
             throw new NotImplementedException($"Could not convert value to type TypeDocument: '{value}'");
         }
@@ -95,19 +95,19 @@ namespace FactPulse.SDK.Model
         public static TypeDocument? FromStringOrDefault(string value)
         {
             if (value.Equals("380"))
-                return TypeDocument._380;
+                return TypeDocument.FACTURE;
 
             if (value.Equals("381"))
-                return TypeDocument._381;
+                return TypeDocument.AVOIR;
 
             if (value.Equals("384"))
-                return TypeDocument._384;
+                return TypeDocument.FACTURE_RECTIFICATIVE;
 
             if (value.Equals("386"))
-                return TypeDocument._386;
+                return TypeDocument.ACOMPTE;
 
             if (value.Equals("389"))
-                return TypeDocument._389;
+                return TypeDocument.AUTOFACTURATION;
 
             return null;
         }
@@ -120,19 +120,19 @@ namespace FactPulse.SDK.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string ToJsonValue(TypeDocument value)
         {
-            if (value == TypeDocument._380)
+            if (value == TypeDocument.FACTURE)
                 return "380";
 
-            if (value == TypeDocument._381)
+            if (value == TypeDocument.AVOIR)
                 return "381";
 
-            if (value == TypeDocument._384)
+            if (value == TypeDocument.FACTURE_RECTIFICATIVE)
                 return "384";
 
-            if (value == TypeDocument._386)
+            if (value == TypeDocument.ACOMPTE)
                 return "386";
 
-            if (value == TypeDocument._389)
+            if (value == TypeDocument.AUTOFACTURATION)
                 return "389";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
