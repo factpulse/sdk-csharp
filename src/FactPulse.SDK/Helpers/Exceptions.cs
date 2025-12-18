@@ -9,6 +9,10 @@ namespace FactPulse.SDK.Helpers {
     public class ValidationErrorDetail {
         public string Level { get; set; } = ""; public string Item { get; set; } = ""; public string Reason { get; set; } = "";
         public string? Source { get; set; } public string? Code { get; set; }
+        public ValidationErrorDetail() { }
+        public ValidationErrorDetail(string level, string item, string reason, string? source = null, string? code = null) {
+            Level = level ?? ""; Item = item ?? ""; Reason = reason ?? ""; Source = source; Code = code;
+        }
         public override string ToString() => $"[{(string.IsNullOrEmpty(Item) ? "unknown" : Item)}] {(string.IsNullOrEmpty(Reason) ? "Unknown error" : Reason)}";
         public static ValidationErrorDetail FromDictionary(Dictionary<string, object?> d) => new() {
             Level = d.TryGetValue("level", out var l) ? l?.ToString() ?? "" : "",
