@@ -149,8 +149,11 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new SubmitCompleteInvoiceResponseJsonConverter());
             _jsonOptions.Converters.Add(new SubmitFlowRequestJsonConverter());
             _jsonOptions.Converters.Add(new SubmitFlowResponseJsonConverter());
+            _jsonOptions.Converters.Add(new SubmitGrossAmountJsonConverter());
             _jsonOptions.Converters.Add(new SubmitInvoiceRequestJsonConverter());
             _jsonOptions.Converters.Add(new SubmitInvoiceResponseJsonConverter());
+            _jsonOptions.Converters.Add(new SubmitNetAmountJsonConverter());
+            _jsonOptions.Converters.Add(new SubmitVatAmountJsonConverter());
             _jsonOptions.Converters.Add(new SupplementaryAttachmentJsonConverter());
             _jsonOptions.Converters.Add(new SupplierJsonConverter());
             _jsonOptions.Converters.Add(new TaskResponseJsonConverter());
@@ -173,7 +176,6 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new ValidationErrorLocInnerJsonConverter());
             _jsonOptions.Converters.Add(new ValidationErrorResponseJsonConverter());
             _jsonOptions.Converters.Add(new ValidationSuccessResponseJsonConverter());
-            _jsonOptions.Converters.Add(new VatAmountJsonConverter());
             _jsonOptions.Converters.Add(new VerificationSuccessResponseJsonConverter());
             _jsonOptions.Converters.Add(new VerifiedFieldSchemaJsonConverter());
             JsonSerializerOptionsProvider jsonSerializerOptionsProvider = new(_jsonOptions);

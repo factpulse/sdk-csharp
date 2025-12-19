@@ -28,14 +28,14 @@ namespace FactPulse.SDK.Model
     /// <summary>
     /// VAT amount
     /// </summary>
-    public partial class VatAmount : IValidatableObject
+    public partial class SubmitVatAmount : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="VatAmount" /> class.
+        /// Initializes a new instance of the <see cref="SubmitVatAmount" /> class.
         /// </summary>
         /// <param name="decimal"></param>
         /// <param name="string"></param>
-        internal VatAmount(Option<decimal?> @decimal, Option<string?> @string)
+        internal SubmitVatAmount(Option<decimal?> @decimal, Option<string?> @string)
         {
             DecimalOption = @decimal;
             StringOption = @string;
@@ -75,7 +75,7 @@ namespace FactPulse.SDK.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class VatAmount {\n");
+            sb.Append("class SubmitVatAmount {\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -92,19 +92,19 @@ namespace FactPulse.SDK.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="VatAmount" />
+    /// A Json converter for type <see cref="SubmitVatAmount" />
     /// </summary>
-    public class VatAmountJsonConverter : JsonConverter<VatAmount>
+    public class SubmitVatAmountJsonConverter : JsonConverter<SubmitVatAmount>
     {
         /// <summary>
-        /// Deserializes json to <see cref="VatAmount" />
+        /// Deserializes json to <see cref="SubmitVatAmount" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override VatAmount Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override SubmitVatAmount Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -163,38 +163,38 @@ namespace FactPulse.SDK.Model
                 ? default
                 : new Option<string?>(varString);
 
-            return new VatAmount(varDecimalParsedValue, varStringParsedValue);
+            return new SubmitVatAmount(varDecimalParsedValue, varStringParsedValue);
         }
 
         /// <summary>
-        /// Serializes a <see cref="VatAmount" />
+        /// Serializes a <see cref="SubmitVatAmount" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="vatAmount"></param>
+        /// <param name="submitVatAmount"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, VatAmount vatAmount, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, SubmitVatAmount submitVatAmount, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            if (vatAmount.DecimalOption.IsSet && vatAmount.DecimalOption.Value != null)
-                writer.WriteNumber("Amount", vatAmount.DecimalOption.Value.Value);
+            if (submitVatAmount.DecimalOption.IsSet && submitVatAmount.DecimalOption.Value != null)
+                writer.WriteNumber("SubmitVatAmount", submitVatAmount.DecimalOption.Value.Value);
 
-            if (vatAmount.StringOption.IsSet && vatAmount.StringOption.Value != null)
-                writer.WriteString("Amount", vatAmount.StringOption.Value);
+            if (submitVatAmount.StringOption.IsSet && submitVatAmount.StringOption.Value != null)
+                writer.WriteString("SubmitVatAmount", submitVatAmount.StringOption.Value);
 
-            WriteProperties(writer, vatAmount, jsonSerializerOptions);
+            WriteProperties(writer, submitVatAmount, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="VatAmount" />
+        /// Serializes the properties of <see cref="SubmitVatAmount" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="vatAmount"></param>
+        /// <param name="submitVatAmount"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, VatAmount vatAmount, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, SubmitVatAmount submitVatAmount, JsonSerializerOptions jsonSerializerOptions)
         {
 
         }

@@ -8,9 +8,9 @@ Name | Type | Description | Notes
 **InvoiceNumber** | **string** | Invoice number | 
 **InvoiceDate** | **string** | Invoice date (ISO format: YYYY-MM-DD) | 
 **StructureId** | **int** | Chorus Pro recipient structure ID | 
-**TotalNetAmount** | [**TotalNetAmount**](TotalNetAmount.md) |  | 
-**VatAmount** | [**VatAmount**](VatAmount.md) |  | 
-**TotalGrossAmount** | [**TotalGrossAmount**](TotalGrossAmount.md) |  | 
+**TotalNetAmount** | [**SubmitNetAmount**](SubmitNetAmount.md) |  | 
+**VatAmount** | [**SubmitVatAmount**](SubmitVatAmount.md) |  | 
+**TotalGrossAmount** | [**SubmitGrossAmount**](SubmitGrossAmount.md) |  | 
 **Credentials** | [**FactureElectroniqueRestApiSchemasChorusProChorusProCredentials**](FactureElectroniqueRestApiSchemasChorusProChorusProCredentials.md) |  | [optional] 
 **PaymentDueDate** | **string** |  | [optional] 
 **ServiceCode** | **string** |  | [optional] 

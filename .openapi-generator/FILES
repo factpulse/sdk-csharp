@@ -98,8 +98,11 @@ docs/models/SubmitCompleteInvoiceRequest.md
 docs/models/SubmitCompleteInvoiceResponse.md
 docs/models/SubmitFlowRequest.md
 docs/models/SubmitFlowResponse.md
+docs/models/SubmitGrossAmount.md
 docs/models/SubmitInvoiceRequest.md
 docs/models/SubmitInvoiceResponse.md
+docs/models/SubmitNetAmount.md
+docs/models/SubmitVatAmount.md
 docs/models/SupplementaryAttachment.md
 docs/models/Supplier.md
 docs/models/TaskResponse.md
@@ -119,7 +122,6 @@ docs/models/ValidationErrorDetail.md
 docs/models/ValidationErrorLocInner.md
 docs/models/ValidationErrorResponse.md
 docs/models/ValidationSuccessResponse.md
-docs/models/VatAmount.md
 docs/models/VerificationSuccessResponse.md
 docs/models/VerifiedFieldSchema.md
 docs/scripts/git_push.ps1
@@ -221,8 +223,11 @@ src/FactPulse.SDK.Test/Model/SubmitCompleteInvoiceRequestTests.cs
 src/FactPulse.SDK.Test/Model/SubmitCompleteInvoiceResponseTests.cs
 src/FactPulse.SDK.Test/Model/SubmitFlowRequestTests.cs
 src/FactPulse.SDK.Test/Model/SubmitFlowResponseTests.cs
+src/FactPulse.SDK.Test/Model/SubmitGrossAmountTests.cs
 src/FactPulse.SDK.Test/Model/SubmitInvoiceRequestTests.cs
 src/FactPulse.SDK.Test/Model/SubmitInvoiceResponseTests.cs
+src/FactPulse.SDK.Test/Model/SubmitNetAmountTests.cs
+src/FactPulse.SDK.Test/Model/SubmitVatAmountTests.cs
 src/FactPulse.SDK.Test/Model/SupplementaryAttachmentTests.cs
 src/FactPulse.SDK.Test/Model/SupplierTests.cs
 src/FactPulse.SDK.Test/Model/TaskResponseTests.cs
@@ -242,7 +247,6 @@ src/FactPulse.SDK.Test/Model/ValidationErrorLocInnerTests.cs
 src/FactPulse.SDK.Test/Model/ValidationErrorResponseTests.cs
 src/FactPulse.SDK.Test/Model/ValidationErrorTests.cs
 src/FactPulse.SDK.Test/Model/ValidationSuccessResponseTests.cs
-src/FactPulse.SDK.Test/Model/VatAmountTests.cs
 src/FactPulse.SDK.Test/Model/VerificationSuccessResponseTests.cs
 src/FactPulse.SDK.Test/Model/VerifiedFieldSchemaTests.cs
 src/FactPulse.SDK.Test/README.md
@@ -364,8 +368,11 @@ src/FactPulse.SDK/Model/SubmitCompleteInvoiceRequest.cs
 src/FactPulse.SDK/Model/SubmitCompleteInvoiceResponse.cs
 src/FactPulse.SDK/Model/SubmitFlowRequest.cs
 src/FactPulse.SDK/Model/SubmitFlowResponse.cs
+src/FactPulse.SDK/Model/SubmitGrossAmount.cs
 src/FactPulse.SDK/Model/SubmitInvoiceRequest.cs
 src/FactPulse.SDK/Model/SubmitInvoiceResponse.cs
+src/FactPulse.SDK/Model/SubmitNetAmount.cs
+src/FactPulse.SDK/Model/SubmitVatAmount.cs
 src/FactPulse.SDK/Model/SupplementaryAttachment.cs
 src/FactPulse.SDK/Model/Supplier.cs
 src/FactPulse.SDK/Model/TaskResponse.cs
@@ -385,7 +392,6 @@ src/FactPulse.SDK/Model/ValidationErrorDetail.cs
 src/FactPulse.SDK/Model/ValidationErrorLocInner.cs
 src/FactPulse.SDK/Model/ValidationErrorResponse.cs
 src/FactPulse.SDK/Model/ValidationSuccessResponse.cs
-src/FactPulse.SDK/Model/VatAmount.cs
 src/FactPulse.SDK/Model/VerificationSuccessResponse.cs
 src/FactPulse.SDK/Model/VerifiedFieldSchema.cs
 src/FactPulse.SDK/README.md

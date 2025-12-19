@@ -49,7 +49,7 @@ namespace FactPulse.SDK.Model
         /// <param name="purchaseOrderReference">purchaseOrderReference</param>
         /// <param name="contractReference">contractReference</param>
         [JsonConstructor]
-        public SubmitInvoiceRequest(string invoiceNumber, string invoiceDate, int structureId, TotalNetAmount totalNetAmount, VatAmount vatAmount, TotalGrossAmount totalGrossAmount, Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?> credentials = default, Option<string?> paymentDueDate = default, Option<string?> serviceCode = default, Option<string?> engagementNumber = default, Option<int?> mainAttachmentId = default, Option<string?> mainAttachmentLabel = default, Option<string?> comment = default, Option<string?> purchaseOrderReference = default, Option<string?> contractReference = default)
+        public SubmitInvoiceRequest(string invoiceNumber, string invoiceDate, int structureId, SubmitNetAmount totalNetAmount, SubmitVatAmount vatAmount, SubmitGrossAmount totalGrossAmount, Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?> credentials = default, Option<string?> paymentDueDate = default, Option<string?> serviceCode = default, Option<string?> engagementNumber = default, Option<int?> mainAttachmentId = default, Option<string?> mainAttachmentLabel = default, Option<string?> comment = default, Option<string?> purchaseOrderReference = default, Option<string?> contractReference = default)
         {
             InvoiceNumber = invoiceNumber;
             InvoiceDate = invoiceDate;
@@ -96,19 +96,19 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets TotalNetAmount
         /// </summary>
         [JsonPropertyName("total_net_amount")]
-        public TotalNetAmount TotalNetAmount { get; set; }
+        public SubmitNetAmount TotalNetAmount { get; set; }
 
         /// <summary>
         /// Gets or Sets VatAmount
         /// </summary>
         [JsonPropertyName("vat_amount")]
-        public VatAmount VatAmount { get; set; }
+        public SubmitVatAmount VatAmount { get; set; }
 
         /// <summary>
         /// Gets or Sets TotalGrossAmount
         /// </summary>
         [JsonPropertyName("total_gross_amount")]
-        public TotalGrossAmount TotalGrossAmount { get; set; }
+        public SubmitGrossAmount TotalGrossAmount { get; set; }
 
         /// <summary>
         /// Used to track the state of Credentials
@@ -290,9 +290,9 @@ namespace FactPulse.SDK.Model
             Option<string?> invoiceNumber = default;
             Option<string?> invoiceDate = default;
             Option<int?> structureId = default;
-            Option<TotalNetAmount?> totalNetAmount = default;
-            Option<VatAmount?> vatAmount = default;
-            Option<TotalGrossAmount?> totalGrossAmount = default;
+            Option<SubmitNetAmount?> totalNetAmount = default;
+            Option<SubmitVatAmount?> vatAmount = default;
+            Option<SubmitGrossAmount?> totalGrossAmount = default;
             Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?> credentials = default;
             Option<string?> paymentDueDate = default;
             Option<string?> serviceCode = default;
@@ -328,13 +328,13 @@ namespace FactPulse.SDK.Model
                             structureId = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "total_net_amount":
-                            totalNetAmount = new Option<TotalNetAmount?>(JsonSerializer.Deserialize<TotalNetAmount>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            totalNetAmount = new Option<SubmitNetAmount?>(JsonSerializer.Deserialize<SubmitNetAmount>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "vat_amount":
-                            vatAmount = new Option<VatAmount?>(JsonSerializer.Deserialize<VatAmount>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            vatAmount = new Option<SubmitVatAmount?>(JsonSerializer.Deserialize<SubmitVatAmount>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "total_gross_amount":
-                            totalGrossAmount = new Option<TotalGrossAmount?>(JsonSerializer.Deserialize<TotalGrossAmount>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            totalGrossAmount = new Option<SubmitGrossAmount?>(JsonSerializer.Deserialize<SubmitGrossAmount>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "credentials":
                             credentials = new Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?>(JsonSerializer.Deserialize<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials>(ref utf8JsonReader, jsonSerializerOptions));

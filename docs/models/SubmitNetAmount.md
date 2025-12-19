@@ -1,5 +1,5 @@
-# FactPulse.SDK.Model.VatAmount
-VAT amount
+# FactPulse.SDK.Model.SubmitNetAmount
+Total net amount
 
 ## Properties
 
