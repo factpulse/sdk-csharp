@@ -1,16 +1,16 @@
 # FactPulse.SDK.Model.GenerateCertificateResponse
-Réponse après génération d'un certificat de test.  Contient le certificat PEM, la clé privée PEM, et optionnellement le PKCS#12.
+Response after generating a test certificate.  Contains certificate PEM, private key PEM, and optionally PKCS#12.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CertificatPem** | **string** | Certificat X.509 au format PEM | 
-**ClePriveePem** | **string** | Clé privée RSA au format PEM | 
-**Info** | [**CertificateInfoResponse**](CertificateInfoResponse.md) | Informations sur le certificat généré | 
-**Status** | **string** | Statut de l&#39;opération | [optional] [default to "success"]
+**CertificatePem** | **string** | X.509 certificate in PEM format | 
+**PrivateKeyPem** | **string** | RSA private key in PEM format | 
+**Info** | [**CertificateInfoResponse**](CertificateInfoResponse.md) | Generated certificate information | 
+**Status** | **string** | Operation status | [optional] [default to "success"]
 **Pkcs12Base64** | **string** |  | [optional] 
-**Avertissement** | **string** | Avertissement sur l&#39;utilisation du certificat | [optional] [default to "⚠️ Ce certificat est AUTO-SIGNÉ et destiné uniquement aux TESTS. Ne PAS utiliser en production. Niveau eIDAS : SES (Simple Electronic Signature)"]
+**Warning** | **string** | Warning about certificate usage | [optional] [default to "WARNING: This certificate is SELF-SIGNED and intended for TESTING only. DO NOT use in production. eIDAS level: SES (Simple Electronic Signature)"]
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

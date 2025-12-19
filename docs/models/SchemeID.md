@@ -1,5 +1,5 @@
 # FactPulse.SDK.Model.SchemeID
-Codes de schémas d'identification (Electronic Address Scheme - EAS), principalement pour l'adressage des factures électroniques.  **Valeurs possibles :** - `0225` : FR_SIREN - SIREN français (le plus commun pour la France, remplace l'ancien 0002) - `0088` : GLN - Global Location Number - `0060` : DUNS - Data Universal Numbering System - `9957` : FR_TVA_INTRA - Numéro de TVA intracommunautaire français - `0199` : GLEIF - Global Legal Entity Identifier Foundation
+Identification scheme codes (Electronic Address Scheme - EAS), mainly for electronic invoice addressing.  **Possible values:** - `0225`: FR_SIREN - French SIREN (most common for France, replaces old 0002) - `0088`: GLN - Global Location Number - `0060`: DUNS - Data Universal Numbering System - `9957`: FR_VAT_INTRA - French intra-community VAT number - `0199`: GLEIF - Global Legal Entity Identifier Foundation
 
 ## Properties
 

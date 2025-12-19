@@ -15,7 +15,7 @@ namespace FactPulse.SDK.Helpers
     // Credentials classes
     // =============================================================================
 
-    /// <summary>Credentials Chorus Pro pour le mode Zero-Trust.</summary>
+    /// <summary>Chorus Pro credentials for Zero-Trust mode.</summary>
     public class ChorusProCredentials
     {
         public string PisteClientId { get; set; }
@@ -36,7 +36,7 @@ namespace FactPulse.SDK.Helpers
         };
     }
 
-    /// <summary>Credentials AFNOR PDP pour le mode Zero-Trust.</summary>
+    /// <summary>AFNOR PDP credentials for Zero-Trust mode.</summary>
     public class AFNORCredentials
     {
         public string FlowServiceUrl { get; set; }
@@ -63,12 +63,12 @@ namespace FactPulse.SDK.Helpers
     }
 
     // =============================================================================
-    // Helpers pour les montants
+    // Amount helpers
     // =============================================================================
 
-    public static class MontantHelpers
+    public static class AmountHelpers
     {
-        public static string Montant(object value)
+        public static string Amount(object value)
         {
             if (value == null) return "0.00";
             if (value is decimal d) return d.ToString("F2");
@@ -80,136 +80,136 @@ namespace FactPulse.SDK.Helpers
             return "0.00";
         }
 
-        public static Dictionary<string, object> MontantTotal(object ht, object tva, object ttc, object aPayer,
-            object remiseTtc = null, string motifRemise = null, object acompte = null)
+        public static Dictionary<string, object> TotalAmount(object exclTax, object vat, object inclTax, object amountDue,
+            object discountInclTax = null, string discountReason = null, object prepayment = null)
         {
             var result = new Dictionary<string, object> {
-                ["montantHtTotal"] = Montant(ht), ["montantTva"] = Montant(tva),
-                ["montantTtcTotal"] = Montant(ttc), ["montantAPayer"] = Montant(aPayer)
+                ["totalExclTax"] = Amount(exclTax), ["vatAmount"] = Amount(vat),
+                ["totalInclTax"] = Amount(inclTax), ["amountDue"] = Amount(amountDue)
             };
-            if (remiseTtc != null) result["montantRemiseGlobaleTtc"] = Montant(remiseTtc);
-            if (motifRemise != null) result["motifRemiseGlobaleTtc"] = motifRemise;
-            if (acompte != null) result["acompte"] = Montant(acompte);
+            if (discountInclTax != null) result["globalDiscountInclTax"] = Amount(discountInclTax);
+            if (discountReason != null) result["globalDiscountReason"] = discountReason;
+            if (prepayment != null) result["prepayment"] = Amount(prepayment);
             return result;
         }
 
-        /// <summary>Crée une ligne de poste (aligné sur LigneDePoste de models.py).</summary>
-        public static Dictionary<string, object> LigneDePoste(int numero, string denomination, object quantite,
-            object montantUnitaireHt, object montantTotalLigneHt, string tauxTva = "20.00",
-            string categorieTva = "S", string unite = "FORFAIT", Dictionary<string, object> options = null)
+        /// <summary>Creates an invoice line (aligned with InvoiceLine in models.py).</summary>
+        public static Dictionary<string, object> InvoiceLine(int number, string description, object quantity,
+            object unitPriceExclTax, object lineTotalExclTax, string vatRate = "20.00",
+            string vatCategory = "S", string unit = "LUMP_SUM", Dictionary<string, object> options = null)
         {
             var result = new Dictionary<string, object> {
-                ["numero"] = numero, ["denomination"] = denomination, ["quantite"] = Montant(quantite),
-                ["montantUnitaireHt"] = Montant(montantUnitaireHt), ["montantTotalLigneHt"] = Montant(montantTotalLigneHt),
-                ["tauxTvaManuel"] = Montant(tauxTva), ["categorieTva"] = categorieTva, ["unite"] = unite
+                ["number"] = number, ["description"] = description, ["quantity"] = Amount(quantity),
+                ["unitPriceExclTax"] = Amount(unitPriceExclTax), ["lineTotalExclTax"] = Amount(lineTotalExclTax),
+                ["vatRateManual"] = Amount(vatRate), ["vatCategory"] = vatCategory, ["unit"] = unit
             };
             if (options != null)
             {
                 if (options.TryGetValue("reference", out var r)) result["reference"] = r;
-                if (options.TryGetValue("montantRemiseHt", out var m)) result["montantRemiseHt"] = Montant(m);
-                if (options.TryGetValue("codeRaisonReduction", out var c)) result["codeRaisonReduction"] = c;
-                if (options.TryGetValue("raisonReduction", out var rr)) result["raisonReduction"] = rr;
-                if (options.TryGetValue("dateDebutPeriode", out var dd)) result["dateDebutPeriode"] = dd;
-                if (options.TryGetValue("dateFinPeriode", out var df)) result["dateFinPeriode"] = df;
+                if (options.TryGetValue("discountExclTax", out var m)) result["discountExclTax"] = Amount(m);
+                if (options.TryGetValue("discountReasonCode", out var c)) result["discountReasonCode"] = c;
+                if (options.TryGetValue("discountReason", out var rr)) result["discountReason"] = rr;
+                if (options.TryGetValue("periodStartDate", out var dd)) result["periodStartDate"] = dd;
+                if (options.TryGetValue("periodEndDate", out var df)) result["periodEndDate"] = df;
             }
             return result;
         }
 
-        /// <summary>Crée une ligne de TVA (aligné sur LigneDeTVA de models.py).</summary>
-        public static Dictionary<string, object> LigneDeTva(object tauxManuel, object montantBaseHt, object montantTva, string categorie = "S")
+        /// <summary>Creates a VAT line (aligned with VatLine in models.py).</summary>
+        public static Dictionary<string, object> VatLine(object rateManual, object baseAmountExclTax, object vatAmount, string category = "S")
             => new Dictionary<string, object> {
-                ["tauxManuel"] = Montant(tauxManuel), ["montantBaseHt"] = Montant(montantBaseHt),
-                ["montantTva"] = Montant(montantTva), ["categorie"] = categorie
+                ["rateManual"] = Amount(rateManual), ["baseAmountExclTax"] = Amount(baseAmountExclTax),
+                ["vatAmount"] = Amount(vatAmount), ["category"] = category
             };
 
-        /// <summary>Crée une adresse postale pour l'API FactPulse.</summary>
-        public static Dictionary<string, object> AdressePostale(string ligne1, string codePostal, string ville,
-            string pays = "FR", string ligne2 = null, string ligne3 = null)
+        /// <summary>Creates a postal address for the FactPulse API.</summary>
+        public static Dictionary<string, object> PostalAddress(string line1, string postalCode, string city,
+            string country = "FR", string line2 = null, string line3 = null)
         {
-            var result = new Dictionary<string, object> { ["ligneUn"] = ligne1, ["codePostal"] = codePostal, ["nomVille"] = ville, ["paysCodeIso"] = pays };
-            if (ligne2 != null) result["ligneDeux"] = ligne2;
-            if (ligne3 != null) result["ligneTrois"] = ligne3;
+            var result = new Dictionary<string, object> { ["line1"] = line1, ["postalCode"] = postalCode, ["city"] = city, ["countryCode"] = country };
+            if (line2 != null) result["line2"] = line2;
+            if (line3 != null) result["line3"] = line3;
             return result;
         }
 
-        /// <summary>Crée une adresse électronique. schemeId: "0009"=SIREN, "0225"=SIRET</summary>
-        public static Dictionary<string, object> AdresseElectronique(string identifiant, string schemeId = "0009")
-            => new Dictionary<string, object> { ["identifiant"] = identifiant, ["schemeId"] = schemeId };
+        /// <summary>Creates an electronic address. schemeId: "0009"=SIREN, "0225"=SIRET</summary>
+        public static Dictionary<string, object> ElectronicAddress(string identifier, string schemeId = "0009")
+            => new Dictionary<string, object> { ["identifier"] = identifier, ["schemeId"] = schemeId };
 
-        /// <summary>Calcule le numéro TVA intracommunautaire français depuis un SIREN.</summary>
-        public static string CalculerTvaIntra(string siren)
+        /// <summary>Computes the French intra-community VAT number from a SIREN.</summary>
+        public static string ComputeVatIntra(string siren)
         {
             if (string.IsNullOrEmpty(siren) || siren.Length != 9 || !siren.All(char.IsDigit)) return null;
             var cle = (12 + 3 * (long.Parse(siren) % 97)) % 97;
             return $"FR{cle:D2}{siren}";
         }
 
-        /// <summary>Crée un fournisseur (émetteur) avec auto-calcul SIREN, TVA intracommunautaire et adresses.</summary>
-        public static Dictionary<string, object> Fournisseur(string nom, string siret, string adresseLigne1,
-            string codePostal, string ville, Dictionary<string, object> options = null)
+        /// <summary>Creates a supplier (issuer) with auto-computed SIREN, intra-EU VAT number and addresses.</summary>
+        public static Dictionary<string, object> Supplier(string name, string siret, string addressLine1,
+            string postalCode, string city, Dictionary<string, object> options = null)
         {
             options ??= new Dictionary<string, object>();
             var siren = options.TryGetValue("siren", out var s) ? s?.ToString() : (siret.Length == 14 ? siret.Substring(0, 9) : null);
-            var numeroTvaIntra = options.TryGetValue("numeroTvaIntra", out var t) ? t?.ToString() : (siren != null ? CalculerTvaIntra(siren) : null);
-            var pays = options.TryGetValue("pays", out var p) ? p?.ToString() : "FR";
-            var adresseLigne2 = options.TryGetValue("adresseLigne2", out var a2) ? a2?.ToString() : null;
+            var vatIntra = options.TryGetValue("vatIntra", out var t) ? t?.ToString() : (siren != null ? ComputeVatIntra(siren) : null);
+            var country = options.TryGetValue("country", out var p) ? p?.ToString() : "FR";
+            var addressLine2 = options.TryGetValue("addressLine2", out var a2) ? a2?.ToString() : null;
 
             var result = new Dictionary<string, object> {
-                ["nom"] = nom, ["idFournisseur"] = options.ContainsKey("idFournisseur") ? options["idFournisseur"] : 0, ["siret"] = siret,
-                ["adresseElectronique"] = AdresseElectronique(siret, "0225"),
-                ["adressePostale"] = AdressePostale(adresseLigne1, codePostal, ville, pays, adresseLigne2)
+                ["name"] = name, ["supplierId"] = options.ContainsKey("supplierId") ? options["supplierId"] : 0, ["siret"] = siret,
+                ["electronicAddress"] = ElectronicAddress(siret, "0225"),
+                ["postalAddress"] = PostalAddress(addressLine1, postalCode, city, country, addressLine2)
             };
             if (siren != null) result["siren"] = siren;
-            if (numeroTvaIntra != null) result["numeroTvaIntra"] = numeroTvaIntra;
+            if (vatIntra != null) result["vatIntra"] = vatIntra;
             if (options.TryGetValue("iban", out var iban)) result["iban"] = iban;
-            if (options.TryGetValue("codeService", out var cs)) result["idServiceFournisseur"] = cs;
-            if (options.TryGetValue("codeCoordonnesBancaires", out var ccb)) result["codeCoordonnesBancairesFournisseur"] = ccb;
+            if (options.TryGetValue("serviceCode", out var cs)) result["supplierServiceId"] = cs;
+            if (options.TryGetValue("bankCoordinatesCode", out var ccb)) result["supplierBankCoordinatesCode"] = ccb;
             return result;
         }
 
-        /// <summary>Crée un destinataire (client) avec auto-calcul SIREN et adresses.</summary>
-        public static Dictionary<string, object> Destinataire(string nom, string siret, string adresseLigne1,
-            string codePostal, string ville, Dictionary<string, object> options = null)
+        /// <summary>Creates a recipient (customer) with auto-computed SIREN and addresses.</summary>
+        public static Dictionary<string, object> Recipient(string name, string siret, string addressLine1,
+            string postalCode, string city, Dictionary<string, object> options = null)
         {
             options ??= new Dictionary<string, object>();
             var siren = options.TryGetValue("siren", out var s) ? s?.ToString() : (siret.Length == 14 ? siret.Substring(0, 9) : null);
-            var pays = options.TryGetValue("pays", out var p) ? p?.ToString() : "FR";
-            var adresseLigne2 = options.TryGetValue("adresseLigne2", out var a2) ? a2?.ToString() : null;
+            var country = options.TryGetValue("country", out var p) ? p?.ToString() : "FR";
+            var addressLine2 = options.TryGetValue("addressLine2", out var a2) ? a2?.ToString() : null;
 
             var result = new Dictionary<string, object> {
-                ["nom"] = nom, ["siret"] = siret,
-                ["adresseElectronique"] = AdresseElectronique(siret, "0225"),
-                ["adressePostale"] = AdressePostale(adresseLigne1, codePostal, ville, pays, adresseLigne2)
+                ["name"] = name, ["siret"] = siret,
+                ["electronicAddress"] = ElectronicAddress(siret, "0225"),
+                ["postalAddress"] = PostalAddress(addressLine1, postalCode, city, country, addressLine2)
             };
             if (siren != null) result["siren"] = siren;
-            if (options.TryGetValue("codeServiceExecutant", out var cse)) result["codeServiceExecutant"] = cse;
+            if (options.TryGetValue("executingServiceCode", out var cse)) result["executingServiceCode"] = cse;
             return result;
         }
 
         /// <summary>
-        /// Crée un bénéficiaire (factor) pour l'affacturage.
+        /// Creates a beneficiary (factor) for factoring.
         ///
-        /// Le bénéficiaire (BG-10 / PayeeTradeParty) est utilisé lorsque le paiement
-        /// doit être effectué à un tiers différent du fournisseur, typiquement un
-        /// factor (société d'affacturage).
+        /// The beneficiary (BG-10 / PayeeTradeParty) is used when payment
+        /// must be made to a third party different from the supplier, typically
+        /// a factor (factoring company).
         ///
-        /// Pour les factures affacturées, il faut aussi:
-        /// - Utiliser un type de document affacturé (393, 396, 501, 502, 472, 473)
-        /// - Ajouter une note ACC avec la mention de subrogation
-        /// - L'IBAN du bénéficiaire sera utilisé pour le paiement
+        /// For factored invoices, you also need to:
+        /// - Use a factored document type (393, 396, 501, 502, 472, 473)
+        /// - Add an ACC note with the subrogation mention
+        /// - The beneficiary's IBAN will be used for payment
         /// </summary>
-        /// <param name="nom">Raison sociale du factor (BT-59)</param>
+        /// <param name="name">Factor's business name (BT-59)</param>
         /// <param name="options">Options: siret (BT-60), siren (BT-61), iban, bic</param>
-        /// <returns>Dict prêt à être utilisé dans une facture affacturée</returns>
-        public static Dictionary<string, object> Beneficiaire(string nom, Dictionary<string, object> options = null)
+        /// <returns>Dictionary ready to be used in a factored invoice</returns>
+        public static Dictionary<string, object> Beneficiary(string name, Dictionary<string, object> options = null)
         {
             options ??= new Dictionary<string, object>();
             var siret = options.TryGetValue("siret", out var si) ? si?.ToString() : null;
-            // Auto-calcul SIREN depuis SIRET
+            // Auto-compute SIREN from SIRET
             var siren = options.TryGetValue("siren", out var sr) ? sr?.ToString()
                 : (siret != null && siret.Length == 14 ? siret.Substring(0, 9) : null);
 
-            var result = new Dictionary<string, object> { ["nom"] = nom };
+            var result = new Dictionary<string, object> { ["name"] = name };
             if (siret != null) result["siret"] = siret;
             if (siren != null) result["siren"] = siren;
             if (options.TryGetValue("iban", out var iban)) result["iban"] = iban;
@@ -219,7 +219,7 @@ namespace FactPulse.SDK.Helpers
     }
 
     // =============================================================================
-    // Client principal
+    // Main client
     // =============================================================================
 
     public class FactPulseClient : IDisposable
@@ -283,7 +283,7 @@ namespace FactPulse.SDK.Helpers
                     throw new FactPulsePollingTimeoutException(taskId, timeoutMs);
 
                 await EnsureAuthenticatedAsync();
-                var request = new HttpRequestMessage(HttpMethod.Get, $"{_apiUrl}/api/v1/traitement/taches/{taskId}/statut");
+                var request = new HttpRequestMessage(HttpMethod.Get, $"{_apiUrl}/api/v1/processing/tasks/{taskId}/status");
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _accessToken);
                 var response = await _httpClient.SendAsync(request);
 
@@ -304,22 +304,22 @@ namespace FactPulse.SDK.Helpers
             }
         }
 
-        public static string FormatMontant(object m) => MontantHelpers.Montant(m);
+        public static string FormatAmount(object m) => AmountHelpers.Amount(m);
 
-        public async Task<byte[]> GenererFacturxAsync(object factureData, string pdfPath, string profil = "EN16931",
-            string formatSortie = "pdf", bool sync = true, int? timeout = null)
+        public async Task<byte[]> GenerateFacturxAsync(object invoiceData, string pdfPath, string profile = "EN16931",
+            string outputFormat = "pdf", bool sync = true, int? timeout = null)
         {
-            var jsonData = factureData is string s ? s : JsonSerializer.Serialize(factureData);
+            var jsonData = invoiceData is string s ? s : JsonSerializer.Serialize(invoiceData);
             var pdfContent = await File.ReadAllBytesAsync(pdfPath);
 
             await EnsureAuthenticatedAsync();
             using var content = new MultipartFormDataContent();
-            content.Add(new StringContent(jsonData), "donnees_facture");
-            content.Add(new StringContent(profil), "profil");
-            content.Add(new StringContent(formatSortie), "format_sortie");
+            content.Add(new StringContent(jsonData), "invoice_data");
+            content.Add(new StringContent(profile), "profile");
+            content.Add(new StringContent(outputFormat), "output_format");
             content.Add(new ByteArrayContent(pdfContent), "source_pdf", Path.GetFileName(pdfPath));
 
-            var request = new HttpRequestMessage(HttpMethod.Post, $"{_apiUrl}/api/v1/traitement/generer-facture") { Content = content };
+            var request = new HttpRequestMessage(HttpMethod.Post, $"{_apiUrl}/api/v1/processing/generate-invoice") { Content = content };
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _accessToken);
             var response = await _httpClient.SendAsync(request);
 
@@ -333,8 +333,8 @@ namespace FactPulse.SDK.Helpers
             var json = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode)
             {
-                // Extraire les détails d'erreur du corps de la réponse
-                var errorMsg = $"Erreur API ({(int)response.StatusCode})";
+                // Extract error details from response body
+                var errorMsg = $"API Error ({(int)response.StatusCode})";
                 var errors = new List<ValidationErrorDetail>();
 
                 try
@@ -347,7 +347,7 @@ namespace FactPulse.SDK.Helpers
                     {
                         if (detail.ValueKind == JsonValueKind.Array)
                         {
-                            errorMsg = "Erreur de validation";
+                            errorMsg = "Validation error";
                             foreach (var err in detail.EnumerateArray())
                             {
                                 var loc = "";
@@ -372,12 +372,12 @@ namespace FactPulse.SDK.Helpers
                 }
                 catch { /* ignore parsing errors */ }
 
-                Console.Error.WriteLine($"Erreur API {(int)response.StatusCode}: {json}");
+                Console.Error.WriteLine($"API Error {(int)response.StatusCode}: {json}");
                 throw new FactPulseValidationException(errorMsg, errors);
             }
 
             var data = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(json);
-            if (sync && data.TryGetValue("id_tache", out var taskIdElem))
+            if (sync && data.TryGetValue("task_id", out var taskIdElem))
             {
                 var result = await PollTaskAsync(taskIdElem.GetString(), timeout);
                 if (result.TryGetValue("contenu_b64", out var b64)) return Convert.FromBase64String(b64.ToString());
@@ -388,7 +388,7 @@ namespace FactPulse.SDK.Helpers
         }
 
         // =========================================================================
-        // AFNOR PDP - Authentication et helpers internes
+        // AFNOR PDP - Authentication and internal helpers
         // =========================================================================
 
         private async Task<AFNORCredentials> GetAfnorCredentialsInternalAsync()
@@ -450,7 +450,7 @@ namespace FactPulse.SDK.Helpers
 
         // ==================== AFNOR Flow Service ====================
 
-        public async Task<Dictionary<string, object>> SoumettreFactureAfnorAsync(string pdfPath, string flowName,
+        public async Task<Dictionary<string, object>> SubmitInvoiceAfnorAsync(string pdfPath, string flowName,
             string flowSyntax = "CII", string flowProfile = "EN16931", string trackingId = null)
         {
             var pdfContent = await File.ReadAllBytesAsync(pdfPath);
@@ -470,7 +470,7 @@ namespace FactPulse.SDK.Helpers
             return await MakeAfnorRequestAsync(HttpMethod.Post, "/flow/v1/flows", multipartContent: content);
         }
 
-        public async Task<Dictionary<string, object>> RechercherFluxAfnorAsync(int offset = 0, int limit = 25,
+        public async Task<Dictionary<string, object>> SearchFlowsAfnorAsync(int offset = 0, int limit = 25,
             string trackingId = null, string status = null)
         {
             var searchBody = new Dictionary<string, object> { ["offset"] = offset, ["limit"] = limit, ["where"] = new Dictionary<string, object>() };
@@ -480,7 +480,7 @@ namespace FactPulse.SDK.Helpers
             return await MakeAfnorRequestAsync(HttpMethod.Post, "/flow/v1/flows/search", searchBody);
         }
 
-        public async Task<byte[]> TelechargerFluxAfnorAsync(string flowId)
+        public async Task<byte[]> DownloadFlowAfnorAsync(string flowId)
         {
             var result = await MakeAfnorRequestAsync(HttpMethod.Get, $"/flow/v1/flows/{flowId}");
             return result.TryGetValue("_raw", out var raw) ? (byte[])raw : Array.Empty<byte>();
@@ -491,13 +491,13 @@ namespace FactPulse.SDK.Helpers
 
         // ==================== AFNOR Directory ====================
 
-        public async Task<Dictionary<string, object>> RechercherSiretAfnorAsync(string siret)
+        public async Task<Dictionary<string, object>> SearchSiretAfnorAsync(string siret)
             => await MakeAfnorRequestAsync(HttpMethod.Get, $"/directory/siret/{siret}");
 
-        public async Task<Dictionary<string, object>> RechercherSirenAfnorAsync(string siren)
+        public async Task<Dictionary<string, object>> SearchSirenAfnorAsync(string siren)
             => await MakeAfnorRequestAsync(HttpMethod.Get, $"/directory/siren/{siren}");
 
-        public async Task<Dictionary<string, object>> ListerCodesRoutageAfnorAsync(string siren)
+        public async Task<Dictionary<string, object>> ListRoutingCodesAfnorAsync(string siren)
             => await MakeAfnorRequestAsync(HttpMethod.Get, $"/directory/siren/{siren}/routing-codes");
 
         // =========================================================================
@@ -522,82 +522,82 @@ namespace FactPulse.SDK.Helpers
             return JsonSerializer.Deserialize<Dictionary<string, object>>(responseBody) ?? new Dictionary<string, object>();
         }
 
-        public async Task<Dictionary<string, object>> RechercherStructureChorusAsync(string identifiantStructure = null,
-            string raisonSociale = null, string typeIdentifiant = "SIRET", bool restreindrePrivees = true)
+        public async Task<Dictionary<string, object>> SearchStructureChorusAsync(string structureIdentifier = null,
+            string businessName = null, string identifierType = "SIRET", bool restrictPrivate = true)
         {
-            var body = new Dictionary<string, object> { ["restreindre_structures_privees"] = restreindrePrivees };
-            if (!string.IsNullOrEmpty(identifiantStructure)) body["identifiant_structure"] = identifiantStructure;
-            if (!string.IsNullOrEmpty(raisonSociale)) body["raison_sociale_structure"] = raisonSociale;
-            if (!string.IsNullOrEmpty(typeIdentifiant)) body["type_identifiant_structure"] = typeIdentifiant;
-            return await MakeChorusRequestAsync(HttpMethod.Post, "/structures/rechercher", body);
+            var body = new Dictionary<string, object> { ["restrict_private_structures"] = restrictPrivate };
+            if (!string.IsNullOrEmpty(structureIdentifier)) body["structure_identifier"] = structureIdentifier;
+            if (!string.IsNullOrEmpty(businessName)) body["structure_business_name"] = businessName;
+            if (!string.IsNullOrEmpty(identifierType)) body["structure_identifier_type"] = identifierType;
+            return await MakeChorusRequestAsync(HttpMethod.Post, "/structures/search", body);
         }
 
-        public async Task<Dictionary<string, object>> ConsulterStructureChorusAsync(int idStructureCpp)
-            => await MakeChorusRequestAsync(HttpMethod.Post, "/structures/consulter", new Dictionary<string, object> { ["id_structure_cpp"] = idStructureCpp });
+        public async Task<Dictionary<string, object>> GetStructureChorusAsync(int cppStructureId)
+            => await MakeChorusRequestAsync(HttpMethod.Post, "/structures/get", new Dictionary<string, object> { ["cpp_structure_id"] = cppStructureId });
 
-        public async Task<Dictionary<string, object>> ObtenirIdChorusDepuisSiretAsync(string siret, string typeIdentifiant = "SIRET")
-            => await MakeChorusRequestAsync(HttpMethod.Post, "/structures/obtenir-id-depuis-siret", new Dictionary<string, object> { ["siret"] = siret, ["type_identifiant"] = typeIdentifiant });
+        public async Task<Dictionary<string, object>> GetChorusIdFromSiretAsync(string siret, string identifierType = "SIRET")
+            => await MakeChorusRequestAsync(HttpMethod.Post, "/structures/get-id-from-siret", new Dictionary<string, object> { ["siret"] = siret, ["identifier_type"] = identifierType });
 
-        public async Task<Dictionary<string, object>> ListerServicesStructureChorusAsync(int idStructureCpp)
-            => await MakeChorusRequestAsync(HttpMethod.Get, $"/structures/{idStructureCpp}/services");
+        public async Task<Dictionary<string, object>> ListStructureServicesChorusAsync(int cppStructureId)
+            => await MakeChorusRequestAsync(HttpMethod.Get, $"/structures/{cppStructureId}/services");
 
-        public async Task<Dictionary<string, object>> SoumettreFactureChorusAsync(Dictionary<string, object> factureData)
-            => await MakeChorusRequestAsync(HttpMethod.Post, "/factures/soumettre", factureData);
+        public async Task<Dictionary<string, object>> SubmitInvoiceChorusAsync(Dictionary<string, object> invoiceData)
+            => await MakeChorusRequestAsync(HttpMethod.Post, "/invoices/submit", invoiceData);
 
-        public async Task<Dictionary<string, object>> ConsulterFactureChorusAsync(int identifiantFactureCpp)
-            => await MakeChorusRequestAsync(HttpMethod.Post, "/factures/consulter", new Dictionary<string, object> { ["identifiant_facture_cpp"] = identifiantFactureCpp });
+        public async Task<Dictionary<string, object>> GetInvoiceChorusAsync(int cppInvoiceIdentifier)
+            => await MakeChorusRequestAsync(HttpMethod.Post, "/invoices/get", new Dictionary<string, object> { ["cpp_invoice_identifier"] = cppInvoiceIdentifier });
 
         // =========================================================================
         // Validation
         // =========================================================================
 
         /// <summary>
-        /// Valide un PDF Factur-X.
+        /// Validates a Factur-X PDF.
         /// </summary>
-        /// <param name="pdfPath">Chemin vers le fichier PDF</param>
-        /// <param name="profil">Profil Factur-X (MINIMUM, BASIC, EN16931, EXTENDED). Si null, auto-détecté.</param>
-        /// <param name="useVerapdf">Active la validation stricte PDF/A avec VeraPDF (défaut: false)</param>
-        public async Task<Dictionary<string, object>> ValiderPdfFacturxAsync(string pdfPath, string? profil = null, bool useVerapdf = false)
+        /// <param name="pdfPath">Path to the PDF file</param>
+        /// <param name="profile">Factur-X profile (MINIMUM, BASIC, EN16931, EXTENDED). If null, auto-detected.</param>
+        /// <param name="useVerapdf">Enable strict PDF/A validation with VeraPDF (default: false)</param>
+        public async Task<Dictionary<string, object>> ValidateFacturxPdfAsync(string pdfPath, string? profile = null, bool useVerapdf = false)
         {
             await EnsureAuthenticatedAsync();
             var pdfContent = await File.ReadAllBytesAsync(pdfPath);
             using var content = new MultipartFormDataContent();
-            content.Add(new ByteArrayContent(pdfContent), "fichier_pdf", Path.GetFileName(pdfPath));
-            if (profil != null)
+            content.Add(new ByteArrayContent(pdfContent), "pdf_file", Path.GetFileName(pdfPath));
+            if (profile != null)
             {
-                content.Add(new StringContent(profil), "profil");
+                content.Add(new StringContent(profile), "profile");
             }
             content.Add(new StringContent(useVerapdf.ToString().ToLower()), "use_verapdf");
 
-            var request = new HttpRequestMessage(HttpMethod.Post, $"{_apiUrl}/api/v1/traitement/valider-pdf-facturx") { Content = content };
+            var request = new HttpRequestMessage(HttpMethod.Post, $"{_apiUrl}/api/v1/processing/validate-facturx-pdf") { Content = content };
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _accessToken);
             var response = await _httpClient.SendAsync(request);
             var json = await response.Content.ReadAsStringAsync();
             return JsonSerializer.Deserialize<Dictionary<string, object>>(json) ?? new Dictionary<string, object>();
         }
 
-        public async Task<Dictionary<string, object>> ValiderXmlFacturxAsync(string xmlContent, string profil = "EN16931")
+        public async Task<Dictionary<string, object>> ValidateFacturxXmlAsync(string xmlContent, string profile = "EN16931")
         {
             await EnsureAuthenticatedAsync();
             using var content = new MultipartFormDataContent();
-            content.Add(new StringContent(xmlContent), "fichier_xml", "facture.xml");
-            content.Add(new StringContent(profil), "profil");
+            content.Add(new StringContent(xmlContent), "xml_file", "invoice.xml");
+            content.Add(new StringContent(profile), "profile");
 
-            var request = new HttpRequestMessage(HttpMethod.Post, $"{_apiUrl}/api/v1/traitement/valider-xml") { Content = content };
+            var request = new HttpRequestMessage(HttpMethod.Post, $"{_apiUrl}/api/v1/processing/validate-xml") { Content = content };
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _accessToken);
             var response = await _httpClient.SendAsync(request);
             var json = await response.Content.ReadAsStringAsync();
             return JsonSerializer.Deserialize<Dictionary<string, object>>(json) ?? new Dictionary<string, object>();
         }
 
-        public async Task<Dictionary<string, object>> ValiderSignaturePdfAsync(string pdfPath)
+        public async Task<Dictionary<string, object>> ValidatePdfSignatureAsync(string pdfPath)
         {
             await EnsureAuthenticatedAsync();
             var pdfContent = await File.ReadAllBytesAsync(pdfPath);
             using var content = new MultipartFormDataContent();
-            content.Add(new ByteArrayContent(pdfContent), "fichier_pdf", Path.GetFileName(pdfPath));
+            content.Add(new ByteArrayContent(pdfContent), "pdf_file", Path.GetFileName(pdfPath));
 
-            var request = new HttpRequestMessage(HttpMethod.Post, $"{_apiUrl}/api/v1/traitement/valider-signature-pdf") { Content = content };
+            var request = new HttpRequestMessage(HttpMethod.Post, $"{_apiUrl}/api/v1/processing/validate-pdf-signature") { Content = content };
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _accessToken);
             var response = await _httpClient.SendAsync(request);
             var json = await response.Content.ReadAsStringAsync();
@@ -608,20 +608,20 @@ namespace FactPulse.SDK.Helpers
         // Signature
         // =========================================================================
 
-        public async Task<byte[]> SignerPdfAsync(string pdfPath, string raison = null, string localisation = null,
+        public async Task<byte[]> SignPdfAsync(string pdfPath, string reason = null, string location = null,
             string contact = null, bool usePadesLt = false, bool useTimestamp = true)
         {
             await EnsureAuthenticatedAsync();
             var pdfContent = await File.ReadAllBytesAsync(pdfPath);
             using var content = new MultipartFormDataContent();
-            content.Add(new ByteArrayContent(pdfContent), "fichier_pdf", Path.GetFileName(pdfPath));
-            if (!string.IsNullOrEmpty(raison)) content.Add(new StringContent(raison), "raison");
-            if (!string.IsNullOrEmpty(localisation)) content.Add(new StringContent(localisation), "localisation");
+            content.Add(new ByteArrayContent(pdfContent), "pdf_file", Path.GetFileName(pdfPath));
+            if (!string.IsNullOrEmpty(reason)) content.Add(new StringContent(reason), "reason");
+            if (!string.IsNullOrEmpty(location)) content.Add(new StringContent(location), "location");
             if (!string.IsNullOrEmpty(contact)) content.Add(new StringContent(contact), "contact");
             content.Add(new StringContent(usePadesLt.ToString().ToLower()), "use_pades_lt");
             content.Add(new StringContent(useTimestamp.ToString().ToLower()), "use_timestamp");
 
-            var request = new HttpRequestMessage(HttpMethod.Post, $"{_apiUrl}/api/v1/traitement/signer-pdf") { Content = content };
+            var request = new HttpRequestMessage(HttpMethod.Post, $"{_apiUrl}/api/v1/processing/sign-pdf") { Content = content };
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _accessToken);
             var response = await _httpClient.SendAsync(request);
             var json = await response.Content.ReadAsStringAsync();
@@ -630,12 +630,12 @@ namespace FactPulse.SDK.Helpers
             throw new FactPulseValidationException("Invalid signature response", null);
         }
 
-        public async Task<Dictionary<string, object>> GenererCertificatTestAsync(string cn = "Test Organisation",
-            string organisation = "Test Organisation", string email = "test@example.com", int dureeJours = 365, int tailleCle = 2048)
+        public async Task<Dictionary<string, object>> GenerateTestCertificateAsync(string cn = "Test Organisation",
+            string organisation = "Test Organisation", string email = "test@example.com", int validityDays = 365, int keySize = 2048)
         {
             await EnsureAuthenticatedAsync();
-            var body = new Dictionary<string, object> { ["cn"] = cn, ["organisation"] = organisation, ["email"] = email, ["duree_jours"] = dureeJours, ["taille_cle"] = tailleCle };
-            var request = new HttpRequestMessage(HttpMethod.Post, $"{_apiUrl}/api/v1/traitement/generer-certificat-test") {
+            var body = new Dictionary<string, object> { ["cn"] = cn, ["organisation"] = organisation, ["email"] = email, ["validity_days"] = validityDays, ["key_size"] = keySize };
+            var request = new HttpRequestMessage(HttpMethod.Post, $"{_apiUrl}/api/v1/processing/generate-test-certificate") {
                 Content = new StringContent(JsonSerializer.Serialize(body), Encoding.UTF8, "application/json")
             };
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _accessToken);
@@ -645,31 +645,31 @@ namespace FactPulse.SDK.Helpers
         }
 
         // =========================================================================
-        // Workflow complet
+        // Complete workflow
         // =========================================================================
 
-        public async Task<Dictionary<string, object>> GenererFacturxCompletAsync(Dictionary<string, object> facture, string pdfSourcePath,
-            string profil = "EN16931", bool valider = true, bool signer = false, bool soumettreAfnor = false,
+        public async Task<Dictionary<string, object>> GenerateFacturxCompleteAsync(Dictionary<string, object> invoice, string pdfSourcePath,
+            string profile = "EN16931", bool validate = true, bool sign = false, bool submitAfnor = false,
             string outputPath = null, string afnorFlowName = null, string afnorTrackingId = null, int timeout = 120000)
         {
             var result = new Dictionary<string, object>();
 
-            // 1. Génération
-            var pdfBytes = await GenererFacturxAsync(facture, pdfSourcePath, profil, "pdf", true, timeout);
+            // 1. Generation
+            var pdfBytes = await GenerateFacturxAsync(invoice, pdfSourcePath, profile, "pdf", true, timeout);
             result["pdfBytes"] = pdfBytes;
 
-            // Créer un fichier temporaire
+            // Create temporary file
             var tempPath = Path.GetTempFileName() + ".pdf";
             try
             {
                 await File.WriteAllBytesAsync(tempPath, pdfBytes);
 
                 // 2. Validation
-                if (valider)
+                if (validate)
                 {
-                    var validation = await ValiderPdfFacturxAsync(tempPath, profil);
+                    var validation = await ValidateFacturxPdfAsync(tempPath, profile);
                     result["validation"] = validation;
-                    if (validation.TryGetValue("est_conforme", out var ec) && ec is bool estConforme && !estConforme)
+                    if (validation.TryGetValue("is_compliant", out var ec) && ec is bool isCompliant && !isCompliant)
                     {
                         if (!string.IsNullOrEmpty(outputPath)) { await File.WriteAllBytesAsync(outputPath, pdfBytes); result["pdfPath"] = outputPath; }
                         return result;
@@ -677,26 +677,26 @@ namespace FactPulse.SDK.Helpers
                 }
 
                 // 3. Signature
-                if (signer)
+                if (sign)
                 {
-                    pdfBytes = await SignerPdfAsync(tempPath);
+                    pdfBytes = await SignPdfAsync(tempPath);
                     result["pdfBytes"] = pdfBytes;
-                    result["signature"] = new Dictionary<string, object> { ["signe"] = true };
+                    result["signature"] = new Dictionary<string, object> { ["signed"] = true };
                     await File.WriteAllBytesAsync(tempPath, pdfBytes);
                 }
 
-                // 4. Soumission AFNOR
-                if (soumettreAfnor)
+                // 4. AFNOR submission
+                if (submitAfnor)
                 {
-                    var numeroFacture = facture.TryGetValue("numeroFacture", out var nf) ? nf?.ToString() :
-                        (facture.TryGetValue("numero_facture", out var nf2) ? nf2?.ToString() : "FACTURE");
-                    var flowName = !string.IsNullOrEmpty(afnorFlowName) ? afnorFlowName : $"Facture {numeroFacture}";
-                    var trackingId = !string.IsNullOrEmpty(afnorTrackingId) ? afnorTrackingId : numeroFacture;
-                    var afnorResult = await SoumettreFactureAfnorAsync(tempPath, flowName, trackingId: trackingId);
+                    var invoiceNumber = invoice.TryGetValue("number", out var nf) ? nf?.ToString() :
+                        (invoice.TryGetValue("invoice_number", out var nf2) ? nf2?.ToString() : "INVOICE");
+                    var flowName = !string.IsNullOrEmpty(afnorFlowName) ? afnorFlowName : $"Invoice {invoiceNumber}";
+                    var trackingId = !string.IsNullOrEmpty(afnorTrackingId) ? afnorTrackingId : invoiceNumber;
+                    var afnorResult = await SubmitInvoiceAfnorAsync(tempPath, flowName, trackingId: trackingId);
                     result["afnor"] = afnorResult;
                 }
 
-                // Sauvegarde finale
+                // Final save
                 if (!string.IsNullOrEmpty(outputPath)) { await File.WriteAllBytesAsync(outputPath, pdfBytes); result["pdfPath"] = outputPath; }
             }
             finally { if (File.Exists(tempPath)) File.Delete(tempPath); }

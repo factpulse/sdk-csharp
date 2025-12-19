@@ -1,14 +1,14 @@
 # FactPulse SDK C#
 
-Client C# officiel pour l'API FactPulse - Facturation électronique française.
+Official C# client for the FactPulse API - French electronic invoicing.
 
-## Fonctionnalités
+## Features
 
-- **Factur-X** : Génération et validation de factures électroniques (profils MINIMUM, BASIC, EN16931, EXTENDED)
-- **Chorus Pro** : Intégration avec la plateforme de facturation publique française
-- **AFNOR PDP/PA** : Soumission de flux conformes à la norme XP Z12-013
-- **Signature électronique** : Signature PDF (PAdES-B-B, PAdES-B-T, PAdES-B-LT)
-- **Client simplifié** : Authentification JWT et polling intégrés via `Helpers`
+- **Factur-X**: Generation and validation of electronic invoices (MINIMUM, BASIC, EN16931, EXTENDED profiles)
+- **Chorus Pro**: Integration with the French public sector invoicing platform
+- **AFNOR PDP/PA**: Submission of flows compliant with the XP Z12-013 standard
+- **Electronic signature**: PDF signature (PAdES-B-B, PAdES-B-T, PAdES-B-LT)
+- **Simplified client**: JWT authentication and integrated polling via `Helpers`
 
 ## Installation
 
@@ -16,197 +16,197 @@ Client C# officiel pour l'API FactPulse - Facturation électronique française.
 dotnet add package FactPulse.SDK
 ```
 
-Ou via NuGet Package Manager :
+Or via NuGet Package Manager:
 
 ```
 Install-Package FactPulse.SDK
 ```
 
-## Démarrage rapide
+## Quick Start
 
-Le namespace `Helpers` offre une API simplifiée avec authentification et polling automatiques :
+The `Helpers` namespace provides a simplified API with automatic authentication and polling:
 
 ```csharp
 using System.IO;
 using FactPulse.SDK.Helpers;
-using static FactPulse.SDK.Helpers.MontantHelpers;
+using static FactPulse.SDK.Helpers.AmountHelpers;
 
-// Créer le client
+// Create the client
 var client = new FactPulseClient(
-    "votre_email@example.com",
-    "votre_mot_de_passe"
+    "your_email@example.com",
+    "your_password"
 );
 
-// Construire la facture avec les helpers
-var factureData = new Dictionary<string, object>
+// Build the invoice with helpers
+var invoiceData = new Dictionary<string, object>
 {
-    ["numeroFacture"] = "FAC-2025-001",
-    ["dateFacture"] = "2025-01-15",
-    ["fournisseur"] = Fournisseur(
-        "Mon Entreprise SAS", "12345678901234",
-        "123 Rue Example", "75001", "Paris"
+    ["number"] = "INV-2025-001",
+    ["date"] = "2025-01-15",
+    ["supplier"] = Supplier(
+        "My Company SAS", "12345678901234",
+        "123 Example Street", "75001", "Paris"
     ),
-    ["destinataire"] = Destinataire(
+    ["recipient"] = Recipient(
         "Client SARL", "98765432109876",
-        "456 Avenue Test", "69001", "Lyon"
+        "456 Test Avenue", "69001", "Lyon"
     ),
-    ["montantTotal"] = MontantTotal(1000.00m, 200.00m, 1200.00m, 1200.00m),
-    ["lignesDePoste"] = new List<object>
+    ["totalAmount"] = TotalAmount(1000.00m, 200.00m, 1200.00m, 1200.00m),
+    ["lines"] = new List<object>
     {
-        LigneDePoste(1, "Prestation de conseil", 10, 100.00m, 1000.00m)
+        InvoiceLine(1, "Consulting services", 10, 100.00m, 1000.00m)
     },
-    ["lignesDeTva"] = new List<object>
+    ["vatLines"] = new List<object>
     {
-        LigneDeTva(1000.00m, 200.00m)
+        VatLine(1000.00m, 200.00m)
     }
 };
 
-// Générer le PDF Factur-X
-var pdfBytes = await client.GenererFacturxAsync(factureData, "facture_source.pdf", "EN16931");
+// Generate the Factur-X PDF
+var pdfBytes = await client.GenerateFacturxAsync(invoiceData, "source_invoice.pdf", "EN16931");
 
-await File.WriteAllBytesAsync("facture_facturx.pdf", pdfBytes);
+await File.WriteAllBytesAsync("invoice_facturx.pdf", pdfBytes);
 ```
 
-## Helpers disponibles (classe MontantHelpers)
+## Available Helpers (AmountHelpers class)
 
-### Montant(value)
+### Amount(value)
 
-Convertit une valeur en string formaté pour les montants monétaires.
+Converts a value to a formatted string for monetary amounts.
 
 ```csharp
-using static FactPulse.SDK.Helpers.MontantHelpers;
+using static FactPulse.SDK.Helpers.AmountHelpers;
 
-Montant(1234.5m);      // "1234.50"
-Montant("1234.56");    // "1234.56"
-Montant(null);         // "0.00"
+Amount(1234.5m);      // "1234.50"
+Amount("1234.56");    // "1234.56"
+Amount(null);         // "0.00"
 ```
 
-### MontantTotal(ht, tva, ttc, aPayer, ...)
+### TotalAmount(excludingTax, vat, includingTax, due, ...)
 
-Crée un objet MontantTotal complet.
+Creates a complete TotalAmount object.
 
 ```csharp
-var total = MontantTotal(
-    1000.00m,       // ht
-    200.00m,        // tva
-    1200.00m,       // ttc
-    1200.00m,       // aPayer
-    50.00m,         // remiseTtc (optionnel)
-    "Fidélité",     // motifRemise (optionnel)
-    100.00m         // acompte (optionnel)
+var total = TotalAmount(
+    1000.00m,               // excludingTax
+    200.00m,                // vat
+    1200.00m,               // includingTax
+    1200.00m,               // due
+    50.00m,                 // discountIncludingTax (optional)
+    "Loyalty discount",     // discountReason (optional)
+    100.00m                 // prepayment (optional)
 );
 ```
 
-### LigneDePoste(numero, denomination, quantite, montantUnitaireHt, montantTotalLigneHt, ...)
+### InvoiceLine(number, description, quantity, unitPrice, lineTotal, ...)
 
-Crée une ligne de facturation.
+Creates an invoice line.
 
 ```csharp
-var ligne = LigneDePoste(
+var line = InvoiceLine(
     1,
-    "Prestation de conseil",
+    "Consulting services",
     5,
     200.00m,
-    1000.00m,  // montantTotalLigneHt requis
-    tauxTva: "TVA20",         // Ou tauxTvaManuel: "20.00"
-    categorieTva: "S",        // S, Z, E, AE, K
-    unite: "HEURE",           // FORFAIT, PIECE, HEURE, JOUR...
+    1000.00m,                 // lineTotal required
+    vatRate: "VAT20",         // Or manualVatRate: "20.00"
+    vatCategory: "S",         // S, Z, E, AE, K
+    unit: "HOUR",             // FIXED, PIECE, HOUR, DAY...
     reference: "REF-001"
 );
 ```
 
-### LigneDeTva(montantBaseHt, montantTva, ...)
+### VatLine(baseExcludingTax, vatAmount, ...)
 
-Crée une ligne de ventilation TVA.
+Creates a VAT breakdown line.
 
 ```csharp
-var tva = LigneDeTva(
-    1000.00m,       // montantBaseHt
-    200.00m,        // montantTva
-    taux: "TVA20",  // Ou tauxManuel: "20.00"
-    categorie: "S"  // S, Z, E, AE, K
+var vat = VatLine(
+    1000.00m,               // baseExcludingTax
+    200.00m,                // vatAmount
+    rate: "VAT20",          // Or manualRate: "20.00"
+    category: "S"           // S, Z, E, AE, K
 );
 ```
 
-### AdressePostale(ligne1, codePostal, ville, ...)
+### PostalAddress(line1, postalCode, city, ...)
 
-Crée une adresse postale structurée.
+Creates a structured postal address.
 
 ```csharp
-var adresse = AdressePostale(
-    "123 Rue de la République",
+var address = PostalAddress(
+    "123 Republic Street",
     "75001",
     "Paris",
-    pays: "FR",             // Défaut: "FR"
-    ligne2: "Bâtiment A"    // Optionnel
+    country: "FR",          // Default: "FR"
+    line2: "Building A"     // Optional
 );
 ```
 
-### Fournisseur(nom, siret, adresseLigne1, codePostal, ville, options)
+### Supplier(name, siret, addressLine1, postalCode, city, options)
 
-Crée un fournisseur complet avec calcul automatique du SIREN et TVA intra.
+Creates a complete supplier with automatic calculation of SIREN and intra-community VAT.
 
 ```csharp
-var f = Fournisseur(
-    "Ma Société SAS",
+var s = Supplier(
+    "My Company SAS",
     "12345678901234",
-    "123 Rue Example",
+    "123 Example Street",
     "75001",
     "Paris",
     iban: "FR7630006000011234567890189"
 );
-// SIREN et TVA intracommunautaire calculés automatiquement
+// SIREN and intra-community VAT automatically calculated
 ```
 
-### Destinataire(nom, siret, adresseLigne1, codePostal, ville, options)
+### Recipient(name, siret, addressLine1, postalCode, city, options)
 
-Crée un destinataire (client) avec calcul automatique du SIREN.
+Creates a recipient (customer) with automatic calculation of SIREN.
 
 ```csharp
-var d = Destinataire(
+var r = Recipient(
     "Client SARL",
     "98765432109876",
-    "456 Avenue Test",
+    "456 Test Avenue",
     "69001",
     "Lyon"
 );
 ```
 
-## Mode Zero-Trust (Chorus Pro / AFNOR)
+## Zero-Trust Mode (Chorus Pro / AFNOR)
 
-Pour passer vos propres credentials sans stockage côté serveur :
+To pass your own credentials without server-side storage:
 
 ```csharp
 using FactPulse.SDK.Helpers;
 
 var chorusCreds = new ChorusProCredentials(
-    "votre_client_id",
-    "votre_client_secret",
-    "votre_login",
-    "votre_password",
+    "your_client_id",
+    "your_client_secret",
+    "your_login",
+    "your_password",
     sandbox: true
 );
 
 var afnorCreds = new AFNORCredentials(
     "https://api.pdp.fr/flow/v1",
     "https://auth.pdp.fr/oauth/token",
-    "votre_client_id",
-    "votre_client_secret"
+    "your_client_id",
+    "your_client_secret"
 );
 
 var client = new FactPulseClient(
-    "votre_email@example.com",
-    "votre_mot_de_passe",
+    "your_email@example.com",
+    "your_password",
     chorusCredentials: chorusCreds,
     afnorCredentials: afnorCreds
 );
 ```
 
-## Ressources
+## Resources
 
-- **Documentation API** : https://factpulse.fr/api/facturation/documentation
-- **Support** : contact@factpulse.fr
+- **API Documentation**: https://factpulse.fr/api/facturation/documentation
+- **Support**: contact@factpulse.fr
 
-## Licence
+## License
 
 MIT License - Copyright (c) 2025 FactPulse

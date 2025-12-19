@@ -4,17 +4,17 @@ All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**GetAfnorCredentialsApiV1AfnorCredentialsGet**](AFNORPDPPAApi.md#getafnorcredentialsapiv1afnorcredentialsget) | **GET** /api/v1/afnor/credentials | Récupérer les credentials AFNOR stockés |
-| [**GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet**](AFNORPDPPAApi.md#getfluxentrantapiv1afnorfluxentrantsflowidget) | **GET** /api/v1/afnor/flux-entrants/{flow_id} | Récupérer et extraire une facture entrante |
-| [**OauthTokenProxyApiV1AfnorOauthTokenPost**](AFNORPDPPAApi.md#oauthtokenproxyapiv1afnoroauthtokenpost) | **POST** /api/v1/afnor/oauth/token | Endpoint OAuth2 pour authentification AFNOR |
+| [**GetAfnorCredentialsApiV1AfnorCredentialsGet**](AFNORPDPPAApi.md#getafnorcredentialsapiv1afnorcredentialsget) | **GET** /api/v1/afnor/credentials | Retrieve stored AFNOR credentials |
+| [**GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet**](AFNORPDPPAApi.md#getfluxentrantapiv1afnorincomingflowsflowidget) | **GET** /api/v1/afnor/incoming-flows/{flow_id} | Retrieve and extract an incoming invoice |
+| [**OauthTokenProxyApiV1AfnorOauthTokenPost**](AFNORPDPPAApi.md#oauthtokenproxyapiv1afnoroauthtokenpost) | **POST** /api/v1/afnor/oauth/token | OAuth2 endpoint for AFNOR authentication |
 
 <a id="getafnorcredentialsapiv1afnorcredentialsget"></a>
 # **GetAfnorCredentialsApiV1AfnorCredentialsGet**
 > Object GetAfnorCredentialsApiV1AfnorCredentialsGet ()
 
-Récupérer les credentials AFNOR stockés
+Retrieve stored AFNOR credentials
 
-Récupère les credentials AFNOR/PDP stockés pour le client_uid du JWT. Cet endpoint est utilisé par le SDK en mode 'stored' pour récupérer les credentials avant de faire l'OAuth AFNOR lui-même.
+Retrieves stored AFNOR/PDP credentials for the JWT's client_uid. This endpoint is used by the SDK in 'stored' mode to retrieve credentials before performing AFNOR OAuth itself.
 
 
 ### Parameters
@@ -36,20 +36,20 @@ This endpoint does not need any parameter.
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Credentials AFNOR récupérés avec succès |  -  |
-| **400** | Aucun client_uid dans le JWT |  -  |
-| **401** | Non authentifié - Token JWT manquant ou invalide |  -  |
-| **404** | Client non trouvé ou pas de credentials AFNOR configurés |  -  |
+| **200** | AFNOR credentials retrieved successfully |  -  |
+| **400** | No client_uid in JWT |  -  |
+| **401** | Not authenticated - Missing or invalid JWT token |  -  |
+| **404** | Client not found or no AFNOR credentials configured |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
-<a id="getfluxentrantapiv1afnorfluxentrantsflowidget"></a>
-# **GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet**
-> FactureEntrante GetFluxEntrantApiV1AfnorFluxEntrantsFlowIdGet (string flowId, bool includeDocument = null)
+<a id="getfluxentrantapiv1afnorincomingflowsflowidget"></a>
+# **GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet**
+> IncomingInvoice GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet (string flowId, bool includeDocument = null)
 
-Récupérer et extraire une facture entrante
+Retrieve and extract an incoming invoice
 
-Télécharge un flux entrant depuis la PDP AFNOR et extrait les métadonnées de la facture vers un format JSON unifié. Supporte les formats Factur-X, CII et UBL.
+Downloads an incoming flow from the AFNOR PDP and extracts invoice metadata into a unified JSON format. Supports Factur-X, CII, and UBL formats.
 
 
 ### Parameters
@@ -61,7 +61,7 @@ Télécharge un flux entrant depuis la PDP AFNOR et extrait les métadonnées de
 
 ### Return type
 
-[**FactureEntrante**](FactureEntrante.md)
+[**IncomingInvoice**](IncomingInvoice.md)
 
 ### Authorization
 
@@ -76,11 +76,11 @@ Télécharge un flux entrant depuis la PDP AFNOR et extrait les métadonnées de
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Facture extraite avec succès |  -  |
-| **400** | Format de facture non supporté ou invalide |  -  |
-| **401** | Non authentifié |  -  |
-| **404** | Flux non trouvé |  -  |
-| **503** | Service PDP indisponible |  -  |
+| **200** | Invoice extracted successfully |  -  |
+| **400** | Unsupported or invalid invoice format |  -  |
+| **401** | Not authenticated |  -  |
+| **404** | Flow not found |  -  |
+| **503** | PDP service unavailable |  -  |
 | **422** | Validation Error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
@@ -89,9 +89,9 @@ Télécharge un flux entrant depuis la PDP AFNOR et extrait les métadonnées de
 # **OauthTokenProxyApiV1AfnorOauthTokenPost**
 > Object OauthTokenProxyApiV1AfnorOauthTokenPost ()
 
-Endpoint OAuth2 pour authentification AFNOR
+OAuth2 endpoint for AFNOR authentication
 
-Endpoint proxy OAuth2 pour obtenir un token d'accès AFNOR. Fait proxy vers le mock AFNOR (sandbox) ou la vraie PDP selon MOCK_AFNOR_BASE_URL. Cet endpoint est public (pas d'auth Django requise) car il est appelé par le SDK AFNOR.
+OAuth2 proxy endpoint to obtain an AFNOR access token. Proxies to AFNOR mock (sandbox) or real PDP depending on MOCK_AFNOR_BASE_URL. This endpoint is public (no Django auth required) as it is called by the AFNOR SDK.
 
 
 ### Parameters
@@ -113,8 +113,8 @@ No authorization required
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Token OAuth2 acquis avec succès |  -  |
-| **401** | Credentials invalides |  -  |
+| **200** | OAuth2 token acquired successfully |  -  |
+| **401** | Invalid credentials |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 

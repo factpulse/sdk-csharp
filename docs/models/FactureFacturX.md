@@ -1,26 +1,26 @@
 # FactPulse.SDK.Model.FactureFacturX
-Modèle de données pour une facture destinée à être convertie en Factur-X.
+Data model for an invoice to be converted to Factur-X.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**NumeroFacture** | **string** |  | 
-**DateEcheancePaiement** | **string** |  | 
-**ModeDepot** | **ModeDepot** |  | 
-**Destinataire** | [**Destinataire**](Destinataire.md) |  | 
-**Fournisseur** | [**Fournisseur**](Fournisseur.md) |  | 
-**CadreDeFacturation** | [**CadreDeFacturation**](CadreDeFacturation.md) |  | 
-**References** | [**References**](References.md) |  | 
-**MontantTotal** | [**MontantTotal**](MontantTotal.md) |  | 
-**DateFacture** | **string** |  | [optional] 
-**LignesDePoste** | [**List&lt;LigneDePoste&gt;**](LigneDePoste.md) |  | [optional] 
-**LignesDeTva** | [**List&lt;LigneDeTVA&gt;**](LigneDeTVA.md) |  | [optional] 
-**Notes** | [**List&lt;Note&gt;**](Note.md) |  | [optional] 
-**Commentaire** | **string** |  | [optional] 
-**IdUtilisateurCourant** | **int** |  | [optional] 
-**PiecesJointesComplementaires** | [**List&lt;PieceJointeComplementaire&gt;**](PieceJointeComplementaire.md) |  | [optional] 
-**Beneficiaire** | [**Beneficiaire**](Beneficiaire.md) |  | [optional] 
+**InvoiceNumber** | **string** |  | 
+**PaymentDueDate** | **string** |  | 
+**SubmissionMode** | **SubmissionMode** |  | 
+**Recipient** | [**Recipient**](Recipient.md) |  | 
+**Supplier** | [**Supplier**](Supplier.md) |  | 
+**InvoicingFramework** | [**InvoicingFramework**](InvoicingFramework.md) |  | 
+**References** | [**InvoiceReferences**](InvoiceReferences.md) |  | 
+**Totals** | [**InvoiceTotals**](InvoiceTotals.md) |  | 
+**InvoiceDate** | **string** |  | [optional] 
+**InvoiceLines** | [**List&lt;InvoiceLine&gt;**](InvoiceLine.md) |  | [optional] 
+**VatLines** | [**List&lt;VATLine&gt;**](VATLine.md) |  | [optional] 
+**Notes** | [**List&lt;InvoiceNote&gt;**](InvoiceNote.md) |  | [optional] 
+**Comment** | **string** |  | [optional] 
+**CurrentUserId** | **int** |  | [optional] 
+**SupplementaryAttachments** | [**List&lt;SupplementaryAttachment&gt;**](SupplementaryAttachment.md) |  | [optional] 
+**Payee** | [**Payee**](Payee.md) |  | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

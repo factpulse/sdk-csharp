@@ -1,11 +1,11 @@
 # FactPulse.SDK.Model.SignatureInfo
-Informations sur la signature électronique.
+Information about the electronic signature.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Signe** | **bool** | Le PDF a été signé | 
+**Signed** | **bool** | PDF was signed | 
 **Cn** | **string** |  | [optional] 
 **Expiration** | **string** |  | [optional] 
 

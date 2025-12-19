@@ -1,21 +1,21 @@
 # FactPulse.SDK.Model.CertificateInfoResponse
-Informations sur un certificat généré.
+Information about a generated certificate.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Cn** | **string** | Common Name | 
-**Organisation** | **string** | Organisation | 
-**Pays** | **string** | Code pays | 
-**Ville** | **string** | Ville | 
-**Province** | **string** | Province | 
-**Sujet** | **string** | Sujet complet (RFC4514) | 
-**Emetteur** | **string** | Émetteur (auto-signé &#x3D; même que sujet) | 
-**NumeroSerie** | **int** | Numéro de série du certificat | 
-**ValideDu** | **string** | Date de début de validité (ISO 8601) | 
-**ValideAu** | **string** | Date de fin de validité (ISO 8601) | 
-**Algorithme** | **string** | Algorithme de signature | 
+**Organization** | **string** | Organization | 
+**Country** | **string** | Country code | 
+**City** | **string** | City | 
+**State** | **string** | State/Province | 
+**Subject** | **string** | Full subject (RFC4514) | 
+**Issuer** | **string** | Issuer (self-signed &#x3D; same as subject) | 
+**SerialNumber** | **int** | Certificate serial number | 
+**ValidFrom** | **string** | Validity start date (ISO 8601) | 
+**ValidTo** | **string** | Validity end date (ISO 8601) | 
+**Algorithm** | **string** | Signature algorithm | 
 **Email** | **string** |  | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)

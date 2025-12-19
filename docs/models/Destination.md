@@ -1,5 +1,5 @@
 # FactPulse.SDK.Model.Destination
-Configuration de la destination (Chorus Pro ou AFNOR)
+Destination configuration (Chorus Pro or AFNOR)
 
 ## Properties
 

@@ -4,7 +4,7 @@ namespace FactPulse.SDK.Helpers {
     public class FactPulseAuthException : FactPulseException { public FactPulseAuthException(string msg = "Auth failed") : base(msg) { } }
     public class FactPulsePollingTimeoutException : FactPulseException {
         public string TaskId { get; } public long Timeout { get; }
-        public FactPulsePollingTimeoutException(string taskId, long timeout) : base($"Timeout ({timeout}ms) pour {taskId}") { TaskId = taskId; Timeout = timeout; }
+        public FactPulsePollingTimeoutException(string taskId, long timeout) : base($"Timeout ({timeout}ms) for task {taskId}") { TaskId = taskId; Timeout = timeout; }
     }
     public class ValidationErrorDetail {
         public string Level { get; set; } = ""; public string Item { get; set; } = ""; public string Reason { get; set; } = "";
@@ -25,6 +25,6 @@ namespace FactPulse.SDK.Helpers {
     public class FactPulseValidationException : FactPulseException {
         public List<ValidationErrorDetail> Errors { get; }
         public FactPulseValidationException(string msg, List<ValidationErrorDetail>? errors = null)
-            : base(errors?.Any() == true ? $"{msg}\n\nDétails:\n{string.Join("\n", errors.Select(e => $"  - {e}"))}" : msg) { Errors = errors ?? new(); }
+            : base(errors?.Any() == true ? $"{msg}\n\nDetails:\n{string.Join("\n", errors.Select(e => $"  - {e}"))}" : msg) { Errors = errors ?? new(); }
     }
 }
