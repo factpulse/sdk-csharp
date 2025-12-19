@@ -81,54 +81,54 @@ namespace FactPulse.SDK.Helpers
         }
 
         public static Dictionary<string, object> TotalAmount(object exclTax, object vat, object inclTax, object amountDue,
-            object discountInclTax = null, string discountReason = null, object prepayment = null)
+            object globalAllowanceAmount = null, string globalAllowanceReason = null, object prepayment = null)
         {
             var result = new Dictionary<string, object> {
-                ["totalExclTax"] = Amount(exclTax), ["vatAmount"] = Amount(vat),
-                ["totalInclTax"] = Amount(inclTax), ["amountDue"] = Amount(amountDue)
+                ["totalNetAmount"] = Amount(exclTax), ["vatAmount"] = Amount(vat),
+                ["totalGrossAmount"] = Amount(inclTax), ["amountDue"] = Amount(amountDue)
             };
-            if (discountInclTax != null) result["globalDiscountInclTax"] = Amount(discountInclTax);
-            if (discountReason != null) result["globalDiscountReason"] = discountReason;
+            if (globalAllowanceAmount != null) result["globalAllowanceAmount"] = Amount(globalAllowanceAmount);
+            if (globalAllowanceReason != null) result["globalAllowanceReason"] = globalAllowanceReason;
             if (prepayment != null) result["prepayment"] = Amount(prepayment);
             return result;
         }
 
         /// <summary>Creates an invoice line (aligned with InvoiceLine in models.py).</summary>
-        public static Dictionary<string, object> InvoiceLine(int number, string description, object quantity,
-            object unitPriceExclTax, object lineTotalExclTax, string vatRate = "20.00",
+        public static Dictionary<string, object> InvoiceLine(int lineNumber, string itemName, object quantity,
+            object unitNetPrice, object lineNetAmount, string vatRate = "20.00",
             string vatCategory = "S", string unit = "LUMP_SUM", Dictionary<string, object> options = null)
         {
             var result = new Dictionary<string, object> {
-                ["number"] = number, ["description"] = description, ["quantity"] = Amount(quantity),
-                ["unitPriceExclTax"] = Amount(unitPriceExclTax), ["lineTotalExclTax"] = Amount(lineTotalExclTax),
-                ["vatRateManual"] = Amount(vatRate), ["vatCategory"] = vatCategory, ["unit"] = unit
+                ["lineNumber"] = lineNumber, ["itemName"] = itemName, ["quantity"] = Amount(quantity),
+                ["unitNetPrice"] = Amount(unitNetPrice), ["lineNetAmount"] = Amount(lineNetAmount),
+                ["manualVatRate"] = Amount(vatRate), ["vatCategory"] = vatCategory, ["unit"] = unit
             };
             if (options != null)
             {
                 if (options.TryGetValue("reference", out var r)) result["reference"] = r;
-                if (options.TryGetValue("discountExclTax", out var m)) result["discountExclTax"] = Amount(m);
-                if (options.TryGetValue("discountReasonCode", out var c)) result["discountReasonCode"] = c;
-                if (options.TryGetValue("discountReason", out var rr)) result["discountReason"] = rr;
+                if (options.TryGetValue("lineAllowanceAmount", out var m)) result["lineAllowanceAmount"] = Amount(m);
+                if (options.TryGetValue("allowanceReasonCode", out var c)) result["allowanceReasonCode"] = c;
+                if (options.TryGetValue("allowanceReason", out var rr)) result["allowanceReason"] = rr;
                 if (options.TryGetValue("periodStartDate", out var dd)) result["periodStartDate"] = dd;
                 if (options.TryGetValue("periodEndDate", out var df)) result["periodEndDate"] = df;
             }
             return result;
         }
 
-        /// <summary>Creates a VAT line (aligned with VatLine in models.py).</summary>
-        public static Dictionary<string, object> VatLine(object rateManual, object baseAmountExclTax, object vatAmount, string category = "S")
+        /// <summary>Creates a VAT line (aligned with VATLine in models.py).</summary>
+        public static Dictionary<string, object> VatLine(object manualRate, object taxableAmount, object vatAmount, string category = "S")
             => new Dictionary<string, object> {
-                ["rateManual"] = Amount(rateManual), ["baseAmountExclTax"] = Amount(baseAmountExclTax),
+                ["manualRate"] = Amount(manualRate), ["taxableAmount"] = Amount(taxableAmount),
                 ["vatAmount"] = Amount(vatAmount), ["category"] = category
             };
 
         /// <summary>Creates a postal address for the FactPulse API.</summary>
-        public static Dictionary<string, object> PostalAddress(string line1, string postalCode, string city,
-            string country = "FR", string line2 = null, string line3 = null)
+        public static Dictionary<string, object> PostalAddress(string lineOne, string postalCode, string city,
+            string countryCode = "FR", string lineTwo = null, string lineThree = null)
         {
-            var result = new Dictionary<string, object> { ["line1"] = line1, ["postalCode"] = postalCode, ["city"] = city, ["countryCode"] = country };
-            if (line2 != null) result["line2"] = line2;
-            if (line3 != null) result["line3"] = line3;
+            var result = new Dictionary<string, object> { ["lineOne"] = lineOne, ["postalCode"] = postalCode, ["city"] = city, ["countryCode"] = countryCode };
+            if (lineTwo != null) result["lineTwo"] = lineTwo;
+            if (lineThree != null) result["lineThree"] = lineThree;
             return result;
         }
 
@@ -150,20 +150,20 @@ namespace FactPulse.SDK.Helpers
         {
             options ??= new Dictionary<string, object>();
             var siren = options.TryGetValue("siren", out var s) ? s?.ToString() : (siret.Length == 14 ? siret.Substring(0, 9) : null);
-            var vatIntra = options.TryGetValue("vatIntra", out var t) ? t?.ToString() : (siren != null ? ComputeVatIntra(siren) : null);
-            var country = options.TryGetValue("country", out var p) ? p?.ToString() : "FR";
+            var vatNumber = options.TryGetValue("vatNumber", out var t) ? t?.ToString() : (siren != null ? ComputeVatIntra(siren) : null);
+            var countryCode = options.TryGetValue("countryCode", out var p) ? p?.ToString() : "FR";
             var addressLine2 = options.TryGetValue("addressLine2", out var a2) ? a2?.ToString() : null;
 
             var result = new Dictionary<string, object> {
                 ["name"] = name, ["supplierId"] = options.ContainsKey("supplierId") ? options["supplierId"] : 0, ["siret"] = siret,
                 ["electronicAddress"] = ElectronicAddress(siret, "0225"),
-                ["postalAddress"] = PostalAddress(addressLine1, postalCode, city, country, addressLine2)
+                ["postalAddress"] = PostalAddress(addressLine1, postalCode, city, countryCode, addressLine2)
             };
             if (siren != null) result["siren"] = siren;
-            if (vatIntra != null) result["vatIntra"] = vatIntra;
+            if (vatNumber != null) result["vatNumber"] = vatNumber;
             if (options.TryGetValue("iban", out var iban)) result["iban"] = iban;
-            if (options.TryGetValue("serviceCode", out var cs)) result["supplierServiceId"] = cs;
-            if (options.TryGetValue("bankCoordinatesCode", out var ccb)) result["supplierBankCoordinatesCode"] = ccb;
+            if (options.TryGetValue("supplierServiceId", out var cs)) result["supplierServiceId"] = cs;
+            if (options.TryGetValue("supplierBankDetailsCode", out var ccb)) result["supplierBankDetailsCode"] = ccb;
             return result;
         }
 
@@ -173,13 +173,13 @@ namespace FactPulse.SDK.Helpers
         {
             options ??= new Dictionary<string, object>();
             var siren = options.TryGetValue("siren", out var s) ? s?.ToString() : (siret.Length == 14 ? siret.Substring(0, 9) : null);
-            var country = options.TryGetValue("country", out var p) ? p?.ToString() : "FR";
+            var countryCode = options.TryGetValue("countryCode", out var p) ? p?.ToString() : "FR";
             var addressLine2 = options.TryGetValue("addressLine2", out var a2) ? a2?.ToString() : null;
 
             var result = new Dictionary<string, object> {
                 ["name"] = name, ["siret"] = siret,
                 ["electronicAddress"] = ElectronicAddress(siret, "0225"),
-                ["postalAddress"] = PostalAddress(addressLine1, postalCode, city, country, addressLine2)
+                ["postalAddress"] = PostalAddress(addressLine1, postalCode, city, countryCode, addressLine2)
             };
             if (siren != null) result["siren"] = siren;
             if (options.TryGetValue("executingServiceCode", out var cse)) result["executingServiceCode"] = cse;
@@ -380,8 +380,8 @@ namespace FactPulse.SDK.Helpers
             if (sync && data.TryGetValue("task_id", out var taskIdElem))
             {
                 var result = await PollTaskAsync(taskIdElem.GetString(), timeout);
-                if (result.TryGetValue("contenu_b64", out var b64)) return Convert.FromBase64String(b64.ToString());
-                if (result.TryGetValue("contenu_xml", out var xml)) return Encoding.UTF8.GetBytes(xml.ToString());
+                if (result.TryGetValue("content_b64", out var b64)) return Convert.FromBase64String(b64.ToString());
+                if (result.TryGetValue("content_xml", out var xml)) return Encoding.UTF8.GetBytes(xml.ToString());
                 throw new FactPulseValidationException("Unexpected result", null);
             }
             return Encoding.UTF8.GetBytes(json);
@@ -626,7 +626,7 @@ namespace FactPulse.SDK.Helpers
             var response = await _httpClient.SendAsync(request);
             var json = await response.Content.ReadAsStringAsync();
             var result = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(json);
-            if (result.TryGetValue("pdf_signe_base64", out var b64)) return Convert.FromBase64String(b64.GetString());
+            if (result.TryGetValue("signed_pdf_base64", out var b64)) return Convert.FromBase64String(b64.GetString());
             throw new FactPulseValidationException("Invalid signature response", null);
         }
 
