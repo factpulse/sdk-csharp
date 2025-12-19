@@ -59,37 +59,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Enum FORFAIT for value: FORFAIT
         /// </summary>
-        FORFAIT = 6,
-
-        /// <summary>
-        /// Enum PIECE2 for value: PIECE
-        /// </summary>
-        PIECE2 = 7,
-
-        /// <summary>
-        /// Enum HEURE2 for value: HEURE
-        /// </summary>
-        HEURE2 = 8,
-
-        /// <summary>
-        /// Enum JOUR2 for value: JOUR
-        /// </summary>
-        JOUR2 = 9,
-
-        /// <summary>
-        /// Enum KILOGRAMME2 for value: KILOGRAMME
-        /// </summary>
-        KILOGRAMME2 = 10,
-
-        /// <summary>
-        /// Enum LITRE2 for value: LITRE
-        /// </summary>
-        LITRE2 = 11,
-
-        /// <summary>
-        /// Enum FORFAIT2 for value: FORFAIT
-        /// </summary>
-        FORFAIT2 = 12
+        FORFAIT = 6
     }
 
     /// <summary>
@@ -122,24 +92,6 @@ namespace FactPulse.SDK.Model
             if (value.Equals("FORFAIT"))
                 return UnitOfMeasure.FORFAIT;
 
-            if (value.Equals("PIECE"))
-                return UnitOfMeasure.PIECE2;
-
-            if (value.Equals("HEURE"))
-                return UnitOfMeasure.HEURE2;
-
-            if (value.Equals("JOUR"))
-                return UnitOfMeasure.JOUR2;
-
-            if (value.Equals("KILOGRAMME"))
-                return UnitOfMeasure.KILOGRAMME2;
-
-            if (value.Equals("LITRE"))
-                return UnitOfMeasure.LITRE2;
-
-            if (value.Equals("FORFAIT"))
-                return UnitOfMeasure.FORFAIT2;
-
             throw new NotImplementedException($"Could not convert value to type UnitOfMeasure: '{value}'");
         }
 
@@ -168,24 +120,6 @@ namespace FactPulse.SDK.Model
             if (value.Equals("FORFAIT"))
                 return UnitOfMeasure.FORFAIT;
 
-            if (value.Equals("PIECE"))
-                return UnitOfMeasure.PIECE2;
-
-            if (value.Equals("HEURE"))
-                return UnitOfMeasure.HEURE2;
-
-            if (value.Equals("JOUR"))
-                return UnitOfMeasure.JOUR2;
-
-            if (value.Equals("KILOGRAMME"))
-                return UnitOfMeasure.KILOGRAMME2;
-
-            if (value.Equals("LITRE"))
-                return UnitOfMeasure.LITRE2;
-
-            if (value.Equals("FORFAIT"))
-                return UnitOfMeasure.FORFAIT2;
-
             return null;
         }
 
@@ -213,24 +147,6 @@ namespace FactPulse.SDK.Model
                 return "LITRE";
 
             if (value == UnitOfMeasure.FORFAIT)
-                return "FORFAIT";
-
-            if (value == UnitOfMeasure.PIECE2)
-                return "PIECE";
-
-            if (value == UnitOfMeasure.HEURE2)
-                return "HEURE";
-
-            if (value == UnitOfMeasure.JOUR2)
-                return "JOUR";
-
-            if (value == UnitOfMeasure.KILOGRAMME2)
-                return "KILOGRAMME";
-
-            if (value == UnitOfMeasure.LITRE2)
-                return "LITRE";
-
-            if (value == UnitOfMeasure.FORFAIT2)
                 return "FORFAIT";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");

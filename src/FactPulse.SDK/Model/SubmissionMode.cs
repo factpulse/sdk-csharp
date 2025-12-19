@@ -44,22 +44,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Enum DEPOTPDFSIGNEAPI for value: DEPOT_PDF_SIGNE_API
         /// </summary>
-        DEPOTPDFSIGNEAPI = 3,
-
-        /// <summary>
-        /// Enum SAISIEAPI2 for value: SAISIE_API
-        /// </summary>
-        SAISIEAPI2 = 4,
-
-        /// <summary>
-        /// Enum DEPOTPDFAPI2 for value: DEPOT_PDF_API
-        /// </summary>
-        DEPOTPDFAPI2 = 5,
-
-        /// <summary>
-        /// Enum DEPOTPDFSIGNEAPI2 for value: DEPOT_PDF_SIGNE_API
-        /// </summary>
-        DEPOTPDFSIGNEAPI2 = 6
+        DEPOTPDFSIGNEAPI = 3
     }
 
     /// <summary>
@@ -83,15 +68,6 @@ namespace FactPulse.SDK.Model
             if (value.Equals("DEPOT_PDF_SIGNE_API"))
                 return SubmissionMode.DEPOTPDFSIGNEAPI;
 
-            if (value.Equals("SAISIE_API"))
-                return SubmissionMode.SAISIEAPI2;
-
-            if (value.Equals("DEPOT_PDF_API"))
-                return SubmissionMode.DEPOTPDFAPI2;
-
-            if (value.Equals("DEPOT_PDF_SIGNE_API"))
-                return SubmissionMode.DEPOTPDFSIGNEAPI2;
-
             throw new NotImplementedException($"Could not convert value to type SubmissionMode: '{value}'");
         }
 
@@ -111,15 +87,6 @@ namespace FactPulse.SDK.Model
             if (value.Equals("DEPOT_PDF_SIGNE_API"))
                 return SubmissionMode.DEPOTPDFSIGNEAPI;
 
-            if (value.Equals("SAISIE_API"))
-                return SubmissionMode.SAISIEAPI2;
-
-            if (value.Equals("DEPOT_PDF_API"))
-                return SubmissionMode.DEPOTPDFAPI2;
-
-            if (value.Equals("DEPOT_PDF_SIGNE_API"))
-                return SubmissionMode.DEPOTPDFSIGNEAPI2;
-
             return null;
         }
 
@@ -138,15 +105,6 @@ namespace FactPulse.SDK.Model
                 return "DEPOT_PDF_API";
 
             if (value == SubmissionMode.DEPOTPDFSIGNEAPI)
-                return "DEPOT_PDF_SIGNE_API";
-
-            if (value == SubmissionMode.SAISIEAPI2)
-                return "SAISIE_API";
-
-            if (value == SubmissionMode.DEPOTPDFAPI2)
-                return "DEPOT_PDF_API";
-
-            if (value == SubmissionMode.DEPOTPDFSIGNEAPI2)
                 return "DEPOT_PDF_SIGNE_API";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");

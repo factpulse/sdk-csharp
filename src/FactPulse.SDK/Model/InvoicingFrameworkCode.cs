@@ -49,27 +49,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Enum A12FACTURECOTRAITANT for value: A12_FACTURE_COTRAITANT
         /// </summary>
-        A12FACTURECOTRAITANT = 4,
-
-        /// <summary>
-        /// Enum A1FACTUREFOURNISSEUR2 for value: A1_FACTURE_FOURNISSEUR
-        /// </summary>
-        A1FACTUREFOURNISSEUR2 = 5,
-
-        /// <summary>
-        /// Enum A2FACTUREFOURNISSEURDEJAPAYEE2 for value: A2_FACTURE_FOURNISSEUR_DEJA_PAYEE
-        /// </summary>
-        A2FACTUREFOURNISSEURDEJAPAYEE2 = 6,
-
-        /// <summary>
-        /// Enum A9FACTURESOUSTRAITANT2 for value: A9_FACTURE_SOUSTRAITANT
-        /// </summary>
-        A9FACTURESOUSTRAITANT2 = 7,
-
-        /// <summary>
-        /// Enum A12FACTURECOTRAITANT2 for value: A12_FACTURE_COTRAITANT
-        /// </summary>
-        A12FACTURECOTRAITANT2 = 8
+        A12FACTURECOTRAITANT = 4
     }
 
     /// <summary>
@@ -96,18 +76,6 @@ namespace FactPulse.SDK.Model
             if (value.Equals("A12_FACTURE_COTRAITANT"))
                 return InvoicingFrameworkCode.A12FACTURECOTRAITANT;
 
-            if (value.Equals("A1_FACTURE_FOURNISSEUR"))
-                return InvoicingFrameworkCode.A1FACTUREFOURNISSEUR2;
-
-            if (value.Equals("A2_FACTURE_FOURNISSEUR_DEJA_PAYEE"))
-                return InvoicingFrameworkCode.A2FACTUREFOURNISSEURDEJAPAYEE2;
-
-            if (value.Equals("A9_FACTURE_SOUSTRAITANT"))
-                return InvoicingFrameworkCode.A9FACTURESOUSTRAITANT2;
-
-            if (value.Equals("A12_FACTURE_COTRAITANT"))
-                return InvoicingFrameworkCode.A12FACTURECOTRAITANT2;
-
             throw new NotImplementedException($"Could not convert value to type InvoicingFrameworkCode: '{value}'");
         }
 
@@ -130,18 +98,6 @@ namespace FactPulse.SDK.Model
             if (value.Equals("A12_FACTURE_COTRAITANT"))
                 return InvoicingFrameworkCode.A12FACTURECOTRAITANT;
 
-            if (value.Equals("A1_FACTURE_FOURNISSEUR"))
-                return InvoicingFrameworkCode.A1FACTUREFOURNISSEUR2;
-
-            if (value.Equals("A2_FACTURE_FOURNISSEUR_DEJA_PAYEE"))
-                return InvoicingFrameworkCode.A2FACTUREFOURNISSEURDEJAPAYEE2;
-
-            if (value.Equals("A9_FACTURE_SOUSTRAITANT"))
-                return InvoicingFrameworkCode.A9FACTURESOUSTRAITANT2;
-
-            if (value.Equals("A12_FACTURE_COTRAITANT"))
-                return InvoicingFrameworkCode.A12FACTURECOTRAITANT2;
-
             return null;
         }
 
@@ -163,18 +119,6 @@ namespace FactPulse.SDK.Model
                 return "A9_FACTURE_SOUSTRAITANT";
 
             if (value == InvoicingFrameworkCode.A12FACTURECOTRAITANT)
-                return "A12_FACTURE_COTRAITANT";
-
-            if (value == InvoicingFrameworkCode.A1FACTUREFOURNISSEUR2)
-                return "A1_FACTURE_FOURNISSEUR";
-
-            if (value == InvoicingFrameworkCode.A2FACTUREFOURNISSEURDEJAPAYEE2)
-                return "A2_FACTURE_FOURNISSEUR_DEJA_PAYEE";
-
-            if (value == InvoicingFrameworkCode.A9FACTURESOUSTRAITANT2)
-                return "A9_FACTURE_SOUSTRAITANT";
-
-            if (value == InvoicingFrameworkCode.A12FACTURECOTRAITANT2)
                 return "A12_FACTURE_COTRAITANT";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");

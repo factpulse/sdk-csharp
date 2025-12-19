@@ -28,10 +28,10 @@ namespace FactPulse.SDK.Model
     /// <summary>
     /// Data model for an invoice to be converted to Factur-X.
     /// </summary>
-    public partial class FactureFacturX : IValidatableObject
+    public partial class FacturXInvoice : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="FactureFacturX" /> class.
+        /// Initializes a new instance of the <see cref="FacturXInvoice" /> class.
         /// </summary>
         /// <param name="invoiceNumber">invoiceNumber</param>
         /// <param name="paymentDueDate">paymentDueDate</param>
@@ -50,7 +50,7 @@ namespace FactPulse.SDK.Model
         /// <param name="supplementaryAttachments">supplementaryAttachments</param>
         /// <param name="payee">payee</param>
         [JsonConstructor]
-        public FactureFacturX(string invoiceNumber, string paymentDueDate, SubmissionMode submissionMode, Recipient recipient, Supplier supplier, InvoicingFramework invoicingFramework, InvoiceReferences references, InvoiceTotals totals, Option<string?> invoiceDate = default, Option<List<InvoiceLine>?> invoiceLines = default, Option<List<VATLine>?> vatLines = default, Option<List<InvoiceNote>?> notes = default, Option<string?> comment = default, Option<int?> currentUserId = default, Option<List<SupplementaryAttachment>?> supplementaryAttachments = default, Option<Payee?> payee = default)
+        public FacturXInvoice(string invoiceNumber, string paymentDueDate, SubmissionMode submissionMode, Recipient recipient, Supplier supplier, InvoicingFramework invoicingFramework, InvoiceReferences references, InvoiceTotals totals, Option<string?> invoiceDate = default, Option<List<InvoiceLine>?> invoiceLines = default, Option<List<VATLine>?> vatLines = default, Option<List<InvoiceNote>?> notes = default, Option<string?> comment = default, Option<int?> currentUserId = default, Option<List<SupplementaryAttachment>?> supplementaryAttachments = default, Option<Payee?> payee = default)
         {
             InvoiceNumber = invoiceNumber;
             PaymentDueDate = paymentDueDate;
@@ -232,7 +232,7 @@ namespace FactPulse.SDK.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class FactureFacturX {\n");
+            sb.Append("class FacturXInvoice {\n");
             sb.Append("  InvoiceNumber: ").Append(InvoiceNumber).Append("\n");
             sb.Append("  PaymentDueDate: ").Append(PaymentDueDate).Append("\n");
             sb.Append("  SubmissionMode: ").Append(SubmissionMode).Append("\n");
@@ -265,19 +265,19 @@ namespace FactPulse.SDK.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="FactureFacturX" />
+    /// A Json converter for type <see cref="FacturXInvoice" />
     /// </summary>
-    public class FactureFacturXJsonConverter : JsonConverter<FactureFacturX>
+    public class FacturXInvoiceJsonConverter : JsonConverter<FacturXInvoice>
     {
         /// <summary>
-        /// Deserializes json to <see cref="FactureFacturX" />
+        /// Deserializes json to <see cref="FacturXInvoice" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override FactureFacturX Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override FacturXInvoice Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -375,185 +375,185 @@ namespace FactPulse.SDK.Model
             }
 
             if (!invoiceNumber.IsSet)
-                throw new ArgumentException("Property is required for class FactureFacturX.", nameof(invoiceNumber));
+                throw new ArgumentException("Property is required for class FacturXInvoice.", nameof(invoiceNumber));
 
             if (!paymentDueDate.IsSet)
-                throw new ArgumentException("Property is required for class FactureFacturX.", nameof(paymentDueDate));
+                throw new ArgumentException("Property is required for class FacturXInvoice.", nameof(paymentDueDate));
 
             if (!submissionMode.IsSet)
-                throw new ArgumentException("Property is required for class FactureFacturX.", nameof(submissionMode));
+                throw new ArgumentException("Property is required for class FacturXInvoice.", nameof(submissionMode));
 
             if (!recipient.IsSet)
-                throw new ArgumentException("Property is required for class FactureFacturX.", nameof(recipient));
+                throw new ArgumentException("Property is required for class FacturXInvoice.", nameof(recipient));
 
             if (!supplier.IsSet)
-                throw new ArgumentException("Property is required for class FactureFacturX.", nameof(supplier));
+                throw new ArgumentException("Property is required for class FacturXInvoice.", nameof(supplier));
 
             if (!invoicingFramework.IsSet)
-                throw new ArgumentException("Property is required for class FactureFacturX.", nameof(invoicingFramework));
+                throw new ArgumentException("Property is required for class FacturXInvoice.", nameof(invoicingFramework));
 
             if (!references.IsSet)
-                throw new ArgumentException("Property is required for class FactureFacturX.", nameof(references));
+                throw new ArgumentException("Property is required for class FacturXInvoice.", nameof(references));
 
             if (!totals.IsSet)
-                throw new ArgumentException("Property is required for class FactureFacturX.", nameof(totals));
+                throw new ArgumentException("Property is required for class FacturXInvoice.", nameof(totals));
 
             if (invoiceNumber.IsSet && invoiceNumber.Value == null)
-                throw new ArgumentNullException(nameof(invoiceNumber), "Property is not nullable for class FactureFacturX.");
+                throw new ArgumentNullException(nameof(invoiceNumber), "Property is not nullable for class FacturXInvoice.");
 
             if (paymentDueDate.IsSet && paymentDueDate.Value == null)
-                throw new ArgumentNullException(nameof(paymentDueDate), "Property is not nullable for class FactureFacturX.");
+                throw new ArgumentNullException(nameof(paymentDueDate), "Property is not nullable for class FacturXInvoice.");
 
             if (submissionMode.IsSet && submissionMode.Value == null)
-                throw new ArgumentNullException(nameof(submissionMode), "Property is not nullable for class FactureFacturX.");
+                throw new ArgumentNullException(nameof(submissionMode), "Property is not nullable for class FacturXInvoice.");
 
             if (recipient.IsSet && recipient.Value == null)
-                throw new ArgumentNullException(nameof(recipient), "Property is not nullable for class FactureFacturX.");
+                throw new ArgumentNullException(nameof(recipient), "Property is not nullable for class FacturXInvoice.");
 
             if (supplier.IsSet && supplier.Value == null)
-                throw new ArgumentNullException(nameof(supplier), "Property is not nullable for class FactureFacturX.");
+                throw new ArgumentNullException(nameof(supplier), "Property is not nullable for class FacturXInvoice.");
 
             if (invoicingFramework.IsSet && invoicingFramework.Value == null)
-                throw new ArgumentNullException(nameof(invoicingFramework), "Property is not nullable for class FactureFacturX.");
+                throw new ArgumentNullException(nameof(invoicingFramework), "Property is not nullable for class FacturXInvoice.");
 
             if (references.IsSet && references.Value == null)
-                throw new ArgumentNullException(nameof(references), "Property is not nullable for class FactureFacturX.");
+                throw new ArgumentNullException(nameof(references), "Property is not nullable for class FacturXInvoice.");
 
             if (totals.IsSet && totals.Value == null)
-                throw new ArgumentNullException(nameof(totals), "Property is not nullable for class FactureFacturX.");
+                throw new ArgumentNullException(nameof(totals), "Property is not nullable for class FacturXInvoice.");
 
             if (invoiceDate.IsSet && invoiceDate.Value == null)
-                throw new ArgumentNullException(nameof(invoiceDate), "Property is not nullable for class FactureFacturX.");
+                throw new ArgumentNullException(nameof(invoiceDate), "Property is not nullable for class FacturXInvoice.");
 
             if (invoiceLines.IsSet && invoiceLines.Value == null)
-                throw new ArgumentNullException(nameof(invoiceLines), "Property is not nullable for class FactureFacturX.");
+                throw new ArgumentNullException(nameof(invoiceLines), "Property is not nullable for class FacturXInvoice.");
 
             if (vatLines.IsSet && vatLines.Value == null)
-                throw new ArgumentNullException(nameof(vatLines), "Property is not nullable for class FactureFacturX.");
+                throw new ArgumentNullException(nameof(vatLines), "Property is not nullable for class FacturXInvoice.");
 
             if (notes.IsSet && notes.Value == null)
-                throw new ArgumentNullException(nameof(notes), "Property is not nullable for class FactureFacturX.");
+                throw new ArgumentNullException(nameof(notes), "Property is not nullable for class FacturXInvoice.");
 
-            return new FactureFacturX(invoiceNumber.Value!, paymentDueDate.Value!, submissionMode.Value!.Value!, recipient.Value!, supplier.Value!, invoicingFramework.Value!, references.Value!, totals.Value!, invoiceDate, invoiceLines, vatLines, notes, comment, currentUserId, supplementaryAttachments, payee);
+            return new FacturXInvoice(invoiceNumber.Value!, paymentDueDate.Value!, submissionMode.Value!.Value!, recipient.Value!, supplier.Value!, invoicingFramework.Value!, references.Value!, totals.Value!, invoiceDate, invoiceLines, vatLines, notes, comment, currentUserId, supplementaryAttachments, payee);
         }
 
         /// <summary>
-        /// Serializes a <see cref="FactureFacturX" />
+        /// Serializes a <see cref="FacturXInvoice" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="factureFacturX"></param>
+        /// <param name="facturXInvoice"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, FactureFacturX factureFacturX, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, FacturXInvoice facturXInvoice, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, factureFacturX, jsonSerializerOptions);
+            WriteProperties(writer, facturXInvoice, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="FactureFacturX" />
+        /// Serializes the properties of <see cref="FacturXInvoice" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="factureFacturX"></param>
+        /// <param name="facturXInvoice"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, FactureFacturX factureFacturX, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, FacturXInvoice facturXInvoice, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (factureFacturX.InvoiceNumber == null)
-                throw new ArgumentNullException(nameof(factureFacturX.InvoiceNumber), "Property is required for class FactureFacturX.");
+            if (facturXInvoice.InvoiceNumber == null)
+                throw new ArgumentNullException(nameof(facturXInvoice.InvoiceNumber), "Property is required for class FacturXInvoice.");
 
-            if (factureFacturX.PaymentDueDate == null)
-                throw new ArgumentNullException(nameof(factureFacturX.PaymentDueDate), "Property is required for class FactureFacturX.");
+            if (facturXInvoice.PaymentDueDate == null)
+                throw new ArgumentNullException(nameof(facturXInvoice.PaymentDueDate), "Property is required for class FacturXInvoice.");
 
-            if (factureFacturX.Recipient == null)
-                throw new ArgumentNullException(nameof(factureFacturX.Recipient), "Property is required for class FactureFacturX.");
+            if (facturXInvoice.Recipient == null)
+                throw new ArgumentNullException(nameof(facturXInvoice.Recipient), "Property is required for class FacturXInvoice.");
 
-            if (factureFacturX.Supplier == null)
-                throw new ArgumentNullException(nameof(factureFacturX.Supplier), "Property is required for class FactureFacturX.");
+            if (facturXInvoice.Supplier == null)
+                throw new ArgumentNullException(nameof(facturXInvoice.Supplier), "Property is required for class FacturXInvoice.");
 
-            if (factureFacturX.InvoicingFramework == null)
-                throw new ArgumentNullException(nameof(factureFacturX.InvoicingFramework), "Property is required for class FactureFacturX.");
+            if (facturXInvoice.InvoicingFramework == null)
+                throw new ArgumentNullException(nameof(facturXInvoice.InvoicingFramework), "Property is required for class FacturXInvoice.");
 
-            if (factureFacturX.References == null)
-                throw new ArgumentNullException(nameof(factureFacturX.References), "Property is required for class FactureFacturX.");
+            if (facturXInvoice.References == null)
+                throw new ArgumentNullException(nameof(facturXInvoice.References), "Property is required for class FacturXInvoice.");
 
-            if (factureFacturX.Totals == null)
-                throw new ArgumentNullException(nameof(factureFacturX.Totals), "Property is required for class FactureFacturX.");
+            if (facturXInvoice.Totals == null)
+                throw new ArgumentNullException(nameof(facturXInvoice.Totals), "Property is required for class FacturXInvoice.");
 
-            if (factureFacturX.InvoiceDateOption.IsSet && factureFacturX.InvoiceDate == null)
-                throw new ArgumentNullException(nameof(factureFacturX.InvoiceDate), "Property is required for class FactureFacturX.");
+            if (facturXInvoice.InvoiceDateOption.IsSet && facturXInvoice.InvoiceDate == null)
+                throw new ArgumentNullException(nameof(facturXInvoice.InvoiceDate), "Property is required for class FacturXInvoice.");
 
-            if (factureFacturX.InvoiceLinesOption.IsSet && factureFacturX.InvoiceLines == null)
-                throw new ArgumentNullException(nameof(factureFacturX.InvoiceLines), "Property is required for class FactureFacturX.");
+            if (facturXInvoice.InvoiceLinesOption.IsSet && facturXInvoice.InvoiceLines == null)
+                throw new ArgumentNullException(nameof(facturXInvoice.InvoiceLines), "Property is required for class FacturXInvoice.");
 
-            if (factureFacturX.VatLinesOption.IsSet && factureFacturX.VatLines == null)
-                throw new ArgumentNullException(nameof(factureFacturX.VatLines), "Property is required for class FactureFacturX.");
+            if (facturXInvoice.VatLinesOption.IsSet && facturXInvoice.VatLines == null)
+                throw new ArgumentNullException(nameof(facturXInvoice.VatLines), "Property is required for class FacturXInvoice.");
 
-            if (factureFacturX.NotesOption.IsSet && factureFacturX.Notes == null)
-                throw new ArgumentNullException(nameof(factureFacturX.Notes), "Property is required for class FactureFacturX.");
+            if (facturXInvoice.NotesOption.IsSet && facturXInvoice.Notes == null)
+                throw new ArgumentNullException(nameof(facturXInvoice.Notes), "Property is required for class FacturXInvoice.");
 
-            writer.WriteString("invoice_number", factureFacturX.InvoiceNumber);
+            writer.WriteString("invoice_number", facturXInvoice.InvoiceNumber);
 
-            writer.WriteString("payment_due_date", factureFacturX.PaymentDueDate);
+            writer.WriteString("payment_due_date", facturXInvoice.PaymentDueDate);
 
-            var submissionModeRawValue = SubmissionModeValueConverter.ToJsonValue(factureFacturX.SubmissionMode);
+            var submissionModeRawValue = SubmissionModeValueConverter.ToJsonValue(facturXInvoice.SubmissionMode);
             writer.WriteString("submission_mode", submissionModeRawValue);
 
             writer.WritePropertyName("recipient");
-            JsonSerializer.Serialize(writer, factureFacturX.Recipient, jsonSerializerOptions);
+            JsonSerializer.Serialize(writer, facturXInvoice.Recipient, jsonSerializerOptions);
             writer.WritePropertyName("supplier");
-            JsonSerializer.Serialize(writer, factureFacturX.Supplier, jsonSerializerOptions);
+            JsonSerializer.Serialize(writer, facturXInvoice.Supplier, jsonSerializerOptions);
             writer.WritePropertyName("invoicing_framework");
-            JsonSerializer.Serialize(writer, factureFacturX.InvoicingFramework, jsonSerializerOptions);
+            JsonSerializer.Serialize(writer, facturXInvoice.InvoicingFramework, jsonSerializerOptions);
             writer.WritePropertyName("references");
-            JsonSerializer.Serialize(writer, factureFacturX.References, jsonSerializerOptions);
+            JsonSerializer.Serialize(writer, facturXInvoice.References, jsonSerializerOptions);
             writer.WritePropertyName("totals");
-            JsonSerializer.Serialize(writer, factureFacturX.Totals, jsonSerializerOptions);
-            if (factureFacturX.InvoiceDateOption.IsSet)
-                writer.WriteString("invoice_date", factureFacturX.InvoiceDate);
+            JsonSerializer.Serialize(writer, facturXInvoice.Totals, jsonSerializerOptions);
+            if (facturXInvoice.InvoiceDateOption.IsSet)
+                writer.WriteString("invoice_date", facturXInvoice.InvoiceDate);
 
-            if (factureFacturX.InvoiceLinesOption.IsSet)
+            if (facturXInvoice.InvoiceLinesOption.IsSet)
             {
                 writer.WritePropertyName("invoice_lines");
-                JsonSerializer.Serialize(writer, factureFacturX.InvoiceLines, jsonSerializerOptions);
+                JsonSerializer.Serialize(writer, facturXInvoice.InvoiceLines, jsonSerializerOptions);
             }
-            if (factureFacturX.VatLinesOption.IsSet)
+            if (facturXInvoice.VatLinesOption.IsSet)
             {
                 writer.WritePropertyName("vat_lines");
-                JsonSerializer.Serialize(writer, factureFacturX.VatLines, jsonSerializerOptions);
+                JsonSerializer.Serialize(writer, facturXInvoice.VatLines, jsonSerializerOptions);
             }
-            if (factureFacturX.NotesOption.IsSet)
+            if (facturXInvoice.NotesOption.IsSet)
             {
                 writer.WritePropertyName("notes");
-                JsonSerializer.Serialize(writer, factureFacturX.Notes, jsonSerializerOptions);
+                JsonSerializer.Serialize(writer, facturXInvoice.Notes, jsonSerializerOptions);
             }
-            if (factureFacturX.CommentOption.IsSet)
-                if (factureFacturX.CommentOption.Value != null)
-                    writer.WriteString("comment", factureFacturX.Comment);
+            if (facturXInvoice.CommentOption.IsSet)
+                if (facturXInvoice.CommentOption.Value != null)
+                    writer.WriteString("comment", facturXInvoice.Comment);
                 else
                     writer.WriteNull("comment");
 
-            if (factureFacturX.CurrentUserIdOption.IsSet)
-                if (factureFacturX.CurrentUserIdOption.Value != null)
-                    writer.WriteNumber("current_user_id", factureFacturX.CurrentUserIdOption.Value!.Value);
+            if (facturXInvoice.CurrentUserIdOption.IsSet)
+                if (facturXInvoice.CurrentUserIdOption.Value != null)
+                    writer.WriteNumber("current_user_id", facturXInvoice.CurrentUserIdOption.Value!.Value);
                 else
                     writer.WriteNull("current_user_id");
 
-            if (factureFacturX.SupplementaryAttachmentsOption.IsSet)
-                if (factureFacturX.SupplementaryAttachmentsOption.Value != null)
+            if (facturXInvoice.SupplementaryAttachmentsOption.IsSet)
+                if (facturXInvoice.SupplementaryAttachmentsOption.Value != null)
                 {
                     writer.WritePropertyName("supplementary_attachments");
-                    JsonSerializer.Serialize(writer, factureFacturX.SupplementaryAttachments, jsonSerializerOptions);
+                    JsonSerializer.Serialize(writer, facturXInvoice.SupplementaryAttachments, jsonSerializerOptions);
                 }
                 else
                     writer.WriteNull("supplementary_attachments");
-            if (factureFacturX.PayeeOption.IsSet)
-                if (factureFacturX.PayeeOption.Value != null)
+            if (facturXInvoice.PayeeOption.IsSet)
+                if (facturXInvoice.PayeeOption.Value != null)
                 {
                     writer.WritePropertyName("payee");
-                    JsonSerializer.Serialize(writer, factureFacturX.Payee, jsonSerializerOptions);
+                    JsonSerializer.Serialize(writer, facturXInvoice.Payee, jsonSerializerOptions);
                 }
                 else
                     writer.WriteNull("payee");

@@ -59,37 +59,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Enum REPORT for value: REPORT
         /// </summary>
-        REPORT = 6,
-
-        /// <summary>
-        /// Enum CHEQUE2 for value: CHEQUE
-        /// </summary>
-        CHEQUE2 = 7,
-
-        /// <summary>
-        /// Enum PRELEVEMENT2 for value: PRELEVEMENT
-        /// </summary>
-        PRELEVEMENT2 = 8,
-
-        /// <summary>
-        /// Enum VIREMENT2 for value: VIREMENT
-        /// </summary>
-        VIREMENT2 = 9,
-
-        /// <summary>
-        /// Enum ESPECE2 for value: ESPECE
-        /// </summary>
-        ESPECE2 = 10,
-
-        /// <summary>
-        /// Enum AUTRE2 for value: AUTRE
-        /// </summary>
-        AUTRE2 = 11,
-
-        /// <summary>
-        /// Enum REPORT2 for value: REPORT
-        /// </summary>
-        REPORT2 = 12
+        REPORT = 6
     }
 
     /// <summary>
@@ -122,24 +92,6 @@ namespace FactPulse.SDK.Model
             if (value.Equals("REPORT"))
                 return PaymentMeans.REPORT;
 
-            if (value.Equals("CHEQUE"))
-                return PaymentMeans.CHEQUE2;
-
-            if (value.Equals("PRELEVEMENT"))
-                return PaymentMeans.PRELEVEMENT2;
-
-            if (value.Equals("VIREMENT"))
-                return PaymentMeans.VIREMENT2;
-
-            if (value.Equals("ESPECE"))
-                return PaymentMeans.ESPECE2;
-
-            if (value.Equals("AUTRE"))
-                return PaymentMeans.AUTRE2;
-
-            if (value.Equals("REPORT"))
-                return PaymentMeans.REPORT2;
-
             throw new NotImplementedException($"Could not convert value to type PaymentMeans: '{value}'");
         }
 
@@ -168,24 +120,6 @@ namespace FactPulse.SDK.Model
             if (value.Equals("REPORT"))
                 return PaymentMeans.REPORT;
 
-            if (value.Equals("CHEQUE"))
-                return PaymentMeans.CHEQUE2;
-
-            if (value.Equals("PRELEVEMENT"))
-                return PaymentMeans.PRELEVEMENT2;
-
-            if (value.Equals("VIREMENT"))
-                return PaymentMeans.VIREMENT2;
-
-            if (value.Equals("ESPECE"))
-                return PaymentMeans.ESPECE2;
-
-            if (value.Equals("AUTRE"))
-                return PaymentMeans.AUTRE2;
-
-            if (value.Equals("REPORT"))
-                return PaymentMeans.REPORT2;
-
             return null;
         }
 
@@ -213,24 +147,6 @@ namespace FactPulse.SDK.Model
                 return "AUTRE";
 
             if (value == PaymentMeans.REPORT)
-                return "REPORT";
-
-            if (value == PaymentMeans.CHEQUE2)
-                return "CHEQUE";
-
-            if (value == PaymentMeans.PRELEVEMENT2)
-                return "PRELEVEMENT";
-
-            if (value == PaymentMeans.VIREMENT2)
-                return "VIREMENT";
-
-            if (value == PaymentMeans.ESPECE2)
-                return "ESPECE";
-
-            if (value == PaymentMeans.AUTRE2)
-                return "AUTRE";
-
-            if (value == PaymentMeans.REPORT2)
                 return "REPORT";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");

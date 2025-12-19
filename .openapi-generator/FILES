@@ -33,10 +33,10 @@ docs/models/ElectronicAddress.md
 docs/models/EnrichedInvoiceInfo.md
 docs/models/ErrorLevel.md
 docs/models/ErrorSource.md
+docs/models/FacturXInvoice.md
 docs/models/FacturXPDFInfo.md
 docs/models/FactureElectroniqueRestApiSchemasChorusProChorusProCredentials.md
 docs/models/FactureElectroniqueRestApiSchemasProcessingChorusProCredentials.md
-docs/models/FactureFacturX.md
 docs/models/FieldStatus.md
 docs/models/FlowDirection.md
 docs/models/FlowProfile.md
@@ -158,10 +158,10 @@ src/FactPulse.SDK.Test/Model/ElectronicAddressTests.cs
 src/FactPulse.SDK.Test/Model/EnrichedInvoiceInfoTests.cs
 src/FactPulse.SDK.Test/Model/ErrorLevelTests.cs
 src/FactPulse.SDK.Test/Model/ErrorSourceTests.cs
+src/FactPulse.SDK.Test/Model/FacturXInvoiceTests.cs
 src/FactPulse.SDK.Test/Model/FacturXPDFInfoTests.cs
 src/FactPulse.SDK.Test/Model/FactureElectroniqueRestApiSchemasChorusProChorusProCredentialsTests.cs
 src/FactPulse.SDK.Test/Model/FactureElectroniqueRestApiSchemasProcessingChorusProCredentialsTests.cs
-src/FactPulse.SDK.Test/Model/FactureFacturXTests.cs
 src/FactPulse.SDK.Test/Model/FieldStatusTests.cs
 src/FactPulse.SDK.Test/Model/FlowDirectionTests.cs
 src/FactPulse.SDK.Test/Model/FlowProfileTests.cs
@@ -303,10 +303,10 @@ src/FactPulse.SDK/Model/ElectronicAddress.cs
 src/FactPulse.SDK/Model/EnrichedInvoiceInfo.cs
 src/FactPulse.SDK/Model/ErrorLevel.cs
 src/FactPulse.SDK/Model/ErrorSource.cs
+src/FactPulse.SDK/Model/FacturXInvoice.cs
 src/FactPulse.SDK/Model/FacturXPDFInfo.cs
 src/FactPulse.SDK/Model/FactureElectroniqueRestApiSchemasChorusProChorusProCredentials.cs
 src/FactPulse.SDK/Model/FactureElectroniqueRestApiSchemasProcessingChorusProCredentials.cs
-src/FactPulse.SDK/Model/FactureFacturX.cs
 src/FactPulse.SDK/Model/FieldStatus.cs
 src/FactPulse.SDK/Model/FlowDirection.cs
 src/FactPulse.SDK/Model/FlowProfile.cs

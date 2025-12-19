@@ -109,87 +109,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Enum PREPAYMENT_CREDIT_NOTE for value: 503
         /// </summary>
-        PREPAYMENT_CREDIT_NOTE = 16,
-
-        /// <summary>
-        /// Enum _3802 for value: 380
-        /// </summary>
-        _3802 = 17,
-
-        /// <summary>
-        /// Enum _3892 for value: 389
-        /// </summary>
-        _3892 = 18,
-
-        /// <summary>
-        /// Enum _3932 for value: 393
-        /// </summary>
-        _3932 = 19,
-
-        /// <summary>
-        /// Enum _5012 for value: 501
-        /// </summary>
-        _5012 = 20,
-
-        /// <summary>
-        /// Enum _3862 for value: 386
-        /// </summary>
-        _3862 = 21,
-
-        /// <summary>
-        /// Enum _5002 for value: 500
-        /// </summary>
-        _5002 = 22,
-
-        /// <summary>
-        /// Enum _3842 for value: 384
-        /// </summary>
-        _3842 = 23,
-
-        /// <summary>
-        /// Enum _4712 for value: 471
-        /// </summary>
-        _4712 = 24,
-
-        /// <summary>
-        /// Enum _4722 for value: 472
-        /// </summary>
-        _4722 = 25,
-
-        /// <summary>
-        /// Enum _4732 for value: 473
-        /// </summary>
-        _4732 = 26,
-
-        /// <summary>
-        /// Enum _3812 for value: 381
-        /// </summary>
-        _3812 = 27,
-
-        /// <summary>
-        /// Enum _2612 for value: 261
-        /// </summary>
-        _2612 = 28,
-
-        /// <summary>
-        /// Enum _2622 for value: 262
-        /// </summary>
-        _2622 = 29,
-
-        /// <summary>
-        /// Enum _3962 for value: 396
-        /// </summary>
-        _3962 = 30,
-
-        /// <summary>
-        /// Enum _5022 for value: 502
-        /// </summary>
-        _5022 = 31,
-
-        /// <summary>
-        /// Enum _5032 for value: 503
-        /// </summary>
-        _5032 = 32
+        PREPAYMENT_CREDIT_NOTE = 16
     }
 
     /// <summary>
@@ -252,54 +172,6 @@ namespace FactPulse.SDK.Model
             if (value.Equals("503"))
                 return InvoiceTypeCode.PREPAYMENT_CREDIT_NOTE;
 
-            if (value.Equals("380"))
-                return InvoiceTypeCode._3802;
-
-            if (value.Equals("389"))
-                return InvoiceTypeCode._3892;
-
-            if (value.Equals("393"))
-                return InvoiceTypeCode._3932;
-
-            if (value.Equals("501"))
-                return InvoiceTypeCode._5012;
-
-            if (value.Equals("386"))
-                return InvoiceTypeCode._3862;
-
-            if (value.Equals("500"))
-                return InvoiceTypeCode._5002;
-
-            if (value.Equals("384"))
-                return InvoiceTypeCode._3842;
-
-            if (value.Equals("471"))
-                return InvoiceTypeCode._4712;
-
-            if (value.Equals("472"))
-                return InvoiceTypeCode._4722;
-
-            if (value.Equals("473"))
-                return InvoiceTypeCode._4732;
-
-            if (value.Equals("381"))
-                return InvoiceTypeCode._3812;
-
-            if (value.Equals("261"))
-                return InvoiceTypeCode._2612;
-
-            if (value.Equals("262"))
-                return InvoiceTypeCode._2622;
-
-            if (value.Equals("396"))
-                return InvoiceTypeCode._3962;
-
-            if (value.Equals("502"))
-                return InvoiceTypeCode._5022;
-
-            if (value.Equals("503"))
-                return InvoiceTypeCode._5032;
-
             throw new NotImplementedException($"Could not convert value to type InvoiceTypeCode: '{value}'");
         }
 
@@ -358,54 +230,6 @@ namespace FactPulse.SDK.Model
             if (value.Equals("503"))
                 return InvoiceTypeCode.PREPAYMENT_CREDIT_NOTE;
 
-            if (value.Equals("380"))
-                return InvoiceTypeCode._3802;
-
-            if (value.Equals("389"))
-                return InvoiceTypeCode._3892;
-
-            if (value.Equals("393"))
-                return InvoiceTypeCode._3932;
-
-            if (value.Equals("501"))
-                return InvoiceTypeCode._5012;
-
-            if (value.Equals("386"))
-                return InvoiceTypeCode._3862;
-
-            if (value.Equals("500"))
-                return InvoiceTypeCode._5002;
-
-            if (value.Equals("384"))
-                return InvoiceTypeCode._3842;
-
-            if (value.Equals("471"))
-                return InvoiceTypeCode._4712;
-
-            if (value.Equals("472"))
-                return InvoiceTypeCode._4722;
-
-            if (value.Equals("473"))
-                return InvoiceTypeCode._4732;
-
-            if (value.Equals("381"))
-                return InvoiceTypeCode._3812;
-
-            if (value.Equals("261"))
-                return InvoiceTypeCode._2612;
-
-            if (value.Equals("262"))
-                return InvoiceTypeCode._2622;
-
-            if (value.Equals("396"))
-                return InvoiceTypeCode._3962;
-
-            if (value.Equals("502"))
-                return InvoiceTypeCode._5022;
-
-            if (value.Equals("503"))
-                return InvoiceTypeCode._5032;
-
             return null;
         }
 
@@ -463,54 +287,6 @@ namespace FactPulse.SDK.Model
                 return "502";
 
             if (value == InvoiceTypeCode.PREPAYMENT_CREDIT_NOTE)
-                return "503";
-
-            if (value == InvoiceTypeCode._3802)
-                return "380";
-
-            if (value == InvoiceTypeCode._3892)
-                return "389";
-
-            if (value == InvoiceTypeCode._3932)
-                return "393";
-
-            if (value == InvoiceTypeCode._5012)
-                return "501";
-
-            if (value == InvoiceTypeCode._3862)
-                return "386";
-
-            if (value == InvoiceTypeCode._5002)
-                return "500";
-
-            if (value == InvoiceTypeCode._3842)
-                return "384";
-
-            if (value == InvoiceTypeCode._4712)
-                return "471";
-
-            if (value == InvoiceTypeCode._4722)
-                return "472";
-
-            if (value == InvoiceTypeCode._4732)
-                return "473";
-
-            if (value == InvoiceTypeCode._3812)
-                return "381";
-
-            if (value == InvoiceTypeCode._2612)
-                return "261";
-
-            if (value == InvoiceTypeCode._2622)
-                return "262";
-
-            if (value == InvoiceTypeCode._3962)
-                return "396";
-
-            if (value == InvoiceTypeCode._5022)
-                return "502";
-
-            if (value == InvoiceTypeCode._5032)
                 return "503";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");

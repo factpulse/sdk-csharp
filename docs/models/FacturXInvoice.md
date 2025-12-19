@@ -1,4 +1,4 @@
-# FactPulse.SDK.Model.FactureFacturX
+# FactPulse.SDK.Model.FacturXInvoice
 Data model for an invoice to be converted to Factur-X.
 
 ## Properties

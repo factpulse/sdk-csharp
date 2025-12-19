@@ -49,27 +49,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Enum SANSTVA for value: SANS_TVA
         /// </summary>
-        SANSTVA = 4,
-
-        /// <summary>
-        /// Enum TVASURDEBIT2 for value: TVA_SUR_DEBIT
-        /// </summary>
-        TVASURDEBIT2 = 5,
-
-        /// <summary>
-        /// Enum TVASURENCAISSEMENT2 for value: TVA_SUR_ENCAISSEMENT
-        /// </summary>
-        TVASURENCAISSEMENT2 = 6,
-
-        /// <summary>
-        /// Enum EXONERATION2 for value: EXONERATION
-        /// </summary>
-        EXONERATION2 = 7,
-
-        /// <summary>
-        /// Enum SANSTVA2 for value: SANS_TVA
-        /// </summary>
-        SANSTVA2 = 8
+        SANSTVA = 4
     }
 
     /// <summary>
@@ -96,18 +76,6 @@ namespace FactPulse.SDK.Model
             if (value.Equals("SANS_TVA"))
                 return VATAccountingCode.SANSTVA;
 
-            if (value.Equals("TVA_SUR_DEBIT"))
-                return VATAccountingCode.TVASURDEBIT2;
-
-            if (value.Equals("TVA_SUR_ENCAISSEMENT"))
-                return VATAccountingCode.TVASURENCAISSEMENT2;
-
-            if (value.Equals("EXONERATION"))
-                return VATAccountingCode.EXONERATION2;
-
-            if (value.Equals("SANS_TVA"))
-                return VATAccountingCode.SANSTVA2;
-
             throw new NotImplementedException($"Could not convert value to type VATAccountingCode: '{value}'");
         }
 
@@ -130,18 +98,6 @@ namespace FactPulse.SDK.Model
             if (value.Equals("SANS_TVA"))
                 return VATAccountingCode.SANSTVA;
 
-            if (value.Equals("TVA_SUR_DEBIT"))
-                return VATAccountingCode.TVASURDEBIT2;
-
-            if (value.Equals("TVA_SUR_ENCAISSEMENT"))
-                return VATAccountingCode.TVASURENCAISSEMENT2;
-
-            if (value.Equals("EXONERATION"))
-                return VATAccountingCode.EXONERATION2;
-
-            if (value.Equals("SANS_TVA"))
-                return VATAccountingCode.SANSTVA2;
-
             return null;
         }
 
@@ -163,18 +119,6 @@ namespace FactPulse.SDK.Model
                 return "EXONERATION";
 
             if (value == VATAccountingCode.SANSTVA)
-                return "SANS_TVA";
-
-            if (value == VATAccountingCode.TVASURDEBIT2)
-                return "TVA_SUR_DEBIT";
-
-            if (value == VATAccountingCode.TVASURENCAISSEMENT2)
-                return "TVA_SUR_ENCAISSEMENT";
-
-            if (value == VATAccountingCode.EXONERATION2)
-                return "EXONERATION";
-
-            if (value == VATAccountingCode.SANSTVA2)
                 return "SANS_TVA";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
