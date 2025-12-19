@@ -55,6 +55,7 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new AllowanceReasonCodeJsonConverter());
             _jsonOptions.Converters.Add(new AllowanceReasonCodeNullableJsonConverter());
             _jsonOptions.Converters.Add(new AmountDueJsonConverter());
+            _jsonOptions.Converters.Add(new AsyncTaskStatusJsonConverter());
             _jsonOptions.Converters.Add(new BoundingBoxSchemaJsonConverter());
             _jsonOptions.Converters.Add(new CeleryStatusJsonConverter());
             _jsonOptions.Converters.Add(new CeleryStatusNullableJsonConverter());
@@ -157,7 +158,6 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new SupplementaryAttachmentJsonConverter());
             _jsonOptions.Converters.Add(new SupplierJsonConverter());
             _jsonOptions.Converters.Add(new TaskResponseJsonConverter());
-            _jsonOptions.Converters.Add(new TaskStatusJsonConverter());
             _jsonOptions.Converters.Add(new TaxableAmountJsonConverter());
             _jsonOptions.Converters.Add(new TotalGrossAmountJsonConverter());
             _jsonOptions.Converters.Add(new TotalNetAmountJsonConverter());

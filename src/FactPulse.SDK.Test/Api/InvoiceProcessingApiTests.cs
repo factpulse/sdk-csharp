@@ -87,7 +87,7 @@ namespace FactPulse.SDK.Test.Api
             string taskId = default!;
             var response = await _instance.GetTaskStatusApiV1ProcessingTasksTaskIdStatusGetAsync(taskId);
             var model = response.Ok();
-            Assert.IsType<TaskStatus>(model);
+            Assert.IsType<AsyncTaskStatus>(model);
         }
 
         /// <summary>

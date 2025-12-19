@@ -28,16 +28,16 @@ namespace FactPulse.SDK.Model
     /// <summary>
     /// Complete description of an async task status.  The &#x60;status&#x60; field indicates the Celery state of the task. When &#x60;status&#x3D;\&quot;SUCCESS\&quot;&#x60;, check &#x60;result.status&#x60; for the business result (\&quot;SUCCESS\&quot; or \&quot;ERROR\&quot;).
     /// </summary>
-    public partial class TaskStatus : IValidatableObject
+    public partial class AsyncTaskStatus : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TaskStatus" /> class.
+        /// Initializes a new instance of the <see cref="AsyncTaskStatus" /> class.
         /// </summary>
         /// <param name="taskId">Unique task identifier</param>
         /// <param name="status">Celery task status (PENDING, STARTED, SUCCESS, FAILURE, RETRY)</param>
         /// <param name="result">result</param>
         [JsonConstructor]
-        public TaskStatus(string taskId, CeleryStatus status, Option<Dictionary<string, Object>?> result = default)
+        public AsyncTaskStatus(string taskId, CeleryStatus status, Option<Dictionary<string, Object>?> result = default)
         {
             TaskId = taskId;
             Status = status;
@@ -81,7 +81,7 @@ namespace FactPulse.SDK.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class TaskStatus {\n");
+            sb.Append("class AsyncTaskStatus {\n");
             sb.Append("  TaskId: ").Append(TaskId).Append("\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  Result: ").Append(Result).Append("\n");
@@ -101,19 +101,19 @@ namespace FactPulse.SDK.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="TaskStatus" />
+    /// A Json converter for type <see cref="AsyncTaskStatus" />
     /// </summary>
-    public class TaskStatusJsonConverter : JsonConverter<TaskStatus>
+    public class AsyncTaskStatusJsonConverter : JsonConverter<AsyncTaskStatus>
     {
         /// <summary>
-        /// Deserializes json to <see cref="TaskStatus" />
+        /// Deserializes json to <see cref="AsyncTaskStatus" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override TaskStatus Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override AsyncTaskStatus Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -159,57 +159,57 @@ namespace FactPulse.SDK.Model
             }
 
             if (!taskId.IsSet)
-                throw new ArgumentException("Property is required for class TaskStatus.", nameof(taskId));
+                throw new ArgumentException("Property is required for class AsyncTaskStatus.", nameof(taskId));
 
             if (!status.IsSet)
-                throw new ArgumentException("Property is required for class TaskStatus.", nameof(status));
+                throw new ArgumentException("Property is required for class AsyncTaskStatus.", nameof(status));
 
             if (taskId.IsSet && taskId.Value == null)
-                throw new ArgumentNullException(nameof(taskId), "Property is not nullable for class TaskStatus.");
+                throw new ArgumentNullException(nameof(taskId), "Property is not nullable for class AsyncTaskStatus.");
 
             if (status.IsSet && status.Value == null)
-                throw new ArgumentNullException(nameof(status), "Property is not nullable for class TaskStatus.");
+                throw new ArgumentNullException(nameof(status), "Property is not nullable for class AsyncTaskStatus.");
 
-            return new TaskStatus(taskId.Value!, status.Value!.Value!, result);
+            return new AsyncTaskStatus(taskId.Value!, status.Value!.Value!, result);
         }
 
         /// <summary>
-        /// Serializes a <see cref="TaskStatus" />
+        /// Serializes a <see cref="AsyncTaskStatus" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="taskStatus"></param>
+        /// <param name="asyncTaskStatus"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, TaskStatus taskStatus, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, AsyncTaskStatus asyncTaskStatus, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, taskStatus, jsonSerializerOptions);
+            WriteProperties(writer, asyncTaskStatus, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="TaskStatus" />
+        /// Serializes the properties of <see cref="AsyncTaskStatus" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="taskStatus"></param>
+        /// <param name="asyncTaskStatus"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, TaskStatus taskStatus, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, AsyncTaskStatus asyncTaskStatus, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (taskStatus.TaskId == null)
-                throw new ArgumentNullException(nameof(taskStatus.TaskId), "Property is required for class TaskStatus.");
+            if (asyncTaskStatus.TaskId == null)
+                throw new ArgumentNullException(nameof(asyncTaskStatus.TaskId), "Property is required for class AsyncTaskStatus.");
 
-            writer.WriteString("taskId", taskStatus.TaskId);
+            writer.WriteString("taskId", asyncTaskStatus.TaskId);
 
-            var statusRawValue = CeleryStatusValueConverter.ToJsonValue(taskStatus.Status);
+            var statusRawValue = CeleryStatusValueConverter.ToJsonValue(asyncTaskStatus.Status);
             writer.WriteString("status", statusRawValue);
 
-            if (taskStatus.ResultOption.IsSet)
-                if (taskStatus.ResultOption.Value != null)
+            if (asyncTaskStatus.ResultOption.IsSet)
+                if (asyncTaskStatus.ResultOption.Value != null)
                 {
                     writer.WritePropertyName("result");
-                    JsonSerializer.Serialize(writer, taskStatus.Result, jsonSerializerOptions);
+                    JsonSerializer.Serialize(writer, asyncTaskStatus.Result, jsonSerializerOptions);
                 }
                 else
                     writer.WriteNull("result");

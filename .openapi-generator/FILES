@@ -21,6 +21,7 @@ docs/models/APIProfile.md
 docs/models/AcknowledgmentStatus.md
 docs/models/AllowanceReasonCode.md
 docs/models/AmountDue.md
+docs/models/AsyncTaskStatus.md
 docs/models/BoundingBoxSchema.md
 docs/models/CeleryStatus.md
 docs/models/CertificateInfoResponse.md
@@ -106,7 +107,6 @@ docs/models/SubmitVatAmount.md
 docs/models/SupplementaryAttachment.md
 docs/models/Supplier.md
 docs/models/TaskResponse.md
-docs/models/TaskStatus.md
 docs/models/TaxableAmount.md
 docs/models/TotalGrossAmount.md
 docs/models/TotalNetAmount.md
@@ -146,6 +146,7 @@ src/FactPulse.SDK.Test/Model/APIProfileTests.cs
 src/FactPulse.SDK.Test/Model/AcknowledgmentStatusTests.cs
 src/FactPulse.SDK.Test/Model/AllowanceReasonCodeTests.cs
 src/FactPulse.SDK.Test/Model/AmountDueTests.cs
+src/FactPulse.SDK.Test/Model/AsyncTaskStatusTests.cs
 src/FactPulse.SDK.Test/Model/BoundingBoxSchemaTests.cs
 src/FactPulse.SDK.Test/Model/CeleryStatusTests.cs
 src/FactPulse.SDK.Test/Model/CertificateInfoResponseTests.cs
@@ -231,7 +232,6 @@ src/FactPulse.SDK.Test/Model/SubmitVatAmountTests.cs
 src/FactPulse.SDK.Test/Model/SupplementaryAttachmentTests.cs
 src/FactPulse.SDK.Test/Model/SupplierTests.cs
 src/FactPulse.SDK.Test/Model/TaskResponseTests.cs
-src/FactPulse.SDK.Test/Model/TaskStatusTests.cs
 src/FactPulse.SDK.Test/Model/TaxableAmountTests.cs
 src/FactPulse.SDK.Test/Model/TotalGrossAmountTests.cs
 src/FactPulse.SDK.Test/Model/TotalNetAmountTests.cs
@@ -291,6 +291,7 @@ src/FactPulse.SDK/Model/APIProfile.cs
 src/FactPulse.SDK/Model/AcknowledgmentStatus.cs
 src/FactPulse.SDK/Model/AllowanceReasonCode.cs
 src/FactPulse.SDK/Model/AmountDue.cs
+src/FactPulse.SDK/Model/AsyncTaskStatus.cs
 src/FactPulse.SDK/Model/BoundingBoxSchema.cs
 src/FactPulse.SDK/Model/CeleryStatus.cs
 src/FactPulse.SDK/Model/CertificateInfoResponse.cs
@@ -376,7 +377,6 @@ src/FactPulse.SDK/Model/SubmitVatAmount.cs
 src/FactPulse.SDK/Model/SupplementaryAttachment.cs
 src/FactPulse.SDK/Model/Supplier.cs
 src/FactPulse.SDK/Model/TaskResponse.cs
-src/FactPulse.SDK/Model/TaskStatus.cs
 src/FactPulse.SDK/Model/TaxableAmount.cs
 src/FactPulse.SDK/Model/TotalGrossAmount.cs
 src/FactPulse.SDK/Model/TotalNetAmount.cs

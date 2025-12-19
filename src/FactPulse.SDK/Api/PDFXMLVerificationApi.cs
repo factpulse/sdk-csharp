@@ -181,7 +181,7 @@ namespace FactPulse.SDK.Api
     /// <summary>
     /// The <see cref="IGetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGetApiResponse"/>
     /// </summary>
-    public interface IGetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGetApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.TaskStatus?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>
+    public interface IGetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGetApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.AsyncTaskStatus?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -199,7 +199,7 @@ namespace FactPulse.SDK.Api
     /// <summary>
     /// The <see cref="IGetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet_0ApiResponse"/>
     /// </summary>
-    public interface IGetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet_0ApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.TaskStatus?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>
+    public interface IGetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet_0ApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.AsyncTaskStatus?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -697,11 +697,11 @@ namespace FactPulse.SDK.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public FactPulse.SDK.Model.TaskStatus? Ok()
+            public FactPulse.SDK.Model.AsyncTaskStatus? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.TaskStatus>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.AsyncTaskStatus>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -710,7 +710,7 @@ namespace FactPulse.SDK.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out FactPulse.SDK.Model.TaskStatus? result)
+            public bool TryOk([NotNullWhen(true)]out FactPulse.SDK.Model.AsyncTaskStatus? result)
             {
                 result = null;
 
@@ -988,11 +988,11 @@ namespace FactPulse.SDK.Api
             /// Deserializes the response if the response is 200 Ok
             /// </summary>
             /// <returns></returns>
-            public FactPulse.SDK.Model.TaskStatus? Ok()
+            public FactPulse.SDK.Model.AsyncTaskStatus? Ok()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.TaskStatus>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.AsyncTaskStatus>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -1001,7 +1001,7 @@ namespace FactPulse.SDK.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out FactPulse.SDK.Model.TaskStatus? result)
+            public bool TryOk([NotNullWhen(true)]out FactPulse.SDK.Model.AsyncTaskStatus? result)
             {
                 result = null;
 

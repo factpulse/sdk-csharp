@@ -99,7 +99,7 @@ Generates a self-signed X.509 certificate for PDF electronic signature testing. 
 
 <a id="gettaskstatusapiv1processingtaskstaskidstatusget"></a>
 # **GetTaskStatusApiV1ProcessingTasksTaskIdStatusGet**
-> TaskStatus GetTaskStatusApiV1ProcessingTasksTaskIdStatusGet (string taskId)
+> AsyncTaskStatus GetTaskStatusApiV1ProcessingTasksTaskIdStatusGet (string taskId)
 
 Get task generation status
 
@@ -114,7 +114,7 @@ Retrieves the progress status of an invoice generation task.  ## Possible states
 
 ### Return type
 
-[**TaskStatus**](TaskStatus.md)
+[**AsyncTaskStatus**](AsyncTaskStatus.md)
 
 ### Authorization
 

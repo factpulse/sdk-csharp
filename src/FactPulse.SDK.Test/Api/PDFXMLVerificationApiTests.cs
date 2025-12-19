@@ -59,7 +59,7 @@ namespace FactPulse.SDK.Test.Api
             string taskId = default!;
             var response = await _instance.GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGetAsync(taskId);
             var model = response.Ok();
-            Assert.IsType<TaskStatus>(model);
+            Assert.IsType<AsyncTaskStatus>(model);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace FactPulse.SDK.Test.Api
             string taskId = default!;
             var response = await _instance.GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet_0Async(taskId);
             var model = response.Ok();
-            Assert.IsType<TaskStatus>(model);
+            Assert.IsType<AsyncTaskStatus>(model);
         }
 
         /// <summary>

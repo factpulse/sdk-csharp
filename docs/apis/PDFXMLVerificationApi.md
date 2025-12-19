@@ -13,7 +13,7 @@ All URIs are relative to *http://localhost*
 
 <a id="getverificationstatusapiv1verificationverifyasynctaskidstatusget"></a>
 # **GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet**
-> TaskStatus GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet (string taskId)
+> AsyncTaskStatus GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet (string taskId)
 
 Get status of an asynchronous verification
 
@@ -28,7 +28,7 @@ Retrieves the status and result of an asynchronous verification task.  **Possibl
 
 ### Return type
 
-[**TaskStatus**](TaskStatus.md)
+[**AsyncTaskStatus**](AsyncTaskStatus.md)
 
 ### Authorization
 
@@ -50,7 +50,7 @@ Retrieves the status and result of an asynchronous verification task.  **Possibl
 
 <a id="getverificationstatusapiv1verificationverifyasynctaskidstatusget_0"></a>
 # **GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet_0**
-> TaskStatus GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet_0 (string taskId)
+> AsyncTaskStatus GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet_0 (string taskId)
 
 Get status of an asynchronous verification
 
@@ -65,7 +65,7 @@ Retrieves the status and result of an asynchronous verification task.  **Possibl
 
 ### Return type
 
-[**TaskStatus**](TaskStatus.md)
+[**AsyncTaskStatus**](AsyncTaskStatus.md)
 
 ### Authorization
 
