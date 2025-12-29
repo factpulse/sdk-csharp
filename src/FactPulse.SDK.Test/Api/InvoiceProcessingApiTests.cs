@@ -57,7 +57,7 @@ namespace FactPulse.SDK.Test.Api
         public async Task GenerateInvoiceApiV1ProcessingGenerateInvoicePostAsyncTest()
         {
             string invoiceData = default!;
-            Client.Option<FacturXProfile> profile = default!;
+            Client.Option<APIProfile> profile = default!;
             Client.Option<OutputFormat> outputFormat = default!;
             Client.Option<bool> autoEnrich = default!;
             Client.Option<System.IO.Stream?> sourcePdf = default!;
@@ -157,7 +157,7 @@ namespace FactPulse.SDK.Test.Api
         public async Task ValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostAsyncTest()
         {
             System.IO.Stream pdfFile = default!;
-            Client.Option<FacturXProfile?> profile = default!;
+            Client.Option<APIProfile?> profile = default!;
             Client.Option<bool> useVerapdf = default!;
             var response = await _instance.ValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostAsync(pdfFile, profile, useVerapdf);
             var model = response.Ok();
@@ -171,7 +171,7 @@ namespace FactPulse.SDK.Test.Api
         public async Task ValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostAsyncTest()
         {
             System.IO.Stream pdfFile = default!;
-            Client.Option<FacturXProfile?> profile = default!;
+            Client.Option<APIProfile?> profile = default!;
             Client.Option<bool> useVerapdf = default!;
             var response = await _instance.ValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostAsync(pdfFile, profile, useVerapdf);
             var model = response.Accepted();
@@ -197,7 +197,7 @@ namespace FactPulse.SDK.Test.Api
         public async Task ValidateXmlApiV1ProcessingValidateXmlPostAsyncTest()
         {
             System.IO.Stream xmlFile = default!;
-            Client.Option<FacturXProfile> profile = default!;
+            Client.Option<APIProfile> profile = default!;
             var response = await _instance.ValidateXmlApiV1ProcessingValidateXmlPostAsync(xmlFile, profile);
             var model = response.Ok();
             Assert.IsType<ValidationSuccessResponse>(model);

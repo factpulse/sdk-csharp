@@ -2,7 +2,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 VisualStudioVersion = 12.0.0.0
 MinimumVisualStudioVersion = 10.0.0.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactPulse.SDK", "src\FactPulse.SDK\FactPulse.SDK.csproj", "{954297A4-2087-4FC5-BE85-BE25F2D8CFAB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactPulse.SDK", "src\FactPulse.SDK\FactPulse.SDK.csproj", "{E371ACD3-6A3F-4ED9-8876-2704032DACCC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactPulse.SDK.Test", "src\FactPulse.SDK.Test\FactPulse.SDK.Test.csproj", "{19F1DEBC-DE5E-4517-8062-F000CD499087}"
 EndProject
@@ -12,10 +12,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{954297A4-2087-4FC5-BE85-BE25F2D8CFAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{954297A4-2087-4FC5-BE85-BE25F2D8CFAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{954297A4-2087-4FC5-BE85-BE25F2D8CFAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{954297A4-2087-4FC5-BE85-BE25F2D8CFAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E371ACD3-6A3F-4ED9-8876-2704032DACCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E371ACD3-6A3F-4ED9-8876-2704032DACCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E371ACD3-6A3F-4ED9-8876-2704032DACCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E371ACD3-6A3F-4ED9-8876-2704032DACCC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19F1DEBC-DE5E-4517-8062-F000CD499087}.Release|Any CPU.ActiveCfg = Release|Any CPU

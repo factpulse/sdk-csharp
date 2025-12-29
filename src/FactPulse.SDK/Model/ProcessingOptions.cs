@@ -38,7 +38,7 @@ namespace FactPulse.SDK.Model
         /// <param name="validateXml">Validate Factur-X XML with Schematron (default to true)</param>
         /// <param name="verifyDestinationParameters">Verify required parameters for destination (e.g., service_code for Chorus) (default to true)</param>
         [JsonConstructor]
-        public ProcessingOptions(Option<FacturXProfile?> facturxProfile = default, Option<bool?> autoEnrich = default, Option<bool?> validateXml = default, Option<bool?> verifyDestinationParameters = default)
+        public ProcessingOptions(Option<APIProfile?> facturxProfile = default, Option<bool?> autoEnrich = default, Option<bool?> validateXml = default, Option<bool?> verifyDestinationParameters = default)
         {
             FacturxProfileOption = facturxProfile;
             AutoEnrichOption = autoEnrich;
@@ -54,14 +54,14 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<FacturXProfile?> FacturxProfileOption { get; private set; }
+        public Option<APIProfile?> FacturxProfileOption { get; private set; }
 
         /// <summary>
         /// Factur-X profile to use
         /// </summary>
         /// <value>Factur-X profile to use</value>
         [JsonPropertyName("facturxProfile")]
-        public FacturXProfile? FacturxProfile { get { return this.FacturxProfileOption; } set { this.FacturxProfileOption = new(value); } }
+        public APIProfile? FacturxProfile { get { return this.FacturxProfileOption; } set { this.FacturxProfileOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of AutoEnrich
@@ -154,7 +154,7 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<FacturXProfile?> facturxProfile = default;
+            Option<APIProfile?> facturxProfile = default;
             Option<bool?> autoEnrich = default;
             Option<bool?> validateXml = default;
             Option<bool?> verifyDestinationParameters = default;
@@ -177,7 +177,7 @@ namespace FactPulse.SDK.Model
                         case "facturxProfile":
                             string? facturxProfileRawValue = utf8JsonReader.GetString();
                             if (facturxProfileRawValue != null)
-                                facturxProfile = new Option<FacturXProfile?>(FacturXProfileValueConverter.FromStringOrDefault(facturxProfileRawValue));
+                                facturxProfile = new Option<APIProfile?>(APIProfileValueConverter.FromStringOrDefault(facturxProfileRawValue));
                             break;
                         case "autoEnrich":
                             autoEnrich = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
@@ -235,7 +235,7 @@ namespace FactPulse.SDK.Model
         {
             if (processingOptions.FacturxProfileOption.IsSet)
             {
-                var facturxProfileRawValue = FacturXProfileValueConverter.ToJsonValue(processingOptions.FacturxProfile!.Value);
+                var facturxProfileRawValue = APIProfileValueConverter.ToJsonValue(processingOptions.FacturxProfile!.Value);
                 writer.WriteString("facturxProfile", facturxProfileRawValue);
             }
             if (processingOptions.AutoEnrichOption.IsSet)

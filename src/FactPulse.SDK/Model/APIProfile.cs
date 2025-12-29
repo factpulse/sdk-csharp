@@ -26,10 +26,10 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Profil Factur-X pour la reponse API.  Note: Simplifie par rapport a utils/facturx.FacturXProfile qui contient aussi les configurations XSLT. Celui-ci est pour l&#39;API.
+    /// Factur-X profile for API responses.  Note: Simplified compared to utils/facturx.ProfilFacturX which also contains XSLT configurations. This one is for the API.
     /// </summary>
-    /// <value>Profil Factur-X pour la reponse API.  Note: Simplifie par rapport a utils/facturx.FacturXProfile qui contient aussi les configurations XSLT. Celui-ci est pour l&#39;API.</value>
-    public enum FacturXProfile
+    /// <value>Factur-X profile for API responses.  Note: Simplified compared to utils/facturx.ProfilFacturX which also contains XSLT configurations. This one is for the API.</value>
+    public enum APIProfile
     {
         /// <summary>
         /// Enum MINIMUM for value: MINIMUM
@@ -53,72 +53,72 @@ namespace FactPulse.SDK.Model
     }
 
     /// <summary>
-    /// Converts <see cref="FacturXProfile"/> to and from the JSON value
+    /// Converts <see cref="APIProfile"/> to and from the JSON value
     /// </summary>
-    public static class FacturXProfileValueConverter
+    public static class APIProfileValueConverter
     {
         /// <summary>
-        /// Parses a given value to <see cref="FacturXProfile"/>
+        /// Parses a given value to <see cref="APIProfile"/>
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static FacturXProfile FromString(string value)
+        public static APIProfile FromString(string value)
         {
             if (value.Equals("MINIMUM"))
-                return FacturXProfile.MINIMUM;
+                return APIProfile.MINIMUM;
 
             if (value.Equals("BASIC"))
-                return FacturXProfile.BASIC;
+                return APIProfile.BASIC;
 
             if (value.Equals("EN16931"))
-                return FacturXProfile.EN16931;
+                return APIProfile.EN16931;
 
             if (value.Equals("EXTENDED"))
-                return FacturXProfile.EXTENDED;
+                return APIProfile.EXTENDED;
 
-            throw new NotImplementedException($"Could not convert value to type FacturXProfile: '{value}'");
+            throw new NotImplementedException($"Could not convert value to type APIProfile: '{value}'");
         }
 
         /// <summary>
-        /// Parses a given value to <see cref="FacturXProfile"/>
+        /// Parses a given value to <see cref="APIProfile"/>
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static FacturXProfile? FromStringOrDefault(string value)
+        public static APIProfile? FromStringOrDefault(string value)
         {
             if (value.Equals("MINIMUM"))
-                return FacturXProfile.MINIMUM;
+                return APIProfile.MINIMUM;
 
             if (value.Equals("BASIC"))
-                return FacturXProfile.BASIC;
+                return APIProfile.BASIC;
 
             if (value.Equals("EN16931"))
-                return FacturXProfile.EN16931;
+                return APIProfile.EN16931;
 
             if (value.Equals("EXTENDED"))
-                return FacturXProfile.EXTENDED;
+                return APIProfile.EXTENDED;
 
             return null;
         }
 
         /// <summary>
-        /// Converts the <see cref="FacturXProfile"/> to the json value
+        /// Converts the <see cref="APIProfile"/> to the json value
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public static string ToJsonValue(FacturXProfile value)
+        public static string ToJsonValue(APIProfile value)
         {
-            if (value == FacturXProfile.MINIMUM)
+            if (value == APIProfile.MINIMUM)
                 return "MINIMUM";
 
-            if (value == FacturXProfile.BASIC)
+            if (value == APIProfile.BASIC)
                 return "BASIC";
 
-            if (value == FacturXProfile.EN16931)
+            if (value == APIProfile.EN16931)
                 return "EN16931";
 
-            if (value == FacturXProfile.EXTENDED)
+            if (value == APIProfile.EXTENDED)
                 return "EXTENDED";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
@@ -126,10 +126,10 @@ namespace FactPulse.SDK.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="FacturXProfile"/>
+    /// A Json converter for type <see cref="APIProfile"/>
     /// </summary>
     /// <exception cref="NotImplementedException"></exception>
-    public class FacturXProfileJsonConverter : JsonConverter<FacturXProfile>
+    public class APIProfileJsonConverter : JsonConverter<APIProfile>
     {
         /// <summary>
         /// Returns a  from the Json object
@@ -138,13 +138,13 @@ namespace FactPulse.SDK.Model
         /// <param name="typeToConvert"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public override FacturXProfile Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override APIProfile Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             string? rawValue = reader.GetString();
 
-            FacturXProfile? result = rawValue == null
+            APIProfile? result = rawValue == null
                 ? null
-                : FacturXProfileValueConverter.FromStringOrDefault(rawValue);
+                : APIProfileValueConverter.FromStringOrDefault(rawValue);
 
             if (result != null)
                 return result.Value;
@@ -153,36 +153,36 @@ namespace FactPulse.SDK.Model
         }
 
         /// <summary>
-        /// Writes the FacturXProfile to the json writer
+        /// Writes the APIProfile to the json writer
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="facturXProfile"></param>
+        /// <param name="aPIProfile"></param>
         /// <param name="options"></param>
-        public override void Write(Utf8JsonWriter writer, FacturXProfile facturXProfile, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, APIProfile aPIProfile, JsonSerializerOptions options)
         {
-            writer.WriteStringValue(FacturXProfileValueConverter.ToJsonValue(facturXProfile).ToString());
+            writer.WriteStringValue(APIProfileValueConverter.ToJsonValue(aPIProfile).ToString());
         }
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="FacturXProfile"/>
+    /// A Json converter for type <see cref="APIProfile"/>
     /// </summary>
-    public class FacturXProfileNullableJsonConverter : JsonConverter<FacturXProfile?>
+    public class APIProfileNullableJsonConverter : JsonConverter<APIProfile?>
     {
         /// <summary>
-        /// Returns a FacturXProfile from the Json object
+        /// Returns a APIProfile from the Json object
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public override FacturXProfile? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override APIProfile? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             string? rawValue = reader.GetString();
 
-            FacturXProfile? result = rawValue == null
+            APIProfile? result = rawValue == null
                 ? null
-                : FacturXProfileValueConverter.FromStringOrDefault(rawValue);
+                : APIProfileValueConverter.FromStringOrDefault(rawValue);
 
             if (result != null)
                 return result.Value;
@@ -191,14 +191,14 @@ namespace FactPulse.SDK.Model
         }
 
         /// <summary>
-        /// Writes the FacturXProfile to the json writer
+        /// Writes the APIProfile to the json writer
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="facturXProfile"></param>
+        /// <param name="aPIProfile"></param>
         /// <param name="options"></param>
-        public override void Write(Utf8JsonWriter writer, FacturXProfile? facturXProfile, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, APIProfile? aPIProfile, JsonSerializerOptions options)
         {
-            writer.WriteStringValue(facturXProfile.HasValue ? FacturXProfileValueConverter.ToJsonValue(facturXProfile.Value).ToString() : "null");
+            writer.WriteStringValue(aPIProfile.HasValue ? APIProfileValueConverter.ToJsonValue(aPIProfile.Value).ToString() : "null");
         }
     }
 }

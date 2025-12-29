@@ -1,5 +1,5 @@
-# FactPulse.SDK.Model.FacturXProfile
-Profil Factur-X pour la reponse API.  Note: Simplifie par rapport a utils/facturx.FacturXProfile qui contient aussi les configurations XSLT. Celui-ci est pour l'API.
+# FactPulse.SDK.Model.APIProfile
+Factur-X profile for API responses.  Note: Simplified compared to utils/facturx.ProfilFacturX which also contains XSLT configurations. This one is for the API.
 
 ## Properties
 

@@ -48,6 +48,8 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new AFNORHealthCheckResponseJsonConverter());
             _jsonOptions.Converters.Add(new AFNORResultJsonConverter());
             _jsonOptions.Converters.Add(new APIErrorJsonConverter());
+            _jsonOptions.Converters.Add(new APIProfileJsonConverter());
+            _jsonOptions.Converters.Add(new APIProfileNullableJsonConverter());
             _jsonOptions.Converters.Add(new AcknowledgmentStatusJsonConverter());
             _jsonOptions.Converters.Add(new AcknowledgmentStatusNullableJsonConverter());
             _jsonOptions.Converters.Add(new AdditionalDocumentJsonConverter());
@@ -84,8 +86,6 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new ExtractionInfoJsonConverter());
             _jsonOptions.Converters.Add(new FacturXInvoiceJsonConverter());
             _jsonOptions.Converters.Add(new FacturXPDFInfoJsonConverter());
-            _jsonOptions.Converters.Add(new FacturXProfileJsonConverter());
-            _jsonOptions.Converters.Add(new FacturXProfileNullableJsonConverter());
             _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasChorusProChorusProCredentialsJsonConverter());
             _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasProcessingChorusProCredentialsJsonConverter());
             _jsonOptions.Converters.Add(new FieldStatusJsonConverter());
