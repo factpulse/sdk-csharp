@@ -26,9 +26,9 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Identification scheme codes (Electronic Address Scheme - EAS), mainly for electronic invoice addressing.  **Possible values:** - &#x60;0225&#x60;: FR_SIREN - French SIREN (most common for France, replaces old 0002) - &#x60;0088&#x60;: GLN - Global Location Number - &#x60;0060&#x60;: DUNS - Data Universal Numbering System - &#x60;9957&#x60;: FR_VAT_INTRA - French intra-community VAT number - &#x60;0199&#x60;: GLEIF - Global Legal Entity Identifier Foundation
+    /// Identification scheme codes (Electronic Address Scheme - EAS), mainly for electronic invoice addressing.  **Possible values:** - &#x60;0225&#x60;: FR_SIREN - French SIREN (most common for France) - &#x60;0009&#x60;: FR_SIRET - French SIRET - &#x60;0002&#x60;: FR_SIREN_OLD - French SIREN (old code, for legal organization ID) - &#x60;0088&#x60;: GLN - Global Location Number - &#x60;0060&#x60;: DUNS - Data Universal Numbering System - &#x60;9957&#x60;: FR_VAT_INTRA - French intra-community VAT number - &#x60;0199&#x60;: GLEIF - Global Legal Entity Identifier Foundation - &#x60;0231&#x60;: DT_DIRECTORY_ID - Directory ID for tax administration - &#x60;EM&#x60;: EMAIL - Email-based electronic address (BT-34/BT-49)
     /// </summary>
-    /// <value>Identification scheme codes (Electronic Address Scheme - EAS), mainly for electronic invoice addressing.  **Possible values:** - &#x60;0225&#x60;: FR_SIREN - French SIREN (most common for France, replaces old 0002) - &#x60;0088&#x60;: GLN - Global Location Number - &#x60;0060&#x60;: DUNS - Data Universal Numbering System - &#x60;9957&#x60;: FR_VAT_INTRA - French intra-community VAT number - &#x60;0199&#x60;: GLEIF - Global Legal Entity Identifier Foundation</value>
+    /// <value>Identification scheme codes (Electronic Address Scheme - EAS), mainly for electronic invoice addressing.  **Possible values:** - &#x60;0225&#x60;: FR_SIREN - French SIREN (most common for France) - &#x60;0009&#x60;: FR_SIRET - French SIRET - &#x60;0002&#x60;: FR_SIREN_OLD - French SIREN (old code, for legal organization ID) - &#x60;0088&#x60;: GLN - Global Location Number - &#x60;0060&#x60;: DUNS - Data Universal Numbering System - &#x60;9957&#x60;: FR_VAT_INTRA - French intra-community VAT number - &#x60;0199&#x60;: GLEIF - Global Legal Entity Identifier Foundation - &#x60;0231&#x60;: DT_DIRECTORY_ID - Directory ID for tax administration - &#x60;EM&#x60;: EMAIL - Email-based electronic address (BT-34/BT-49)</value>
     public enum SchemeID
     {
         /// <summary>
@@ -37,24 +37,54 @@ namespace FactPulse.SDK.Model
         FR_SIREN = 1,
 
         /// <summary>
-        /// Enum GLN for value: 0088
+        /// Enum GLN for value: 0009
         /// </summary>
         GLN = 2,
 
         /// <summary>
-        /// Enum DUNS for value: 0060
+        /// Enum DUNS for value: 0002
         /// </summary>
         DUNS = 3,
 
         /// <summary>
-        /// Enum FR_TVA_INTRA for value: 9957
+        /// Enum FR_TVA_INTRA for value: 0088
         /// </summary>
         FR_TVA_INTRA = 4,
 
         /// <summary>
-        /// Enum GLEIF for value: 0199
+        /// Enum GLEIF for value: 0060
         /// </summary>
-        GLEIF = 5
+        GLEIF = 5,
+
+        /// <summary>
+        /// Enum _9957 for value: 9957
+        /// </summary>
+        _9957 = 6,
+
+        /// <summary>
+        /// Enum _0199 for value: 0199
+        /// </summary>
+        _0199 = 7,
+
+        /// <summary>
+        /// Enum _0231 for value: 0231
+        /// </summary>
+        _0231 = 8,
+
+        /// <summary>
+        /// Enum EM for value: EM
+        /// </summary>
+        EM = 9,
+
+        /// <summary>
+        /// Enum _0177 for value: 0177
+        /// </summary>
+        _0177 = 10,
+
+        /// <summary>
+        /// Enum _0224 for value: 0224
+        /// </summary>
+        _0224 = 11
     }
 
     /// <summary>
@@ -72,17 +102,35 @@ namespace FactPulse.SDK.Model
             if (value.Equals("0225"))
                 return SchemeID.FR_SIREN;
 
-            if (value.Equals("0088"))
+            if (value.Equals("0009"))
                 return SchemeID.GLN;
 
-            if (value.Equals("0060"))
+            if (value.Equals("0002"))
                 return SchemeID.DUNS;
 
-            if (value.Equals("9957"))
+            if (value.Equals("0088"))
                 return SchemeID.FR_TVA_INTRA;
 
-            if (value.Equals("0199"))
+            if (value.Equals("0060"))
                 return SchemeID.GLEIF;
+
+            if (value.Equals("9957"))
+                return SchemeID._9957;
+
+            if (value.Equals("0199"))
+                return SchemeID._0199;
+
+            if (value.Equals("0231"))
+                return SchemeID._0231;
+
+            if (value.Equals("EM"))
+                return SchemeID.EM;
+
+            if (value.Equals("0177"))
+                return SchemeID._0177;
+
+            if (value.Equals("0224"))
+                return SchemeID._0224;
 
             throw new NotImplementedException($"Could not convert value to type SchemeID: '{value}'");
         }
@@ -97,17 +145,35 @@ namespace FactPulse.SDK.Model
             if (value.Equals("0225"))
                 return SchemeID.FR_SIREN;
 
-            if (value.Equals("0088"))
+            if (value.Equals("0009"))
                 return SchemeID.GLN;
 
-            if (value.Equals("0060"))
+            if (value.Equals("0002"))
                 return SchemeID.DUNS;
 
-            if (value.Equals("9957"))
+            if (value.Equals("0088"))
                 return SchemeID.FR_TVA_INTRA;
 
-            if (value.Equals("0199"))
+            if (value.Equals("0060"))
                 return SchemeID.GLEIF;
+
+            if (value.Equals("9957"))
+                return SchemeID._9957;
+
+            if (value.Equals("0199"))
+                return SchemeID._0199;
+
+            if (value.Equals("0231"))
+                return SchemeID._0231;
+
+            if (value.Equals("EM"))
+                return SchemeID.EM;
+
+            if (value.Equals("0177"))
+                return SchemeID._0177;
+
+            if (value.Equals("0224"))
+                return SchemeID._0224;
 
             return null;
         }
@@ -124,16 +190,34 @@ namespace FactPulse.SDK.Model
                 return "0225";
 
             if (value == SchemeID.GLN)
-                return "0088";
+                return "0009";
 
             if (value == SchemeID.DUNS)
-                return "0060";
+                return "0002";
 
             if (value == SchemeID.FR_TVA_INTRA)
-                return "9957";
+                return "0088";
 
             if (value == SchemeID.GLEIF)
+                return "0060";
+
+            if (value == SchemeID._9957)
+                return "9957";
+
+            if (value == SchemeID._0199)
                 return "0199";
+
+            if (value == SchemeID._0231)
+                return "0231";
+
+            if (value == SchemeID.EM)
+                return "EM";
+
+            if (value == SchemeID._0177)
+                return "0177";
+
+            if (value == SchemeID._0224)
+                return "0224";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }

@@ -34,20 +34,24 @@ namespace FactPulse.SDK.Model
         /// Initializes a new instance of the <see cref="Payee" /> class.
         /// </summary>
         /// <param name="nom">Payee name (BT-59). Mandatory.</param>
+        /// <param name="payeeId">payeeId</param>
         /// <param name="siret">siret</param>
         /// <param name="siren">siren</param>
         /// <param name="electronicAddress">electronicAddress</param>
         /// <param name="iban">iban</param>
         /// <param name="bic">bic</param>
+        /// <param name="globalIds">globalIds</param>
         [JsonConstructor]
-        public Payee(string nom, Option<string?> siret = default, Option<string?> siren = default, Option<ElectronicAddress?> electronicAddress = default, Option<string?> iban = default, Option<string?> bic = default)
+        public Payee(string nom, Option<string?> payeeId = default, Option<string?> siret = default, Option<string?> siren = default, Option<ElectronicAddress?> electronicAddress = default, Option<string?> iban = default, Option<string?> bic = default, Option<List<ElectronicAddress>?> globalIds = default)
         {
             Nom = nom;
+            PayeeIdOption = payeeId;
             SiretOption = siret;
             SirenOption = siren;
             ElectronicAddressOption = electronicAddress;
             IbanOption = iban;
             BicOption = bic;
+            GlobalIdsOption = globalIds;
             OnCreated();
         }
 
@@ -59,6 +63,19 @@ namespace FactPulse.SDK.Model
         /// <value>Payee name (BT-59). Mandatory.</value>
         [JsonPropertyName("nom")]
         public string Nom { get; set; }
+
+        /// <summary>
+        /// Used to track the state of PayeeId
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> PayeeIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets PayeeId
+        /// </summary>
+        [JsonPropertyName("payeeId")]
+        public string? PayeeId { get { return this.PayeeIdOption; } set { this.PayeeIdOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Siret
@@ -126,6 +143,19 @@ namespace FactPulse.SDK.Model
         public string? Bic { get { return this.BicOption; } set { this.BicOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of GlobalIds
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<ElectronicAddress>?> GlobalIdsOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets GlobalIds
+        /// </summary>
+        [JsonPropertyName("global_ids")]
+        public List<ElectronicAddress>? GlobalIds { get { return this.GlobalIdsOption; } set { this.GlobalIdsOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -134,11 +164,13 @@ namespace FactPulse.SDK.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class Payee {\n");
             sb.Append("  Nom: ").Append(Nom).Append("\n");
+            sb.Append("  PayeeId: ").Append(PayeeId).Append("\n");
             sb.Append("  Siret: ").Append(Siret).Append("\n");
             sb.Append("  Siren: ").Append(Siren).Append("\n");
             sb.Append("  ElectronicAddress: ").Append(ElectronicAddress).Append("\n");
             sb.Append("  Iban: ").Append(Iban).Append("\n");
             sb.Append("  Bic: ").Append(Bic).Append("\n");
+            sb.Append("  GlobalIds: ").Append(GlobalIds).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -203,11 +235,13 @@ namespace FactPulse.SDK.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<string?> nom = default;
+            Option<string?> payeeId = default;
             Option<string?> siret = default;
             Option<string?> siren = default;
             Option<ElectronicAddress?> electronicAddress = default;
             Option<string?> iban = default;
             Option<string?> bic = default;
+            Option<List<ElectronicAddress>?> globalIds = default;
 
             while (utf8JsonReader.Read())
             {
@@ -227,6 +261,9 @@ namespace FactPulse.SDK.Model
                         case "nom":
                             nom = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
+                        case "payeeId":
+                            payeeId = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         case "siret":
                             siret = new Option<string?>(utf8JsonReader.GetString());
                             break;
@@ -242,6 +279,9 @@ namespace FactPulse.SDK.Model
                         case "bic":
                             bic = new Option<string?>(utf8JsonReader.GetString());
                             break;
+                        case "global_ids":
+                            globalIds = new Option<List<ElectronicAddress>?>(JsonSerializer.Deserialize<List<ElectronicAddress>>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         default:
                             break;
                     }
@@ -254,7 +294,7 @@ namespace FactPulse.SDK.Model
             if (nom.IsSet && nom.Value == null)
                 throw new ArgumentNullException(nameof(nom), "Property is not nullable for class Payee.");
 
-            return new Payee(nom.Value!, siret, siren, electronicAddress, iban, bic);
+            return new Payee(nom.Value!, payeeId, siret, siren, electronicAddress, iban, bic, globalIds);
         }
 
         /// <summary>
@@ -285,6 +325,12 @@ namespace FactPulse.SDK.Model
                 throw new ArgumentNullException(nameof(payee.Nom), "Property is required for class Payee.");
 
             writer.WriteString("nom", payee.Nom);
+
+            if (payee.PayeeIdOption.IsSet)
+                if (payee.PayeeIdOption.Value != null)
+                    writer.WriteString("payeeId", payee.PayeeId);
+                else
+                    writer.WriteNull("payeeId");
 
             if (payee.SiretOption.IsSet)
                 if (payee.SiretOption.Value != null)
@@ -317,6 +363,15 @@ namespace FactPulse.SDK.Model
                     writer.WriteString("bic", payee.Bic);
                 else
                     writer.WriteNull("bic");
+
+            if (payee.GlobalIdsOption.IsSet)
+                if (payee.GlobalIdsOption.Value != null)
+                {
+                    writer.WritePropertyName("global_ids");
+                    JsonSerializer.Serialize(writer, payee.GlobalIds, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("global_ids");
         }
     }
 }

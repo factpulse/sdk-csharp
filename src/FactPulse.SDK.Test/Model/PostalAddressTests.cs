@@ -81,6 +81,15 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'LineThree'
+        /// </summary>
+        [Fact]
+        public void LineThreeTest()
+        {
+            // TODO unit test for the property 'LineThree'
+        }
+
+        /// <summary>
         /// Test the property 'City'
         /// </summary>
         [Fact]
@@ -96,6 +105,15 @@ namespace FactPulse.SDK.Test.Model
         public void CountryCodeTest()
         {
             // TODO unit test for the property 'CountryCode'
+        }
+
+        /// <summary>
+        /// Test the property 'CountrySubdivision'
+        /// </summary>
+        [Fact]
+        public void CountrySubdivisionTest()
+        {
+            // TODO unit test for the property 'CountrySubdivision'
         }
     }
 }

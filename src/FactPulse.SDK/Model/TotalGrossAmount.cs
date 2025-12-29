@@ -26,7 +26,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Total gross amount (including tax). (Accepte number, string ou integer)
+    /// Invoice total amount with VAT (BT-112). Can be negative for correction invoices.
     /// </summary>
     public partial class TotalGrossAmount : IValidatableObject
     {
@@ -178,7 +178,7 @@ namespace FactPulse.SDK.Model
             writer.WriteStartObject();
 
             if (totalGrossAmount.DecimalOption.IsSet && totalGrossAmount.DecimalOption.Value != null)
-                writer.WriteNumber("VATAmount", totalGrossAmount.DecimalOption.Value.Value);
+                writer.WriteNumber("Rate", totalGrossAmount.DecimalOption.Value.Value);
 
             if (totalGrossAmount.StringOption.IsSet && totalGrossAmount.StringOption.Value != null)
                 writer.WriteString("VATAmount", totalGrossAmount.StringOption.Value);

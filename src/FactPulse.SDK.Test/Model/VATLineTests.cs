@@ -99,6 +99,15 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'DueDateTypeCode'
+        /// </summary>
+        [Fact]
+        public void DueDateTypeCodeTest()
+        {
+            // TODO unit test for the property 'DueDateTypeCode'
+        }
+
+        /// <summary>
         /// Test the property 'ExemptionReason'
         /// </summary>
         [Fact]

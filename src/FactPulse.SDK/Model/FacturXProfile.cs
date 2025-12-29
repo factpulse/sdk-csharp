@@ -26,124 +26,110 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Commercial document types (UNTDID 1001).  | Code | Name | Description | |- -- -- -|- -- -- -|- -- -- -- -- -- --| | 380 | INVOICE | Commercial invoice | | 381 | CREDIT_NOTE | Credit note | | 384 | CORRECTED_INVOICE | Corrected invoice | | 386 | PREPAYMENT | Prepayment invoice | | 389 | SELF_BILLED | Self-billed invoice |
+    /// Profil Factur-X pour la reponse API.  Note: Simplifie par rapport a utils/facturx.FacturXProfile qui contient aussi les configurations XSLT. Celui-ci est pour l&#39;API.
     /// </summary>
-    /// <value>Commercial document types (UNTDID 1001).  | Code | Name | Description | |- -- -- -|- -- -- -|- -- -- -- -- -- --| | 380 | INVOICE | Commercial invoice | | 381 | CREDIT_NOTE | Credit note | | 384 | CORRECTED_INVOICE | Corrected invoice | | 386 | PREPAYMENT | Prepayment invoice | | 389 | SELF_BILLED | Self-billed invoice |</value>
-    public enum DocumentType
+    /// <value>Profil Factur-X pour la reponse API.  Note: Simplifie par rapport a utils/facturx.FacturXProfile qui contient aussi les configurations XSLT. Celui-ci est pour l&#39;API.</value>
+    public enum FacturXProfile
     {
         /// <summary>
-        /// Enum INVOICE for value: 380
+        /// Enum MINIMUM for value: MINIMUM
         /// </summary>
-        INVOICE = 1,
+        MINIMUM = 1,
 
         /// <summary>
-        /// Enum CREDIT_NOTE for value: 381
+        /// Enum BASIC for value: BASIC
         /// </summary>
-        CREDIT_NOTE = 2,
+        BASIC = 2,
 
         /// <summary>
-        /// Enum CORRECTED_INVOICE for value: 384
+        /// Enum EN16931 for value: EN16931
         /// </summary>
-        CORRECTED_INVOICE = 3,
+        EN16931 = 3,
 
         /// <summary>
-        /// Enum PREPAYMENT for value: 386
+        /// Enum EXTENDED for value: EXTENDED
         /// </summary>
-        PREPAYMENT = 4,
-
-        /// <summary>
-        /// Enum SELF_BILLED for value: 389
-        /// </summary>
-        SELF_BILLED = 5
+        EXTENDED = 4
     }
 
     /// <summary>
-    /// Converts <see cref="DocumentType"/> to and from the JSON value
+    /// Converts <see cref="FacturXProfile"/> to and from the JSON value
     /// </summary>
-    public static class DocumentTypeValueConverter
+    public static class FacturXProfileValueConverter
     {
         /// <summary>
-        /// Parses a given value to <see cref="DocumentType"/>
+        /// Parses a given value to <see cref="FacturXProfile"/>
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static DocumentType FromString(string value)
+        public static FacturXProfile FromString(string value)
         {
-            if (value.Equals("380"))
-                return DocumentType.INVOICE;
+            if (value.Equals("MINIMUM"))
+                return FacturXProfile.MINIMUM;
 
-            if (value.Equals("381"))
-                return DocumentType.CREDIT_NOTE;
+            if (value.Equals("BASIC"))
+                return FacturXProfile.BASIC;
 
-            if (value.Equals("384"))
-                return DocumentType.CORRECTED_INVOICE;
+            if (value.Equals("EN16931"))
+                return FacturXProfile.EN16931;
 
-            if (value.Equals("386"))
-                return DocumentType.PREPAYMENT;
+            if (value.Equals("EXTENDED"))
+                return FacturXProfile.EXTENDED;
 
-            if (value.Equals("389"))
-                return DocumentType.SELF_BILLED;
-
-            throw new NotImplementedException($"Could not convert value to type DocumentType: '{value}'");
+            throw new NotImplementedException($"Could not convert value to type FacturXProfile: '{value}'");
         }
 
         /// <summary>
-        /// Parses a given value to <see cref="DocumentType"/>
+        /// Parses a given value to <see cref="FacturXProfile"/>
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static DocumentType? FromStringOrDefault(string value)
+        public static FacturXProfile? FromStringOrDefault(string value)
         {
-            if (value.Equals("380"))
-                return DocumentType.INVOICE;
+            if (value.Equals("MINIMUM"))
+                return FacturXProfile.MINIMUM;
 
-            if (value.Equals("381"))
-                return DocumentType.CREDIT_NOTE;
+            if (value.Equals("BASIC"))
+                return FacturXProfile.BASIC;
 
-            if (value.Equals("384"))
-                return DocumentType.CORRECTED_INVOICE;
+            if (value.Equals("EN16931"))
+                return FacturXProfile.EN16931;
 
-            if (value.Equals("386"))
-                return DocumentType.PREPAYMENT;
-
-            if (value.Equals("389"))
-                return DocumentType.SELF_BILLED;
+            if (value.Equals("EXTENDED"))
+                return FacturXProfile.EXTENDED;
 
             return null;
         }
 
         /// <summary>
-        /// Converts the <see cref="DocumentType"/> to the json value
+        /// Converts the <see cref="FacturXProfile"/> to the json value
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public static string ToJsonValue(DocumentType value)
+        public static string ToJsonValue(FacturXProfile value)
         {
-            if (value == DocumentType.INVOICE)
-                return "380";
+            if (value == FacturXProfile.MINIMUM)
+                return "MINIMUM";
 
-            if (value == DocumentType.CREDIT_NOTE)
-                return "381";
+            if (value == FacturXProfile.BASIC)
+                return "BASIC";
 
-            if (value == DocumentType.CORRECTED_INVOICE)
-                return "384";
+            if (value == FacturXProfile.EN16931)
+                return "EN16931";
 
-            if (value == DocumentType.PREPAYMENT)
-                return "386";
-
-            if (value == DocumentType.SELF_BILLED)
-                return "389";
+            if (value == FacturXProfile.EXTENDED)
+                return "EXTENDED";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="DocumentType"/>
+    /// A Json converter for type <see cref="FacturXProfile"/>
     /// </summary>
     /// <exception cref="NotImplementedException"></exception>
-    public class DocumentTypeJsonConverter : JsonConverter<DocumentType>
+    public class FacturXProfileJsonConverter : JsonConverter<FacturXProfile>
     {
         /// <summary>
         /// Returns a  from the Json object
@@ -152,13 +138,13 @@ namespace FactPulse.SDK.Model
         /// <param name="typeToConvert"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public override DocumentType Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override FacturXProfile Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             string? rawValue = reader.GetString();
 
-            DocumentType? result = rawValue == null
+            FacturXProfile? result = rawValue == null
                 ? null
-                : DocumentTypeValueConverter.FromStringOrDefault(rawValue);
+                : FacturXProfileValueConverter.FromStringOrDefault(rawValue);
 
             if (result != null)
                 return result.Value;
@@ -167,36 +153,36 @@ namespace FactPulse.SDK.Model
         }
 
         /// <summary>
-        /// Writes the DocumentType to the json writer
+        /// Writes the FacturXProfile to the json writer
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="documentType"></param>
+        /// <param name="facturXProfile"></param>
         /// <param name="options"></param>
-        public override void Write(Utf8JsonWriter writer, DocumentType documentType, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, FacturXProfile facturXProfile, JsonSerializerOptions options)
         {
-            writer.WriteStringValue(DocumentTypeValueConverter.ToJsonValue(documentType).ToString());
+            writer.WriteStringValue(FacturXProfileValueConverter.ToJsonValue(facturXProfile).ToString());
         }
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="DocumentType"/>
+    /// A Json converter for type <see cref="FacturXProfile"/>
     /// </summary>
-    public class DocumentTypeNullableJsonConverter : JsonConverter<DocumentType?>
+    public class FacturXProfileNullableJsonConverter : JsonConverter<FacturXProfile?>
     {
         /// <summary>
-        /// Returns a DocumentType from the Json object
+        /// Returns a FacturXProfile from the Json object
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="options"></param>
         /// <returns></returns>
-        public override DocumentType? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override FacturXProfile? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             string? rawValue = reader.GetString();
 
-            DocumentType? result = rawValue == null
+            FacturXProfile? result = rawValue == null
                 ? null
-                : DocumentTypeValueConverter.FromStringOrDefault(rawValue);
+                : FacturXProfileValueConverter.FromStringOrDefault(rawValue);
 
             if (result != null)
                 return result.Value;
@@ -205,14 +191,14 @@ namespace FactPulse.SDK.Model
         }
 
         /// <summary>
-        /// Writes the DocumentType to the json writer
+        /// Writes the FacturXProfile to the json writer
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="documentType"></param>
+        /// <param name="facturXProfile"></param>
         /// <param name="options"></param>
-        public override void Write(Utf8JsonWriter writer, DocumentType? documentType, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, FacturXProfile? facturXProfile, JsonSerializerOptions options)
         {
-            writer.WriteStringValue(documentType.HasValue ? DocumentTypeValueConverter.ToJsonValue(documentType.Value).ToString() : "null");
+            writer.WriteStringValue(facturXProfile.HasValue ? FacturXProfileValueConverter.ToJsonValue(facturXProfile.Value).ToString() : "null");
         }
     }
 }

@@ -64,7 +64,7 @@ namespace FactPulse.SDK.Model
         /// Flow syntax (CII for Factur-X)
         /// </summary>
         /// <value>Flow syntax (CII for Factur-X)</value>
-        [JsonPropertyName("flow_syntax")]
+        [JsonPropertyName("flowSyntax")]
         public FlowSyntax? FlowSyntax { get { return this.FlowSyntaxOption; } set { this.FlowSyntaxOption = new(value); } }
 
         /// <summary>
@@ -77,7 +77,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets FlowProfile
         /// </summary>
-        [JsonPropertyName("flow_profile")]
+        [JsonPropertyName("flowProfile")]
         public FlowProfile? FlowProfile { get { return this.FlowProfileOption; } set { this.FlowProfileOption = new(value); } }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace FactPulse.SDK.Model
         /// </summary>
         /// <value>Flow name (e.g., &#39;Invoice 2025-001&#39;)</value>
         /* <example>Invoice 2025-001</example> */
-        [JsonPropertyName("flow_name")]
+        [JsonPropertyName("flowName")]
         public string FlowName { get; set; }
 
         /// <summary>
@@ -98,7 +98,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets TrackingId
         /// </summary>
-        [JsonPropertyName("tracking_id")]
+        [JsonPropertyName("trackingId")]
         public string? TrackingId { get { return this.TrackingIdOption; } set { this.TrackingIdOption = new(value); } }
 
         /// <summary>
@@ -111,7 +111,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets RequestId
         /// </summary>
-        [JsonPropertyName("request_id")]
+        [JsonPropertyName("requestId")]
         public string? RequestId { get { return this.RequestIdOption; } set { this.RequestIdOption = new(value); } }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets PdpCredentials
         /// </summary>
-        [JsonPropertyName("pdp_credentials")]
+        [JsonPropertyName("pdpCredentials")]
         public PDPCredentials? PdpCredentials { get { return this.PdpCredentialsOption; } set { this.PdpCredentialsOption = new(value); } }
 
         /// <summary>
@@ -200,26 +200,26 @@ namespace FactPulse.SDK.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "flow_name":
+                        case "flowName":
                             flowName = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "flow_syntax":
+                        case "flowSyntax":
                             string? flowSyntaxRawValue = utf8JsonReader.GetString();
                             if (flowSyntaxRawValue != null)
                                 flowSyntax = new Option<FlowSyntax?>(FlowSyntaxValueConverter.FromStringOrDefault(flowSyntaxRawValue));
                             break;
-                        case "flow_profile":
+                        case "flowProfile":
                             string? flowProfileRawValue = utf8JsonReader.GetString();
                             if (flowProfileRawValue != null)
                                 flowProfile = new Option<FlowProfile?>(FlowProfileValueConverter.FromStringOrDefault(flowProfileRawValue));
                             break;
-                        case "tracking_id":
+                        case "trackingId":
                             trackingId = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "request_id":
+                        case "requestId":
                             requestId = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "pdp_credentials":
+                        case "pdpCredentials":
                             pdpCredentials = new Option<PDPCredentials?>(JsonSerializer.Deserialize<PDPCredentials>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
@@ -267,41 +267,41 @@ namespace FactPulse.SDK.Model
             if (submitFlowRequest.FlowName == null)
                 throw new ArgumentNullException(nameof(submitFlowRequest.FlowName), "Property is required for class SubmitFlowRequest.");
 
-            writer.WriteString("flow_name", submitFlowRequest.FlowName);
+            writer.WriteString("flowName", submitFlowRequest.FlowName);
 
             if (submitFlowRequest.FlowSyntaxOption.IsSet)
             {
                 var flowSyntaxRawValue = FlowSyntaxValueConverter.ToJsonValue(submitFlowRequest.FlowSyntax!.Value);
-                writer.WriteString("flow_syntax", flowSyntaxRawValue);
+                writer.WriteString("flowSyntax", flowSyntaxRawValue);
             }
             if (submitFlowRequest.FlowProfileOption.IsSet)
                 if (submitFlowRequest.FlowProfileOption!.Value != null)
                 {
                     var flowProfileRawValue = FlowProfileValueConverter.ToJsonValue(submitFlowRequest.FlowProfileOption.Value!.Value);
-                    writer.WriteString("flow_profile", flowProfileRawValue);
+                    writer.WriteString("flowProfile", flowProfileRawValue);
                 }
                 else
-                    writer.WriteNull("flow_profile");
+                    writer.WriteNull("flowProfile");
             if (submitFlowRequest.TrackingIdOption.IsSet)
                 if (submitFlowRequest.TrackingIdOption.Value != null)
-                    writer.WriteString("tracking_id", submitFlowRequest.TrackingId);
+                    writer.WriteString("trackingId", submitFlowRequest.TrackingId);
                 else
-                    writer.WriteNull("tracking_id");
+                    writer.WriteNull("trackingId");
 
             if (submitFlowRequest.RequestIdOption.IsSet)
                 if (submitFlowRequest.RequestIdOption.Value != null)
-                    writer.WriteString("request_id", submitFlowRequest.RequestId);
+                    writer.WriteString("requestId", submitFlowRequest.RequestId);
                 else
-                    writer.WriteNull("request_id");
+                    writer.WriteNull("requestId");
 
             if (submitFlowRequest.PdpCredentialsOption.IsSet)
                 if (submitFlowRequest.PdpCredentialsOption.Value != null)
                 {
-                    writer.WritePropertyName("pdp_credentials");
+                    writer.WritePropertyName("pdpCredentials");
                     JsonSerializer.Serialize(writer, submitFlowRequest.PdpCredentials, jsonSerializerOptions);
                 }
                 else
-                    writer.WriteNull("pdp_credentials");
+                    writer.WriteNull("pdpCredentials");
         }
     }
 }

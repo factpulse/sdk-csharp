@@ -1,5 +1,5 @@
 # FactPulse.SDK.Model.ManualRate
-Manual VAT rate value. (Accepte number, string ou integer)
+VAT category rate (BT-119). (Accepte number, string ou integer)
 
 ## Properties
 

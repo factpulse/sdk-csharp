@@ -26,7 +26,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Prepayment amount. (Accepte number, string ou integer)
+    /// Sum of amounts already paid (BT-113). Can be negative for correction invoices.
     /// </summary>
     public partial class InvoiceTotalsPrepayment : IValidatableObject
     {
@@ -178,7 +178,7 @@ namespace FactPulse.SDK.Model
             writer.WriteStartObject();
 
             if (invoiceTotalsPrepayment.DecimalOption.IsSet && invoiceTotalsPrepayment.DecimalOption.Value != null)
-                writer.WriteNumber("VATAmount", invoiceTotalsPrepayment.DecimalOption.Value.Value);
+                writer.WriteNumber("Rate", invoiceTotalsPrepayment.DecimalOption.Value.Value);
 
             if (invoiceTotalsPrepayment.StringOption.IsSet && invoiceTotalsPrepayment.StringOption.Value != null)
                 writer.WriteString("VATAmount", invoiceTotalsPrepayment.StringOption.Value);

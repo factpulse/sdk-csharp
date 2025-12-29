@@ -26,7 +26,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// VAT amount for this line. (Accepte number, string ou integer)
+    /// VAT category tax amount (BT-117). Can be negative for correction invoices.
     /// </summary>
     public partial class VATAmount : IValidatableObject
     {
@@ -178,7 +178,7 @@ namespace FactPulse.SDK.Model
             writer.WriteStartObject();
 
             if (vATAmount.DecimalOption.IsSet && vATAmount.DecimalOption.Value != null)
-                writer.WriteNumber("VATAmount", vATAmount.DecimalOption.Value.Value);
+                writer.WriteNumber("Rate", vATAmount.DecimalOption.Value.Value);
 
             if (vATAmount.StringOption.IsSet && vATAmount.StringOption.Value != null)
                 writer.WriteString("VATAmount", vATAmount.StringOption.Value);

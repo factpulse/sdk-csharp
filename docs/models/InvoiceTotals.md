@@ -1,5 +1,5 @@
 # FactPulse.SDK.Model.InvoiceTotals
-Contains all invoice total amounts.
+Contains all invoice total amounts (BG-22).
 
 ## Properties
 
@@ -9,7 +9,11 @@ Name | Type | Description | Notes
 **VatAmount** | [**TotalVATAmount**](TotalVATAmount.md) |  | 
 **TotalGrossAmount** | [**TotalGrossAmount**](TotalGrossAmount.md) |  | 
 **AmountDue** | [**AmountDue**](AmountDue.md) |  | 
+**LineTotalAmount** | [**LineTotalAmount**](LineTotalAmount.md) |  | [optional] 
+**AllowanceTotalAmount** | [**AllowanceTotalAmount**](AllowanceTotalAmount.md) |  | [optional] 
+**ChargeTotalAmount** | [**ChargeTotalAmount**](ChargeTotalAmount.md) |  | [optional] 
 **Prepayment** | [**InvoiceTotalsPrepayment**](InvoiceTotalsPrepayment.md) |  | [optional] 
+**RoundingAmount** | [**RoundingAmount**](RoundingAmount.md) |  | [optional] 
 **GlobalAllowanceAmount** | [**GlobalAllowanceAmount**](GlobalAllowanceAmount.md) |  | [optional] 
 **GlobalAllowanceReason** | **string** |  | [optional] 
 

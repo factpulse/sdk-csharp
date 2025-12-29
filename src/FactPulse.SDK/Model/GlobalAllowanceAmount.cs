@@ -26,7 +26,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Global allowance amount (including tax). (Accepte number, string ou integer)
+    /// Global allowance amount (legacy - use allowance_total_amount). (Accepte number, string ou integer)
     /// </summary>
     public partial class GlobalAllowanceAmount : IValidatableObject
     {
@@ -178,10 +178,10 @@ namespace FactPulse.SDK.Model
             writer.WriteStartObject();
 
             if (globalAllowanceAmount.DecimalOption.IsSet && globalAllowanceAmount.DecimalOption.Value != null)
-                writer.WriteNumber("VATAmount", globalAllowanceAmount.DecimalOption.Value.Value);
+                writer.WriteNumber("Rate", globalAllowanceAmount.DecimalOption.Value.Value);
 
             if (globalAllowanceAmount.StringOption.IsSet && globalAllowanceAmount.StringOption.Value != null)
-                writer.WriteString("VATAmount", globalAllowanceAmount.StringOption.Value);
+                writer.WriteString("Rate", globalAllowanceAmount.StringOption.Value);
 
             WriteProperties(writer, globalAllowanceAmount, jsonSerializerOptions);
             writer.WriteEndObject();

@@ -69,7 +69,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets AcknowledgmentStatus
         /// </summary>
-        [JsonPropertyName("acknowledgment_status")]
+        [JsonPropertyName("acknowledgmentStatus")]
         public AcknowledgmentStatus? AcknowledgmentStatus { get { return this.AcknowledgmentStatusOption; } set { this.AcknowledgmentStatusOption = new(value); } }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets UpdatedAfter
         /// </summary>
-        [JsonPropertyName("updated_after")]
+        [JsonPropertyName("updatedAfter")]
         public DateTime? UpdatedAfter { get { return this.UpdatedAfterOption; } set { this.UpdatedAfterOption = new(value); } }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets UpdatedBefore
         /// </summary>
-        [JsonPropertyName("updated_before")]
+        [JsonPropertyName("updatedBefore")]
         public DateTime? UpdatedBefore { get { return this.UpdatedBeforeOption; } set { this.UpdatedBeforeOption = new(value); } }
 
         /// <summary>
@@ -108,7 +108,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets FlowTypes
         /// </summary>
-        [JsonPropertyName("flow_types")]
+        [JsonPropertyName("flowTypes")]
         public List<FlowType>? FlowTypes { get { return this.FlowTypesOption; } set { this.FlowTypesOption = new(value); } }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets FlowDirections
         /// </summary>
-        [JsonPropertyName("flow_directions")]
+        [JsonPropertyName("flowDirections")]
         public List<FlowDirection>? FlowDirections { get { return this.FlowDirectionsOption; } set { this.FlowDirectionsOption = new(value); } }
 
         /// <summary>
@@ -134,7 +134,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets TrackingId
         /// </summary>
-        [JsonPropertyName("tracking_id")]
+        [JsonPropertyName("trackingId")]
         public string? TrackingId { get { return this.TrackingIdOption; } set { this.TrackingIdOption = new(value); } }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets FlowId
         /// </summary>
-        [JsonPropertyName("flow_id")]
+        [JsonPropertyName("flowId")]
         public string? FlowId { get { return this.FlowIdOption; } set { this.FlowIdOption = new(value); } }
 
         /// <summary>
@@ -285,25 +285,25 @@ namespace FactPulse.SDK.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "updated_after":
+                        case "updatedAfter":
                             updatedAfter = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime?>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
-                        case "updated_before":
+                        case "updatedBefore":
                             updatedBefore = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime?>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
-                        case "flow_types":
+                        case "flowTypes":
                             flowTypes = new Option<List<FlowType>?>(JsonSerializer.Deserialize<List<FlowType>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
-                        case "flow_directions":
+                        case "flowDirections":
                             flowDirections = new Option<List<FlowDirection>?>(JsonSerializer.Deserialize<List<FlowDirection>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
-                        case "tracking_id":
+                        case "trackingId":
                             trackingId = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "flow_id":
+                        case "flowId":
                             flowId = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "acknowledgment_status":
+                        case "acknowledgmentStatus":
                             string? acknowledgmentStatusRawValue = utf8JsonReader.GetString();
                             if (acknowledgmentStatusRawValue != null)
                                 acknowledgmentStatus = new Option<AcknowledgmentStatus?>(AcknowledgmentStatusValueConverter.FromStringOrDefault(acknowledgmentStatusRawValue));
@@ -355,52 +355,52 @@ namespace FactPulse.SDK.Model
         {
             if (searchFlowRequest.UpdatedAfterOption.IsSet)
                 if (searchFlowRequest.UpdatedAfterOption.Value != null)
-                    writer.WriteString("updated_after", searchFlowRequest.UpdatedAfterOption.Value!.Value.ToString(UpdatedAfterFormat));
+                    writer.WriteString("updatedAfter", searchFlowRequest.UpdatedAfterOption.Value!.Value.ToString(UpdatedAfterFormat));
                 else
-                    writer.WriteNull("updated_after");
+                    writer.WriteNull("updatedAfter");
 
             if (searchFlowRequest.UpdatedBeforeOption.IsSet)
                 if (searchFlowRequest.UpdatedBeforeOption.Value != null)
-                    writer.WriteString("updated_before", searchFlowRequest.UpdatedBeforeOption.Value!.Value.ToString(UpdatedBeforeFormat));
+                    writer.WriteString("updatedBefore", searchFlowRequest.UpdatedBeforeOption.Value!.Value.ToString(UpdatedBeforeFormat));
                 else
-                    writer.WriteNull("updated_before");
+                    writer.WriteNull("updatedBefore");
 
             if (searchFlowRequest.FlowTypesOption.IsSet)
                 if (searchFlowRequest.FlowTypesOption.Value != null)
                 {
-                    writer.WritePropertyName("flow_types");
+                    writer.WritePropertyName("flowTypes");
                     JsonSerializer.Serialize(writer, searchFlowRequest.FlowTypes, jsonSerializerOptions);
                 }
                 else
-                    writer.WriteNull("flow_types");
+                    writer.WriteNull("flowTypes");
             if (searchFlowRequest.FlowDirectionsOption.IsSet)
                 if (searchFlowRequest.FlowDirectionsOption.Value != null)
                 {
-                    writer.WritePropertyName("flow_directions");
+                    writer.WritePropertyName("flowDirections");
                     JsonSerializer.Serialize(writer, searchFlowRequest.FlowDirections, jsonSerializerOptions);
                 }
                 else
-                    writer.WriteNull("flow_directions");
+                    writer.WriteNull("flowDirections");
             if (searchFlowRequest.TrackingIdOption.IsSet)
                 if (searchFlowRequest.TrackingIdOption.Value != null)
-                    writer.WriteString("tracking_id", searchFlowRequest.TrackingId);
+                    writer.WriteString("trackingId", searchFlowRequest.TrackingId);
                 else
-                    writer.WriteNull("tracking_id");
+                    writer.WriteNull("trackingId");
 
             if (searchFlowRequest.FlowIdOption.IsSet)
                 if (searchFlowRequest.FlowIdOption.Value != null)
-                    writer.WriteString("flow_id", searchFlowRequest.FlowId);
+                    writer.WriteString("flowId", searchFlowRequest.FlowId);
                 else
-                    writer.WriteNull("flow_id");
+                    writer.WriteNull("flowId");
 
             if (searchFlowRequest.AcknowledgmentStatusOption.IsSet)
                 if (searchFlowRequest.AcknowledgmentStatusOption!.Value != null)
                 {
                     var acknowledgmentStatusRawValue = AcknowledgmentStatusValueConverter.ToJsonValue(searchFlowRequest.AcknowledgmentStatusOption.Value!.Value);
-                    writer.WriteString("acknowledgment_status", acknowledgmentStatusRawValue);
+                    writer.WriteString("acknowledgmentStatus", acknowledgmentStatusRawValue);
                 }
                 else
-                    writer.WriteNull("acknowledgment_status");
+                    writer.WriteNull("acknowledgmentStatus");
             if (searchFlowRequest.OffsetOption.IsSet)
                 writer.WriteNumber("offset", searchFlowRequest.OffsetOption.Value!.Value);
 

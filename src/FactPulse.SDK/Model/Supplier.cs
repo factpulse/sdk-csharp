@@ -26,7 +26,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Information about the supplier who issues the invoice.
+    /// Information about the supplier / seller (BG-4).
     /// </summary>
     public partial class Supplier : IValidatableObject
     {
@@ -35,27 +35,43 @@ namespace FactPulse.SDK.Model
         /// </summary>
         /// <param name="supplierId">supplierId</param>
         /// <param name="electronicAddress">electronicAddress</param>
+        /// <param name="privateId">privateId</param>
         /// <param name="supplierBankAccountCode">supplierBankAccountCode</param>
         /// <param name="supplierServiceId">supplierServiceId</param>
         /// <param name="name">name</param>
+        /// <param name="tradingBusinessName">tradingBusinessName</param>
+        /// <param name="legalDescription">legalDescription</param>
         /// <param name="siren">siren</param>
         /// <param name="siret">siret</param>
         /// <param name="vatNumber">vatNumber</param>
         /// <param name="iban">iban</param>
+        /// <param name="bic">bic</param>
+        /// <param name="bankAccountName">bankAccountName</param>
+        /// <param name="proprietaryId">proprietaryId</param>
         /// <param name="postalAddress">postalAddress</param>
+        /// <param name="contact">contact</param>
+        /// <param name="globalIds">globalIds</param>
         [JsonConstructor]
-        public Supplier(int supplierId, ElectronicAddress? electronicAddress = default, Option<int?> supplierBankAccountCode = default, Option<int?> supplierServiceId = default, Option<string?> name = default, Option<string?> siren = default, Option<string?> siret = default, Option<string?> vatNumber = default, Option<string?> iban = default, Option<PostalAddress?> postalAddress = default)
+        public Supplier(int supplierId, ElectronicAddress? electronicAddress = default, Option<string?> privateId = default, Option<int?> supplierBankAccountCode = default, Option<int?> supplierServiceId = default, Option<string?> name = default, Option<string?> tradingBusinessName = default, Option<string?> legalDescription = default, Option<string?> siren = default, Option<string?> siret = default, Option<string?> vatNumber = default, Option<string?> iban = default, Option<string?> bic = default, Option<string?> bankAccountName = default, Option<string?> proprietaryId = default, Option<PostalAddress?> postalAddress = default, Option<Contact?> contact = default, Option<List<ElectronicAddress>?> globalIds = default)
         {
             SupplierId = supplierId;
             ElectronicAddress = electronicAddress;
+            PrivateIdOption = privateId;
             SupplierBankAccountCodeOption = supplierBankAccountCode;
             SupplierServiceIdOption = supplierServiceId;
             NameOption = name;
+            TradingBusinessNameOption = tradingBusinessName;
+            LegalDescriptionOption = legalDescription;
             SirenOption = siren;
             SiretOption = siret;
             VatNumberOption = vatNumber;
             IbanOption = iban;
+            BicOption = bic;
+            BankAccountNameOption = bankAccountName;
+            ProprietaryIdOption = proprietaryId;
             PostalAddressOption = postalAddress;
+            ContactOption = contact;
+            GlobalIdsOption = globalIds;
             OnCreated();
         }
 
@@ -72,6 +88,19 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonPropertyName("electronic_address")]
         public ElectronicAddress? ElectronicAddress { get; set; }
+
+        /// <summary>
+        /// Used to track the state of PrivateId
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> PrivateIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets PrivateId
+        /// </summary>
+        [JsonPropertyName("private_id")]
+        public string? PrivateId { get { return this.PrivateIdOption; } set { this.PrivateIdOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of SupplierBankAccountCode
@@ -111,6 +140,32 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonPropertyName("name")]
         public string? Name { get { return this.NameOption; } set { this.NameOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of TradingBusinessName
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> TradingBusinessNameOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets TradingBusinessName
+        /// </summary>
+        [JsonPropertyName("trading_business_name")]
+        public string? TradingBusinessName { get { return this.TradingBusinessNameOption; } set { this.TradingBusinessNameOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of LegalDescription
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> LegalDescriptionOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets LegalDescription
+        /// </summary>
+        [JsonPropertyName("legal_description")]
+        public string? LegalDescription { get { return this.LegalDescriptionOption; } set { this.LegalDescriptionOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Siren
@@ -165,6 +220,45 @@ namespace FactPulse.SDK.Model
         public string? Iban { get { return this.IbanOption; } set { this.IbanOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of Bic
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> BicOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Bic
+        /// </summary>
+        [JsonPropertyName("bic")]
+        public string? Bic { get { return this.BicOption; } set { this.BicOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of BankAccountName
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> BankAccountNameOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets BankAccountName
+        /// </summary>
+        [JsonPropertyName("bank_account_name")]
+        public string? BankAccountName { get { return this.BankAccountNameOption; } set { this.BankAccountNameOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of ProprietaryId
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> ProprietaryIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ProprietaryId
+        /// </summary>
+        [JsonPropertyName("proprietaryId")]
+        public string? ProprietaryId { get { return this.ProprietaryIdOption; } set { this.ProprietaryIdOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of PostalAddress
         /// </summary>
         [JsonIgnore]
@@ -178,6 +272,32 @@ namespace FactPulse.SDK.Model
         public PostalAddress? PostalAddress { get { return this.PostalAddressOption; } set { this.PostalAddressOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of Contact
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<Contact?> ContactOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Contact
+        /// </summary>
+        [JsonPropertyName("contact")]
+        public Contact? Contact { get { return this.ContactOption; } set { this.ContactOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of GlobalIds
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<ElectronicAddress>?> GlobalIdsOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets GlobalIds
+        /// </summary>
+        [JsonPropertyName("global_ids")]
+        public List<ElectronicAddress>? GlobalIds { get { return this.GlobalIdsOption; } set { this.GlobalIdsOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -187,14 +307,22 @@ namespace FactPulse.SDK.Model
             sb.Append("class Supplier {\n");
             sb.Append("  SupplierId: ").Append(SupplierId).Append("\n");
             sb.Append("  ElectronicAddress: ").Append(ElectronicAddress).Append("\n");
+            sb.Append("  PrivateId: ").Append(PrivateId).Append("\n");
             sb.Append("  SupplierBankAccountCode: ").Append(SupplierBankAccountCode).Append("\n");
             sb.Append("  SupplierServiceId: ").Append(SupplierServiceId).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  TradingBusinessName: ").Append(TradingBusinessName).Append("\n");
+            sb.Append("  LegalDescription: ").Append(LegalDescription).Append("\n");
             sb.Append("  Siren: ").Append(Siren).Append("\n");
             sb.Append("  Siret: ").Append(Siret).Append("\n");
             sb.Append("  VatNumber: ").Append(VatNumber).Append("\n");
             sb.Append("  Iban: ").Append(Iban).Append("\n");
+            sb.Append("  Bic: ").Append(Bic).Append("\n");
+            sb.Append("  BankAccountName: ").Append(BankAccountName).Append("\n");
+            sb.Append("  ProprietaryId: ").Append(ProprietaryId).Append("\n");
             sb.Append("  PostalAddress: ").Append(PostalAddress).Append("\n");
+            sb.Append("  Contact: ").Append(Contact).Append("\n");
+            sb.Append("  GlobalIds: ").Append(GlobalIds).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -234,14 +362,22 @@ namespace FactPulse.SDK.Model
 
             Option<int?> supplierId = default;
             Option<ElectronicAddress?> electronicAddress = default;
+            Option<string?> privateId = default;
             Option<int?> supplierBankAccountCode = default;
             Option<int?> supplierServiceId = default;
             Option<string?> name = default;
+            Option<string?> tradingBusinessName = default;
+            Option<string?> legalDescription = default;
             Option<string?> siren = default;
             Option<string?> siret = default;
             Option<string?> vatNumber = default;
             Option<string?> iban = default;
+            Option<string?> bic = default;
+            Option<string?> bankAccountName = default;
+            Option<string?> proprietaryId = default;
             Option<PostalAddress?> postalAddress = default;
+            Option<Contact?> contact = default;
+            Option<List<ElectronicAddress>?> globalIds = default;
 
             while (utf8JsonReader.Read())
             {
@@ -264,6 +400,9 @@ namespace FactPulse.SDK.Model
                         case "electronic_address":
                             electronicAddress = new Option<ElectronicAddress?>(JsonSerializer.Deserialize<ElectronicAddress>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
+                        case "private_id":
+                            privateId = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         case "supplier_bank_account_code":
                             supplierBankAccountCode = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
@@ -272,6 +411,12 @@ namespace FactPulse.SDK.Model
                             break;
                         case "name":
                             name = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "trading_business_name":
+                            tradingBusinessName = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "legal_description":
+                            legalDescription = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "siren":
                             siren = new Option<string?>(utf8JsonReader.GetString());
@@ -285,8 +430,23 @@ namespace FactPulse.SDK.Model
                         case "iban":
                             iban = new Option<string?>(utf8JsonReader.GetString());
                             break;
+                        case "bic":
+                            bic = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "bank_account_name":
+                            bankAccountName = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "proprietaryId":
+                            proprietaryId = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         case "postal_address":
                             postalAddress = new Option<PostalAddress?>(JsonSerializer.Deserialize<PostalAddress>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "contact":
+                            contact = new Option<Contact?>(JsonSerializer.Deserialize<Contact>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "global_ids":
+                            globalIds = new Option<List<ElectronicAddress>?>(JsonSerializer.Deserialize<List<ElectronicAddress>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -303,7 +463,7 @@ namespace FactPulse.SDK.Model
             if (supplierId.IsSet && supplierId.Value == null)
                 throw new ArgumentNullException(nameof(supplierId), "Property is not nullable for class Supplier.");
 
-            return new Supplier(supplierId.Value!.Value!, electronicAddress.Value!, supplierBankAccountCode, supplierServiceId, name, siren, siret, vatNumber, iban, postalAddress);
+            return new Supplier(supplierId.Value!.Value!, electronicAddress.Value!, privateId, supplierBankAccountCode, supplierServiceId, name, tradingBusinessName, legalDescription, siren, siret, vatNumber, iban, bic, bankAccountName, proprietaryId, postalAddress, contact, globalIds);
         }
 
         /// <summary>
@@ -339,6 +499,12 @@ namespace FactPulse.SDK.Model
             }
             else
                 writer.WriteNull("electronic_address");
+            if (supplier.PrivateIdOption.IsSet)
+                if (supplier.PrivateIdOption.Value != null)
+                    writer.WriteString("private_id", supplier.PrivateId);
+                else
+                    writer.WriteNull("private_id");
+
             if (supplier.SupplierBankAccountCodeOption.IsSet)
                 if (supplier.SupplierBankAccountCodeOption.Value != null)
                     writer.WriteNumber("supplier_bank_account_code", supplier.SupplierBankAccountCodeOption.Value!.Value);
@@ -356,6 +522,18 @@ namespace FactPulse.SDK.Model
                     writer.WriteString("name", supplier.Name);
                 else
                     writer.WriteNull("name");
+
+            if (supplier.TradingBusinessNameOption.IsSet)
+                if (supplier.TradingBusinessNameOption.Value != null)
+                    writer.WriteString("trading_business_name", supplier.TradingBusinessName);
+                else
+                    writer.WriteNull("trading_business_name");
+
+            if (supplier.LegalDescriptionOption.IsSet)
+                if (supplier.LegalDescriptionOption.Value != null)
+                    writer.WriteString("legal_description", supplier.LegalDescription);
+                else
+                    writer.WriteNull("legal_description");
 
             if (supplier.SirenOption.IsSet)
                 if (supplier.SirenOption.Value != null)
@@ -381,6 +559,24 @@ namespace FactPulse.SDK.Model
                 else
                     writer.WriteNull("iban");
 
+            if (supplier.BicOption.IsSet)
+                if (supplier.BicOption.Value != null)
+                    writer.WriteString("bic", supplier.Bic);
+                else
+                    writer.WriteNull("bic");
+
+            if (supplier.BankAccountNameOption.IsSet)
+                if (supplier.BankAccountNameOption.Value != null)
+                    writer.WriteString("bank_account_name", supplier.BankAccountName);
+                else
+                    writer.WriteNull("bank_account_name");
+
+            if (supplier.ProprietaryIdOption.IsSet)
+                if (supplier.ProprietaryIdOption.Value != null)
+                    writer.WriteString("proprietaryId", supplier.ProprietaryId);
+                else
+                    writer.WriteNull("proprietaryId");
+
             if (supplier.PostalAddressOption.IsSet)
                 if (supplier.PostalAddressOption.Value != null)
                 {
@@ -389,6 +585,22 @@ namespace FactPulse.SDK.Model
                 }
                 else
                     writer.WriteNull("postal_address");
+            if (supplier.ContactOption.IsSet)
+                if (supplier.ContactOption.Value != null)
+                {
+                    writer.WritePropertyName("contact");
+                    JsonSerializer.Serialize(writer, supplier.Contact, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("contact");
+            if (supplier.GlobalIdsOption.IsSet)
+                if (supplier.GlobalIdsOption.Value != null)
+                {
+                    writer.WritePropertyName("global_ids");
+                    JsonSerializer.Serialize(writer, supplier.GlobalIds, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("global_ids");
         }
     }
 }

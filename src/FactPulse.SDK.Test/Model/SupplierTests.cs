@@ -72,6 +72,15 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'PrivateId'
+        /// </summary>
+        [Fact]
+        public void PrivateIdTest()
+        {
+            // TODO unit test for the property 'PrivateId'
+        }
+
+        /// <summary>
         /// Test the property 'SupplierBankAccountCode'
         /// </summary>
         [Fact]
@@ -96,6 +105,24 @@ namespace FactPulse.SDK.Test.Model
         public void NameTest()
         {
             // TODO unit test for the property 'Name'
+        }
+
+        /// <summary>
+        /// Test the property 'TradingBusinessName'
+        /// </summary>
+        [Fact]
+        public void TradingBusinessNameTest()
+        {
+            // TODO unit test for the property 'TradingBusinessName'
+        }
+
+        /// <summary>
+        /// Test the property 'LegalDescription'
+        /// </summary>
+        [Fact]
+        public void LegalDescriptionTest()
+        {
+            // TODO unit test for the property 'LegalDescription'
         }
 
         /// <summary>
@@ -135,12 +162,57 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'Bic'
+        /// </summary>
+        [Fact]
+        public void BicTest()
+        {
+            // TODO unit test for the property 'Bic'
+        }
+
+        /// <summary>
+        /// Test the property 'BankAccountName'
+        /// </summary>
+        [Fact]
+        public void BankAccountNameTest()
+        {
+            // TODO unit test for the property 'BankAccountName'
+        }
+
+        /// <summary>
+        /// Test the property 'ProprietaryId'
+        /// </summary>
+        [Fact]
+        public void ProprietaryIdTest()
+        {
+            // TODO unit test for the property 'ProprietaryId'
+        }
+
+        /// <summary>
         /// Test the property 'PostalAddress'
         /// </summary>
         [Fact]
         public void PostalAddressTest()
         {
             // TODO unit test for the property 'PostalAddress'
+        }
+
+        /// <summary>
+        /// Test the property 'Contact'
+        /// </summary>
+        [Fact]
+        public void ContactTest()
+        {
+            // TODO unit test for the property 'Contact'
+        }
+
+        /// <summary>
+        /// Test the property 'GlobalIds'
+        /// </summary>
+        [Fact]
+        public void GlobalIdsTest()
+        {
+            // TODO unit test for the property 'GlobalIds'
         }
     }
 }

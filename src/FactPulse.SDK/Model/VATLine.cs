@@ -26,7 +26,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Represents a VAT breakdown line by rate.  For exemptions (categories E, AE, K, G, O), the fields &#x60;exemption_reason&#x60; and &#x60;vatex_code&#x60; are required per EN16931.
+    /// Represents a VAT breakdown line by rate (BG-23).  For exemptions (categories E, AE, K, G, O), the fields &#x60;exemption_reason&#x60; and &#x60;vatex_code&#x60; are required per EN16931.
     /// </summary>
     public partial class VATLine : IValidatableObject
     {
@@ -38,16 +38,18 @@ namespace FactPulse.SDK.Model
         /// <param name="rate">rate</param>
         /// <param name="manualRate">manualRate</param>
         /// <param name="category">category</param>
+        /// <param name="dueDateTypeCode">dueDateTypeCode</param>
         /// <param name="exemptionReason">exemptionReason</param>
         /// <param name="vatexCode">vatexCode</param>
         [JsonConstructor]
-        public VATLine(TaxableAmount taxableAmount, VATAmount vatAmount, Option<string?> rate = default, Option<ManualRate?> manualRate = default, Option<VATCategory?> category = default, Option<string?> exemptionReason = default, Option<string?> vatexCode = default)
+        public VATLine(TaxableAmount taxableAmount, VATAmount vatAmount, Option<string?> rate = default, Option<ManualRate?> manualRate = default, Option<VATCategory?> category = default, Option<VATPointDateCode?> dueDateTypeCode = default, Option<string?> exemptionReason = default, Option<string?> vatexCode = default)
         {
             TaxableAmount = taxableAmount;
             VatAmount = vatAmount;
             RateOption = rate;
             ManualRateOption = manualRate;
             CategoryOption = category;
+            DueDateTypeCodeOption = dueDateTypeCode;
             ExemptionReasonOption = exemptionReason;
             VatexCodeOption = vatexCode;
             OnCreated();
@@ -67,6 +69,19 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonPropertyName("category")]
         public VATCategory? Category { get { return this.CategoryOption; } set { this.CategoryOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of DueDateTypeCode
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<VATPointDateCode?> DueDateTypeCodeOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets DueDateTypeCode
+        /// </summary>
+        [JsonPropertyName("due_date_type_code")]
+        public VATPointDateCode? DueDateTypeCode { get { return this.DueDateTypeCodeOption; } set { this.DueDateTypeCodeOption = new(value); } }
 
         /// <summary>
         /// Gets or Sets TaxableAmount
@@ -145,6 +160,7 @@ namespace FactPulse.SDK.Model
             sb.Append("  Rate: ").Append(Rate).Append("\n");
             sb.Append("  ManualRate: ").Append(ManualRate).Append("\n");
             sb.Append("  Category: ").Append(Category).Append("\n");
+            sb.Append("  DueDateTypeCode: ").Append(DueDateTypeCode).Append("\n");
             sb.Append("  ExemptionReason: ").Append(ExemptionReason).Append("\n");
             sb.Append("  VatexCode: ").Append(VatexCode).Append("\n");
             sb.Append("}\n");
@@ -189,6 +205,7 @@ namespace FactPulse.SDK.Model
             Option<string?> rate = default;
             Option<ManualRate?> manualRate = default;
             Option<VATCategory?> category = default;
+            Option<VATPointDateCode?> dueDateTypeCode = default;
             Option<string?> exemptionReason = default;
             Option<string?> vatexCode = default;
 
@@ -224,6 +241,11 @@ namespace FactPulse.SDK.Model
                             if (categoryRawValue != null)
                                 category = new Option<VATCategory?>(VATCategoryValueConverter.FromStringOrDefault(categoryRawValue));
                             break;
+                        case "due_date_type_code":
+                            string? dueDateTypeCodeRawValue = utf8JsonReader.GetString();
+                            if (dueDateTypeCodeRawValue != null)
+                                dueDateTypeCode = new Option<VATPointDateCode?>(VATPointDateCodeValueConverter.FromStringOrDefault(dueDateTypeCodeRawValue));
+                            break;
                         case "exemption_reason":
                             exemptionReason = new Option<string?>(utf8JsonReader.GetString());
                             break;
@@ -251,7 +273,7 @@ namespace FactPulse.SDK.Model
             if (manualRate.IsSet && manualRate.Value == null)
                 throw new ArgumentNullException(nameof(manualRate), "Property is not nullable for class VATLine.");
 
-            return new VATLine(taxableAmount.Value!, vatAmount.Value!, rate, manualRate, category, exemptionReason, vatexCode);
+            return new VATLine(taxableAmount.Value!, vatAmount.Value!, rate, manualRate, category, dueDateTypeCode, exemptionReason, vatexCode);
         }
 
         /// <summary>
@@ -310,6 +332,14 @@ namespace FactPulse.SDK.Model
                 }
                 else
                     writer.WriteNull("category");
+            if (vATLine.DueDateTypeCodeOption.IsSet)
+                if (vATLine.DueDateTypeCodeOption!.Value != null)
+                {
+                    var dueDateTypeCodeRawValue = VATPointDateCodeValueConverter.ToJsonValue(vATLine.DueDateTypeCodeOption.Value!.Value);
+                    writer.WriteString("due_date_type_code", dueDateTypeCodeRawValue);
+                }
+                else
+                    writer.WriteNull("due_date_type_code");
             if (vATLine.ExemptionReasonOption.IsSet)
                 if (vATLine.ExemptionReasonOption.Value != null)
                     writer.WriteString("exemption_reason", vATLine.ExemptionReason);

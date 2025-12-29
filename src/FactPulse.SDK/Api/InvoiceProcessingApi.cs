@@ -49,7 +49,7 @@ namespace FactPulse.SDK.Api
         /// <param name="sourcePdf"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse"/>&gt;</returns>
-        Task<IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse> GenerateInvoiceApiV1ProcessingGenerateInvoicePostAsync(string invoiceData, Option<APIProfile> profile = default, Option<OutputFormat> outputFormat = default, Option<bool> autoEnrich = default, Option<System.IO.Stream?> sourcePdf = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse> GenerateInvoiceApiV1ProcessingGenerateInvoicePostAsync(string invoiceData, Option<FacturXProfile> profile = default, Option<OutputFormat> outputFormat = default, Option<bool> autoEnrich = default, Option<System.IO.Stream?> sourcePdf = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Generate a Factur-X invoice
@@ -64,7 +64,7 @@ namespace FactPulse.SDK.Api
         /// <param name="sourcePdf"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse"/>?&gt;</returns>
-        Task<IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse?> GenerateInvoiceApiV1ProcessingGenerateInvoicePostOrDefaultAsync(string invoiceData, Option<APIProfile> profile = default, Option<OutputFormat> outputFormat = default, Option<bool> autoEnrich = default, Option<System.IO.Stream?> sourcePdf = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse?> GenerateInvoiceApiV1ProcessingGenerateInvoicePostOrDefaultAsync(string invoiceData, Option<FacturXProfile> profile = default, Option<OutputFormat> outputFormat = default, Option<bool> autoEnrich = default, Option<System.IO.Stream?> sourcePdf = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Generate a self-signed X.509 test certificate
@@ -240,7 +240,7 @@ namespace FactPulse.SDK.Api
         /// <param name="useVerapdf">Enable strict PDF/A validation with VeraPDF (recommended for production). If False, uses basic metadata validation. (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse"/>&gt;</returns>
-        Task<IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse> ValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostAsync(System.IO.Stream pdfFile, Option<APIProfile?> profile = default, Option<bool> useVerapdf = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse> ValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostAsync(System.IO.Stream pdfFile, Option<FacturXProfile?> profile = default, Option<bool> useVerapdf = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Validate a complete Factur-X PDF
@@ -253,7 +253,7 @@ namespace FactPulse.SDK.Api
         /// <param name="useVerapdf">Enable strict PDF/A validation with VeraPDF (recommended for production). If False, uses basic metadata validation. (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse"/>?&gt;</returns>
-        Task<IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse?> ValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostOrDefaultAsync(System.IO.Stream pdfFile, Option<APIProfile?> profile = default, Option<bool> useVerapdf = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse?> ValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostOrDefaultAsync(System.IO.Stream pdfFile, Option<FacturXProfile?> profile = default, Option<bool> useVerapdf = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Validate a Factur-X PDF (asynchronous with polling)
@@ -267,7 +267,7 @@ namespace FactPulse.SDK.Api
         /// <param name="useVerapdf">Enable strict PDF/A validation with VeraPDF (recommended for production). May take several seconds. (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse"/>&gt;</returns>
-        Task<IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse> ValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostAsync(System.IO.Stream pdfFile, Option<APIProfile?> profile = default, Option<bool> useVerapdf = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse> ValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostAsync(System.IO.Stream pdfFile, Option<FacturXProfile?> profile = default, Option<bool> useVerapdf = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Validate a Factur-X PDF (asynchronous with polling)
@@ -280,7 +280,7 @@ namespace FactPulse.SDK.Api
         /// <param name="useVerapdf">Enable strict PDF/A validation with VeraPDF (recommended for production). May take several seconds. (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse"/>?&gt;</returns>
-        Task<IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse?> ValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostOrDefaultAsync(System.IO.Stream pdfFile, Option<APIProfile?> profile = default, Option<bool> useVerapdf = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse?> ValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostOrDefaultAsync(System.IO.Stream pdfFile, Option<FacturXProfile?> profile = default, Option<bool> useVerapdf = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Validate electronic signatures of a PDF
@@ -316,7 +316,7 @@ namespace FactPulse.SDK.Api
         /// <param name="profile">Validation profile (MINIMUM, BASIC, EN16931, EXTENDED). (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateXmlApiV1ProcessingValidateXmlPostApiResponse"/>&gt;</returns>
-        Task<IValidateXmlApiV1ProcessingValidateXmlPostApiResponse> ValidateXmlApiV1ProcessingValidateXmlPostAsync(System.IO.Stream xmlFile, Option<APIProfile> profile = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IValidateXmlApiV1ProcessingValidateXmlPostApiResponse> ValidateXmlApiV1ProcessingValidateXmlPostAsync(System.IO.Stream xmlFile, Option<FacturXProfile> profile = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Validate an existing Factur-X XML
@@ -328,7 +328,7 @@ namespace FactPulse.SDK.Api
         /// <param name="profile">Validation profile (MINIMUM, BASIC, EN16931, EXTENDED). (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateXmlApiV1ProcessingValidateXmlPostApiResponse"/>?&gt;</returns>
-        Task<IValidateXmlApiV1ProcessingValidateXmlPostApiResponse?> ValidateXmlApiV1ProcessingValidateXmlPostOrDefaultAsync(System.IO.Stream xmlFile, Option<APIProfile> profile = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IValidateXmlApiV1ProcessingValidateXmlPostApiResponse?> ValidateXmlApiV1ProcessingValidateXmlPostOrDefaultAsync(System.IO.Stream xmlFile, Option<FacturXProfile> profile = default, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -886,7 +886,7 @@ namespace FactPulse.SDK.Api
             BearerTokenProvider = bearerTokenProvider;
         }
 
-        partial void FormatGenerateInvoiceApiV1ProcessingGenerateInvoicePost(ref string invoiceData, ref Option<APIProfile> profile, ref Option<OutputFormat> outputFormat, ref Option<bool> autoEnrich, ref Option<System.IO.Stream?> sourcePdf);
+        partial void FormatGenerateInvoiceApiV1ProcessingGenerateInvoicePost(ref string invoiceData, ref Option<FacturXProfile> profile, ref Option<OutputFormat> outputFormat, ref Option<bool> autoEnrich, ref Option<System.IO.Stream?> sourcePdf);
 
         /// <summary>
         /// Validates the request parameters
@@ -908,7 +908,7 @@ namespace FactPulse.SDK.Api
         /// <param name="outputFormat"></param>
         /// <param name="autoEnrich"></param>
         /// <param name="sourcePdf"></param>
-        private void AfterGenerateInvoiceApiV1ProcessingGenerateInvoicePostDefaultImplementation(IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse apiResponseLocalVar, string invoiceData, Option<APIProfile> profile, Option<OutputFormat> outputFormat, Option<bool> autoEnrich, Option<System.IO.Stream?> sourcePdf)
+        private void AfterGenerateInvoiceApiV1ProcessingGenerateInvoicePostDefaultImplementation(IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse apiResponseLocalVar, string invoiceData, Option<FacturXProfile> profile, Option<OutputFormat> outputFormat, Option<bool> autoEnrich, Option<System.IO.Stream?> sourcePdf)
         {
             bool suppressDefaultLog = false;
             AfterGenerateInvoiceApiV1ProcessingGenerateInvoicePost(ref suppressDefaultLog, apiResponseLocalVar, invoiceData, profile, outputFormat, autoEnrich, sourcePdf);
@@ -926,7 +926,7 @@ namespace FactPulse.SDK.Api
         /// <param name="outputFormat"></param>
         /// <param name="autoEnrich"></param>
         /// <param name="sourcePdf"></param>
-        partial void AfterGenerateInvoiceApiV1ProcessingGenerateInvoicePost(ref bool suppressDefaultLog, IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse apiResponseLocalVar, string invoiceData, Option<APIProfile> profile, Option<OutputFormat> outputFormat, Option<bool> autoEnrich, Option<System.IO.Stream?> sourcePdf);
+        partial void AfterGenerateInvoiceApiV1ProcessingGenerateInvoicePost(ref bool suppressDefaultLog, IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse apiResponseLocalVar, string invoiceData, Option<FacturXProfile> profile, Option<OutputFormat> outputFormat, Option<bool> autoEnrich, Option<System.IO.Stream?> sourcePdf);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -939,7 +939,7 @@ namespace FactPulse.SDK.Api
         /// <param name="outputFormat"></param>
         /// <param name="autoEnrich"></param>
         /// <param name="sourcePdf"></param>
-        private void OnErrorGenerateInvoiceApiV1ProcessingGenerateInvoicePostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string invoiceData, Option<APIProfile> profile, Option<OutputFormat> outputFormat, Option<bool> autoEnrich, Option<System.IO.Stream?> sourcePdf)
+        private void OnErrorGenerateInvoiceApiV1ProcessingGenerateInvoicePostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string invoiceData, Option<FacturXProfile> profile, Option<OutputFormat> outputFormat, Option<bool> autoEnrich, Option<System.IO.Stream?> sourcePdf)
         {
             bool suppressDefaultLogLocalVar = false;
             OnErrorGenerateInvoiceApiV1ProcessingGenerateInvoicePost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, invoiceData, profile, outputFormat, autoEnrich, sourcePdf);
@@ -959,7 +959,7 @@ namespace FactPulse.SDK.Api
         /// <param name="outputFormat"></param>
         /// <param name="autoEnrich"></param>
         /// <param name="sourcePdf"></param>
-        partial void OnErrorGenerateInvoiceApiV1ProcessingGenerateInvoicePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string invoiceData, Option<APIProfile> profile, Option<OutputFormat> outputFormat, Option<bool> autoEnrich, Option<System.IO.Stream?> sourcePdf);
+        partial void OnErrorGenerateInvoiceApiV1ProcessingGenerateInvoicePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string invoiceData, Option<FacturXProfile> profile, Option<OutputFormat> outputFormat, Option<bool> autoEnrich, Option<System.IO.Stream?> sourcePdf);
 
         /// <summary>
         /// Generate a Factur-X invoice Generates an electronic invoice in Factur-X format compliant with European standards.  ## Applied Standards  - **Factur-X** (France): FNFE-MPE standard (Forum National de la Facture Électronique) - **ZUGFeRD** (Germany): German format compatible with Factur-X - **EN 16931**: European semantic standard for electronic invoicing - **ISO 19005-3** (PDF/A-3): Long-term electronic archiving - **Cross Industry Invoice (CII)**: UN/CEFACT XML syntax  ## 🆕 New: Simplified format with auto-enrichment (P0.1)  You can now create an invoice by providing only: - An invoice number - A sender SIRET + **IBAN** (required) - A recipient SIRET - Invoice lines (description, quantity, net price)  **Simplified format example**: &#x60;&#x60;&#x60;json {   \&quot;number\&quot;: \&quot;FACT-2025-001\&quot;,   \&quot;sender\&quot;: {     \&quot;siret\&quot;: \&quot;92019522900017\&quot;,     \&quot;iban\&quot;: \&quot;FR7630001007941234567890185\&quot;   },   \&quot;recipient\&quot;: {\&quot;siret\&quot;: \&quot;35600000000048\&quot;},   \&quot;lines\&quot;: [     {\&quot;description\&quot;: \&quot;Service\&quot;, \&quot;quantity\&quot;: 10, \&quot;unitPrice\&quot;: 100.00, \&quot;vatRate\&quot;: 20.0}   ] } &#x60;&#x60;&#x60;  **⚠️ Required fields (simplified format)**: - &#x60;number&#x60;: Unique invoice number - &#x60;sender.siret&#x60;: Sender&#39;s SIRET (14 digits) - &#x60;sender.iban&#x60;: Bank account IBAN (no public API to retrieve it) - &#x60;recipient.siret&#x60;: Recipient&#39;s SIRET - &#x60;lines[]&#x60;: At least one invoice line  **What happens automatically with &#x60;auto_enrich&#x3D;True&#x60;**: - ✅ Name enrichment from Chorus Pro API - ✅ Address enrichment from Business Search API (free, public) - ✅ Automatic intra-EU VAT calculation (FR + key + SIREN) - ✅ Chorus Pro ID retrieval for electronic invoicing - ✅ Net/VAT/Gross totals calculation - ✅ Date generation (today + 30-day due date) - ✅ Multi-rate VAT handling  **Supported identifiers**: - SIRET (14 digits): Specific establishment ⭐ Recommended - SIREN (9 digits): Company (auto-selection of headquarters) - Special types: UE_HORS_FRANCE, RIDET, TAHITI, etc.  ## Checks performed during generation  ### 1. Data validation (Pydantic) - Data types (amounts as Decimal, ISO 8601 dates) - Formats (14-digit SIRET, 9-digit SIREN, IBAN) - Required fields per profile - Amount consistency (Net + VAT &#x3D; Gross)  ### 2. CII-compliant XML generation - Serialization according to Cross Industry Invoice XSD schema - Correct UN/CEFACT namespaces - Hierarchical structure respected - UTF-8 encoding without BOM  ### 3. Schematron validation - Business rules for selected profile (MINIMUM, BASIC, EN16931, EXTENDED) - Element cardinality (required, optional, repeatable) - Calculation rules (totals, VAT, discounts) - European EN 16931 compliance  ### 4. PDF/A-3 conversion (if output_format&#x3D;&#39;pdf&#39;) - Source PDF conversion to PDF/A-3 via Ghostscript - Factur-X XML embedding in PDF - Compliant XMP metadata - ICC sRGB color profile - Removal of forbidden elements (JavaScript, forms)  ## How it works  1. **Submission**: Invoice is queued in Celery for asynchronous processing 2. **Immediate return**: You receive a &#x60;task_id&#x60; (HTTP 202 Accepted) 3. **Tracking**: Use the &#x60;/tasks/{task_id}/status&#x60; endpoint to track progress  ## Output formats  - **xml**: Generates only Factur-X XML (recommended for testing) - **pdf**: Generates PDF/A-3 with embedded XML (requires &#x60;source_pdf&#x60;)  ## Factur-X profiles  - **MINIMUM**: Minimal data (simplified invoice) - **BASIC**: Basic information (SMEs) - **EN16931**: European standard (recommended, compliant with directive 2014/55/EU) - **EXTENDED**: All available data (large accounts)  ## What you get  After successful processing (status &#x60;completed&#x60;): - **XML only**: Base64-encoded Factur-X compliant XML file - **PDF/A-3**: PDF with embedded XML, ready for sending/archiving - **Metadata**: Profile, Factur-X version, file size - **Validation**: Schematron compliance confirmation  ## Validation  Data is automatically validated according to detected format. On error, a 422 status is returned with invalid field details.
@@ -971,7 +971,7 @@ namespace FactPulse.SDK.Api
         /// <param name="sourcePdf"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse"/>&gt;</returns>
-        public async Task<IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse?> GenerateInvoiceApiV1ProcessingGenerateInvoicePostOrDefaultAsync(string invoiceData, Option<APIProfile> profile = default, Option<OutputFormat> outputFormat = default, Option<bool> autoEnrich = default, Option<System.IO.Stream?> sourcePdf = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse?> GenerateInvoiceApiV1ProcessingGenerateInvoicePostOrDefaultAsync(string invoiceData, Option<FacturXProfile> profile = default, Option<OutputFormat> outputFormat = default, Option<bool> autoEnrich = default, Option<System.IO.Stream?> sourcePdf = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -994,7 +994,7 @@ namespace FactPulse.SDK.Api
         /// <param name="sourcePdf"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse"/>&gt;</returns>
-        public async Task<IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse> GenerateInvoiceApiV1ProcessingGenerateInvoicePostAsync(string invoiceData, Option<APIProfile> profile = default, Option<OutputFormat> outputFormat = default, Option<bool> autoEnrich = default, Option<System.IO.Stream?> sourcePdf = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse> GenerateInvoiceApiV1ProcessingGenerateInvoicePostAsync(string invoiceData, Option<FacturXProfile> profile = default, Option<OutputFormat> outputFormat = default, Option<bool> autoEnrich = default, Option<System.IO.Stream?> sourcePdf = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -3189,7 +3189,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPost(ref System.IO.Stream pdfFile, ref Option<APIProfile?> profile, ref Option<bool> useVerapdf);
+        partial void FormatValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPost(ref System.IO.Stream pdfFile, ref Option<FacturXProfile?> profile, ref Option<bool> useVerapdf);
 
         /// <summary>
         /// Validates the request parameters
@@ -3209,7 +3209,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pdfFile"></param>
         /// <param name="profile"></param>
         /// <param name="useVerapdf"></param>
-        private void AfterValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostDefaultImplementation(IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse apiResponseLocalVar, System.IO.Stream pdfFile, Option<APIProfile?> profile, Option<bool> useVerapdf)
+        private void AfterValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostDefaultImplementation(IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse apiResponseLocalVar, System.IO.Stream pdfFile, Option<FacturXProfile?> profile, Option<bool> useVerapdf)
         {
             bool suppressDefaultLog = false;
             AfterValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPost(ref suppressDefaultLog, apiResponseLocalVar, pdfFile, profile, useVerapdf);
@@ -3225,7 +3225,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pdfFile"></param>
         /// <param name="profile"></param>
         /// <param name="useVerapdf"></param>
-        partial void AfterValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPost(ref bool suppressDefaultLog, IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse apiResponseLocalVar, System.IO.Stream pdfFile, Option<APIProfile?> profile, Option<bool> useVerapdf);
+        partial void AfterValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPost(ref bool suppressDefaultLog, IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse apiResponseLocalVar, System.IO.Stream pdfFile, Option<FacturXProfile?> profile, Option<bool> useVerapdf);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -3236,7 +3236,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pdfFile"></param>
         /// <param name="profile"></param>
         /// <param name="useVerapdf"></param>
-        private void OnErrorValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream pdfFile, Option<APIProfile?> profile, Option<bool> useVerapdf)
+        private void OnErrorValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream pdfFile, Option<FacturXProfile?> profile, Option<bool> useVerapdf)
         {
             bool suppressDefaultLogLocalVar = false;
             OnErrorValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, pdfFile, profile, useVerapdf);
@@ -3254,7 +3254,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pdfFile"></param>
         /// <param name="profile"></param>
         /// <param name="useVerapdf"></param>
-        partial void OnErrorValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream pdfFile, Option<APIProfile?> profile, Option<bool> useVerapdf);
+        partial void OnErrorValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream pdfFile, Option<FacturXProfile?> profile, Option<bool> useVerapdf);
 
         /// <summary>
         /// Validate a complete Factur-X PDF Validates a complete Factur-X PDF according to European and French standards.  ## Applied validation standards  - **EN 16931**: European semantic standard (directive 2014/55/EU) - **ISO 19005-3** (PDF/A-3): Long-term electronic archiving - **Factur-X / ZUGFeRD**: Franco-German specification - **Schematron**: XML business rules validation - **eIDAS**: European regulation on electronic identification (signatures)  ## Checks performed  ### 1. Factur-X XML extraction and validation **Checks performed:** - Presence of embedded XML file (&#x60;factur-x.xml&#x60; or &#x60;zugferd-invoice.xml&#x60;) - Automatic profile detection (MINIMUM, BASIC, EN16931, EXTENDED) - XML parsing with UTF-8 validation - GuidelineSpecifiedDocumentContextParameter/ID extraction  **Schematron validation:** - Business rules for detected profile (MINIMUM: 45 rules, EN16931: 178 rules) - Cardinality of required elements - Calculation consistency (net, VAT, gross amounts, discounts) - Identifier formats (SIRET, intra-EU VAT, IBAN) - Standardized codes (ISO country codes, UN/ECE units, VAT codes)  **What is verified:** - ✅ XML structure conforming to Cross Industry Invoice XSD - ✅ Correct UN/CEFACT namespace - ✅ European business rules (BR-xx) - ✅ French-specific rules (FR-xx)  ### 2. PDF/A-3 compliance **Basic validation (metadata):** - Presence of &#x60;/Type&#x60; field set to &#x60;Catalog&#x60; - Metadata &#x60;pdfaid:part&#x60; &#x3D; 3 (PDF/A-3) - Metadata &#x60;pdfaid:conformance&#x60; &#x3D; B or U - PDF version &gt;&#x3D; 1.4  **Strict VeraPDF validation (if use_verapdf&#x3D;True):** - 146+ ISO 19005-3 rules (PDF/A-3B) - Absence of forbidden content (JavaScript, multimedia, dynamic forms) - Correctly embedded fonts and subsets - Compliant color spaces (sRGB, DeviceGray) - Valid file structure (cross-reference table) - XMP metadata conforming to ISO 16684-1  **What is verified:** - ✅ Long-term archivable file (20+ years) - ✅ Guaranteed readability (embedded fonts) - ✅ Legal compliance (France, Germany, EU)  ### 3. XMP metadata (eXtensible Metadata Platform) **Checks performed:** - Presence of &#x60;&lt;?xpacket&gt;&#x60; block with XMP metadata - &#x60;fx:&#x60; namespace for Factur-X: &#x60;urn:factur-x:pdfa:CrossIndustryDocument:invoice:1p0#&#x60; - Required Factur-X fields:   - &#x60;fx:ConformanceLevel&#x60;: Profile (MINIMUM, BASIC, EN16931, EXTENDED)   - &#x60;fx:DocumentFileName&#x60;: Embedded XML name   - &#x60;fx:DocumentType&#x60;: \&quot;INVOICE\&quot;   - &#x60;fx:Version&#x60;: Factur-X version (1.0.07)  **What is verified:** - ✅ Metadata conforming to ISO 16684-1 - ✅ Correct declared Factur-X profile - ✅ Supported Factur-X version  ### 4. Electronic signatures **Detection and analysis:** - Presence of &#x60;/Sig&#x60; dictionaries in PDF - Signature type: PAdES (PDF Advanced Electronic Signature) - Information extraction:   - Signer name (&#x60;/Name&#x60;)   - Signing date (&#x60;/M&#x60;)   - Signature reason (&#x60;/Reason&#x60;)   - Signature location (&#x60;/Location&#x60;)   - Signature type (approval, certification)  **What is verified:** - ✅ Presence of signatures or seals - ✅ Number of signatures (single or multi-signature) - ℹ️ No cryptographic verification (requires certificates)  ## Parameters  - **pdf_file** (required): The Factur-X PDF file to validate - **profile** (optional): Expected profile. If absent, auto-detected from XML - **use_verapdf** (optional, default&#x3D;false): Enable strict PDF/A validation with VeraPDF   - &#x60;false&#x60;: Fast metadata validation (2-3 seconds)   - &#x60;true&#x60;: Complete ISO 19005-3 validation (15-30 seconds, **recommended for production**)  ## Detailed response  &#x60;&#x60;&#x60;json {   \&quot;isCompliant\&quot;: true,   \&quot;xml\&quot;: {     \&quot;present\&quot;: true,     \&quot;compliant\&quot;: true,     \&quot;profile\&quot;: \&quot;EN16931\&quot;,     \&quot;errors\&quot;: []   },   \&quot;pdfa\&quot;: {     \&quot;compliant\&quot;: true,     \&quot;version\&quot;: \&quot;PDF/A-3B\&quot;,     \&quot;method\&quot;: \&quot;verapdf\&quot;,     \&quot;errors\&quot;: []   },   \&quot;xmp\&quot;: {     \&quot;present\&quot;: true,     \&quot;compliant\&quot;: true,     \&quot;metadata\&quot;: {...}   },   \&quot;signatures\&quot;: {     \&quot;present\&quot;: true,     \&quot;count\&quot;: 1,     \&quot;details\&quot;: [...]   } } &#x60;&#x60;&#x60;  ## Use cases  - **Before sending**: Validate generated invoice before transmission to client - **On reception**: Verify compliance of invoice received from supplier - **Audit**: Check quality of invoice batches - **Legal compliance**: Ensure B2B/B2G obligations are met in France - **Debugging**: Identify issues in generation process - **Archiving**: Guarantee long-term validity (PDF/A-3)  ## Processing time  - Basic validation: 2-3 seconds - VeraPDF validation: 15-30 seconds (depends on PDF size)
@@ -3264,7 +3264,7 @@ namespace FactPulse.SDK.Api
         /// <param name="useVerapdf">Enable strict PDF/A validation with VeraPDF (recommended for production). If False, uses basic metadata validation. (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse"/>&gt;</returns>
-        public async Task<IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse?> ValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostOrDefaultAsync(System.IO.Stream pdfFile, Option<APIProfile?> profile = default, Option<bool> useVerapdf = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse?> ValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostOrDefaultAsync(System.IO.Stream pdfFile, Option<FacturXProfile?> profile = default, Option<bool> useVerapdf = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -3285,7 +3285,7 @@ namespace FactPulse.SDK.Api
         /// <param name="useVerapdf">Enable strict PDF/A validation with VeraPDF (recommended for production). If False, uses basic metadata validation. (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse"/>&gt;</returns>
-        public async Task<IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse> ValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostAsync(System.IO.Stream pdfFile, Option<APIProfile?> profile = default, Option<bool> useVerapdf = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse> ValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostAsync(System.IO.Stream pdfFile, Option<FacturXProfile?> profile = default, Option<bool> useVerapdf = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -3520,7 +3520,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPost(ref System.IO.Stream pdfFile, ref Option<APIProfile?> profile, ref Option<bool> useVerapdf);
+        partial void FormatValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPost(ref System.IO.Stream pdfFile, ref Option<FacturXProfile?> profile, ref Option<bool> useVerapdf);
 
         /// <summary>
         /// Validates the request parameters
@@ -3540,7 +3540,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pdfFile"></param>
         /// <param name="profile"></param>
         /// <param name="useVerapdf"></param>
-        private void AfterValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostDefaultImplementation(IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse apiResponseLocalVar, System.IO.Stream pdfFile, Option<APIProfile?> profile, Option<bool> useVerapdf)
+        private void AfterValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostDefaultImplementation(IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse apiResponseLocalVar, System.IO.Stream pdfFile, Option<FacturXProfile?> profile, Option<bool> useVerapdf)
         {
             bool suppressDefaultLog = false;
             AfterValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPost(ref suppressDefaultLog, apiResponseLocalVar, pdfFile, profile, useVerapdf);
@@ -3556,7 +3556,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pdfFile"></param>
         /// <param name="profile"></param>
         /// <param name="useVerapdf"></param>
-        partial void AfterValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPost(ref bool suppressDefaultLog, IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse apiResponseLocalVar, System.IO.Stream pdfFile, Option<APIProfile?> profile, Option<bool> useVerapdf);
+        partial void AfterValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPost(ref bool suppressDefaultLog, IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse apiResponseLocalVar, System.IO.Stream pdfFile, Option<FacturXProfile?> profile, Option<bool> useVerapdf);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -3567,7 +3567,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pdfFile"></param>
         /// <param name="profile"></param>
         /// <param name="useVerapdf"></param>
-        private void OnErrorValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream pdfFile, Option<APIProfile?> profile, Option<bool> useVerapdf)
+        private void OnErrorValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream pdfFile, Option<FacturXProfile?> profile, Option<bool> useVerapdf)
         {
             bool suppressDefaultLogLocalVar = false;
             OnErrorValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, pdfFile, profile, useVerapdf);
@@ -3585,7 +3585,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pdfFile"></param>
         /// <param name="profile"></param>
         /// <param name="useVerapdf"></param>
-        partial void OnErrorValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream pdfFile, Option<APIProfile?> profile, Option<bool> useVerapdf);
+        partial void OnErrorValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream pdfFile, Option<FacturXProfile?> profile, Option<bool> useVerapdf);
 
         /// <summary>
         /// Validate a Factur-X PDF (asynchronous with polling) Validates a Factur-X PDF asynchronously with polling system.  ## How it works  1. **Submission**: PDF is queued for asynchronous validation 2. **Immediate return**: You receive a &#x60;task_id&#x60; (HTTP 202) 3. **Tracking**: Use the &#x60;/tasks/{task_id}/status&#x60; endpoint to track progress  ## Advantages of asynchronous mode  - **No timeout**: Ideal for large PDFs or VeraPDF validation (which can take several seconds) - **Scalability**: Validations are processed by dedicated Celery workers - **Status tracking**: Allows you to monitor validation progress - **Non-blocking**: Your client doesn&#39;t wait during validation  ## When to use this mode?  - **VeraPDF validation enabled** (&#x60;use_verapdf&#x3D;True&#x60;): Strict validation can take 2-10 seconds - **Large PDF files**: PDFs &gt; 1 MB - **Batch processing**: Validating multiple invoices in parallel - **Asynchronous integration**: Your system supports polling  ## Checks performed  ### 1. Factur-X XML extraction and validation - Verifies presence of Factur-X compliant embedded XML file - Automatically detects profile used (MINIMUM, BASIC, EN16931, EXTENDED) - Validates XML against detected profile&#39;s Schematron rules  ### 2. PDF/A compliance - **Without VeraPDF**: Basic metadata validation (fast, ~100ms) - **With VeraPDF**: Strict ISO 19005 validation (146+ rules, 2-10s)   - Detects PDF/A version (PDF/A-1, PDF/A-3, etc.)   - Detailed non-compliance reports  ### 3. XMP metadata - Verifies presence of XMP metadata in PDF - Validates Factur-X metadata compliance (profile, version) - Extracts all available XMP metadata  ### 4. Electronic signatures - Detects presence of electronic signatures or seals - Extracts information about each signature (signer, date, reason) - Counts number of signatures present  ## Parameters  - **pdf_file**: The Factur-X PDF file to validate - **profile**: Expected Factur-X profile (optional). If not specified, profile   will be auto-detected from embedded XML file. - **use_verapdf**: Enable strict PDF/A validation with VeraPDF.   ⚠️ **Warning**: VeraPDF can take 2-10 seconds depending on PDF size.   Recommended only in asynchronous mode to avoid timeouts.  ## Retrieving results  After submission, use &#x60;GET /tasks/{task_id}/status&#x60; endpoint to retrieve the result.  **Polling example**: &#x60;&#x60;&#x60;python import requests import time  # 1. Submit task response &#x3D; requests.post(\&quot;/validate-facturx-async\&quot;, files&#x3D;{\&quot;pdf_file\&quot;: pdf_file}) task_id &#x3D; response.json()[\&quot;taskId\&quot;]  # 2. Poll every 2 seconds while True:     status_response &#x3D; requests.get(f\&quot;/tasks/{task_id}/status\&quot;)     status &#x3D; status_response.json()      if status[\&quot;status\&quot;] &#x3D;&#x3D; \&quot;SUCCESS\&quot;:         result &#x3D; status[\&quot;result\&quot;][\&quot;validation_result\&quot;]         print(f\&quot;Compliant: {result[&#39;is_compliant&#39;]}\&quot;)         break     elif status[\&quot;status\&quot;] &#x3D;&#x3D; \&quot;FAILURE\&quot;:         print(f\&quot;Error: {status[&#39;result&#39;][&#39;errorMessage&#39;]}\&quot;)         break      time.sleep(2)  # Wait 2 seconds before next check &#x60;&#x60;&#x60;  ## Use cases  - Validate invoices before sending with VeraPDF (strict validation) - Process invoice batches in parallel - Integrate validation into an asynchronous pipeline - Validate large PDFs without timeout risk
@@ -3595,7 +3595,7 @@ namespace FactPulse.SDK.Api
         /// <param name="useVerapdf">Enable strict PDF/A validation with VeraPDF (recommended for production). May take several seconds. (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse"/>&gt;</returns>
-        public async Task<IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse?> ValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostOrDefaultAsync(System.IO.Stream pdfFile, Option<APIProfile?> profile = default, Option<bool> useVerapdf = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse?> ValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostOrDefaultAsync(System.IO.Stream pdfFile, Option<FacturXProfile?> profile = default, Option<bool> useVerapdf = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -3616,7 +3616,7 @@ namespace FactPulse.SDK.Api
         /// <param name="useVerapdf">Enable strict PDF/A validation with VeraPDF (recommended for production). May take several seconds. (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse"/>&gt;</returns>
-        public async Task<IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse> ValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostAsync(System.IO.Stream pdfFile, Option<APIProfile?> profile = default, Option<bool> useVerapdf = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse> ValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostAsync(System.IO.Stream pdfFile, Option<FacturXProfile?> profile = default, Option<bool> useVerapdf = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -4164,7 +4164,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatValidateXmlApiV1ProcessingValidateXmlPost(ref System.IO.Stream xmlFile, ref Option<APIProfile> profile);
+        partial void FormatValidateXmlApiV1ProcessingValidateXmlPost(ref System.IO.Stream xmlFile, ref Option<FacturXProfile> profile);
 
         /// <summary>
         /// Validates the request parameters
@@ -4183,7 +4183,7 @@ namespace FactPulse.SDK.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="xmlFile"></param>
         /// <param name="profile"></param>
-        private void AfterValidateXmlApiV1ProcessingValidateXmlPostDefaultImplementation(IValidateXmlApiV1ProcessingValidateXmlPostApiResponse apiResponseLocalVar, System.IO.Stream xmlFile, Option<APIProfile> profile)
+        private void AfterValidateXmlApiV1ProcessingValidateXmlPostDefaultImplementation(IValidateXmlApiV1ProcessingValidateXmlPostApiResponse apiResponseLocalVar, System.IO.Stream xmlFile, Option<FacturXProfile> profile)
         {
             bool suppressDefaultLog = false;
             AfterValidateXmlApiV1ProcessingValidateXmlPost(ref suppressDefaultLog, apiResponseLocalVar, xmlFile, profile);
@@ -4198,7 +4198,7 @@ namespace FactPulse.SDK.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="xmlFile"></param>
         /// <param name="profile"></param>
-        partial void AfterValidateXmlApiV1ProcessingValidateXmlPost(ref bool suppressDefaultLog, IValidateXmlApiV1ProcessingValidateXmlPostApiResponse apiResponseLocalVar, System.IO.Stream xmlFile, Option<APIProfile> profile);
+        partial void AfterValidateXmlApiV1ProcessingValidateXmlPost(ref bool suppressDefaultLog, IValidateXmlApiV1ProcessingValidateXmlPostApiResponse apiResponseLocalVar, System.IO.Stream xmlFile, Option<FacturXProfile> profile);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -4208,7 +4208,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pathLocalVar"></param>
         /// <param name="xmlFile"></param>
         /// <param name="profile"></param>
-        private void OnErrorValidateXmlApiV1ProcessingValidateXmlPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream xmlFile, Option<APIProfile> profile)
+        private void OnErrorValidateXmlApiV1ProcessingValidateXmlPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream xmlFile, Option<FacturXProfile> profile)
         {
             bool suppressDefaultLogLocalVar = false;
             OnErrorValidateXmlApiV1ProcessingValidateXmlPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, xmlFile, profile);
@@ -4225,7 +4225,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pathLocalVar"></param>
         /// <param name="xmlFile"></param>
         /// <param name="profile"></param>
-        partial void OnErrorValidateXmlApiV1ProcessingValidateXmlPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream xmlFile, Option<APIProfile> profile);
+        partial void OnErrorValidateXmlApiV1ProcessingValidateXmlPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream xmlFile, Option<FacturXProfile> profile);
 
         /// <summary>
         /// Validate an existing Factur-X XML Validates a Factur-X XML file against Schematron business rules according to EN 16931 standard.  ## Applied Standard  **Schematron ISO/IEC 19757-3**: Business rules validation language for XML - Semantic validation (beyond XSD syntax) - European EN 16931 business rules - French-specific Factur-X rules - Arithmetic calculations and data consistency  ## Profiles and validated rules  ### MINIMUM (45 rules) - Unique invoice identifier - Dates (issue, due date) - Party identifiers (SIRET/SIREN) - Total gross amount  ### BASIC (102 rules) - All MINIMUM rules - Detailed invoice lines - Basic VAT calculations - Payment methods - References (order, contract)  ### EN16931 (178 rules) - All BASIC rules - **European rules (BR-xx)**: 81 business rules - **French rules (FR-xx)**: 12 France-specific rules - **Advanced calculations (CR-xx)**: 32 calculation rules - **Standardized codes (CL-xx)**: 52 code lists  ### EXTENDED (210+ rules) - All EN16931 rules - Logistics information - Advanced accounting data - Multiple external references  ## Checks performed  ### 1. Syntax validation - Correct XML parsing (UTF-8, well-formed) - UN/CEFACT namespaces present - Hierarchical structure respected  ### 2. Business rules (BR-xx) Examples: - &#x60;BR-1&#x60;: Invoice total must equal sum of line totals + document-level amounts - &#x60;BR-CO-10&#x60;: Sum of VAT base amounts must equal invoice net total - &#x60;BR-16&#x60;: Invoice currency code must be in ISO 4217 list  ### 3. French rules (FR-xx) Examples: - &#x60;FR-1&#x60;: Supplier SIRET must have 14 digits - &#x60;FR-2&#x60;: Customer SIRET must have 14 digits (if present) - &#x60;FR-5&#x60;: Intra-EU VAT number must be in format FRxx999999999  ### 4. Calculation rules (CR-xx) - Net + VAT &#x3D; Gross amounts - Sum of lines &#x3D; Document total - Discounts and surcharges correctly applied - Compliant rounding (2 decimals for amounts)  ### 5. Standardized codes (CL-xx) - ISO 3166-1 alpha-2 country codes - ISO 4217 currency codes - UN/ECE Rec 20 measurement units - VAT codes (types, categories, exemptions) - SchemeID for identifiers (0002&#x3D;SIREN, 0009&#x3D;SIRET, etc.)  ## Validation process  1. **XSLT loading**: Schematron file converted to XSLT (Saxon-HE) 2. **Transformation**: Rules applied to XML 3. **Results analysis**: Extraction of errors (&#x60;failed-assert&#x60;) and warnings (&#x60;successful-report&#x60;) 4. **Report**: Structured list of non-conformities  ## Responses  **200 OK**: Compliant XML &#x60;&#x60;&#x60;json {   \&quot;message\&quot;: \&quot;XML is compliant with EN16931 profile\&quot; } &#x60;&#x60;&#x60;  **400 Bad Request**: Non-compliant XML &#x60;&#x60;&#x60;json {   \&quot;detail\&quot;: [     \&quot;[BR-1] Invoice total (120.00) does not match calculated sum (100.00 + 20.00)\&quot;,     \&quot;[FR-1] Supplier SIRET must contain exactly 14 digits\&quot;   ] } &#x60;&#x60;&#x60;  ## Use cases  - **Pre-validation**: Verify XML before PDF/A integration - **Debugging**: Precisely identify generation errors - **Testing**: Validate test or example XMLs - **Compliance**: Ensure European and French rules are met - **Development**: Quick testing without PDF generation  ## Processing time  - MINIMUM profile: ~0.5 second - EN16931 profile: ~1-2 seconds - EXTENDED profile: ~2-3 seconds
@@ -4234,7 +4234,7 @@ namespace FactPulse.SDK.Api
         /// <param name="profile">Validation profile (MINIMUM, BASIC, EN16931, EXTENDED). (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateXmlApiV1ProcessingValidateXmlPostApiResponse"/>&gt;</returns>
-        public async Task<IValidateXmlApiV1ProcessingValidateXmlPostApiResponse?> ValidateXmlApiV1ProcessingValidateXmlPostOrDefaultAsync(System.IO.Stream xmlFile, Option<APIProfile> profile = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IValidateXmlApiV1ProcessingValidateXmlPostApiResponse?> ValidateXmlApiV1ProcessingValidateXmlPostOrDefaultAsync(System.IO.Stream xmlFile, Option<FacturXProfile> profile = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -4254,7 +4254,7 @@ namespace FactPulse.SDK.Api
         /// <param name="profile">Validation profile (MINIMUM, BASIC, EN16931, EXTENDED). (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateXmlApiV1ProcessingValidateXmlPostApiResponse"/>&gt;</returns>
-        public async Task<IValidateXmlApiV1ProcessingValidateXmlPostApiResponse> ValidateXmlApiV1ProcessingValidateXmlPostAsync(System.IO.Stream xmlFile, Option<APIProfile> profile = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IValidateXmlApiV1ProcessingValidateXmlPostApiResponse> ValidateXmlApiV1ProcessingValidateXmlPostAsync(System.IO.Stream xmlFile, Option<FacturXProfile> profile = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 

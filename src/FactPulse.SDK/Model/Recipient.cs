@@ -26,7 +26,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Information about the invoice recipient (the customer).
+    /// Information about the invoice recipient / buyer (BG-7).
     /// </summary>
     public partial class Recipient : IValidatableObject
     {
@@ -38,16 +38,22 @@ namespace FactPulse.SDK.Model
         /// <param name="name">name</param>
         /// <param name="siren">siren</param>
         /// <param name="siret">siret</param>
+        /// <param name="vatNumber">vatNumber</param>
         /// <param name="postalAddress">postalAddress</param>
+        /// <param name="contact">contact</param>
+        /// <param name="globalIds">globalIds</param>
         [JsonConstructor]
-        public Recipient(ElectronicAddress? electronicAddress = default, Option<string?> executingServiceCode = default, Option<string?> name = default, Option<string?> siren = default, Option<string?> siret = default, Option<PostalAddress?> postalAddress = default)
+        public Recipient(ElectronicAddress? electronicAddress = default, Option<string?> executingServiceCode = default, Option<string?> name = default, Option<string?> siren = default, Option<string?> siret = default, Option<string?> vatNumber = default, Option<PostalAddress?> postalAddress = default, Option<Contact?> contact = default, Option<List<ElectronicAddress>?> globalIds = default)
         {
             ElectronicAddress = electronicAddress;
             ExecutingServiceCodeOption = executingServiceCode;
             NameOption = name;
             SirenOption = siren;
             SiretOption = siret;
+            VatNumberOption = vatNumber;
             PostalAddressOption = postalAddress;
+            ContactOption = contact;
+            GlobalIdsOption = globalIds;
             OnCreated();
         }
 
@@ -112,6 +118,19 @@ namespace FactPulse.SDK.Model
         public string? Siret { get { return this.SiretOption; } set { this.SiretOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of VatNumber
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> VatNumberOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets VatNumber
+        /// </summary>
+        [JsonPropertyName("vat_number")]
+        public string? VatNumber { get { return this.VatNumberOption; } set { this.VatNumberOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of PostalAddress
         /// </summary>
         [JsonIgnore]
@@ -123,6 +142,32 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonPropertyName("postal_address")]
         public PostalAddress? PostalAddress { get { return this.PostalAddressOption; } set { this.PostalAddressOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Contact
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<Contact?> ContactOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Contact
+        /// </summary>
+        [JsonPropertyName("contact")]
+        public Contact? Contact { get { return this.ContactOption; } set { this.ContactOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of GlobalIds
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<ElectronicAddress>?> GlobalIdsOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets GlobalIds
+        /// </summary>
+        [JsonPropertyName("global_ids")]
+        public List<ElectronicAddress>? GlobalIds { get { return this.GlobalIdsOption; } set { this.GlobalIdsOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -137,7 +182,10 @@ namespace FactPulse.SDK.Model
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  Siren: ").Append(Siren).Append("\n");
             sb.Append("  Siret: ").Append(Siret).Append("\n");
+            sb.Append("  VatNumber: ").Append(VatNumber).Append("\n");
             sb.Append("  PostalAddress: ").Append(PostalAddress).Append("\n");
+            sb.Append("  Contact: ").Append(Contact).Append("\n");
+            sb.Append("  GlobalIds: ").Append(GlobalIds).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -180,7 +228,10 @@ namespace FactPulse.SDK.Model
             Option<string?> name = default;
             Option<string?> siren = default;
             Option<string?> siret = default;
+            Option<string?> vatNumber = default;
             Option<PostalAddress?> postalAddress = default;
+            Option<Contact?> contact = default;
+            Option<List<ElectronicAddress>?> globalIds = default;
 
             while (utf8JsonReader.Read())
             {
@@ -212,8 +263,17 @@ namespace FactPulse.SDK.Model
                         case "siret":
                             siret = new Option<string?>(utf8JsonReader.GetString());
                             break;
+                        case "vat_number":
+                            vatNumber = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         case "postal_address":
                             postalAddress = new Option<PostalAddress?>(JsonSerializer.Deserialize<PostalAddress>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "contact":
+                            contact = new Option<Contact?>(JsonSerializer.Deserialize<Contact>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "global_ids":
+                            globalIds = new Option<List<ElectronicAddress>?>(JsonSerializer.Deserialize<List<ElectronicAddress>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -224,7 +284,7 @@ namespace FactPulse.SDK.Model
             if (!electronicAddress.IsSet)
                 throw new ArgumentException("Property is required for class Recipient.", nameof(electronicAddress));
 
-            return new Recipient(electronicAddress.Value!, executingServiceCode, name, siren, siret, postalAddress);
+            return new Recipient(electronicAddress.Value!, executingServiceCode, name, siren, siret, vatNumber, postalAddress, contact, globalIds);
         }
 
         /// <summary>
@@ -282,6 +342,12 @@ namespace FactPulse.SDK.Model
                 else
                     writer.WriteNull("siret");
 
+            if (recipient.VatNumberOption.IsSet)
+                if (recipient.VatNumberOption.Value != null)
+                    writer.WriteString("vat_number", recipient.VatNumber);
+                else
+                    writer.WriteNull("vat_number");
+
             if (recipient.PostalAddressOption.IsSet)
                 if (recipient.PostalAddressOption.Value != null)
                 {
@@ -290,6 +356,22 @@ namespace FactPulse.SDK.Model
                 }
                 else
                     writer.WriteNull("postal_address");
+            if (recipient.ContactOption.IsSet)
+                if (recipient.ContactOption.Value != null)
+                {
+                    writer.WritePropertyName("contact");
+                    JsonSerializer.Serialize(writer, recipient.Contact, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("contact");
+            if (recipient.GlobalIdsOption.IsSet)
+                if (recipient.GlobalIdsOption.Value != null)
+                {
+                    writer.WritePropertyName("global_ids");
+                    JsonSerializer.Serialize(writer, recipient.GlobalIds, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("global_ids");
         }
     }
 }

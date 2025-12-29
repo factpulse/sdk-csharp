@@ -26,7 +26,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Total net amount (before tax). (Accepte number, string ou integer)
+    /// Invoice total amount without VAT (BT-109). Can be negative for correction invoices.
     /// </summary>
     public partial class TotalNetAmount : IValidatableObject
     {
@@ -178,7 +178,7 @@ namespace FactPulse.SDK.Model
             writer.WriteStartObject();
 
             if (totalNetAmount.DecimalOption.IsSet && totalNetAmount.DecimalOption.Value != null)
-                writer.WriteNumber("VATAmount", totalNetAmount.DecimalOption.Value.Value);
+                writer.WriteNumber("Rate", totalNetAmount.DecimalOption.Value.Value);
 
             if (totalNetAmount.StringOption.IsSet && totalNetAmount.StringOption.Value != null)
                 writer.WriteString("VATAmount", totalNetAmount.StringOption.Value);

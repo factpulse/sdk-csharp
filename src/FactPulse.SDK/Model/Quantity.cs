@@ -26,7 +26,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Invoiced quantity for this line.
+    /// Invoiced quantity (BT-129). Can be negative for correction invoices.
     /// </summary>
     public partial class Quantity : IValidatableObject
     {
@@ -178,10 +178,10 @@ namespace FactPulse.SDK.Model
             writer.WriteStartObject();
 
             if (quantity.DecimalOption.IsSet && quantity.DecimalOption.Value != null)
-                writer.WriteNumber("UnitNetPrice", quantity.DecimalOption.Value.Value);
+                writer.WriteNumber("Rate", quantity.DecimalOption.Value.Value);
 
             if (quantity.StringOption.IsSet && quantity.StringOption.Value != null)
-                writer.WriteString("UnitNetPrice", quantity.StringOption.Value);
+                writer.WriteString("VATAmount", quantity.StringOption.Value);
 
             WriteProperties(writer, quantity, jsonSerializerOptions);
             writer.WriteEndObject();

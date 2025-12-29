@@ -26,7 +26,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Amount due for payment. (Accepte number, string ou integer)
+    /// Amount due for payment (BT-115). Can be negative for correction invoices.
     /// </summary>
     public partial class AmountDue : IValidatableObject
     {
@@ -178,7 +178,7 @@ namespace FactPulse.SDK.Model
             writer.WriteStartObject();
 
             if (amountDue.DecimalOption.IsSet && amountDue.DecimalOption.Value != null)
-                writer.WriteNumber("VATAmount", amountDue.DecimalOption.Value.Value);
+                writer.WriteNumber("Rate", amountDue.DecimalOption.Value.Value);
 
             if (amountDue.StringOption.IsSet && amountDue.StringOption.Value != null)
                 writer.WriteString("VATAmount", amountDue.StringOption.Value);

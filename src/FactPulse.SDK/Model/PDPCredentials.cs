@@ -56,7 +56,7 @@ namespace FactPulse.SDK.Model
         /// </summary>
         /// <value>Base URL of the AFNOR Flow Service</value>
         /* <example>https://api.pdp-example.fr/flow/v1</example> */
-        [JsonPropertyName("flow_service_url")]
+        [JsonPropertyName("flowServiceUrl")]
         public string FlowServiceUrl { get; set; }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace FactPulse.SDK.Model
         /// </summary>
         /// <value>OAuth2 server URL</value>
         /* <example>https://auth.pdp-example.fr/oauth/token</example> */
-        [JsonPropertyName("token_url")]
+        [JsonPropertyName("tokenUrl")]
         public string TokenUrl { get; set; }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace FactPulse.SDK.Model
         /// </summary>
         /// <value>OAuth2 Client ID</value>
         /* <example>factpulse_prod_abc123</example> */
-        [JsonPropertyName("client_id")]
+        [JsonPropertyName("clientId")]
         public string ClientId { get; set; }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace FactPulse.SDK.Model
         /// </summary>
         /// <value>OAuth2 Client Secret (sensitive)</value>
         /* <example>secret_xyz789</example> */
-        [JsonPropertyName("client_secret")]
+        [JsonPropertyName("clientSecret")]
         public string ClientSecret { get; set; }
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets DirectoryServiceUrl
         /// </summary>
-        [JsonPropertyName("directory_service_url")]
+        [JsonPropertyName("directoryServiceUrl")]
         public string? DirectoryServiceUrl { get { return this.DirectoryServiceUrlOption; } set { this.DirectoryServiceUrlOption = new(value); } }
 
         /// <summary>
@@ -167,19 +167,19 @@ namespace FactPulse.SDK.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "flow_service_url":
+                        case "flowServiceUrl":
                             flowServiceUrl = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "token_url":
+                        case "tokenUrl":
                             tokenUrl = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "client_id":
+                        case "clientId":
                             clientId = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "client_secret":
+                        case "clientSecret":
                             clientSecret = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "directory_service_url":
+                        case "directoryServiceUrl":
                             directoryServiceUrl = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         default:
@@ -251,19 +251,19 @@ namespace FactPulse.SDK.Model
             if (pDPCredentials.ClientSecret == null)
                 throw new ArgumentNullException(nameof(pDPCredentials.ClientSecret), "Property is required for class PDPCredentials.");
 
-            writer.WriteString("flow_service_url", pDPCredentials.FlowServiceUrl);
+            writer.WriteString("flowServiceUrl", pDPCredentials.FlowServiceUrl);
 
-            writer.WriteString("token_url", pDPCredentials.TokenUrl);
+            writer.WriteString("tokenUrl", pDPCredentials.TokenUrl);
 
-            writer.WriteString("client_id", pDPCredentials.ClientId);
+            writer.WriteString("clientId", pDPCredentials.ClientId);
 
-            writer.WriteString("client_secret", pDPCredentials.ClientSecret);
+            writer.WriteString("clientSecret", pDPCredentials.ClientSecret);
 
             if (pDPCredentials.DirectoryServiceUrlOption.IsSet)
                 if (pDPCredentials.DirectoryServiceUrlOption.Value != null)
-                    writer.WriteString("directory_service_url", pDPCredentials.DirectoryServiceUrl);
+                    writer.WriteString("directoryServiceUrl", pDPCredentials.DirectoryServiceUrl);
                 else
-                    writer.WriteNull("directory_service_url");
+                    writer.WriteNull("directoryServiceUrl");
         }
     }
 }

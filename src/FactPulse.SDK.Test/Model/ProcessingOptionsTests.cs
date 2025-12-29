@@ -72,12 +72,12 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'Validate'
+        /// Test the property 'ValidateXml'
         /// </summary>
         [Fact]
-        public void ValidateTest()
+        public void ValidateXmlTest()
         {
-            // TODO unit test for the property 'Validate'
+            // TODO unit test for the property 'ValidateXml'
         }
 
         /// <summary>

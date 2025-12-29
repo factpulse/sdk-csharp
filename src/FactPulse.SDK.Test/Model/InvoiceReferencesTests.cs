@@ -81,12 +81,39 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'BusinessProcessId'
+        /// </summary>
+        [Fact]
+        public void BusinessProcessIdTest()
+        {
+            // TODO unit test for the property 'BusinessProcessId'
+        }
+
+        /// <summary>
         /// Test the property 'InvoiceCurrency'
         /// </summary>
         [Fact]
         public void InvoiceCurrencyTest()
         {
             // TODO unit test for the property 'InvoiceCurrency'
+        }
+
+        /// <summary>
+        /// Test the property 'PaymentMeansText'
+        /// </summary>
+        [Fact]
+        public void PaymentMeansTextTest()
+        {
+            // TODO unit test for the property 'PaymentMeansText'
+        }
+
+        /// <summary>
+        /// Test the property 'BuyerReference'
+        /// </summary>
+        [Fact]
+        public void BuyerReferenceTest()
+        {
+            // TODO unit test for the property 'BuyerReference'
         }
 
         /// <summary>
@@ -99,15 +126,6 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'VatExemptionReason'
-        /// </summary>
-        [Fact]
-        public void VatExemptionReasonTest()
-        {
-            // TODO unit test for the property 'VatExemptionReason'
-        }
-
-        /// <summary>
         /// Test the property 'PurchaseOrderReference'
         /// </summary>
         [Fact]
@@ -117,12 +135,84 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'SellerOrderReference'
+        /// </summary>
+        [Fact]
+        public void SellerOrderReferenceTest()
+        {
+            // TODO unit test for the property 'SellerOrderReference'
+        }
+
+        /// <summary>
+        /// Test the property 'ReceivingAdviceReference'
+        /// </summary>
+        [Fact]
+        public void ReceivingAdviceReferenceTest()
+        {
+            // TODO unit test for the property 'ReceivingAdviceReference'
+        }
+
+        /// <summary>
+        /// Test the property 'DespatchAdviceReference'
+        /// </summary>
+        [Fact]
+        public void DespatchAdviceReferenceTest()
+        {
+            // TODO unit test for the property 'DespatchAdviceReference'
+        }
+
+        /// <summary>
+        /// Test the property 'TenderReference'
+        /// </summary>
+        [Fact]
+        public void TenderReferenceTest()
+        {
+            // TODO unit test for the property 'TenderReference'
+        }
+
+        /// <summary>
         /// Test the property 'PrecedingInvoiceReference'
         /// </summary>
         [Fact]
         public void PrecedingInvoiceReferenceTest()
         {
             // TODO unit test for the property 'PrecedingInvoiceReference'
+        }
+
+        /// <summary>
+        /// Test the property 'PrecedingInvoiceDate'
+        /// </summary>
+        [Fact]
+        public void PrecedingInvoiceDateTest()
+        {
+            // TODO unit test for the property 'PrecedingInvoiceDate'
+        }
+
+        /// <summary>
+        /// Test the property 'ProjectReference'
+        /// </summary>
+        [Fact]
+        public void ProjectReferenceTest()
+        {
+            // TODO unit test for the property 'ProjectReference'
+        }
+
+        /// <summary>
+        /// Test the property 'ProjectName'
+        /// </summary>
+        [Fact]
+        public void ProjectNameTest()
+        {
+            // TODO unit test for the property 'ProjectName'
+        }
+
+        /// <summary>
+        /// Test the property 'VatExemptionReason'
+        /// </summary>
+        [Fact]
+        public void VatExemptionReasonTest()
+        {
+            // TODO unit test for the property 'VatExemptionReason'
         }
     }
 }

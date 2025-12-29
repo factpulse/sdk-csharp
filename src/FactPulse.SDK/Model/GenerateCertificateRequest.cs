@@ -163,7 +163,7 @@ namespace FactPulse.SDK.Model
         /// </summary>
         /// <value>Validity duration in days</value>
         /* <example>365</example> */
-        [JsonPropertyName("validity_days")]
+        [JsonPropertyName("validityDays")]
         public int? ValidityDays { get { return this.ValidityDaysOption; } set { this.ValidityDaysOption = new(value); } }
 
         /// <summary>
@@ -178,7 +178,7 @@ namespace FactPulse.SDK.Model
         /// </summary>
         /// <value>RSA key size in bits</value>
         /* <example>2048</example> */
-        [JsonPropertyName("key_size")]
+        [JsonPropertyName("keySize")]
         public int? KeySize { get { return this.KeySizeOption; } set { this.KeySizeOption = new(value); } }
 
         /// <summary>
@@ -191,7 +191,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets KeyPassphrase
         /// </summary>
-        [JsonPropertyName("key_passphrase")]
+        [JsonPropertyName("keyPassphrase")]
         public string? KeyPassphrase { get { return this.KeyPassphraseOption; } set { this.KeyPassphraseOption = new(value); } }
 
         /// <summary>
@@ -206,7 +206,7 @@ namespace FactPulse.SDK.Model
         /// </summary>
         /// <value>Also generate a PKCS#12 (.p12) file</value>
         /* <example>false</example> */
-        [JsonPropertyName("generate_p12")]
+        [JsonPropertyName("generateP12")]
         public bool? GenerateP12 { get { return this.GenerateP12Option; } set { this.GenerateP12Option = new(value); } }
 
         /// <summary>
@@ -221,7 +221,7 @@ namespace FactPulse.SDK.Model
         /// </summary>
         /// <value>Passphrase for PKCS#12 file</value>
         /* <example>changeme</example> */
-        [JsonPropertyName("p12_passphrase")]
+        [JsonPropertyName("p12Passphrase")]
         public string? P12Passphrase { get { return this.P12PassphraseOption; } set { this.P12PassphraseOption = new(value); } }
 
         /// <summary>
@@ -349,19 +349,19 @@ namespace FactPulse.SDK.Model
                         case "email":
                             email = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "validity_days":
+                        case "validityDays":
                             validityDays = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
-                        case "key_size":
+                        case "keySize":
                             keySize = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
-                        case "key_passphrase":
+                        case "keyPassphrase":
                             keyPassphrase = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "generate_p12":
+                        case "generateP12":
                             generateP12 = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
-                        case "p12_passphrase":
+                        case "p12Passphrase":
                             p12Passphrase = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         default:
@@ -464,22 +464,22 @@ namespace FactPulse.SDK.Model
                     writer.WriteNull("email");
 
             if (generateCertificateRequest.ValidityDaysOption.IsSet)
-                writer.WriteNumber("validity_days", generateCertificateRequest.ValidityDaysOption.Value!.Value);
+                writer.WriteNumber("validityDays", generateCertificateRequest.ValidityDaysOption.Value!.Value);
 
             if (generateCertificateRequest.KeySizeOption.IsSet)
-                writer.WriteNumber("key_size", generateCertificateRequest.KeySizeOption.Value!.Value);
+                writer.WriteNumber("keySize", generateCertificateRequest.KeySizeOption.Value!.Value);
 
             if (generateCertificateRequest.KeyPassphraseOption.IsSet)
                 if (generateCertificateRequest.KeyPassphraseOption.Value != null)
-                    writer.WriteString("key_passphrase", generateCertificateRequest.KeyPassphrase);
+                    writer.WriteString("keyPassphrase", generateCertificateRequest.KeyPassphrase);
                 else
-                    writer.WriteNull("key_passphrase");
+                    writer.WriteNull("keyPassphrase");
 
             if (generateCertificateRequest.GenerateP12Option.IsSet)
-                writer.WriteBoolean("generate_p12", generateCertificateRequest.GenerateP12Option.Value!.Value);
+                writer.WriteBoolean("generateP12", generateCertificateRequest.GenerateP12Option.Value!.Value);
 
             if (generateCertificateRequest.P12PassphraseOption.IsSet)
-                writer.WriteString("p12_passphrase", generateCertificateRequest.P12Passphrase);
+                writer.WriteString("p12Passphrase", generateCertificateRequest.P12Passphrase);
         }
     }
 }

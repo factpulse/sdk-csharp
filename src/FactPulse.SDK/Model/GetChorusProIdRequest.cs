@@ -78,7 +78,7 @@ namespace FactPulse.SDK.Model
         /// Identifier type (SIRET, SIREN, UE_HORS_FRANCE, etc.)
         /// </summary>
         /// <value>Identifier type (SIRET, SIREN, UE_HORS_FRANCE, etc.)</value>
-        [JsonPropertyName("identifier_type")]
+        [JsonPropertyName("identifierType")]
         public string? IdentifierType { get { return this.IdentifierTypeOption; } set { this.IdentifierTypeOption = new(value); } }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace FactPulse.SDK.Model
                         case "credentials":
                             credentials = new Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?>(JsonSerializer.Deserialize<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
-                        case "identifier_type":
+                        case "identifierType":
                             identifierType = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         default:
@@ -216,7 +216,7 @@ namespace FactPulse.SDK.Model
                 else
                     writer.WriteNull("credentials");
             if (getChorusProIdRequest.IdentifierTypeOption.IsSet)
-                writer.WriteString("identifier_type", getChorusProIdRequest.IdentifierType);
+                writer.WriteString("identifierType", getChorusProIdRequest.IdentifierType);
         }
     }
 }

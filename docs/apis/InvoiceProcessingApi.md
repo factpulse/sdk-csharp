@@ -18,7 +18,7 @@ All URIs are relative to *http://localhost*
 
 <a id="generateinvoiceapiv1processinggenerateinvoicepost"></a>
 # **GenerateInvoiceApiV1ProcessingGenerateInvoicePost**
-> TaskResponse GenerateInvoiceApiV1ProcessingGenerateInvoicePost (string invoiceData, APIProfile profile = null, OutputFormat outputFormat = null, bool autoEnrich = null, System.IO.Stream sourcePdf = null)
+> TaskResponse GenerateInvoiceApiV1ProcessingGenerateInvoicePost (string invoiceData, FacturXProfile profile = null, OutputFormat outputFormat = null, bool autoEnrich = null, System.IO.Stream sourcePdf = null)
 
 Generate a Factur-X invoice
 
@@ -30,7 +30,7 @@ Generates an electronic invoice in Factur-X format compliant with European stand
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **invoiceData** | **string** | Invoice data in JSON format.              Two formats accepted:             1. **Classic format**: Complete FactureFacturX structure (all fields)             2. **Simplified format** (🆕 P0.1): Minimal structure with auto-enrichment              Format is detected automatically!              |  |
-| **profile** | **APIProfile** | Factur-X profile: MINIMUM, BASIC, EN16931 or EXTENDED. | [optional]  |
+| **profile** | **FacturXProfile** | Factur-X profile: MINIMUM, BASIC, EN16931 or EXTENDED. | [optional]  |
 | **outputFormat** | **OutputFormat** | Output format: &#39;xml&#39; (XML only) or &#39;pdf&#39; (Factur-X PDF with embedded XML). | [optional]  |
 | **autoEnrich** | **bool** | 🆕 Enable auto-enrichment from SIRET/SIREN (simplified format only) | [optional] [default to true] |
 | **sourcePdf** | **System.IO.Stream****System.IO.Stream** |  | [optional]  |
@@ -303,7 +303,7 @@ Asynchronous version of the `/invoices/submit-complete` endpoint using Celery fo
 
 <a id="validatefacturxpdfapiv1processingvalidatefacturxpdfpost"></a>
 # **ValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPost**
-> PDFValidationResultAPI ValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPost (System.IO.Stream pdfFile, APIProfile profile = null, bool useVerapdf = null)
+> PDFValidationResultAPI ValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPost (System.IO.Stream pdfFile, FacturXProfile profile = null, bool useVerapdf = null)
 
 Validate a complete Factur-X PDF
 
@@ -315,7 +315,7 @@ Validates a complete Factur-X PDF according to European and French standards.  #
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **pdfFile** | **System.IO.Stream****System.IO.Stream** | Factur-X PDF file to validate (.pdf format). |  |
-| **profile** | **APIProfile** |  | [optional]  |
+| **profile** | **FacturXProfile** |  | [optional]  |
 | **useVerapdf** | **bool** | Enable strict PDF/A validation with VeraPDF (recommended for production). If False, uses basic metadata validation. | [optional] [default to false] |
 
 ### Return type
@@ -343,7 +343,7 @@ Validates a complete Factur-X PDF according to European and French standards.  #
 
 <a id="validatefacturxpdfasyncapiv1processingvalidatefacturxasyncpost"></a>
 # **ValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPost**
-> TaskResponse ValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPost (System.IO.Stream pdfFile, APIProfile profile = null, bool useVerapdf = null)
+> TaskResponse ValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPost (System.IO.Stream pdfFile, FacturXProfile profile = null, bool useVerapdf = null)
 
 Validate a Factur-X PDF (asynchronous with polling)
 
@@ -355,7 +355,7 @@ Validates a Factur-X PDF asynchronously with polling system.  ## How it works  1
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **pdfFile** | **System.IO.Stream****System.IO.Stream** | Factur-X PDF file to validate (.pdf format). |  |
-| **profile** | **APIProfile** |  | [optional]  |
+| **profile** | **FacturXProfile** |  | [optional]  |
 | **useVerapdf** | **bool** | Enable strict PDF/A validation with VeraPDF (recommended for production). May take several seconds. | [optional] [default to false] |
 
 ### Return type
@@ -421,7 +421,7 @@ Validates electronic signatures present in an uploaded PDF.      **Verifications
 
 <a id="validatexmlapiv1processingvalidatexmlpost"></a>
 # **ValidateXmlApiV1ProcessingValidateXmlPost**
-> ValidationSuccessResponse ValidateXmlApiV1ProcessingValidateXmlPost (System.IO.Stream xmlFile, APIProfile profile = null)
+> ValidationSuccessResponse ValidateXmlApiV1ProcessingValidateXmlPost (System.IO.Stream xmlFile, FacturXProfile profile = null)
 
 Validate an existing Factur-X XML
 
@@ -433,7 +433,7 @@ Validates a Factur-X XML file against Schematron business rules according to EN 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **xmlFile** | **System.IO.Stream****System.IO.Stream** | Factur-X XML file to validate (.xml format). |  |
-| **profile** | **APIProfile** | Validation profile (MINIMUM, BASIC, EN16931, EXTENDED). | [optional]  |
+| **profile** | **FacturXProfile** | Validation profile (MINIMUM, BASIC, EN16931, EXTENDED). | [optional]  |
 
 ### Return type
 

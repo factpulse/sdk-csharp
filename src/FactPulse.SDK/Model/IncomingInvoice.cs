@@ -53,7 +53,7 @@ namespace FactPulse.SDK.Model
         /// <param name="documentContentType">documentContentType</param>
         /// <param name="documentFilename">documentFilename</param>
         [JsonConstructor]
-        public IncomingInvoice(InvoiceFormat sourceFormat, string supplierReference, IncomingSupplier supplier, string billingSiteName, string issueDate, string netAmount, string vatAmount, string grossAmount, Option<string?> flowId = default, Option<DocumentType?> documentType = default, Option<string?> billingSiteSiret = default, Option<string?> dueDate = default, Option<string?> currency = default, Option<string?> purchaseOrderNumber = default, Option<string?> contractReference = default, Option<string?> invoiceSubject = default, Option<string?> documentBase64 = default, Option<string?> documentContentType = default, Option<string?> documentFilename = default)
+        public IncomingInvoice(InvoiceFormat sourceFormat, string supplierReference, IncomingSupplier supplier, string billingSiteName, string issueDate, string netAmount, string vatAmount, string grossAmount, Option<string?> flowId = default, Option<InvoiceTypeCode?> documentType = default, Option<string?> billingSiteSiret = default, Option<string?> dueDate = default, Option<string?> currency = default, Option<string?> purchaseOrderNumber = default, Option<string?> contractReference = default, Option<string?> invoiceSubject = default, Option<string?> documentBase64 = default, Option<string?> documentContentType = default, Option<string?> documentFilename = default)
         {
             SourceFormat = sourceFormat;
             SupplierReference = supplierReference;
@@ -91,14 +91,14 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<DocumentType?> DocumentTypeOption { get; private set; }
+        public Option<InvoiceTypeCode?> DocumentTypeOption { get; private set; }
 
         /// <summary>
         /// Document type (BT-3)
         /// </summary>
         /// <value>Document type (BT-3)</value>
         [JsonPropertyName("documentType")]
-        public DocumentType? DocumentType { get { return this.DocumentTypeOption; } set { this.DocumentTypeOption = new(value); } }
+        public InvoiceTypeCode? DocumentType { get { return this.DocumentTypeOption; } set { this.DocumentTypeOption = new(value); } }
 
         /// <summary>
         /// Invoice number issued by the supplier (BT-1)
@@ -383,7 +383,7 @@ namespace FactPulse.SDK.Model
             Option<string?> vatAmount = default;
             Option<string?> grossAmount = default;
             Option<string?> flowId = default;
-            Option<DocumentType?> documentType = default;
+            Option<InvoiceTypeCode?> documentType = default;
             Option<string?> billingSiteSiret = default;
             Option<string?> dueDate = default;
             Option<string?> currency = default;
@@ -441,7 +441,7 @@ namespace FactPulse.SDK.Model
                         case "documentType":
                             string? documentTypeRawValue = utf8JsonReader.GetString();
                             if (documentTypeRawValue != null)
-                                documentType = new Option<DocumentType?>(DocumentTypeValueConverter.FromStringOrDefault(documentTypeRawValue));
+                                documentType = new Option<InvoiceTypeCode?>(InvoiceTypeCodeValueConverter.FromStringOrDefault(documentTypeRawValue));
                             break;
                         case "billingSiteSiret":
                             billingSiteSiret = new Option<string?>(utf8JsonReader.GetString());
@@ -606,7 +606,7 @@ namespace FactPulse.SDK.Model
 
             if (incomingInvoice.DocumentTypeOption.IsSet)
             {
-                var documentTypeRawValue = DocumentTypeValueConverter.ToJsonValue(incomingInvoice.DocumentType!.Value);
+                var documentTypeRawValue = InvoiceTypeCodeValueConverter.ToJsonValue(incomingInvoice.DocumentType!.Value);
                 writer.WriteString("documentType", documentTypeRawValue);
             }
             if (incomingInvoice.BillingSiteSiretOption.IsSet)

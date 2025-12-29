@@ -26,69 +26,91 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Represents a line item in an invoice.
+    /// Represents an invoice line item (BG-25).
     /// </summary>
     public partial class InvoiceLine : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="InvoiceLine" /> class.
         /// </summary>
-        /// <param name="lineNumber">lineNumber</param>
-        /// <param name="itemName">itemName</param>
+        /// <param name="lineNumber">Invoice line identifier (BT-126).</param>
+        /// <param name="itemName">Item name (BT-153).</param>
         /// <param name="quantity">quantity</param>
-        /// <param name="unit">unit</param>
+        /// <param name="unit">Invoiced quantity unit of measure code (BT-130).</param>
         /// <param name="unitNetPrice">unitNetPrice</param>
+        /// <param name="lineNote">lineNote</param>
         /// <param name="reference">reference</param>
-        /// <param name="allowanceAmount">allowanceAmount</param>
+        /// <param name="buyerAssignedId">buyerAssignedId</param>
+        /// <param name="productGlobalId">productGlobalId</param>
+        /// <param name="productGlobalIdScheme">productGlobalIdScheme</param>
+        /// <param name="itemDescription">itemDescription</param>
+        /// <param name="originCountry">originCountry</param>
+        /// <param name="characteristics">characteristics</param>
+        /// <param name="classifications">classifications</param>
+        /// <param name="grossUnitPrice">grossUnitPrice</param>
+        /// <param name="priceBasisQuantity">priceBasisQuantity</param>
+        /// <param name="priceBasisUnit">priceBasisUnit</param>
+        /// <param name="priceAllowanceAmount">priceAllowanceAmount</param>
         /// <param name="lineNetAmount">lineNetAmount</param>
+        /// <param name="allowanceAmount">allowanceAmount</param>
+        /// <param name="allowanceReasonCode">allowanceReasonCode</param>
+        /// <param name="allowanceReason">allowanceReason</param>
+        /// <param name="allowancesCharges">allowancesCharges</param>
         /// <param name="vatRate">vatRate</param>
         /// <param name="manualVatRate">manualVatRate</param>
         /// <param name="vatCategory">vatCategory</param>
         /// <param name="periodStartDate">periodStartDate</param>
         /// <param name="periodEndDate">periodEndDate</param>
-        /// <param name="allowanceReasonCode">allowanceReasonCode</param>
-        /// <param name="allowanceReason">allowanceReason</param>
+        /// <param name="purchaseOrderLineRef">purchaseOrderLineRef</param>
+        /// <param name="accountingAccount">accountingAccount</param>
+        /// <param name="additionalDocuments">additionalDocuments</param>
+        /// <param name="lineNotes">lineNotes</param>
         [JsonConstructor]
-        public InvoiceLine(int lineNumber, string itemName, Quantity quantity, UnitOfMeasure unit, UnitNetPrice unitNetPrice, Option<string?> reference = default, Option<InvoiceLineAllowanceAmount?> allowanceAmount = default, Option<LineNetAmount?> lineNetAmount = default, Option<string?> vatRate = default, Option<ManualVatRate?> manualVatRate = default, Option<VATCategory?> vatCategory = default, Option<string?> periodStartDate = default, Option<string?> periodEndDate = default, Option<AllowanceReasonCode?> allowanceReasonCode = default, Option<string?> allowanceReason = default)
+        public InvoiceLine(int lineNumber, string itemName, Quantity quantity, UnitOfMeasure unit, UnitNetPrice unitNetPrice, Option<string?> lineNote = default, Option<string?> reference = default, Option<string?> buyerAssignedId = default, Option<string?> productGlobalId = default, Option<string?> productGlobalIdScheme = default, Option<string?> itemDescription = default, Option<string?> originCountry = default, Option<List<ProductCharacteristic>?> characteristics = default, Option<List<ProductClassification>?> classifications = default, Option<GrossUnitPrice?> grossUnitPrice = default, Option<PriceBasisQuantity?> priceBasisQuantity = default, Option<string?> priceBasisUnit = default, Option<PriceAllowanceAmount?> priceAllowanceAmount = default, Option<LineNetAmount?> lineNetAmount = default, Option<InvoiceLineAllowanceAmount?> allowanceAmount = default, Option<AllowanceReasonCode?> allowanceReasonCode = default, Option<string?> allowanceReason = default, Option<List<AllowanceCharge>?> allowancesCharges = default, Option<string?> vatRate = default, Option<ManualVatRate?> manualVatRate = default, Option<VATCategory?> vatCategory = default, Option<string?> periodStartDate = default, Option<string?> periodEndDate = default, Option<string?> purchaseOrderLineRef = default, Option<string?> accountingAccount = default, Option<List<AdditionalDocument>?> additionalDocuments = default, Option<List<InvoiceNote>?> lineNotes = default)
         {
             LineNumber = lineNumber;
             ItemName = itemName;
             Quantity = quantity;
             Unit = unit;
             UnitNetPrice = unitNetPrice;
+            LineNoteOption = lineNote;
             ReferenceOption = reference;
-            AllowanceAmountOption = allowanceAmount;
+            BuyerAssignedIdOption = buyerAssignedId;
+            ProductGlobalIdOption = productGlobalId;
+            ProductGlobalIdSchemeOption = productGlobalIdScheme;
+            ItemDescriptionOption = itemDescription;
+            OriginCountryOption = originCountry;
+            CharacteristicsOption = characteristics;
+            ClassificationsOption = classifications;
+            GrossUnitPriceOption = grossUnitPrice;
+            PriceBasisQuantityOption = priceBasisQuantity;
+            PriceBasisUnitOption = priceBasisUnit;
+            PriceAllowanceAmountOption = priceAllowanceAmount;
             LineNetAmountOption = lineNetAmount;
+            AllowanceAmountOption = allowanceAmount;
+            AllowanceReasonCodeOption = allowanceReasonCode;
+            AllowanceReasonOption = allowanceReason;
+            AllowancesChargesOption = allowancesCharges;
             VatRateOption = vatRate;
             ManualVatRateOption = manualVatRate;
             VatCategoryOption = vatCategory;
             PeriodStartDateOption = periodStartDate;
             PeriodEndDateOption = periodEndDate;
-            AllowanceReasonCodeOption = allowanceReasonCode;
-            AllowanceReasonOption = allowanceReason;
+            PurchaseOrderLineRefOption = purchaseOrderLineRef;
+            AccountingAccountOption = accountingAccount;
+            AdditionalDocumentsOption = additionalDocuments;
+            LineNotesOption = lineNotes;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Unit
+        /// Invoiced quantity unit of measure code (BT-130).
         /// </summary>
+        /// <value>Invoiced quantity unit of measure code (BT-130).</value>
         [JsonPropertyName("unit")]
         public UnitOfMeasure Unit { get; set; }
-
-        /// <summary>
-        /// Used to track the state of VatCategory
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<VATCategory?> VatCategoryOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets VatCategory
-        /// </summary>
-        [JsonPropertyName("vat_category")]
-        public VATCategory? VatCategory { get { return this.VatCategoryOption; } set { this.VatCategoryOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of AllowanceReasonCode
@@ -104,14 +126,29 @@ namespace FactPulse.SDK.Model
         public AllowanceReasonCode? AllowanceReasonCode { get { return this.AllowanceReasonCodeOption; } set { this.AllowanceReasonCodeOption = new(value); } }
 
         /// <summary>
-        /// Gets or Sets LineNumber
+        /// Used to track the state of VatCategory
         /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<VATCategory?> VatCategoryOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets VatCategory
+        /// </summary>
+        [JsonPropertyName("vat_category")]
+        public VATCategory? VatCategory { get { return this.VatCategoryOption; } set { this.VatCategoryOption = new(value); } }
+
+        /// <summary>
+        /// Invoice line identifier (BT-126).
+        /// </summary>
+        /// <value>Invoice line identifier (BT-126).</value>
         [JsonPropertyName("line_number")]
         public int LineNumber { get; set; }
 
         /// <summary>
-        /// Gets or Sets ItemName
+        /// Item name (BT-153).
         /// </summary>
+        /// <value>Item name (BT-153).</value>
         [JsonPropertyName("item_name")]
         public string ItemName { get; set; }
 
@@ -128,6 +165,19 @@ namespace FactPulse.SDK.Model
         public UnitNetPrice UnitNetPrice { get; set; }
 
         /// <summary>
+        /// Used to track the state of LineNote
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> LineNoteOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets LineNote
+        /// </summary>
+        [JsonPropertyName("line_note")]
+        public string? LineNote { get { return this.LineNoteOption; } set { this.LineNoteOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of Reference
         /// </summary>
         [JsonIgnore]
@@ -139,6 +189,162 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonPropertyName("reference")]
         public string? Reference { get { return this.ReferenceOption; } set { this.ReferenceOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of BuyerAssignedId
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> BuyerAssignedIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets BuyerAssignedId
+        /// </summary>
+        [JsonPropertyName("buyer_assigned_id")]
+        public string? BuyerAssignedId { get { return this.BuyerAssignedIdOption; } set { this.BuyerAssignedIdOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of ProductGlobalId
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> ProductGlobalIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ProductGlobalId
+        /// </summary>
+        [JsonPropertyName("product_global_id")]
+        public string? ProductGlobalId { get { return this.ProductGlobalIdOption; } set { this.ProductGlobalIdOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of ProductGlobalIdScheme
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> ProductGlobalIdSchemeOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ProductGlobalIdScheme
+        /// </summary>
+        [JsonPropertyName("product_global_id_scheme")]
+        public string? ProductGlobalIdScheme { get { return this.ProductGlobalIdSchemeOption; } set { this.ProductGlobalIdSchemeOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of ItemDescription
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> ItemDescriptionOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ItemDescription
+        /// </summary>
+        [JsonPropertyName("item_description")]
+        public string? ItemDescription { get { return this.ItemDescriptionOption; } set { this.ItemDescriptionOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of OriginCountry
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> OriginCountryOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets OriginCountry
+        /// </summary>
+        [JsonPropertyName("origin_country")]
+        public string? OriginCountry { get { return this.OriginCountryOption; } set { this.OriginCountryOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Characteristics
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<ProductCharacteristic>?> CharacteristicsOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Characteristics
+        /// </summary>
+        [JsonPropertyName("characteristics")]
+        public List<ProductCharacteristic>? Characteristics { get { return this.CharacteristicsOption; } set { this.CharacteristicsOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Classifications
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<ProductClassification>?> ClassificationsOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Classifications
+        /// </summary>
+        [JsonPropertyName("classifications")]
+        public List<ProductClassification>? Classifications { get { return this.ClassificationsOption; } set { this.ClassificationsOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of GrossUnitPrice
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<GrossUnitPrice?> GrossUnitPriceOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets GrossUnitPrice
+        /// </summary>
+        [JsonPropertyName("gross_unit_price")]
+        public GrossUnitPrice? GrossUnitPrice { get { return this.GrossUnitPriceOption; } set { this.GrossUnitPriceOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of PriceBasisQuantity
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<PriceBasisQuantity?> PriceBasisQuantityOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets PriceBasisQuantity
+        /// </summary>
+        [JsonPropertyName("price_basis_quantity")]
+        public PriceBasisQuantity? PriceBasisQuantity { get { return this.PriceBasisQuantityOption; } set { this.PriceBasisQuantityOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of PriceBasisUnit
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> PriceBasisUnitOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets PriceBasisUnit
+        /// </summary>
+        [JsonPropertyName("price_basis_unit")]
+        public string? PriceBasisUnit { get { return this.PriceBasisUnitOption; } set { this.PriceBasisUnitOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of PriceAllowanceAmount
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<PriceAllowanceAmount?> PriceAllowanceAmountOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets PriceAllowanceAmount
+        /// </summary>
+        [JsonPropertyName("price_allowance_amount")]
+        public PriceAllowanceAmount? PriceAllowanceAmount { get { return this.PriceAllowanceAmountOption; } set { this.PriceAllowanceAmountOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of LineNetAmount
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<LineNetAmount?> LineNetAmountOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets LineNetAmount
+        /// </summary>
+        [JsonPropertyName("lineNetAmount")]
+        public LineNetAmount? LineNetAmount { get { return this.LineNetAmountOption; } set { this.LineNetAmountOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of AllowanceAmount
@@ -154,17 +360,30 @@ namespace FactPulse.SDK.Model
         public InvoiceLineAllowanceAmount? AllowanceAmount { get { return this.AllowanceAmountOption; } set { this.AllowanceAmountOption = new(value); } }
 
         /// <summary>
-        /// Used to track the state of LineNetAmount
+        /// Used to track the state of AllowanceReason
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<LineNetAmount?> LineNetAmountOption { get; private set; }
+        public Option<string?> AllowanceReasonOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets LineNetAmount
+        /// Gets or Sets AllowanceReason
         /// </summary>
-        [JsonPropertyName("lineNetAmount")]
-        public LineNetAmount? LineNetAmount { get { return this.LineNetAmountOption; } set { this.LineNetAmountOption = new(value); } }
+        [JsonPropertyName("allowanceReason")]
+        public string? AllowanceReason { get { return this.AllowanceReasonOption; } set { this.AllowanceReasonOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of AllowancesCharges
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<AllowanceCharge>?> AllowancesChargesOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets AllowancesCharges
+        /// </summary>
+        [JsonPropertyName("allowances_charges")]
+        public List<AllowanceCharge>? AllowancesCharges { get { return this.AllowancesChargesOption; } set { this.AllowancesChargesOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of VatRate
@@ -202,7 +421,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets PeriodStartDate
         /// </summary>
-        [JsonPropertyName("periodStartDate")]
+        [JsonPropertyName("period_start_date")]
         public string? PeriodStartDate { get { return this.PeriodStartDateOption; } set { this.PeriodStartDateOption = new(value); } }
 
         /// <summary>
@@ -215,21 +434,60 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets PeriodEndDate
         /// </summary>
-        [JsonPropertyName("periodEndDate")]
+        [JsonPropertyName("period_end_date")]
         public string? PeriodEndDate { get { return this.PeriodEndDateOption; } set { this.PeriodEndDateOption = new(value); } }
 
         /// <summary>
-        /// Used to track the state of AllowanceReason
+        /// Used to track the state of PurchaseOrderLineRef
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> AllowanceReasonOption { get; private set; }
+        public Option<string?> PurchaseOrderLineRefOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets AllowanceReason
+        /// Gets or Sets PurchaseOrderLineRef
         /// </summary>
-        [JsonPropertyName("allowanceReason")]
-        public string? AllowanceReason { get { return this.AllowanceReasonOption; } set { this.AllowanceReasonOption = new(value); } }
+        [JsonPropertyName("purchase_order_line_ref")]
+        public string? PurchaseOrderLineRef { get { return this.PurchaseOrderLineRefOption; } set { this.PurchaseOrderLineRefOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of AccountingAccount
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> AccountingAccountOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets AccountingAccount
+        /// </summary>
+        [JsonPropertyName("accounting_account")]
+        public string? AccountingAccount { get { return this.AccountingAccountOption; } set { this.AccountingAccountOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of AdditionalDocuments
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<AdditionalDocument>?> AdditionalDocumentsOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets AdditionalDocuments
+        /// </summary>
+        [JsonPropertyName("additional_documents")]
+        public List<AdditionalDocument>? AdditionalDocuments { get { return this.AdditionalDocumentsOption; } set { this.AdditionalDocumentsOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of LineNotes
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<InvoiceNote>?> LineNotesOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets LineNotes
+        /// </summary>
+        [JsonPropertyName("line_notes")]
+        public List<InvoiceNote>? LineNotes { get { return this.LineNotesOption; } set { this.LineNotesOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -244,16 +502,33 @@ namespace FactPulse.SDK.Model
             sb.Append("  Quantity: ").Append(Quantity).Append("\n");
             sb.Append("  Unit: ").Append(Unit).Append("\n");
             sb.Append("  UnitNetPrice: ").Append(UnitNetPrice).Append("\n");
+            sb.Append("  LineNote: ").Append(LineNote).Append("\n");
             sb.Append("  Reference: ").Append(Reference).Append("\n");
-            sb.Append("  AllowanceAmount: ").Append(AllowanceAmount).Append("\n");
+            sb.Append("  BuyerAssignedId: ").Append(BuyerAssignedId).Append("\n");
+            sb.Append("  ProductGlobalId: ").Append(ProductGlobalId).Append("\n");
+            sb.Append("  ProductGlobalIdScheme: ").Append(ProductGlobalIdScheme).Append("\n");
+            sb.Append("  ItemDescription: ").Append(ItemDescription).Append("\n");
+            sb.Append("  OriginCountry: ").Append(OriginCountry).Append("\n");
+            sb.Append("  Characteristics: ").Append(Characteristics).Append("\n");
+            sb.Append("  Classifications: ").Append(Classifications).Append("\n");
+            sb.Append("  GrossUnitPrice: ").Append(GrossUnitPrice).Append("\n");
+            sb.Append("  PriceBasisQuantity: ").Append(PriceBasisQuantity).Append("\n");
+            sb.Append("  PriceBasisUnit: ").Append(PriceBasisUnit).Append("\n");
+            sb.Append("  PriceAllowanceAmount: ").Append(PriceAllowanceAmount).Append("\n");
             sb.Append("  LineNetAmount: ").Append(LineNetAmount).Append("\n");
+            sb.Append("  AllowanceAmount: ").Append(AllowanceAmount).Append("\n");
+            sb.Append("  AllowanceReasonCode: ").Append(AllowanceReasonCode).Append("\n");
+            sb.Append("  AllowanceReason: ").Append(AllowanceReason).Append("\n");
+            sb.Append("  AllowancesCharges: ").Append(AllowancesCharges).Append("\n");
             sb.Append("  VatRate: ").Append(VatRate).Append("\n");
             sb.Append("  ManualVatRate: ").Append(ManualVatRate).Append("\n");
             sb.Append("  VatCategory: ").Append(VatCategory).Append("\n");
             sb.Append("  PeriodStartDate: ").Append(PeriodStartDate).Append("\n");
             sb.Append("  PeriodEndDate: ").Append(PeriodEndDate).Append("\n");
-            sb.Append("  AllowanceReasonCode: ").Append(AllowanceReasonCode).Append("\n");
-            sb.Append("  AllowanceReason: ").Append(AllowanceReason).Append("\n");
+            sb.Append("  PurchaseOrderLineRef: ").Append(PurchaseOrderLineRef).Append("\n");
+            sb.Append("  AccountingAccount: ").Append(AccountingAccount).Append("\n");
+            sb.Append("  AdditionalDocuments: ").Append(AdditionalDocuments).Append("\n");
+            sb.Append("  LineNotes: ").Append(LineNotes).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -296,16 +571,33 @@ namespace FactPulse.SDK.Model
             Option<Quantity?> quantity = default;
             Option<UnitOfMeasure?> unit = default;
             Option<UnitNetPrice?> unitNetPrice = default;
+            Option<string?> lineNote = default;
             Option<string?> reference = default;
-            Option<InvoiceLineAllowanceAmount?> allowanceAmount = default;
+            Option<string?> buyerAssignedId = default;
+            Option<string?> productGlobalId = default;
+            Option<string?> productGlobalIdScheme = default;
+            Option<string?> itemDescription = default;
+            Option<string?> originCountry = default;
+            Option<List<ProductCharacteristic>?> characteristics = default;
+            Option<List<ProductClassification>?> classifications = default;
+            Option<GrossUnitPrice?> grossUnitPrice = default;
+            Option<PriceBasisQuantity?> priceBasisQuantity = default;
+            Option<string?> priceBasisUnit = default;
+            Option<PriceAllowanceAmount?> priceAllowanceAmount = default;
             Option<LineNetAmount?> lineNetAmount = default;
+            Option<InvoiceLineAllowanceAmount?> allowanceAmount = default;
+            Option<AllowanceReasonCode?> allowanceReasonCode = default;
+            Option<string?> allowanceReason = default;
+            Option<List<AllowanceCharge>?> allowancesCharges = default;
             Option<string?> vatRate = default;
             Option<ManualVatRate?> manualVatRate = default;
             Option<VATCategory?> vatCategory = default;
             Option<string?> periodStartDate = default;
             Option<string?> periodEndDate = default;
-            Option<AllowanceReasonCode?> allowanceReasonCode = default;
-            Option<string?> allowanceReason = default;
+            Option<string?> purchaseOrderLineRef = default;
+            Option<string?> accountingAccount = default;
+            Option<List<AdditionalDocument>?> additionalDocuments = default;
+            Option<List<InvoiceNote>?> lineNotes = default;
 
             while (utf8JsonReader.Read())
             {
@@ -339,14 +631,61 @@ namespace FactPulse.SDK.Model
                         case "unit_net_price":
                             unitNetPrice = new Option<UnitNetPrice?>(JsonSerializer.Deserialize<UnitNetPrice>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
+                        case "line_note":
+                            lineNote = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         case "reference":
                             reference = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "buyer_assigned_id":
+                            buyerAssignedId = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "product_global_id":
+                            productGlobalId = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "product_global_id_scheme":
+                            productGlobalIdScheme = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "item_description":
+                            itemDescription = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "origin_country":
+                            originCountry = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "characteristics":
+                            characteristics = new Option<List<ProductCharacteristic>?>(JsonSerializer.Deserialize<List<ProductCharacteristic>>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "classifications":
+                            classifications = new Option<List<ProductClassification>?>(JsonSerializer.Deserialize<List<ProductClassification>>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "gross_unit_price":
+                            grossUnitPrice = new Option<GrossUnitPrice?>(JsonSerializer.Deserialize<GrossUnitPrice>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "price_basis_quantity":
+                            priceBasisQuantity = new Option<PriceBasisQuantity?>(JsonSerializer.Deserialize<PriceBasisQuantity>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "price_basis_unit":
+                            priceBasisUnit = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "price_allowance_amount":
+                            priceAllowanceAmount = new Option<PriceAllowanceAmount?>(JsonSerializer.Deserialize<PriceAllowanceAmount>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "lineNetAmount":
+                            lineNetAmount = new Option<LineNetAmount?>(JsonSerializer.Deserialize<LineNetAmount>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "allowanceAmount":
                             allowanceAmount = new Option<InvoiceLineAllowanceAmount?>(JsonSerializer.Deserialize<InvoiceLineAllowanceAmount>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
-                        case "lineNetAmount":
-                            lineNetAmount = new Option<LineNetAmount?>(JsonSerializer.Deserialize<LineNetAmount>(ref utf8JsonReader, jsonSerializerOptions)!);
+                        case "allowanceReasonCode":
+                            string? allowanceReasonCodeRawValue = utf8JsonReader.GetString();
+                            if (allowanceReasonCodeRawValue != null)
+                                allowanceReasonCode = new Option<AllowanceReasonCode?>(AllowanceReasonCodeValueConverter.FromStringOrDefault(allowanceReasonCodeRawValue));
+                            break;
+                        case "allowanceReason":
+                            allowanceReason = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "allowances_charges":
+                            allowancesCharges = new Option<List<AllowanceCharge>?>(JsonSerializer.Deserialize<List<AllowanceCharge>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "vat_rate":
                             vatRate = new Option<string?>(utf8JsonReader.GetString());
@@ -359,19 +698,23 @@ namespace FactPulse.SDK.Model
                             if (vatCategoryRawValue != null)
                                 vatCategory = new Option<VATCategory?>(VATCategoryValueConverter.FromStringOrDefault(vatCategoryRawValue));
                             break;
-                        case "periodStartDate":
+                        case "period_start_date":
                             periodStartDate = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "periodEndDate":
+                        case "period_end_date":
                             periodEndDate = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "allowanceReasonCode":
-                            string? allowanceReasonCodeRawValue = utf8JsonReader.GetString();
-                            if (allowanceReasonCodeRawValue != null)
-                                allowanceReasonCode = new Option<AllowanceReasonCode?>(AllowanceReasonCodeValueConverter.FromStringOrDefault(allowanceReasonCodeRawValue));
+                        case "purchase_order_line_ref":
+                            purchaseOrderLineRef = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "allowanceReason":
-                            allowanceReason = new Option<string?>(utf8JsonReader.GetString());
+                        case "accounting_account":
+                            accountingAccount = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "additional_documents":
+                            additionalDocuments = new Option<List<AdditionalDocument>?>(JsonSerializer.Deserialize<List<AdditionalDocument>>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "line_notes":
+                            lineNotes = new Option<List<InvoiceNote>?>(JsonSerializer.Deserialize<List<InvoiceNote>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -409,13 +752,10 @@ namespace FactPulse.SDK.Model
             if (unitNetPrice.IsSet && unitNetPrice.Value == null)
                 throw new ArgumentNullException(nameof(unitNetPrice), "Property is not nullable for class InvoiceLine.");
 
-            if (lineNetAmount.IsSet && lineNetAmount.Value == null)
-                throw new ArgumentNullException(nameof(lineNetAmount), "Property is not nullable for class InvoiceLine.");
-
             if (manualVatRate.IsSet && manualVatRate.Value == null)
                 throw new ArgumentNullException(nameof(manualVatRate), "Property is not nullable for class InvoiceLine.");
 
-            return new InvoiceLine(lineNumber.Value!.Value!, itemName.Value!, quantity.Value!, unit.Value!.Value!, unitNetPrice.Value!, reference, allowanceAmount, lineNetAmount, vatRate, manualVatRate, vatCategory, periodStartDate, periodEndDate, allowanceReasonCode, allowanceReason);
+            return new InvoiceLine(lineNumber.Value!.Value!, itemName.Value!, quantity.Value!, unit.Value!.Value!, unitNetPrice.Value!, lineNote, reference, buyerAssignedId, productGlobalId, productGlobalIdScheme, itemDescription, originCountry, characteristics, classifications, grossUnitPrice, priceBasisQuantity, priceBasisUnit, priceAllowanceAmount, lineNetAmount, allowanceAmount, allowanceReasonCode, allowanceReason, allowancesCharges, vatRate, manualVatRate, vatCategory, periodStartDate, periodEndDate, purchaseOrderLineRef, accountingAccount, additionalDocuments, lineNotes);
         }
 
         /// <summary>
@@ -451,9 +791,6 @@ namespace FactPulse.SDK.Model
             if (invoiceLine.UnitNetPrice == null)
                 throw new ArgumentNullException(nameof(invoiceLine.UnitNetPrice), "Property is required for class InvoiceLine.");
 
-            if (invoiceLine.LineNetAmountOption.IsSet && invoiceLine.LineNetAmount == null)
-                throw new ArgumentNullException(nameof(invoiceLine.LineNetAmount), "Property is required for class InvoiceLine.");
-
             if (invoiceLine.ManualVatRateOption.IsSet && invoiceLine.ManualVatRate == null)
                 throw new ArgumentNullException(nameof(invoiceLine.ManualVatRate), "Property is required for class InvoiceLine.");
 
@@ -468,12 +805,102 @@ namespace FactPulse.SDK.Model
 
             writer.WritePropertyName("unit_net_price");
             JsonSerializer.Serialize(writer, invoiceLine.UnitNetPrice, jsonSerializerOptions);
+            if (invoiceLine.LineNoteOption.IsSet)
+                if (invoiceLine.LineNoteOption.Value != null)
+                    writer.WriteString("line_note", invoiceLine.LineNote);
+                else
+                    writer.WriteNull("line_note");
+
             if (invoiceLine.ReferenceOption.IsSet)
                 if (invoiceLine.ReferenceOption.Value != null)
                     writer.WriteString("reference", invoiceLine.Reference);
                 else
                     writer.WriteNull("reference");
 
+            if (invoiceLine.BuyerAssignedIdOption.IsSet)
+                if (invoiceLine.BuyerAssignedIdOption.Value != null)
+                    writer.WriteString("buyer_assigned_id", invoiceLine.BuyerAssignedId);
+                else
+                    writer.WriteNull("buyer_assigned_id");
+
+            if (invoiceLine.ProductGlobalIdOption.IsSet)
+                if (invoiceLine.ProductGlobalIdOption.Value != null)
+                    writer.WriteString("product_global_id", invoiceLine.ProductGlobalId);
+                else
+                    writer.WriteNull("product_global_id");
+
+            if (invoiceLine.ProductGlobalIdSchemeOption.IsSet)
+                if (invoiceLine.ProductGlobalIdSchemeOption.Value != null)
+                    writer.WriteString("product_global_id_scheme", invoiceLine.ProductGlobalIdScheme);
+                else
+                    writer.WriteNull("product_global_id_scheme");
+
+            if (invoiceLine.ItemDescriptionOption.IsSet)
+                if (invoiceLine.ItemDescriptionOption.Value != null)
+                    writer.WriteString("item_description", invoiceLine.ItemDescription);
+                else
+                    writer.WriteNull("item_description");
+
+            if (invoiceLine.OriginCountryOption.IsSet)
+                if (invoiceLine.OriginCountryOption.Value != null)
+                    writer.WriteString("origin_country", invoiceLine.OriginCountry);
+                else
+                    writer.WriteNull("origin_country");
+
+            if (invoiceLine.CharacteristicsOption.IsSet)
+                if (invoiceLine.CharacteristicsOption.Value != null)
+                {
+                    writer.WritePropertyName("characteristics");
+                    JsonSerializer.Serialize(writer, invoiceLine.Characteristics, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("characteristics");
+            if (invoiceLine.ClassificationsOption.IsSet)
+                if (invoiceLine.ClassificationsOption.Value != null)
+                {
+                    writer.WritePropertyName("classifications");
+                    JsonSerializer.Serialize(writer, invoiceLine.Classifications, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("classifications");
+            if (invoiceLine.GrossUnitPriceOption.IsSet)
+                if (invoiceLine.GrossUnitPriceOption.Value != null)
+                {
+                    writer.WritePropertyName("gross_unit_price");
+                    JsonSerializer.Serialize(writer, invoiceLine.GrossUnitPrice, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("gross_unit_price");
+            if (invoiceLine.PriceBasisQuantityOption.IsSet)
+                if (invoiceLine.PriceBasisQuantityOption.Value != null)
+                {
+                    writer.WritePropertyName("price_basis_quantity");
+                    JsonSerializer.Serialize(writer, invoiceLine.PriceBasisQuantity, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("price_basis_quantity");
+            if (invoiceLine.PriceBasisUnitOption.IsSet)
+                if (invoiceLine.PriceBasisUnitOption.Value != null)
+                    writer.WriteString("price_basis_unit", invoiceLine.PriceBasisUnit);
+                else
+                    writer.WriteNull("price_basis_unit");
+
+            if (invoiceLine.PriceAllowanceAmountOption.IsSet)
+                if (invoiceLine.PriceAllowanceAmountOption.Value != null)
+                {
+                    writer.WritePropertyName("price_allowance_amount");
+                    JsonSerializer.Serialize(writer, invoiceLine.PriceAllowanceAmount, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("price_allowance_amount");
+            if (invoiceLine.LineNetAmountOption.IsSet)
+                if (invoiceLine.LineNetAmountOption.Value != null)
+                {
+                    writer.WritePropertyName("lineNetAmount");
+                    JsonSerializer.Serialize(writer, invoiceLine.LineNetAmount, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("lineNetAmount");
             if (invoiceLine.AllowanceAmountOption.IsSet)
                 if (invoiceLine.AllowanceAmountOption.Value != null)
                 {
@@ -482,11 +909,28 @@ namespace FactPulse.SDK.Model
                 }
                 else
                     writer.WriteNull("allowanceAmount");
-            if (invoiceLine.LineNetAmountOption.IsSet)
-            {
-                writer.WritePropertyName("lineNetAmount");
-                JsonSerializer.Serialize(writer, invoiceLine.LineNetAmount, jsonSerializerOptions);
-            }
+            if (invoiceLine.AllowanceReasonCodeOption.IsSet)
+                if (invoiceLine.AllowanceReasonCodeOption!.Value != null)
+                {
+                    var allowanceReasonCodeRawValue = AllowanceReasonCodeValueConverter.ToJsonValue(invoiceLine.AllowanceReasonCodeOption.Value!.Value);
+                    writer.WriteString("allowanceReasonCode", allowanceReasonCodeRawValue);
+                }
+                else
+                    writer.WriteNull("allowanceReasonCode");
+            if (invoiceLine.AllowanceReasonOption.IsSet)
+                if (invoiceLine.AllowanceReasonOption.Value != null)
+                    writer.WriteString("allowanceReason", invoiceLine.AllowanceReason);
+                else
+                    writer.WriteNull("allowanceReason");
+
+            if (invoiceLine.AllowancesChargesOption.IsSet)
+                if (invoiceLine.AllowancesChargesOption.Value != null)
+                {
+                    writer.WritePropertyName("allowances_charges");
+                    JsonSerializer.Serialize(writer, invoiceLine.AllowancesCharges, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("allowances_charges");
             if (invoiceLine.VatRateOption.IsSet)
                 if (invoiceLine.VatRateOption.Value != null)
                     writer.WriteString("vat_rate", invoiceLine.VatRate);
@@ -508,29 +952,44 @@ namespace FactPulse.SDK.Model
                     writer.WriteNull("vat_category");
             if (invoiceLine.PeriodStartDateOption.IsSet)
                 if (invoiceLine.PeriodStartDateOption.Value != null)
-                    writer.WriteString("periodStartDate", invoiceLine.PeriodStartDate);
+                    writer.WriteString("period_start_date", invoiceLine.PeriodStartDate);
                 else
-                    writer.WriteNull("periodStartDate");
+                    writer.WriteNull("period_start_date");
 
             if (invoiceLine.PeriodEndDateOption.IsSet)
                 if (invoiceLine.PeriodEndDateOption.Value != null)
-                    writer.WriteString("periodEndDate", invoiceLine.PeriodEndDate);
+                    writer.WriteString("period_end_date", invoiceLine.PeriodEndDate);
                 else
-                    writer.WriteNull("periodEndDate");
+                    writer.WriteNull("period_end_date");
 
-            if (invoiceLine.AllowanceReasonCodeOption.IsSet)
-                if (invoiceLine.AllowanceReasonCodeOption!.Value != null)
+            if (invoiceLine.PurchaseOrderLineRefOption.IsSet)
+                if (invoiceLine.PurchaseOrderLineRefOption.Value != null)
+                    writer.WriteString("purchase_order_line_ref", invoiceLine.PurchaseOrderLineRef);
+                else
+                    writer.WriteNull("purchase_order_line_ref");
+
+            if (invoiceLine.AccountingAccountOption.IsSet)
+                if (invoiceLine.AccountingAccountOption.Value != null)
+                    writer.WriteString("accounting_account", invoiceLine.AccountingAccount);
+                else
+                    writer.WriteNull("accounting_account");
+
+            if (invoiceLine.AdditionalDocumentsOption.IsSet)
+                if (invoiceLine.AdditionalDocumentsOption.Value != null)
                 {
-                    var allowanceReasonCodeRawValue = AllowanceReasonCodeValueConverter.ToJsonValue(invoiceLine.AllowanceReasonCodeOption.Value!.Value);
-                    writer.WriteString("allowanceReasonCode", allowanceReasonCodeRawValue);
+                    writer.WritePropertyName("additional_documents");
+                    JsonSerializer.Serialize(writer, invoiceLine.AdditionalDocuments, jsonSerializerOptions);
                 }
                 else
-                    writer.WriteNull("allowanceReasonCode");
-            if (invoiceLine.AllowanceReasonOption.IsSet)
-                if (invoiceLine.AllowanceReasonOption.Value != null)
-                    writer.WriteString("allowanceReason", invoiceLine.AllowanceReason);
+                    writer.WriteNull("additional_documents");
+            if (invoiceLine.LineNotesOption.IsSet)
+                if (invoiceLine.LineNotesOption.Value != null)
+                {
+                    writer.WritePropertyName("line_notes");
+                    JsonSerializer.Serialize(writer, invoiceLine.LineNotes, jsonSerializerOptions);
+                }
                 else
-                    writer.WriteNull("allowanceReason");
+                    writer.WriteNull("line_notes");
         }
     }
 }

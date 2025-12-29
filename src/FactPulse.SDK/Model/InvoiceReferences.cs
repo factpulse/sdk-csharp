@@ -33,33 +33,54 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="InvoiceReferences" /> class.
         /// </summary>
-        /// <param name="paymentMeans">paymentMeans</param>
+        /// <param name="paymentMeans">Payment means type code (BT-81).</param>
         /// <param name="invoiceType">invoiceType</param>
-        /// <param name="vatAccountingCode">vatAccountingCode</param>
-        /// <param name="invoiceCurrency">invoiceCurrency (default to &quot;EUR&quot;)</param>
+        /// <param name="vatAccountingCode">VAT accounting code.</param>
+        /// <param name="businessProcessId">businessProcessId</param>
+        /// <param name="invoiceCurrency">Invoice currency code (BT-5). ISO 4217. (default to &quot;EUR&quot;)</param>
+        /// <param name="paymentMeansText">paymentMeansText</param>
+        /// <param name="buyerReference">buyerReference</param>
         /// <param name="contractReference">contractReference</param>
-        /// <param name="vatExemptionReason">vatExemptionReason</param>
         /// <param name="purchaseOrderReference">purchaseOrderReference</param>
+        /// <param name="sellerOrderReference">sellerOrderReference</param>
+        /// <param name="receivingAdviceReference">receivingAdviceReference</param>
+        /// <param name="despatchAdviceReference">despatchAdviceReference</param>
+        /// <param name="tenderReference">tenderReference</param>
         /// <param name="precedingInvoiceReference">precedingInvoiceReference</param>
+        /// <param name="precedingInvoiceDate">precedingInvoiceDate</param>
+        /// <param name="projectReference">projectReference</param>
+        /// <param name="projectName">projectName</param>
+        /// <param name="vatExemptionReason">vatExemptionReason</param>
         [JsonConstructor]
-        public InvoiceReferences(PaymentMeans paymentMeans, InvoiceTypeCode invoiceType, VATAccountingCode vatAccountingCode, Option<string?> invoiceCurrency = default, Option<string?> contractReference = default, Option<string?> vatExemptionReason = default, Option<string?> purchaseOrderReference = default, Option<string?> precedingInvoiceReference = default)
+        public InvoiceReferences(PaymentMeans paymentMeans, InvoiceTypeCode invoiceType, VATAccountingCode vatAccountingCode, Option<string?> businessProcessId = default, Option<string?> invoiceCurrency = default, Option<string?> paymentMeansText = default, Option<string?> buyerReference = default, Option<string?> contractReference = default, Option<string?> purchaseOrderReference = default, Option<string?> sellerOrderReference = default, Option<string?> receivingAdviceReference = default, Option<string?> despatchAdviceReference = default, Option<string?> tenderReference = default, Option<string?> precedingInvoiceReference = default, Option<string?> precedingInvoiceDate = default, Option<string?> projectReference = default, Option<string?> projectName = default, Option<string?> vatExemptionReason = default)
         {
             PaymentMeans = paymentMeans;
             InvoiceType = invoiceType;
             VatAccountingCode = vatAccountingCode;
+            BusinessProcessIdOption = businessProcessId;
             InvoiceCurrencyOption = invoiceCurrency;
+            PaymentMeansTextOption = paymentMeansText;
+            BuyerReferenceOption = buyerReference;
             ContractReferenceOption = contractReference;
-            VatExemptionReasonOption = vatExemptionReason;
             PurchaseOrderReferenceOption = purchaseOrderReference;
+            SellerOrderReferenceOption = sellerOrderReference;
+            ReceivingAdviceReferenceOption = receivingAdviceReference;
+            DespatchAdviceReferenceOption = despatchAdviceReference;
+            TenderReferenceOption = tenderReference;
             PrecedingInvoiceReferenceOption = precedingInvoiceReference;
+            PrecedingInvoiceDateOption = precedingInvoiceDate;
+            ProjectReferenceOption = projectReference;
+            ProjectNameOption = projectName;
+            VatExemptionReasonOption = vatExemptionReason;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets PaymentMeans
+        /// Payment means type code (BT-81).
         /// </summary>
+        /// <value>Payment means type code (BT-81).</value>
         [JsonPropertyName("payment_means")]
         public PaymentMeans PaymentMeans { get; set; }
 
@@ -70,10 +91,24 @@ namespace FactPulse.SDK.Model
         public InvoiceTypeCode InvoiceType { get; set; }
 
         /// <summary>
-        /// Gets or Sets VatAccountingCode
+        /// VAT accounting code.
         /// </summary>
+        /// <value>VAT accounting code.</value>
         [JsonPropertyName("vat_accounting_code")]
         public VATAccountingCode VatAccountingCode { get; set; }
+
+        /// <summary>
+        /// Used to track the state of BusinessProcessId
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> BusinessProcessIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets BusinessProcessId
+        /// </summary>
+        [JsonPropertyName("business_process_id")]
+        public string? BusinessProcessId { get { return this.BusinessProcessIdOption; } set { this.BusinessProcessIdOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of InvoiceCurrency
@@ -83,10 +118,37 @@ namespace FactPulse.SDK.Model
         public Option<string?> InvoiceCurrencyOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets InvoiceCurrency
+        /// Invoice currency code (BT-5). ISO 4217.
         /// </summary>
+        /// <value>Invoice currency code (BT-5). ISO 4217.</value>
         [JsonPropertyName("invoice_currency")]
         public string? InvoiceCurrency { get { return this.InvoiceCurrencyOption; } set { this.InvoiceCurrencyOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of PaymentMeansText
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> PaymentMeansTextOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets PaymentMeansText
+        /// </summary>
+        [JsonPropertyName("payment_means_text")]
+        public string? PaymentMeansText { get { return this.PaymentMeansTextOption; } set { this.PaymentMeansTextOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of BuyerReference
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> BuyerReferenceOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets BuyerReference
+        /// </summary>
+        [JsonPropertyName("buyer_reference")]
+        public string? BuyerReference { get { return this.BuyerReferenceOption; } set { this.BuyerReferenceOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of ContractReference
@@ -102,19 +164,6 @@ namespace FactPulse.SDK.Model
         public string? ContractReference { get { return this.ContractReferenceOption; } set { this.ContractReferenceOption = new(value); } }
 
         /// <summary>
-        /// Used to track the state of VatExemptionReason
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> VatExemptionReasonOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets VatExemptionReason
-        /// </summary>
-        [JsonPropertyName("vat_exemption_reason")]
-        public string? VatExemptionReason { get { return this.VatExemptionReasonOption; } set { this.VatExemptionReasonOption = new(value); } }
-
-        /// <summary>
         /// Used to track the state of PurchaseOrderReference
         /// </summary>
         [JsonIgnore]
@@ -126,6 +175,58 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonPropertyName("purchase_order_reference")]
         public string? PurchaseOrderReference { get { return this.PurchaseOrderReferenceOption; } set { this.PurchaseOrderReferenceOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of SellerOrderReference
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> SellerOrderReferenceOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets SellerOrderReference
+        /// </summary>
+        [JsonPropertyName("seller_order_reference")]
+        public string? SellerOrderReference { get { return this.SellerOrderReferenceOption; } set { this.SellerOrderReferenceOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of ReceivingAdviceReference
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> ReceivingAdviceReferenceOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ReceivingAdviceReference
+        /// </summary>
+        [JsonPropertyName("receiving_advice_reference")]
+        public string? ReceivingAdviceReference { get { return this.ReceivingAdviceReferenceOption; } set { this.ReceivingAdviceReferenceOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of DespatchAdviceReference
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> DespatchAdviceReferenceOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets DespatchAdviceReference
+        /// </summary>
+        [JsonPropertyName("despatch_advice_reference")]
+        public string? DespatchAdviceReference { get { return this.DespatchAdviceReferenceOption; } set { this.DespatchAdviceReferenceOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of TenderReference
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> TenderReferenceOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets TenderReference
+        /// </summary>
+        [JsonPropertyName("tender_reference")]
+        public string? TenderReference { get { return this.TenderReferenceOption; } set { this.TenderReferenceOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of PrecedingInvoiceReference
@@ -141,6 +242,58 @@ namespace FactPulse.SDK.Model
         public string? PrecedingInvoiceReference { get { return this.PrecedingInvoiceReferenceOption; } set { this.PrecedingInvoiceReferenceOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of PrecedingInvoiceDate
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> PrecedingInvoiceDateOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets PrecedingInvoiceDate
+        /// </summary>
+        [JsonPropertyName("preceding_invoice_date")]
+        public string? PrecedingInvoiceDate { get { return this.PrecedingInvoiceDateOption; } set { this.PrecedingInvoiceDateOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of ProjectReference
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> ProjectReferenceOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ProjectReference
+        /// </summary>
+        [JsonPropertyName("project_reference")]
+        public string? ProjectReference { get { return this.ProjectReferenceOption; } set { this.ProjectReferenceOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of ProjectName
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> ProjectNameOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ProjectName
+        /// </summary>
+        [JsonPropertyName("project_name")]
+        public string? ProjectName { get { return this.ProjectNameOption; } set { this.ProjectNameOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of VatExemptionReason
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> VatExemptionReasonOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets VatExemptionReason
+        /// </summary>
+        [JsonPropertyName("vat_exemption_reason")]
+        public string? VatExemptionReason { get { return this.VatExemptionReasonOption; } set { this.VatExemptionReasonOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -151,11 +304,21 @@ namespace FactPulse.SDK.Model
             sb.Append("  PaymentMeans: ").Append(PaymentMeans).Append("\n");
             sb.Append("  InvoiceType: ").Append(InvoiceType).Append("\n");
             sb.Append("  VatAccountingCode: ").Append(VatAccountingCode).Append("\n");
+            sb.Append("  BusinessProcessId: ").Append(BusinessProcessId).Append("\n");
             sb.Append("  InvoiceCurrency: ").Append(InvoiceCurrency).Append("\n");
+            sb.Append("  PaymentMeansText: ").Append(PaymentMeansText).Append("\n");
+            sb.Append("  BuyerReference: ").Append(BuyerReference).Append("\n");
             sb.Append("  ContractReference: ").Append(ContractReference).Append("\n");
-            sb.Append("  VatExemptionReason: ").Append(VatExemptionReason).Append("\n");
             sb.Append("  PurchaseOrderReference: ").Append(PurchaseOrderReference).Append("\n");
+            sb.Append("  SellerOrderReference: ").Append(SellerOrderReference).Append("\n");
+            sb.Append("  ReceivingAdviceReference: ").Append(ReceivingAdviceReference).Append("\n");
+            sb.Append("  DespatchAdviceReference: ").Append(DespatchAdviceReference).Append("\n");
+            sb.Append("  TenderReference: ").Append(TenderReference).Append("\n");
             sb.Append("  PrecedingInvoiceReference: ").Append(PrecedingInvoiceReference).Append("\n");
+            sb.Append("  PrecedingInvoiceDate: ").Append(PrecedingInvoiceDate).Append("\n");
+            sb.Append("  ProjectReference: ").Append(ProjectReference).Append("\n");
+            sb.Append("  ProjectName: ").Append(ProjectName).Append("\n");
+            sb.Append("  VatExemptionReason: ").Append(VatExemptionReason).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -196,11 +359,21 @@ namespace FactPulse.SDK.Model
             Option<PaymentMeans?> paymentMeans = default;
             Option<InvoiceTypeCode?> invoiceType = default;
             Option<VATAccountingCode?> vatAccountingCode = default;
+            Option<string?> businessProcessId = default;
             Option<string?> invoiceCurrency = default;
+            Option<string?> paymentMeansText = default;
+            Option<string?> buyerReference = default;
             Option<string?> contractReference = default;
-            Option<string?> vatExemptionReason = default;
             Option<string?> purchaseOrderReference = default;
+            Option<string?> sellerOrderReference = default;
+            Option<string?> receivingAdviceReference = default;
+            Option<string?> despatchAdviceReference = default;
+            Option<string?> tenderReference = default;
             Option<string?> precedingInvoiceReference = default;
+            Option<string?> precedingInvoiceDate = default;
+            Option<string?> projectReference = default;
+            Option<string?> projectName = default;
+            Option<string?> vatExemptionReason = default;
 
             while (utf8JsonReader.Read())
             {
@@ -232,20 +405,50 @@ namespace FactPulse.SDK.Model
                             if (vatAccountingCodeRawValue != null)
                                 vatAccountingCode = new Option<VATAccountingCode?>(VATAccountingCodeValueConverter.FromStringOrDefault(vatAccountingCodeRawValue));
                             break;
+                        case "business_process_id":
+                            businessProcessId = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         case "invoice_currency":
                             invoiceCurrency = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
+                        case "payment_means_text":
+                            paymentMeansText = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "buyer_reference":
+                            buyerReference = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "contract_reference":
                             contractReference = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "vat_exemption_reason":
-                            vatExemptionReason = new Option<string?>(utf8JsonReader.GetString());
-                            break;
                         case "purchase_order_reference":
                             purchaseOrderReference = new Option<string?>(utf8JsonReader.GetString());
                             break;
+                        case "seller_order_reference":
+                            sellerOrderReference = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "receiving_advice_reference":
+                            receivingAdviceReference = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "despatch_advice_reference":
+                            despatchAdviceReference = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "tender_reference":
+                            tenderReference = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         case "preceding_invoice_reference":
                             precedingInvoiceReference = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "preceding_invoice_date":
+                            precedingInvoiceDate = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "project_reference":
+                            projectReference = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "project_name":
+                            projectName = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "vat_exemption_reason":
+                            vatExemptionReason = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -274,7 +477,7 @@ namespace FactPulse.SDK.Model
             if (invoiceCurrency.IsSet && invoiceCurrency.Value == null)
                 throw new ArgumentNullException(nameof(invoiceCurrency), "Property is not nullable for class InvoiceReferences.");
 
-            return new InvoiceReferences(paymentMeans.Value!.Value!, invoiceType.Value!.Value!, vatAccountingCode.Value!.Value!, invoiceCurrency, contractReference, vatExemptionReason, purchaseOrderReference, precedingInvoiceReference);
+            return new InvoiceReferences(paymentMeans.Value!.Value!, invoiceType.Value!.Value!, vatAccountingCode.Value!.Value!, businessProcessId, invoiceCurrency, paymentMeansText, buyerReference, contractReference, purchaseOrderReference, sellerOrderReference, receivingAdviceReference, despatchAdviceReference, tenderReference, precedingInvoiceReference, precedingInvoiceDate, projectReference, projectName, vatExemptionReason);
         }
 
         /// <summary>
@@ -313,8 +516,26 @@ namespace FactPulse.SDK.Model
             var vatAccountingCodeRawValue = VATAccountingCodeValueConverter.ToJsonValue(invoiceReferences.VatAccountingCode);
             writer.WriteString("vat_accounting_code", vatAccountingCodeRawValue);
 
+            if (invoiceReferences.BusinessProcessIdOption.IsSet)
+                if (invoiceReferences.BusinessProcessIdOption.Value != null)
+                    writer.WriteString("business_process_id", invoiceReferences.BusinessProcessId);
+                else
+                    writer.WriteNull("business_process_id");
+
             if (invoiceReferences.InvoiceCurrencyOption.IsSet)
                 writer.WriteString("invoice_currency", invoiceReferences.InvoiceCurrency);
+
+            if (invoiceReferences.PaymentMeansTextOption.IsSet)
+                if (invoiceReferences.PaymentMeansTextOption.Value != null)
+                    writer.WriteString("payment_means_text", invoiceReferences.PaymentMeansText);
+                else
+                    writer.WriteNull("payment_means_text");
+
+            if (invoiceReferences.BuyerReferenceOption.IsSet)
+                if (invoiceReferences.BuyerReferenceOption.Value != null)
+                    writer.WriteString("buyer_reference", invoiceReferences.BuyerReference);
+                else
+                    writer.WriteNull("buyer_reference");
 
             if (invoiceReferences.ContractReferenceOption.IsSet)
                 if (invoiceReferences.ContractReferenceOption.Value != null)
@@ -322,23 +543,65 @@ namespace FactPulse.SDK.Model
                 else
                     writer.WriteNull("contract_reference");
 
-            if (invoiceReferences.VatExemptionReasonOption.IsSet)
-                if (invoiceReferences.VatExemptionReasonOption.Value != null)
-                    writer.WriteString("vat_exemption_reason", invoiceReferences.VatExemptionReason);
-                else
-                    writer.WriteNull("vat_exemption_reason");
-
             if (invoiceReferences.PurchaseOrderReferenceOption.IsSet)
                 if (invoiceReferences.PurchaseOrderReferenceOption.Value != null)
                     writer.WriteString("purchase_order_reference", invoiceReferences.PurchaseOrderReference);
                 else
                     writer.WriteNull("purchase_order_reference");
 
+            if (invoiceReferences.SellerOrderReferenceOption.IsSet)
+                if (invoiceReferences.SellerOrderReferenceOption.Value != null)
+                    writer.WriteString("seller_order_reference", invoiceReferences.SellerOrderReference);
+                else
+                    writer.WriteNull("seller_order_reference");
+
+            if (invoiceReferences.ReceivingAdviceReferenceOption.IsSet)
+                if (invoiceReferences.ReceivingAdviceReferenceOption.Value != null)
+                    writer.WriteString("receiving_advice_reference", invoiceReferences.ReceivingAdviceReference);
+                else
+                    writer.WriteNull("receiving_advice_reference");
+
+            if (invoiceReferences.DespatchAdviceReferenceOption.IsSet)
+                if (invoiceReferences.DespatchAdviceReferenceOption.Value != null)
+                    writer.WriteString("despatch_advice_reference", invoiceReferences.DespatchAdviceReference);
+                else
+                    writer.WriteNull("despatch_advice_reference");
+
+            if (invoiceReferences.TenderReferenceOption.IsSet)
+                if (invoiceReferences.TenderReferenceOption.Value != null)
+                    writer.WriteString("tender_reference", invoiceReferences.TenderReference);
+                else
+                    writer.WriteNull("tender_reference");
+
             if (invoiceReferences.PrecedingInvoiceReferenceOption.IsSet)
                 if (invoiceReferences.PrecedingInvoiceReferenceOption.Value != null)
                     writer.WriteString("preceding_invoice_reference", invoiceReferences.PrecedingInvoiceReference);
                 else
                     writer.WriteNull("preceding_invoice_reference");
+
+            if (invoiceReferences.PrecedingInvoiceDateOption.IsSet)
+                if (invoiceReferences.PrecedingInvoiceDateOption.Value != null)
+                    writer.WriteString("preceding_invoice_date", invoiceReferences.PrecedingInvoiceDate);
+                else
+                    writer.WriteNull("preceding_invoice_date");
+
+            if (invoiceReferences.ProjectReferenceOption.IsSet)
+                if (invoiceReferences.ProjectReferenceOption.Value != null)
+                    writer.WriteString("project_reference", invoiceReferences.ProjectReference);
+                else
+                    writer.WriteNull("project_reference");
+
+            if (invoiceReferences.ProjectNameOption.IsSet)
+                if (invoiceReferences.ProjectNameOption.Value != null)
+                    writer.WriteString("project_name", invoiceReferences.ProjectName);
+                else
+                    writer.WriteNull("project_name");
+
+            if (invoiceReferences.VatExemptionReasonOption.IsSet)
+                if (invoiceReferences.VatExemptionReasonOption.Value != null)
+                    writer.WriteString("vat_exemption_reason", invoiceReferences.VatExemptionReason);
+                else
+                    writer.WriteNull("vat_exemption_reason");
         }
     }
 }

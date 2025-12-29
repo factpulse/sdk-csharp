@@ -90,12 +90,48 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'LineTotalAmount'
+        /// </summary>
+        [Fact]
+        public void LineTotalAmountTest()
+        {
+            // TODO unit test for the property 'LineTotalAmount'
+        }
+
+        /// <summary>
+        /// Test the property 'AllowanceTotalAmount'
+        /// </summary>
+        [Fact]
+        public void AllowanceTotalAmountTest()
+        {
+            // TODO unit test for the property 'AllowanceTotalAmount'
+        }
+
+        /// <summary>
+        /// Test the property 'ChargeTotalAmount'
+        /// </summary>
+        [Fact]
+        public void ChargeTotalAmountTest()
+        {
+            // TODO unit test for the property 'ChargeTotalAmount'
+        }
+
+        /// <summary>
         /// Test the property 'Prepayment'
         /// </summary>
         [Fact]
         public void PrepaymentTest()
         {
             // TODO unit test for the property 'Prepayment'
+        }
+
+        /// <summary>
+        /// Test the property 'RoundingAmount'
+        /// </summary>
+        [Fact]
+        public void RoundingAmountTest()
+        {
+            // TODO unit test for the property 'RoundingAmount'
         }
 
         /// <summary>

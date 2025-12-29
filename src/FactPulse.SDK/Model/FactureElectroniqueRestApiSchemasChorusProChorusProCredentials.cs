@@ -55,28 +55,28 @@ namespace FactPulse.SDK.Model
         /// PISTE Client ID (government API portal)
         /// </summary>
         /// <value>PISTE Client ID (government API portal)</value>
-        [JsonPropertyName("piste_client_id")]
+        [JsonPropertyName("pisteClientId")]
         public string PisteClientId { get; set; }
 
         /// <summary>
         /// PISTE Client Secret
         /// </summary>
         /// <value>PISTE Client Secret</value>
-        [JsonPropertyName("piste_client_secret")]
+        [JsonPropertyName("pisteClientSecret")]
         public string PisteClientSecret { get; set; }
 
         /// <summary>
         /// Chorus Pro login
         /// </summary>
         /// <value>Chorus Pro login</value>
-        [JsonPropertyName("chorus_pro_login")]
+        [JsonPropertyName("chorusProLogin")]
         public string ChorusProLogin { get; set; }
 
         /// <summary>
         /// Chorus Pro password
         /// </summary>
         /// <value>Chorus Pro password</value>
-        [JsonPropertyName("chorus_pro_password")]
+        [JsonPropertyName("chorusProPassword")]
         public string ChorusProPassword { get; set; }
 
         /// <summary>
@@ -164,16 +164,16 @@ namespace FactPulse.SDK.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "piste_client_id":
+                        case "pisteClientId":
                             pisteClientId = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "piste_client_secret":
+                        case "pisteClientSecret":
                             pisteClientSecret = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "chorus_pro_login":
+                        case "chorusProLogin":
                             chorusProLogin = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "chorus_pro_password":
+                        case "chorusProPassword":
                             chorusProPassword = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "sandbox":
@@ -251,13 +251,13 @@ namespace FactPulse.SDK.Model
             if (factureElectroniqueRestApiSchemasChorusProChorusProCredentials.ChorusProPassword == null)
                 throw new ArgumentNullException(nameof(factureElectroniqueRestApiSchemasChorusProChorusProCredentials.ChorusProPassword), "Property is required for class FactureElectroniqueRestApiSchemasChorusProChorusProCredentials.");
 
-            writer.WriteString("piste_client_id", factureElectroniqueRestApiSchemasChorusProChorusProCredentials.PisteClientId);
+            writer.WriteString("pisteClientId", factureElectroniqueRestApiSchemasChorusProChorusProCredentials.PisteClientId);
 
-            writer.WriteString("piste_client_secret", factureElectroniqueRestApiSchemasChorusProChorusProCredentials.PisteClientSecret);
+            writer.WriteString("pisteClientSecret", factureElectroniqueRestApiSchemasChorusProChorusProCredentials.PisteClientSecret);
 
-            writer.WriteString("chorus_pro_login", factureElectroniqueRestApiSchemasChorusProChorusProCredentials.ChorusProLogin);
+            writer.WriteString("chorusProLogin", factureElectroniqueRestApiSchemasChorusProChorusProCredentials.ChorusProLogin);
 
-            writer.WriteString("chorus_pro_password", factureElectroniqueRestApiSchemasChorusProChorusProCredentials.ChorusProPassword);
+            writer.WriteString("chorusProPassword", factureElectroniqueRestApiSchemasChorusProChorusProCredentials.ChorusProPassword);
 
             if (factureElectroniqueRestApiSchemasChorusProChorusProCredentials.SandboxOption.IsSet)
                 writer.WriteBoolean("sandbox", factureElectroniqueRestApiSchemasChorusProChorusProCredentials.SandboxOption.Value!.Value);

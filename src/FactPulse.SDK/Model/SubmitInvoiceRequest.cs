@@ -75,39 +75,39 @@ namespace FactPulse.SDK.Model
         /// Invoice number
         /// </summary>
         /// <value>Invoice number</value>
-        [JsonPropertyName("invoice_number")]
+        [JsonPropertyName("invoiceNumber")]
         public string InvoiceNumber { get; set; }
 
         /// <summary>
         /// Invoice date (ISO format: YYYY-MM-DD)
         /// </summary>
         /// <value>Invoice date (ISO format: YYYY-MM-DD)</value>
-        [JsonPropertyName("invoice_date")]
+        [JsonPropertyName("invoiceDate")]
         public string InvoiceDate { get; set; }
 
         /// <summary>
         /// Chorus Pro recipient structure ID
         /// </summary>
         /// <value>Chorus Pro recipient structure ID</value>
-        [JsonPropertyName("structure_id")]
+        [JsonPropertyName("structureId")]
         public int StructureId { get; set; }
 
         /// <summary>
         /// Gets or Sets TotalNetAmount
         /// </summary>
-        [JsonPropertyName("total_net_amount")]
+        [JsonPropertyName("totalNetAmount")]
         public SubmitNetAmount TotalNetAmount { get; set; }
 
         /// <summary>
         /// Gets or Sets VatAmount
         /// </summary>
-        [JsonPropertyName("vat_amount")]
+        [JsonPropertyName("vatAmount")]
         public SubmitVatAmount VatAmount { get; set; }
 
         /// <summary>
         /// Gets or Sets TotalGrossAmount
         /// </summary>
-        [JsonPropertyName("total_gross_amount")]
+        [JsonPropertyName("totalGrossAmount")]
         public SubmitGrossAmount TotalGrossAmount { get; set; }
 
         /// <summary>
@@ -133,7 +133,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets PaymentDueDate
         /// </summary>
-        [JsonPropertyName("payment_due_date")]
+        [JsonPropertyName("paymentDueDate")]
         public string? PaymentDueDate { get { return this.PaymentDueDateOption; } set { this.PaymentDueDateOption = new(value); } }
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets ServiceCode
         /// </summary>
-        [JsonPropertyName("service_code")]
+        [JsonPropertyName("serviceCode")]
         public string? ServiceCode { get { return this.ServiceCodeOption; } set { this.ServiceCodeOption = new(value); } }
 
         /// <summary>
@@ -159,7 +159,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets EngagementNumber
         /// </summary>
-        [JsonPropertyName("engagement_number")]
+        [JsonPropertyName("engagementNumber")]
         public string? EngagementNumber { get { return this.EngagementNumberOption; } set { this.EngagementNumberOption = new(value); } }
 
         /// <summary>
@@ -172,7 +172,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets MainAttachmentId
         /// </summary>
-        [JsonPropertyName("main_attachment_id")]
+        [JsonPropertyName("mainAttachmentId")]
         public int? MainAttachmentId { get { return this.MainAttachmentIdOption; } set { this.MainAttachmentIdOption = new(value); } }
 
         /// <summary>
@@ -185,7 +185,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets MainAttachmentLabel
         /// </summary>
-        [JsonPropertyName("main_attachment_label")]
+        [JsonPropertyName("mainAttachmentLabel")]
         public string? MainAttachmentLabel { get { return this.MainAttachmentLabelOption; } set { this.MainAttachmentLabelOption = new(value); } }
 
         /// <summary>
@@ -211,7 +211,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets PurchaseOrderReference
         /// </summary>
-        [JsonPropertyName("purchase_order_reference")]
+        [JsonPropertyName("purchaseOrderReference")]
         public string? PurchaseOrderReference { get { return this.PurchaseOrderReferenceOption; } set { this.PurchaseOrderReferenceOption = new(value); } }
 
         /// <summary>
@@ -224,7 +224,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets ContractReference
         /// </summary>
-        [JsonPropertyName("contract_reference")]
+        [JsonPropertyName("contractReference")]
         public string? ContractReference { get { return this.ContractReferenceOption; } set { this.ContractReferenceOption = new(value); } }
 
         /// <summary>
@@ -318,49 +318,49 @@ namespace FactPulse.SDK.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "invoice_number":
+                        case "invoiceNumber":
                             invoiceNumber = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "invoice_date":
+                        case "invoiceDate":
                             invoiceDate = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "structure_id":
+                        case "structureId":
                             structureId = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
-                        case "total_net_amount":
+                        case "totalNetAmount":
                             totalNetAmount = new Option<SubmitNetAmount?>(JsonSerializer.Deserialize<SubmitNetAmount>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
-                        case "vat_amount":
+                        case "vatAmount":
                             vatAmount = new Option<SubmitVatAmount?>(JsonSerializer.Deserialize<SubmitVatAmount>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
-                        case "total_gross_amount":
+                        case "totalGrossAmount":
                             totalGrossAmount = new Option<SubmitGrossAmount?>(JsonSerializer.Deserialize<SubmitGrossAmount>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "credentials":
                             credentials = new Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?>(JsonSerializer.Deserialize<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
-                        case "payment_due_date":
+                        case "paymentDueDate":
                             paymentDueDate = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "service_code":
+                        case "serviceCode":
                             serviceCode = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "engagement_number":
+                        case "engagementNumber":
                             engagementNumber = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "main_attachment_id":
+                        case "mainAttachmentId":
                             mainAttachmentId = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
-                        case "main_attachment_label":
+                        case "mainAttachmentLabel":
                             mainAttachmentLabel = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "comment":
                             comment = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "purchase_order_reference":
+                        case "purchaseOrderReference":
                             purchaseOrderReference = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "contract_reference":
+                        case "contractReference":
                             contractReference = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         default:
@@ -447,17 +447,17 @@ namespace FactPulse.SDK.Model
             if (submitInvoiceRequest.TotalGrossAmount == null)
                 throw new ArgumentNullException(nameof(submitInvoiceRequest.TotalGrossAmount), "Property is required for class SubmitInvoiceRequest.");
 
-            writer.WriteString("invoice_number", submitInvoiceRequest.InvoiceNumber);
+            writer.WriteString("invoiceNumber", submitInvoiceRequest.InvoiceNumber);
 
-            writer.WriteString("invoice_date", submitInvoiceRequest.InvoiceDate);
+            writer.WriteString("invoiceDate", submitInvoiceRequest.InvoiceDate);
 
-            writer.WriteNumber("structure_id", submitInvoiceRequest.StructureId);
+            writer.WriteNumber("structureId", submitInvoiceRequest.StructureId);
 
-            writer.WritePropertyName("total_net_amount");
+            writer.WritePropertyName("totalNetAmount");
             JsonSerializer.Serialize(writer, submitInvoiceRequest.TotalNetAmount, jsonSerializerOptions);
-            writer.WritePropertyName("vat_amount");
+            writer.WritePropertyName("vatAmount");
             JsonSerializer.Serialize(writer, submitInvoiceRequest.VatAmount, jsonSerializerOptions);
-            writer.WritePropertyName("total_gross_amount");
+            writer.WritePropertyName("totalGrossAmount");
             JsonSerializer.Serialize(writer, submitInvoiceRequest.TotalGrossAmount, jsonSerializerOptions);
             if (submitInvoiceRequest.CredentialsOption.IsSet)
                 if (submitInvoiceRequest.CredentialsOption.Value != null)
@@ -469,33 +469,33 @@ namespace FactPulse.SDK.Model
                     writer.WriteNull("credentials");
             if (submitInvoiceRequest.PaymentDueDateOption.IsSet)
                 if (submitInvoiceRequest.PaymentDueDateOption.Value != null)
-                    writer.WriteString("payment_due_date", submitInvoiceRequest.PaymentDueDate);
+                    writer.WriteString("paymentDueDate", submitInvoiceRequest.PaymentDueDate);
                 else
-                    writer.WriteNull("payment_due_date");
+                    writer.WriteNull("paymentDueDate");
 
             if (submitInvoiceRequest.ServiceCodeOption.IsSet)
                 if (submitInvoiceRequest.ServiceCodeOption.Value != null)
-                    writer.WriteString("service_code", submitInvoiceRequest.ServiceCode);
+                    writer.WriteString("serviceCode", submitInvoiceRequest.ServiceCode);
                 else
-                    writer.WriteNull("service_code");
+                    writer.WriteNull("serviceCode");
 
             if (submitInvoiceRequest.EngagementNumberOption.IsSet)
                 if (submitInvoiceRequest.EngagementNumberOption.Value != null)
-                    writer.WriteString("engagement_number", submitInvoiceRequest.EngagementNumber);
+                    writer.WriteString("engagementNumber", submitInvoiceRequest.EngagementNumber);
                 else
-                    writer.WriteNull("engagement_number");
+                    writer.WriteNull("engagementNumber");
 
             if (submitInvoiceRequest.MainAttachmentIdOption.IsSet)
                 if (submitInvoiceRequest.MainAttachmentIdOption.Value != null)
-                    writer.WriteNumber("main_attachment_id", submitInvoiceRequest.MainAttachmentIdOption.Value!.Value);
+                    writer.WriteNumber("mainAttachmentId", submitInvoiceRequest.MainAttachmentIdOption.Value!.Value);
                 else
-                    writer.WriteNull("main_attachment_id");
+                    writer.WriteNull("mainAttachmentId");
 
             if (submitInvoiceRequest.MainAttachmentLabelOption.IsSet)
                 if (submitInvoiceRequest.MainAttachmentLabelOption.Value != null)
-                    writer.WriteString("main_attachment_label", submitInvoiceRequest.MainAttachmentLabel);
+                    writer.WriteString("mainAttachmentLabel", submitInvoiceRequest.MainAttachmentLabel);
                 else
-                    writer.WriteNull("main_attachment_label");
+                    writer.WriteNull("mainAttachmentLabel");
 
             if (submitInvoiceRequest.CommentOption.IsSet)
                 if (submitInvoiceRequest.CommentOption.Value != null)
@@ -505,15 +505,15 @@ namespace FactPulse.SDK.Model
 
             if (submitInvoiceRequest.PurchaseOrderReferenceOption.IsSet)
                 if (submitInvoiceRequest.PurchaseOrderReferenceOption.Value != null)
-                    writer.WriteString("purchase_order_reference", submitInvoiceRequest.PurchaseOrderReference);
+                    writer.WriteString("purchaseOrderReference", submitInvoiceRequest.PurchaseOrderReference);
                 else
-                    writer.WriteNull("purchase_order_reference");
+                    writer.WriteNull("purchaseOrderReference");
 
             if (submitInvoiceRequest.ContractReferenceOption.IsSet)
                 if (submitInvoiceRequest.ContractReferenceOption.Value != null)
-                    writer.WriteString("contract_reference", submitInvoiceRequest.ContractReference);
+                    writer.WriteString("contractReference", submitInvoiceRequest.ContractReference);
                 else
-                    writer.WriteNull("contract_reference");
+                    writer.WriteNull("contractReference");
         }
     }
 }

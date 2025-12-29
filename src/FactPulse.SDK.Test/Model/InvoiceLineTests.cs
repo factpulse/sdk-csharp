@@ -99,12 +99,129 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'LineNote'
+        /// </summary>
+        [Fact]
+        public void LineNoteTest()
+        {
+            // TODO unit test for the property 'LineNote'
+        }
+
+        /// <summary>
         /// Test the property 'Reference'
         /// </summary>
         [Fact]
         public void ReferenceTest()
         {
             // TODO unit test for the property 'Reference'
+        }
+
+        /// <summary>
+        /// Test the property 'BuyerAssignedId'
+        /// </summary>
+        [Fact]
+        public void BuyerAssignedIdTest()
+        {
+            // TODO unit test for the property 'BuyerAssignedId'
+        }
+
+        /// <summary>
+        /// Test the property 'ProductGlobalId'
+        /// </summary>
+        [Fact]
+        public void ProductGlobalIdTest()
+        {
+            // TODO unit test for the property 'ProductGlobalId'
+        }
+
+        /// <summary>
+        /// Test the property 'ProductGlobalIdScheme'
+        /// </summary>
+        [Fact]
+        public void ProductGlobalIdSchemeTest()
+        {
+            // TODO unit test for the property 'ProductGlobalIdScheme'
+        }
+
+        /// <summary>
+        /// Test the property 'ItemDescription'
+        /// </summary>
+        [Fact]
+        public void ItemDescriptionTest()
+        {
+            // TODO unit test for the property 'ItemDescription'
+        }
+
+        /// <summary>
+        /// Test the property 'OriginCountry'
+        /// </summary>
+        [Fact]
+        public void OriginCountryTest()
+        {
+            // TODO unit test for the property 'OriginCountry'
+        }
+
+        /// <summary>
+        /// Test the property 'Characteristics'
+        /// </summary>
+        [Fact]
+        public void CharacteristicsTest()
+        {
+            // TODO unit test for the property 'Characteristics'
+        }
+
+        /// <summary>
+        /// Test the property 'Classifications'
+        /// </summary>
+        [Fact]
+        public void ClassificationsTest()
+        {
+            // TODO unit test for the property 'Classifications'
+        }
+
+        /// <summary>
+        /// Test the property 'GrossUnitPrice'
+        /// </summary>
+        [Fact]
+        public void GrossUnitPriceTest()
+        {
+            // TODO unit test for the property 'GrossUnitPrice'
+        }
+
+        /// <summary>
+        /// Test the property 'PriceBasisQuantity'
+        /// </summary>
+        [Fact]
+        public void PriceBasisQuantityTest()
+        {
+            // TODO unit test for the property 'PriceBasisQuantity'
+        }
+
+        /// <summary>
+        /// Test the property 'PriceBasisUnit'
+        /// </summary>
+        [Fact]
+        public void PriceBasisUnitTest()
+        {
+            // TODO unit test for the property 'PriceBasisUnit'
+        }
+
+        /// <summary>
+        /// Test the property 'PriceAllowanceAmount'
+        /// </summary>
+        [Fact]
+        public void PriceAllowanceAmountTest()
+        {
+            // TODO unit test for the property 'PriceAllowanceAmount'
+        }
+
+        /// <summary>
+        /// Test the property 'LineNetAmount'
+        /// </summary>
+        [Fact]
+        public void LineNetAmountTest()
+        {
+            // TODO unit test for the property 'LineNetAmount'
         }
 
         /// <summary>
@@ -117,12 +234,30 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'LineNetAmount'
+        /// Test the property 'AllowanceReasonCode'
         /// </summary>
         [Fact]
-        public void LineNetAmountTest()
+        public void AllowanceReasonCodeTest()
         {
-            // TODO unit test for the property 'LineNetAmount'
+            // TODO unit test for the property 'AllowanceReasonCode'
+        }
+
+        /// <summary>
+        /// Test the property 'AllowanceReason'
+        /// </summary>
+        [Fact]
+        public void AllowanceReasonTest()
+        {
+            // TODO unit test for the property 'AllowanceReason'
+        }
+
+        /// <summary>
+        /// Test the property 'AllowancesCharges'
+        /// </summary>
+        [Fact]
+        public void AllowancesChargesTest()
+        {
+            // TODO unit test for the property 'AllowancesCharges'
         }
 
         /// <summary>
@@ -171,21 +306,39 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'AllowanceReasonCode'
+        /// Test the property 'PurchaseOrderLineRef'
         /// </summary>
         [Fact]
-        public void AllowanceReasonCodeTest()
+        public void PurchaseOrderLineRefTest()
         {
-            // TODO unit test for the property 'AllowanceReasonCode'
+            // TODO unit test for the property 'PurchaseOrderLineRef'
         }
 
         /// <summary>
-        /// Test the property 'AllowanceReason'
+        /// Test the property 'AccountingAccount'
         /// </summary>
         [Fact]
-        public void AllowanceReasonTest()
+        public void AccountingAccountTest()
         {
-            // TODO unit test for the property 'AllowanceReason'
+            // TODO unit test for the property 'AccountingAccount'
+        }
+
+        /// <summary>
+        /// Test the property 'AdditionalDocuments'
+        /// </summary>
+        [Fact]
+        public void AdditionalDocumentsTest()
+        {
+            // TODO unit test for the property 'AdditionalDocuments'
+        }
+
+        /// <summary>
+        /// Test the property 'LineNotes'
+        /// </summary>
+        [Fact]
+        public void LineNotesTest()
+        {
+            // TODO unit test for the property 'LineNotes'
         }
     }
 }

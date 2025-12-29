@@ -1,5 +1,5 @@
-# FactPulse.SDK.Model.APIProfile
-Factur-X profile for API requests.
+# FactPulse.SDK.Model.VATPointDateCode
+VAT point date code (BT-8) - When VAT becomes due.  UNTDID 2005 subset used in EN16931.
 
 ## Properties
 

@@ -178,10 +178,10 @@ namespace FactPulse.SDK.Model
             writer.WriteStartObject();
 
             if (submitNetAmount.DecimalOption.IsSet && submitNetAmount.DecimalOption.Value != null)
-                writer.WriteNumber("SubmitVatAmount", submitNetAmount.DecimalOption.Value.Value);
+                writer.WriteNumber("Rate", submitNetAmount.DecimalOption.Value.Value);
 
             if (submitNetAmount.StringOption.IsSet && submitNetAmount.StringOption.Value != null)
-                writer.WriteString("SubmitVatAmount", submitNetAmount.StringOption.Value);
+                writer.WriteString("Rate", submitNetAmount.StringOption.Value);
 
             WriteProperties(writer, submitNetAmount, jsonSerializerOptions);
             writer.WriteEndObject();

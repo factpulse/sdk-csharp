@@ -99,12 +99,39 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'VatNumber'
+        /// </summary>
+        [Fact]
+        public void VatNumberTest()
+        {
+            // TODO unit test for the property 'VatNumber'
+        }
+
+        /// <summary>
         /// Test the property 'PostalAddress'
         /// </summary>
         [Fact]
         public void PostalAddressTest()
         {
             // TODO unit test for the property 'PostalAddress'
+        }
+
+        /// <summary>
+        /// Test the property 'Contact'
+        /// </summary>
+        [Fact]
+        public void ContactTest()
+        {
+            // TODO unit test for the property 'Contact'
+        }
+
+        /// <summary>
+        /// Test the property 'GlobalIds'
+        /// </summary>
+        [Fact]
+        public void GlobalIdsTest()
+        {
+            // TODO unit test for the property 'GlobalIds'
         }
     }
 }

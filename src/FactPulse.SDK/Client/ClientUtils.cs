@@ -115,8 +115,6 @@ namespace FactPulse.SDK.Client
                 return AFNORDestination.TypeEnumToJsonValue(aFNORDestinationTypeEnum);
             if (obj is AFNORDestination.FlowSyntaxEnum aFNORDestinationFlowSyntaxEnum)
                 return AFNORDestination.FlowSyntaxEnumToJsonValue(aFNORDestinationFlowSyntaxEnum);
-            if (obj is APIProfile aPIProfile)
-                return APIProfileValueConverter.ToJsonValue(aPIProfile);
             if (obj is AcknowledgmentStatus acknowledgmentStatus)
                 return AcknowledgmentStatusValueConverter.ToJsonValue(acknowledgmentStatus);
             if (obj is AllowanceReasonCode allowanceReasonCode)
@@ -127,12 +125,12 @@ namespace FactPulse.SDK.Client
                 return ChorusProDestination.TypeEnumToJsonValue(chorusProDestinationTypeEnum);
             if (obj is Destination.TypeEnum destinationTypeEnum)
                 return Destination.TypeEnumToJsonValue(destinationTypeEnum);
-            if (obj is DocumentType documentType)
-                return DocumentTypeValueConverter.ToJsonValue(documentType);
             if (obj is ErrorLevel errorLevel)
                 return ErrorLevelValueConverter.ToJsonValue(errorLevel);
             if (obj is ErrorSource errorSource)
                 return ErrorSourceValueConverter.ToJsonValue(errorSource);
+            if (obj is FacturXProfile facturXProfile)
+                return FacturXProfileValueConverter.ToJsonValue(facturXProfile);
             if (obj is FieldStatus fieldStatus)
                 return FieldStatusValueConverter.ToJsonValue(fieldStatus);
             if (obj is FlowDirection flowDirection)
@@ -167,6 +165,8 @@ namespace FactPulse.SDK.Client
                 return VATAccountingCodeValueConverter.ToJsonValue(vATAccountingCode);
             if (obj is VATCategory vATCategory)
                 return VATCategoryValueConverter.ToJsonValue(vATCategory);
+            if (obj is VATPointDateCode vATPointDateCode)
+                return VATPointDateCodeValueConverter.ToJsonValue(vATPointDateCode);
             if (obj is ICollection collection)
             {
                 List<string?> entries = new();

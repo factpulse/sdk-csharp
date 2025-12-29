@@ -49,7 +49,7 @@ namespace FactPulse.SDK.Model
         /// Chorus Pro invoice ID
         /// </summary>
         /// <value>Chorus Pro invoice ID</value>
-        [JsonPropertyName("chorus_invoice_id")]
+        [JsonPropertyName("chorusInvoiceId")]
         public int ChorusInvoiceId { get; set; }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace FactPulse.SDK.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "chorus_invoice_id":
+                        case "chorusInvoiceId":
                             chorusInvoiceId = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "credentials":
@@ -175,7 +175,7 @@ namespace FactPulse.SDK.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, GetInvoiceRequest getInvoiceRequest, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WriteNumber("chorus_invoice_id", getInvoiceRequest.ChorusInvoiceId);
+            writer.WriteNumber("chorusInvoiceId", getInvoiceRequest.ChorusInvoiceId);
 
             if (getInvoiceRequest.CredentialsOption.IsSet)
                 if (getInvoiceRequest.CredentialsOption.Value != null)

@@ -26,7 +26,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Line net amount (quantity × unit price - allowance). (Accepte number, string ou integer)
+    /// Invoice line net amount (BT-131). Can be negative for correction invoices.
     /// </summary>
     public partial class LineNetAmount : IValidatableObject
     {
@@ -178,10 +178,10 @@ namespace FactPulse.SDK.Model
             writer.WriteStartObject();
 
             if (lineNetAmount.DecimalOption.IsSet && lineNetAmount.DecimalOption.Value != null)
-                writer.WriteNumber("VATAmount", lineNetAmount.DecimalOption.Value.Value);
+                writer.WriteNumber("Rate", lineNetAmount.DecimalOption.Value.Value);
 
             if (lineNetAmount.StringOption.IsSet && lineNetAmount.StringOption.Value != null)
-                writer.WriteString("VATAmount", lineNetAmount.StringOption.Value);
+                writer.WriteString("LineNetAmount", lineNetAmount.StringOption.Value);
 
             WriteProperties(writer, lineNetAmount, jsonSerializerOptions);
             writer.WriteEndObject();

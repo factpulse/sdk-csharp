@@ -196,5 +196,131 @@ namespace FactPulse.SDK.Test.Model
         {
             // TODO unit test for the property 'Payee'
         }
+
+        /// <summary>
+        /// Test the property 'DeliveryParty'
+        /// </summary>
+        [Fact]
+        public void DeliveryPartyTest()
+        {
+            // TODO unit test for the property 'DeliveryParty'
+        }
+
+        /// <summary>
+        /// Test the property 'TaxRepresentative'
+        /// </summary>
+        [Fact]
+        public void TaxRepresentativeTest()
+        {
+            // TODO unit test for the property 'TaxRepresentative'
+        }
+
+        /// <summary>
+        /// Test the property 'DeliveryDate'
+        /// </summary>
+        [Fact]
+        public void DeliveryDateTest()
+        {
+            // TODO unit test for the property 'DeliveryDate'
+        }
+
+        /// <summary>
+        /// Test the property 'BillingPeriodStart'
+        /// </summary>
+        [Fact]
+        public void BillingPeriodStartTest()
+        {
+            // TODO unit test for the property 'BillingPeriodStart'
+        }
+
+        /// <summary>
+        /// Test the property 'BillingPeriodEnd'
+        /// </summary>
+        [Fact]
+        public void BillingPeriodEndTest()
+        {
+            // TODO unit test for the property 'BillingPeriodEnd'
+        }
+
+        /// <summary>
+        /// Test the property 'PaymentReference'
+        /// </summary>
+        [Fact]
+        public void PaymentReferenceTest()
+        {
+            // TODO unit test for the property 'PaymentReference'
+        }
+
+        /// <summary>
+        /// Test the property 'CreditorReferenceId'
+        /// </summary>
+        [Fact]
+        public void CreditorReferenceIdTest()
+        {
+            // TODO unit test for the property 'CreditorReferenceId'
+        }
+
+        /// <summary>
+        /// Test the property 'DirectDebitMandateId'
+        /// </summary>
+        [Fact]
+        public void DirectDebitMandateIdTest()
+        {
+            // TODO unit test for the property 'DirectDebitMandateId'
+        }
+
+        /// <summary>
+        /// Test the property 'DebtorIban'
+        /// </summary>
+        [Fact]
+        public void DebtorIbanTest()
+        {
+            // TODO unit test for the property 'DebtorIban'
+        }
+
+        /// <summary>
+        /// Test the property 'PaymentTerms'
+        /// </summary>
+        [Fact]
+        public void PaymentTermsTest()
+        {
+            // TODO unit test for the property 'PaymentTerms'
+        }
+
+        /// <summary>
+        /// Test the property 'AllowancesCharges'
+        /// </summary>
+        [Fact]
+        public void AllowancesChargesTest()
+        {
+            // TODO unit test for the property 'AllowancesCharges'
+        }
+
+        /// <summary>
+        /// Test the property 'AdditionalDocuments'
+        /// </summary>
+        [Fact]
+        public void AdditionalDocumentsTest()
+        {
+            // TODO unit test for the property 'AdditionalDocuments'
+        }
+
+        /// <summary>
+        /// Test the property 'BuyerAccountingReference'
+        /// </summary>
+        [Fact]
+        public void BuyerAccountingReferenceTest()
+        {
+            // TODO unit test for the property 'BuyerAccountingReference'
+        }
+
+        /// <summary>
+        /// Test the property 'PaymentCard'
+        /// </summary>
+        [Fact]
+        public void PaymentCardTest()
+        {
+            // TODO unit test for the property 'PaymentCard'
+        }
     }
 }

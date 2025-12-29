@@ -63,6 +63,15 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'PayeeId'
+        /// </summary>
+        [Fact]
+        public void PayeeIdTest()
+        {
+            // TODO unit test for the property 'PayeeId'
+        }
+
+        /// <summary>
         /// Test the property 'Siret'
         /// </summary>
         [Fact]
@@ -105,6 +114,15 @@ namespace FactPulse.SDK.Test.Model
         public void BicTest()
         {
             // TODO unit test for the property 'Bic'
+        }
+
+        /// <summary>
+        /// Test the property 'GlobalIds'
+        /// </summary>
+        [Fact]
+        public void GlobalIdsTest()
+        {
+            // TODO unit test for the property 'GlobalIds'
         }
     }
 }

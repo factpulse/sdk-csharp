@@ -35,14 +35,14 @@ namespace FactPulse.SDK.Model
         /// </summary>
         /// <param name="facturxProfile">Factur-X profile to use</param>
         /// <param name="autoEnrich">Auto-enrich data (Company APIs, Chorus Pro, etc.) (default to true)</param>
-        /// <param name="validate">Validate Factur-X XML with Schematron (default to true)</param>
+        /// <param name="validateXml">Validate Factur-X XML with Schematron (default to true)</param>
         /// <param name="verifyDestinationParameters">Verify required parameters for destination (e.g., service_code for Chorus) (default to true)</param>
         [JsonConstructor]
-        public ProcessingOptions(Option<APIProfile?> facturxProfile = default, Option<bool?> autoEnrich = default, Option<bool?> validate = default, Option<bool?> verifyDestinationParameters = default)
+        public ProcessingOptions(Option<FacturXProfile?> facturxProfile = default, Option<bool?> autoEnrich = default, Option<bool?> validateXml = default, Option<bool?> verifyDestinationParameters = default)
         {
             FacturxProfileOption = facturxProfile;
             AutoEnrichOption = autoEnrich;
-            ValidateOption = validate;
+            ValidateXmlOption = validateXml;
             VerifyDestinationParametersOption = verifyDestinationParameters;
             OnCreated();
         }
@@ -54,14 +54,14 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<APIProfile?> FacturxProfileOption { get; private set; }
+        public Option<FacturXProfile?> FacturxProfileOption { get; private set; }
 
         /// <summary>
         /// Factur-X profile to use
         /// </summary>
         /// <value>Factur-X profile to use</value>
         [JsonPropertyName("facturxProfile")]
-        public APIProfile? FacturxProfile { get { return this.FacturxProfileOption; } set { this.FacturxProfileOption = new(value); } }
+        public FacturXProfile? FacturxProfile { get { return this.FacturxProfileOption; } set { this.FacturxProfileOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of AutoEnrich
@@ -78,18 +78,18 @@ namespace FactPulse.SDK.Model
         public bool? AutoEnrich { get { return this.AutoEnrichOption; } set { this.AutoEnrichOption = new(value); } }
 
         /// <summary>
-        /// Used to track the state of Validate
+        /// Used to track the state of ValidateXml
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<bool?> ValidateOption { get; private set; }
+        public Option<bool?> ValidateXmlOption { get; private set; }
 
         /// <summary>
         /// Validate Factur-X XML with Schematron
         /// </summary>
         /// <value>Validate Factur-X XML with Schematron</value>
-        [JsonPropertyName("validate")]
-        public bool? Validate { get { return this.ValidateOption; } set { this.ValidateOption = new(value); } }
+        [JsonPropertyName("validateXml")]
+        public bool? ValidateXml { get { return this.ValidateXmlOption; } set { this.ValidateXmlOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of VerifyDestinationParameters
@@ -115,7 +115,7 @@ namespace FactPulse.SDK.Model
             sb.Append("class ProcessingOptions {\n");
             sb.Append("  FacturxProfile: ").Append(FacturxProfile).Append("\n");
             sb.Append("  AutoEnrich: ").Append(AutoEnrich).Append("\n");
-            sb.Append("  Validate: ").Append(Validate).Append("\n");
+            sb.Append("  ValidateXml: ").Append(ValidateXml).Append("\n");
             sb.Append("  VerifyDestinationParameters: ").Append(VerifyDestinationParameters).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -154,9 +154,9 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<APIProfile?> facturxProfile = default;
+            Option<FacturXProfile?> facturxProfile = default;
             Option<bool?> autoEnrich = default;
-            Option<bool?> validate = default;
+            Option<bool?> validateXml = default;
             Option<bool?> verifyDestinationParameters = default;
 
             while (utf8JsonReader.Read())
@@ -177,13 +177,13 @@ namespace FactPulse.SDK.Model
                         case "facturxProfile":
                             string? facturxProfileRawValue = utf8JsonReader.GetString();
                             if (facturxProfileRawValue != null)
-                                facturxProfile = new Option<APIProfile?>(APIProfileValueConverter.FromStringOrDefault(facturxProfileRawValue));
+                                facturxProfile = new Option<FacturXProfile?>(FacturXProfileValueConverter.FromStringOrDefault(facturxProfileRawValue));
                             break;
                         case "autoEnrich":
                             autoEnrich = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
-                        case "validate":
-                            validate = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
+                        case "validateXml":
+                            validateXml = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
                         case "verifyDestinationParameters":
                             verifyDestinationParameters = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
@@ -200,13 +200,13 @@ namespace FactPulse.SDK.Model
             if (autoEnrich.IsSet && autoEnrich.Value == null)
                 throw new ArgumentNullException(nameof(autoEnrich), "Property is not nullable for class ProcessingOptions.");
 
-            if (validate.IsSet && validate.Value == null)
-                throw new ArgumentNullException(nameof(validate), "Property is not nullable for class ProcessingOptions.");
+            if (validateXml.IsSet && validateXml.Value == null)
+                throw new ArgumentNullException(nameof(validateXml), "Property is not nullable for class ProcessingOptions.");
 
             if (verifyDestinationParameters.IsSet && verifyDestinationParameters.Value == null)
                 throw new ArgumentNullException(nameof(verifyDestinationParameters), "Property is not nullable for class ProcessingOptions.");
 
-            return new ProcessingOptions(facturxProfile, autoEnrich, validate, verifyDestinationParameters);
+            return new ProcessingOptions(facturxProfile, autoEnrich, validateXml, verifyDestinationParameters);
         }
 
         /// <summary>
@@ -235,14 +235,14 @@ namespace FactPulse.SDK.Model
         {
             if (processingOptions.FacturxProfileOption.IsSet)
             {
-                var facturxProfileRawValue = APIProfileValueConverter.ToJsonValue(processingOptions.FacturxProfile!.Value);
+                var facturxProfileRawValue = FacturXProfileValueConverter.ToJsonValue(processingOptions.FacturxProfile!.Value);
                 writer.WriteString("facturxProfile", facturxProfileRawValue);
             }
             if (processingOptions.AutoEnrichOption.IsSet)
                 writer.WriteBoolean("autoEnrich", processingOptions.AutoEnrichOption.Value!.Value);
 
-            if (processingOptions.ValidateOption.IsSet)
-                writer.WriteBoolean("validate", processingOptions.ValidateOption.Value!.Value);
+            if (processingOptions.ValidateXmlOption.IsSet)
+                writer.WriteBoolean("validateXml", processingOptions.ValidateXmlOption.Value!.Value);
 
             if (processingOptions.VerifyDestinationParametersOption.IsSet)
                 writer.WriteBoolean("verifyDestinationParameters", processingOptions.VerifyDestinationParametersOption.Value!.Value);

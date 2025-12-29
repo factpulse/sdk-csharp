@@ -1,5 +1,5 @@
 # FactPulse.SDK.Model.GlobalAllowanceAmount
-Global allowance amount (including tax). (Accepte number, string ou integer)
+Global allowance amount (legacy - use allowance_total_amount). (Accepte number, string ou integer)
 
 ## Properties
 

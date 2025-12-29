@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **VatAmount** | **string** | Total VAT amount (BT-110) | 
 **GrossAmount** | **string** | Total gross amount (BT-112) | 
 **FlowId** | **string** |  | [optional] 
-**DocumentType** | **DocumentType** | Document type (BT-3) | [optional] 
+**DocumentType** | **InvoiceTypeCode** | Document type (BT-3) | [optional] 
 **BillingSiteSiret** | **string** |  | [optional] 
 **DueDate** | **string** |  | [optional] 
 **Currency** | **string** | ISO currency code (BT-5) | [optional] [default to "EUR"]

@@ -26,7 +26,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Contains all invoice total amounts.
+    /// Contains all invoice total amounts (BG-22).
     /// </summary>
     public partial class InvoiceTotals : IValidatableObject
     {
@@ -37,17 +37,25 @@ namespace FactPulse.SDK.Model
         /// <param name="vatAmount">vatAmount</param>
         /// <param name="totalGrossAmount">totalGrossAmount</param>
         /// <param name="amountDue">amountDue</param>
+        /// <param name="lineTotalAmount">lineTotalAmount</param>
+        /// <param name="allowanceTotalAmount">allowanceTotalAmount</param>
+        /// <param name="chargeTotalAmount">chargeTotalAmount</param>
         /// <param name="prepayment">prepayment</param>
+        /// <param name="roundingAmount">roundingAmount</param>
         /// <param name="globalAllowanceAmount">globalAllowanceAmount</param>
         /// <param name="globalAllowanceReason">globalAllowanceReason</param>
         [JsonConstructor]
-        public InvoiceTotals(TotalNetAmount totalNetAmount, TotalVATAmount vatAmount, TotalGrossAmount totalGrossAmount, AmountDue amountDue, Option<InvoiceTotalsPrepayment?> prepayment = default, Option<GlobalAllowanceAmount?> globalAllowanceAmount = default, Option<string?> globalAllowanceReason = default)
+        public InvoiceTotals(TotalNetAmount totalNetAmount, TotalVATAmount vatAmount, TotalGrossAmount totalGrossAmount, AmountDue amountDue, Option<LineTotalAmount?> lineTotalAmount = default, Option<AllowanceTotalAmount?> allowanceTotalAmount = default, Option<ChargeTotalAmount?> chargeTotalAmount = default, Option<InvoiceTotalsPrepayment?> prepayment = default, Option<RoundingAmount?> roundingAmount = default, Option<GlobalAllowanceAmount?> globalAllowanceAmount = default, Option<string?> globalAllowanceReason = default)
         {
             TotalNetAmount = totalNetAmount;
             VatAmount = vatAmount;
             TotalGrossAmount = totalGrossAmount;
             AmountDue = amountDue;
+            LineTotalAmountOption = lineTotalAmount;
+            AllowanceTotalAmountOption = allowanceTotalAmount;
+            ChargeTotalAmountOption = chargeTotalAmount;
             PrepaymentOption = prepayment;
+            RoundingAmountOption = roundingAmount;
             GlobalAllowanceAmountOption = globalAllowanceAmount;
             GlobalAllowanceReasonOption = globalAllowanceReason;
             OnCreated();
@@ -80,6 +88,45 @@ namespace FactPulse.SDK.Model
         public AmountDue AmountDue { get; set; }
 
         /// <summary>
+        /// Used to track the state of LineTotalAmount
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<LineTotalAmount?> LineTotalAmountOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets LineTotalAmount
+        /// </summary>
+        [JsonPropertyName("line_total_amount")]
+        public LineTotalAmount? LineTotalAmount { get { return this.LineTotalAmountOption; } set { this.LineTotalAmountOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of AllowanceTotalAmount
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<AllowanceTotalAmount?> AllowanceTotalAmountOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets AllowanceTotalAmount
+        /// </summary>
+        [JsonPropertyName("allowance_total_amount")]
+        public AllowanceTotalAmount? AllowanceTotalAmount { get { return this.AllowanceTotalAmountOption; } set { this.AllowanceTotalAmountOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of ChargeTotalAmount
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<ChargeTotalAmount?> ChargeTotalAmountOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ChargeTotalAmount
+        /// </summary>
+        [JsonPropertyName("charge_total_amount")]
+        public ChargeTotalAmount? ChargeTotalAmount { get { return this.ChargeTotalAmountOption; } set { this.ChargeTotalAmountOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of Prepayment
         /// </summary>
         [JsonIgnore]
@@ -91,6 +138,19 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonPropertyName("prepayment")]
         public InvoiceTotalsPrepayment? Prepayment { get { return this.PrepaymentOption; } set { this.PrepaymentOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of RoundingAmount
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<RoundingAmount?> RoundingAmountOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets RoundingAmount
+        /// </summary>
+        [JsonPropertyName("rounding_amount")]
+        public RoundingAmount? RoundingAmount { get { return this.RoundingAmountOption; } set { this.RoundingAmountOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of GlobalAllowanceAmount
@@ -130,7 +190,11 @@ namespace FactPulse.SDK.Model
             sb.Append("  VatAmount: ").Append(VatAmount).Append("\n");
             sb.Append("  TotalGrossAmount: ").Append(TotalGrossAmount).Append("\n");
             sb.Append("  AmountDue: ").Append(AmountDue).Append("\n");
+            sb.Append("  LineTotalAmount: ").Append(LineTotalAmount).Append("\n");
+            sb.Append("  AllowanceTotalAmount: ").Append(AllowanceTotalAmount).Append("\n");
+            sb.Append("  ChargeTotalAmount: ").Append(ChargeTotalAmount).Append("\n");
             sb.Append("  Prepayment: ").Append(Prepayment).Append("\n");
+            sb.Append("  RoundingAmount: ").Append(RoundingAmount).Append("\n");
             sb.Append("  GlobalAllowanceAmount: ").Append(GlobalAllowanceAmount).Append("\n");
             sb.Append("  GlobalAllowanceReason: ").Append(GlobalAllowanceReason).Append("\n");
             sb.Append("}\n");
@@ -174,7 +238,11 @@ namespace FactPulse.SDK.Model
             Option<TotalVATAmount?> vatAmount = default;
             Option<TotalGrossAmount?> totalGrossAmount = default;
             Option<AmountDue?> amountDue = default;
+            Option<LineTotalAmount?> lineTotalAmount = default;
+            Option<AllowanceTotalAmount?> allowanceTotalAmount = default;
+            Option<ChargeTotalAmount?> chargeTotalAmount = default;
             Option<InvoiceTotalsPrepayment?> prepayment = default;
+            Option<RoundingAmount?> roundingAmount = default;
             Option<GlobalAllowanceAmount?> globalAllowanceAmount = default;
             Option<string?> globalAllowanceReason = default;
 
@@ -205,8 +273,20 @@ namespace FactPulse.SDK.Model
                         case "amount_due":
                             amountDue = new Option<AmountDue?>(JsonSerializer.Deserialize<AmountDue>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
+                        case "line_total_amount":
+                            lineTotalAmount = new Option<LineTotalAmount?>(JsonSerializer.Deserialize<LineTotalAmount>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "allowance_total_amount":
+                            allowanceTotalAmount = new Option<AllowanceTotalAmount?>(JsonSerializer.Deserialize<AllowanceTotalAmount>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "charge_total_amount":
+                            chargeTotalAmount = new Option<ChargeTotalAmount?>(JsonSerializer.Deserialize<ChargeTotalAmount>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         case "prepayment":
                             prepayment = new Option<InvoiceTotalsPrepayment?>(JsonSerializer.Deserialize<InvoiceTotalsPrepayment>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "rounding_amount":
+                            roundingAmount = new Option<RoundingAmount?>(JsonSerializer.Deserialize<RoundingAmount>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "globalAllowanceAmount":
                             globalAllowanceAmount = new Option<GlobalAllowanceAmount?>(JsonSerializer.Deserialize<GlobalAllowanceAmount>(ref utf8JsonReader, jsonSerializerOptions)!);
@@ -247,7 +327,7 @@ namespace FactPulse.SDK.Model
             if (globalAllowanceAmount.IsSet && globalAllowanceAmount.Value == null)
                 throw new ArgumentNullException(nameof(globalAllowanceAmount), "Property is not nullable for class InvoiceTotals.");
 
-            return new InvoiceTotals(totalNetAmount.Value!, vatAmount.Value!, totalGrossAmount.Value!, amountDue.Value!, prepayment, globalAllowanceAmount, globalAllowanceReason);
+            return new InvoiceTotals(totalNetAmount.Value!, vatAmount.Value!, totalGrossAmount.Value!, amountDue.Value!, lineTotalAmount, allowanceTotalAmount, chargeTotalAmount, prepayment, roundingAmount, globalAllowanceAmount, globalAllowanceReason);
         }
 
         /// <summary>
@@ -297,6 +377,30 @@ namespace FactPulse.SDK.Model
             JsonSerializer.Serialize(writer, invoiceTotals.TotalGrossAmount, jsonSerializerOptions);
             writer.WritePropertyName("amount_due");
             JsonSerializer.Serialize(writer, invoiceTotals.AmountDue, jsonSerializerOptions);
+            if (invoiceTotals.LineTotalAmountOption.IsSet)
+                if (invoiceTotals.LineTotalAmountOption.Value != null)
+                {
+                    writer.WritePropertyName("line_total_amount");
+                    JsonSerializer.Serialize(writer, invoiceTotals.LineTotalAmount, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("line_total_amount");
+            if (invoiceTotals.AllowanceTotalAmountOption.IsSet)
+                if (invoiceTotals.AllowanceTotalAmountOption.Value != null)
+                {
+                    writer.WritePropertyName("allowance_total_amount");
+                    JsonSerializer.Serialize(writer, invoiceTotals.AllowanceTotalAmount, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("allowance_total_amount");
+            if (invoiceTotals.ChargeTotalAmountOption.IsSet)
+                if (invoiceTotals.ChargeTotalAmountOption.Value != null)
+                {
+                    writer.WritePropertyName("charge_total_amount");
+                    JsonSerializer.Serialize(writer, invoiceTotals.ChargeTotalAmount, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("charge_total_amount");
             if (invoiceTotals.PrepaymentOption.IsSet)
                 if (invoiceTotals.PrepaymentOption.Value != null)
                 {
@@ -305,6 +409,14 @@ namespace FactPulse.SDK.Model
                 }
                 else
                     writer.WriteNull("prepayment");
+            if (invoiceTotals.RoundingAmountOption.IsSet)
+                if (invoiceTotals.RoundingAmountOption.Value != null)
+                {
+                    writer.WritePropertyName("rounding_amount");
+                    JsonSerializer.Serialize(writer, invoiceTotals.RoundingAmount, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("rounding_amount");
             if (invoiceTotals.GlobalAllowanceAmountOption.IsSet)
             {
                 writer.WritePropertyName("globalAllowanceAmount");

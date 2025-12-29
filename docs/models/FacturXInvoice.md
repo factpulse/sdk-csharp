@@ -21,6 +21,20 @@ Name | Type | Description | Notes
 **CurrentUserId** | **int** |  | [optional] 
 **SupplementaryAttachments** | [**List&lt;SupplementaryAttachment&gt;**](SupplementaryAttachment.md) |  | [optional] 
 **Payee** | [**Payee**](Payee.md) |  | [optional] 
+**DeliveryParty** | [**DeliveryParty**](DeliveryParty.md) |  | [optional] 
+**TaxRepresentative** | [**TaxRepresentative**](TaxRepresentative.md) |  | [optional] 
+**DeliveryDate** | **string** |  | [optional] 
+**BillingPeriodStart** | **string** |  | [optional] 
+**BillingPeriodEnd** | **string** |  | [optional] 
+**PaymentReference** | **string** |  | [optional] 
+**CreditorReferenceId** | **string** |  | [optional] 
+**DirectDebitMandateId** | **string** |  | [optional] 
+**DebtorIban** | **string** |  | [optional] 
+**PaymentTerms** | **string** |  | [optional] 
+**AllowancesCharges** | [**List&lt;AllowanceCharge&gt;**](AllowanceCharge.md) |  | [optional] 
+**AdditionalDocuments** | [**List&lt;AdditionalDocument&gt;**](AdditionalDocument.md) |  | [optional] 
+**BuyerAccountingReference** | **string** |  | [optional] 
+**PaymentCard** | [**PaymentCard**](PaymentCard.md) |  | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

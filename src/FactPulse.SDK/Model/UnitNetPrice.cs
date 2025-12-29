@@ -26,7 +26,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Unit net price (before tax).
+    /// Item net price after line discount (BT-146).
     /// </summary>
     public partial class UnitNetPrice : IValidatableObject
     {
@@ -181,7 +181,7 @@ namespace FactPulse.SDK.Model
                 writer.WriteNumber("UnitNetPrice", unitNetPrice.DecimalOption.Value.Value);
 
             if (unitNetPrice.StringOption.IsSet && unitNetPrice.StringOption.Value != null)
-                writer.WriteString("UnitNetPrice", unitNetPrice.StringOption.Value);
+                writer.WriteString("VATAmount", unitNetPrice.StringOption.Value);
 
             WriteProperties(writer, unitNetPrice, jsonSerializerOptions);
             writer.WriteEndObject();

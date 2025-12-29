@@ -1,5 +1,5 @@
 # FactPulse.SDK.Model.LineNetAmount
-Line net amount (quantity × unit price - allowance). (Accepte number, string ou integer)
+Invoice line net amount (BT-131). Can be negative for correction invoices.
 
 ## Properties
 

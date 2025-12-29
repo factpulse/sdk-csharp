@@ -26,7 +26,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Allowance amount before tax. (Accepte number, string ou integer)
+    /// Simple line allowance amount (BT-136). (Accepte number, string ou integer)
     /// </summary>
     public partial class InvoiceLineAllowanceAmount : IValidatableObject
     {
@@ -178,10 +178,10 @@ namespace FactPulse.SDK.Model
             writer.WriteStartObject();
 
             if (invoiceLineAllowanceAmount.DecimalOption.IsSet && invoiceLineAllowanceAmount.DecimalOption.Value != null)
-                writer.WriteNumber("VATAmount", invoiceLineAllowanceAmount.DecimalOption.Value.Value);
+                writer.WriteNumber("Rate", invoiceLineAllowanceAmount.DecimalOption.Value.Value);
 
             if (invoiceLineAllowanceAmount.StringOption.IsSet && invoiceLineAllowanceAmount.StringOption.Value != null)
-                writer.WriteString("VATAmount", invoiceLineAllowanceAmount.StringOption.Value);
+                writer.WriteString("Rate", invoiceLineAllowanceAmount.StringOption.Value);
 
             WriteProperties(writer, invoiceLineAllowanceAmount, jsonSerializerOptions);
             writer.WriteEndObject();

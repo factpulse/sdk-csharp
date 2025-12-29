@@ -74,7 +74,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets StructureIdentifier
         /// </summary>
-        [JsonPropertyName("structure_identifier")]
+        [JsonPropertyName("structureIdentifier")]
         public string? StructureIdentifier { get { return this.StructureIdentifierOption; } set { this.StructureIdentifierOption = new(value); } }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets StructureIdentifierType
         /// </summary>
-        [JsonPropertyName("structure_identifier_type")]
+        [JsonPropertyName("structureIdentifierType")]
         public string? StructureIdentifierType { get { return this.StructureIdentifierTypeOption; } set { this.StructureIdentifierTypeOption = new(value); } }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets CompanyName
         /// </summary>
-        [JsonPropertyName("company_name")]
+        [JsonPropertyName("companyName")]
         public string? CompanyName { get { return this.CompanyNameOption; } set { this.CompanyNameOption = new(value); } }
 
         /// <summary>
@@ -114,7 +114,7 @@ namespace FactPulse.SDK.Model
         /// Limit search to private structures only
         /// </summary>
         /// <value>Limit search to private structures only</value>
-        [JsonPropertyName("restrict_private_structures")]
+        [JsonPropertyName("restrictPrivateStructures")]
         public bool? RestrictPrivateStructures { get { return this.RestrictPrivateStructuresOption; } set { this.RestrictPrivateStructuresOption = new(value); } }
 
         /// <summary>
@@ -191,16 +191,16 @@ namespace FactPulse.SDK.Model
                         case "credentials":
                             credentials = new Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?>(JsonSerializer.Deserialize<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
-                        case "structure_identifier":
+                        case "structureIdentifier":
                             structureIdentifier = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "structure_identifier_type":
+                        case "structureIdentifierType":
                             structureIdentifierType = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "company_name":
+                        case "companyName":
                             companyName = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "restrict_private_structures":
+                        case "restrictPrivateStructures":
                             restrictPrivateStructures = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
                         default:
@@ -249,24 +249,24 @@ namespace FactPulse.SDK.Model
                     writer.WriteNull("credentials");
             if (searchStructureRequest.StructureIdentifierOption.IsSet)
                 if (searchStructureRequest.StructureIdentifierOption.Value != null)
-                    writer.WriteString("structure_identifier", searchStructureRequest.StructureIdentifier);
+                    writer.WriteString("structureIdentifier", searchStructureRequest.StructureIdentifier);
                 else
-                    writer.WriteNull("structure_identifier");
+                    writer.WriteNull("structureIdentifier");
 
             if (searchStructureRequest.StructureIdentifierTypeOption.IsSet)
                 if (searchStructureRequest.StructureIdentifierTypeOption.Value != null)
-                    writer.WriteString("structure_identifier_type", searchStructureRequest.StructureIdentifierType);
+                    writer.WriteString("structureIdentifierType", searchStructureRequest.StructureIdentifierType);
                 else
-                    writer.WriteNull("structure_identifier_type");
+                    writer.WriteNull("structureIdentifierType");
 
             if (searchStructureRequest.CompanyNameOption.IsSet)
                 if (searchStructureRequest.CompanyNameOption.Value != null)
-                    writer.WriteString("company_name", searchStructureRequest.CompanyName);
+                    writer.WriteString("companyName", searchStructureRequest.CompanyName);
                 else
-                    writer.WriteNull("company_name");
+                    writer.WriteNull("companyName");
 
             if (searchStructureRequest.RestrictPrivateStructuresOption.IsSet)
-                writer.WriteBoolean("restrict_private_structures", searchStructureRequest.RestrictPrivateStructuresOption.Value!.Value);
+                writer.WriteBoolean("restrictPrivateStructures", searchStructureRequest.RestrictPrivateStructuresOption.Value!.Value);
         }
     }
 }

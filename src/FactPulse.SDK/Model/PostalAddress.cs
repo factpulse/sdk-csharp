@@ -26,7 +26,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Represents a postal address.
+    /// Represents a postal address (BG-5, BG-8, BG-12, BG-15).
     /// </summary>
     public partial class PostalAddress : IValidatableObject
     {
@@ -36,16 +36,20 @@ namespace FactPulse.SDK.Model
         /// <param name="postalCode">postalCode</param>
         /// <param name="lineOne">lineOne</param>
         /// <param name="lineTwo">lineTwo</param>
+        /// <param name="lineThree">lineThree</param>
         /// <param name="city">city</param>
         /// <param name="countryCode">countryCode</param>
+        /// <param name="countrySubdivision">countrySubdivision</param>
         [JsonConstructor]
-        public PostalAddress(Option<string?> postalCode = default, Option<string?> lineOne = default, Option<string?> lineTwo = default, Option<string?> city = default, Option<string?> countryCode = default)
+        public PostalAddress(Option<string?> postalCode = default, Option<string?> lineOne = default, Option<string?> lineTwo = default, Option<string?> lineThree = default, Option<string?> city = default, Option<string?> countryCode = default, Option<string?> countrySubdivision = default)
         {
             PostalCodeOption = postalCode;
             LineOneOption = lineOne;
             LineTwoOption = lineTwo;
+            LineThreeOption = lineThree;
             CityOption = city;
             CountryCodeOption = countryCode;
+            CountrySubdivisionOption = countrySubdivision;
             OnCreated();
         }
 
@@ -91,6 +95,19 @@ namespace FactPulse.SDK.Model
         public string? LineTwo { get { return this.LineTwoOption; } set { this.LineTwoOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of LineThree
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> LineThreeOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets LineThree
+        /// </summary>
+        [JsonPropertyName("lineThree")]
+        public string? LineThree { get { return this.LineThreeOption; } set { this.LineThreeOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of City
         /// </summary>
         [JsonIgnore]
@@ -117,6 +134,19 @@ namespace FactPulse.SDK.Model
         public string? CountryCode { get { return this.CountryCodeOption; } set { this.CountryCodeOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of CountrySubdivision
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> CountrySubdivisionOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets CountrySubdivision
+        /// </summary>
+        [JsonPropertyName("countrySubdivision")]
+        public string? CountrySubdivision { get { return this.CountrySubdivisionOption; } set { this.CountrySubdivisionOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -127,8 +157,10 @@ namespace FactPulse.SDK.Model
             sb.Append("  PostalCode: ").Append(PostalCode).Append("\n");
             sb.Append("  LineOne: ").Append(LineOne).Append("\n");
             sb.Append("  LineTwo: ").Append(LineTwo).Append("\n");
+            sb.Append("  LineThree: ").Append(LineThree).Append("\n");
             sb.Append("  City: ").Append(City).Append("\n");
             sb.Append("  CountryCode: ").Append(CountryCode).Append("\n");
+            sb.Append("  CountrySubdivision: ").Append(CountrySubdivision).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -169,8 +201,10 @@ namespace FactPulse.SDK.Model
             Option<string?> postalCode = default;
             Option<string?> lineOne = default;
             Option<string?> lineTwo = default;
+            Option<string?> lineThree = default;
             Option<string?> city = default;
             Option<string?> countryCode = default;
+            Option<string?> countrySubdivision = default;
 
             while (utf8JsonReader.Read())
             {
@@ -196,11 +230,17 @@ namespace FactPulse.SDK.Model
                         case "lineTwo":
                             lineTwo = new Option<string?>(utf8JsonReader.GetString());
                             break;
+                        case "lineThree":
+                            lineThree = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         case "city":
                             city = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "countryCode":
                             countryCode = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "countrySubdivision":
+                            countrySubdivision = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -208,7 +248,7 @@ namespace FactPulse.SDK.Model
                 }
             }
 
-            return new PostalAddress(postalCode, lineOne, lineTwo, city, countryCode);
+            return new PostalAddress(postalCode, lineOne, lineTwo, lineThree, city, countryCode, countrySubdivision);
         }
 
         /// <summary>
@@ -253,6 +293,12 @@ namespace FactPulse.SDK.Model
                 else
                     writer.WriteNull("lineTwo");
 
+            if (postalAddress.LineThreeOption.IsSet)
+                if (postalAddress.LineThreeOption.Value != null)
+                    writer.WriteString("lineThree", postalAddress.LineThree);
+                else
+                    writer.WriteNull("lineThree");
+
             if (postalAddress.CityOption.IsSet)
                 if (postalAddress.CityOption.Value != null)
                     writer.WriteString("city", postalAddress.City);
@@ -264,6 +310,12 @@ namespace FactPulse.SDK.Model
                     writer.WriteString("countryCode", postalAddress.CountryCode);
                 else
                     writer.WriteNull("countryCode");
+
+            if (postalAddress.CountrySubdivisionOption.IsSet)
+                if (postalAddress.CountrySubdivisionOption.Value != null)
+                    writer.WriteString("countrySubdivision", postalAddress.CountrySubdivision);
+                else
+                    writer.WriteNull("countrySubdivision");
         }
     }
 }

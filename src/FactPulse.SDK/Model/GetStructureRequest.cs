@@ -51,7 +51,7 @@ namespace FactPulse.SDK.Model
         /// Chorus Pro structure ID
         /// </summary>
         /// <value>Chorus Pro structure ID</value>
-        [JsonPropertyName("structure_id")]
+        [JsonPropertyName("structureId")]
         public int StructureId { get; set; }
 
         /// <summary>
@@ -78,7 +78,7 @@ namespace FactPulse.SDK.Model
         /// Language code (fr, en)
         /// </summary>
         /// <value>Language code (fr, en)</value>
-        [JsonPropertyName("language_code")]
+        [JsonPropertyName("languageCode")]
         public string? LanguageCode { get { return this.LanguageCodeOption; } set { this.LanguageCodeOption = new(value); } }
 
         /// <summary>
@@ -148,13 +148,13 @@ namespace FactPulse.SDK.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "structure_id":
+                        case "structureId":
                             structureId = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "credentials":
                             credentials = new Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?>(JsonSerializer.Deserialize<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
-                        case "language_code":
+                        case "languageCode":
                             languageCode = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         default:
@@ -202,7 +202,7 @@ namespace FactPulse.SDK.Model
             if (getStructureRequest.LanguageCodeOption.IsSet && getStructureRequest.LanguageCode == null)
                 throw new ArgumentNullException(nameof(getStructureRequest.LanguageCode), "Property is required for class GetStructureRequest.");
 
-            writer.WriteNumber("structure_id", getStructureRequest.StructureId);
+            writer.WriteNumber("structureId", getStructureRequest.StructureId);
 
             if (getStructureRequest.CredentialsOption.IsSet)
                 if (getStructureRequest.CredentialsOption.Value != null)
@@ -213,7 +213,7 @@ namespace FactPulse.SDK.Model
                 else
                     writer.WriteNull("credentials");
             if (getStructureRequest.LanguageCodeOption.IsSet)
-                writer.WriteString("language_code", getStructureRequest.LanguageCode);
+                writer.WriteString("languageCode", getStructureRequest.LanguageCode);
         }
     }
 }

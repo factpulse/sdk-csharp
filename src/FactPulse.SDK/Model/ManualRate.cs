@@ -26,7 +26,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Manual VAT rate value. (Accepte number, string ou integer)
+    /// VAT category rate (BT-119). (Accepte number, string ou integer)
     /// </summary>
     public partial class ManualRate : IValidatableObject
     {
@@ -178,10 +178,10 @@ namespace FactPulse.SDK.Model
             writer.WriteStartObject();
 
             if (manualRate.DecimalOption.IsSet && manualRate.DecimalOption.Value != null)
-                writer.WriteNumber("VATAmount", manualRate.DecimalOption.Value.Value);
+                writer.WriteNumber("Rate", manualRate.DecimalOption.Value.Value);
 
             if (manualRate.StringOption.IsSet && manualRate.StringOption.Value != null)
-                writer.WriteString("VATAmount", manualRate.StringOption.Value);
+                writer.WriteString("Rate", manualRate.StringOption.Value);
 
             WriteProperties(writer, manualRate, jsonSerializerOptions);
             writer.WriteEndObject();

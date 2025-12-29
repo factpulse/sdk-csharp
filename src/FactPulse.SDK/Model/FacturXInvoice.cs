@@ -49,8 +49,22 @@ namespace FactPulse.SDK.Model
         /// <param name="currentUserId">currentUserId</param>
         /// <param name="supplementaryAttachments">supplementaryAttachments</param>
         /// <param name="payee">payee</param>
+        /// <param name="deliveryParty">deliveryParty</param>
+        /// <param name="taxRepresentative">taxRepresentative</param>
+        /// <param name="deliveryDate">deliveryDate</param>
+        /// <param name="billingPeriodStart">billingPeriodStart</param>
+        /// <param name="billingPeriodEnd">billingPeriodEnd</param>
+        /// <param name="paymentReference">paymentReference</param>
+        /// <param name="creditorReferenceId">creditorReferenceId</param>
+        /// <param name="directDebitMandateId">directDebitMandateId</param>
+        /// <param name="debtorIban">debtorIban</param>
+        /// <param name="paymentTerms">paymentTerms</param>
+        /// <param name="allowancesCharges">allowancesCharges</param>
+        /// <param name="additionalDocuments">additionalDocuments</param>
+        /// <param name="buyerAccountingReference">buyerAccountingReference</param>
+        /// <param name="paymentCard">paymentCard</param>
         [JsonConstructor]
-        public FacturXInvoice(string invoiceNumber, string paymentDueDate, SubmissionMode submissionMode, Recipient recipient, Supplier supplier, InvoicingFramework invoicingFramework, InvoiceReferences references, InvoiceTotals totals, Option<string?> invoiceDate = default, Option<List<InvoiceLine>?> invoiceLines = default, Option<List<VATLine>?> vatLines = default, Option<List<InvoiceNote>?> notes = default, Option<string?> comment = default, Option<int?> currentUserId = default, Option<List<SupplementaryAttachment>?> supplementaryAttachments = default, Option<Payee?> payee = default)
+        public FacturXInvoice(string invoiceNumber, string paymentDueDate, SubmissionMode submissionMode, Recipient recipient, Supplier supplier, InvoicingFramework invoicingFramework, InvoiceReferences references, InvoiceTotals totals, Option<string?> invoiceDate = default, Option<List<InvoiceLine>?> invoiceLines = default, Option<List<VATLine>?> vatLines = default, Option<List<InvoiceNote>?> notes = default, Option<string?> comment = default, Option<int?> currentUserId = default, Option<List<SupplementaryAttachment>?> supplementaryAttachments = default, Option<Payee?> payee = default, Option<DeliveryParty?> deliveryParty = default, Option<TaxRepresentative?> taxRepresentative = default, Option<string?> deliveryDate = default, Option<string?> billingPeriodStart = default, Option<string?> billingPeriodEnd = default, Option<string?> paymentReference = default, Option<string?> creditorReferenceId = default, Option<string?> directDebitMandateId = default, Option<string?> debtorIban = default, Option<string?> paymentTerms = default, Option<List<AllowanceCharge>?> allowancesCharges = default, Option<List<AdditionalDocument>?> additionalDocuments = default, Option<string?> buyerAccountingReference = default, Option<PaymentCard?> paymentCard = default)
         {
             InvoiceNumber = invoiceNumber;
             PaymentDueDate = paymentDueDate;
@@ -68,6 +82,20 @@ namespace FactPulse.SDK.Model
             CurrentUserIdOption = currentUserId;
             SupplementaryAttachmentsOption = supplementaryAttachments;
             PayeeOption = payee;
+            DeliveryPartyOption = deliveryParty;
+            TaxRepresentativeOption = taxRepresentative;
+            DeliveryDateOption = deliveryDate;
+            BillingPeriodStartOption = billingPeriodStart;
+            BillingPeriodEndOption = billingPeriodEnd;
+            PaymentReferenceOption = paymentReference;
+            CreditorReferenceIdOption = creditorReferenceId;
+            DirectDebitMandateIdOption = directDebitMandateId;
+            DebtorIbanOption = debtorIban;
+            PaymentTermsOption = paymentTerms;
+            AllowancesChargesOption = allowancesCharges;
+            AdditionalDocumentsOption = additionalDocuments;
+            BuyerAccountingReferenceOption = buyerAccountingReference;
+            PaymentCardOption = paymentCard;
             OnCreated();
         }
 
@@ -226,6 +254,188 @@ namespace FactPulse.SDK.Model
         public Payee? Payee { get { return this.PayeeOption; } set { this.PayeeOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of DeliveryParty
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<DeliveryParty?> DeliveryPartyOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets DeliveryParty
+        /// </summary>
+        [JsonPropertyName("delivery_party")]
+        public DeliveryParty? DeliveryParty { get { return this.DeliveryPartyOption; } set { this.DeliveryPartyOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of TaxRepresentative
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<TaxRepresentative?> TaxRepresentativeOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets TaxRepresentative
+        /// </summary>
+        [JsonPropertyName("tax_representative")]
+        public TaxRepresentative? TaxRepresentative { get { return this.TaxRepresentativeOption; } set { this.TaxRepresentativeOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of DeliveryDate
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> DeliveryDateOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets DeliveryDate
+        /// </summary>
+        [JsonPropertyName("delivery_date")]
+        public string? DeliveryDate { get { return this.DeliveryDateOption; } set { this.DeliveryDateOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of BillingPeriodStart
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> BillingPeriodStartOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets BillingPeriodStart
+        /// </summary>
+        [JsonPropertyName("billing_period_start")]
+        public string? BillingPeriodStart { get { return this.BillingPeriodStartOption; } set { this.BillingPeriodStartOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of BillingPeriodEnd
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> BillingPeriodEndOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets BillingPeriodEnd
+        /// </summary>
+        [JsonPropertyName("billing_period_end")]
+        public string? BillingPeriodEnd { get { return this.BillingPeriodEndOption; } set { this.BillingPeriodEndOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of PaymentReference
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> PaymentReferenceOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets PaymentReference
+        /// </summary>
+        [JsonPropertyName("payment_reference")]
+        public string? PaymentReference { get { return this.PaymentReferenceOption; } set { this.PaymentReferenceOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of CreditorReferenceId
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> CreditorReferenceIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets CreditorReferenceId
+        /// </summary>
+        [JsonPropertyName("creditor_reference_id")]
+        public string? CreditorReferenceId { get { return this.CreditorReferenceIdOption; } set { this.CreditorReferenceIdOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of DirectDebitMandateId
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> DirectDebitMandateIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets DirectDebitMandateId
+        /// </summary>
+        [JsonPropertyName("direct_debit_mandate_id")]
+        public string? DirectDebitMandateId { get { return this.DirectDebitMandateIdOption; } set { this.DirectDebitMandateIdOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of DebtorIban
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> DebtorIbanOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets DebtorIban
+        /// </summary>
+        [JsonPropertyName("debtor_iban")]
+        public string? DebtorIban { get { return this.DebtorIbanOption; } set { this.DebtorIbanOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of PaymentTerms
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> PaymentTermsOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets PaymentTerms
+        /// </summary>
+        [JsonPropertyName("payment_terms")]
+        public string? PaymentTerms { get { return this.PaymentTermsOption; } set { this.PaymentTermsOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of AllowancesCharges
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<AllowanceCharge>?> AllowancesChargesOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets AllowancesCharges
+        /// </summary>
+        [JsonPropertyName("allowances_charges")]
+        public List<AllowanceCharge>? AllowancesCharges { get { return this.AllowancesChargesOption; } set { this.AllowancesChargesOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of AdditionalDocuments
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<AdditionalDocument>?> AdditionalDocumentsOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets AdditionalDocuments
+        /// </summary>
+        [JsonPropertyName("additional_documents")]
+        public List<AdditionalDocument>? AdditionalDocuments { get { return this.AdditionalDocumentsOption; } set { this.AdditionalDocumentsOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of BuyerAccountingReference
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> BuyerAccountingReferenceOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets BuyerAccountingReference
+        /// </summary>
+        [JsonPropertyName("buyer_accounting_reference")]
+        public string? BuyerAccountingReference { get { return this.BuyerAccountingReferenceOption; } set { this.BuyerAccountingReferenceOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of PaymentCard
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<PaymentCard?> PaymentCardOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets PaymentCard
+        /// </summary>
+        [JsonPropertyName("payment_card")]
+        public PaymentCard? PaymentCard { get { return this.PaymentCardOption; } set { this.PaymentCardOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -249,6 +459,20 @@ namespace FactPulse.SDK.Model
             sb.Append("  CurrentUserId: ").Append(CurrentUserId).Append("\n");
             sb.Append("  SupplementaryAttachments: ").Append(SupplementaryAttachments).Append("\n");
             sb.Append("  Payee: ").Append(Payee).Append("\n");
+            sb.Append("  DeliveryParty: ").Append(DeliveryParty).Append("\n");
+            sb.Append("  TaxRepresentative: ").Append(TaxRepresentative).Append("\n");
+            sb.Append("  DeliveryDate: ").Append(DeliveryDate).Append("\n");
+            sb.Append("  BillingPeriodStart: ").Append(BillingPeriodStart).Append("\n");
+            sb.Append("  BillingPeriodEnd: ").Append(BillingPeriodEnd).Append("\n");
+            sb.Append("  PaymentReference: ").Append(PaymentReference).Append("\n");
+            sb.Append("  CreditorReferenceId: ").Append(CreditorReferenceId).Append("\n");
+            sb.Append("  DirectDebitMandateId: ").Append(DirectDebitMandateId).Append("\n");
+            sb.Append("  DebtorIban: ").Append(DebtorIban).Append("\n");
+            sb.Append("  PaymentTerms: ").Append(PaymentTerms).Append("\n");
+            sb.Append("  AllowancesCharges: ").Append(AllowancesCharges).Append("\n");
+            sb.Append("  AdditionalDocuments: ").Append(AdditionalDocuments).Append("\n");
+            sb.Append("  BuyerAccountingReference: ").Append(BuyerAccountingReference).Append("\n");
+            sb.Append("  PaymentCard: ").Append(PaymentCard).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -302,6 +526,20 @@ namespace FactPulse.SDK.Model
             Option<int?> currentUserId = default;
             Option<List<SupplementaryAttachment>?> supplementaryAttachments = default;
             Option<Payee?> payee = default;
+            Option<DeliveryParty?> deliveryParty = default;
+            Option<TaxRepresentative?> taxRepresentative = default;
+            Option<string?> deliveryDate = default;
+            Option<string?> billingPeriodStart = default;
+            Option<string?> billingPeriodEnd = default;
+            Option<string?> paymentReference = default;
+            Option<string?> creditorReferenceId = default;
+            Option<string?> directDebitMandateId = default;
+            Option<string?> debtorIban = default;
+            Option<string?> paymentTerms = default;
+            Option<List<AllowanceCharge>?> allowancesCharges = default;
+            Option<List<AdditionalDocument>?> additionalDocuments = default;
+            Option<string?> buyerAccountingReference = default;
+            Option<PaymentCard?> paymentCard = default;
 
             while (utf8JsonReader.Read())
             {
@@ -367,6 +605,48 @@ namespace FactPulse.SDK.Model
                             break;
                         case "payee":
                             payee = new Option<Payee?>(JsonSerializer.Deserialize<Payee>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "delivery_party":
+                            deliveryParty = new Option<DeliveryParty?>(JsonSerializer.Deserialize<DeliveryParty>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "tax_representative":
+                            taxRepresentative = new Option<TaxRepresentative?>(JsonSerializer.Deserialize<TaxRepresentative>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "delivery_date":
+                            deliveryDate = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "billing_period_start":
+                            billingPeriodStart = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "billing_period_end":
+                            billingPeriodEnd = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "payment_reference":
+                            paymentReference = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "creditor_reference_id":
+                            creditorReferenceId = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "direct_debit_mandate_id":
+                            directDebitMandateId = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "debtor_iban":
+                            debtorIban = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "payment_terms":
+                            paymentTerms = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "allowances_charges":
+                            allowancesCharges = new Option<List<AllowanceCharge>?>(JsonSerializer.Deserialize<List<AllowanceCharge>>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "additional_documents":
+                            additionalDocuments = new Option<List<AdditionalDocument>?>(JsonSerializer.Deserialize<List<AdditionalDocument>>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "buyer_accounting_reference":
+                            buyerAccountingReference = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "payment_card":
+                            paymentCard = new Option<PaymentCard?>(JsonSerializer.Deserialize<PaymentCard>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -434,7 +714,7 @@ namespace FactPulse.SDK.Model
             if (notes.IsSet && notes.Value == null)
                 throw new ArgumentNullException(nameof(notes), "Property is not nullable for class FacturXInvoice.");
 
-            return new FacturXInvoice(invoiceNumber.Value!, paymentDueDate.Value!, submissionMode.Value!.Value!, recipient.Value!, supplier.Value!, invoicingFramework.Value!, references.Value!, totals.Value!, invoiceDate, invoiceLines, vatLines, notes, comment, currentUserId, supplementaryAttachments, payee);
+            return new FacturXInvoice(invoiceNumber.Value!, paymentDueDate.Value!, submissionMode.Value!.Value!, recipient.Value!, supplier.Value!, invoicingFramework.Value!, references.Value!, totals.Value!, invoiceDate, invoiceLines, vatLines, notes, comment, currentUserId, supplementaryAttachments, payee, deliveryParty, taxRepresentative, deliveryDate, billingPeriodStart, billingPeriodEnd, paymentReference, creditorReferenceId, directDebitMandateId, debtorIban, paymentTerms, allowancesCharges, additionalDocuments, buyerAccountingReference, paymentCard);
         }
 
         /// <summary>
@@ -557,6 +837,100 @@ namespace FactPulse.SDK.Model
                 }
                 else
                     writer.WriteNull("payee");
+            if (facturXInvoice.DeliveryPartyOption.IsSet)
+                if (facturXInvoice.DeliveryPartyOption.Value != null)
+                {
+                    writer.WritePropertyName("delivery_party");
+                    JsonSerializer.Serialize(writer, facturXInvoice.DeliveryParty, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("delivery_party");
+            if (facturXInvoice.TaxRepresentativeOption.IsSet)
+                if (facturXInvoice.TaxRepresentativeOption.Value != null)
+                {
+                    writer.WritePropertyName("tax_representative");
+                    JsonSerializer.Serialize(writer, facturXInvoice.TaxRepresentative, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("tax_representative");
+            if (facturXInvoice.DeliveryDateOption.IsSet)
+                if (facturXInvoice.DeliveryDateOption.Value != null)
+                    writer.WriteString("delivery_date", facturXInvoice.DeliveryDate);
+                else
+                    writer.WriteNull("delivery_date");
+
+            if (facturXInvoice.BillingPeriodStartOption.IsSet)
+                if (facturXInvoice.BillingPeriodStartOption.Value != null)
+                    writer.WriteString("billing_period_start", facturXInvoice.BillingPeriodStart);
+                else
+                    writer.WriteNull("billing_period_start");
+
+            if (facturXInvoice.BillingPeriodEndOption.IsSet)
+                if (facturXInvoice.BillingPeriodEndOption.Value != null)
+                    writer.WriteString("billing_period_end", facturXInvoice.BillingPeriodEnd);
+                else
+                    writer.WriteNull("billing_period_end");
+
+            if (facturXInvoice.PaymentReferenceOption.IsSet)
+                if (facturXInvoice.PaymentReferenceOption.Value != null)
+                    writer.WriteString("payment_reference", facturXInvoice.PaymentReference);
+                else
+                    writer.WriteNull("payment_reference");
+
+            if (facturXInvoice.CreditorReferenceIdOption.IsSet)
+                if (facturXInvoice.CreditorReferenceIdOption.Value != null)
+                    writer.WriteString("creditor_reference_id", facturXInvoice.CreditorReferenceId);
+                else
+                    writer.WriteNull("creditor_reference_id");
+
+            if (facturXInvoice.DirectDebitMandateIdOption.IsSet)
+                if (facturXInvoice.DirectDebitMandateIdOption.Value != null)
+                    writer.WriteString("direct_debit_mandate_id", facturXInvoice.DirectDebitMandateId);
+                else
+                    writer.WriteNull("direct_debit_mandate_id");
+
+            if (facturXInvoice.DebtorIbanOption.IsSet)
+                if (facturXInvoice.DebtorIbanOption.Value != null)
+                    writer.WriteString("debtor_iban", facturXInvoice.DebtorIban);
+                else
+                    writer.WriteNull("debtor_iban");
+
+            if (facturXInvoice.PaymentTermsOption.IsSet)
+                if (facturXInvoice.PaymentTermsOption.Value != null)
+                    writer.WriteString("payment_terms", facturXInvoice.PaymentTerms);
+                else
+                    writer.WriteNull("payment_terms");
+
+            if (facturXInvoice.AllowancesChargesOption.IsSet)
+                if (facturXInvoice.AllowancesChargesOption.Value != null)
+                {
+                    writer.WritePropertyName("allowances_charges");
+                    JsonSerializer.Serialize(writer, facturXInvoice.AllowancesCharges, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("allowances_charges");
+            if (facturXInvoice.AdditionalDocumentsOption.IsSet)
+                if (facturXInvoice.AdditionalDocumentsOption.Value != null)
+                {
+                    writer.WritePropertyName("additional_documents");
+                    JsonSerializer.Serialize(writer, facturXInvoice.AdditionalDocuments, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("additional_documents");
+            if (facturXInvoice.BuyerAccountingReferenceOption.IsSet)
+                if (facturXInvoice.BuyerAccountingReferenceOption.Value != null)
+                    writer.WriteString("buyer_accounting_reference", facturXInvoice.BuyerAccountingReference);
+                else
+                    writer.WriteNull("buyer_accounting_reference");
+
+            if (facturXInvoice.PaymentCardOption.IsSet)
+                if (facturXInvoice.PaymentCardOption.Value != null)
+                {
+                    writer.WritePropertyName("payment_card");
+                    JsonSerializer.Serialize(writer, facturXInvoice.PaymentCard, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("payment_card");
         }
     }
 }
