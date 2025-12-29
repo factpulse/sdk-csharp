@@ -37,54 +37,54 @@ namespace FactPulse.SDK.Model
         FR_SIREN = 1,
 
         /// <summary>
-        /// Enum GLN for value: 0009
+        /// Enum FR_SIRET for value: 0009
         /// </summary>
-        GLN = 2,
+        FR_SIRET = 2,
 
         /// <summary>
-        /// Enum DUNS for value: 0002
+        /// Enum FR_SIREN_OLD for value: 0002
         /// </summary>
-        DUNS = 3,
+        FR_SIREN_OLD = 3,
 
         /// <summary>
-        /// Enum FR_TVA_INTRA for value: 0088
+        /// Enum GLN for value: 0088
         /// </summary>
-        FR_TVA_INTRA = 4,
+        GLN = 4,
 
         /// <summary>
-        /// Enum GLEIF for value: 0060
+        /// Enum DUNS for value: 0060
         /// </summary>
-        GLEIF = 5,
+        DUNS = 5,
 
         /// <summary>
-        /// Enum _9957 for value: 9957
+        /// Enum FR_VAT_INTRA for value: 9957
         /// </summary>
-        _9957 = 6,
+        FR_VAT_INTRA = 6,
 
         /// <summary>
-        /// Enum _0199 for value: 0199
+        /// Enum GLEIF for value: 0199
         /// </summary>
-        _0199 = 7,
+        GLEIF = 7,
 
         /// <summary>
-        /// Enum _0231 for value: 0231
+        /// Enum DT_DIRECTORY_ID for value: 0231
         /// </summary>
-        _0231 = 8,
+        DT_DIRECTORY_ID = 8,
 
         /// <summary>
-        /// Enum EM for value: EM
+        /// Enum EMAIL for value: EM
         /// </summary>
-        EM = 9,
+        EMAIL = 9,
 
         /// <summary>
-        /// Enum _0177 for value: 0177
+        /// Enum ODETTE for value: 0177
         /// </summary>
-        _0177 = 10,
+        ODETTE = 10,
 
         /// <summary>
-        /// Enum _0224 for value: 0224
+        /// Enum FR_CHORUS_PRO_ROUTING for value: 0224
         /// </summary>
-        _0224 = 11
+        FR_CHORUS_PRO_ROUTING = 11
     }
 
     /// <summary>
@@ -103,34 +103,34 @@ namespace FactPulse.SDK.Model
                 return SchemeID.FR_SIREN;
 
             if (value.Equals("0009"))
-                return SchemeID.GLN;
+                return SchemeID.FR_SIRET;
 
             if (value.Equals("0002"))
-                return SchemeID.DUNS;
+                return SchemeID.FR_SIREN_OLD;
 
             if (value.Equals("0088"))
-                return SchemeID.FR_TVA_INTRA;
+                return SchemeID.GLN;
 
             if (value.Equals("0060"))
-                return SchemeID.GLEIF;
+                return SchemeID.DUNS;
 
             if (value.Equals("9957"))
-                return SchemeID._9957;
+                return SchemeID.FR_VAT_INTRA;
 
             if (value.Equals("0199"))
-                return SchemeID._0199;
+                return SchemeID.GLEIF;
 
             if (value.Equals("0231"))
-                return SchemeID._0231;
+                return SchemeID.DT_DIRECTORY_ID;
 
             if (value.Equals("EM"))
-                return SchemeID.EM;
+                return SchemeID.EMAIL;
 
             if (value.Equals("0177"))
-                return SchemeID._0177;
+                return SchemeID.ODETTE;
 
             if (value.Equals("0224"))
-                return SchemeID._0224;
+                return SchemeID.FR_CHORUS_PRO_ROUTING;
 
             throw new NotImplementedException($"Could not convert value to type SchemeID: '{value}'");
         }
@@ -146,34 +146,34 @@ namespace FactPulse.SDK.Model
                 return SchemeID.FR_SIREN;
 
             if (value.Equals("0009"))
-                return SchemeID.GLN;
+                return SchemeID.FR_SIRET;
 
             if (value.Equals("0002"))
-                return SchemeID.DUNS;
+                return SchemeID.FR_SIREN_OLD;
 
             if (value.Equals("0088"))
-                return SchemeID.FR_TVA_INTRA;
+                return SchemeID.GLN;
 
             if (value.Equals("0060"))
-                return SchemeID.GLEIF;
+                return SchemeID.DUNS;
 
             if (value.Equals("9957"))
-                return SchemeID._9957;
+                return SchemeID.FR_VAT_INTRA;
 
             if (value.Equals("0199"))
-                return SchemeID._0199;
+                return SchemeID.GLEIF;
 
             if (value.Equals("0231"))
-                return SchemeID._0231;
+                return SchemeID.DT_DIRECTORY_ID;
 
             if (value.Equals("EM"))
-                return SchemeID.EM;
+                return SchemeID.EMAIL;
 
             if (value.Equals("0177"))
-                return SchemeID._0177;
+                return SchemeID.ODETTE;
 
             if (value.Equals("0224"))
-                return SchemeID._0224;
+                return SchemeID.FR_CHORUS_PRO_ROUTING;
 
             return null;
         }
@@ -189,34 +189,34 @@ namespace FactPulse.SDK.Model
             if (value == SchemeID.FR_SIREN)
                 return "0225";
 
-            if (value == SchemeID.GLN)
+            if (value == SchemeID.FR_SIRET)
                 return "0009";
 
-            if (value == SchemeID.DUNS)
+            if (value == SchemeID.FR_SIREN_OLD)
                 return "0002";
 
-            if (value == SchemeID.FR_TVA_INTRA)
+            if (value == SchemeID.GLN)
                 return "0088";
 
-            if (value == SchemeID.GLEIF)
+            if (value == SchemeID.DUNS)
                 return "0060";
 
-            if (value == SchemeID._9957)
+            if (value == SchemeID.FR_VAT_INTRA)
                 return "9957";
 
-            if (value == SchemeID._0199)
+            if (value == SchemeID.GLEIF)
                 return "0199";
 
-            if (value == SchemeID._0231)
+            if (value == SchemeID.DT_DIRECTORY_ID)
                 return "0231";
 
-            if (value == SchemeID.EM)
+            if (value == SchemeID.EMAIL)
                 return "EM";
 
-            if (value == SchemeID._0177)
+            if (value == SchemeID.ODETTE)
                 return "0177";
 
-            if (value == SchemeID._0224)
+            if (value == SchemeID.FR_CHORUS_PRO_ROUTING)
                 return "0224";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
