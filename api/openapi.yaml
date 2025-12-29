@@ -3125,14 +3125,8 @@ paths:
           content:
             application/json:
               schema:
-                allOf:
-                - $ref: "#/components/schemas/ConvertSuccessResponse"
-                anyOf:
-                - $ref: "#/components/schemas/ConvertSuccessResponse"
-                - $ref: "#/components/schemas/ConvertPendingInputResponse"
-                - $ref: "#/components/schemas/ConvertValidationFailedResponse"
-                title: Response Convert Document Api V1 Convert Post
-          description: Conversion réussie
+                $ref: "#/components/schemas/ConvertSuccessResponse"
+          description: Successful Response
         "202":
           content:
             application/json:
@@ -3184,14 +3178,8 @@ paths:
           content:
             application/json:
               schema:
-                allOf:
-                - $ref: "#/components/schemas/ConvertSuccessResponse"
-                anyOf:
-                - $ref: "#/components/schemas/ConvertSuccessResponse"
-                - $ref: "#/components/schemas/ConvertValidationFailedResponse"
-                title: Response Resume Conversion Api V1 Convert  Conversion Id  Resume
-                  Post
-          description: Conversion réussie
+                $ref: "#/components/schemas/ConvertSuccessResponse"
+          description: Successful Response
         "404":
           description: Conversion non trouvée ou expirée
         "422":
@@ -3985,7 +3973,7 @@ components:
         missing_fields:
         - field: field
           bt_code: bt_code
-          confidence: 5.637376656633329
+          confidence: 3.616076749251911
           required_for:
           - required_for
           - required_for
@@ -3993,7 +3981,7 @@ components:
           suggested_value: suggested_value
         - field: field
           bt_code: bt_code
-          confidence: 5.637376656633329
+          confidence: 3.616076749251911
           required_for:
           - required_for
           - required_for
@@ -4001,9 +3989,9 @@ components:
           suggested_value: suggested_value
         message: Donnees manquantes requises pour la conformite
         extraction:
-          confidence_score: 0.8008281904610115
-          fields_extracted: 6
-          fields_enriched: 1
+          confidence_score: 6.027456183070403
+          fields_extracted: 1
+          fields_enriched: 5
           fields_missing: 5
         resume_url: resume_url
         status: pending_input
@@ -4081,6 +4069,43 @@ components:
         Le champ `invoice` contient les donnees de la facture au format FacturXInvoice
         (cf. facture_electronique.models.FacturXInvoice). Ce modele est le meme que
         celui utilise pour la generation Factur-X, garantissant une coherence totale.
+      example:
+        pdf_regenerated: false
+        processing_time_ms: 9
+        pdf_regenerated_reason: pdf_regenerated_reason
+        conversion_id: conversion_id
+        files:
+          xml: ""
+          facturx_pdf: ""
+        invoice:
+          key: ""
+        extraction:
+          confidence_score: 6.027456183070403
+          fields_extracted: 1
+          fields_enriched: 5
+          fields_missing: 5
+        validation:
+          schematron_rules_total: 7
+          pdfa_compliant: true
+          schematron_rules_passed: 2
+          profile: profile
+          errors:
+          - msg: msg
+            loc:
+            - ValidationError_loc_inner
+            - ValidationError_loc_inner
+            type: type
+          - msg: msg
+            loc:
+            - ValidationError_loc_inner
+            - ValidationError_loc_inner
+            type: type
+          xml_embedded: true
+        status: success
+        document_type:
+          code: 0
+          label: label
+          detected_as: detected_as
       properties:
         status:
           default: success
@@ -4136,7 +4161,7 @@ components:
         missing_fields:
         - field: field
           bt_code: bt_code
-          confidence: 5.637376656633329
+          confidence: 3.616076749251911
           required_for:
           - required_for
           - required_for
@@ -4144,7 +4169,7 @@ components:
           suggested_value: suggested_value
         - field: field
           bt_code: bt_code
-          confidence: 5.637376656633329
+          confidence: 3.616076749251911
           required_for:
           - required_for
           - required_for
@@ -4153,9 +4178,9 @@ components:
         message: Donnees extraites avec erreurs de validation. Completez le formulaire
           et appelez /resume.
         extraction:
-          confidence_score: 0.8008281904610115
-          fields_extracted: 6
-          fields_enriched: 1
+          confidence_score: 6.027456183070403
+          fields_extracted: 1
+          fields_enriched: 5
           fields_missing: 5
         resume_url: resume_url
         validation:
@@ -4222,6 +4247,10 @@ components:
       title: ConvertValidationFailedResponse
     DocumentTypeInfo:
       description: Informations sur le type de document detecte.
+      example:
+        code: 0
+        label: label
+        detected_as: detected_as
       properties:
         code:
           description: Code UNTDID 1001
@@ -4313,9 +4342,9 @@ components:
     ExtractionInfo:
       description: Informations sur l'extraction des donnees.
       example:
-        confidence_score: 0.8008281904610115
-        fields_extracted: 6
-        fields_enriched: 1
+        confidence_score: 6.027456183070403
+        fields_extracted: 1
+        fields_enriched: 5
         fields_missing: 5
       properties:
         confidence_score:
@@ -4397,6 +4426,9 @@ components:
       title: FileInfo
     FilesInfo:
       description: Fichiers generes.
+      example:
+        xml: ""
+        facturx_pdf: ""
       properties:
         facturx_pdf:
           allOf:
@@ -5069,7 +5101,7 @@ components:
       example:
         field: field
         bt_code: bt_code
-        confidence: 5.637376656633329
+        confidence: 3.616076749251911
         required_for:
         - required_for
         - required_for
