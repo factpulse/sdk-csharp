@@ -27,94 +27,96 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Informations sur la validation.
+    /// Optional Chorus Pro credentials.  **MODE 1 - JWT retrieval (recommended):** Do not provide this &#x60;credentials&#x60; field in the payload. Credentials will be automatically retrieved via client_uid from JWT (0-trust).  **MODE 2 - Credentials in payload:** Provide all required fields below. Useful for tests or third-party integrations.
     /// </summary>
-    public partial class ValidationInfo : IValidatableObject
+    public partial class FactureElectroniqueRestApiSchemasProcessingChorusProCredentials : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ValidationInfo" /> class.
+        /// Initializes a new instance of the <see cref="FactureElectroniqueRestApiSchemasProcessingChorusProCredentials" /> class.
         /// </summary>
-        /// <param name="profile">Profil Factur-X utilise</param>
-        /// <param name="schematronRulesPassed">Regles passees</param>
-        /// <param name="schematronRulesTotal">Total regles</param>
-        /// <param name="pdfaCompliant">PDF/A-3 conforme (default to true)</param>
-        /// <param name="xmlEmbedded">XML embarque dans PDF (default to true)</param>
-        /// <param name="errors">errors</param>
+        /// <param name="pisteClientId">pisteClientId</param>
+        /// <param name="pisteClientSecret">pisteClientSecret</param>
+        /// <param name="chorusLogin">chorusLogin</param>
+        /// <param name="chorusPassword">chorusPassword</param>
+        /// <param name="sandboxMode">[MODE 2] Use sandbox mode (default: True) (default to true)</param>
         [JsonConstructor]
-        public ValidationInfo(string profile, int schematronRulesPassed, int schematronRulesTotal, Option<bool?> pdfaCompliant = default, Option<bool?> xmlEmbedded = default, Option<List<FactureElectroniqueRestApiSchemasConvertValidationError>?> errors = default)
+        public FactureElectroniqueRestApiSchemasProcessingChorusProCredentials(Option<string?> pisteClientId = default, Option<string?> pisteClientSecret = default, Option<string?> chorusLogin = default, Option<string?> chorusPassword = default, Option<bool?> sandboxMode = default)
         {
-            Profile = profile;
-            SchematronRulesPassed = schematronRulesPassed;
-            SchematronRulesTotal = schematronRulesTotal;
-            PdfaCompliantOption = pdfaCompliant;
-            XmlEmbeddedOption = xmlEmbedded;
-            ErrorsOption = errors;
+            PisteClientIdOption = pisteClientId;
+            PisteClientSecretOption = pisteClientSecret;
+            ChorusLoginOption = chorusLogin;
+            ChorusPasswordOption = chorusPassword;
+            SandboxModeOption = sandboxMode;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Profil Factur-X utilise
-        /// </summary>
-        /// <value>Profil Factur-X utilise</value>
-        [JsonPropertyName("profile")]
-        public string Profile { get; set; }
-
-        /// <summary>
-        /// Regles passees
-        /// </summary>
-        /// <value>Regles passees</value>
-        [JsonPropertyName("schematron_rules_passed")]
-        public int SchematronRulesPassed { get; set; }
-
-        /// <summary>
-        /// Total regles
-        /// </summary>
-        /// <value>Total regles</value>
-        [JsonPropertyName("schematron_rules_total")]
-        public int SchematronRulesTotal { get; set; }
-
-        /// <summary>
-        /// Used to track the state of PdfaCompliant
+        /// Used to track the state of PisteClientId
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<bool?> PdfaCompliantOption { get; private set; }
+        public Option<string?> PisteClientIdOption { get; private set; }
 
         /// <summary>
-        /// PDF/A-3 conforme
+        /// Gets or Sets PisteClientId
         /// </summary>
-        /// <value>PDF/A-3 conforme</value>
-        [JsonPropertyName("pdfa_compliant")]
-        public bool? PdfaCompliant { get { return this.PdfaCompliantOption; } set { this.PdfaCompliantOption = new(value); } }
+        [JsonPropertyName("pisteClientId")]
+        public string? PisteClientId { get { return this.PisteClientIdOption; } set { this.PisteClientIdOption = new(value); } }
 
         /// <summary>
-        /// Used to track the state of XmlEmbedded
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<bool?> XmlEmbeddedOption { get; private set; }
-
-        /// <summary>
-        /// XML embarque dans PDF
-        /// </summary>
-        /// <value>XML embarque dans PDF</value>
-        [JsonPropertyName("xml_embedded")]
-        public bool? XmlEmbedded { get { return this.XmlEmbeddedOption; } set { this.XmlEmbeddedOption = new(value); } }
-
-        /// <summary>
-        /// Used to track the state of Errors
+        /// Used to track the state of PisteClientSecret
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<FactureElectroniqueRestApiSchemasConvertValidationError>?> ErrorsOption { get; private set; }
+        public Option<string?> PisteClientSecretOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Errors
+        /// Gets or Sets PisteClientSecret
         /// </summary>
-        [JsonPropertyName("errors")]
-        public List<FactureElectroniqueRestApiSchemasConvertValidationError>? Errors { get { return this.ErrorsOption; } set { this.ErrorsOption = new(value); } }
+        [JsonPropertyName("pisteClientSecret")]
+        public string? PisteClientSecret { get { return this.PisteClientSecretOption; } set { this.PisteClientSecretOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of ChorusLogin
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> ChorusLoginOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ChorusLogin
+        /// </summary>
+        [JsonPropertyName("chorusLogin")]
+        public string? ChorusLogin { get { return this.ChorusLoginOption; } set { this.ChorusLoginOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of ChorusPassword
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> ChorusPasswordOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ChorusPassword
+        /// </summary>
+        [JsonPropertyName("chorusPassword")]
+        public string? ChorusPassword { get { return this.ChorusPasswordOption; } set { this.ChorusPasswordOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of SandboxMode
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> SandboxModeOption { get; private set; }
+
+        /// <summary>
+        /// [MODE 2] Use sandbox mode (default: True)
+        /// </summary>
+        /// <value>[MODE 2] Use sandbox mode (default: True)</value>
+        [JsonPropertyName("sandboxMode")]
+        public bool? SandboxMode { get { return this.SandboxModeOption; } set { this.SandboxModeOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -123,13 +125,12 @@ namespace FactPulse.SDK.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class ValidationInfo {\n");
-            sb.Append("  Profile: ").Append(Profile).Append("\n");
-            sb.Append("  SchematronRulesPassed: ").Append(SchematronRulesPassed).Append("\n");
-            sb.Append("  SchematronRulesTotal: ").Append(SchematronRulesTotal).Append("\n");
-            sb.Append("  PdfaCompliant: ").Append(PdfaCompliant).Append("\n");
-            sb.Append("  XmlEmbedded: ").Append(XmlEmbedded).Append("\n");
-            sb.Append("  Errors: ").Append(Errors).Append("\n");
+            sb.Append("class FactureElectroniqueRestApiSchemasProcessingChorusProCredentials {\n");
+            sb.Append("  PisteClientId: ").Append(PisteClientId).Append("\n");
+            sb.Append("  PisteClientSecret: ").Append(PisteClientSecret).Append("\n");
+            sb.Append("  ChorusLogin: ").Append(ChorusLogin).Append("\n");
+            sb.Append("  ChorusPassword: ").Append(ChorusPassword).Append("\n");
+            sb.Append("  SandboxMode: ").Append(SandboxMode).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -146,19 +147,19 @@ namespace FactPulse.SDK.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="ValidationInfo" />
+    /// A Json converter for type <see cref="FactureElectroniqueRestApiSchemasProcessingChorusProCredentials" />
     /// </summary>
-    public class ValidationInfoJsonConverter : JsonConverter<ValidationInfo>
+    public class FactureElectroniqueRestApiSchemasProcessingChorusProCredentialsJsonConverter : JsonConverter<FactureElectroniqueRestApiSchemasProcessingChorusProCredentials>
     {
         /// <summary>
-        /// Deserializes json to <see cref="ValidationInfo" />
+        /// Deserializes json to <see cref="FactureElectroniqueRestApiSchemasProcessingChorusProCredentials" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override ValidationInfo Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override FactureElectroniqueRestApiSchemasProcessingChorusProCredentials Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -167,12 +168,11 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<string?> profile = default;
-            Option<int?> schematronRulesPassed = default;
-            Option<int?> schematronRulesTotal = default;
-            Option<bool?> pdfaCompliant = default;
-            Option<bool?> xmlEmbedded = default;
-            Option<List<FactureElectroniqueRestApiSchemasConvertValidationError>?> errors = default;
+            Option<string?> pisteClientId = default;
+            Option<string?> pisteClientSecret = default;
+            Option<string?> chorusLogin = default;
+            Option<string?> chorusPassword = default;
+            Option<bool?> sandboxMode = default;
 
             while (utf8JsonReader.Read())
             {
@@ -189,23 +189,20 @@ namespace FactPulse.SDK.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "profile":
-                            profile = new Option<string?>(utf8JsonReader.GetString()!);
+                        case "pisteClientId":
+                            pisteClientId = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "schematron_rules_passed":
-                            schematronRulesPassed = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                        case "pisteClientSecret":
+                            pisteClientSecret = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "schematron_rules_total":
-                            schematronRulesTotal = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                        case "chorusLogin":
+                            chorusLogin = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "pdfa_compliant":
-                            pdfaCompliant = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
+                        case "chorusPassword":
+                            chorusPassword = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "xml_embedded":
-                            xmlEmbedded = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
-                            break;
-                        case "errors":
-                            errors = new Option<List<FactureElectroniqueRestApiSchemasConvertValidationError>?>(JsonSerializer.Deserialize<List<FactureElectroniqueRestApiSchemasConvertValidationError>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                        case "sandboxMode":
+                            sandboxMode = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
                         default:
                             break;
@@ -213,83 +210,62 @@ namespace FactPulse.SDK.Model
                 }
             }
 
-            if (!profile.IsSet)
-                throw new ArgumentException("Property is required for class ValidationInfo.", nameof(profile));
+            if (sandboxMode.IsSet && sandboxMode.Value == null)
+                throw new ArgumentNullException(nameof(sandboxMode), "Property is not nullable for class FactureElectroniqueRestApiSchemasProcessingChorusProCredentials.");
 
-            if (!schematronRulesPassed.IsSet)
-                throw new ArgumentException("Property is required for class ValidationInfo.", nameof(schematronRulesPassed));
-
-            if (!schematronRulesTotal.IsSet)
-                throw new ArgumentException("Property is required for class ValidationInfo.", nameof(schematronRulesTotal));
-
-            if (profile.IsSet && profile.Value == null)
-                throw new ArgumentNullException(nameof(profile), "Property is not nullable for class ValidationInfo.");
-
-            if (schematronRulesPassed.IsSet && schematronRulesPassed.Value == null)
-                throw new ArgumentNullException(nameof(schematronRulesPassed), "Property is not nullable for class ValidationInfo.");
-
-            if (schematronRulesTotal.IsSet && schematronRulesTotal.Value == null)
-                throw new ArgumentNullException(nameof(schematronRulesTotal), "Property is not nullable for class ValidationInfo.");
-
-            if (pdfaCompliant.IsSet && pdfaCompliant.Value == null)
-                throw new ArgumentNullException(nameof(pdfaCompliant), "Property is not nullable for class ValidationInfo.");
-
-            if (xmlEmbedded.IsSet && xmlEmbedded.Value == null)
-                throw new ArgumentNullException(nameof(xmlEmbedded), "Property is not nullable for class ValidationInfo.");
-
-            if (errors.IsSet && errors.Value == null)
-                throw new ArgumentNullException(nameof(errors), "Property is not nullable for class ValidationInfo.");
-
-            return new ValidationInfo(profile.Value!, schematronRulesPassed.Value!.Value!, schematronRulesTotal.Value!.Value!, pdfaCompliant, xmlEmbedded, errors);
+            return new FactureElectroniqueRestApiSchemasProcessingChorusProCredentials(pisteClientId, pisteClientSecret, chorusLogin, chorusPassword, sandboxMode);
         }
 
         /// <summary>
-        /// Serializes a <see cref="ValidationInfo" />
+        /// Serializes a <see cref="FactureElectroniqueRestApiSchemasProcessingChorusProCredentials" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="validationInfo"></param>
+        /// <param name="factureElectroniqueRestApiSchemasProcessingChorusProCredentials"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, ValidationInfo validationInfo, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, FactureElectroniqueRestApiSchemasProcessingChorusProCredentials factureElectroniqueRestApiSchemasProcessingChorusProCredentials, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, validationInfo, jsonSerializerOptions);
+            WriteProperties(writer, factureElectroniqueRestApiSchemasProcessingChorusProCredentials, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="ValidationInfo" />
+        /// Serializes the properties of <see cref="FactureElectroniqueRestApiSchemasProcessingChorusProCredentials" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="validationInfo"></param>
+        /// <param name="factureElectroniqueRestApiSchemasProcessingChorusProCredentials"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, ValidationInfo validationInfo, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, FactureElectroniqueRestApiSchemasProcessingChorusProCredentials factureElectroniqueRestApiSchemasProcessingChorusProCredentials, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (validationInfo.Profile == null)
-                throw new ArgumentNullException(nameof(validationInfo.Profile), "Property is required for class ValidationInfo.");
+            if (factureElectroniqueRestApiSchemasProcessingChorusProCredentials.PisteClientIdOption.IsSet)
+                if (factureElectroniqueRestApiSchemasProcessingChorusProCredentials.PisteClientIdOption.Value != null)
+                    writer.WriteString("pisteClientId", factureElectroniqueRestApiSchemasProcessingChorusProCredentials.PisteClientId);
+                else
+                    writer.WriteNull("pisteClientId");
 
-            if (validationInfo.ErrorsOption.IsSet && validationInfo.Errors == null)
-                throw new ArgumentNullException(nameof(validationInfo.Errors), "Property is required for class ValidationInfo.");
+            if (factureElectroniqueRestApiSchemasProcessingChorusProCredentials.PisteClientSecretOption.IsSet)
+                if (factureElectroniqueRestApiSchemasProcessingChorusProCredentials.PisteClientSecretOption.Value != null)
+                    writer.WriteString("pisteClientSecret", factureElectroniqueRestApiSchemasProcessingChorusProCredentials.PisteClientSecret);
+                else
+                    writer.WriteNull("pisteClientSecret");
 
-            writer.WriteString("profile", validationInfo.Profile);
+            if (factureElectroniqueRestApiSchemasProcessingChorusProCredentials.ChorusLoginOption.IsSet)
+                if (factureElectroniqueRestApiSchemasProcessingChorusProCredentials.ChorusLoginOption.Value != null)
+                    writer.WriteString("chorusLogin", factureElectroniqueRestApiSchemasProcessingChorusProCredentials.ChorusLogin);
+                else
+                    writer.WriteNull("chorusLogin");
 
-            writer.WriteNumber("schematron_rules_passed", validationInfo.SchematronRulesPassed);
+            if (factureElectroniqueRestApiSchemasProcessingChorusProCredentials.ChorusPasswordOption.IsSet)
+                if (factureElectroniqueRestApiSchemasProcessingChorusProCredentials.ChorusPasswordOption.Value != null)
+                    writer.WriteString("chorusPassword", factureElectroniqueRestApiSchemasProcessingChorusProCredentials.ChorusPassword);
+                else
+                    writer.WriteNull("chorusPassword");
 
-            writer.WriteNumber("schematron_rules_total", validationInfo.SchematronRulesTotal);
-
-            if (validationInfo.PdfaCompliantOption.IsSet)
-                writer.WriteBoolean("pdfa_compliant", validationInfo.PdfaCompliantOption.Value!.Value);
-
-            if (validationInfo.XmlEmbeddedOption.IsSet)
-                writer.WriteBoolean("xml_embedded", validationInfo.XmlEmbeddedOption.Value!.Value);
-
-            if (validationInfo.ErrorsOption.IsSet)
-            {
-                writer.WritePropertyName("errors");
-                JsonSerializer.Serialize(writer, validationInfo.Errors, jsonSerializerOptions);
-            }
+            if (factureElectroniqueRestApiSchemasProcessingChorusProCredentials.SandboxModeOption.IsSet)
+                writer.WriteBoolean("sandboxMode", factureElectroniqueRestApiSchemasProcessingChorusProCredentials.SandboxModeOption.Value!.Value);
         }
     }
 }
