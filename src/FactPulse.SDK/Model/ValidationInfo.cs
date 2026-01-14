@@ -41,7 +41,7 @@ namespace FactPulse.SDK.Model
         /// <param name="xmlEmbedded">XML embarque dans PDF (default to true)</param>
         /// <param name="errors">errors</param>
         [JsonConstructor]
-        public ValidationInfo(string profile, int schematronRulesPassed, int schematronRulesTotal, Option<bool?> pdfaCompliant = default, Option<bool?> xmlEmbedded = default, Option<List<FactureElectroniqueRestApiSchemasConvertValidationError>?> errors = default)
+        public ValidationInfo(string profile, int schematronRulesPassed, int schematronRulesTotal, Option<bool?> pdfaCompliant = default, Option<bool?> xmlEmbedded = default, Option<List<ValidationError>?> errors = default)
         {
             Profile = profile;
             SchematronRulesPassed = schematronRulesPassed;
@@ -108,13 +108,13 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<FactureElectroniqueRestApiSchemasConvertValidationError>?> ErrorsOption { get; private set; }
+        public Option<List<ValidationError>?> ErrorsOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Errors
         /// </summary>
         [JsonPropertyName("errors")]
-        public List<FactureElectroniqueRestApiSchemasConvertValidationError>? Errors { get { return this.ErrorsOption; } set { this.ErrorsOption = new(value); } }
+        public List<ValidationError>? Errors { get { return this.ErrorsOption; } set { this.ErrorsOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -172,7 +172,7 @@ namespace FactPulse.SDK.Model
             Option<int?> schematronRulesTotal = default;
             Option<bool?> pdfaCompliant = default;
             Option<bool?> xmlEmbedded = default;
-            Option<List<FactureElectroniqueRestApiSchemasConvertValidationError>?> errors = default;
+            Option<List<ValidationError>?> errors = default;
 
             while (utf8JsonReader.Read())
             {
@@ -205,7 +205,7 @@ namespace FactPulse.SDK.Model
                             xmlEmbedded = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
                         case "errors":
-                            errors = new Option<List<FactureElectroniqueRestApiSchemasConvertValidationError>?>(JsonSerializer.Deserialize<List<FactureElectroniqueRestApiSchemasConvertValidationError>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            errors = new Option<List<ValidationError>?>(JsonSerializer.Deserialize<List<ValidationError>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         default:
                             break;
