@@ -5,7 +5,7 @@ Search structures by criteria.
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Credentials** | [**FactureElectroniqueRestApiSchemasChorusProChorusProCredentials**](FactureElectroniqueRestApiSchemasChorusProChorusProCredentials.md) |  | [optional] 
+**Credentials** | [**ChorusProCredentials**](ChorusProCredentials.md) |  | [optional] 
 **StructureIdentifier** | **string** |  | [optional] 
 **StructureIdentifierType** | **string** |  | [optional] 
 **CompanyName** | **string** |  | [optional] 
