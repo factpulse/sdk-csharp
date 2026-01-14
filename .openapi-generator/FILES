@@ -157,7 +157,7 @@ docs/models/ExtractionInfo.md
 docs/models/FacturXInvoice.md
 docs/models/FacturXPDFInfo.md
 docs/models/FactureElectroniqueModelsInvoiceTypeCode.md
-docs/models/FactureElectroniqueRestApiSchemasConvertValidationError.md
+docs/models/FactureElectroniqueRestApiSchemasEreportingValidationError.md
 docs/models/FactureElectroniqueRestApiSchemasProcessingChorusProCredentials.md
 docs/models/FieldStatus.md
 docs/models/FileInfo.md
@@ -450,7 +450,7 @@ src/FactPulse.SDK.Test/Model/ExtractionInfoTests.cs
 src/FactPulse.SDK.Test/Model/FacturXInvoiceTests.cs
 src/FactPulse.SDK.Test/Model/FacturXPDFInfoTests.cs
 src/FactPulse.SDK.Test/Model/FactureElectroniqueModelsInvoiceTypeCodeTests.cs
-src/FactPulse.SDK.Test/Model/FactureElectroniqueRestApiSchemasConvertValidationErrorTests.cs
+src/FactPulse.SDK.Test/Model/FactureElectroniqueRestApiSchemasEreportingValidationErrorTests.cs
 src/FactPulse.SDK.Test/Model/FactureElectroniqueRestApiSchemasProcessingChorusProCredentialsTests.cs
 src/FactPulse.SDK.Test/Model/FieldStatusTests.cs
 src/FactPulse.SDK.Test/Model/FileInfoTests.cs
@@ -763,7 +763,7 @@ src/FactPulse.SDK/Model/ExtractionInfo.cs
 src/FactPulse.SDK/Model/FacturXInvoice.cs
 src/FactPulse.SDK/Model/FacturXPDFInfo.cs
 src/FactPulse.SDK/Model/FactureElectroniqueModelsInvoiceTypeCode.cs
-src/FactPulse.SDK/Model/FactureElectroniqueRestApiSchemasConvertValidationError.cs
+src/FactPulse.SDK/Model/FactureElectroniqueRestApiSchemasEreportingValidationError.cs
 src/FactPulse.SDK/Model/FactureElectroniqueRestApiSchemasProcessingChorusProCredentials.cs
 src/FactPulse.SDK/Model/FieldStatus.cs
 src/FactPulse.SDK/Model/FileInfo.cs
