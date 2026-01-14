@@ -41,7 +41,7 @@ namespace FactPulse.SDK.Model
         /// <param name="errors">List of validation errors (if any)</param>
         /// <param name="warnings">List of validation warnings (if any)</param>
         [JsonConstructor]
-        public ValidateEReportingResponse(bool valid, string reportId, string flowType, string message, Option<List<FactureElectroniqueRestApiSchemasEreportingValidationError>?> errors = default, Option<List<FactureElectroniqueRestApiSchemasEreportingValidationError>?> warnings = default)
+        public ValidateEReportingResponse(bool valid, string reportId, string flowType, string message, Option<List<ValidationError>?> errors = default, Option<List<ValidationError>?> warnings = default)
         {
             Valid = valid;
             ReportId = reportId;
@@ -87,28 +87,28 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<FactureElectroniqueRestApiSchemasEreportingValidationError>?> ErrorsOption { get; private set; }
+        public Option<List<ValidationError>?> ErrorsOption { get; private set; }
 
         /// <summary>
         /// List of validation errors (if any)
         /// </summary>
         /// <value>List of validation errors (if any)</value>
         [JsonPropertyName("errors")]
-        public List<FactureElectroniqueRestApiSchemasEreportingValidationError>? Errors { get { return this.ErrorsOption; } set { this.ErrorsOption = new(value); } }
+        public List<ValidationError>? Errors { get { return this.ErrorsOption; } set { this.ErrorsOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Warnings
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<FactureElectroniqueRestApiSchemasEreportingValidationError>?> WarningsOption { get; private set; }
+        public Option<List<ValidationError>?> WarningsOption { get; private set; }
 
         /// <summary>
         /// List of validation warnings (if any)
         /// </summary>
         /// <value>List of validation warnings (if any)</value>
         [JsonPropertyName("warnings")]
-        public List<FactureElectroniqueRestApiSchemasEreportingValidationError>? Warnings { get { return this.WarningsOption; } set { this.WarningsOption = new(value); } }
+        public List<ValidationError>? Warnings { get { return this.WarningsOption; } set { this.WarningsOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -165,8 +165,8 @@ namespace FactPulse.SDK.Model
             Option<string?> reportId = default;
             Option<string?> flowType = default;
             Option<string?> message = default;
-            Option<List<FactureElectroniqueRestApiSchemasEreportingValidationError>?> errors = default;
-            Option<List<FactureElectroniqueRestApiSchemasEreportingValidationError>?> warnings = default;
+            Option<List<ValidationError>?> errors = default;
+            Option<List<ValidationError>?> warnings = default;
 
             while (utf8JsonReader.Read())
             {
@@ -196,10 +196,10 @@ namespace FactPulse.SDK.Model
                             message = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "errors":
-                            errors = new Option<List<FactureElectroniqueRestApiSchemasEreportingValidationError>?>(JsonSerializer.Deserialize<List<FactureElectroniqueRestApiSchemasEreportingValidationError>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            errors = new Option<List<ValidationError>?>(JsonSerializer.Deserialize<List<ValidationError>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "warnings":
-                            warnings = new Option<List<FactureElectroniqueRestApiSchemasEreportingValidationError>?>(JsonSerializer.Deserialize<List<FactureElectroniqueRestApiSchemasEreportingValidationError>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            warnings = new Option<List<ValidationError>?>(JsonSerializer.Deserialize<List<ValidationError>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         default:
                             break;
