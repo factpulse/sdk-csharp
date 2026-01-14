@@ -40,8 +40,10 @@ var client = new FactPulseClient(
 // Build the invoice with helpers
 var invoiceData = new Dictionary<string, object>
 {
-    ["number"] = "INV-2025-001",
-    ["date"] = "2025-01-15",
+    ["invoiceNumber"] = "INV-2025-001",
+    ["issueDate"] = "2025-01-15",
+    ["dueDate"] = "2025-02-15",
+    ["currencyCode"] = "EUR",
     ["supplier"] = Supplier(
         "My Company SAS", "12345678901234",
         "123 Example Street", "75001", "Paris"
@@ -50,7 +52,7 @@ var invoiceData = new Dictionary<string, object>
         "Client SARL", "98765432109876",
         "456 Test Avenue", "69001", "Lyon"
     ),
-    ["totalAmount"] = TotalAmount(1000.00m, 200.00m, 1200.00m, 1200.00m),
+    ["totals"] = TotalAmount(1000.00m, 200.00m, 1200.00m, 1200.00m),
     ["lines"] = new List<object>
     {
         InvoiceLine(1, "Consulting services", 10, 100.00m, 1000.00m)
