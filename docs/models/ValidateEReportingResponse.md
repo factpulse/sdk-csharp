@@ -9,8 +9,8 @@ Name | Type | Description | Notes
 **ReportId** | **string** | Report identifier | 
 **FlowType** | **string** | Flux type | 
 **Message** | **string** | Status message | 
-**Errors** | [**List&lt;ValidationError&gt;**](ValidationError.md) | List of validation errors (if any) | [optional] 
-**Warnings** | [**List&lt;ValidationError&gt;**](ValidationError.md) | List of validation warnings (if any) | [optional] 
+**Errors** | [**List&lt;FactureElectroniqueRestApiSchemasEreportingValidationError&gt;**](FactureElectroniqueRestApiSchemasEreportingValidationError.md) | List of validation errors (if any) | [optional] 
+**Warnings** | [**List&lt;FactureElectroniqueRestApiSchemasEreportingValidationError&gt;**](FactureElectroniqueRestApiSchemasEreportingValidationError.md) | List of validation warnings (if any) | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 
