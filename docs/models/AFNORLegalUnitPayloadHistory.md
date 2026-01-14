@@ -1,0 +1,13 @@
+# FactPulse.SDK.Model.AFNORLegalUnitPayloadHistory
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**Siren** | **string** | SIREN number | [optional] 
+**BusinessName** | **string** | Business name | [optional] 
+**EntityType** | **AFNOREntityType** |  | [optional] 
+**AdministrativeStatus** | **AFNORLegalUnitAdministrativeStatus** |  | [optional] 
+
+[[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
+
