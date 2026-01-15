@@ -213,6 +213,7 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new DocumentTypeInfoJsonConverter());
             _jsonOptions.Converters.Add(new EReportingFlowTypeJsonConverter());
             _jsonOptions.Converters.Add(new EReportingFlowTypeNullableJsonConverter());
+            _jsonOptions.Converters.Add(new EReportingValidationErrorJsonConverter());
             _jsonOptions.Converters.Add(new ElectronicAddressJsonConverter());
             _jsonOptions.Converters.Add(new EnrichedInvoiceInfoJsonConverter());
             _jsonOptions.Converters.Add(new ErrorLevelJsonConverter());
@@ -222,9 +223,8 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new ExtractionInfoJsonConverter());
             _jsonOptions.Converters.Add(new FacturXInvoiceJsonConverter());
             _jsonOptions.Converters.Add(new FacturXPDFInfoJsonConverter());
-            _jsonOptions.Converters.Add(new FactureElectroniqueModelsInvoiceTypeCodeJsonConverter());
-            _jsonOptions.Converters.Add(new FactureElectroniqueModelsInvoiceTypeCodeNullableJsonConverter());
-            _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasEreportingValidationErrorJsonConverter());
+            _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeJsonConverter());
+            _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeNullableJsonConverter());
             _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasProcessingChorusProCredentialsJsonConverter());
             _jsonOptions.Converters.Add(new FieldStatusJsonConverter());
             _jsonOptions.Converters.Add(new FieldStatusNullableJsonConverter());
@@ -311,6 +311,7 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new RoundingAmountJsonConverter());
             _jsonOptions.Converters.Add(new RoutingCodeIncludeJsonConverter());
             _jsonOptions.Converters.Add(new RoutingCodeIncludeNullableJsonConverter());
+            _jsonOptions.Converters.Add(new SchematronValidationErrorJsonConverter());
             _jsonOptions.Converters.Add(new SchemeIDJsonConverter());
             _jsonOptions.Converters.Add(new SchemeIDNullableJsonConverter());
             _jsonOptions.Converters.Add(new SearchFlowRequestJsonConverter());

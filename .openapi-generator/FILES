@@ -149,6 +149,7 @@ docs/models/DirectoryLineInclude.md
 docs/models/DocType.md
 docs/models/DocumentTypeInfo.md
 docs/models/EReportingFlowType.md
+docs/models/EReportingValidationError.md
 docs/models/ElectronicAddress.md
 docs/models/EnrichedInvoiceInfo.md
 docs/models/ErrorLevel.md
@@ -156,8 +157,7 @@ docs/models/ErrorSource.md
 docs/models/ExtractionInfo.md
 docs/models/FacturXInvoice.md
 docs/models/FacturXPDFInfo.md
-docs/models/FactureElectroniqueModelsInvoiceTypeCode.md
-docs/models/FactureElectroniqueRestApiSchemasEreportingValidationError.md
+docs/models/FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode.md
 docs/models/FactureElectroniqueRestApiSchemasProcessingChorusProCredentials.md
 docs/models/FieldStatus.md
 docs/models/FileInfo.md
@@ -229,6 +229,7 @@ docs/models/ReportPeriod.md
 docs/models/ReportSender.md
 docs/models/RoundingAmount.md
 docs/models/RoutingCodeInclude.md
+docs/models/SchematronValidationError.md
 docs/models/SchemeID.md
 docs/models/SearchFlowRequest.md
 docs/models/SearchFlowResponse.md
@@ -442,6 +443,7 @@ src/FactPulse.SDK.Test/Model/DirectoryLineIncludeTests.cs
 src/FactPulse.SDK.Test/Model/DocTypeTests.cs
 src/FactPulse.SDK.Test/Model/DocumentTypeInfoTests.cs
 src/FactPulse.SDK.Test/Model/EReportingFlowTypeTests.cs
+src/FactPulse.SDK.Test/Model/EReportingValidationErrorTests.cs
 src/FactPulse.SDK.Test/Model/ElectronicAddressTests.cs
 src/FactPulse.SDK.Test/Model/EnrichedInvoiceInfoTests.cs
 src/FactPulse.SDK.Test/Model/ErrorLevelTests.cs
@@ -449,8 +451,7 @@ src/FactPulse.SDK.Test/Model/ErrorSourceTests.cs
 src/FactPulse.SDK.Test/Model/ExtractionInfoTests.cs
 src/FactPulse.SDK.Test/Model/FacturXInvoiceTests.cs
 src/FactPulse.SDK.Test/Model/FacturXPDFInfoTests.cs
-src/FactPulse.SDK.Test/Model/FactureElectroniqueModelsInvoiceTypeCodeTests.cs
-src/FactPulse.SDK.Test/Model/FactureElectroniqueRestApiSchemasEreportingValidationErrorTests.cs
+src/FactPulse.SDK.Test/Model/FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeTests.cs
 src/FactPulse.SDK.Test/Model/FactureElectroniqueRestApiSchemasProcessingChorusProCredentialsTests.cs
 src/FactPulse.SDK.Test/Model/FieldStatusTests.cs
 src/FactPulse.SDK.Test/Model/FileInfoTests.cs
@@ -522,6 +523,7 @@ src/FactPulse.SDK.Test/Model/ReportPeriodTests.cs
 src/FactPulse.SDK.Test/Model/ReportSenderTests.cs
 src/FactPulse.SDK.Test/Model/RoundingAmountTests.cs
 src/FactPulse.SDK.Test/Model/RoutingCodeIncludeTests.cs
+src/FactPulse.SDK.Test/Model/SchematronValidationErrorTests.cs
 src/FactPulse.SDK.Test/Model/SchemeIDTests.cs
 src/FactPulse.SDK.Test/Model/SearchFlowRequestTests.cs
 src/FactPulse.SDK.Test/Model/SearchFlowResponseTests.cs
@@ -755,6 +757,7 @@ src/FactPulse.SDK/Model/DirectoryLineInclude.cs
 src/FactPulse.SDK/Model/DocType.cs
 src/FactPulse.SDK/Model/DocumentTypeInfo.cs
 src/FactPulse.SDK/Model/EReportingFlowType.cs
+src/FactPulse.SDK/Model/EReportingValidationError.cs
 src/FactPulse.SDK/Model/ElectronicAddress.cs
 src/FactPulse.SDK/Model/EnrichedInvoiceInfo.cs
 src/FactPulse.SDK/Model/ErrorLevel.cs
@@ -762,8 +765,7 @@ src/FactPulse.SDK/Model/ErrorSource.cs
 src/FactPulse.SDK/Model/ExtractionInfo.cs
 src/FactPulse.SDK/Model/FacturXInvoice.cs
 src/FactPulse.SDK/Model/FacturXPDFInfo.cs
-src/FactPulse.SDK/Model/FactureElectroniqueModelsInvoiceTypeCode.cs
-src/FactPulse.SDK/Model/FactureElectroniqueRestApiSchemasEreportingValidationError.cs
+src/FactPulse.SDK/Model/FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode.cs
 src/FactPulse.SDK/Model/FactureElectroniqueRestApiSchemasProcessingChorusProCredentials.cs
 src/FactPulse.SDK/Model/FieldStatus.cs
 src/FactPulse.SDK/Model/FileInfo.cs
@@ -835,6 +837,7 @@ src/FactPulse.SDK/Model/ReportPeriod.cs
 src/FactPulse.SDK/Model/ReportSender.cs
 src/FactPulse.SDK/Model/RoundingAmount.cs
 src/FactPulse.SDK/Model/RoutingCodeInclude.cs
+src/FactPulse.SDK/Model/SchematronValidationError.cs
 src/FactPulse.SDK/Model/SchemeID.cs
 src/FactPulse.SDK/Model/SearchFlowRequest.cs
 src/FactPulse.SDK/Model/SearchFlowResponse.cs

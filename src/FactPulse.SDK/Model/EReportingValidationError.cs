@@ -27,18 +27,18 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Validation error detail.
+    /// Validation error detail for E-Reporting.
     /// </summary>
-    public partial class FactureElectroniqueRestApiSchemasEreportingValidationError : IValidatableObject
+    public partial class EReportingValidationError : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="FactureElectroniqueRestApiSchemasEreportingValidationError" /> class.
+        /// Initializes a new instance of the <see cref="EReportingValidationError" /> class.
         /// </summary>
         /// <param name="field">Field path with error</param>
         /// <param name="message">Error message</param>
         /// <param name="code">code</param>
         [JsonConstructor]
-        public FactureElectroniqueRestApiSchemasEreportingValidationError(string field, string message, Option<string?> code = default)
+        public EReportingValidationError(string field, string message, Option<string?> code = default)
         {
             Field = field;
             Message = message;
@@ -82,7 +82,7 @@ namespace FactPulse.SDK.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class FactureElectroniqueRestApiSchemasEreportingValidationError {\n");
+            sb.Append("class EReportingValidationError {\n");
             sb.Append("  Field: ").Append(Field).Append("\n");
             sb.Append("  Message: ").Append(Message).Append("\n");
             sb.Append("  Code: ").Append(Code).Append("\n");
@@ -102,19 +102,19 @@ namespace FactPulse.SDK.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="FactureElectroniqueRestApiSchemasEreportingValidationError" />
+    /// A Json converter for type <see cref="EReportingValidationError" />
     /// </summary>
-    public class FactureElectroniqueRestApiSchemasEreportingValidationErrorJsonConverter : JsonConverter<FactureElectroniqueRestApiSchemasEreportingValidationError>
+    public class EReportingValidationErrorJsonConverter : JsonConverter<EReportingValidationError>
     {
         /// <summary>
-        /// Deserializes json to <see cref="FactureElectroniqueRestApiSchemasEreportingValidationError" />
+        /// Deserializes json to <see cref="EReportingValidationError" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override FactureElectroniqueRestApiSchemasEreportingValidationError Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override EReportingValidationError Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -158,57 +158,57 @@ namespace FactPulse.SDK.Model
             }
 
             if (!field.IsSet)
-                throw new ArgumentException("Property is required for class FactureElectroniqueRestApiSchemasEreportingValidationError.", nameof(field));
+                throw new ArgumentException("Property is required for class EReportingValidationError.", nameof(field));
 
             if (!message.IsSet)
-                throw new ArgumentException("Property is required for class FactureElectroniqueRestApiSchemasEreportingValidationError.", nameof(message));
+                throw new ArgumentException("Property is required for class EReportingValidationError.", nameof(message));
 
             if (field.IsSet && field.Value == null)
-                throw new ArgumentNullException(nameof(field), "Property is not nullable for class FactureElectroniqueRestApiSchemasEreportingValidationError.");
+                throw new ArgumentNullException(nameof(field), "Property is not nullable for class EReportingValidationError.");
 
             if (message.IsSet && message.Value == null)
-                throw new ArgumentNullException(nameof(message), "Property is not nullable for class FactureElectroniqueRestApiSchemasEreportingValidationError.");
+                throw new ArgumentNullException(nameof(message), "Property is not nullable for class EReportingValidationError.");
 
-            return new FactureElectroniqueRestApiSchemasEreportingValidationError(field.Value!, message.Value!, code);
+            return new EReportingValidationError(field.Value!, message.Value!, code);
         }
 
         /// <summary>
-        /// Serializes a <see cref="FactureElectroniqueRestApiSchemasEreportingValidationError" />
+        /// Serializes a <see cref="EReportingValidationError" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="factureElectroniqueRestApiSchemasEreportingValidationError"></param>
+        /// <param name="eReportingValidationError"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, FactureElectroniqueRestApiSchemasEreportingValidationError factureElectroniqueRestApiSchemasEreportingValidationError, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, EReportingValidationError eReportingValidationError, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, factureElectroniqueRestApiSchemasEreportingValidationError, jsonSerializerOptions);
+            WriteProperties(writer, eReportingValidationError, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="FactureElectroniqueRestApiSchemasEreportingValidationError" />
+        /// Serializes the properties of <see cref="EReportingValidationError" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="factureElectroniqueRestApiSchemasEreportingValidationError"></param>
+        /// <param name="eReportingValidationError"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, FactureElectroniqueRestApiSchemasEreportingValidationError factureElectroniqueRestApiSchemasEreportingValidationError, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, EReportingValidationError eReportingValidationError, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (factureElectroniqueRestApiSchemasEreportingValidationError.Field == null)
-                throw new ArgumentNullException(nameof(factureElectroniqueRestApiSchemasEreportingValidationError.Field), "Property is required for class FactureElectroniqueRestApiSchemasEreportingValidationError.");
+            if (eReportingValidationError.Field == null)
+                throw new ArgumentNullException(nameof(eReportingValidationError.Field), "Property is required for class EReportingValidationError.");
 
-            if (factureElectroniqueRestApiSchemasEreportingValidationError.Message == null)
-                throw new ArgumentNullException(nameof(factureElectroniqueRestApiSchemasEreportingValidationError.Message), "Property is required for class FactureElectroniqueRestApiSchemasEreportingValidationError.");
+            if (eReportingValidationError.Message == null)
+                throw new ArgumentNullException(nameof(eReportingValidationError.Message), "Property is required for class EReportingValidationError.");
 
-            writer.WriteString("field", factureElectroniqueRestApiSchemasEreportingValidationError.Field);
+            writer.WriteString("field", eReportingValidationError.Field);
 
-            writer.WriteString("message", factureElectroniqueRestApiSchemasEreportingValidationError.Message);
+            writer.WriteString("message", eReportingValidationError.Message);
 
-            if (factureElectroniqueRestApiSchemasEreportingValidationError.CodeOption.IsSet)
-                if (factureElectroniqueRestApiSchemasEreportingValidationError.CodeOption.Value != null)
-                    writer.WriteString("code", factureElectroniqueRestApiSchemasEreportingValidationError.Code);
+            if (eReportingValidationError.CodeOption.IsSet)
+                if (eReportingValidationError.CodeOption.Value != null)
+                    writer.WriteString("code", eReportingValidationError.Code);
                 else
                     writer.WriteNull("code");
         }

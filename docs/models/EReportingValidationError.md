@@ -1,5 +1,5 @@
-# FactPulse.SDK.Model.FactureElectroniqueRestApiSchemasEreportingValidationError
-Validation error detail.
+# FactPulse.SDK.Model.EReportingValidationError
+Validation error detail for E-Reporting.
 
 ## Properties
 
