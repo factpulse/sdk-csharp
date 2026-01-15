@@ -29,7 +29,6 @@ The `Helpers` namespace provides a simplified API with automatic authentication 
 ```csharp
 using System.IO;
 using FactPulse.SDK.Helpers;
-using static FactPulse.SDK.Helpers.AmountHelpers;
 
 // Create the client
 var client = new FactPulseClient(
@@ -37,34 +36,35 @@ var client = new FactPulseClient(
     "your_password"
 );
 
-// Build the invoice with helpers
+// Build the invoice using simplified format (auto-calculates totals)
 var invoiceData = new Dictionary<string, object>
 {
-    ["invoiceNumber"] = "INV-2025-001",
-    ["issueDate"] = "2025-01-15",
-    ["dueDate"] = "2025-02-15",
-    ["currencyCode"] = "EUR",
-    ["supplier"] = Supplier(
-        "My Company SAS", "12345678901234",
-        "123 Example Street", "75001", "Paris"
-    ),
-    ["recipient"] = Recipient(
-        "Client SARL", "98765432109876",
-        "456 Test Avenue", "69001", "Lyon"
-    ),
-    ["totals"] = TotalAmount(1000.00m, 200.00m, 1200.00m, 1200.00m),
-    ["lines"] = new List<object>
+    ["number"] = "INV-2025-001",
+    ["supplier"] = new Dictionary<string, object>
     {
-        InvoiceLine(1, "Consulting services", 10, 100.00m, 1000.00m)
+        ["name"] = "My Company SAS",
+        ["siret"] = "12345678901234",
+        ["iban"] = "FR7630001007941234567890185"
     },
-    ["vatLines"] = new List<object>
+    ["recipient"] = new Dictionary<string, object>
     {
-        VatLine(1000.00m, 200.00m)
+        ["name"] = "Client SARL",
+        ["siret"] = "98765432109876"
+    },
+    ["lines"] = new List<Dictionary<string, object>>
+    {
+        new Dictionary<string, object>
+        {
+            ["description"] = "Consulting services",
+            ["quantity"] = 10,
+            ["unitPrice"] = 100.0,
+            ["vatRate"] = 20
+        }
     }
 };
 
 // Generate the Factur-X PDF
-var pdfBytes = await client.GenerateFacturxAsync(invoiceData, "source_invoice.pdf", "EN16931");
+var pdfBytes = await client.GenerateFacturxAsync(invoiceData, "source_invoice.pdf");
 
 await File.WriteAllBytesAsync("invoice_facturx.pdf", pdfBytes);
 ```

@@ -377,7 +377,7 @@ namespace FactPulse.SDK.Helpers
             }
 
             var data = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(json);
-            if (sync && data.TryGetValue("task_id", out var taskIdElem))
+            if (sync && data.TryGetValue("taskId", out var taskIdElem))
             {
                 var result = await PollTaskAsync(taskIdElem.GetString(), timeout);
                 if (result.TryGetValue("content_b64", out var b64)) return Convert.FromBase64String(b64.ToString());
