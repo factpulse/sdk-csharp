@@ -40,7 +40,7 @@ namespace FactPulse.SDK.Model
         /// <param name="companyName">companyName</param>
         /// <param name="restrictPrivateStructures">Limit search to private structures only (default to false)</param>
         [JsonConstructor]
-        public SearchStructureRequest(Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?> credentials = default, Option<string?> structureIdentifier = default, Option<string?> structureIdentifierType = default, Option<string?> companyName = default, Option<bool?> restrictPrivateStructures = default)
+        public SearchStructureRequest(Option<ChorusProCredentials?> credentials = default, Option<string?> structureIdentifier = default, Option<string?> structureIdentifierType = default, Option<string?> companyName = default, Option<bool?> restrictPrivateStructures = default)
         {
             CredentialsOption = credentials;
             StructureIdentifierOption = structureIdentifier;
@@ -57,13 +57,13 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?> CredentialsOption { get; private set; }
+        public Option<ChorusProCredentials?> CredentialsOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Credentials
         /// </summary>
         [JsonPropertyName("credentials")]
-        public FactureElectroniqueRestApiSchemasChorusProChorusProCredentials? Credentials { get { return this.CredentialsOption; } set { this.CredentialsOption = new(value); } }
+        public ChorusProCredentials? Credentials { get { return this.CredentialsOption; } set { this.CredentialsOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of StructureIdentifier
@@ -168,7 +168,7 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?> credentials = default;
+            Option<ChorusProCredentials?> credentials = default;
             Option<string?> structureIdentifier = default;
             Option<string?> structureIdentifierType = default;
             Option<string?> companyName = default;
@@ -190,7 +190,7 @@ namespace FactPulse.SDK.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "credentials":
-                            credentials = new Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?>(JsonSerializer.Deserialize<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials>(ref utf8JsonReader, jsonSerializerOptions));
+                            credentials = new Option<ChorusProCredentials?>(JsonSerializer.Deserialize<ChorusProCredentials>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "structureIdentifier":
                             structureIdentifier = new Option<string?>(utf8JsonReader.GetString());
