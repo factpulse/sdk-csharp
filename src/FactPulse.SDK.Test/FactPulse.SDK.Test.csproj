@@ -3,7 +3,7 @@
   <PropertyGroup>
     <AssemblyName>FactPulse.SDK.Test</AssemblyName>
     <RootNamespace>FactPulse.SDK.Test</RootNamespace>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <IsPackable>false</IsPackable>
     <Nullable>enable</Nullable>
   </PropertyGroup>

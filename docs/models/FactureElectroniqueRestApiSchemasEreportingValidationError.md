@@ -1,12 +1,13 @@
-# FactPulse.SDK.Model.ChorusProDestination
-Specific configuration for Chorus Pro destination.
+# FactPulse.SDK.Model.FactureElectroniqueRestApiSchemasEreportingValidationError
+Validation error detail.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Type** | **string** |  | [optional] [default to TypeEnum.ChorusPro]
-**Credentials** | [**ChorusProCredentials**](ChorusProCredentials.md) |  | [optional] 
+**Field** | **string** | Field path with error | 
+**Message** | **string** | Error message | 
+**Code** | **string** |  | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

@@ -1,7 +1,22 @@
+# Build results
 bin/
 obj/
-*.user
-*.suo
-.vs/
-*.nupkg
+*.dll
+*.exe
+*.pdb
+
+# NuGet
 packages/
+*.nupkg
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

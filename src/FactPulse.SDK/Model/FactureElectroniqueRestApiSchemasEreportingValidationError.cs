@@ -27,60 +27,53 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Get structure details.
+    /// Validation error detail.
     /// </summary>
-    public partial class GetStructureRequest : IValidatableObject
+    public partial class FactureElectroniqueRestApiSchemasEreportingValidationError : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="GetStructureRequest" /> class.
+        /// Initializes a new instance of the <see cref="FactureElectroniqueRestApiSchemasEreportingValidationError" /> class.
         /// </summary>
-        /// <param name="structureId">Chorus Pro structure ID</param>
-        /// <param name="credentials">credentials</param>
-        /// <param name="languageCode">Language code (fr, en) (default to &quot;fr&quot;)</param>
+        /// <param name="field">Field path with error</param>
+        /// <param name="message">Error message</param>
+        /// <param name="code">code</param>
         [JsonConstructor]
-        public GetStructureRequest(int structureId, Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?> credentials = default, Option<string?> languageCode = default)
+        public FactureElectroniqueRestApiSchemasEreportingValidationError(string field, string message, Option<string?> code = default)
         {
-            StructureId = structureId;
-            CredentialsOption = credentials;
-            LanguageCodeOption = languageCode;
+            Field = field;
+            Message = message;
+            CodeOption = code;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Chorus Pro structure ID
+        /// Field path with error
         /// </summary>
-        /// <value>Chorus Pro structure ID</value>
-        [JsonPropertyName("structureId")]
-        public int StructureId { get; set; }
+        /// <value>Field path with error</value>
+        [JsonPropertyName("field")]
+        public string Field { get; set; }
 
         /// <summary>
-        /// Used to track the state of Credentials
+        /// Error message
+        /// </summary>
+        /// <value>Error message</value>
+        [JsonPropertyName("message")]
+        public string Message { get; set; }
+
+        /// <summary>
+        /// Used to track the state of Code
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?> CredentialsOption { get; private set; }
+        public Option<string?> CodeOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Credentials
+        /// Gets or Sets Code
         /// </summary>
-        [JsonPropertyName("credentials")]
-        public FactureElectroniqueRestApiSchemasChorusProChorusProCredentials? Credentials { get { return this.CredentialsOption; } set { this.CredentialsOption = new(value); } }
-
-        /// <summary>
-        /// Used to track the state of LanguageCode
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> LanguageCodeOption { get; private set; }
-
-        /// <summary>
-        /// Language code (fr, en)
-        /// </summary>
-        /// <value>Language code (fr, en)</value>
-        [JsonPropertyName("languageCode")]
-        public string? LanguageCode { get { return this.LanguageCodeOption; } set { this.LanguageCodeOption = new(value); } }
+        [JsonPropertyName("code")]
+        public string? Code { get { return this.CodeOption; } set { this.CodeOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -89,10 +82,10 @@ namespace FactPulse.SDK.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class GetStructureRequest {\n");
-            sb.Append("  StructureId: ").Append(StructureId).Append("\n");
-            sb.Append("  Credentials: ").Append(Credentials).Append("\n");
-            sb.Append("  LanguageCode: ").Append(LanguageCode).Append("\n");
+            sb.Append("class FactureElectroniqueRestApiSchemasEreportingValidationError {\n");
+            sb.Append("  Field: ").Append(Field).Append("\n");
+            sb.Append("  Message: ").Append(Message).Append("\n");
+            sb.Append("  Code: ").Append(Code).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -109,19 +102,19 @@ namespace FactPulse.SDK.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="GetStructureRequest" />
+    /// A Json converter for type <see cref="FactureElectroniqueRestApiSchemasEreportingValidationError" />
     /// </summary>
-    public class GetStructureRequestJsonConverter : JsonConverter<GetStructureRequest>
+    public class FactureElectroniqueRestApiSchemasEreportingValidationErrorJsonConverter : JsonConverter<FactureElectroniqueRestApiSchemasEreportingValidationError>
     {
         /// <summary>
-        /// Deserializes json to <see cref="GetStructureRequest" />
+        /// Deserializes json to <see cref="FactureElectroniqueRestApiSchemasEreportingValidationError" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override GetStructureRequest Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override FactureElectroniqueRestApiSchemasEreportingValidationError Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -130,9 +123,9 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<int?> structureId = default;
-            Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?> credentials = default;
-            Option<string?> languageCode = default;
+            Option<string?> field = default;
+            Option<string?> message = default;
+            Option<string?> code = default;
 
             while (utf8JsonReader.Read())
             {
@@ -149,14 +142,14 @@ namespace FactPulse.SDK.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "structureId":
-                            structureId = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                        case "field":
+                            field = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "credentials":
-                            credentials = new Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?>(JsonSerializer.Deserialize<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials>(ref utf8JsonReader, jsonSerializerOptions));
+                        case "message":
+                            message = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "languageCode":
-                            languageCode = new Option<string?>(utf8JsonReader.GetString()!);
+                        case "code":
+                            code = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -164,57 +157,60 @@ namespace FactPulse.SDK.Model
                 }
             }
 
-            if (!structureId.IsSet)
-                throw new ArgumentException("Property is required for class GetStructureRequest.", nameof(structureId));
+            if (!field.IsSet)
+                throw new ArgumentException("Property is required for class FactureElectroniqueRestApiSchemasEreportingValidationError.", nameof(field));
 
-            if (structureId.IsSet && structureId.Value == null)
-                throw new ArgumentNullException(nameof(structureId), "Property is not nullable for class GetStructureRequest.");
+            if (!message.IsSet)
+                throw new ArgumentException("Property is required for class FactureElectroniqueRestApiSchemasEreportingValidationError.", nameof(message));
 
-            if (languageCode.IsSet && languageCode.Value == null)
-                throw new ArgumentNullException(nameof(languageCode), "Property is not nullable for class GetStructureRequest.");
+            if (field.IsSet && field.Value == null)
+                throw new ArgumentNullException(nameof(field), "Property is not nullable for class FactureElectroniqueRestApiSchemasEreportingValidationError.");
 
-            return new GetStructureRequest(structureId.Value!.Value!, credentials, languageCode);
+            if (message.IsSet && message.Value == null)
+                throw new ArgumentNullException(nameof(message), "Property is not nullable for class FactureElectroniqueRestApiSchemasEreportingValidationError.");
+
+            return new FactureElectroniqueRestApiSchemasEreportingValidationError(field.Value!, message.Value!, code);
         }
 
         /// <summary>
-        /// Serializes a <see cref="GetStructureRequest" />
+        /// Serializes a <see cref="FactureElectroniqueRestApiSchemasEreportingValidationError" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="getStructureRequest"></param>
+        /// <param name="factureElectroniqueRestApiSchemasEreportingValidationError"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, GetStructureRequest getStructureRequest, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, FactureElectroniqueRestApiSchemasEreportingValidationError factureElectroniqueRestApiSchemasEreportingValidationError, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, getStructureRequest, jsonSerializerOptions);
+            WriteProperties(writer, factureElectroniqueRestApiSchemasEreportingValidationError, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="GetStructureRequest" />
+        /// Serializes the properties of <see cref="FactureElectroniqueRestApiSchemasEreportingValidationError" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="getStructureRequest"></param>
+        /// <param name="factureElectroniqueRestApiSchemasEreportingValidationError"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, GetStructureRequest getStructureRequest, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, FactureElectroniqueRestApiSchemasEreportingValidationError factureElectroniqueRestApiSchemasEreportingValidationError, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (getStructureRequest.LanguageCodeOption.IsSet && getStructureRequest.LanguageCode == null)
-                throw new ArgumentNullException(nameof(getStructureRequest.LanguageCode), "Property is required for class GetStructureRequest.");
+            if (factureElectroniqueRestApiSchemasEreportingValidationError.Field == null)
+                throw new ArgumentNullException(nameof(factureElectroniqueRestApiSchemasEreportingValidationError.Field), "Property is required for class FactureElectroniqueRestApiSchemasEreportingValidationError.");
 
-            writer.WriteNumber("structureId", getStructureRequest.StructureId);
+            if (factureElectroniqueRestApiSchemasEreportingValidationError.Message == null)
+                throw new ArgumentNullException(nameof(factureElectroniqueRestApiSchemasEreportingValidationError.Message), "Property is required for class FactureElectroniqueRestApiSchemasEreportingValidationError.");
 
-            if (getStructureRequest.CredentialsOption.IsSet)
-                if (getStructureRequest.CredentialsOption.Value != null)
-                {
-                    writer.WritePropertyName("credentials");
-                    JsonSerializer.Serialize(writer, getStructureRequest.Credentials, jsonSerializerOptions);
-                }
+            writer.WriteString("field", factureElectroniqueRestApiSchemasEreportingValidationError.Field);
+
+            writer.WriteString("message", factureElectroniqueRestApiSchemasEreportingValidationError.Message);
+
+            if (factureElectroniqueRestApiSchemasEreportingValidationError.CodeOption.IsSet)
+                if (factureElectroniqueRestApiSchemasEreportingValidationError.CodeOption.Value != null)
+                    writer.WriteString("code", factureElectroniqueRestApiSchemasEreportingValidationError.Code);
                 else
-                    writer.WriteNull("credentials");
-            if (getStructureRequest.LanguageCodeOption.IsSet)
-                writer.WriteString("languageCode", getStructureRequest.LanguageCode);
+                    writer.WriteNull("code");
         }
     }
 }
