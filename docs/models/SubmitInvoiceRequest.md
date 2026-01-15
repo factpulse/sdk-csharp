@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **TotalNetAmount** | [**SubmitNetAmount**](SubmitNetAmount.md) |  | 
 **VatAmount** | [**SubmitVatAmount**](SubmitVatAmount.md) |  | 
 **TotalGrossAmount** | [**SubmitGrossAmount**](SubmitGrossAmount.md) |  | 
-**Credentials** | [**ChorusProCredentials**](ChorusProCredentials.md) |  | [optional] 
+**Credentials** | [**FactureElectroniqueRestApiSchemasChorusProChorusProCredentials**](FactureElectroniqueRestApiSchemasChorusProChorusProCredentials.md) |  | [optional] 
 **PaymentDueDate** | **string** |  | [optional] 
 **ServiceCode** | **string** |  | [optional] 
 **EngagementNumber** | **string** |  | [optional] 

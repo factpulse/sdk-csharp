@@ -491,14 +491,31 @@ namespace FactPulse.SDK.Helpers
 
         // ==================== AFNOR Directory ====================
 
-        public async Task<Dictionary<string, object>> SearchSiretAfnorAsync(string siret)
-            => await MakeAfnorRequestAsync(HttpMethod.Get, $"/directory/siret/{siret}");
+        /// <summary>Gets a facility by SIRET in the AFNOR directory.</summary>
+        public async Task<Dictionary<string, object>> GetSiretAfnorAsync(string siret)
+            => await MakeAfnorRequestAsync(HttpMethod.Get, $"/directory/v1/siret/code-insee:{siret}");
 
-        public async Task<Dictionary<string, object>> SearchSirenAfnorAsync(string siren)
-            => await MakeAfnorRequestAsync(HttpMethod.Get, $"/directory/siren/{siren}");
+        /// <summary>Gets a legal unit by SIREN in the AFNOR directory.</summary>
+        public async Task<Dictionary<string, object>> GetSirenAfnorAsync(string siren)
+            => await MakeAfnorRequestAsync(HttpMethod.Get, $"/directory/v1/siren/code-insee:{siren}");
 
-        public async Task<Dictionary<string, object>> ListRoutingCodesAfnorAsync(string siren)
-            => await MakeAfnorRequestAsync(HttpMethod.Get, $"/directory/siren/{siren}/routing-codes");
+        /// <summary>Searches for legal units (SIREN) in the AFNOR directory.</summary>
+        public async Task<Dictionary<string, object>> SearchSirenAfnorAsync(Dictionary<string, object> filters = null, int limit = 25)
+        {
+            var searchBody = new Dictionary<string, object> { ["filters"] = filters ?? new Dictionary<string, object>(), ["limit"] = limit };
+            return await MakeAfnorRequestAsync(HttpMethod.Post, "/directory/v1/siren/search", searchBody);
+        }
+
+        /// <summary>Searches for routing codes in the AFNOR directory.</summary>
+        public async Task<Dictionary<string, object>> SearchRoutingCodesAfnorAsync(Dictionary<string, object> filters = null, int limit = 25)
+        {
+            var searchBody = new Dictionary<string, object> { ["filters"] = filters ?? new Dictionary<string, object>(), ["limit"] = limit };
+            return await MakeAfnorRequestAsync(HttpMethod.Post, "/directory/v1/routing-code/search", searchBody);
+        }
+
+        /// <summary>Gets a routing code by SIRET and routing identifier.</summary>
+        public async Task<Dictionary<string, object>> GetRoutingCodeAfnorAsync(string siret, string routingIdentifier)
+            => await MakeAfnorRequestAsync(HttpMethod.Get, $"/directory/v1/routing-code/siret:{siret}/code:{routingIdentifier}");
 
         // =========================================================================
         // Chorus Pro
