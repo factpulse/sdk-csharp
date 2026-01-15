@@ -112,7 +112,6 @@ docs/models/AFNORUpdatePutRoutingCodeBody.md
 docs/models/AFNORWebhookCallbackContent.md
 docs/models/APIError.md
 docs/models/APIProfile.md
-docs/models/AcceptLanguage.md
 docs/models/AcknowledgmentStatus.md
 docs/models/AdditionalDocument.md
 docs/models/AggregatedPaymentInput.md
@@ -145,7 +144,6 @@ docs/models/Currency.md
 docs/models/CurrencyCode.md
 docs/models/DeliveryParty.md
 docs/models/Destination.md
-docs/models/DirectoryLineInclude.md
 docs/models/DocType.md
 docs/models/DocumentTypeInfo.md
 docs/models/EReportingFlowType.md
@@ -157,8 +155,8 @@ docs/models/ErrorSource.md
 docs/models/ExtractionInfo.md
 docs/models/FacturXInvoice.md
 docs/models/FacturXPDFInfo.md
+docs/models/FactureElectroniqueRestApiSchemasChorusProChorusProCredentials.md
 docs/models/FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode.md
-docs/models/FactureElectroniqueRestApiSchemasProcessingChorusProCredentials.md
 docs/models/FieldStatus.md
 docs/models/FileInfo.md
 docs/models/FilesInfo.md
@@ -228,7 +226,6 @@ docs/models/Recipient.md
 docs/models/ReportPeriod.md
 docs/models/ReportSender.md
 docs/models/RoundingAmount.md
-docs/models/RoutingCodeInclude.md
 docs/models/SchematronValidationError.md
 docs/models/SchemeID.md
 docs/models/SearchFlowRequest.md
@@ -241,7 +238,6 @@ docs/models/SignatureInfo.md
 docs/models/SignatureInfoAPI.md
 docs/models/SignatureParameters.md
 docs/models/SimplifiedInvoiceData.md
-docs/models/SiretInclude.md
 docs/models/StructureInfo.md
 docs/models/StructureParameters.md
 docs/models/StructureService.md
@@ -406,7 +402,6 @@ src/FactPulse.SDK.Test/Model/AFNORUpdatePutRoutingCodeBodyTests.cs
 src/FactPulse.SDK.Test/Model/AFNORWebhookCallbackContentTests.cs
 src/FactPulse.SDK.Test/Model/APIErrorTests.cs
 src/FactPulse.SDK.Test/Model/APIProfileTests.cs
-src/FactPulse.SDK.Test/Model/AcceptLanguageTests.cs
 src/FactPulse.SDK.Test/Model/AcknowledgmentStatusTests.cs
 src/FactPulse.SDK.Test/Model/AdditionalDocumentTests.cs
 src/FactPulse.SDK.Test/Model/AggregatedPaymentInputTests.cs
@@ -439,7 +434,6 @@ src/FactPulse.SDK.Test/Model/CurrencyCodeTests.cs
 src/FactPulse.SDK.Test/Model/CurrencyTests.cs
 src/FactPulse.SDK.Test/Model/DeliveryPartyTests.cs
 src/FactPulse.SDK.Test/Model/DestinationTests.cs
-src/FactPulse.SDK.Test/Model/DirectoryLineIncludeTests.cs
 src/FactPulse.SDK.Test/Model/DocTypeTests.cs
 src/FactPulse.SDK.Test/Model/DocumentTypeInfoTests.cs
 src/FactPulse.SDK.Test/Model/EReportingFlowTypeTests.cs
@@ -451,8 +445,8 @@ src/FactPulse.SDK.Test/Model/ErrorSourceTests.cs
 src/FactPulse.SDK.Test/Model/ExtractionInfoTests.cs
 src/FactPulse.SDK.Test/Model/FacturXInvoiceTests.cs
 src/FactPulse.SDK.Test/Model/FacturXPDFInfoTests.cs
+src/FactPulse.SDK.Test/Model/FactureElectroniqueRestApiSchemasChorusProChorusProCredentialsTests.cs
 src/FactPulse.SDK.Test/Model/FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeTests.cs
-src/FactPulse.SDK.Test/Model/FactureElectroniqueRestApiSchemasProcessingChorusProCredentialsTests.cs
 src/FactPulse.SDK.Test/Model/FieldStatusTests.cs
 src/FactPulse.SDK.Test/Model/FileInfoTests.cs
 src/FactPulse.SDK.Test/Model/FilesInfoTests.cs
@@ -522,7 +516,6 @@ src/FactPulse.SDK.Test/Model/RecipientTests.cs
 src/FactPulse.SDK.Test/Model/ReportPeriodTests.cs
 src/FactPulse.SDK.Test/Model/ReportSenderTests.cs
 src/FactPulse.SDK.Test/Model/RoundingAmountTests.cs
-src/FactPulse.SDK.Test/Model/RoutingCodeIncludeTests.cs
 src/FactPulse.SDK.Test/Model/SchematronValidationErrorTests.cs
 src/FactPulse.SDK.Test/Model/SchemeIDTests.cs
 src/FactPulse.SDK.Test/Model/SearchFlowRequestTests.cs
@@ -535,7 +528,6 @@ src/FactPulse.SDK.Test/Model/SignatureInfoAPITests.cs
 src/FactPulse.SDK.Test/Model/SignatureInfoTests.cs
 src/FactPulse.SDK.Test/Model/SignatureParametersTests.cs
 src/FactPulse.SDK.Test/Model/SimplifiedInvoiceDataTests.cs
-src/FactPulse.SDK.Test/Model/SiretIncludeTests.cs
 src/FactPulse.SDK.Test/Model/StructureInfoTests.cs
 src/FactPulse.SDK.Test/Model/StructureParametersTests.cs
 src/FactPulse.SDK.Test/Model/StructureServiceTests.cs
@@ -720,7 +712,6 @@ src/FactPulse.SDK/Model/AFNORUpdatePutRoutingCodeBody.cs
 src/FactPulse.SDK/Model/AFNORWebhookCallbackContent.cs
 src/FactPulse.SDK/Model/APIError.cs
 src/FactPulse.SDK/Model/APIProfile.cs
-src/FactPulse.SDK/Model/AcceptLanguage.cs
 src/FactPulse.SDK/Model/AcknowledgmentStatus.cs
 src/FactPulse.SDK/Model/AdditionalDocument.cs
 src/FactPulse.SDK/Model/AggregatedPaymentInput.cs
@@ -753,7 +744,6 @@ src/FactPulse.SDK/Model/Currency.cs
 src/FactPulse.SDK/Model/CurrencyCode.cs
 src/FactPulse.SDK/Model/DeliveryParty.cs
 src/FactPulse.SDK/Model/Destination.cs
-src/FactPulse.SDK/Model/DirectoryLineInclude.cs
 src/FactPulse.SDK/Model/DocType.cs
 src/FactPulse.SDK/Model/DocumentTypeInfo.cs
 src/FactPulse.SDK/Model/EReportingFlowType.cs
@@ -765,8 +755,8 @@ src/FactPulse.SDK/Model/ErrorSource.cs
 src/FactPulse.SDK/Model/ExtractionInfo.cs
 src/FactPulse.SDK/Model/FacturXInvoice.cs
 src/FactPulse.SDK/Model/FacturXPDFInfo.cs
+src/FactPulse.SDK/Model/FactureElectroniqueRestApiSchemasChorusProChorusProCredentials.cs
 src/FactPulse.SDK/Model/FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode.cs
-src/FactPulse.SDK/Model/FactureElectroniqueRestApiSchemasProcessingChorusProCredentials.cs
 src/FactPulse.SDK/Model/FieldStatus.cs
 src/FactPulse.SDK/Model/FileInfo.cs
 src/FactPulse.SDK/Model/FilesInfo.cs
@@ -836,7 +826,6 @@ src/FactPulse.SDK/Model/Recipient.cs
 src/FactPulse.SDK/Model/ReportPeriod.cs
 src/FactPulse.SDK/Model/ReportSender.cs
 src/FactPulse.SDK/Model/RoundingAmount.cs
-src/FactPulse.SDK/Model/RoutingCodeInclude.cs
 src/FactPulse.SDK/Model/SchematronValidationError.cs
 src/FactPulse.SDK/Model/SchemeID.cs
 src/FactPulse.SDK/Model/SearchFlowRequest.cs
@@ -849,7 +838,6 @@ src/FactPulse.SDK/Model/SignatureInfo.cs
 src/FactPulse.SDK/Model/SignatureInfoAPI.cs
 src/FactPulse.SDK/Model/SignatureParameters.cs
 src/FactPulse.SDK/Model/SimplifiedInvoiceData.cs
-src/FactPulse.SDK/Model/SiretInclude.cs
 src/FactPulse.SDK/Model/StructureInfo.cs
 src/FactPulse.SDK/Model/StructureParameters.cs
 src/FactPulse.SDK/Model/StructureService.cs

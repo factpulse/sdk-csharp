@@ -26,7 +26,7 @@ All URIs are relative to *https://factpulse.fr*
 
 <a id="createdirectorylineproxyapiv1afnordirectoryv1directorylinepost"></a>
 # **CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePost**
-> Object CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePost (AcceptLanguage acceptLanguage = null)
+> Object CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePost ()
 
 Creating a directory line
 
@@ -34,18 +34,14 @@ Creation of a new directory line for a SIREN, a SIRET or a ROUTING CODE.
 
 
 ### Parameters
-
-| Name | Type | Description | Notes |
-|------|------|-------------|-------|
-| **acceptLanguage** | **AcceptLanguage** | Specifies the language in which the resource is requested. | [optional]  |
-
+This endpoint does not need any parameter.
 ### Return type
 
 **Object**
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -73,7 +69,7 @@ Creation of a new directory line for a SIREN, a SIRET or a ROUTING CODE.
 
 <a id="createroutingcodeproxyapiv1afnordirectoryv1routingcodepost"></a>
 # **CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePost**
-> Object CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePost (AcceptLanguage acceptLanguage = null)
+> Object CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePost ()
 
 Create a routing code
 
@@ -81,18 +77,14 @@ Creating a routing code.
 
 
 ### Parameters
-
-| Name | Type | Description | Notes |
-|------|------|-------------|-------|
-| **acceptLanguage** | **AcceptLanguage** | Specifies the language in which the resource is requested. | [optional]  |
-
+This endpoint does not need any parameter.
 ### Return type
 
 **Object**
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -120,7 +112,7 @@ Creating a routing code.
 
 <a id="deletedirectorylineproxyapiv1afnordirectoryv1directorylineidinstanceidinstancedelete"></a>
 # **DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete**
-> Object DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete (string idInstance, AcceptLanguage acceptLanguage = null)
+> Object DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete (string idInstance)
 
 Delete a directory line
 
@@ -132,7 +124,6 @@ Delete a directory line.
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **idInstance** | **string** | AFNOR instance ID (UUID) |  |
-| **acceptLanguage** | **AcceptLanguage** | Specifies the language in which the resource is requested. | [optional]  |
 
 ### Return type
 
@@ -140,7 +131,7 @@ Delete a directory line.
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -202,7 +193,7 @@ No authorization required
 
 <a id="getdirectorylinebycodeproxyapiv1afnordirectoryv1directorylinecodeaddressingidentifierget"></a>
 # **GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet**
-> AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet (string addressingIdentifier, List<string> fields = null, List<DirectoryLineInclude> include = null, AcceptLanguage acceptLanguage = null)
+> AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet (string addressingIdentifier)
 
 Get a directory line.
 
@@ -214,9 +205,6 @@ Retrieve the data from the directory line corresponding to the identifier passed
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **addressingIdentifier** | **string** | Addressing identifier (SIREN, SIRET or routing code) |  |
-| **fields** | [**List&lt;string&gt;**](string.md) | Fields of the Directory Line resource. | [optional]  |
-| **include** | [**List&lt;DirectoryLineInclude&gt;**](DirectoryLineInclude.md) | Relations to include in the response. | [optional]  |
-| **acceptLanguage** | **AcceptLanguage** | Specifies the language in which the resource is requested. | [optional]  |
 
 ### Return type
 
@@ -224,7 +212,7 @@ Retrieve the data from the directory line corresponding to the identifier passed
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -251,7 +239,7 @@ Retrieve the data from the directory line corresponding to the identifier passed
 
 <a id="getdirectorylinebyidinstanceproxyapiv1afnordirectoryv1directorylineidinstanceidinstanceget"></a>
 # **GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet**
-> AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet (string idInstance, List<string> fields = null, AcceptLanguage acceptLanguage = null)
+> AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet (string idInstance)
 
 Get a directory line.
 
@@ -263,8 +251,6 @@ Retrieve the data from the directory line corresponding to the identifier passed
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **idInstance** | **string** | AFNOR instance ID (UUID) |  |
-| **fields** | [**List&lt;string&gt;**](string.md) | Fields of the Directory Line resource. | [optional]  |
-| **acceptLanguage** | **AcceptLanguage** | Specifies the language in which the resource is requested. | [optional]  |
 
 ### Return type
 
@@ -272,7 +258,7 @@ Retrieve the data from the directory line corresponding to the identifier passed
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -299,7 +285,7 @@ Retrieve the data from the directory line corresponding to the identifier passed
 
 <a id="getroutingcodebyidinstanceproxyapiv1afnordirectoryv1routingcodeidinstanceidinstanceget"></a>
 # **GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet**
-> AFNORRoutingCodePayloadHistoryLegalUnitFacility GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet (string idInstance, List<string> fields = null, AcceptLanguage acceptLanguage = null)
+> AFNORRoutingCodePayloadHistoryLegalUnitFacility GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet (string idInstance)
 
 Get a routing code by instance-id.
 
@@ -311,8 +297,6 @@ Retrieve the Routing Code data corresponding to the Instance ID.
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **idInstance** | **string** | AFNOR instance ID (UUID) |  |
-| **fields** | [**List&lt;string&gt;**](string.md) | Fields of the Routing Code resource | [optional]  |
-| **acceptLanguage** | **AcceptLanguage** | Specifies the language in which the resource is requested. | [optional]  |
 
 ### Return type
 
@@ -320,7 +304,7 @@ Retrieve the Routing Code data corresponding to the Instance ID.
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -347,7 +331,7 @@ Retrieve the Routing Code data corresponding to the Instance ID.
 
 <a id="getroutingcodebysiretandcodeproxyapiv1afnordirectoryv1routingcodesiretsiretcoderoutingidentifierget"></a>
 # **GetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet**
-> AFNORRoutingCodePayloadHistoryLegalUnitFacility GetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet (string siret, string routingIdentifier, List<string> fields = null, List<RoutingCodeInclude> include = null, AcceptLanguage acceptLanguage = null)
+> AFNORRoutingCodePayloadHistoryLegalUnitFacility GetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet (string siret, string routingIdentifier)
 
 Get a routing code by SIRET and routing identifier
 
@@ -360,9 +344,6 @@ Retrieve the Routing Code data corresponding to the identifier passed in paramet
 |------|------|-------------|-------|
 | **siret** | **string** | 14-digit SIRET number (INSEE establishment identifier) |  |
 | **routingIdentifier** | **string** | Routing code identifier |  |
-| **fields** | [**List&lt;string&gt;**](string.md) | Fields of the Routing Code resource | [optional]  |
-| **include** | [**List&lt;RoutingCodeInclude&gt;**](RoutingCodeInclude.md) | Relations to include in the response. | [optional]  |
-| **acceptLanguage** | **AcceptLanguage** | Specifies the language in which the resource is requested. | [optional]  |
 
 ### Return type
 
@@ -370,7 +351,7 @@ Retrieve the Routing Code data corresponding to the identifier passed in paramet
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -397,7 +378,7 @@ Retrieve the Routing Code data corresponding to the identifier passed in paramet
 
 <a id="getsirenbycodeinseeproxyapiv1afnordirectoryv1sirencodeinseesirenget"></a>
 # **GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet**
-> AFNORLegalUnitPayloadHistory GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet (string siren, List<string> fields = null, AcceptLanguage acceptLanguage = null)
+> AFNORLegalUnitPayloadHistory GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet (string siren)
 
 Consult a siren (legal unit) by SIREN number
 
@@ -409,8 +390,6 @@ Returns the details of a company (legal unit) identified by the SIREN number pas
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **siren** | **string** | 9-digit SIREN number (INSEE company identifier) |  |
-| **fields** | [**List&lt;string&gt;**](string.md) | Fields of the SIREN resource | [optional]  |
-| **acceptLanguage** | **AcceptLanguage** | Specifies the language in which the resource is requested. | [optional]  |
 
 ### Return type
 
@@ -418,7 +397,7 @@ Returns the details of a company (legal unit) identified by the SIREN number pas
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -445,7 +424,7 @@ Returns the details of a company (legal unit) identified by the SIREN number pas
 
 <a id="getsirenbyidinstanceproxyapiv1afnordirectoryv1sirenidinstanceidinstanceget"></a>
 # **GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet**
-> AFNORLegalUnitPayloadHistory GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet (string idInstance, List<string> fields = null, AcceptLanguage acceptLanguage = null)
+> AFNORLegalUnitPayloadHistory GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet (string idInstance)
 
 Gets a siren (legal unit) by instance ID
 
@@ -457,8 +436,6 @@ Returns the details of a company (legal unit) identified by the id-instance pass
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **idInstance** | **string** | AFNOR instance ID (UUID) |  |
-| **fields** | [**List&lt;string&gt;**](string.md) | Fields of the SIREN resource | [optional]  |
-| **acceptLanguage** | **AcceptLanguage** | Specifies the language in which the resource is requested. | [optional]  |
 
 ### Return type
 
@@ -466,7 +443,7 @@ Returns the details of a company (legal unit) identified by the id-instance pass
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -493,7 +470,7 @@ Returns the details of a company (legal unit) identified by the id-instance pass
 
 <a id="getsiretbycodeinseeproxyapiv1afnordirectoryv1siretcodeinseesiretget"></a>
 # **GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet**
-> AFNORFacilityPayloadHistory GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet (string siret, List<string> fields = null, List<SiretInclude> include = null, AcceptLanguage acceptLanguage = null)
+> AFNORFacilityPayloadHistory GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet (string siret)
 
 Gets a siret (facility) by SIRET number
 
@@ -505,9 +482,6 @@ Returns the details of a facility associated to a SIRET.
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **siret** | **string** | 14-digit SIRET number (INSEE establishment identifier) |  |
-| **fields** | [**List&lt;string&gt;**](string.md) | Fields of a SIRET resource. | [optional]  |
-| **include** | [**List&lt;SiretInclude&gt;**](SiretInclude.md) | Relations to include in the response. | [optional]  |
-| **acceptLanguage** | **AcceptLanguage** | Specifies the language in which the resource is requested. | [optional]  |
 
 ### Return type
 
@@ -515,7 +489,7 @@ Returns the details of a facility associated to a SIRET.
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -542,7 +516,7 @@ Returns the details of a facility associated to a SIRET.
 
 <a id="getsiretbyidinstanceproxyapiv1afnordirectoryv1siretidinstanceidinstanceget"></a>
 # **GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet**
-> AFNORFacilityPayloadHistory GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet (string idInstance, List<string> fields = null, AcceptLanguage acceptLanguage = null)
+> AFNORFacilityPayloadHistory GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet (string idInstance)
 
 Gets a siret (facility) by id-instance
 
@@ -554,8 +528,6 @@ Returns the details of a facility according to an instance-id.
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **idInstance** | **string** | AFNOR instance ID (UUID) |  |
-| **fields** | [**List&lt;string&gt;**](string.md) | Fields of a SIRET resource. | [optional]  |
-| **acceptLanguage** | **AcceptLanguage** | Specifies the language in which the resource is requested. | [optional]  |
 
 ### Return type
 
@@ -563,7 +535,7 @@ Returns the details of a facility according to an instance-id.
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -590,7 +562,7 @@ Returns the details of a facility according to an instance-id.
 
 <a id="patchdirectorylineproxyapiv1afnordirectoryv1directorylineidinstanceidinstancepatch"></a>
 # **PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch**
-> AFNORDirectoryLinePost201Response PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch (string idInstance, AcceptLanguage acceptLanguage = null)
+> AFNORDirectoryLinePost201Response PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch (string idInstance)
 
 Partially updates a directory line..
 
@@ -602,7 +574,6 @@ Partially updates a directory line.
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **idInstance** | **string** | AFNOR instance ID (UUID) |  |
-| **acceptLanguage** | **AcceptLanguage** | Specifies the language in which the resource is requested. | [optional]  |
 
 ### Return type
 
@@ -610,7 +581,7 @@ Partially updates a directory line.
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -637,7 +608,7 @@ Partially updates a directory line.
 
 <a id="patchroutingcodeproxyapiv1afnordirectoryv1routingcodeidinstanceidinstancepatch"></a>
 # **PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch**
-> AFNORRoutingCodePost201Response PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch (string idInstance, AcceptLanguage acceptLanguage = null)
+> AFNORRoutingCodePost201Response PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch (string idInstance)
 
 Partially update a private routing code.
 
@@ -649,7 +620,6 @@ Partially update a private routing code.
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **idInstance** | **string** | AFNOR instance ID (UUID) |  |
-| **acceptLanguage** | **AcceptLanguage** | Specifies the language in which the resource is requested. | [optional]  |
 
 ### Return type
 
@@ -657,7 +627,7 @@ Partially update a private routing code.
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -685,7 +655,7 @@ Partially update a private routing code.
 
 <a id="putroutingcodeproxyapiv1afnordirectoryv1routingcodeidinstanceidinstanceput"></a>
 # **PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut**
-> AFNORRoutingCodePost201Response PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut (string idInstance, AcceptLanguage acceptLanguage = null)
+> AFNORRoutingCodePost201Response PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut (string idInstance)
 
 Completely update a private routing code.
 
@@ -697,7 +667,6 @@ Completely update a private routing code.
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **idInstance** | **string** | AFNOR instance ID (UUID) |  |
-| **acceptLanguage** | **AcceptLanguage** | Specifies the language in which the resource is requested. | [optional]  |
 
 ### Return type
 
@@ -705,7 +674,7 @@ Completely update a private routing code.
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -733,7 +702,7 @@ Completely update a private routing code.
 
 <a id="searchdirectorylineproxyapiv1afnordirectoryv1directorylinesearchpost"></a>
 # **SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPost**
-> AFNORDirectoryLineSearchPost200Response SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPost (AcceptLanguage acceptLanguage = null)
+> AFNORDirectoryLineSearchPost200Response SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPost ()
 
 Search for a directory line
 
@@ -741,18 +710,14 @@ Search for directory lines that meet all the criteria passed as parameters and r
 
 
 ### Parameters
-
-| Name | Type | Description | Notes |
-|------|------|-------------|-------|
-| **acceptLanguage** | **AcceptLanguage** | Specifies the language in which the resource is requested. | [optional]  |
-
+This endpoint does not need any parameter.
 ### Return type
 
 [**AFNORDirectoryLineSearchPost200Response**](AFNORDirectoryLineSearchPost200Response.md)
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -780,7 +745,7 @@ Search for directory lines that meet all the criteria passed as parameters and r
 
 <a id="searchroutingcodeproxyapiv1afnordirectoryv1routingcodesearchpost"></a>
 # **SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPost**
-> AFNORRoutingCodeSearchPost200Response SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPost (AcceptLanguage acceptLanguage = null)
+> AFNORRoutingCodeSearchPost200Response SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPost ()
 
 Search for a routing code
 
@@ -788,18 +753,14 @@ Search for routing codes that meet all the criteria passed as parameters and ret
 
 
 ### Parameters
-
-| Name | Type | Description | Notes |
-|------|------|-------------|-------|
-| **acceptLanguage** | **AcceptLanguage** | Specifies the language in which the resource is requested. | [optional]  |
-
+This endpoint does not need any parameter.
 ### Return type
 
 [**AFNORRoutingCodeSearchPost200Response**](AFNORRoutingCodeSearchPost200Response.md)
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -827,7 +788,7 @@ Search for routing codes that meet all the criteria passed as parameters and ret
 
 <a id="searchsirenproxyapiv1afnordirectoryv1sirensearchpost"></a>
 # **SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPost**
-> AFNORSirenSearchPost200Response SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPost (AcceptLanguage acceptLanguage = null)
+> AFNORSirenSearchPost200Response SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPost ()
 
 SIREN search (or legal unit)
 
@@ -835,18 +796,14 @@ Multi-criteria company search.
 
 
 ### Parameters
-
-| Name | Type | Description | Notes |
-|------|------|-------------|-------|
-| **acceptLanguage** | **AcceptLanguage** | Specifies the language in which the resource is requested. | [optional]  |
-
+This endpoint does not need any parameter.
 ### Return type
 
 [**AFNORSirenSearchPost200Response**](AFNORSirenSearchPost200Response.md)
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 
@@ -874,7 +831,7 @@ Multi-criteria company search.
 
 <a id="searchsiretproxyapiv1afnordirectoryv1siretsearchpost"></a>
 # **SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPost**
-> AFNORSiretSearchPost200Response SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPost (AcceptLanguage acceptLanguage = null)
+> AFNORSiretSearchPost200Response SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPost ()
 
 Search for a SIRET (facility)
 
@@ -882,18 +839,14 @@ Multi-criteria search for facilities.
 
 
 ### Parameters
-
-| Name | Type | Description | Notes |
-|------|------|-------------|-------|
-| **acceptLanguage** | **AcceptLanguage** | Specifies the language in which the resource is requested. | [optional]  |
-
+This endpoint does not need any parameter.
 ### Return type
 
 [**AFNORSiretSearchPost200Response**](AFNORSiretSearchPost200Response.md)
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+No authorization required
 
 ### HTTP request headers
 

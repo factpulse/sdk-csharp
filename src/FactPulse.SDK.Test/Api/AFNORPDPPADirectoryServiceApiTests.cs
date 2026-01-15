@@ -57,8 +57,7 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostAsyncTest()
         {
-            Client.Option<AcceptLanguage> acceptLanguage = default!;
-            var response = await _instance.CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostAsync(acceptLanguage);
+            var response = await _instance.CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostAsync();
             var model = response.Ok();
             Assert.IsType<Object>(model);
         }
@@ -69,8 +68,7 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostAsyncTest()
         {
-            Client.Option<AcceptLanguage> acceptLanguage = default!;
-            var response = await _instance.CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostAsync(acceptLanguage);
+            var response = await _instance.CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostAsync();
             var model = response.Ok();
             Assert.IsType<Object>(model);
         }
@@ -82,8 +80,7 @@ namespace FactPulse.SDK.Test.Api
         public async Task DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteAsyncTest()
         {
             string idInstance = default!;
-            Client.Option<AcceptLanguage> acceptLanguage = default!;
-            var response = await _instance.DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteAsync(idInstance, acceptLanguage);
+            var response = await _instance.DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteAsync(idInstance);
             var model = response.Ok();
             Assert.IsType<Object>(model);
         }
@@ -106,10 +103,7 @@ namespace FactPulse.SDK.Test.Api
         public async Task GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetAsyncTest()
         {
             string addressingIdentifier = default!;
-            Client.Option<List<string>?> fields = default!;
-            Client.Option<List<DirectoryLineInclude>?> include = default!;
-            Client.Option<AcceptLanguage> acceptLanguage = default!;
-            var response = await _instance.GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetAsync(addressingIdentifier, fields, include, acceptLanguage);
+            var response = await _instance.GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetAsync(addressingIdentifier);
             var model = response.Ok();
             Assert.IsType<AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode>(model);
         }
@@ -121,9 +115,7 @@ namespace FactPulse.SDK.Test.Api
         public async Task GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetAsyncTest()
         {
             string idInstance = default!;
-            Client.Option<List<string>?> fields = default!;
-            Client.Option<AcceptLanguage> acceptLanguage = default!;
-            var response = await _instance.GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetAsync(idInstance, fields, acceptLanguage);
+            var response = await _instance.GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetAsync(idInstance);
             var model = response.Ok();
             Assert.IsType<AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode>(model);
         }
@@ -135,9 +127,7 @@ namespace FactPulse.SDK.Test.Api
         public async Task GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetAsyncTest()
         {
             string idInstance = default!;
-            Client.Option<List<string>?> fields = default!;
-            Client.Option<AcceptLanguage> acceptLanguage = default!;
-            var response = await _instance.GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetAsync(idInstance, fields, acceptLanguage);
+            var response = await _instance.GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetAsync(idInstance);
             var model = response.Ok();
             Assert.IsType<AFNORRoutingCodePayloadHistoryLegalUnitFacility>(model);
         }
@@ -150,10 +140,7 @@ namespace FactPulse.SDK.Test.Api
         {
             string siret = default!;
             string routingIdentifier = default!;
-            Client.Option<List<string>?> fields = default!;
-            Client.Option<List<RoutingCodeInclude>?> include = default!;
-            Client.Option<AcceptLanguage> acceptLanguage = default!;
-            var response = await _instance.GetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetAsync(siret, routingIdentifier, fields, include, acceptLanguage);
+            var response = await _instance.GetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetAsync(siret, routingIdentifier);
             var model = response.Ok();
             Assert.IsType<AFNORRoutingCodePayloadHistoryLegalUnitFacility>(model);
         }
@@ -165,9 +152,7 @@ namespace FactPulse.SDK.Test.Api
         public async Task GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetAsyncTest()
         {
             string siren = default!;
-            Client.Option<List<string>?> fields = default!;
-            Client.Option<AcceptLanguage> acceptLanguage = default!;
-            var response = await _instance.GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetAsync(siren, fields, acceptLanguage);
+            var response = await _instance.GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetAsync(siren);
             var model = response.Ok();
             Assert.IsType<AFNORLegalUnitPayloadHistory>(model);
         }
@@ -179,9 +164,7 @@ namespace FactPulse.SDK.Test.Api
         public async Task GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetAsyncTest()
         {
             string idInstance = default!;
-            Client.Option<List<string>?> fields = default!;
-            Client.Option<AcceptLanguage> acceptLanguage = default!;
-            var response = await _instance.GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetAsync(idInstance, fields, acceptLanguage);
+            var response = await _instance.GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetAsync(idInstance);
             var model = response.Ok();
             Assert.IsType<AFNORLegalUnitPayloadHistory>(model);
         }
@@ -193,10 +176,7 @@ namespace FactPulse.SDK.Test.Api
         public async Task GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetAsyncTest()
         {
             string siret = default!;
-            Client.Option<List<string>?> fields = default!;
-            Client.Option<List<SiretInclude>?> include = default!;
-            Client.Option<AcceptLanguage> acceptLanguage = default!;
-            var response = await _instance.GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetAsync(siret, fields, include, acceptLanguage);
+            var response = await _instance.GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetAsync(siret);
             var model = response.Ok();
             Assert.IsType<AFNORFacilityPayloadHistory>(model);
         }
@@ -208,9 +188,7 @@ namespace FactPulse.SDK.Test.Api
         public async Task GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetAsyncTest()
         {
             string idInstance = default!;
-            Client.Option<List<string>?> fields = default!;
-            Client.Option<AcceptLanguage> acceptLanguage = default!;
-            var response = await _instance.GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetAsync(idInstance, fields, acceptLanguage);
+            var response = await _instance.GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetAsync(idInstance);
             var model = response.Ok();
             Assert.IsType<AFNORFacilityPayloadHistory>(model);
         }
@@ -222,8 +200,7 @@ namespace FactPulse.SDK.Test.Api
         public async Task PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchAsyncTest()
         {
             string idInstance = default!;
-            Client.Option<AcceptLanguage> acceptLanguage = default!;
-            var response = await _instance.PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchAsync(idInstance, acceptLanguage);
+            var response = await _instance.PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchAsync(idInstance);
             var model = response.Ok();
             Assert.IsType<AFNORDirectoryLinePost201Response>(model);
         }
@@ -235,8 +212,7 @@ namespace FactPulse.SDK.Test.Api
         public async Task PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchAsyncTest()
         {
             string idInstance = default!;
-            Client.Option<AcceptLanguage> acceptLanguage = default!;
-            var response = await _instance.PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchAsync(idInstance, acceptLanguage);
+            var response = await _instance.PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchAsync(idInstance);
             var model = response.Ok();
             Assert.IsType<AFNORRoutingCodePost201Response>(model);
         }
@@ -248,8 +224,7 @@ namespace FactPulse.SDK.Test.Api
         public async Task PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutAsyncTest()
         {
             string idInstance = default!;
-            Client.Option<AcceptLanguage> acceptLanguage = default!;
-            var response = await _instance.PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutAsync(idInstance, acceptLanguage);
+            var response = await _instance.PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutAsync(idInstance);
             var model = response.Ok();
             Assert.IsType<AFNORRoutingCodePost201Response>(model);
         }
@@ -260,8 +235,7 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostAsyncTest()
         {
-            Client.Option<AcceptLanguage> acceptLanguage = default!;
-            var response = await _instance.SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostAsync(acceptLanguage);
+            var response = await _instance.SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostAsync();
             var model = response.Ok();
             Assert.IsType<AFNORDirectoryLineSearchPost200Response>(model);
         }
@@ -272,8 +246,7 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostAsyncTest()
         {
-            Client.Option<AcceptLanguage> acceptLanguage = default!;
-            var response = await _instance.SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostAsync(acceptLanguage);
+            var response = await _instance.SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostAsync();
             var model = response.Ok();
             Assert.IsType<AFNORRoutingCodeSearchPost200Response>(model);
         }
@@ -284,8 +257,7 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostAsyncTest()
         {
-            Client.Option<AcceptLanguage> acceptLanguage = default!;
-            var response = await _instance.SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostAsync(acceptLanguage);
+            var response = await _instance.SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostAsync();
             var model = response.Ok();
             Assert.IsType<AFNORSirenSearchPost200Response>(model);
         }
@@ -296,8 +268,7 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostAsyncTest()
         {
-            Client.Option<AcceptLanguage> acceptLanguage = default!;
-            var response = await _instance.SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostAsync(acceptLanguage);
+            var response = await _instance.SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostAsync();
             var model = response.Ok();
             Assert.IsType<AFNORSiretSearchPost200Response>(model);
         }

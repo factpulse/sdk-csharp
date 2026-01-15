@@ -172,8 +172,6 @@ namespace FactPulse.SDK.Client
                 return AFNORStrictOperatorValueConverter.ToJsonValue(aFNORStrictOperator);
             if (obj is APIProfile aPIProfile)
                 return APIProfileValueConverter.ToJsonValue(aPIProfile);
-            if (obj is AcceptLanguage acceptLanguage)
-                return AcceptLanguageValueConverter.ToJsonValue(acceptLanguage);
             if (obj is AcknowledgmentStatus acknowledgmentStatus)
                 return AcknowledgmentStatusValueConverter.ToJsonValue(acknowledgmentStatus);
             if (obj is AllowanceChargeReasonCode allowanceChargeReasonCode)
@@ -190,8 +188,6 @@ namespace FactPulse.SDK.Client
                 return CurrencyCodeValueConverter.ToJsonValue(currencyCode);
             if (obj is Destination.TypeEnum destinationTypeEnum)
                 return Destination.TypeEnumToJsonValue(destinationTypeEnum);
-            if (obj is DirectoryLineInclude directoryLineInclude)
-                return DirectoryLineIncludeValueConverter.ToJsonValue(directoryLineInclude);
             if (obj is DocType docType)
                 return DocTypeValueConverter.ToJsonValue(docType);
             if (obj is EReportingFlowType eReportingFlowType)
@@ -230,12 +226,8 @@ namespace FactPulse.SDK.Client
                 return PaymentMeansValueConverter.ToJsonValue(paymentMeans);
             if (obj is ProcessingRule processingRule)
                 return ProcessingRuleValueConverter.ToJsonValue(processingRule);
-            if (obj is RoutingCodeInclude routingCodeInclude)
-                return RoutingCodeIncludeValueConverter.ToJsonValue(routingCodeInclude);
             if (obj is SchemeID schemeID)
                 return SchemeIDValueConverter.ToJsonValue(schemeID);
-            if (obj is SiretInclude siretInclude)
-                return SiretIncludeValueConverter.ToJsonValue(siretInclude);
             if (obj is SubmissionMode submissionMode)
                 return SubmissionModeValueConverter.ToJsonValue(submissionMode);
             if (obj is SubmitCompleteInvoiceResponse.DestinationTypeEnum submitCompleteInvoiceResponseDestinationTypeEnum)

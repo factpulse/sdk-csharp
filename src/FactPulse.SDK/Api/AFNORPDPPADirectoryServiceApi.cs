@@ -43,10 +43,9 @@ namespace FactPulse.SDK.Api
         /// Creation of a new directory line for a SIREN, a SIRET or a ROUTING CODE.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostApiResponse"/>&gt;</returns>
-        Task<ICreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostApiResponse> CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostAsync(Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostApiResponse> CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostAsync(System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Creating a directory line
@@ -54,10 +53,9 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Creation of a new directory line for a SIREN, a SIRET or a ROUTING CODE.
         /// </remarks>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostApiResponse"/>?&gt;</returns>
-        Task<ICreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostApiResponse?> CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostOrDefaultAsync(Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostApiResponse?> CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create a routing code
@@ -66,10 +64,9 @@ namespace FactPulse.SDK.Api
         /// Creating a routing code.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostApiResponse"/>&gt;</returns>
-        Task<ICreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostApiResponse> CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostAsync(Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostApiResponse> CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostAsync(System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Create a routing code
@@ -77,10 +74,9 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Creating a routing code.
         /// </remarks>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostApiResponse"/>?&gt;</returns>
-        Task<ICreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostApiResponse?> CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostOrDefaultAsync(Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ICreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostApiResponse?> CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete a directory line
@@ -90,10 +86,9 @@ namespace FactPulse.SDK.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteApiResponse"/>&gt;</returns>
-        Task<IDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteApiResponse> DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteAsync(string idInstance, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteApiResponse> DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Delete a directory line
@@ -102,10 +97,9 @@ namespace FactPulse.SDK.Api
         /// Delete a directory line.
         /// </remarks>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteApiResponse"/>?&gt;</returns>
-        Task<IDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteApiResponse?> DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteOrDefaultAsync(string idInstance, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteApiResponse?> DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteOrDefaultAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Healthcheck Directory Service
@@ -136,12 +130,9 @@ namespace FactPulse.SDK.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="addressingIdentifier">Addressing identifier (SIREN, SIRET or routing code)</param>
-        /// <param name="fields">Fields of the Directory Line resource. (optional)</param>
-        /// <param name="include">Relations to include in the response. (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetApiResponse"/>&gt;</returns>
-        Task<IGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetApiResponse> GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetAsync(string addressingIdentifier, Option<List<string>?> fields = default, Option<List<DirectoryLineInclude>?> include = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetApiResponse> GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetAsync(string addressingIdentifier, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a directory line.
@@ -150,12 +141,9 @@ namespace FactPulse.SDK.Api
         /// Retrieve the data from the directory line corresponding to the identifier passed in parameters.
         /// </remarks>
         /// <param name="addressingIdentifier">Addressing identifier (SIREN, SIRET or routing code)</param>
-        /// <param name="fields">Fields of the Directory Line resource. (optional)</param>
-        /// <param name="include">Relations to include in the response. (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetApiResponse"/>?&gt;</returns>
-        Task<IGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetApiResponse?> GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetOrDefaultAsync(string addressingIdentifier, Option<List<string>?> fields = default, Option<List<DirectoryLineInclude>?> include = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetApiResponse?> GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetOrDefaultAsync(string addressingIdentifier, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a directory line.
@@ -165,11 +153,9 @@ namespace FactPulse.SDK.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="fields">Fields of the Directory Line resource. (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetApiResponse"/>&gt;</returns>
-        Task<IGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetApiResponse> GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetAsync(string idInstance, Option<List<string>?> fields = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetApiResponse> GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a directory line.
@@ -178,11 +164,9 @@ namespace FactPulse.SDK.Api
         /// Retrieve the data from the directory line corresponding to the identifier passed in parameters.
         /// </remarks>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="fields">Fields of the Directory Line resource. (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetApiResponse"/>?&gt;</returns>
-        Task<IGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetApiResponse?> GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetOrDefaultAsync(string idInstance, Option<List<string>?> fields = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetApiResponse?> GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetOrDefaultAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a routing code by instance-id.
@@ -192,11 +176,9 @@ namespace FactPulse.SDK.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="fields">Fields of the Routing Code resource (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetApiResponse"/>&gt;</returns>
-        Task<IGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetApiResponse> GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetAsync(string idInstance, Option<List<string>?> fields = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetApiResponse> GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a routing code by instance-id.
@@ -205,11 +187,9 @@ namespace FactPulse.SDK.Api
         /// Retrieve the Routing Code data corresponding to the Instance ID.
         /// </remarks>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="fields">Fields of the Routing Code resource (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetApiResponse"/>?&gt;</returns>
-        Task<IGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetApiResponse?> GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetOrDefaultAsync(string idInstance, Option<List<string>?> fields = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetApiResponse?> GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetOrDefaultAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a routing code by SIRET and routing identifier
@@ -220,12 +200,9 @@ namespace FactPulse.SDK.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="siret">14-digit SIRET number (INSEE establishment identifier)</param>
         /// <param name="routingIdentifier">Routing code identifier</param>
-        /// <param name="fields">Fields of the Routing Code resource (optional)</param>
-        /// <param name="include">Relations to include in the response. (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetApiResponse"/>&gt;</returns>
-        Task<IGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetApiResponse> GetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetAsync(string siret, string routingIdentifier, Option<List<string>?> fields = default, Option<List<RoutingCodeInclude>?> include = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetApiResponse> GetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetAsync(string siret, string routingIdentifier, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get a routing code by SIRET and routing identifier
@@ -235,12 +212,9 @@ namespace FactPulse.SDK.Api
         /// </remarks>
         /// <param name="siret">14-digit SIRET number (INSEE establishment identifier)</param>
         /// <param name="routingIdentifier">Routing code identifier</param>
-        /// <param name="fields">Fields of the Routing Code resource (optional)</param>
-        /// <param name="include">Relations to include in the response. (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetApiResponse"/>?&gt;</returns>
-        Task<IGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetApiResponse?> GetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetOrDefaultAsync(string siret, string routingIdentifier, Option<List<string>?> fields = default, Option<List<RoutingCodeInclude>?> include = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetApiResponse?> GetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetOrDefaultAsync(string siret, string routingIdentifier, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Consult a siren (legal unit) by SIREN number
@@ -250,11 +224,9 @@ namespace FactPulse.SDK.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="siren">9-digit SIREN number (INSEE company identifier)</param>
-        /// <param name="fields">Fields of the SIREN resource (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetApiResponse"/>&gt;</returns>
-        Task<IGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetApiResponse> GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetAsync(string siren, Option<List<string>?> fields = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetApiResponse> GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetAsync(string siren, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Consult a siren (legal unit) by SIREN number
@@ -263,11 +235,9 @@ namespace FactPulse.SDK.Api
         /// Returns the details of a company (legal unit) identified by the SIREN number passed as a parameter.
         /// </remarks>
         /// <param name="siren">9-digit SIREN number (INSEE company identifier)</param>
-        /// <param name="fields">Fields of the SIREN resource (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetApiResponse"/>?&gt;</returns>
-        Task<IGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetApiResponse?> GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetOrDefaultAsync(string siren, Option<List<string>?> fields = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetApiResponse?> GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetOrDefaultAsync(string siren, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Gets a siren (legal unit) by instance ID
@@ -277,11 +247,9 @@ namespace FactPulse.SDK.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="fields">Fields of the SIREN resource (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetApiResponse"/>&gt;</returns>
-        Task<IGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetApiResponse> GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetAsync(string idInstance, Option<List<string>?> fields = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetApiResponse> GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Gets a siren (legal unit) by instance ID
@@ -290,11 +258,9 @@ namespace FactPulse.SDK.Api
         /// Returns the details of a company (legal unit) identified by the id-instance passed as a parameter.
         /// </remarks>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="fields">Fields of the SIREN resource (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetApiResponse"/>?&gt;</returns>
-        Task<IGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetApiResponse?> GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetOrDefaultAsync(string idInstance, Option<List<string>?> fields = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetApiResponse?> GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetOrDefaultAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Gets a siret (facility) by SIRET number
@@ -304,12 +270,9 @@ namespace FactPulse.SDK.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="siret">14-digit SIRET number (INSEE establishment identifier)</param>
-        /// <param name="fields">Fields of a SIRET resource. (optional)</param>
-        /// <param name="include">Relations to include in the response. (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetApiResponse"/>&gt;</returns>
-        Task<IGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetApiResponse> GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetAsync(string siret, Option<List<string>?> fields = default, Option<List<SiretInclude>?> include = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetApiResponse> GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetAsync(string siret, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Gets a siret (facility) by SIRET number
@@ -318,12 +281,9 @@ namespace FactPulse.SDK.Api
         /// Returns the details of a facility associated to a SIRET.
         /// </remarks>
         /// <param name="siret">14-digit SIRET number (INSEE establishment identifier)</param>
-        /// <param name="fields">Fields of a SIRET resource. (optional)</param>
-        /// <param name="include">Relations to include in the response. (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetApiResponse"/>?&gt;</returns>
-        Task<IGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetApiResponse?> GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetOrDefaultAsync(string siret, Option<List<string>?> fields = default, Option<List<SiretInclude>?> include = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetApiResponse?> GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetOrDefaultAsync(string siret, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Gets a siret (facility) by id-instance
@@ -333,11 +293,9 @@ namespace FactPulse.SDK.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="fields">Fields of a SIRET resource. (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetApiResponse"/>&gt;</returns>
-        Task<IGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetApiResponse> GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetAsync(string idInstance, Option<List<string>?> fields = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetApiResponse> GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Gets a siret (facility) by id-instance
@@ -346,11 +304,9 @@ namespace FactPulse.SDK.Api
         /// Returns the details of a facility according to an instance-id.
         /// </remarks>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="fields">Fields of a SIRET resource. (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetApiResponse"/>?&gt;</returns>
-        Task<IGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetApiResponse?> GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetOrDefaultAsync(string idInstance, Option<List<string>?> fields = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetApiResponse?> GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetOrDefaultAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Partially updates a directory line..
@@ -360,10 +316,9 @@ namespace FactPulse.SDK.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchApiResponse"/>&gt;</returns>
-        Task<IPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchApiResponse> PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchAsync(string idInstance, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchApiResponse> PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Partially updates a directory line..
@@ -372,10 +327,9 @@ namespace FactPulse.SDK.Api
         /// Partially updates a directory line.
         /// </remarks>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchApiResponse"/>?&gt;</returns>
-        Task<IPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchApiResponse?> PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchOrDefaultAsync(string idInstance, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchApiResponse?> PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchOrDefaultAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Partially update a private routing code.
@@ -385,10 +339,9 @@ namespace FactPulse.SDK.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchApiResponse"/>&gt;</returns>
-        Task<IPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchApiResponse> PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchAsync(string idInstance, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchApiResponse> PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Partially update a private routing code.
@@ -397,10 +350,9 @@ namespace FactPulse.SDK.Api
         /// Partially update a private routing code.
         /// </remarks>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchApiResponse"/>?&gt;</returns>
-        Task<IPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchApiResponse?> PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchOrDefaultAsync(string idInstance, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchApiResponse?> PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchOrDefaultAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Completely update a private routing code.
@@ -410,10 +362,9 @@ namespace FactPulse.SDK.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutApiResponse"/>&gt;</returns>
-        Task<IPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutApiResponse> PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutAsync(string idInstance, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutApiResponse> PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Completely update a private routing code.
@@ -422,10 +373,9 @@ namespace FactPulse.SDK.Api
         /// Completely update a private routing code.
         /// </remarks>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutApiResponse"/>?&gt;</returns>
-        Task<IPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutApiResponse?> PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutOrDefaultAsync(string idInstance, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutApiResponse?> PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutOrDefaultAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Search for a directory line
@@ -434,10 +384,9 @@ namespace FactPulse.SDK.Api
         /// Search for directory lines that meet all the criteria passed as parameters and return the results in the desired format.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostApiResponse"/>&gt;</returns>
-        Task<ISearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostApiResponse> SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostAsync(Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostApiResponse> SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostAsync(System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Search for a directory line
@@ -445,10 +394,9 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Search for directory lines that meet all the criteria passed as parameters and return the results in the desired format.
         /// </remarks>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostApiResponse"/>?&gt;</returns>
-        Task<ISearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostApiResponse?> SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostOrDefaultAsync(Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostApiResponse?> SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Search for a routing code
@@ -457,10 +405,9 @@ namespace FactPulse.SDK.Api
         /// Search for routing codes that meet all the criteria passed as parameters and return the routing codes in the desired format.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostApiResponse"/>&gt;</returns>
-        Task<ISearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostApiResponse> SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostAsync(Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostApiResponse> SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostAsync(System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Search for a routing code
@@ -468,10 +415,9 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Search for routing codes that meet all the criteria passed as parameters and return the routing codes in the desired format.
         /// </remarks>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostApiResponse"/>?&gt;</returns>
-        Task<ISearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostApiResponse?> SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostOrDefaultAsync(Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostApiResponse?> SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// SIREN search (or legal unit)
@@ -480,10 +426,9 @@ namespace FactPulse.SDK.Api
         /// Multi-criteria company search.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostApiResponse"/>&gt;</returns>
-        Task<ISearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostApiResponse> SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostAsync(Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostApiResponse> SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostAsync(System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// SIREN search (or legal unit)
@@ -491,10 +436,9 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Multi-criteria company search.
         /// </remarks>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostApiResponse"/>?&gt;</returns>
-        Task<ISearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostApiResponse?> SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostOrDefaultAsync(Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostApiResponse?> SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Search for a SIRET (facility)
@@ -503,10 +447,9 @@ namespace FactPulse.SDK.Api
         /// Multi-criteria search for facilities.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostApiResponse"/>&gt;</returns>
-        Task<ISearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostApiResponse> SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostAsync(Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostApiResponse> SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostAsync(System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Search for a SIRET (facility)
@@ -514,10 +457,9 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Multi-criteria search for facilities.
         /// </remarks>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostApiResponse"/>?&gt;</returns>
-        Task<ISearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostApiResponse?> SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostOrDefaultAsync(Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostApiResponse?> SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -2327,17 +2269,14 @@ namespace FactPulse.SDK.Api
             BearerTokenProvider = bearerTokenProvider;
         }
 
-        partial void FormatCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePost(ref Option<AcceptLanguage> acceptLanguage);
-
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="acceptLanguage"></param>
-        private void AfterCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostDefaultImplementation(ICreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostApiResponse apiResponseLocalVar, Option<AcceptLanguage> acceptLanguage)
+        private void AfterCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostDefaultImplementation(ICreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostApiResponse apiResponseLocalVar)
         {
             bool suppressDefaultLog = false;
-            AfterCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePost(ref suppressDefaultLog, apiResponseLocalVar, acceptLanguage);
+            AfterCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePost(ref suppressDefaultLog, apiResponseLocalVar);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -2347,8 +2286,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void AfterCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePost(ref bool suppressDefaultLog, ICreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostApiResponse apiResponseLocalVar, Option<AcceptLanguage> acceptLanguage);
+        partial void AfterCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePost(ref bool suppressDefaultLog, ICreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostApiResponse apiResponseLocalVar);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -2356,11 +2294,10 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="acceptLanguage"></param>
-        private void OnErrorCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<AcceptLanguage> acceptLanguage)
+        private void OnErrorCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, acceptLanguage);
+            OnErrorCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -2372,20 +2309,18 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void OnErrorCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<AcceptLanguage> acceptLanguage);
+        partial void OnErrorCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar);
 
         /// <summary>
         /// Creating a directory line Creation of a new directory line for a SIREN, a SIRET or a ROUTING CODE.
         /// </summary>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostApiResponse"/>&gt;</returns>
-        public async Task<ICreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostApiResponse?> CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostOrDefaultAsync(Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostApiResponse?> CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostAsync(acceptLanguage, cancellationToken).ConfigureAwait(false);
+                return await CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -2397,17 +2332,14 @@ namespace FactPulse.SDK.Api
         /// Creating a directory line Creation of a new directory line for a SIREN, a SIRET or a ROUTING CODE.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostApiResponse"/>&gt;</returns>
-        public async Task<ICreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostApiResponse> CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostAsync(Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostApiResponse> CreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostAsync(System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                FormatCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePost(ref acceptLanguage);
-
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
                     uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
@@ -2417,17 +2349,7 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/afnor/directory/v1/directory-line"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/directory-line");
 
-                    if (acceptLanguage.IsSet)
-                        httpRequestMessageLocalVar.Headers.Add("Accept-Language", ClientUtils.ParameterToString(acceptLanguage.Value));
-
-                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
-
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
-
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
-
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -2456,13 +2378,9 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostDefaultImplementation(apiResponseLocalVar, acceptLanguage);
+                        AfterCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostDefaultImplementation(apiResponseLocalVar);
 
                         Events.ExecuteOnCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePost(apiResponseLocalVar);
-
-                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
-                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
-                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -2470,7 +2388,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostDefaultImplementation(e, "/api/v1/afnor/directory/v1/directory-line", uriBuilderLocalVar.Path, acceptLanguage);
+                OnErrorCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePostDefaultImplementation(e, "/api/v1/afnor/directory/v1/directory-line", uriBuilderLocalVar.Path);
                 Events.ExecuteOnErrorCreateDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLinePost(e);
                 throw;
             }
@@ -2667,17 +2585,14 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePost(ref Option<AcceptLanguage> acceptLanguage);
-
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="acceptLanguage"></param>
-        private void AfterCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostDefaultImplementation(ICreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostApiResponse apiResponseLocalVar, Option<AcceptLanguage> acceptLanguage)
+        private void AfterCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostDefaultImplementation(ICreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostApiResponse apiResponseLocalVar)
         {
             bool suppressDefaultLog = false;
-            AfterCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePost(ref suppressDefaultLog, apiResponseLocalVar, acceptLanguage);
+            AfterCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePost(ref suppressDefaultLog, apiResponseLocalVar);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -2687,8 +2602,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void AfterCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePost(ref bool suppressDefaultLog, ICreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostApiResponse apiResponseLocalVar, Option<AcceptLanguage> acceptLanguage);
+        partial void AfterCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePost(ref bool suppressDefaultLog, ICreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostApiResponse apiResponseLocalVar);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -2696,11 +2610,10 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="acceptLanguage"></param>
-        private void OnErrorCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<AcceptLanguage> acceptLanguage)
+        private void OnErrorCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, acceptLanguage);
+            OnErrorCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -2712,20 +2625,18 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void OnErrorCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<AcceptLanguage> acceptLanguage);
+        partial void OnErrorCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar);
 
         /// <summary>
         /// Create a routing code Creating a routing code.
         /// </summary>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostApiResponse"/>&gt;</returns>
-        public async Task<ICreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostApiResponse?> CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostOrDefaultAsync(Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostApiResponse?> CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostAsync(acceptLanguage, cancellationToken).ConfigureAwait(false);
+                return await CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -2737,17 +2648,14 @@ namespace FactPulse.SDK.Api
         /// Create a routing code Creating a routing code.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostApiResponse"/>&gt;</returns>
-        public async Task<ICreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostApiResponse> CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostAsync(Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ICreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostApiResponse> CreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostAsync(System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                FormatCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePost(ref acceptLanguage);
-
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
                     uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
@@ -2757,17 +2665,7 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/afnor/directory/v1/routing-code"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/routing-code");
 
-                    if (acceptLanguage.IsSet)
-                        httpRequestMessageLocalVar.Headers.Add("Accept-Language", ClientUtils.ParameterToString(acceptLanguage.Value));
-
-                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
-
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
-
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
-
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -2796,13 +2694,9 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostDefaultImplementation(apiResponseLocalVar, acceptLanguage);
+                        AfterCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostDefaultImplementation(apiResponseLocalVar);
 
                         Events.ExecuteOnCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePost(apiResponseLocalVar);
-
-                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
-                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
-                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -2810,7 +2704,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostDefaultImplementation(e, "/api/v1/afnor/directory/v1/routing-code", uriBuilderLocalVar.Path, acceptLanguage);
+                OnErrorCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePostDefaultImplementation(e, "/api/v1/afnor/directory/v1/routing-code", uriBuilderLocalVar.Path);
                 Events.ExecuteOnErrorCreateRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodePost(e);
                 throw;
             }
@@ -3007,7 +2901,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete(ref string idInstance, ref Option<AcceptLanguage> acceptLanguage);
+        partial void FormatDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete(ref string idInstance);
 
         /// <summary>
         /// Validates the request parameters
@@ -3025,11 +2919,10 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="acceptLanguage"></param>
-        private void AfterDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteDefaultImplementation(IDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteApiResponse apiResponseLocalVar, string idInstance, Option<AcceptLanguage> acceptLanguage)
+        private void AfterDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteDefaultImplementation(IDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteApiResponse apiResponseLocalVar, string idInstance)
         {
             bool suppressDefaultLog = false;
-            AfterDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete(ref suppressDefaultLog, apiResponseLocalVar, idInstance, acceptLanguage);
+            AfterDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete(ref suppressDefaultLog, apiResponseLocalVar, idInstance);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -3040,8 +2933,7 @@ namespace FactPulse.SDK.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void AfterDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete(ref bool suppressDefaultLog, IDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteApiResponse apiResponseLocalVar, string idInstance, Option<AcceptLanguage> acceptLanguage);
+        partial void AfterDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete(ref bool suppressDefaultLog, IDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteApiResponse apiResponseLocalVar, string idInstance);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -3050,11 +2942,10 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="acceptLanguage"></param>
-        private void OnErrorDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance, Option<AcceptLanguage> acceptLanguage)
+        private void OnErrorDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, idInstance, acceptLanguage);
+            OnErrorDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, idInstance);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -3067,21 +2958,19 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void OnErrorDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance, Option<AcceptLanguage> acceptLanguage);
+        partial void OnErrorDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance);
 
         /// <summary>
         /// Delete a directory line Delete a directory line.
         /// </summary>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteApiResponse"/>&gt;</returns>
-        public async Task<IDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteApiResponse?> DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteOrDefaultAsync(string idInstance, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteApiResponse?> DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteOrDefaultAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteAsync(idInstance, acceptLanguage, cancellationToken).ConfigureAwait(false);
+                return await DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteAsync(idInstance, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -3094,10 +2983,9 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteApiResponse"/>&gt;</returns>
-        public async Task<IDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteApiResponse> DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteAsync(string idInstance, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteApiResponse> DeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -3105,7 +2993,7 @@ namespace FactPulse.SDK.Api
             {
                 ValidateDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete(idInstance);
 
-                FormatDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete(ref idInstance, ref acceptLanguage);
+                FormatDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete(ref idInstance);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -3117,17 +3005,7 @@ namespace FactPulse.SDK.Api
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/directory-line/id-instance:{id_instance}");
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bid_instance%7D", Uri.EscapeDataString(idInstance.ToString()));
 
-                    if (acceptLanguage.IsSet)
-                        httpRequestMessageLocalVar.Headers.Add("Accept-Language", ClientUtils.ParameterToString(acceptLanguage.Value));
-
-                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
-
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
-
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
-
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -3156,13 +3034,9 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteDefaultImplementation(apiResponseLocalVar, idInstance, acceptLanguage);
+                        AfterDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteDefaultImplementation(apiResponseLocalVar, idInstance);
 
                         Events.ExecuteOnDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete(apiResponseLocalVar);
-
-                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
-                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
-                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -3170,7 +3044,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteDefaultImplementation(e, "/api/v1/afnor/directory/v1/directory-line/id-instance:{id_instance}", uriBuilderLocalVar.Path, idInstance, acceptLanguage);
+                OnErrorDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDeleteDefaultImplementation(e, "/api/v1/afnor/directory/v1/directory-line/id-instance:{id_instance}", uriBuilderLocalVar.Path, idInstance);
                 Events.ExecuteOnErrorDeleteDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceDelete(e);
                 throw;
             }
@@ -3565,7 +3439,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet(ref string addressingIdentifier, Option<List<string>?> fields, Option<List<DirectoryLineInclude>?> include, ref Option<AcceptLanguage> acceptLanguage);
+        partial void FormatGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet(ref string addressingIdentifier);
 
         /// <summary>
         /// Validates the request parameters
@@ -3583,13 +3457,10 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="addressingIdentifier"></param>
-        /// <param name="fields"></param>
-        /// <param name="include"></param>
-        /// <param name="acceptLanguage"></param>
-        private void AfterGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetDefaultImplementation(IGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetApiResponse apiResponseLocalVar, string addressingIdentifier, Option<List<string>?> fields, Option<List<DirectoryLineInclude>?> include, Option<AcceptLanguage> acceptLanguage)
+        private void AfterGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetDefaultImplementation(IGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetApiResponse apiResponseLocalVar, string addressingIdentifier)
         {
             bool suppressDefaultLog = false;
-            AfterGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet(ref suppressDefaultLog, apiResponseLocalVar, addressingIdentifier, fields, include, acceptLanguage);
+            AfterGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet(ref suppressDefaultLog, apiResponseLocalVar, addressingIdentifier);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -3600,10 +3471,7 @@ namespace FactPulse.SDK.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="addressingIdentifier"></param>
-        /// <param name="fields"></param>
-        /// <param name="include"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void AfterGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet(ref bool suppressDefaultLog, IGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetApiResponse apiResponseLocalVar, string addressingIdentifier, Option<List<string>?> fields, Option<List<DirectoryLineInclude>?> include, Option<AcceptLanguage> acceptLanguage);
+        partial void AfterGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet(ref bool suppressDefaultLog, IGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetApiResponse apiResponseLocalVar, string addressingIdentifier);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -3612,13 +3480,10 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="addressingIdentifier"></param>
-        /// <param name="fields"></param>
-        /// <param name="include"></param>
-        /// <param name="acceptLanguage"></param>
-        private void OnErrorGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string addressingIdentifier, Option<List<string>?> fields, Option<List<DirectoryLineInclude>?> include, Option<AcceptLanguage> acceptLanguage)
+        private void OnErrorGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string addressingIdentifier)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, addressingIdentifier, fields, include, acceptLanguage);
+            OnErrorGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, addressingIdentifier);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -3631,25 +3496,19 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="addressingIdentifier"></param>
-        /// <param name="fields"></param>
-        /// <param name="include"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void OnErrorGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string addressingIdentifier, Option<List<string>?> fields, Option<List<DirectoryLineInclude>?> include, Option<AcceptLanguage> acceptLanguage);
+        partial void OnErrorGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string addressingIdentifier);
 
         /// <summary>
         /// Get a directory line. Retrieve the data from the directory line corresponding to the identifier passed in parameters.
         /// </summary>
         /// <param name="addressingIdentifier">Addressing identifier (SIREN, SIRET or routing code)</param>
-        /// <param name="fields">Fields of the Directory Line resource. (optional)</param>
-        /// <param name="include">Relations to include in the response. (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetApiResponse"/>&gt;</returns>
-        public async Task<IGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetApiResponse?> GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetOrDefaultAsync(string addressingIdentifier, Option<List<string>?> fields = default, Option<List<DirectoryLineInclude>?> include = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetApiResponse?> GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetOrDefaultAsync(string addressingIdentifier, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetAsync(addressingIdentifier, fields, include, acceptLanguage, cancellationToken).ConfigureAwait(false);
+                return await GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetAsync(addressingIdentifier, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -3662,12 +3521,9 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="addressingIdentifier">Addressing identifier (SIREN, SIRET or routing code)</param>
-        /// <param name="fields">Fields of the Directory Line resource. (optional)</param>
-        /// <param name="include">Relations to include in the response. (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetApiResponse"/>&gt;</returns>
-        public async Task<IGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetApiResponse> GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetAsync(string addressingIdentifier, Option<List<string>?> fields = default, Option<List<DirectoryLineInclude>?> include = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetApiResponse> GetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetAsync(string addressingIdentifier, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -3675,7 +3531,7 @@ namespace FactPulse.SDK.Api
             {
                 ValidateGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet(addressingIdentifier);
 
-                FormatGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet(ref addressingIdentifier, fields, include, ref acceptLanguage);
+                FormatGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet(ref addressingIdentifier);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -3687,27 +3543,7 @@ namespace FactPulse.SDK.Api
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/directory-line/code:{addressing_identifier}");
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Baddressing_identifier%7D", Uri.EscapeDataString(addressingIdentifier.ToString()));
 
-                    System.Collections.Specialized.NameValueCollection parseQueryStringLocalVar = System.Web.HttpUtility.ParseQueryString(string.Empty);
-
-                    if (fields.IsSet)
-                        parseQueryStringLocalVar["fields"] = ClientUtils.ParameterToString(fields.Value);
-
-                    if (include.IsSet)
-                        parseQueryStringLocalVar["include"] = ClientUtils.ParameterToString(include.Value);
-
-                    uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
-
-                    if (acceptLanguage.IsSet)
-                        httpRequestMessageLocalVar.Headers.Add("Accept-Language", ClientUtils.ParameterToString(acceptLanguage.Value));
-
-                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
-
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
-
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
-
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -3736,13 +3572,9 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetDefaultImplementation(apiResponseLocalVar, addressingIdentifier, fields, include, acceptLanguage);
+                        AfterGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetDefaultImplementation(apiResponseLocalVar, addressingIdentifier);
 
                         Events.ExecuteOnGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet(apiResponseLocalVar);
-
-                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
-                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
-                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -3750,7 +3582,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetDefaultImplementation(e, "/api/v1/afnor/directory/v1/directory-line/code:{addressing_identifier}", uriBuilderLocalVar.Path, addressingIdentifier, fields, include, acceptLanguage);
+                OnErrorGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGetDefaultImplementation(e, "/api/v1/afnor/directory/v1/directory-line/code:{addressing_identifier}", uriBuilderLocalVar.Path, addressingIdentifier);
                 Events.ExecuteOnErrorGetDirectoryLineByCodeProxyApiV1AfnorDirectoryV1DirectoryLineCodeAddressingIdentifierGet(e);
                 throw;
             }
@@ -3909,7 +3741,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet(ref string idInstance, Option<List<string>?> fields, ref Option<AcceptLanguage> acceptLanguage);
+        partial void FormatGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet(ref string idInstance);
 
         /// <summary>
         /// Validates the request parameters
@@ -3927,12 +3759,10 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="fields"></param>
-        /// <param name="acceptLanguage"></param>
-        private void AfterGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetDefaultImplementation(IGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetApiResponse apiResponseLocalVar, string idInstance, Option<List<string>?> fields, Option<AcceptLanguage> acceptLanguage)
+        private void AfterGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetDefaultImplementation(IGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetApiResponse apiResponseLocalVar, string idInstance)
         {
             bool suppressDefaultLog = false;
-            AfterGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet(ref suppressDefaultLog, apiResponseLocalVar, idInstance, fields, acceptLanguage);
+            AfterGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet(ref suppressDefaultLog, apiResponseLocalVar, idInstance);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -3943,9 +3773,7 @@ namespace FactPulse.SDK.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="fields"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void AfterGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet(ref bool suppressDefaultLog, IGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetApiResponse apiResponseLocalVar, string idInstance, Option<List<string>?> fields, Option<AcceptLanguage> acceptLanguage);
+        partial void AfterGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet(ref bool suppressDefaultLog, IGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetApiResponse apiResponseLocalVar, string idInstance);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -3954,12 +3782,10 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="fields"></param>
-        /// <param name="acceptLanguage"></param>
-        private void OnErrorGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance, Option<List<string>?> fields, Option<AcceptLanguage> acceptLanguage)
+        private void OnErrorGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, idInstance, fields, acceptLanguage);
+            OnErrorGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, idInstance);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -3972,23 +3798,19 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="fields"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void OnErrorGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance, Option<List<string>?> fields, Option<AcceptLanguage> acceptLanguage);
+        partial void OnErrorGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance);
 
         /// <summary>
         /// Get a directory line. Retrieve the data from the directory line corresponding to the identifier passed in parameters.
         /// </summary>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="fields">Fields of the Directory Line resource. (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetApiResponse"/>&gt;</returns>
-        public async Task<IGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetApiResponse?> GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetOrDefaultAsync(string idInstance, Option<List<string>?> fields = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetApiResponse?> GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetOrDefaultAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetAsync(idInstance, fields, acceptLanguage, cancellationToken).ConfigureAwait(false);
+                return await GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetAsync(idInstance, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -4001,11 +3823,9 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="fields">Fields of the Directory Line resource. (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetApiResponse"/>&gt;</returns>
-        public async Task<IGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetApiResponse> GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetAsync(string idInstance, Option<List<string>?> fields = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetApiResponse> GetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -4013,7 +3833,7 @@ namespace FactPulse.SDK.Api
             {
                 ValidateGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet(idInstance);
 
-                FormatGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet(ref idInstance, fields, ref acceptLanguage);
+                FormatGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet(ref idInstance);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -4025,24 +3845,7 @@ namespace FactPulse.SDK.Api
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/directory-line/id-instance:{id_instance}");
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bid_instance%7D", Uri.EscapeDataString(idInstance.ToString()));
 
-                    System.Collections.Specialized.NameValueCollection parseQueryStringLocalVar = System.Web.HttpUtility.ParseQueryString(string.Empty);
-
-                    if (fields.IsSet)
-                        parseQueryStringLocalVar["fields"] = ClientUtils.ParameterToString(fields.Value);
-
-                    uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
-
-                    if (acceptLanguage.IsSet)
-                        httpRequestMessageLocalVar.Headers.Add("Accept-Language", ClientUtils.ParameterToString(acceptLanguage.Value));
-
-                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
-
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
-
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
-
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -4071,13 +3874,9 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetDefaultImplementation(apiResponseLocalVar, idInstance, fields, acceptLanguage);
+                        AfterGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetDefaultImplementation(apiResponseLocalVar, idInstance);
 
                         Events.ExecuteOnGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet(apiResponseLocalVar);
-
-                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
-                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
-                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -4085,7 +3884,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetDefaultImplementation(e, "/api/v1/afnor/directory/v1/directory-line/id-instance:{id_instance}", uriBuilderLocalVar.Path, idInstance, fields, acceptLanguage);
+                OnErrorGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGetDefaultImplementation(e, "/api/v1/afnor/directory/v1/directory-line/id-instance:{id_instance}", uriBuilderLocalVar.Path, idInstance);
                 Events.ExecuteOnErrorGetDirectoryLineByIdInstanceProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstanceGet(e);
                 throw;
             }
@@ -4244,7 +4043,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet(ref string idInstance, Option<List<string>?> fields, ref Option<AcceptLanguage> acceptLanguage);
+        partial void FormatGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet(ref string idInstance);
 
         /// <summary>
         /// Validates the request parameters
@@ -4262,12 +4061,10 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="fields"></param>
-        /// <param name="acceptLanguage"></param>
-        private void AfterGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetDefaultImplementation(IGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetApiResponse apiResponseLocalVar, string idInstance, Option<List<string>?> fields, Option<AcceptLanguage> acceptLanguage)
+        private void AfterGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetDefaultImplementation(IGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetApiResponse apiResponseLocalVar, string idInstance)
         {
             bool suppressDefaultLog = false;
-            AfterGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet(ref suppressDefaultLog, apiResponseLocalVar, idInstance, fields, acceptLanguage);
+            AfterGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet(ref suppressDefaultLog, apiResponseLocalVar, idInstance);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -4278,9 +4075,7 @@ namespace FactPulse.SDK.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="fields"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void AfterGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet(ref bool suppressDefaultLog, IGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetApiResponse apiResponseLocalVar, string idInstance, Option<List<string>?> fields, Option<AcceptLanguage> acceptLanguage);
+        partial void AfterGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet(ref bool suppressDefaultLog, IGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetApiResponse apiResponseLocalVar, string idInstance);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -4289,12 +4084,10 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="fields"></param>
-        /// <param name="acceptLanguage"></param>
-        private void OnErrorGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance, Option<List<string>?> fields, Option<AcceptLanguage> acceptLanguage)
+        private void OnErrorGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, idInstance, fields, acceptLanguage);
+            OnErrorGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, idInstance);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -4307,23 +4100,19 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="fields"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void OnErrorGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance, Option<List<string>?> fields, Option<AcceptLanguage> acceptLanguage);
+        partial void OnErrorGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance);
 
         /// <summary>
         /// Get a routing code by instance-id. Retrieve the Routing Code data corresponding to the Instance ID.
         /// </summary>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="fields">Fields of the Routing Code resource (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetApiResponse"/>&gt;</returns>
-        public async Task<IGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetApiResponse?> GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetOrDefaultAsync(string idInstance, Option<List<string>?> fields = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetApiResponse?> GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetOrDefaultAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetAsync(idInstance, fields, acceptLanguage, cancellationToken).ConfigureAwait(false);
+                return await GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetAsync(idInstance, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -4336,11 +4125,9 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="fields">Fields of the Routing Code resource (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetApiResponse"/>&gt;</returns>
-        public async Task<IGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetApiResponse> GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetAsync(string idInstance, Option<List<string>?> fields = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetApiResponse> GetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -4348,7 +4135,7 @@ namespace FactPulse.SDK.Api
             {
                 ValidateGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet(idInstance);
 
-                FormatGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet(ref idInstance, fields, ref acceptLanguage);
+                FormatGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet(ref idInstance);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -4360,24 +4147,7 @@ namespace FactPulse.SDK.Api
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/routing-code/id-instance:{id_instance}");
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bid_instance%7D", Uri.EscapeDataString(idInstance.ToString()));
 
-                    System.Collections.Specialized.NameValueCollection parseQueryStringLocalVar = System.Web.HttpUtility.ParseQueryString(string.Empty);
-
-                    if (fields.IsSet)
-                        parseQueryStringLocalVar["fields"] = ClientUtils.ParameterToString(fields.Value);
-
-                    uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
-
-                    if (acceptLanguage.IsSet)
-                        httpRequestMessageLocalVar.Headers.Add("Accept-Language", ClientUtils.ParameterToString(acceptLanguage.Value));
-
-                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
-
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
-
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
-
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -4406,13 +4176,9 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetDefaultImplementation(apiResponseLocalVar, idInstance, fields, acceptLanguage);
+                        AfterGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetDefaultImplementation(apiResponseLocalVar, idInstance);
 
                         Events.ExecuteOnGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet(apiResponseLocalVar);
-
-                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
-                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
-                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -4420,7 +4186,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetDefaultImplementation(e, "/api/v1/afnor/directory/v1/routing-code/id-instance:{id_instance}", uriBuilderLocalVar.Path, idInstance, fields, acceptLanguage);
+                OnErrorGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGetDefaultImplementation(e, "/api/v1/afnor/directory/v1/routing-code/id-instance:{id_instance}", uriBuilderLocalVar.Path, idInstance);
                 Events.ExecuteOnErrorGetRoutingCodeByIdInstanceProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstanceGet(e);
                 throw;
             }
@@ -4579,7 +4345,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet(ref string siret, ref string routingIdentifier, Option<List<string>?> fields, Option<List<RoutingCodeInclude>?> include, ref Option<AcceptLanguage> acceptLanguage);
+        partial void FormatGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet(ref string siret, ref string routingIdentifier);
 
         /// <summary>
         /// Validates the request parameters
@@ -4602,13 +4368,10 @@ namespace FactPulse.SDK.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="siret"></param>
         /// <param name="routingIdentifier"></param>
-        /// <param name="fields"></param>
-        /// <param name="include"></param>
-        /// <param name="acceptLanguage"></param>
-        private void AfterGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetDefaultImplementation(IGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetApiResponse apiResponseLocalVar, string siret, string routingIdentifier, Option<List<string>?> fields, Option<List<RoutingCodeInclude>?> include, Option<AcceptLanguage> acceptLanguage)
+        private void AfterGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetDefaultImplementation(IGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetApiResponse apiResponseLocalVar, string siret, string routingIdentifier)
         {
             bool suppressDefaultLog = false;
-            AfterGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet(ref suppressDefaultLog, apiResponseLocalVar, siret, routingIdentifier, fields, include, acceptLanguage);
+            AfterGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet(ref suppressDefaultLog, apiResponseLocalVar, siret, routingIdentifier);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -4620,10 +4383,7 @@ namespace FactPulse.SDK.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="siret"></param>
         /// <param name="routingIdentifier"></param>
-        /// <param name="fields"></param>
-        /// <param name="include"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void AfterGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet(ref bool suppressDefaultLog, IGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetApiResponse apiResponseLocalVar, string siret, string routingIdentifier, Option<List<string>?> fields, Option<List<RoutingCodeInclude>?> include, Option<AcceptLanguage> acceptLanguage);
+        partial void AfterGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet(ref bool suppressDefaultLog, IGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetApiResponse apiResponseLocalVar, string siret, string routingIdentifier);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -4633,13 +4393,10 @@ namespace FactPulse.SDK.Api
         /// <param name="pathLocalVar"></param>
         /// <param name="siret"></param>
         /// <param name="routingIdentifier"></param>
-        /// <param name="fields"></param>
-        /// <param name="include"></param>
-        /// <param name="acceptLanguage"></param>
-        private void OnErrorGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string siret, string routingIdentifier, Option<List<string>?> fields, Option<List<RoutingCodeInclude>?> include, Option<AcceptLanguage> acceptLanguage)
+        private void OnErrorGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string siret, string routingIdentifier)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, siret, routingIdentifier, fields, include, acceptLanguage);
+            OnErrorGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, siret, routingIdentifier);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -4653,26 +4410,20 @@ namespace FactPulse.SDK.Api
         /// <param name="pathLocalVar"></param>
         /// <param name="siret"></param>
         /// <param name="routingIdentifier"></param>
-        /// <param name="fields"></param>
-        /// <param name="include"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void OnErrorGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string siret, string routingIdentifier, Option<List<string>?> fields, Option<List<RoutingCodeInclude>?> include, Option<AcceptLanguage> acceptLanguage);
+        partial void OnErrorGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string siret, string routingIdentifier);
 
         /// <summary>
         /// Get a routing code by SIRET and routing identifier Retrieve the Routing Code data corresponding to the identifier passed in parameters.
         /// </summary>
         /// <param name="siret">14-digit SIRET number (INSEE establishment identifier)</param>
         /// <param name="routingIdentifier">Routing code identifier</param>
-        /// <param name="fields">Fields of the Routing Code resource (optional)</param>
-        /// <param name="include">Relations to include in the response. (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetApiResponse"/>&gt;</returns>
-        public async Task<IGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetApiResponse?> GetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetOrDefaultAsync(string siret, string routingIdentifier, Option<List<string>?> fields = default, Option<List<RoutingCodeInclude>?> include = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetApiResponse?> GetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetOrDefaultAsync(string siret, string routingIdentifier, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetAsync(siret, routingIdentifier, fields, include, acceptLanguage, cancellationToken).ConfigureAwait(false);
+                return await GetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetAsync(siret, routingIdentifier, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -4686,12 +4437,9 @@ namespace FactPulse.SDK.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="siret">14-digit SIRET number (INSEE establishment identifier)</param>
         /// <param name="routingIdentifier">Routing code identifier</param>
-        /// <param name="fields">Fields of the Routing Code resource (optional)</param>
-        /// <param name="include">Relations to include in the response. (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetApiResponse"/>&gt;</returns>
-        public async Task<IGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetApiResponse> GetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetAsync(string siret, string routingIdentifier, Option<List<string>?> fields = default, Option<List<RoutingCodeInclude>?> include = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetApiResponse> GetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetAsync(string siret, string routingIdentifier, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -4699,7 +4447,7 @@ namespace FactPulse.SDK.Api
             {
                 ValidateGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet(siret, routingIdentifier);
 
-                FormatGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet(ref siret, ref routingIdentifier, fields, include, ref acceptLanguage);
+                FormatGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet(ref siret, ref routingIdentifier);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -4712,27 +4460,7 @@ namespace FactPulse.SDK.Api
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bsiret%7D", Uri.EscapeDataString(siret.ToString()));
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Brouting_identifier%7D", Uri.EscapeDataString(routingIdentifier.ToString()));
 
-                    System.Collections.Specialized.NameValueCollection parseQueryStringLocalVar = System.Web.HttpUtility.ParseQueryString(string.Empty);
-
-                    if (fields.IsSet)
-                        parseQueryStringLocalVar["fields"] = ClientUtils.ParameterToString(fields.Value);
-
-                    if (include.IsSet)
-                        parseQueryStringLocalVar["include"] = ClientUtils.ParameterToString(include.Value);
-
-                    uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
-
-                    if (acceptLanguage.IsSet)
-                        httpRequestMessageLocalVar.Headers.Add("Accept-Language", ClientUtils.ParameterToString(acceptLanguage.Value));
-
-                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
-
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
-
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
-
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -4761,13 +4489,9 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetDefaultImplementation(apiResponseLocalVar, siret, routingIdentifier, fields, include, acceptLanguage);
+                        AfterGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetDefaultImplementation(apiResponseLocalVar, siret, routingIdentifier);
 
                         Events.ExecuteOnGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet(apiResponseLocalVar);
-
-                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
-                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
-                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -4775,7 +4499,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetDefaultImplementation(e, "/api/v1/afnor/directory/v1/routing-code/siret:{siret}/code:{routing_identifier}", uriBuilderLocalVar.Path, siret, routingIdentifier, fields, include, acceptLanguage);
+                OnErrorGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGetDefaultImplementation(e, "/api/v1/afnor/directory/v1/routing-code/siret:{siret}/code:{routing_identifier}", uriBuilderLocalVar.Path, siret, routingIdentifier);
                 Events.ExecuteOnErrorGetRoutingCodeBySiretAndCodeProxyApiV1AfnorDirectoryV1RoutingCodeSiretSiretCodeRoutingIdentifierGet(e);
                 throw;
             }
@@ -4934,7 +4658,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet(ref string siren, Option<List<string>?> fields, ref Option<AcceptLanguage> acceptLanguage);
+        partial void FormatGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet(ref string siren);
 
         /// <summary>
         /// Validates the request parameters
@@ -4952,12 +4676,10 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="siren"></param>
-        /// <param name="fields"></param>
-        /// <param name="acceptLanguage"></param>
-        private void AfterGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetDefaultImplementation(IGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetApiResponse apiResponseLocalVar, string siren, Option<List<string>?> fields, Option<AcceptLanguage> acceptLanguage)
+        private void AfterGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetDefaultImplementation(IGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetApiResponse apiResponseLocalVar, string siren)
         {
             bool suppressDefaultLog = false;
-            AfterGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet(ref suppressDefaultLog, apiResponseLocalVar, siren, fields, acceptLanguage);
+            AfterGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet(ref suppressDefaultLog, apiResponseLocalVar, siren);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -4968,9 +4690,7 @@ namespace FactPulse.SDK.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="siren"></param>
-        /// <param name="fields"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void AfterGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet(ref bool suppressDefaultLog, IGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetApiResponse apiResponseLocalVar, string siren, Option<List<string>?> fields, Option<AcceptLanguage> acceptLanguage);
+        partial void AfterGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet(ref bool suppressDefaultLog, IGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetApiResponse apiResponseLocalVar, string siren);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -4979,12 +4699,10 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="siren"></param>
-        /// <param name="fields"></param>
-        /// <param name="acceptLanguage"></param>
-        private void OnErrorGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string siren, Option<List<string>?> fields, Option<AcceptLanguage> acceptLanguage)
+        private void OnErrorGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string siren)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, siren, fields, acceptLanguage);
+            OnErrorGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, siren);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -4997,23 +4715,19 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="siren"></param>
-        /// <param name="fields"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void OnErrorGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string siren, Option<List<string>?> fields, Option<AcceptLanguage> acceptLanguage);
+        partial void OnErrorGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string siren);
 
         /// <summary>
         /// Consult a siren (legal unit) by SIREN number Returns the details of a company (legal unit) identified by the SIREN number passed as a parameter.
         /// </summary>
         /// <param name="siren">9-digit SIREN number (INSEE company identifier)</param>
-        /// <param name="fields">Fields of the SIREN resource (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetApiResponse"/>&gt;</returns>
-        public async Task<IGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetApiResponse?> GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetOrDefaultAsync(string siren, Option<List<string>?> fields = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetApiResponse?> GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetOrDefaultAsync(string siren, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetAsync(siren, fields, acceptLanguage, cancellationToken).ConfigureAwait(false);
+                return await GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetAsync(siren, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -5026,11 +4740,9 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="siren">9-digit SIREN number (INSEE company identifier)</param>
-        /// <param name="fields">Fields of the SIREN resource (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetApiResponse"/>&gt;</returns>
-        public async Task<IGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetApiResponse> GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetAsync(string siren, Option<List<string>?> fields = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetApiResponse> GetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetAsync(string siren, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -5038,7 +4750,7 @@ namespace FactPulse.SDK.Api
             {
                 ValidateGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet(siren);
 
-                FormatGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet(ref siren, fields, ref acceptLanguage);
+                FormatGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet(ref siren);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -5050,24 +4762,7 @@ namespace FactPulse.SDK.Api
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/siren/code-insee:{siren}");
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bsiren%7D", Uri.EscapeDataString(siren.ToString()));
 
-                    System.Collections.Specialized.NameValueCollection parseQueryStringLocalVar = System.Web.HttpUtility.ParseQueryString(string.Empty);
-
-                    if (fields.IsSet)
-                        parseQueryStringLocalVar["fields"] = ClientUtils.ParameterToString(fields.Value);
-
-                    uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
-
-                    if (acceptLanguage.IsSet)
-                        httpRequestMessageLocalVar.Headers.Add("Accept-Language", ClientUtils.ParameterToString(acceptLanguage.Value));
-
-                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
-
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
-
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
-
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -5096,13 +4791,9 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetDefaultImplementation(apiResponseLocalVar, siren, fields, acceptLanguage);
+                        AfterGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetDefaultImplementation(apiResponseLocalVar, siren);
 
                         Events.ExecuteOnGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet(apiResponseLocalVar);
-
-                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
-                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
-                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -5110,7 +4801,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetDefaultImplementation(e, "/api/v1/afnor/directory/v1/siren/code-insee:{siren}", uriBuilderLocalVar.Path, siren, fields, acceptLanguage);
+                OnErrorGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGetDefaultImplementation(e, "/api/v1/afnor/directory/v1/siren/code-insee:{siren}", uriBuilderLocalVar.Path, siren);
                 Events.ExecuteOnErrorGetSirenByCodeInseeProxyApiV1AfnorDirectoryV1SirenCodeInseeSirenGet(e);
                 throw;
             }
@@ -5269,7 +4960,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet(ref string idInstance, Option<List<string>?> fields, ref Option<AcceptLanguage> acceptLanguage);
+        partial void FormatGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet(ref string idInstance);
 
         /// <summary>
         /// Validates the request parameters
@@ -5287,12 +4978,10 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="fields"></param>
-        /// <param name="acceptLanguage"></param>
-        private void AfterGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetDefaultImplementation(IGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetApiResponse apiResponseLocalVar, string idInstance, Option<List<string>?> fields, Option<AcceptLanguage> acceptLanguage)
+        private void AfterGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetDefaultImplementation(IGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetApiResponse apiResponseLocalVar, string idInstance)
         {
             bool suppressDefaultLog = false;
-            AfterGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet(ref suppressDefaultLog, apiResponseLocalVar, idInstance, fields, acceptLanguage);
+            AfterGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet(ref suppressDefaultLog, apiResponseLocalVar, idInstance);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -5303,9 +4992,7 @@ namespace FactPulse.SDK.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="fields"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void AfterGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet(ref bool suppressDefaultLog, IGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetApiResponse apiResponseLocalVar, string idInstance, Option<List<string>?> fields, Option<AcceptLanguage> acceptLanguage);
+        partial void AfterGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet(ref bool suppressDefaultLog, IGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetApiResponse apiResponseLocalVar, string idInstance);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -5314,12 +5001,10 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="fields"></param>
-        /// <param name="acceptLanguage"></param>
-        private void OnErrorGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance, Option<List<string>?> fields, Option<AcceptLanguage> acceptLanguage)
+        private void OnErrorGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, idInstance, fields, acceptLanguage);
+            OnErrorGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, idInstance);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -5332,23 +5017,19 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="fields"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void OnErrorGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance, Option<List<string>?> fields, Option<AcceptLanguage> acceptLanguage);
+        partial void OnErrorGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance);
 
         /// <summary>
         /// Gets a siren (legal unit) by instance ID Returns the details of a company (legal unit) identified by the id-instance passed as a parameter.
         /// </summary>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="fields">Fields of the SIREN resource (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetApiResponse"/>&gt;</returns>
-        public async Task<IGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetApiResponse?> GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetOrDefaultAsync(string idInstance, Option<List<string>?> fields = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetApiResponse?> GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetOrDefaultAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetAsync(idInstance, fields, acceptLanguage, cancellationToken).ConfigureAwait(false);
+                return await GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetAsync(idInstance, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -5361,11 +5042,9 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="fields">Fields of the SIREN resource (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetApiResponse"/>&gt;</returns>
-        public async Task<IGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetApiResponse> GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetAsync(string idInstance, Option<List<string>?> fields = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetApiResponse> GetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -5373,7 +5052,7 @@ namespace FactPulse.SDK.Api
             {
                 ValidateGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet(idInstance);
 
-                FormatGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet(ref idInstance, fields, ref acceptLanguage);
+                FormatGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet(ref idInstance);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -5385,24 +5064,7 @@ namespace FactPulse.SDK.Api
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/siren/id-instance:{id_instance}");
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bid_instance%7D", Uri.EscapeDataString(idInstance.ToString()));
 
-                    System.Collections.Specialized.NameValueCollection parseQueryStringLocalVar = System.Web.HttpUtility.ParseQueryString(string.Empty);
-
-                    if (fields.IsSet)
-                        parseQueryStringLocalVar["fields"] = ClientUtils.ParameterToString(fields.Value);
-
-                    uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
-
-                    if (acceptLanguage.IsSet)
-                        httpRequestMessageLocalVar.Headers.Add("Accept-Language", ClientUtils.ParameterToString(acceptLanguage.Value));
-
-                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
-
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
-
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
-
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -5431,13 +5093,9 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetDefaultImplementation(apiResponseLocalVar, idInstance, fields, acceptLanguage);
+                        AfterGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetDefaultImplementation(apiResponseLocalVar, idInstance);
 
                         Events.ExecuteOnGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet(apiResponseLocalVar);
-
-                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
-                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
-                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -5445,7 +5103,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetDefaultImplementation(e, "/api/v1/afnor/directory/v1/siren/id-instance:{id_instance}", uriBuilderLocalVar.Path, idInstance, fields, acceptLanguage);
+                OnErrorGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGetDefaultImplementation(e, "/api/v1/afnor/directory/v1/siren/id-instance:{id_instance}", uriBuilderLocalVar.Path, idInstance);
                 Events.ExecuteOnErrorGetSirenByIdInstanceProxyApiV1AfnorDirectoryV1SirenIdInstanceIdInstanceGet(e);
                 throw;
             }
@@ -5604,7 +5262,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet(ref string siret, Option<List<string>?> fields, Option<List<SiretInclude>?> include, ref Option<AcceptLanguage> acceptLanguage);
+        partial void FormatGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet(ref string siret);
 
         /// <summary>
         /// Validates the request parameters
@@ -5622,13 +5280,10 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="siret"></param>
-        /// <param name="fields"></param>
-        /// <param name="include"></param>
-        /// <param name="acceptLanguage"></param>
-        private void AfterGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetDefaultImplementation(IGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetApiResponse apiResponseLocalVar, string siret, Option<List<string>?> fields, Option<List<SiretInclude>?> include, Option<AcceptLanguage> acceptLanguage)
+        private void AfterGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetDefaultImplementation(IGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetApiResponse apiResponseLocalVar, string siret)
         {
             bool suppressDefaultLog = false;
-            AfterGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet(ref suppressDefaultLog, apiResponseLocalVar, siret, fields, include, acceptLanguage);
+            AfterGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet(ref suppressDefaultLog, apiResponseLocalVar, siret);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -5639,10 +5294,7 @@ namespace FactPulse.SDK.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="siret"></param>
-        /// <param name="fields"></param>
-        /// <param name="include"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void AfterGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet(ref bool suppressDefaultLog, IGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetApiResponse apiResponseLocalVar, string siret, Option<List<string>?> fields, Option<List<SiretInclude>?> include, Option<AcceptLanguage> acceptLanguage);
+        partial void AfterGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet(ref bool suppressDefaultLog, IGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetApiResponse apiResponseLocalVar, string siret);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -5651,13 +5303,10 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="siret"></param>
-        /// <param name="fields"></param>
-        /// <param name="include"></param>
-        /// <param name="acceptLanguage"></param>
-        private void OnErrorGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string siret, Option<List<string>?> fields, Option<List<SiretInclude>?> include, Option<AcceptLanguage> acceptLanguage)
+        private void OnErrorGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string siret)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, siret, fields, include, acceptLanguage);
+            OnErrorGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, siret);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -5670,25 +5319,19 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="siret"></param>
-        /// <param name="fields"></param>
-        /// <param name="include"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void OnErrorGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string siret, Option<List<string>?> fields, Option<List<SiretInclude>?> include, Option<AcceptLanguage> acceptLanguage);
+        partial void OnErrorGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string siret);
 
         /// <summary>
         /// Gets a siret (facility) by SIRET number Returns the details of a facility associated to a SIRET.
         /// </summary>
         /// <param name="siret">14-digit SIRET number (INSEE establishment identifier)</param>
-        /// <param name="fields">Fields of a SIRET resource. (optional)</param>
-        /// <param name="include">Relations to include in the response. (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetApiResponse"/>&gt;</returns>
-        public async Task<IGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetApiResponse?> GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetOrDefaultAsync(string siret, Option<List<string>?> fields = default, Option<List<SiretInclude>?> include = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetApiResponse?> GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetOrDefaultAsync(string siret, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetAsync(siret, fields, include, acceptLanguage, cancellationToken).ConfigureAwait(false);
+                return await GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetAsync(siret, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -5701,12 +5344,9 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="siret">14-digit SIRET number (INSEE establishment identifier)</param>
-        /// <param name="fields">Fields of a SIRET resource. (optional)</param>
-        /// <param name="include">Relations to include in the response. (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetApiResponse"/>&gt;</returns>
-        public async Task<IGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetApiResponse> GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetAsync(string siret, Option<List<string>?> fields = default, Option<List<SiretInclude>?> include = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetApiResponse> GetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetAsync(string siret, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -5714,7 +5354,7 @@ namespace FactPulse.SDK.Api
             {
                 ValidateGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet(siret);
 
-                FormatGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet(ref siret, fields, include, ref acceptLanguage);
+                FormatGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet(ref siret);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -5726,27 +5366,7 @@ namespace FactPulse.SDK.Api
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/siret/code-insee:{siret}");
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bsiret%7D", Uri.EscapeDataString(siret.ToString()));
 
-                    System.Collections.Specialized.NameValueCollection parseQueryStringLocalVar = System.Web.HttpUtility.ParseQueryString(string.Empty);
-
-                    if (fields.IsSet)
-                        parseQueryStringLocalVar["fields"] = ClientUtils.ParameterToString(fields.Value);
-
-                    if (include.IsSet)
-                        parseQueryStringLocalVar["include"] = ClientUtils.ParameterToString(include.Value);
-
-                    uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
-
-                    if (acceptLanguage.IsSet)
-                        httpRequestMessageLocalVar.Headers.Add("Accept-Language", ClientUtils.ParameterToString(acceptLanguage.Value));
-
-                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
-
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
-
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
-
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -5775,13 +5395,9 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetDefaultImplementation(apiResponseLocalVar, siret, fields, include, acceptLanguage);
+                        AfterGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetDefaultImplementation(apiResponseLocalVar, siret);
 
                         Events.ExecuteOnGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet(apiResponseLocalVar);
-
-                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
-                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
-                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -5789,7 +5405,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetDefaultImplementation(e, "/api/v1/afnor/directory/v1/siret/code-insee:{siret}", uriBuilderLocalVar.Path, siret, fields, include, acceptLanguage);
+                OnErrorGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGetDefaultImplementation(e, "/api/v1/afnor/directory/v1/siret/code-insee:{siret}", uriBuilderLocalVar.Path, siret);
                 Events.ExecuteOnErrorGetSiretByCodeInseeProxyApiV1AfnorDirectoryV1SiretCodeInseeSiretGet(e);
                 throw;
             }
@@ -5948,7 +5564,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet(ref string idInstance, Option<List<string>?> fields, ref Option<AcceptLanguage> acceptLanguage);
+        partial void FormatGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet(ref string idInstance);
 
         /// <summary>
         /// Validates the request parameters
@@ -5966,12 +5582,10 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="fields"></param>
-        /// <param name="acceptLanguage"></param>
-        private void AfterGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetDefaultImplementation(IGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetApiResponse apiResponseLocalVar, string idInstance, Option<List<string>?> fields, Option<AcceptLanguage> acceptLanguage)
+        private void AfterGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetDefaultImplementation(IGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetApiResponse apiResponseLocalVar, string idInstance)
         {
             bool suppressDefaultLog = false;
-            AfterGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet(ref suppressDefaultLog, apiResponseLocalVar, idInstance, fields, acceptLanguage);
+            AfterGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet(ref suppressDefaultLog, apiResponseLocalVar, idInstance);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -5982,9 +5596,7 @@ namespace FactPulse.SDK.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="fields"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void AfterGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet(ref bool suppressDefaultLog, IGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetApiResponse apiResponseLocalVar, string idInstance, Option<List<string>?> fields, Option<AcceptLanguage> acceptLanguage);
+        partial void AfterGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet(ref bool suppressDefaultLog, IGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetApiResponse apiResponseLocalVar, string idInstance);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -5993,12 +5605,10 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="fields"></param>
-        /// <param name="acceptLanguage"></param>
-        private void OnErrorGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance, Option<List<string>?> fields, Option<AcceptLanguage> acceptLanguage)
+        private void OnErrorGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, idInstance, fields, acceptLanguage);
+            OnErrorGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, idInstance);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -6011,23 +5621,19 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="fields"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void OnErrorGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance, Option<List<string>?> fields, Option<AcceptLanguage> acceptLanguage);
+        partial void OnErrorGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance);
 
         /// <summary>
         /// Gets a siret (facility) by id-instance Returns the details of a facility according to an instance-id.
         /// </summary>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="fields">Fields of a SIRET resource. (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetApiResponse"/>&gt;</returns>
-        public async Task<IGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetApiResponse?> GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetOrDefaultAsync(string idInstance, Option<List<string>?> fields = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetApiResponse?> GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetOrDefaultAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetAsync(idInstance, fields, acceptLanguage, cancellationToken).ConfigureAwait(false);
+                return await GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetAsync(idInstance, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -6040,11 +5646,9 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="fields">Fields of a SIRET resource. (optional)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetApiResponse"/>&gt;</returns>
-        public async Task<IGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetApiResponse> GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetAsync(string idInstance, Option<List<string>?> fields = default, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetApiResponse> GetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -6052,7 +5656,7 @@ namespace FactPulse.SDK.Api
             {
                 ValidateGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet(idInstance);
 
-                FormatGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet(ref idInstance, fields, ref acceptLanguage);
+                FormatGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet(ref idInstance);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -6064,24 +5668,7 @@ namespace FactPulse.SDK.Api
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/siret/id-instance:{id_instance}");
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bid_instance%7D", Uri.EscapeDataString(idInstance.ToString()));
 
-                    System.Collections.Specialized.NameValueCollection parseQueryStringLocalVar = System.Web.HttpUtility.ParseQueryString(string.Empty);
-
-                    if (fields.IsSet)
-                        parseQueryStringLocalVar["fields"] = ClientUtils.ParameterToString(fields.Value);
-
-                    uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
-
-                    if (acceptLanguage.IsSet)
-                        httpRequestMessageLocalVar.Headers.Add("Accept-Language", ClientUtils.ParameterToString(acceptLanguage.Value));
-
-                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
-
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
-
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
-
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -6110,13 +5697,9 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetDefaultImplementation(apiResponseLocalVar, idInstance, fields, acceptLanguage);
+                        AfterGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetDefaultImplementation(apiResponseLocalVar, idInstance);
 
                         Events.ExecuteOnGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet(apiResponseLocalVar);
-
-                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
-                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
-                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -6124,7 +5707,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetDefaultImplementation(e, "/api/v1/afnor/directory/v1/siret/id-instance:{id_instance}", uriBuilderLocalVar.Path, idInstance, fields, acceptLanguage);
+                OnErrorGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGetDefaultImplementation(e, "/api/v1/afnor/directory/v1/siret/id-instance:{id_instance}", uriBuilderLocalVar.Path, idInstance);
                 Events.ExecuteOnErrorGetSiretByIdInstanceProxyApiV1AfnorDirectoryV1SiretIdInstanceIdInstanceGet(e);
                 throw;
             }
@@ -6283,7 +5866,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch(ref string idInstance, ref Option<AcceptLanguage> acceptLanguage);
+        partial void FormatPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch(ref string idInstance);
 
         /// <summary>
         /// Validates the request parameters
@@ -6301,11 +5884,10 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="acceptLanguage"></param>
-        private void AfterPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchDefaultImplementation(IPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchApiResponse apiResponseLocalVar, string idInstance, Option<AcceptLanguage> acceptLanguage)
+        private void AfterPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchDefaultImplementation(IPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchApiResponse apiResponseLocalVar, string idInstance)
         {
             bool suppressDefaultLog = false;
-            AfterPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch(ref suppressDefaultLog, apiResponseLocalVar, idInstance, acceptLanguage);
+            AfterPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch(ref suppressDefaultLog, apiResponseLocalVar, idInstance);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -6316,8 +5898,7 @@ namespace FactPulse.SDK.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void AfterPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch(ref bool suppressDefaultLog, IPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchApiResponse apiResponseLocalVar, string idInstance, Option<AcceptLanguage> acceptLanguage);
+        partial void AfterPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch(ref bool suppressDefaultLog, IPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchApiResponse apiResponseLocalVar, string idInstance);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -6326,11 +5907,10 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="acceptLanguage"></param>
-        private void OnErrorPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance, Option<AcceptLanguage> acceptLanguage)
+        private void OnErrorPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, idInstance, acceptLanguage);
+            OnErrorPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, idInstance);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -6343,21 +5923,19 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void OnErrorPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance, Option<AcceptLanguage> acceptLanguage);
+        partial void OnErrorPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance);
 
         /// <summary>
         /// Partially updates a directory line.. Partially updates a directory line.
         /// </summary>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchApiResponse"/>&gt;</returns>
-        public async Task<IPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchApiResponse?> PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchOrDefaultAsync(string idInstance, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchApiResponse?> PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchOrDefaultAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchAsync(idInstance, acceptLanguage, cancellationToken).ConfigureAwait(false);
+                return await PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchAsync(idInstance, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -6370,10 +5948,9 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchApiResponse"/>&gt;</returns>
-        public async Task<IPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchApiResponse> PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchAsync(string idInstance, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchApiResponse> PatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -6381,7 +5958,7 @@ namespace FactPulse.SDK.Api
             {
                 ValidatePatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch(idInstance);
 
-                FormatPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch(ref idInstance, ref acceptLanguage);
+                FormatPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch(ref idInstance);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -6393,17 +5970,7 @@ namespace FactPulse.SDK.Api
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/directory-line/id-instance:{id_instance}");
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bid_instance%7D", Uri.EscapeDataString(idInstance.ToString()));
 
-                    if (acceptLanguage.IsSet)
-                        httpRequestMessageLocalVar.Headers.Add("Accept-Language", ClientUtils.ParameterToString(acceptLanguage.Value));
-
-                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
-
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
-
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
-
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -6432,13 +5999,9 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchDefaultImplementation(apiResponseLocalVar, idInstance, acceptLanguage);
+                        AfterPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchDefaultImplementation(apiResponseLocalVar, idInstance);
 
                         Events.ExecuteOnPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch(apiResponseLocalVar);
-
-                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
-                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
-                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -6446,7 +6009,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchDefaultImplementation(e, "/api/v1/afnor/directory/v1/directory-line/id-instance:{id_instance}", uriBuilderLocalVar.Path, idInstance, acceptLanguage);
+                OnErrorPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatchDefaultImplementation(e, "/api/v1/afnor/directory/v1/directory-line/id-instance:{id_instance}", uriBuilderLocalVar.Path, idInstance);
                 Events.ExecuteOnErrorPatchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineIdInstanceIdInstancePatch(e);
                 throw;
             }
@@ -6605,7 +6168,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch(ref string idInstance, ref Option<AcceptLanguage> acceptLanguage);
+        partial void FormatPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch(ref string idInstance);
 
         /// <summary>
         /// Validates the request parameters
@@ -6623,11 +6186,10 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="acceptLanguage"></param>
-        private void AfterPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchDefaultImplementation(IPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchApiResponse apiResponseLocalVar, string idInstance, Option<AcceptLanguage> acceptLanguage)
+        private void AfterPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchDefaultImplementation(IPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchApiResponse apiResponseLocalVar, string idInstance)
         {
             bool suppressDefaultLog = false;
-            AfterPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch(ref suppressDefaultLog, apiResponseLocalVar, idInstance, acceptLanguage);
+            AfterPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch(ref suppressDefaultLog, apiResponseLocalVar, idInstance);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -6638,8 +6200,7 @@ namespace FactPulse.SDK.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void AfterPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch(ref bool suppressDefaultLog, IPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchApiResponse apiResponseLocalVar, string idInstance, Option<AcceptLanguage> acceptLanguage);
+        partial void AfterPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch(ref bool suppressDefaultLog, IPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchApiResponse apiResponseLocalVar, string idInstance);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -6648,11 +6209,10 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="acceptLanguage"></param>
-        private void OnErrorPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance, Option<AcceptLanguage> acceptLanguage)
+        private void OnErrorPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, idInstance, acceptLanguage);
+            OnErrorPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, idInstance);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -6665,21 +6225,19 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void OnErrorPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance, Option<AcceptLanguage> acceptLanguage);
+        partial void OnErrorPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance);
 
         /// <summary>
         /// Partially update a private routing code. Partially update a private routing code.
         /// </summary>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchApiResponse"/>&gt;</returns>
-        public async Task<IPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchApiResponse?> PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchOrDefaultAsync(string idInstance, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchApiResponse?> PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchOrDefaultAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchAsync(idInstance, acceptLanguage, cancellationToken).ConfigureAwait(false);
+                return await PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchAsync(idInstance, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -6692,10 +6250,9 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchApiResponse"/>&gt;</returns>
-        public async Task<IPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchApiResponse> PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchAsync(string idInstance, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchApiResponse> PatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -6703,7 +6260,7 @@ namespace FactPulse.SDK.Api
             {
                 ValidatePatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch(idInstance);
 
-                FormatPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch(ref idInstance, ref acceptLanguage);
+                FormatPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch(ref idInstance);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -6715,17 +6272,7 @@ namespace FactPulse.SDK.Api
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/routing-code/id-instance:{id_instance}");
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bid_instance%7D", Uri.EscapeDataString(idInstance.ToString()));
 
-                    if (acceptLanguage.IsSet)
-                        httpRequestMessageLocalVar.Headers.Add("Accept-Language", ClientUtils.ParameterToString(acceptLanguage.Value));
-
-                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
-
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
-
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
-
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -6754,13 +6301,9 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchDefaultImplementation(apiResponseLocalVar, idInstance, acceptLanguage);
+                        AfterPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchDefaultImplementation(apiResponseLocalVar, idInstance);
 
                         Events.ExecuteOnPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch(apiResponseLocalVar);
-
-                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
-                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
-                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -6768,7 +6311,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchDefaultImplementation(e, "/api/v1/afnor/directory/v1/routing-code/id-instance:{id_instance}", uriBuilderLocalVar.Path, idInstance, acceptLanguage);
+                OnErrorPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatchDefaultImplementation(e, "/api/v1/afnor/directory/v1/routing-code/id-instance:{id_instance}", uriBuilderLocalVar.Path, idInstance);
                 Events.ExecuteOnErrorPatchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePatch(e);
                 throw;
             }
@@ -6933,7 +6476,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut(ref string idInstance, ref Option<AcceptLanguage> acceptLanguage);
+        partial void FormatPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut(ref string idInstance);
 
         /// <summary>
         /// Validates the request parameters
@@ -6951,11 +6494,10 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="acceptLanguage"></param>
-        private void AfterPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutDefaultImplementation(IPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutApiResponse apiResponseLocalVar, string idInstance, Option<AcceptLanguage> acceptLanguage)
+        private void AfterPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutDefaultImplementation(IPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutApiResponse apiResponseLocalVar, string idInstance)
         {
             bool suppressDefaultLog = false;
-            AfterPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut(ref suppressDefaultLog, apiResponseLocalVar, idInstance, acceptLanguage);
+            AfterPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut(ref suppressDefaultLog, apiResponseLocalVar, idInstance);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -6966,8 +6508,7 @@ namespace FactPulse.SDK.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void AfterPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut(ref bool suppressDefaultLog, IPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutApiResponse apiResponseLocalVar, string idInstance, Option<AcceptLanguage> acceptLanguage);
+        partial void AfterPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut(ref bool suppressDefaultLog, IPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutApiResponse apiResponseLocalVar, string idInstance);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -6976,11 +6517,10 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="acceptLanguage"></param>
-        private void OnErrorPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance, Option<AcceptLanguage> acceptLanguage)
+        private void OnErrorPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, idInstance, acceptLanguage);
+            OnErrorPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, idInstance);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -6993,21 +6533,19 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="idInstance"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void OnErrorPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance, Option<AcceptLanguage> acceptLanguage);
+        partial void OnErrorPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string idInstance);
 
         /// <summary>
         /// Completely update a private routing code. Completely update a private routing code.
         /// </summary>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutApiResponse"/>&gt;</returns>
-        public async Task<IPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutApiResponse?> PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutOrDefaultAsync(string idInstance, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutApiResponse?> PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutOrDefaultAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutAsync(idInstance, acceptLanguage, cancellationToken).ConfigureAwait(false);
+                return await PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutAsync(idInstance, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -7020,10 +6558,9 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="idInstance">AFNOR instance ID (UUID)</param>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutApiResponse"/>&gt;</returns>
-        public async Task<IPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutApiResponse> PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutAsync(string idInstance, Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutApiResponse> PutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutAsync(string idInstance, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -7031,7 +6568,7 @@ namespace FactPulse.SDK.Api
             {
                 ValidatePutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut(idInstance);
 
-                FormatPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut(ref idInstance, ref acceptLanguage);
+                FormatPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut(ref idInstance);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -7043,17 +6580,7 @@ namespace FactPulse.SDK.Api
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/routing-code/id-instance:{id_instance}");
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bid_instance%7D", Uri.EscapeDataString(idInstance.ToString()));
 
-                    if (acceptLanguage.IsSet)
-                        httpRequestMessageLocalVar.Headers.Add("Accept-Language", ClientUtils.ParameterToString(acceptLanguage.Value));
-
-                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
-
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
-
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
-
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -7082,13 +6609,9 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutDefaultImplementation(apiResponseLocalVar, idInstance, acceptLanguage);
+                        AfterPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutDefaultImplementation(apiResponseLocalVar, idInstance);
 
                         Events.ExecuteOnPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut(apiResponseLocalVar);
-
-                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
-                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
-                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -7096,7 +6619,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutDefaultImplementation(e, "/api/v1/afnor/directory/v1/routing-code/id-instance:{id_instance}", uriBuilderLocalVar.Path, idInstance, acceptLanguage);
+                OnErrorPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePutDefaultImplementation(e, "/api/v1/afnor/directory/v1/routing-code/id-instance:{id_instance}", uriBuilderLocalVar.Path, idInstance);
                 Events.ExecuteOnErrorPutRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeIdInstanceIdInstancePut(e);
                 throw;
             }
@@ -7261,17 +6784,14 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPost(ref Option<AcceptLanguage> acceptLanguage);
-
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="acceptLanguage"></param>
-        private void AfterSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostDefaultImplementation(ISearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostApiResponse apiResponseLocalVar, Option<AcceptLanguage> acceptLanguage)
+        private void AfterSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostDefaultImplementation(ISearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostApiResponse apiResponseLocalVar)
         {
             bool suppressDefaultLog = false;
-            AfterSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPost(ref suppressDefaultLog, apiResponseLocalVar, acceptLanguage);
+            AfterSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPost(ref suppressDefaultLog, apiResponseLocalVar);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -7281,8 +6801,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void AfterSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPost(ref bool suppressDefaultLog, ISearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostApiResponse apiResponseLocalVar, Option<AcceptLanguage> acceptLanguage);
+        partial void AfterSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPost(ref bool suppressDefaultLog, ISearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostApiResponse apiResponseLocalVar);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -7290,11 +6809,10 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="acceptLanguage"></param>
-        private void OnErrorSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<AcceptLanguage> acceptLanguage)
+        private void OnErrorSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, acceptLanguage);
+            OnErrorSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -7306,20 +6824,18 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void OnErrorSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<AcceptLanguage> acceptLanguage);
+        partial void OnErrorSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar);
 
         /// <summary>
         /// Search for a directory line Search for directory lines that meet all the criteria passed as parameters and return the results in the desired format.
         /// </summary>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostApiResponse"/>&gt;</returns>
-        public async Task<ISearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostApiResponse?> SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostOrDefaultAsync(Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostApiResponse?> SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostAsync(acceptLanguage, cancellationToken).ConfigureAwait(false);
+                return await SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -7331,17 +6847,14 @@ namespace FactPulse.SDK.Api
         /// Search for a directory line Search for directory lines that meet all the criteria passed as parameters and return the results in the desired format.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostApiResponse"/>&gt;</returns>
-        public async Task<ISearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostApiResponse> SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostAsync(Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostApiResponse> SearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostAsync(System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                FormatSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPost(ref acceptLanguage);
-
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
                     uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
@@ -7351,17 +6864,7 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/afnor/directory/v1/directory-line/search"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/directory-line/search");
 
-                    if (acceptLanguage.IsSet)
-                        httpRequestMessageLocalVar.Headers.Add("Accept-Language", ClientUtils.ParameterToString(acceptLanguage.Value));
-
-                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
-
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
-
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
-
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -7390,13 +6893,9 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostDefaultImplementation(apiResponseLocalVar, acceptLanguage);
+                        AfterSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostDefaultImplementation(apiResponseLocalVar);
 
                         Events.ExecuteOnSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPost(apiResponseLocalVar);
-
-                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
-                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
-                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -7404,7 +6903,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostDefaultImplementation(e, "/api/v1/afnor/directory/v1/directory-line/search", uriBuilderLocalVar.Path, acceptLanguage);
+                OnErrorSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostDefaultImplementation(e, "/api/v1/afnor/directory/v1/directory-line/search", uriBuilderLocalVar.Path);
                 Events.ExecuteOnErrorSearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPost(e);
                 throw;
             }
@@ -7601,17 +7100,14 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPost(ref Option<AcceptLanguage> acceptLanguage);
-
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="acceptLanguage"></param>
-        private void AfterSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostDefaultImplementation(ISearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostApiResponse apiResponseLocalVar, Option<AcceptLanguage> acceptLanguage)
+        private void AfterSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostDefaultImplementation(ISearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostApiResponse apiResponseLocalVar)
         {
             bool suppressDefaultLog = false;
-            AfterSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPost(ref suppressDefaultLog, apiResponseLocalVar, acceptLanguage);
+            AfterSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPost(ref suppressDefaultLog, apiResponseLocalVar);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -7621,8 +7117,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void AfterSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPost(ref bool suppressDefaultLog, ISearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostApiResponse apiResponseLocalVar, Option<AcceptLanguage> acceptLanguage);
+        partial void AfterSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPost(ref bool suppressDefaultLog, ISearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostApiResponse apiResponseLocalVar);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -7630,11 +7125,10 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="acceptLanguage"></param>
-        private void OnErrorSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<AcceptLanguage> acceptLanguage)
+        private void OnErrorSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, acceptLanguage);
+            OnErrorSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -7646,20 +7140,18 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void OnErrorSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<AcceptLanguage> acceptLanguage);
+        partial void OnErrorSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar);
 
         /// <summary>
         /// Search for a routing code Search for routing codes that meet all the criteria passed as parameters and return the routing codes in the desired format.
         /// </summary>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostApiResponse"/>&gt;</returns>
-        public async Task<ISearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostApiResponse?> SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostOrDefaultAsync(Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostApiResponse?> SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostAsync(acceptLanguage, cancellationToken).ConfigureAwait(false);
+                return await SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -7671,17 +7163,14 @@ namespace FactPulse.SDK.Api
         /// Search for a routing code Search for routing codes that meet all the criteria passed as parameters and return the routing codes in the desired format.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostApiResponse"/>&gt;</returns>
-        public async Task<ISearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostApiResponse> SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostAsync(Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostApiResponse> SearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostAsync(System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                FormatSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPost(ref acceptLanguage);
-
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
                     uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
@@ -7691,17 +7180,7 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/afnor/directory/v1/routing-code/search"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/routing-code/search");
 
-                    if (acceptLanguage.IsSet)
-                        httpRequestMessageLocalVar.Headers.Add("Accept-Language", ClientUtils.ParameterToString(acceptLanguage.Value));
-
-                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
-
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
-
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
-
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -7730,13 +7209,9 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostDefaultImplementation(apiResponseLocalVar, acceptLanguage);
+                        AfterSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostDefaultImplementation(apiResponseLocalVar);
 
                         Events.ExecuteOnSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPost(apiResponseLocalVar);
-
-                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
-                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
-                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -7744,7 +7219,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostDefaultImplementation(e, "/api/v1/afnor/directory/v1/routing-code/search", uriBuilderLocalVar.Path, acceptLanguage);
+                OnErrorSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostDefaultImplementation(e, "/api/v1/afnor/directory/v1/routing-code/search", uriBuilderLocalVar.Path);
                 Events.ExecuteOnErrorSearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPost(e);
                 throw;
             }
@@ -7941,17 +7416,14 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPost(ref Option<AcceptLanguage> acceptLanguage);
-
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="acceptLanguage"></param>
-        private void AfterSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostDefaultImplementation(ISearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostApiResponse apiResponseLocalVar, Option<AcceptLanguage> acceptLanguage)
+        private void AfterSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostDefaultImplementation(ISearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostApiResponse apiResponseLocalVar)
         {
             bool suppressDefaultLog = false;
-            AfterSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPost(ref suppressDefaultLog, apiResponseLocalVar, acceptLanguage);
+            AfterSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPost(ref suppressDefaultLog, apiResponseLocalVar);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -7961,8 +7433,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void AfterSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPost(ref bool suppressDefaultLog, ISearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostApiResponse apiResponseLocalVar, Option<AcceptLanguage> acceptLanguage);
+        partial void AfterSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPost(ref bool suppressDefaultLog, ISearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostApiResponse apiResponseLocalVar);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -7970,11 +7441,10 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="acceptLanguage"></param>
-        private void OnErrorSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<AcceptLanguage> acceptLanguage)
+        private void OnErrorSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, acceptLanguage);
+            OnErrorSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -7986,20 +7456,18 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void OnErrorSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<AcceptLanguage> acceptLanguage);
+        partial void OnErrorSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar);
 
         /// <summary>
         /// SIREN search (or legal unit) Multi-criteria company search.
         /// </summary>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostApiResponse"/>&gt;</returns>
-        public async Task<ISearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostApiResponse?> SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostOrDefaultAsync(Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostApiResponse?> SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostAsync(acceptLanguage, cancellationToken).ConfigureAwait(false);
+                return await SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -8011,17 +7479,14 @@ namespace FactPulse.SDK.Api
         /// SIREN search (or legal unit) Multi-criteria company search.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostApiResponse"/>&gt;</returns>
-        public async Task<ISearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostApiResponse> SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostAsync(Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostApiResponse> SearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostAsync(System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                FormatSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPost(ref acceptLanguage);
-
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
                     uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
@@ -8031,17 +7496,7 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/afnor/directory/v1/siren/search"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/siren/search");
 
-                    if (acceptLanguage.IsSet)
-                        httpRequestMessageLocalVar.Headers.Add("Accept-Language", ClientUtils.ParameterToString(acceptLanguage.Value));
-
-                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
-
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
-
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
-
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -8070,13 +7525,9 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostDefaultImplementation(apiResponseLocalVar, acceptLanguage);
+                        AfterSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostDefaultImplementation(apiResponseLocalVar);
 
                         Events.ExecuteOnSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPost(apiResponseLocalVar);
-
-                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
-                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
-                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -8084,7 +7535,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostDefaultImplementation(e, "/api/v1/afnor/directory/v1/siren/search", uriBuilderLocalVar.Path, acceptLanguage);
+                OnErrorSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostDefaultImplementation(e, "/api/v1/afnor/directory/v1/siren/search", uriBuilderLocalVar.Path);
                 Events.ExecuteOnErrorSearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPost(e);
                 throw;
             }
@@ -8281,17 +7732,14 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPost(ref Option<AcceptLanguage> acceptLanguage);
-
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="acceptLanguage"></param>
-        private void AfterSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostDefaultImplementation(ISearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostApiResponse apiResponseLocalVar, Option<AcceptLanguage> acceptLanguage)
+        private void AfterSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostDefaultImplementation(ISearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostApiResponse apiResponseLocalVar)
         {
             bool suppressDefaultLog = false;
-            AfterSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPost(ref suppressDefaultLog, apiResponseLocalVar, acceptLanguage);
+            AfterSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPost(ref suppressDefaultLog, apiResponseLocalVar);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -8301,8 +7749,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void AfterSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPost(ref bool suppressDefaultLog, ISearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostApiResponse apiResponseLocalVar, Option<AcceptLanguage> acceptLanguage);
+        partial void AfterSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPost(ref bool suppressDefaultLog, ISearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostApiResponse apiResponseLocalVar);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -8310,11 +7757,10 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="acceptLanguage"></param>
-        private void OnErrorSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<AcceptLanguage> acceptLanguage)
+        private void OnErrorSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, acceptLanguage);
+            OnErrorSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -8326,20 +7772,18 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="acceptLanguage"></param>
-        partial void OnErrorSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<AcceptLanguage> acceptLanguage);
+        partial void OnErrorSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar);
 
         /// <summary>
         /// Search for a SIRET (facility) Multi-criteria search for facilities.
         /// </summary>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostApiResponse"/>&gt;</returns>
-        public async Task<ISearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostApiResponse?> SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostOrDefaultAsync(Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostApiResponse?> SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostAsync(acceptLanguage, cancellationToken).ConfigureAwait(false);
+                return await SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostAsync(cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -8351,17 +7795,14 @@ namespace FactPulse.SDK.Api
         /// Search for a SIRET (facility) Multi-criteria search for facilities.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="acceptLanguage">Specifies the language in which the resource is requested. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostApiResponse"/>&gt;</returns>
-        public async Task<ISearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostApiResponse> SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostAsync(Option<AcceptLanguage> acceptLanguage = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostApiResponse> SearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostAsync(System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                FormatSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPost(ref acceptLanguage);
-
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
                     uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
@@ -8371,17 +7812,7 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/afnor/directory/v1/siret/search"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/directory/v1/siret/search");
 
-                    if (acceptLanguage.IsSet)
-                        httpRequestMessageLocalVar.Headers.Add("Accept-Language", ClientUtils.ParameterToString(acceptLanguage.Value));
-
-                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
-
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
-
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
-
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -8410,13 +7841,9 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostDefaultImplementation(apiResponseLocalVar, acceptLanguage);
+                        AfterSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostDefaultImplementation(apiResponseLocalVar);
 
                         Events.ExecuteOnSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPost(apiResponseLocalVar);
-
-                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
-                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
-                                tokenBaseLocalVar.BeginRateLimit();
 
                         return apiResponseLocalVar;
                     }
@@ -8424,7 +7851,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostDefaultImplementation(e, "/api/v1/afnor/directory/v1/siret/search", uriBuilderLocalVar.Path, acceptLanguage);
+                OnErrorSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostDefaultImplementation(e, "/api/v1/afnor/directory/v1/siret/search", uriBuilderLocalVar.Path);
                 Events.ExecuteOnErrorSearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPost(e);
                 throw;
             }
