@@ -291,12 +291,12 @@ namespace FactPulse.SDK.Helpers
 
                 var json = await response.Content.ReadAsStringAsync();
                 var data = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(json);
-                var statut = data["statut"].GetString();
+                var status = data["status"].GetString();
 
-                if (statut == "SUCCESS")
-                    return data.TryGetValue("resultat", out var r) ? JsonSerializer.Deserialize<Dictionary<string, object>>(r.GetRawText()) : new Dictionary<string, object>();
+                if (status == "SUCCESS")
+                    return data.TryGetValue("result", out var r) ? JsonSerializer.Deserialize<Dictionary<string, object>>(r.GetRawText()) : new Dictionary<string, object>();
 
-                if (statut == "FAILURE")
+                if (status == "FAILURE")
                     throw new FactPulseValidationException($"Task {taskId} failed", null);
 
                 await Task.Delay((int)currentInterval);
