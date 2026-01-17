@@ -27,29 +27,69 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Response for validation errors.
+    /// Erreur de validation.
     /// </summary>
-    public partial class FactureElectroniqueRestApiSchemasValidationValidationErrorResponse : IValidatableObject
+    public partial class FactureElectroniqueRestApiSchemasCdarValidationErrorResponse : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="FactureElectroniqueRestApiSchemasValidationValidationErrorResponse" /> class.
+        /// Initializes a new instance of the <see cref="FactureElectroniqueRestApiSchemasCdarValidationErrorResponse" /> class.
         /// </summary>
-        /// <param name="detail">List of detected validation errors.</param>
+        /// <param name="field">Champ concerné</param>
+        /// <param name="message">Message d&#39;erreur</param>
+        /// <param name="rule">rule</param>
+        /// <param name="severity">Sévérité (error/warning) (default to &quot;error&quot;)</param>
         [JsonConstructor]
-        public FactureElectroniqueRestApiSchemasValidationValidationErrorResponse(List<string> detail)
+        public FactureElectroniqueRestApiSchemasCdarValidationErrorResponse(string field, string message, Option<string?> rule = default, Option<string?> severity = default)
         {
-            Detail = detail;
+            Field = field;
+            Message = message;
+            RuleOption = rule;
+            SeverityOption = severity;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// List of detected validation errors.
+        /// Champ concerné
         /// </summary>
-        /// <value>List of detected validation errors.</value>
-        [JsonPropertyName("detail")]
-        public List<string> Detail { get; set; }
+        /// <value>Champ concerné</value>
+        [JsonPropertyName("field")]
+        public string Field { get; set; }
+
+        /// <summary>
+        /// Message d&#39;erreur
+        /// </summary>
+        /// <value>Message d&#39;erreur</value>
+        [JsonPropertyName("message")]
+        public string Message { get; set; }
+
+        /// <summary>
+        /// Used to track the state of Rule
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> RuleOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Rule
+        /// </summary>
+        [JsonPropertyName("rule")]
+        public string? Rule { get { return this.RuleOption; } set { this.RuleOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Severity
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> SeverityOption { get; private set; }
+
+        /// <summary>
+        /// Sévérité (error/warning)
+        /// </summary>
+        /// <value>Sévérité (error/warning)</value>
+        [JsonPropertyName("severity")]
+        public string? Severity { get { return this.SeverityOption; } set { this.SeverityOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -58,8 +98,11 @@ namespace FactPulse.SDK.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class FactureElectroniqueRestApiSchemasValidationValidationErrorResponse {\n");
-            sb.Append("  Detail: ").Append(Detail).Append("\n");
+            sb.Append("class FactureElectroniqueRestApiSchemasCdarValidationErrorResponse {\n");
+            sb.Append("  Field: ").Append(Field).Append("\n");
+            sb.Append("  Message: ").Append(Message).Append("\n");
+            sb.Append("  Rule: ").Append(Rule).Append("\n");
+            sb.Append("  Severity: ").Append(Severity).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -76,19 +119,19 @@ namespace FactPulse.SDK.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="FactureElectroniqueRestApiSchemasValidationValidationErrorResponse" />
+    /// A Json converter for type <see cref="FactureElectroniqueRestApiSchemasCdarValidationErrorResponse" />
     /// </summary>
-    public class FactureElectroniqueRestApiSchemasValidationValidationErrorResponseJsonConverter : JsonConverter<FactureElectroniqueRestApiSchemasValidationValidationErrorResponse>
+    public class FactureElectroniqueRestApiSchemasCdarValidationErrorResponseJsonConverter : JsonConverter<FactureElectroniqueRestApiSchemasCdarValidationErrorResponse>
     {
         /// <summary>
-        /// Deserializes json to <see cref="FactureElectroniqueRestApiSchemasValidationValidationErrorResponse" />
+        /// Deserializes json to <see cref="FactureElectroniqueRestApiSchemasCdarValidationErrorResponse" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override FactureElectroniqueRestApiSchemasValidationValidationErrorResponse Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override FactureElectroniqueRestApiSchemasCdarValidationErrorResponse Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -97,7 +140,10 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<List<string>?> detail = default;
+            Option<string?> field = default;
+            Option<string?> message = default;
+            Option<string?> rule = default;
+            Option<string?> severity = default;
 
             while (utf8JsonReader.Read())
             {
@@ -114,8 +160,17 @@ namespace FactPulse.SDK.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "detail":
-                            detail = new Option<List<string>?>(JsonSerializer.Deserialize<List<string>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                        case "field":
+                            field = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
+                        case "message":
+                            message = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
+                        case "rule":
+                            rule = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "severity":
+                            severity = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         default:
                             break;
@@ -123,44 +178,69 @@ namespace FactPulse.SDK.Model
                 }
             }
 
-            if (!detail.IsSet)
-                throw new ArgumentException("Property is required for class FactureElectroniqueRestApiSchemasValidationValidationErrorResponse.", nameof(detail));
+            if (!field.IsSet)
+                throw new ArgumentException("Property is required for class FactureElectroniqueRestApiSchemasCdarValidationErrorResponse.", nameof(field));
 
-            if (detail.IsSet && detail.Value == null)
-                throw new ArgumentNullException(nameof(detail), "Property is not nullable for class FactureElectroniqueRestApiSchemasValidationValidationErrorResponse.");
+            if (!message.IsSet)
+                throw new ArgumentException("Property is required for class FactureElectroniqueRestApiSchemasCdarValidationErrorResponse.", nameof(message));
 
-            return new FactureElectroniqueRestApiSchemasValidationValidationErrorResponse(detail.Value!);
+            if (field.IsSet && field.Value == null)
+                throw new ArgumentNullException(nameof(field), "Property is not nullable for class FactureElectroniqueRestApiSchemasCdarValidationErrorResponse.");
+
+            if (message.IsSet && message.Value == null)
+                throw new ArgumentNullException(nameof(message), "Property is not nullable for class FactureElectroniqueRestApiSchemasCdarValidationErrorResponse.");
+
+            if (severity.IsSet && severity.Value == null)
+                throw new ArgumentNullException(nameof(severity), "Property is not nullable for class FactureElectroniqueRestApiSchemasCdarValidationErrorResponse.");
+
+            return new FactureElectroniqueRestApiSchemasCdarValidationErrorResponse(field.Value!, message.Value!, rule, severity);
         }
 
         /// <summary>
-        /// Serializes a <see cref="FactureElectroniqueRestApiSchemasValidationValidationErrorResponse" />
+        /// Serializes a <see cref="FactureElectroniqueRestApiSchemasCdarValidationErrorResponse" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="factureElectroniqueRestApiSchemasValidationValidationErrorResponse"></param>
+        /// <param name="factureElectroniqueRestApiSchemasCdarValidationErrorResponse"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, FactureElectroniqueRestApiSchemasValidationValidationErrorResponse factureElectroniqueRestApiSchemasValidationValidationErrorResponse, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, FactureElectroniqueRestApiSchemasCdarValidationErrorResponse factureElectroniqueRestApiSchemasCdarValidationErrorResponse, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, factureElectroniqueRestApiSchemasValidationValidationErrorResponse, jsonSerializerOptions);
+            WriteProperties(writer, factureElectroniqueRestApiSchemasCdarValidationErrorResponse, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="FactureElectroniqueRestApiSchemasValidationValidationErrorResponse" />
+        /// Serializes the properties of <see cref="FactureElectroniqueRestApiSchemasCdarValidationErrorResponse" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="factureElectroniqueRestApiSchemasValidationValidationErrorResponse"></param>
+        /// <param name="factureElectroniqueRestApiSchemasCdarValidationErrorResponse"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, FactureElectroniqueRestApiSchemasValidationValidationErrorResponse factureElectroniqueRestApiSchemasValidationValidationErrorResponse, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, FactureElectroniqueRestApiSchemasCdarValidationErrorResponse factureElectroniqueRestApiSchemasCdarValidationErrorResponse, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (factureElectroniqueRestApiSchemasValidationValidationErrorResponse.Detail == null)
-                throw new ArgumentNullException(nameof(factureElectroniqueRestApiSchemasValidationValidationErrorResponse.Detail), "Property is required for class FactureElectroniqueRestApiSchemasValidationValidationErrorResponse.");
+            if (factureElectroniqueRestApiSchemasCdarValidationErrorResponse.Field == null)
+                throw new ArgumentNullException(nameof(factureElectroniqueRestApiSchemasCdarValidationErrorResponse.Field), "Property is required for class FactureElectroniqueRestApiSchemasCdarValidationErrorResponse.");
 
-            writer.WritePropertyName("detail");
-            JsonSerializer.Serialize(writer, factureElectroniqueRestApiSchemasValidationValidationErrorResponse.Detail, jsonSerializerOptions);
+            if (factureElectroniqueRestApiSchemasCdarValidationErrorResponse.Message == null)
+                throw new ArgumentNullException(nameof(factureElectroniqueRestApiSchemasCdarValidationErrorResponse.Message), "Property is required for class FactureElectroniqueRestApiSchemasCdarValidationErrorResponse.");
+
+            if (factureElectroniqueRestApiSchemasCdarValidationErrorResponse.SeverityOption.IsSet && factureElectroniqueRestApiSchemasCdarValidationErrorResponse.Severity == null)
+                throw new ArgumentNullException(nameof(factureElectroniqueRestApiSchemasCdarValidationErrorResponse.Severity), "Property is required for class FactureElectroniqueRestApiSchemasCdarValidationErrorResponse.");
+
+            writer.WriteString("field", factureElectroniqueRestApiSchemasCdarValidationErrorResponse.Field);
+
+            writer.WriteString("message", factureElectroniqueRestApiSchemasCdarValidationErrorResponse.Message);
+
+            if (factureElectroniqueRestApiSchemasCdarValidationErrorResponse.RuleOption.IsSet)
+                if (factureElectroniqueRestApiSchemasCdarValidationErrorResponse.RuleOption.Value != null)
+                    writer.WriteString("rule", factureElectroniqueRestApiSchemasCdarValidationErrorResponse.Rule);
+                else
+                    writer.WriteNull("rule");
+
+            if (factureElectroniqueRestApiSchemasCdarValidationErrorResponse.SeverityOption.IsSet)
+                writer.WriteString("severity", factureElectroniqueRestApiSchemasCdarValidationErrorResponse.Severity);
         }
     }
 }
