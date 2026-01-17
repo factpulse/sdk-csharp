@@ -380,6 +380,29 @@ namespace FactPulse.SDK.Helpers
             if (sync && data.TryGetValue("taskId", out var taskIdElem))
             {
                 var result = await PollTaskAsync(taskIdElem.GetString(), timeout);
+
+                // Check for business error (task succeeded but business result is ERROR)
+                if (result.TryGetValue("status", out var statusElem) && statusElem.ToString() == "ERROR")
+                {
+                    var errorMsg = result.TryGetValue("errorMessage", out var msgElem) ? msgElem.ToString() : "Business error";
+                    var errors = new List<ValidationErrorDetail>();
+                    if (result.TryGetValue("details", out var detailsElem) && detailsElem.ValueKind == JsonValueKind.Array)
+                    {
+                        foreach (var d in detailsElem.EnumerateArray())
+                        {
+                            errors.Add(new ValidationErrorDetail
+                            {
+                                Level = d.TryGetProperty("level", out var l) ? l.GetString() : "ERROR",
+                                Item = d.TryGetProperty("item", out var i) ? i.GetString() : "",
+                                Reason = d.TryGetProperty("reason", out var r) ? r.GetString() : "",
+                                Source = d.TryGetProperty("source", out var s) ? s.GetString() : null,
+                                Code = d.TryGetProperty("code", out var c) ? c.GetString() : null
+                            });
+                        }
+                    }
+                    throw new FactPulseValidationException(errorMsg, errors);
+                }
+
                 if (result.TryGetValue("content_b64", out var b64)) return Convert.FromBase64String(b64.ToString());
                 if (result.TryGetValue("content_xml", out var xml)) return Encoding.UTF8.GetBytes(xml.ToString());
                 throw new FactPulseValidationException("Unexpected result", null);
