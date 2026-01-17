@@ -382,22 +382,25 @@ namespace FactPulse.SDK.Helpers
                 var result = await PollTaskAsync(taskIdElem.GetString(), timeout);
 
                 // Check for business error (task succeeded but business result is ERROR)
-                if (result.TryGetValue("status", out var statusElem) && statusElem.ToString() == "ERROR")
+                if (result.TryGetValue("status", out var statusObj) && statusObj?.ToString() == "ERROR")
                 {
-                    var errorMsg = result.TryGetValue("errorMessage", out var msgElem) ? msgElem.ToString() : "Business error";
+                    var errorMsg = result.TryGetValue("errorMessage", out var msgObj) ? msgObj?.ToString() ?? "Business error" : "Business error";
                     var errors = new List<ValidationErrorDetail>();
-                    if (result.TryGetValue("details", out var detailsElem) && detailsElem.ValueKind == JsonValueKind.Array)
+                    if (result.TryGetValue("details", out var detailsObj) && detailsObj is IEnumerable<object> detailsList)
                     {
-                        foreach (var d in detailsElem.EnumerateArray())
+                        foreach (var d in detailsList)
                         {
-                            errors.Add(new ValidationErrorDetail
+                            if (d is IDictionary<string, object> det)
                             {
-                                Level = d.TryGetProperty("level", out var l) ? l.GetString() : "ERROR",
-                                Item = d.TryGetProperty("item", out var i) ? i.GetString() : "",
-                                Reason = d.TryGetProperty("reason", out var r) ? r.GetString() : "",
-                                Source = d.TryGetProperty("source", out var s) ? s.GetString() : null,
-                                Code = d.TryGetProperty("code", out var c) ? c.GetString() : null
-                            });
+                                errors.Add(new ValidationErrorDetail
+                                {
+                                    Level = det.TryGetValue("level", out var lv) ? lv?.ToString() ?? "ERROR" : "ERROR",
+                                    Item = det.TryGetValue("item", out var it) ? it?.ToString() ?? "" : "",
+                                    Reason = det.TryGetValue("reason", out var re) ? re?.ToString() ?? "" : "",
+                                    Source = det.TryGetValue("source", out var so) ? so?.ToString() : null,
+                                    Code = det.TryGetValue("code", out var co) ? co?.ToString() : null
+                                });
+                            }
                         }
                     }
                     throw new FactPulseValidationException(errorMsg, errors);

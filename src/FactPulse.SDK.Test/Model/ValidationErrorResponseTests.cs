@@ -55,39 +55,12 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'Field'
+        /// Test the property 'Detail'
         /// </summary>
         [Fact]
-        public void FieldTest()
+        public void DetailTest()
         {
-            // TODO unit test for the property 'Field'
-        }
-
-        /// <summary>
-        /// Test the property 'Message'
-        /// </summary>
-        [Fact]
-        public void MessageTest()
-        {
-            // TODO unit test for the property 'Message'
-        }
-
-        /// <summary>
-        /// Test the property 'Rule'
-        /// </summary>
-        [Fact]
-        public void RuleTest()
-        {
-            // TODO unit test for the property 'Rule'
-        }
-
-        /// <summary>
-        /// Test the property 'Severity'
-        /// </summary>
-        [Fact]
-        public void SeverityTest()
-        {
-            // TODO unit test for the property 'Severity'
+            // TODO unit test for the property 'Detail'
         }
     }
 }

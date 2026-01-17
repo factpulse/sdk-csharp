@@ -38,7 +38,7 @@ namespace FactPulse.SDK.Model
         /// <param name="errors">Liste des erreurs</param>
         /// <param name="warnings">Liste des avertissements</param>
         [JsonConstructor]
-        public ValidateCDARResponse(bool valid, Option<List<ValidationErrorResponse>?> errors = default, Option<List<ValidationErrorResponse>?> warnings = default)
+        public ValidateCDARResponse(bool valid, Option<List<FactureElectroniqueRestApiSchemasCdarValidationErrorResponse>?> errors = default, Option<List<FactureElectroniqueRestApiSchemasCdarValidationErrorResponse>?> warnings = default)
         {
             Valid = valid;
             ErrorsOption = errors;
@@ -60,28 +60,28 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<ValidationErrorResponse>?> ErrorsOption { get; private set; }
+        public Option<List<FactureElectroniqueRestApiSchemasCdarValidationErrorResponse>?> ErrorsOption { get; private set; }
 
         /// <summary>
         /// Liste des erreurs
         /// </summary>
         /// <value>Liste des erreurs</value>
         [JsonPropertyName("errors")]
-        public List<ValidationErrorResponse>? Errors { get { return this.ErrorsOption; } set { this.ErrorsOption = new(value); } }
+        public List<FactureElectroniqueRestApiSchemasCdarValidationErrorResponse>? Errors { get { return this.ErrorsOption; } set { this.ErrorsOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Warnings
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<ValidationErrorResponse>?> WarningsOption { get; private set; }
+        public Option<List<FactureElectroniqueRestApiSchemasCdarValidationErrorResponse>?> WarningsOption { get; private set; }
 
         /// <summary>
         /// Liste des avertissements
         /// </summary>
         /// <value>Liste des avertissements</value>
         [JsonPropertyName("warnings")]
-        public List<ValidationErrorResponse>? Warnings { get { return this.WarningsOption; } set { this.WarningsOption = new(value); } }
+        public List<FactureElectroniqueRestApiSchemasCdarValidationErrorResponse>? Warnings { get { return this.WarningsOption; } set { this.WarningsOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -132,8 +132,8 @@ namespace FactPulse.SDK.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<bool?> valid = default;
-            Option<List<ValidationErrorResponse>?> errors = default;
-            Option<List<ValidationErrorResponse>?> warnings = default;
+            Option<List<FactureElectroniqueRestApiSchemasCdarValidationErrorResponse>?> errors = default;
+            Option<List<FactureElectroniqueRestApiSchemasCdarValidationErrorResponse>?> warnings = default;
 
             while (utf8JsonReader.Read())
             {
@@ -154,10 +154,10 @@ namespace FactPulse.SDK.Model
                             valid = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
                         case "errors":
-                            errors = new Option<List<ValidationErrorResponse>?>(JsonSerializer.Deserialize<List<ValidationErrorResponse>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            errors = new Option<List<FactureElectroniqueRestApiSchemasCdarValidationErrorResponse>?>(JsonSerializer.Deserialize<List<FactureElectroniqueRestApiSchemasCdarValidationErrorResponse>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "warnings":
-                            warnings = new Option<List<ValidationErrorResponse>?>(JsonSerializer.Deserialize<List<ValidationErrorResponse>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            warnings = new Option<List<FactureElectroniqueRestApiSchemasCdarValidationErrorResponse>?>(JsonSerializer.Deserialize<List<FactureElectroniqueRestApiSchemasCdarValidationErrorResponse>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         default:
                             break;
