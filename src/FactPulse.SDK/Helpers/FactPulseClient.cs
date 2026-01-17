@@ -314,7 +314,8 @@ namespace FactPulse.SDK.Helpers
 
             await EnsureAuthenticatedAsync();
             using var content = new MultipartFormDataContent();
-            content.Add(new StringContent(jsonData), "invoice_data");
+            var invoiceContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            content.Add(invoiceContent, "invoice_data", "invoice.json");
             content.Add(new StringContent(profile), "profile");
             content.Add(new StringContent(outputFormat), "output_format");
             content.Add(new ByteArrayContent(pdfContent), "source_pdf", Path.GetFileName(pdfPath));
