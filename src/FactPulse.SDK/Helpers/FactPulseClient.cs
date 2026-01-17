@@ -686,7 +686,7 @@ namespace FactPulse.SDK.Helpers
                 {
                     var validation = await ValidateFacturxPdfAsync(tempPath, profile);
                     result["validation"] = validation;
-                    if (validation.TryGetValue("is_compliant", out var ec) && ec is bool isCompliant && !isCompliant)
+                    if (validation.TryGetValue("isCompliant", out var ec) && ec is bool isCompliant && !isCompliant)
                     {
                         if (!string.IsNullOrEmpty(outputPath)) { await File.WriteAllBytesAsync(outputPath, pdfBytes); result["pdfPath"] = outputPath; }
                         return result;
@@ -705,8 +705,8 @@ namespace FactPulse.SDK.Helpers
                 // 4. AFNOR submission
                 if (submitAfnor)
                 {
-                    var invoiceNumber = invoice.TryGetValue("number", out var nf) ? nf?.ToString() :
-                        (invoice.TryGetValue("invoice_number", out var nf2) ? nf2?.ToString() : "INVOICE");
+                    var invoiceNumber = invoice.TryGetValue("invoiceNumber", out var nf) ? nf?.ToString() :
+                        (invoice.TryGetValue("number", out var nf2) ? nf2?.ToString() : "INVOICE");
                     var flowName = !string.IsNullOrEmpty(afnorFlowName) ? afnorFlowName : $"Invoice {invoiceNumber}";
                     var trackingId = !string.IsNullOrEmpty(afnorTrackingId) ? afnorTrackingId : invoiceNumber;
                     var afnorResult = await SubmitInvoiceAfnorAsync(tempPath, flowName, trackingId: trackingId);

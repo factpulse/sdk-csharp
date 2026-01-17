@@ -80,6 +80,9 @@ namespace FactPulse.SDK.Test.Api
             var aFNORPDPPAFlowServiceApi = _hostUsingConfigureWithAClient.Services.GetRequiredService<IAFNORPDPPAFlowServiceApi>();
             Assert.True(aFNORPDPPAFlowServiceApi.HttpClient.BaseAddress != null);
 
+            var cDARCycleDeVieApi = _hostUsingConfigureWithAClient.Services.GetRequiredService<ICDARCycleDeVieApi>();
+            Assert.True(cDARCycleDeVieApi.HttpClient.BaseAddress != null);
+
             var chorusProApi = _hostUsingConfigureWithAClient.Services.GetRequiredService<IChorusProApi>();
             Assert.True(chorusProApi.HttpClient.BaseAddress != null);
 
@@ -119,6 +122,9 @@ namespace FactPulse.SDK.Test.Api
 
             var aFNORPDPPAFlowServiceApi = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<IAFNORPDPPAFlowServiceApi>();
             Assert.True(aFNORPDPPAFlowServiceApi.HttpClient.BaseAddress != null);
+
+            var cDARCycleDeVieApi = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<ICDARCycleDeVieApi>();
+            Assert.True(cDARCycleDeVieApi.HttpClient.BaseAddress != null);
 
             var chorusProApi = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<IChorusProApi>();
             Assert.True(chorusProApi.HttpClient.BaseAddress != null);
@@ -160,6 +166,9 @@ namespace FactPulse.SDK.Test.Api
             var aFNORPDPPAFlowServiceApi = _hostUsingAddWithAClient.Services.GetRequiredService<IAFNORPDPPAFlowServiceApi>();
             Assert.True(aFNORPDPPAFlowServiceApi.HttpClient.BaseAddress != null);
             
+            var cDARCycleDeVieApi = _hostUsingAddWithAClient.Services.GetRequiredService<ICDARCycleDeVieApi>();
+            Assert.True(cDARCycleDeVieApi.HttpClient.BaseAddress != null);
+            
             var chorusProApi = _hostUsingAddWithAClient.Services.GetRequiredService<IChorusProApi>();
             Assert.True(chorusProApi.HttpClient.BaseAddress != null);
             
@@ -199,6 +208,9 @@ namespace FactPulse.SDK.Test.Api
 
             var aFNORPDPPAFlowServiceApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<IAFNORPDPPAFlowServiceApi>();
             Assert.True(aFNORPDPPAFlowServiceApi.HttpClient.BaseAddress != null);
+
+            var cDARCycleDeVieApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<ICDARCycleDeVieApi>();
+            Assert.True(cDARCycleDeVieApi.HttpClient.BaseAddress != null);
 
             var chorusProApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<IChorusProApi>();
             Assert.True(chorusProApi.HttpClient.BaseAddress != null);

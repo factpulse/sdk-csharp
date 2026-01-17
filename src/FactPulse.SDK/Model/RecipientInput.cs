@@ -27,96 +27,96 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Optional Chorus Pro credentials.  **MODE 1 - JWT retrieval (recommended):** Do not provide this &#x60;credentials&#x60; field in the payload. Credentials will be automatically retrieved via client_uid from JWT (0-trust).  **MODE 2 - Credentials in payload:** Provide all required fields below. Useful for tests or third-party integrations.
+    /// Destinataire du message CDAR.
     /// </summary>
-    public partial class FactureElectroniqueRestApiSchemasProcessingChorusProCredentials : IValidatableObject
+    public partial class RecipientInput : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="FactureElectroniqueRestApiSchemasProcessingChorusProCredentials" /> class.
+        /// Initializes a new instance of the <see cref="RecipientInput" /> class.
         /// </summary>
-        /// <param name="pisteClientId">pisteClientId</param>
-        /// <param name="pisteClientSecret">pisteClientSecret</param>
-        /// <param name="chorusLogin">chorusLogin</param>
-        /// <param name="chorusPassword">chorusPassword</param>
-        /// <param name="sandboxMode">[MODE 2] Use sandbox mode (default: True) (default to true)</param>
+        /// <param name="siren">siren</param>
+        /// <param name="siret">siret</param>
+        /// <param name="name">name</param>
+        /// <param name="role">Code rôle (BY, SE, WK, etc.) (default to &quot;BY&quot;)</param>
+        /// <param name="email">email</param>
         [JsonConstructor]
-        public FactureElectroniqueRestApiSchemasProcessingChorusProCredentials(Option<string?> pisteClientId = default, Option<string?> pisteClientSecret = default, Option<string?> chorusLogin = default, Option<string?> chorusPassword = default, Option<bool?> sandboxMode = default)
+        public RecipientInput(Option<string?> siren = default, Option<string?> siret = default, Option<string?> name = default, Option<string?> role = default, Option<string?> email = default)
         {
-            PisteClientIdOption = pisteClientId;
-            PisteClientSecretOption = pisteClientSecret;
-            ChorusLoginOption = chorusLogin;
-            ChorusPasswordOption = chorusPassword;
-            SandboxModeOption = sandboxMode;
+            SirenOption = siren;
+            SiretOption = siret;
+            NameOption = name;
+            RoleOption = role;
+            EmailOption = email;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Used to track the state of PisteClientId
+        /// Used to track the state of Siren
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> PisteClientIdOption { get; private set; }
+        public Option<string?> SirenOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets PisteClientId
+        /// Gets or Sets Siren
         /// </summary>
-        [JsonPropertyName("pisteClientId")]
-        public string? PisteClientId { get { return this.PisteClientIdOption; } set { this.PisteClientIdOption = new(value); } }
+        [JsonPropertyName("siren")]
+        public string? Siren { get { return this.SirenOption; } set { this.SirenOption = new(value); } }
 
         /// <summary>
-        /// Used to track the state of PisteClientSecret
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> PisteClientSecretOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets PisteClientSecret
-        /// </summary>
-        [JsonPropertyName("pisteClientSecret")]
-        public string? PisteClientSecret { get { return this.PisteClientSecretOption; } set { this.PisteClientSecretOption = new(value); } }
-
-        /// <summary>
-        /// Used to track the state of ChorusLogin
+        /// Used to track the state of Siret
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> ChorusLoginOption { get; private set; }
+        public Option<string?> SiretOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets ChorusLogin
+        /// Gets or Sets Siret
         /// </summary>
-        [JsonPropertyName("chorusLogin")]
-        public string? ChorusLogin { get { return this.ChorusLoginOption; } set { this.ChorusLoginOption = new(value); } }
+        [JsonPropertyName("siret")]
+        public string? Siret { get { return this.SiretOption; } set { this.SiretOption = new(value); } }
 
         /// <summary>
-        /// Used to track the state of ChorusPassword
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> ChorusPasswordOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets ChorusPassword
-        /// </summary>
-        [JsonPropertyName("chorusPassword")]
-        public string? ChorusPassword { get { return this.ChorusPasswordOption; } set { this.ChorusPasswordOption = new(value); } }
-
-        /// <summary>
-        /// Used to track the state of SandboxMode
+        /// Used to track the state of Name
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<bool?> SandboxModeOption { get; private set; }
+        public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// [MODE 2] Use sandbox mode (default: True)
+        /// Gets or Sets Name
         /// </summary>
-        /// <value>[MODE 2] Use sandbox mode (default: True)</value>
-        [JsonPropertyName("sandboxMode")]
-        public bool? SandboxMode { get { return this.SandboxModeOption; } set { this.SandboxModeOption = new(value); } }
+        [JsonPropertyName("name")]
+        public string? Name { get { return this.NameOption; } set { this.NameOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Role
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> RoleOption { get; private set; }
+
+        /// <summary>
+        /// Code rôle (BY, SE, WK, etc.)
+        /// </summary>
+        /// <value>Code rôle (BY, SE, WK, etc.)</value>
+        [JsonPropertyName("role")]
+        public string? Role { get { return this.RoleOption; } set { this.RoleOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Email
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> EmailOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Email
+        /// </summary>
+        [JsonPropertyName("email")]
+        public string? Email { get { return this.EmailOption; } set { this.EmailOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -125,12 +125,12 @@ namespace FactPulse.SDK.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class FactureElectroniqueRestApiSchemasProcessingChorusProCredentials {\n");
-            sb.Append("  PisteClientId: ").Append(PisteClientId).Append("\n");
-            sb.Append("  PisteClientSecret: ").Append(PisteClientSecret).Append("\n");
-            sb.Append("  ChorusLogin: ").Append(ChorusLogin).Append("\n");
-            sb.Append("  ChorusPassword: ").Append(ChorusPassword).Append("\n");
-            sb.Append("  SandboxMode: ").Append(SandboxMode).Append("\n");
+            sb.Append("class RecipientInput {\n");
+            sb.Append("  Siren: ").Append(Siren).Append("\n");
+            sb.Append("  Siret: ").Append(Siret).Append("\n");
+            sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  Role: ").Append(Role).Append("\n");
+            sb.Append("  Email: ").Append(Email).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -147,19 +147,19 @@ namespace FactPulse.SDK.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="FactureElectroniqueRestApiSchemasProcessingChorusProCredentials" />
+    /// A Json converter for type <see cref="RecipientInput" />
     /// </summary>
-    public class FactureElectroniqueRestApiSchemasProcessingChorusProCredentialsJsonConverter : JsonConverter<FactureElectroniqueRestApiSchemasProcessingChorusProCredentials>
+    public class RecipientInputJsonConverter : JsonConverter<RecipientInput>
     {
         /// <summary>
-        /// Deserializes json to <see cref="FactureElectroniqueRestApiSchemasProcessingChorusProCredentials" />
+        /// Deserializes json to <see cref="RecipientInput" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override FactureElectroniqueRestApiSchemasProcessingChorusProCredentials Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override RecipientInput Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -168,11 +168,11 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<string?> pisteClientId = default;
-            Option<string?> pisteClientSecret = default;
-            Option<string?> chorusLogin = default;
-            Option<string?> chorusPassword = default;
-            Option<bool?> sandboxMode = default;
+            Option<string?> siren = default;
+            Option<string?> siret = default;
+            Option<string?> name = default;
+            Option<string?> role = default;
+            Option<string?> email = default;
 
             while (utf8JsonReader.Read())
             {
@@ -189,20 +189,20 @@ namespace FactPulse.SDK.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "pisteClientId":
-                            pisteClientId = new Option<string?>(utf8JsonReader.GetString());
+                        case "siren":
+                            siren = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "pisteClientSecret":
-                            pisteClientSecret = new Option<string?>(utf8JsonReader.GetString());
+                        case "siret":
+                            siret = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "chorusLogin":
-                            chorusLogin = new Option<string?>(utf8JsonReader.GetString());
+                        case "name":
+                            name = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "chorusPassword":
-                            chorusPassword = new Option<string?>(utf8JsonReader.GetString());
+                        case "role":
+                            role = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "sandboxMode":
-                            sandboxMode = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
+                        case "email":
+                            email = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -210,62 +210,65 @@ namespace FactPulse.SDK.Model
                 }
             }
 
-            if (sandboxMode.IsSet && sandboxMode.Value == null)
-                throw new ArgumentNullException(nameof(sandboxMode), "Property is not nullable for class FactureElectroniqueRestApiSchemasProcessingChorusProCredentials.");
+            if (role.IsSet && role.Value == null)
+                throw new ArgumentNullException(nameof(role), "Property is not nullable for class RecipientInput.");
 
-            return new FactureElectroniqueRestApiSchemasProcessingChorusProCredentials(pisteClientId, pisteClientSecret, chorusLogin, chorusPassword, sandboxMode);
+            return new RecipientInput(siren, siret, name, role, email);
         }
 
         /// <summary>
-        /// Serializes a <see cref="FactureElectroniqueRestApiSchemasProcessingChorusProCredentials" />
+        /// Serializes a <see cref="RecipientInput" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="factureElectroniqueRestApiSchemasProcessingChorusProCredentials"></param>
+        /// <param name="recipientInput"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, FactureElectroniqueRestApiSchemasProcessingChorusProCredentials factureElectroniqueRestApiSchemasProcessingChorusProCredentials, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, RecipientInput recipientInput, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, factureElectroniqueRestApiSchemasProcessingChorusProCredentials, jsonSerializerOptions);
+            WriteProperties(writer, recipientInput, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="FactureElectroniqueRestApiSchemasProcessingChorusProCredentials" />
+        /// Serializes the properties of <see cref="RecipientInput" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="factureElectroniqueRestApiSchemasProcessingChorusProCredentials"></param>
+        /// <param name="recipientInput"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, FactureElectroniqueRestApiSchemasProcessingChorusProCredentials factureElectroniqueRestApiSchemasProcessingChorusProCredentials, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, RecipientInput recipientInput, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (factureElectroniqueRestApiSchemasProcessingChorusProCredentials.PisteClientIdOption.IsSet)
-                if (factureElectroniqueRestApiSchemasProcessingChorusProCredentials.PisteClientIdOption.Value != null)
-                    writer.WriteString("pisteClientId", factureElectroniqueRestApiSchemasProcessingChorusProCredentials.PisteClientId);
-                else
-                    writer.WriteNull("pisteClientId");
+            if (recipientInput.RoleOption.IsSet && recipientInput.Role == null)
+                throw new ArgumentNullException(nameof(recipientInput.Role), "Property is required for class RecipientInput.");
 
-            if (factureElectroniqueRestApiSchemasProcessingChorusProCredentials.PisteClientSecretOption.IsSet)
-                if (factureElectroniqueRestApiSchemasProcessingChorusProCredentials.PisteClientSecretOption.Value != null)
-                    writer.WriteString("pisteClientSecret", factureElectroniqueRestApiSchemasProcessingChorusProCredentials.PisteClientSecret);
+            if (recipientInput.SirenOption.IsSet)
+                if (recipientInput.SirenOption.Value != null)
+                    writer.WriteString("siren", recipientInput.Siren);
                 else
-                    writer.WriteNull("pisteClientSecret");
+                    writer.WriteNull("siren");
 
-            if (factureElectroniqueRestApiSchemasProcessingChorusProCredentials.ChorusLoginOption.IsSet)
-                if (factureElectroniqueRestApiSchemasProcessingChorusProCredentials.ChorusLoginOption.Value != null)
-                    writer.WriteString("chorusLogin", factureElectroniqueRestApiSchemasProcessingChorusProCredentials.ChorusLogin);
+            if (recipientInput.SiretOption.IsSet)
+                if (recipientInput.SiretOption.Value != null)
+                    writer.WriteString("siret", recipientInput.Siret);
                 else
-                    writer.WriteNull("chorusLogin");
+                    writer.WriteNull("siret");
 
-            if (factureElectroniqueRestApiSchemasProcessingChorusProCredentials.ChorusPasswordOption.IsSet)
-                if (factureElectroniqueRestApiSchemasProcessingChorusProCredentials.ChorusPasswordOption.Value != null)
-                    writer.WriteString("chorusPassword", factureElectroniqueRestApiSchemasProcessingChorusProCredentials.ChorusPassword);
+            if (recipientInput.NameOption.IsSet)
+                if (recipientInput.NameOption.Value != null)
+                    writer.WriteString("name", recipientInput.Name);
                 else
-                    writer.WriteNull("chorusPassword");
+                    writer.WriteNull("name");
 
-            if (factureElectroniqueRestApiSchemasProcessingChorusProCredentials.SandboxModeOption.IsSet)
-                writer.WriteBoolean("sandboxMode", factureElectroniqueRestApiSchemasProcessingChorusProCredentials.SandboxModeOption.Value!.Value);
+            if (recipientInput.RoleOption.IsSet)
+                writer.WriteString("role", recipientInput.Role);
+
+            if (recipientInput.EmailOption.IsSet)
+                if (recipientInput.EmailOption.Value != null)
+                    writer.WriteString("email", recipientInput.Email);
+                else
+                    writer.WriteNull("email");
         }
     }
 }
