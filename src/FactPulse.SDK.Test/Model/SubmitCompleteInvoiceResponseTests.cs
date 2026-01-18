@@ -91,12 +91,12 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'PdfBase64'
+        /// Test the property 'ContentB64'
         /// </summary>
         [Fact]
-        public void PdfBase64Test()
+        public void ContentB64Test()
         {
-            // TODO unit test for the property 'PdfBase64'
+            // TODO unit test for the property 'ContentB64'
         }
 
         /// <summary>

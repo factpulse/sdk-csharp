@@ -38,19 +38,19 @@ namespace FactPulse.SDK.Model
         /// <param name="destinationType">Destination type</param>
         /// <param name="enrichedInvoice">Enriched invoice data</param>
         /// <param name="facturxPdf">Generated PDF information</param>
-        /// <param name="pdfBase64">Generated Factur-X PDF (and signed if requested) base64-encoded</param>
+        /// <param name="contentB64">Generated Factur-X PDF (and signed if requested) base64-encoded</param>
         /// <param name="message">Return message</param>
         /// <param name="chorusResult">chorusResult</param>
         /// <param name="afnorResult">afnorResult</param>
         /// <param name="signature">signature</param>
         [JsonConstructor]
-        public SubmitCompleteInvoiceResponse(bool success, DestinationTypeEnum destinationType, EnrichedInvoiceInfo enrichedInvoice, FacturXPDFInfo facturxPdf, string pdfBase64, string message, Option<ChorusProResult?> chorusResult = default, Option<AFNORResult?> afnorResult = default, Option<SignatureInfo?> signature = default)
+        public SubmitCompleteInvoiceResponse(bool success, DestinationTypeEnum destinationType, EnrichedInvoiceInfo enrichedInvoice, FacturXPDFInfo facturxPdf, string contentB64, string message, Option<ChorusProResult?> chorusResult = default, Option<AFNORResult?> afnorResult = default, Option<SignatureInfo?> signature = default)
         {
             Success = success;
             DestinationType = destinationType;
             EnrichedInvoice = enrichedInvoice;
             FacturxPdf = facturxPdf;
-            PdfBase64 = pdfBase64;
+            ContentB64 = contentB64;
             Message = message;
             ChorusResultOption = chorusResult;
             AfnorResultOption = afnorResult;
@@ -159,8 +159,8 @@ namespace FactPulse.SDK.Model
         /// Generated Factur-X PDF (and signed if requested) base64-encoded
         /// </summary>
         /// <value>Generated Factur-X PDF (and signed if requested) base64-encoded</value>
-        [JsonPropertyName("pdfBase64")]
-        public string PdfBase64 { get; set; }
+        [JsonPropertyName("contentB64")]
+        public string ContentB64 { get; set; }
 
         /// <summary>
         /// Return message
@@ -220,7 +220,7 @@ namespace FactPulse.SDK.Model
             sb.Append("  DestinationType: ").Append(DestinationType).Append("\n");
             sb.Append("  EnrichedInvoice: ").Append(EnrichedInvoice).Append("\n");
             sb.Append("  FacturxPdf: ").Append(FacturxPdf).Append("\n");
-            sb.Append("  PdfBase64: ").Append(PdfBase64).Append("\n");
+            sb.Append("  ContentB64: ").Append(ContentB64).Append("\n");
             sb.Append("  Message: ").Append(Message).Append("\n");
             sb.Append("  ChorusResult: ").Append(ChorusResult).Append("\n");
             sb.Append("  AfnorResult: ").Append(AfnorResult).Append("\n");
@@ -266,7 +266,7 @@ namespace FactPulse.SDK.Model
             Option<SubmitCompleteInvoiceResponse.DestinationTypeEnum?> destinationType = default;
             Option<EnrichedInvoiceInfo?> enrichedInvoice = default;
             Option<FacturXPDFInfo?> facturxPdf = default;
-            Option<string?> pdfBase64 = default;
+            Option<string?> contentB64 = default;
             Option<string?> message = default;
             Option<ChorusProResult?> chorusResult = default;
             Option<AFNORResult?> afnorResult = default;
@@ -301,8 +301,8 @@ namespace FactPulse.SDK.Model
                         case "facturxPdf":
                             facturxPdf = new Option<FacturXPDFInfo?>(JsonSerializer.Deserialize<FacturXPDFInfo>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
-                        case "pdfBase64":
-                            pdfBase64 = new Option<string?>(utf8JsonReader.GetString()!);
+                        case "contentB64":
+                            contentB64 = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "message":
                             message = new Option<string?>(utf8JsonReader.GetString()!);
@@ -334,8 +334,8 @@ namespace FactPulse.SDK.Model
             if (!facturxPdf.IsSet)
                 throw new ArgumentException("Property is required for class SubmitCompleteInvoiceResponse.", nameof(facturxPdf));
 
-            if (!pdfBase64.IsSet)
-                throw new ArgumentException("Property is required for class SubmitCompleteInvoiceResponse.", nameof(pdfBase64));
+            if (!contentB64.IsSet)
+                throw new ArgumentException("Property is required for class SubmitCompleteInvoiceResponse.", nameof(contentB64));
 
             if (!message.IsSet)
                 throw new ArgumentException("Property is required for class SubmitCompleteInvoiceResponse.", nameof(message));
@@ -352,13 +352,13 @@ namespace FactPulse.SDK.Model
             if (facturxPdf.IsSet && facturxPdf.Value == null)
                 throw new ArgumentNullException(nameof(facturxPdf), "Property is not nullable for class SubmitCompleteInvoiceResponse.");
 
-            if (pdfBase64.IsSet && pdfBase64.Value == null)
-                throw new ArgumentNullException(nameof(pdfBase64), "Property is not nullable for class SubmitCompleteInvoiceResponse.");
+            if (contentB64.IsSet && contentB64.Value == null)
+                throw new ArgumentNullException(nameof(contentB64), "Property is not nullable for class SubmitCompleteInvoiceResponse.");
 
             if (message.IsSet && message.Value == null)
                 throw new ArgumentNullException(nameof(message), "Property is not nullable for class SubmitCompleteInvoiceResponse.");
 
-            return new SubmitCompleteInvoiceResponse(success.Value!.Value!, destinationType.Value!.Value!, enrichedInvoice.Value!, facturxPdf.Value!, pdfBase64.Value!, message.Value!, chorusResult, afnorResult, signature);
+            return new SubmitCompleteInvoiceResponse(success.Value!.Value!, destinationType.Value!.Value!, enrichedInvoice.Value!, facturxPdf.Value!, contentB64.Value!, message.Value!, chorusResult, afnorResult, signature);
         }
 
         /// <summary>
@@ -391,8 +391,8 @@ namespace FactPulse.SDK.Model
             if (submitCompleteInvoiceResponse.FacturxPdf == null)
                 throw new ArgumentNullException(nameof(submitCompleteInvoiceResponse.FacturxPdf), "Property is required for class SubmitCompleteInvoiceResponse.");
 
-            if (submitCompleteInvoiceResponse.PdfBase64 == null)
-                throw new ArgumentNullException(nameof(submitCompleteInvoiceResponse.PdfBase64), "Property is required for class SubmitCompleteInvoiceResponse.");
+            if (submitCompleteInvoiceResponse.ContentB64 == null)
+                throw new ArgumentNullException(nameof(submitCompleteInvoiceResponse.ContentB64), "Property is required for class SubmitCompleteInvoiceResponse.");
 
             if (submitCompleteInvoiceResponse.Message == null)
                 throw new ArgumentNullException(nameof(submitCompleteInvoiceResponse.Message), "Property is required for class SubmitCompleteInvoiceResponse.");
@@ -405,7 +405,7 @@ namespace FactPulse.SDK.Model
             JsonSerializer.Serialize(writer, submitCompleteInvoiceResponse.EnrichedInvoice, jsonSerializerOptions);
             writer.WritePropertyName("facturxPdf");
             JsonSerializer.Serialize(writer, submitCompleteInvoiceResponse.FacturxPdf, jsonSerializerOptions);
-            writer.WriteString("pdfBase64", submitCompleteInvoiceResponse.PdfBase64);
+            writer.WriteString("contentB64", submitCompleteInvoiceResponse.ContentB64);
 
             writer.WriteString("message", submitCompleteInvoiceResponse.Message);
 

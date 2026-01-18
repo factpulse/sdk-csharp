@@ -83,15 +83,26 @@ namespace FactPulse.SDK
 
             var result = await ParseResponseAsync(response);
 
-            // Auto-poll if taskId present
+            // Auto-poll: support both taskId (camelCase) and task_id (snake_case)
+            string taskId = null;
             if (result.TryGetValue("taskId", out var taskIdObj) && taskIdObj is JsonElement taskIdElem)
-                return await PollAsync(taskIdElem.GetString());
+                taskId = taskIdElem.GetString();
+            else if (result.TryGetValue("task_id", out var taskIdObj2) && taskIdObj2 is JsonElement taskIdElem2)
+                taskId = taskIdElem2.GetString();
+            if (taskId != null)
+                return await PollAsync(taskId);
 
-            // Auto-decode base64
+            // Auto-decode: support both content_b64 and contentB64
+            string b64Content = null;
             if (result.TryGetValue("content_b64", out var b64Obj) && b64Obj is JsonElement b64Elem)
+                b64Content = b64Elem.GetString();
+            else if (result.TryGetValue("contentB64", out var b64Obj2) && b64Obj2 is JsonElement b64Elem2)
+                b64Content = b64Elem2.GetString();
+            if (b64Content != null)
             {
-                result["content"] = Convert.FromBase64String(b64Elem.GetString());
+                result["content"] = Convert.FromBase64String(b64Content);
                 result.Remove("content_b64");
+                result.Remove("contentB64");
             }
 
             return result;
@@ -168,10 +179,17 @@ namespace FactPulse.SDK
                         ? JsonSerializer.Deserialize<Dictionary<string, object>>(re.GetRawText())
                         : new Dictionary<string, object>();
 
+                    // Support both content_b64 and contentB64
+                    string b64Content = null;
                     if (result.TryGetValue("content_b64", out var b64) && b64 is JsonElement b64Elem)
+                        b64Content = b64Elem.GetString();
+                    else if (result.TryGetValue("contentB64", out var b64_2) && b64_2 is JsonElement b64Elem2)
+                        b64Content = b64Elem2.GetString();
+                    if (b64Content != null)
                     {
-                        result["content"] = Convert.FromBase64String(b64Elem.GetString());
+                        result["content"] = Convert.FromBase64String(b64Content);
                         result.Remove("content_b64");
+                        result.Remove("contentB64");
                     }
                     return result;
                 }

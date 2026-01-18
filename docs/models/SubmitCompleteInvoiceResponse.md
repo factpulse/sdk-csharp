@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **DestinationType** | **string** | Destination type | 
 **EnrichedInvoice** | [**EnrichedInvoiceInfo**](EnrichedInvoiceInfo.md) | Enriched invoice data | 
 **FacturxPdf** | [**FacturXPDFInfo**](FacturXPDFInfo.md) | Generated PDF information | 
-**PdfBase64** | **string** | Generated Factur-X PDF (and signed if requested) base64-encoded | 
+**ContentB64** | **string** | Generated Factur-X PDF (and signed if requested) base64-encoded | 
 **Message** | **string** | Return message | 
 **ChorusResult** | [**ChorusProResult**](ChorusProResult.md) |  | [optional] 
 **AfnorResult** | [**AFNORResult**](AFNORResult.md) |  | [optional] 

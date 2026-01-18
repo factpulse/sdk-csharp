@@ -196,8 +196,8 @@ namespace FactPulse.SDK.Client
                 return ErrorLevelValueConverter.ToJsonValue(errorLevel);
             if (obj is ErrorSource errorSource)
                 return ErrorSourceValueConverter.ToJsonValue(errorSource);
-            if (obj is FactureElectroniqueModelsInvoiceTypeCode factureElectroniqueModelsInvoiceTypeCode)
-                return FactureElectroniqueModelsInvoiceTypeCodeValueConverter.ToJsonValue(factureElectroniqueModelsInvoiceTypeCode);
+            if (obj is FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode factureElectroniqueRestApiSchemasEreportingInvoiceTypeCode)
+                return FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeValueConverter.ToJsonValue(factureElectroniqueRestApiSchemasEreportingInvoiceTypeCode);
             if (obj is FieldStatus fieldStatus)
                 return FieldStatusValueConverter.ToJsonValue(fieldStatus);
             if (obj is FlowDirection flowDirection)
