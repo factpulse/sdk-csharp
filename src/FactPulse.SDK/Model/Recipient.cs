@@ -44,9 +44,9 @@ namespace FactPulse.SDK.Model
         /// <param name="contact">contact</param>
         /// <param name="globalIds">globalIds</param>
         [JsonConstructor]
-        public Recipient(ElectronicAddress? electronicAddress = default, Option<string?> executingServiceCode = default, Option<string?> name = default, Option<string?> siren = default, Option<string?> siret = default, Option<string?> vatNumber = default, Option<PostalAddress?> postalAddress = default, Option<Contact?> contact = default, Option<List<ElectronicAddress>?> globalIds = default)
+        public Recipient(Option<ElectronicAddress?> electronicAddress = default, Option<string?> executingServiceCode = default, Option<string?> name = default, Option<string?> siren = default, Option<string?> siret = default, Option<string?> vatNumber = default, Option<PostalAddress?> postalAddress = default, Option<Contact?> contact = default, Option<List<ElectronicAddress>?> globalIds = default)
         {
-            ElectronicAddress = electronicAddress;
+            ElectronicAddressOption = electronicAddress;
             ExecutingServiceCodeOption = executingServiceCode;
             NameOption = name;
             SirenOption = siren;
@@ -61,10 +61,17 @@ namespace FactPulse.SDK.Model
         partial void OnCreated();
 
         /// <summary>
+        /// Used to track the state of ElectronicAddress
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<ElectronicAddress?> ElectronicAddressOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets ElectronicAddress
         /// </summary>
         [JsonPropertyName("electronic_address")]
-        public ElectronicAddress? ElectronicAddress { get; set; }
+        public ElectronicAddress? ElectronicAddress { get { return this.ElectronicAddressOption; } set { this.ElectronicAddressOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of ExecutingServiceCode
@@ -282,10 +289,7 @@ namespace FactPulse.SDK.Model
                 }
             }
 
-            if (!electronicAddress.IsSet)
-                throw new ArgumentException("Property is required for class Recipient.", nameof(electronicAddress));
-
-            return new Recipient(electronicAddress.Value!, executingServiceCode, name, siren, siret, vatNumber, postalAddress, contact, globalIds);
+            return new Recipient(electronicAddress, executingServiceCode, name, siren, siret, vatNumber, postalAddress, contact, globalIds);
         }
 
         /// <summary>
@@ -312,13 +316,14 @@ namespace FactPulse.SDK.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, Recipient recipient, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (recipient.ElectronicAddress != null)
-            {
-                writer.WritePropertyName("electronic_address");
-                JsonSerializer.Serialize(writer, recipient.ElectronicAddress, jsonSerializerOptions);
-            }
-            else
-                writer.WriteNull("electronic_address");
+            if (recipient.ElectronicAddressOption.IsSet)
+                if (recipient.ElectronicAddressOption.Value != null)
+                {
+                    writer.WritePropertyName("electronic_address");
+                    JsonSerializer.Serialize(writer, recipient.ElectronicAddress, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("electronic_address");
             if (recipient.ExecutingServiceCodeOption.IsSet)
                 if (recipient.ExecutingServiceCodeOption.Value != null)
                     writer.WriteString("executing_service_code", recipient.ExecutingServiceCode);

@@ -53,10 +53,10 @@ namespace FactPulse.SDK.Model
         /// <param name="contact">contact</param>
         /// <param name="globalIds">globalIds</param>
         [JsonConstructor]
-        public Supplier(int supplierId, ElectronicAddress? electronicAddress = default, Option<string?> privateId = default, Option<int?> supplierBankAccountCode = default, Option<int?> supplierServiceId = default, Option<string?> name = default, Option<string?> tradingBusinessName = default, Option<string?> legalDescription = default, Option<string?> siren = default, Option<string?> siret = default, Option<string?> vatNumber = default, Option<string?> iban = default, Option<string?> bic = default, Option<string?> bankAccountName = default, Option<string?> proprietaryId = default, Option<PostalAddress?> postalAddress = default, Option<Contact?> contact = default, Option<List<ElectronicAddress>?> globalIds = default)
+        public Supplier(int supplierId, Option<ElectronicAddress?> electronicAddress = default, Option<string?> privateId = default, Option<int?> supplierBankAccountCode = default, Option<int?> supplierServiceId = default, Option<string?> name = default, Option<string?> tradingBusinessName = default, Option<string?> legalDescription = default, Option<string?> siren = default, Option<string?> siret = default, Option<string?> vatNumber = default, Option<string?> iban = default, Option<string?> bic = default, Option<string?> bankAccountName = default, Option<string?> proprietaryId = default, Option<PostalAddress?> postalAddress = default, Option<Contact?> contact = default, Option<List<ElectronicAddress>?> globalIds = default)
         {
             SupplierId = supplierId;
-            ElectronicAddress = electronicAddress;
+            ElectronicAddressOption = electronicAddress;
             PrivateIdOption = privateId;
             SupplierBankAccountCodeOption = supplierBankAccountCode;
             SupplierServiceIdOption = supplierServiceId;
@@ -85,10 +85,17 @@ namespace FactPulse.SDK.Model
         public int SupplierId { get; set; }
 
         /// <summary>
+        /// Used to track the state of ElectronicAddress
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<ElectronicAddress?> ElectronicAddressOption { get; private set; }
+
+        /// <summary>
         /// Gets or Sets ElectronicAddress
         /// </summary>
         [JsonPropertyName("electronic_address")]
-        public ElectronicAddress? ElectronicAddress { get; set; }
+        public ElectronicAddress? ElectronicAddress { get { return this.ElectronicAddressOption; } set { this.ElectronicAddressOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of PrivateId
@@ -458,13 +465,10 @@ namespace FactPulse.SDK.Model
             if (!supplierId.IsSet)
                 throw new ArgumentException("Property is required for class Supplier.", nameof(supplierId));
 
-            if (!electronicAddress.IsSet)
-                throw new ArgumentException("Property is required for class Supplier.", nameof(electronicAddress));
-
             if (supplierId.IsSet && supplierId.Value == null)
                 throw new ArgumentNullException(nameof(supplierId), "Property is not nullable for class Supplier.");
 
-            return new Supplier(supplierId.Value!.Value!, electronicAddress.Value!, privateId, supplierBankAccountCode, supplierServiceId, name, tradingBusinessName, legalDescription, siren, siret, vatNumber, iban, bic, bankAccountName, proprietaryId, postalAddress, contact, globalIds);
+            return new Supplier(supplierId.Value!.Value!, electronicAddress, privateId, supplierBankAccountCode, supplierServiceId, name, tradingBusinessName, legalDescription, siren, siret, vatNumber, iban, bic, bankAccountName, proprietaryId, postalAddress, contact, globalIds);
         }
 
         /// <summary>
@@ -493,13 +497,14 @@ namespace FactPulse.SDK.Model
         {
             writer.WriteNumber("supplier_id", supplier.SupplierId);
 
-            if (supplier.ElectronicAddress != null)
-            {
-                writer.WritePropertyName("electronic_address");
-                JsonSerializer.Serialize(writer, supplier.ElectronicAddress, jsonSerializerOptions);
-            }
-            else
-                writer.WriteNull("electronic_address");
+            if (supplier.ElectronicAddressOption.IsSet)
+                if (supplier.ElectronicAddressOption.Value != null)
+                {
+                    writer.WritePropertyName("electronic_address");
+                    JsonSerializer.Serialize(writer, supplier.ElectronicAddress, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("electronic_address");
             if (supplier.PrivateIdOption.IsSet)
                 if (supplier.PrivateIdOption.Value != null)
                     writer.WriteString("private_id", supplier.PrivateId);

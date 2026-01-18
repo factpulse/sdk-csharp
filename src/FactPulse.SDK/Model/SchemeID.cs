@@ -27,25 +27,25 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Identification scheme codes (Electronic Address Scheme - EAS), mainly for electronic invoice addressing.  **Possible values:** - &#x60;0225&#x60;: FR_SIREN - French SIREN (most common for France) - &#x60;0009&#x60;: FR_SIRET - French SIRET - &#x60;0002&#x60;: FR_SIREN_OLD - French SIREN (old code, for legal organization ID) - &#x60;0088&#x60;: GLN - Global Location Number - &#x60;0060&#x60;: DUNS - Data Universal Numbering System - &#x60;9957&#x60;: FR_VAT_INTRA - French intra-community VAT number - &#x60;0199&#x60;: GLEIF - Global Legal Entity Identifier Foundation - &#x60;0231&#x60;: DT_DIRECTORY_ID - Directory ID for tax administration - &#x60;EM&#x60;: EMAIL - Email-based electronic address (BT-34/BT-49)
+    /// Identification scheme codes (Electronic Address Scheme - EAS).  **Electronic Address (routing for PDP/Chorus Pro):** - &#x60;0225&#x60;: FR_ELECTRONIC_ADDRESS - French electronic billing address (BT-34/BT-49)             Format: SIREN or SIREN_SUFFIX (e.g., \&quot;920195229_92019522900017\&quot;)  **Legal Identifiers (entity identification):** - &#x60;0002&#x60;: FR_SIREN - French SIREN (9 digits) for BT-30/BT-47 - &#x60;0009&#x60;: FR_SIRET - French SIRET (14 digits) for BT-29/BT-46  **Other schemes:** - &#x60;0088&#x60;: GLN - Global Location Number - &#x60;0060&#x60;: DUNS - Data Universal Numbering System - &#x60;9957&#x60;: FR_VAT_INTRA - French intra-community VAT number - &#x60;0199&#x60;: GLEIF - Global Legal Entity Identifier Foundation - &#x60;0231&#x60;: DT_DIRECTORY_ID - Directory ID for tax administration - &#x60;EM&#x60;: EMAIL - Email-based electronic address
     /// </summary>
-    /// <value>Identification scheme codes (Electronic Address Scheme - EAS), mainly for electronic invoice addressing.  **Possible values:** - &#x60;0225&#x60;: FR_SIREN - French SIREN (most common for France) - &#x60;0009&#x60;: FR_SIRET - French SIRET - &#x60;0002&#x60;: FR_SIREN_OLD - French SIREN (old code, for legal organization ID) - &#x60;0088&#x60;: GLN - Global Location Number - &#x60;0060&#x60;: DUNS - Data Universal Numbering System - &#x60;9957&#x60;: FR_VAT_INTRA - French intra-community VAT number - &#x60;0199&#x60;: GLEIF - Global Legal Entity Identifier Foundation - &#x60;0231&#x60;: DT_DIRECTORY_ID - Directory ID for tax administration - &#x60;EM&#x60;: EMAIL - Email-based electronic address (BT-34/BT-49)</value>
+    /// <value>Identification scheme codes (Electronic Address Scheme - EAS).  **Electronic Address (routing for PDP/Chorus Pro):** - &#x60;0225&#x60;: FR_ELECTRONIC_ADDRESS - French electronic billing address (BT-34/BT-49)             Format: SIREN or SIREN_SUFFIX (e.g., \&quot;920195229_92019522900017\&quot;)  **Legal Identifiers (entity identification):** - &#x60;0002&#x60;: FR_SIREN - French SIREN (9 digits) for BT-30/BT-47 - &#x60;0009&#x60;: FR_SIRET - French SIRET (14 digits) for BT-29/BT-46  **Other schemes:** - &#x60;0088&#x60;: GLN - Global Location Number - &#x60;0060&#x60;: DUNS - Data Universal Numbering System - &#x60;9957&#x60;: FR_VAT_INTRA - French intra-community VAT number - &#x60;0199&#x60;: GLEIF - Global Legal Entity Identifier Foundation - &#x60;0231&#x60;: DT_DIRECTORY_ID - Directory ID for tax administration - &#x60;EM&#x60;: EMAIL - Email-based electronic address</value>
     public enum SchemeID
     {
         /// <summary>
-        /// Enum FR_SIREN for value: 0225
+        /// Enum FR_ELECTRONIC_ADDRESS for value: 0225
         /// </summary>
-        FR_SIREN = 1,
+        FR_ELECTRONIC_ADDRESS = 1,
+
+        /// <summary>
+        /// Enum FR_SIREN for value: 0002
+        /// </summary>
+        FR_SIREN = 2,
 
         /// <summary>
         /// Enum FR_SIRET for value: 0009
         /// </summary>
-        FR_SIRET = 2,
-
-        /// <summary>
-        /// Enum FR_SIREN_OLD for value: 0002
-        /// </summary>
-        FR_SIREN_OLD = 3,
+        FR_SIRET = 3,
 
         /// <summary>
         /// Enum GLN for value: 0088
@@ -136,13 +136,13 @@ namespace FactPulse.SDK.Model
         public static SchemeID FromString(string value)
         {
             if (value.Equals("0225"))
+                return SchemeID.FR_ELECTRONIC_ADDRESS;
+
+            if (value.Equals("0002"))
                 return SchemeID.FR_SIREN;
 
             if (value.Equals("0009"))
                 return SchemeID.FR_SIRET;
-
-            if (value.Equals("0002"))
-                return SchemeID.FR_SIREN_OLD;
 
             if (value.Equals("0088"))
                 return SchemeID.GLN;
@@ -200,13 +200,13 @@ namespace FactPulse.SDK.Model
         public static SchemeID? FromStringOrDefault(string value)
         {
             if (value.Equals("0225"))
+                return SchemeID.FR_ELECTRONIC_ADDRESS;
+
+            if (value.Equals("0002"))
                 return SchemeID.FR_SIREN;
 
             if (value.Equals("0009"))
                 return SchemeID.FR_SIRET;
-
-            if (value.Equals("0002"))
-                return SchemeID.FR_SIREN_OLD;
 
             if (value.Equals("0088"))
                 return SchemeID.GLN;
@@ -264,14 +264,14 @@ namespace FactPulse.SDK.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string ToJsonValue(SchemeID value)
         {
-            if (value == SchemeID.FR_SIREN)
+            if (value == SchemeID.FR_ELECTRONIC_ADDRESS)
                 return "0225";
+
+            if (value == SchemeID.FR_SIREN)
+                return "0002";
 
             if (value == SchemeID.FR_SIRET)
                 return "0009";
-
-            if (value == SchemeID.FR_SIREN_OLD)
-                return "0002";
 
             if (value == SchemeID.GLN)
                 return "0088";

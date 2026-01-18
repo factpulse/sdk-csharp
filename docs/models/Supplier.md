@@ -6,7 +6,7 @@ Information about the supplier / seller (BG-4).
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **SupplierId** | **int** |  | 
-**ElectronicAddress** | [**ElectronicAddress**](ElectronicAddress.md) |  | 
+**ElectronicAddress** | [**ElectronicAddress**](ElectronicAddress.md) |  | [optional] 
 **PrivateId** | **string** |  | [optional] 
 **SupplierBankAccountCode** | **int** |  | [optional] 
 **SupplierServiceId** | **int** |  | [optional] 

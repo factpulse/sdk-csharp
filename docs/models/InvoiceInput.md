@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **TaxExclusiveAmount** | [**Taxexclusiveamount1**](Taxexclusiveamount1.md) |  | 
 **TaxAmount** | [**Taxamount1**](Taxamount1.md) |  | 
 **TaxBreakdown** | [**List&lt;TaxBreakdownInput&gt;**](TaxBreakdownInput.md) | VAT breakdown | 
-**TypeCode** | **FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode** | Invoice type code | [optional] 
+**TypeCode** | **InvoiceTypeCode** | Invoice type code | [optional] 
 **Currency** | [**Currency**](Currency.md) |  | [optional] 
 **DueDate** | **DateOnly** |  | [optional] 
 **SellerVatId** | **string** |  | [optional] 
