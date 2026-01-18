@@ -5,10 +5,10 @@ Official C# client for the FactPulse API - French electronic invoicing.
 ## Features
 
 - **Factur-X**: Generation and validation of electronic invoices (MINIMUM, BASIC, EN16931, EXTENDED profiles)
-- **Chorus Pro**: Integration with the French public sector invoicing platform
-- **AFNOR PDP/PA**: Submission of flows compliant with the XP Z12-013 standard
-- **Electronic signature**: PDF signature (PAdES-B-B, PAdES-B-T, PAdES-B-LT)
-- **Simplified client**: JWT authentication and integrated polling via `Helpers`
+- **Chorus Pro**: Integration with the French public invoicing platform
+- **AFNOR PDP/PA**: Submission of flows compliant with XP Z12-013 standard
+- **Electronic signature**: PDF signing (PAdES-B-B, PAdES-B-T, PAdES-B-LT)
+- **Thin HTTP wrapper**: Generic `PostAsync()` and `GetAsync()` methods with automatic JWT auth and polling
 
 ## Installation
 
@@ -24,189 +24,216 @@ Install-Package FactPulse.SDK
 
 ## Quick Start
 
-The `Helpers` namespace provides a simplified API with automatic authentication and polling:
-
 ```csharp
+using System;
 using System.IO;
-using FactPulse.SDK.Helpers;
+using System.Collections.Generic;
+using FactPulse.SDK;
 
 // Create the client
 var client = new FactPulseClient(
     "your_email@example.com",
-    "your_password"
+    "your_password",
+    "your-client-uuid"  // From dashboard: Configuration > Clients
 );
 
-// Build the invoice using simplified format (auto-calculates totals)
-var invoiceData = new Dictionary<string, object>
+// Read your source PDF
+var pdfB64 = Convert.ToBase64String(File.ReadAllBytes("source_invoice.pdf"));
+
+// Generate Factur-X and submit to PDP in one call
+var result = await client.PostAsync("processing/invoices/submit-complete-async", new Dictionary<string, object>
 {
-    ["number"] = "INV-2025-001",
-    ["supplier"] = new Dictionary<string, object>
+    ["invoiceData"] = new Dictionary<string, object>
     {
-        ["name"] = "My Company SAS",
-        ["siret"] = "12345678901234",
-        ["iban"] = "FR7630001007941234567890185"
-    },
-    ["recipient"] = new Dictionary<string, object>
-    {
-        ["name"] = "Client SARL",
-        ["siret"] = "98765432109876"
-    },
-    ["lines"] = new List<Dictionary<string, object>>
-    {
-        new Dictionary<string, object>
+        ["number"] = "INV-2025-001",
+        ["supplier"] = new Dictionary<string, object>
         {
-            ["description"] = "Consulting services",
-            ["quantity"] = 10,
-            ["unitPrice"] = 100.0,
-            ["vatRate"] = 20
+            ["siret"] = "12345678901234",
+            ["iban"] = "FR7630001007941234567890185",
+            ["routingAddress"] = "12345678901234"
+        },
+        ["recipient"] = new Dictionary<string, object>
+        {
+            ["siret"] = "98765432109876",
+            ["routingAddress"] = "98765432109876"
+        },
+        ["lines"] = new List<Dictionary<string, object>>
+        {
+            new Dictionary<string, object>
+            {
+                ["description"] = "Consulting services",
+                ["quantity"] = 10,
+                ["unitPrice"] = 100.0,
+                ["vatRate"] = 20.0
+            }
         }
+    },
+    ["sourcePdf"] = pdfB64,
+    ["profile"] = "EN16931",
+    ["destination"] = new Dictionary<string, object> { ["type"] = "afnor" }
+});
+
+// PDF is in result["content"] (auto-polled, auto-decoded)
+var facturxPdf = (byte[])result["content"];
+await File.WriteAllBytesAsync("facturx_invoice.pdf", facturxPdf);
+
+var afnorResult = (Dictionary<string, object>)result["afnorResult"];
+Console.WriteLine($"Flow ID: {afnorResult["flowId"]}");
+```
+
+## API Methods
+
+The SDK provides two generic methods that map directly to API endpoints:
+
+```csharp
+// POST /api/v1/{path}
+var result = await client.PostAsync("path/to/endpoint", data);
+
+// GET /api/v1/{path}
+var result = await client.GetAsync("path/to/endpoint", queryParams);
+```
+
+### Common Endpoints
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `processing/invoices/submit-complete-async` | POST | Generate Factur-X + submit to PDP |
+| `processing/generate-invoice` | POST | Generate Factur-X XML or PDF |
+| `processing/validate-xml` | POST | Validate Factur-X XML |
+| `processing/validate-facturx-pdf` | POST | Validate Factur-X PDF |
+| `processing/sign-pdf` | POST | Sign PDF with certificate |
+| `afnor/flow/v1/flows` | POST | Submit flow to AFNOR PDP |
+| `afnor/incoming-flows/{flow_id}` | GET | Get incoming invoice |
+| `chorus-pro/factures/soumettre` | POST | Submit to Chorus Pro |
+
+## Webhooks
+
+Instead of polling, you can receive results via webhook by adding `callbackUrl`:
+
+```csharp
+var result = await client.PostAsync("processing/invoices/submit-complete-async", new Dictionary<string, object>
+{
+    ["invoiceData"] = invoiceData,
+    ["sourcePdf"] = pdfB64,
+    ["destination"] = new Dictionary<string, object> { ["type"] = "afnor" },
+    ["callbackUrl"] = "https://your-server.com/webhook/factpulse",
+    ["webhookMode"] = "INLINE"  // or "DOWNLOAD_URL"
+});
+
+var taskId = (string)result["taskId"];
+// Result will be POSTed to your webhook URL
+```
+
+### Webhook Receiver Example (ASP.NET Core)
+
+```csharp
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.Json;
+
+[ApiController]
+[Route("webhook")]
+public class WebhookController : ControllerBase
+{
+    private const string WebhookSecret = "your-shared-secret";
+
+    [HttpPost("factpulse")]
+    public IActionResult HandleWebhook()
+    {
+        using var reader = new StreamReader(Request.Body);
+        var payload = reader.ReadToEndAsync().Result;
+        var signature = Request.Headers["X-Webhook-Signature"].ToString();
+
+        if (!VerifySignature(payload, signature))
+        {
+            return Unauthorized(new { error = "Invalid signature" });
+        }
+
+        var eventData = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(payload);
+        var eventType = eventData["event_type"].GetString();
+        var data = eventData["data"];
+
+        switch (eventType)
+        {
+            case "submission.completed":
+                var flowId = data.GetProperty("afnorResult").GetProperty("flowId").GetString();
+                Console.WriteLine($"Invoice submitted: {flowId}");
+                break;
+            case "submission.failed":
+                Console.WriteLine($"Submission failed: {data.GetProperty("error")}");
+                break;
+        }
+
+        return Ok(new { status = "received" });
     }
-};
 
-// Generate the Factur-X PDF
-var pdfBytes = await client.GenerateFacturxAsync(invoiceData, "source_invoice.pdf");
+    private static bool VerifySignature(string payload, string signature)
+    {
+        if (!signature.StartsWith("sha256=")) return false;
 
-await File.WriteAllBytesAsync("invoice_facturx.pdf", pdfBytes);
+        using var hmac = new HMACSHA256(Encoding.UTF8.GetBytes(WebhookSecret));
+        var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(payload));
+        var expected = BitConverter.ToString(hash).Replace("-", "").ToLower();
+
+        return expected == signature[7..];
+    }
+}
 ```
 
-## Available Helpers (AmountHelpers class)
+### Webhook Event Types
 
-### Amount(value)
+| Event | Description |
+|-------|-------------|
+| `generation.completed` | Factur-X generated successfully |
+| `generation.failed` | Generation failed |
+| `validation.completed` | Validation passed |
+| `validation.failed` | Validation failed |
+| `signature.completed` | PDF signed |
+| `submission.completed` | Submitted to PDP/Chorus |
+| `submission.failed` | Submission failed |
 
-Converts a value to a formatted string for monetary amounts.
+## Zero-Storage Mode
+
+Pass PDP credentials directly in the request (no server-side storage):
 
 ```csharp
-using static FactPulse.SDK.Helpers.AmountHelpers;
-
-Amount(1234.5m);      // "1234.50"
-Amount("1234.56");    // "1234.56"
-Amount(null);         // "0.00"
+var result = await client.PostAsync("processing/invoices/submit-complete-async", new Dictionary<string, object>
+{
+    ["invoiceData"] = invoiceData,
+    ["sourcePdf"] = pdfB64,
+    ["destination"] = new Dictionary<string, object>
+    {
+        ["type"] = "afnor",
+        ["flowServiceUrl"] = "https://api.pdp.example.com/flow/v1",
+        ["tokenUrl"] = "https://auth.pdp.example.com/oauth/token",
+        ["clientId"] = "your_pdp_client_id",
+        ["clientSecret"] = "your_pdp_client_secret"
+    }
+});
 ```
 
-### TotalAmount(excludingTax, vat, includingTax, due, ...)
-
-Creates a complete TotalAmount object.
+## Error Handling
 
 ```csharp
-var total = TotalAmount(
-    1000.00m,               // excludingTax
-    200.00m,                // vat
-    1200.00m,               // includingTax
-    1200.00m,               // due
-    50.00m,                 // discountIncludingTax (optional)
-    "Loyalty discount",     // discountReason (optional)
-    100.00m                 // prepayment (optional)
-);
-```
+using FactPulse.SDK;
 
-### InvoiceLine(number, description, quantity, unitPrice, lineTotal, ...)
-
-Creates an invoice line.
-
-```csharp
-var line = InvoiceLine(
-    1,
-    "Consulting services",
-    5,
-    200.00m,
-    1000.00m,                 // lineTotal required
-    vatRate: "VAT20",         // Or manualVatRate: "20.00"
-    vatCategory: "S",         // S, Z, E, AE, K
-    unit: "HOUR",             // FIXED, PIECE, HOUR, DAY...
-    reference: "REF-001"
-);
-```
-
-### VatLine(baseExcludingTax, vatAmount, ...)
-
-Creates a VAT breakdown line.
-
-```csharp
-var vat = VatLine(
-    1000.00m,               // baseExcludingTax
-    200.00m,                // vatAmount
-    rate: "VAT20",          // Or manualRate: "20.00"
-    category: "S"           // S, Z, E, AE, K
-);
-```
-
-### PostalAddress(line1, postalCode, city, ...)
-
-Creates a structured postal address.
-
-```csharp
-var address = PostalAddress(
-    "123 Republic Street",
-    "75001",
-    "Paris",
-    country: "FR",          // Default: "FR"
-    line2: "Building A"     // Optional
-);
-```
-
-### Supplier(name, siret, addressLine1, postalCode, city, options)
-
-Creates a complete supplier with automatic calculation of SIREN and intra-community VAT.
-
-```csharp
-var s = Supplier(
-    "My Company SAS",
-    "12345678901234",
-    "123 Example Street",
-    "75001",
-    "Paris",
-    iban: "FR7630006000011234567890189"
-);
-// SIREN and intra-community VAT automatically calculated
-```
-
-### Recipient(name, siret, addressLine1, postalCode, city, options)
-
-Creates a recipient (customer) with automatic calculation of SIREN.
-
-```csharp
-var r = Recipient(
-    "Client SARL",
-    "98765432109876",
-    "456 Test Avenue",
-    "69001",
-    "Lyon"
-);
-```
-
-## Zero-Trust Mode (Chorus Pro / AFNOR)
-
-To pass your own credentials without server-side storage:
-
-```csharp
-using FactPulse.SDK.Helpers;
-
-var chorusCreds = new ChorusProCredentials(
-    "your_client_id",
-    "your_client_secret",
-    "your_login",
-    "your_password",
-    sandbox: true
-);
-
-var afnorCreds = new AFNORCredentials(
-    "https://api.pdp.fr/flow/v1",
-    "https://auth.pdp.fr/oauth/token",
-    "your_client_id",
-    "your_client_secret"
-);
-
-var client = new FactPulseClient(
-    "your_email@example.com",
-    "your_password",
-    chorusCredentials: chorusCreds,
-    afnorCredentials: afnorCreds
-);
+try
+{
+    var result = await client.PostAsync("processing/validate-xml", data);
+}
+catch (FactPulseException e)
+{
+    Console.WriteLine($"Error: {e.Message}");
+    Console.WriteLine($"Status code: {e.StatusCode}");
+    Console.WriteLine($"Details: {string.Join(", ", e.Details)}");
+}
 ```
 
 ## Resources
 
 - **API Documentation**: https://factpulse.fr/api/facturation/documentation
+- **Webhooks Guide**: https://factpulse.fr/docs/webhooks
 - **Support**: contact@factpulse.fr
 
 ## License
