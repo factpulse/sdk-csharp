@@ -663,7 +663,7 @@ namespace FactPulse.SDK.Api
     /// <summary>
     /// The <see cref="IValidateXmlApiV1ProcessingValidateXmlPostApiResponse"/>
     /// </summary>
-    public interface IValidateXmlApiV1ProcessingValidateXmlPostApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.ValidationSuccessResponse?>, IBadRequest<FactPulse.SDK.Model.ValidationErrorResponse?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>, IUnauthorized<FactPulse.SDK.Model.APIError?>
+    public interface IValidateXmlApiV1ProcessingValidateXmlPostApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.ValidationSuccessResponse?>, IBadRequest<FactPulse.SDK.Model.FactureElectroniqueRestApiSchemasValidationValidationErrorResponse?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>, IUnauthorized<FactPulse.SDK.Model.APIError?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -4941,11 +4941,11 @@ namespace FactPulse.SDK.Api
             /// Deserializes the response if the response is 400 BadRequest
             /// </summary>
             /// <returns></returns>
-            public FactPulse.SDK.Model.ValidationErrorResponse? BadRequest()
+            public FactPulse.SDK.Model.FactureElectroniqueRestApiSchemasValidationValidationErrorResponse? BadRequest()
             {
                 // This logic may be modified with the AsModel.mustache template
                 return IsBadRequest
-                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.ValidationErrorResponse>(RawContent, _jsonSerializerOptions)
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.FactureElectroniqueRestApiSchemasValidationValidationErrorResponse>(RawContent, _jsonSerializerOptions)
                     : null;
             }
 
@@ -4954,7 +4954,7 @@ namespace FactPulse.SDK.Api
             /// </summary>
             /// <param name="result"></param>
             /// <returns></returns>
-            public bool TryBadRequest([NotNullWhen(true)]out FactPulse.SDK.Model.ValidationErrorResponse? result)
+            public bool TryBadRequest([NotNullWhen(true)]out FactPulse.SDK.Model.FactureElectroniqueRestApiSchemasValidationValidationErrorResponse? result)
             {
                 result = null;
 
