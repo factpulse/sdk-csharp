@@ -50,12 +50,12 @@ var result = await client.PostAsync("processing/invoices/submit-complete-async",
         {
             ["siret"] = "12345678901234",
             ["iban"] = "FR7630001007941234567890185",
-            ["routingAddress"] = "12345678901234"
+            ["routing_address"] = "12345678901234"
         },
         ["recipient"] = new Dictionary<string, object>
         {
             ["siret"] = "98765432109876",
-            ["routingAddress"] = "98765432109876"
+            ["routing_address"] = "98765432109876"
         },
         ["lines"] = new List<Dictionary<string, object>>
         {
