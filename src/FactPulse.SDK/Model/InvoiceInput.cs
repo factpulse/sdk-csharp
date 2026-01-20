@@ -51,7 +51,7 @@ namespace FactPulse.SDK.Model
         /// <param name="referencedInvoiceId">referencedInvoiceId</param>
         /// <param name="referencedInvoiceDate">referencedInvoiceDate</param>
         [JsonConstructor]
-        public InvoiceInput(string invoiceId, DateOnly issueDate, string sellerSiren, Buyercountry buyerCountry, Taxexclusiveamount1 taxExclusiveAmount, Taxamount1 taxAmount, List<TaxBreakdownInput> taxBreakdown, Option<InvoiceTypeCode?> typeCode = default, Option<Currency?> currency = default, Option<DateOnly?> dueDate = default, Option<string?> sellerVatId = default, Option<Sellercountry?> sellerCountry = default, Option<string?> buyerId = default, Option<string?> buyerVatId = default, Option<string?> referencedInvoiceId = default, Option<DateOnly?> referencedInvoiceDate = default)
+        public InvoiceInput(string invoiceId, DateOnly issueDate, string sellerSiren, Buyercountry buyerCountry, Taxexclusiveamount1 taxExclusiveAmount, Taxamount1 taxAmount, List<TaxBreakdownInput> taxBreakdown, Option<FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode?> typeCode = default, Option<Currency?> currency = default, Option<DateOnly?> dueDate = default, Option<string?> sellerVatId = default, Option<Sellercountry?> sellerCountry = default, Option<string?> buyerId = default, Option<string?> buyerVatId = default, Option<string?> referencedInvoiceId = default, Option<DateOnly?> referencedInvoiceDate = default)
         {
             InvoiceId = invoiceId;
             IssueDate = issueDate;
@@ -79,14 +79,14 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<InvoiceTypeCode?> TypeCodeOption { get; private set; }
+        public Option<FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode?> TypeCodeOption { get; private set; }
 
         /// <summary>
         /// Invoice type code
         /// </summary>
         /// <value>Invoice type code</value>
         [JsonPropertyName("typeCode")]
-        public InvoiceTypeCode? TypeCode { get { return this.TypeCodeOption; } set { this.TypeCodeOption = new(value); } }
+        public FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode? TypeCode { get { return this.TypeCodeOption; } set { this.TypeCodeOption = new(value); } }
 
         /// <summary>
         /// Invoice identifier
@@ -324,7 +324,7 @@ namespace FactPulse.SDK.Model
             Option<Taxexclusiveamount1?> taxExclusiveAmount = default;
             Option<Taxamount1?> taxAmount = default;
             Option<List<TaxBreakdownInput>?> taxBreakdown = default;
-            Option<InvoiceTypeCode?> typeCode = default;
+            Option<FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode?> typeCode = default;
             Option<Currency?> currency = default;
             Option<DateOnly?> dueDate = default;
             Option<string?> sellerVatId = default;
@@ -373,7 +373,7 @@ namespace FactPulse.SDK.Model
                         case "typeCode":
                             string? typeCodeRawValue = utf8JsonReader.GetString();
                             if (typeCodeRawValue != null)
-                                typeCode = new Option<InvoiceTypeCode?>(InvoiceTypeCodeValueConverter.FromStringOrDefault(typeCodeRawValue));
+                                typeCode = new Option<FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode?>(FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeValueConverter.FromStringOrDefault(typeCodeRawValue));
                             break;
                         case "currency":
                             currency = new Option<Currency?>(JsonSerializer.Deserialize<Currency>(ref utf8JsonReader, jsonSerializerOptions)!);
@@ -523,7 +523,7 @@ namespace FactPulse.SDK.Model
             JsonSerializer.Serialize(writer, invoiceInput.TaxBreakdown, jsonSerializerOptions);
             if (invoiceInput.TypeCodeOption.IsSet)
             {
-                var typeCodeRawValue = InvoiceTypeCodeValueConverter.ToJsonValue(invoiceInput.TypeCode!.Value);
+                var typeCodeRawValue = FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeValueConverter.ToJsonValue(invoiceInput.TypeCode!.Value);
                 writer.WriteString("typeCode", typeCodeRawValue);
             }
             if (invoiceInput.CurrencyOption.IsSet)
