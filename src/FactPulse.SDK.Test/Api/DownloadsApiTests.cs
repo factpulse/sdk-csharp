@@ -64,18 +64,6 @@ namespace FactPulse.SDK.Test.Api
         }
 
         /// <summary>
-        /// Test CheckFileApiV1DownloadDownloadIdHead_0
-        /// </summary>
-        [Fact (Skip = "not implemented")]
-        public async Task CheckFileApiV1DownloadDownloadIdHead_0AsyncTest()
-        {
-            string downloadId = default!;
-            var response = await _instance.CheckFileApiV1DownloadDownloadIdHead_0Async(downloadId);
-            var model = response.Ok();
-            Assert.IsType<Object>(model);
-        }
-
-        /// <summary>
         /// Test DownloadFileApiV1DownloadDownloadIdGet
         /// </summary>
         [Fact (Skip = "not implemented")]
@@ -84,19 +72,6 @@ namespace FactPulse.SDK.Test.Api
             string downloadId = default!;
             Client.Option<bool> deleteAfter = default!;
             var response = await _instance.DownloadFileApiV1DownloadDownloadIdGetAsync(downloadId, deleteAfter);
-            var model = response.Ok();
-            Assert.IsType<Object>(model);
-        }
-
-        /// <summary>
-        /// Test DownloadFileApiV1DownloadDownloadIdGet_0
-        /// </summary>
-        [Fact (Skip = "not implemented")]
-        public async Task DownloadFileApiV1DownloadDownloadIdGet_0AsyncTest()
-        {
-            string downloadId = default!;
-            Client.Option<bool> deleteAfter = default!;
-            var response = await _instance.DownloadFileApiV1DownloadDownloadIdGet_0Async(downloadId, deleteAfter);
             var model = response.Ok();
             Assert.IsType<Object>(model);
         }

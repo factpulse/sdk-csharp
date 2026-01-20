@@ -53,8 +53,12 @@ namespace FactPulse.SDK.Model
         /// <param name="actionCode">actionCode</param>
         /// <param name="encaisseAmount">encaisseAmount</param>
         /// <param name="flowType">Type de flux AFNOR (CustomerInvoiceLC, SupplierInvoiceLC, etc.) (default to &quot;CustomerInvoiceLC&quot;)</param>
+        /// <param name="pdpFlowServiceUrl">pdpFlowServiceUrl</param>
+        /// <param name="pdpTokenUrl">pdpTokenUrl</param>
+        /// <param name="pdpClientId">pdpClientId</param>
+        /// <param name="pdpClientSecret">pdpClientSecret</param>
         [JsonConstructor]
-        public SubmitCDARRequest(string documentId, string senderSiren, string invoiceId, DateOnly invoiceIssueDate, string status, Option<string?> businessProcess = default, Option<string?> typeCode = default, Option<string?> senderRole = default, Option<string?> senderName = default, Option<string?> senderEmail = default, Option<List<RecipientInput>?> recipients = default, Option<string?> invoiceTypeCode = default, Option<string?> invoiceSellerSiren = default, Option<string?> invoiceBuyerSiren = default, Option<string?> reasonCode = default, Option<string?> reasonText = default, Option<string?> actionCode = default, Option<Encaisseamount?> encaisseAmount = default, Option<string?> flowType = default)
+        public SubmitCDARRequest(string documentId, string senderSiren, string invoiceId, DateOnly invoiceIssueDate, string status, Option<string?> businessProcess = default, Option<string?> typeCode = default, Option<string?> senderRole = default, Option<string?> senderName = default, Option<string?> senderEmail = default, Option<List<RecipientInput>?> recipients = default, Option<string?> invoiceTypeCode = default, Option<string?> invoiceSellerSiren = default, Option<string?> invoiceBuyerSiren = default, Option<string?> reasonCode = default, Option<string?> reasonText = default, Option<string?> actionCode = default, Option<Encaisseamount?> encaisseAmount = default, Option<string?> flowType = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default)
         {
             DocumentId = documentId;
             SenderSiren = senderSiren;
@@ -75,6 +79,10 @@ namespace FactPulse.SDK.Model
             ActionCodeOption = actionCode;
             EncaisseAmountOption = encaisseAmount;
             FlowTypeOption = flowType;
+            PdpFlowServiceUrlOption = pdpFlowServiceUrl;
+            PdpTokenUrlOption = pdpTokenUrl;
+            PdpClientIdOption = pdpClientId;
+            PdpClientSecretOption = pdpClientSecret;
             OnCreated();
         }
 
@@ -304,6 +312,58 @@ namespace FactPulse.SDK.Model
         public string? FlowType { get { return this.FlowTypeOption; } set { this.FlowTypeOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of PdpFlowServiceUrl
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> PdpFlowServiceUrlOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets PdpFlowServiceUrl
+        /// </summary>
+        [JsonPropertyName("pdpFlowServiceUrl")]
+        public string? PdpFlowServiceUrl { get { return this.PdpFlowServiceUrlOption; } set { this.PdpFlowServiceUrlOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of PdpTokenUrl
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> PdpTokenUrlOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets PdpTokenUrl
+        /// </summary>
+        [JsonPropertyName("pdpTokenUrl")]
+        public string? PdpTokenUrl { get { return this.PdpTokenUrlOption; } set { this.PdpTokenUrlOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of PdpClientId
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> PdpClientIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets PdpClientId
+        /// </summary>
+        [JsonPropertyName("pdpClientId")]
+        public string? PdpClientId { get { return this.PdpClientIdOption; } set { this.PdpClientIdOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of PdpClientSecret
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> PdpClientSecretOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets PdpClientSecret
+        /// </summary>
+        [JsonPropertyName("pdpClientSecret")]
+        public string? PdpClientSecret { get { return this.PdpClientSecretOption; } set { this.PdpClientSecretOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -330,6 +390,10 @@ namespace FactPulse.SDK.Model
             sb.Append("  ActionCode: ").Append(ActionCode).Append("\n");
             sb.Append("  EncaisseAmount: ").Append(EncaisseAmount).Append("\n");
             sb.Append("  FlowType: ").Append(FlowType).Append("\n");
+            sb.Append("  PdpFlowServiceUrl: ").Append(PdpFlowServiceUrl).Append("\n");
+            sb.Append("  PdpTokenUrl: ").Append(PdpTokenUrl).Append("\n");
+            sb.Append("  PdpClientId: ").Append(PdpClientId).Append("\n");
+            sb.Append("  PdpClientSecret: ").Append(PdpClientSecret).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -391,6 +455,10 @@ namespace FactPulse.SDK.Model
             Option<string?> actionCode = default;
             Option<Encaisseamount?> encaisseAmount = default;
             Option<string?> flowType = default;
+            Option<string?> pdpFlowServiceUrl = default;
+            Option<string?> pdpTokenUrl = default;
+            Option<string?> pdpClientId = default;
+            Option<string?> pdpClientSecret = default;
 
             while (utf8JsonReader.Read())
             {
@@ -464,6 +532,18 @@ namespace FactPulse.SDK.Model
                         case "flowType":
                             flowType = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
+                        case "pdpFlowServiceUrl":
+                            pdpFlowServiceUrl = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "pdpTokenUrl":
+                            pdpTokenUrl = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "pdpClientId":
+                            pdpClientId = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "pdpClientSecret":
+                            pdpClientSecret = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         default:
                             break;
                     }
@@ -518,7 +598,7 @@ namespace FactPulse.SDK.Model
             if (flowType.IsSet && flowType.Value == null)
                 throw new ArgumentNullException(nameof(flowType), "Property is not nullable for class SubmitCDARRequest.");
 
-            return new SubmitCDARRequest(documentId.Value!, senderSiren.Value!, invoiceId.Value!, invoiceIssueDate.Value!.Value!, status.Value!, businessProcess, typeCode, senderRole, senderName, senderEmail, recipients, invoiceTypeCode, invoiceSellerSiren, invoiceBuyerSiren, reasonCode, reasonText, actionCode, encaisseAmount, flowType);
+            return new SubmitCDARRequest(documentId.Value!, senderSiren.Value!, invoiceId.Value!, invoiceIssueDate.Value!.Value!, status.Value!, businessProcess, typeCode, senderRole, senderName, senderEmail, recipients, invoiceTypeCode, invoiceSellerSiren, invoiceBuyerSiren, reasonCode, reasonText, actionCode, encaisseAmount, flowType, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
         }
 
         /// <summary>
@@ -654,6 +734,30 @@ namespace FactPulse.SDK.Model
                     writer.WriteNull("encaisseAmount");
             if (submitCDARRequest.FlowTypeOption.IsSet)
                 writer.WriteString("flowType", submitCDARRequest.FlowType);
+
+            if (submitCDARRequest.PdpFlowServiceUrlOption.IsSet)
+                if (submitCDARRequest.PdpFlowServiceUrlOption.Value != null)
+                    writer.WriteString("pdpFlowServiceUrl", submitCDARRequest.PdpFlowServiceUrl);
+                else
+                    writer.WriteNull("pdpFlowServiceUrl");
+
+            if (submitCDARRequest.PdpTokenUrlOption.IsSet)
+                if (submitCDARRequest.PdpTokenUrlOption.Value != null)
+                    writer.WriteString("pdpTokenUrl", submitCDARRequest.PdpTokenUrl);
+                else
+                    writer.WriteNull("pdpTokenUrl");
+
+            if (submitCDARRequest.PdpClientIdOption.IsSet)
+                if (submitCDARRequest.PdpClientIdOption.Value != null)
+                    writer.WriteString("pdpClientId", submitCDARRequest.PdpClientId);
+                else
+                    writer.WriteNull("pdpClientId");
+
+            if (submitCDARRequest.PdpClientSecretOption.IsSet)
+                if (submitCDARRequest.PdpClientSecretOption.Value != null)
+                    writer.WriteString("pdpClientSecret", submitCDARRequest.PdpClientSecret);
+                else
+                    writer.WriteNull("pdpClientSecret");
         }
     }
 }

@@ -86,6 +86,9 @@ namespace FactPulse.SDK.Test.Api
             var chorusProApi = _hostUsingConfigureWithAClient.Services.GetRequiredService<IChorusProApi>();
             Assert.True(chorusProApi.HttpClient.BaseAddress != null);
 
+            var clientManagementApi = _hostUsingConfigureWithAClient.Services.GetRequiredService<IClientManagementApi>();
+            Assert.True(clientManagementApi.HttpClient.BaseAddress != null);
+
             var documentConversionApi = _hostUsingConfigureWithAClient.Services.GetRequiredService<IDocumentConversionApi>();
             Assert.True(documentConversionApi.HttpClient.BaseAddress != null);
 
@@ -128,6 +131,9 @@ namespace FactPulse.SDK.Test.Api
 
             var chorusProApi = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<IChorusProApi>();
             Assert.True(chorusProApi.HttpClient.BaseAddress != null);
+
+            var clientManagementApi = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<IClientManagementApi>();
+            Assert.True(clientManagementApi.HttpClient.BaseAddress != null);
 
             var documentConversionApi = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<IDocumentConversionApi>();
             Assert.True(documentConversionApi.HttpClient.BaseAddress != null);
@@ -172,6 +178,9 @@ namespace FactPulse.SDK.Test.Api
             var chorusProApi = _hostUsingAddWithAClient.Services.GetRequiredService<IChorusProApi>();
             Assert.True(chorusProApi.HttpClient.BaseAddress != null);
             
+            var clientManagementApi = _hostUsingAddWithAClient.Services.GetRequiredService<IClientManagementApi>();
+            Assert.True(clientManagementApi.HttpClient.BaseAddress != null);
+            
             var documentConversionApi = _hostUsingAddWithAClient.Services.GetRequiredService<IDocumentConversionApi>();
             Assert.True(documentConversionApi.HttpClient.BaseAddress != null);
             
@@ -214,6 +223,9 @@ namespace FactPulse.SDK.Test.Api
 
             var chorusProApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<IChorusProApi>();
             Assert.True(chorusProApi.HttpClient.BaseAddress != null);
+
+            var clientManagementApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<IClientManagementApi>();
+            Assert.True(clientManagementApi.HttpClient.BaseAddress != null);
 
             var documentConversionApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<IDocumentConversionApi>();
             Assert.True(documentConversionApi.HttpClient.BaseAddress != null);

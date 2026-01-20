@@ -181,11 +181,10 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new AllowanceTotalAmountJsonConverter());
             _jsonOptions.Converters.Add(new AmountJsonConverter());
             _jsonOptions.Converters.Add(new Amount1JsonConverter());
+            _jsonOptions.Converters.Add(new Amount2JsonConverter());
             _jsonOptions.Converters.Add(new AmountDueJsonConverter());
             _jsonOptions.Converters.Add(new AsyncTaskStatusJsonConverter());
             _jsonOptions.Converters.Add(new BaseAmountJsonConverter());
-            _jsonOptions.Converters.Add(new BodySubmitCdarApiV1CdarSubmitPostJsonConverter());
-            _jsonOptions.Converters.Add(new BodySubmitCdarXmlApiV1CdarSubmitXmlPostJsonConverter());
             _jsonOptions.Converters.Add(new BoundingBoxSchemaJsonConverter());
             _jsonOptions.Converters.Add(new BuyercountryJsonConverter());
             _jsonOptions.Converters.Add(new CeleryStatusJsonConverter());
@@ -195,6 +194,12 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new ChorusProCredentialsJsonConverter());
             _jsonOptions.Converters.Add(new ChorusProDestinationJsonConverter());
             _jsonOptions.Converters.Add(new ChorusProResultJsonConverter());
+            _jsonOptions.Converters.Add(new ClientActivateResponseJsonConverter());
+            _jsonOptions.Converters.Add(new ClientCreateRequestJsonConverter());
+            _jsonOptions.Converters.Add(new ClientDetailJsonConverter());
+            _jsonOptions.Converters.Add(new ClientListResponseJsonConverter());
+            _jsonOptions.Converters.Add(new ClientSummaryJsonConverter());
+            _jsonOptions.Converters.Add(new ClientUpdateRequestJsonConverter());
             _jsonOptions.Converters.Add(new ContactJsonConverter());
             _jsonOptions.Converters.Add(new ConvertResumeRequestJsonConverter());
             _jsonOptions.Converters.Add(new ConvertSuccessResponseJsonConverter());
@@ -218,6 +223,7 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new ElectronicAddressJsonConverter());
             _jsonOptions.Converters.Add(new EncaisseamountJsonConverter());
             _jsonOptions.Converters.Add(new Encaisseamount1JsonConverter());
+            _jsonOptions.Converters.Add(new EncaisseeRequestJsonConverter());
             _jsonOptions.Converters.Add(new EnrichedInvoiceInfoJsonConverter());
             _jsonOptions.Converters.Add(new ErrorLevelJsonConverter());
             _jsonOptions.Converters.Add(new ErrorLevelNullableJsonConverter());
@@ -226,9 +232,9 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new ExtractionInfoJsonConverter());
             _jsonOptions.Converters.Add(new FacturXInvoiceJsonConverter());
             _jsonOptions.Converters.Add(new FacturXPDFInfoJsonConverter());
-            _jsonOptions.Converters.Add(new FactureElectroniqueModelsInvoiceTypeCodeJsonConverter());
-            _jsonOptions.Converters.Add(new FactureElectroniqueModelsInvoiceTypeCodeNullableJsonConverter());
             _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasCdarValidationErrorResponseJsonConverter());
+            _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeJsonConverter());
+            _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeNullableJsonConverter());
             _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasProcessingChorusProCredentialsJsonConverter());
             _jsonOptions.Converters.Add(new FieldStatusJsonConverter());
             _jsonOptions.Converters.Add(new FieldStatusNullableJsonConverter());
@@ -291,6 +297,8 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new OutputFormatJsonConverter());
             _jsonOptions.Converters.Add(new OutputFormatNullableJsonConverter());
             _jsonOptions.Converters.Add(new PDFValidationResultAPIJsonConverter());
+            _jsonOptions.Converters.Add(new PDPConfigResponseJsonConverter());
+            _jsonOptions.Converters.Add(new PDPConfigUpdateRequestJsonConverter());
             _jsonOptions.Converters.Add(new PDPCredentialsJsonConverter());
             _jsonOptions.Converters.Add(new PageDimensionsSchemaJsonConverter());
             _jsonOptions.Converters.Add(new PayeeJsonConverter());
@@ -314,6 +322,7 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new ReasonCodesResponseJsonConverter());
             _jsonOptions.Converters.Add(new RecipientJsonConverter());
             _jsonOptions.Converters.Add(new RecipientInputJsonConverter());
+            _jsonOptions.Converters.Add(new RefuseeRequestJsonConverter());
             _jsonOptions.Converters.Add(new ReportPeriodJsonConverter());
             _jsonOptions.Converters.Add(new ReportSenderJsonConverter());
             _jsonOptions.Converters.Add(new RoundingAmountJsonConverter());
@@ -325,10 +334,12 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new SearchServicesResponseJsonConverter());
             _jsonOptions.Converters.Add(new SearchStructureRequestJsonConverter());
             _jsonOptions.Converters.Add(new SearchStructureResponseJsonConverter());
+            _jsonOptions.Converters.Add(new SecretStatusJsonConverter());
             _jsonOptions.Converters.Add(new SellercountryJsonConverter());
             _jsonOptions.Converters.Add(new SignatureInfoJsonConverter());
             _jsonOptions.Converters.Add(new SignatureInfoAPIJsonConverter());
             _jsonOptions.Converters.Add(new SignatureParametersJsonConverter());
+            _jsonOptions.Converters.Add(new SimplifiedCDARResponseJsonConverter());
             _jsonOptions.Converters.Add(new SimplifiedInvoiceDataJsonConverter());
             _jsonOptions.Converters.Add(new StatusCodeInfoJsonConverter());
             _jsonOptions.Converters.Add(new StatusCodesResponseJsonConverter());
@@ -404,6 +415,7 @@ namespace FactPulse.SDK.Client
             _services.AddSingleton<AFNORPDPPAFlowServiceApiEvents>();
             _services.AddSingleton<CDARCycleDeVieApiEvents>();
             _services.AddSingleton<ChorusProApiEvents>();
+            _services.AddSingleton<ClientManagementApiEvents>();
             _services.AddSingleton<DocumentConversionApiEvents>();
             _services.AddSingleton<DownloadsApiEvents>();
             _services.AddSingleton<EReportingApiEvents>();
@@ -433,6 +445,7 @@ namespace FactPulse.SDK.Client
             builders.Add(_services.AddHttpClient<IAFNORPDPPAFlowServiceApi, AFNORPDPPAFlowServiceApi>(client));
             builders.Add(_services.AddHttpClient<ICDARCycleDeVieApi, CDARCycleDeVieApi>(client));
             builders.Add(_services.AddHttpClient<IChorusProApi, ChorusProApi>(client));
+            builders.Add(_services.AddHttpClient<IClientManagementApi, ClientManagementApi>(client));
             builders.Add(_services.AddHttpClient<IDocumentConversionApi, DocumentConversionApi>(client));
             builders.Add(_services.AddHttpClient<IDownloadsApi, DownloadsApi>(client));
             builders.Add(_services.AddHttpClient<IEReportingApi, EReportingApi>(client));

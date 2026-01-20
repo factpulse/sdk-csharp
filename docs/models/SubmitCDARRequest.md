@@ -24,6 +24,10 @@ Name | Type | Description | Notes
 **ActionCode** | **string** |  | [optional] 
 **EncaisseAmount** | [**Encaisseamount**](Encaisseamount.md) |  | [optional] 
 **FlowType** | **string** | Type de flux AFNOR (CustomerInvoiceLC, SupplierInvoiceLC, etc.) | [optional] [default to "CustomerInvoiceLC"]
+**PdpFlowServiceUrl** | **string** |  | [optional] 
+**PdpTokenUrl** | **string** |  | [optional] 
+**PdpClientId** | **string** |  | [optional] 
+**PdpClientSecret** | **string** |  | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

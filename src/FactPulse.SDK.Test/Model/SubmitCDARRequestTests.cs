@@ -224,5 +224,41 @@ namespace FactPulse.SDK.Test.Model
         {
             // TODO unit test for the property 'FlowType'
         }
+
+        /// <summary>
+        /// Test the property 'PdpFlowServiceUrl'
+        /// </summary>
+        [Fact]
+        public void PdpFlowServiceUrlTest()
+        {
+            // TODO unit test for the property 'PdpFlowServiceUrl'
+        }
+
+        /// <summary>
+        /// Test the property 'PdpTokenUrl'
+        /// </summary>
+        [Fact]
+        public void PdpTokenUrlTest()
+        {
+            // TODO unit test for the property 'PdpTokenUrl'
+        }
+
+        /// <summary>
+        /// Test the property 'PdpClientId'
+        /// </summary>
+        [Fact]
+        public void PdpClientIdTest()
+        {
+            // TODO unit test for the property 'PdpClientId'
+        }
+
+        /// <summary>
+        /// Test the property 'PdpClientSecret'
+        /// </summary>
+        [Fact]
+        public void PdpClientSecretTest()
+        {
+            // TODO unit test for the property 'PdpClientSecret'
+        }
     }
 }

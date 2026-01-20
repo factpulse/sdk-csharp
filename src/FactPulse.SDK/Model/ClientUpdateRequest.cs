@@ -27,43 +27,65 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// BodySubmitCdarApiV1CdarSubmitPost
+    /// Partial client update request.
     /// </summary>
-    public partial class BodySubmitCdarApiV1CdarSubmitPost : IValidatableObject
+    public partial class ClientUpdateRequest : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BodySubmitCdarApiV1CdarSubmitPost" /> class.
+        /// Initializes a new instance of the <see cref="ClientUpdateRequest" /> class.
         /// </summary>
-        /// <param name="request">request</param>
-        /// <param name="pdpCredentials">pdpCredentials</param>
+        /// <param name="name">name</param>
+        /// <param name="description">description</param>
+        /// <param name="siret">siret</param>
         [JsonConstructor]
-        public BodySubmitCdarApiV1CdarSubmitPost(SubmitCDARRequest request, Option<PDPCredentials?> pdpCredentials = default)
+        public ClientUpdateRequest(Option<string?> name = default, Option<string?> description = default, Option<string?> siret = default)
         {
-            Request = request;
-            PdpCredentialsOption = pdpCredentials;
+            NameOption = name;
+            DescriptionOption = description;
+            SiretOption = siret;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Request
-        /// </summary>
-        [JsonPropertyName("request")]
-        public SubmitCDARRequest Request { get; set; }
-
-        /// <summary>
-        /// Used to track the state of PdpCredentials
+        /// Used to track the state of Name
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<PDPCredentials?> PdpCredentialsOption { get; private set; }
+        public Option<string?> NameOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets PdpCredentials
+        /// Gets or Sets Name
         /// </summary>
-        [JsonPropertyName("pdp_credentials")]
-        public PDPCredentials? PdpCredentials { get { return this.PdpCredentialsOption; } set { this.PdpCredentialsOption = new(value); } }
+        [JsonPropertyName("name")]
+        public string? Name { get { return this.NameOption; } set { this.NameOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Description
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> DescriptionOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Description
+        /// </summary>
+        [JsonPropertyName("description")]
+        public string? Description { get { return this.DescriptionOption; } set { this.DescriptionOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Siret
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> SiretOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Siret
+        /// </summary>
+        [JsonPropertyName("siret")]
+        public string? Siret { get { return this.SiretOption; } set { this.SiretOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -72,9 +94,10 @@ namespace FactPulse.SDK.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class BodySubmitCdarApiV1CdarSubmitPost {\n");
-            sb.Append("  Request: ").Append(Request).Append("\n");
-            sb.Append("  PdpCredentials: ").Append(PdpCredentials).Append("\n");
+            sb.Append("class ClientUpdateRequest {\n");
+            sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  Description: ").Append(Description).Append("\n");
+            sb.Append("  Siret: ").Append(Siret).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -86,24 +109,52 @@ namespace FactPulse.SDK.Model
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // Name (string) maxLength
+            if (this.Name != null && this.Name.Length > 255)
+            {
+                yield return new ValidationResult("Invalid value for Name, length must be less than 255.", new [] { "Name" });
+            }
+
+            // Name (string) minLength
+            if (this.Name != null && this.Name.Length < 1)
+            {
+                yield return new ValidationResult("Invalid value for Name, length must be greater than 1.", new [] { "Name" });
+            }
+
+            // Description (string) maxLength
+            if (this.Description != null && this.Description.Length > 1000)
+            {
+                yield return new ValidationResult("Invalid value for Description, length must be less than 1000.", new [] { "Description" });
+            }
+
+            if (this.SiretOption.Value != null) {
+                // Siret (string) pattern
+                Regex regexSiret = new Regex(@"^\d{14}$", RegexOptions.CultureInvariant);
+
+                if (this.SiretOption.Value != null &&!regexSiret.Match(this.SiretOption.Value).Success)
+                {
+                    yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Siret, must match a pattern of " + regexSiret, new [] { "Siret" });
+                }
+            }
+
             yield break;
         }
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="BodySubmitCdarApiV1CdarSubmitPost" />
+    /// A Json converter for type <see cref="ClientUpdateRequest" />
     /// </summary>
-    public class BodySubmitCdarApiV1CdarSubmitPostJsonConverter : JsonConverter<BodySubmitCdarApiV1CdarSubmitPost>
+    public class ClientUpdateRequestJsonConverter : JsonConverter<ClientUpdateRequest>
     {
         /// <summary>
-        /// Deserializes json to <see cref="BodySubmitCdarApiV1CdarSubmitPost" />
+        /// Deserializes json to <see cref="ClientUpdateRequest" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override BodySubmitCdarApiV1CdarSubmitPost Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override ClientUpdateRequest Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -112,8 +163,9 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<SubmitCDARRequest?> request = default;
-            Option<PDPCredentials?> pdpCredentials = default;
+            Option<string?> name = default;
+            Option<string?> description = default;
+            Option<string?> siret = default;
 
             while (utf8JsonReader.Read())
             {
@@ -130,11 +182,14 @@ namespace FactPulse.SDK.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "request":
-                            request = new Option<SubmitCDARRequest?>(JsonSerializer.Deserialize<SubmitCDARRequest>(ref utf8JsonReader, jsonSerializerOptions)!);
+                        case "name":
+                            name = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "pdp_credentials":
-                            pdpCredentials = new Option<PDPCredentials?>(JsonSerializer.Deserialize<PDPCredentials>(ref utf8JsonReader, jsonSerializerOptions));
+                        case "description":
+                            description = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "siret":
+                            siret = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         default:
                             break;
@@ -142,52 +197,50 @@ namespace FactPulse.SDK.Model
                 }
             }
 
-            if (!request.IsSet)
-                throw new ArgumentException("Property is required for class BodySubmitCdarApiV1CdarSubmitPost.", nameof(request));
-
-            if (request.IsSet && request.Value == null)
-                throw new ArgumentNullException(nameof(request), "Property is not nullable for class BodySubmitCdarApiV1CdarSubmitPost.");
-
-            return new BodySubmitCdarApiV1CdarSubmitPost(request.Value!, pdpCredentials);
+            return new ClientUpdateRequest(name, description, siret);
         }
 
         /// <summary>
-        /// Serializes a <see cref="BodySubmitCdarApiV1CdarSubmitPost" />
+        /// Serializes a <see cref="ClientUpdateRequest" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="bodySubmitCdarApiV1CdarSubmitPost"></param>
+        /// <param name="clientUpdateRequest"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, BodySubmitCdarApiV1CdarSubmitPost bodySubmitCdarApiV1CdarSubmitPost, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, ClientUpdateRequest clientUpdateRequest, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, bodySubmitCdarApiV1CdarSubmitPost, jsonSerializerOptions);
+            WriteProperties(writer, clientUpdateRequest, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="BodySubmitCdarApiV1CdarSubmitPost" />
+        /// Serializes the properties of <see cref="ClientUpdateRequest" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="bodySubmitCdarApiV1CdarSubmitPost"></param>
+        /// <param name="clientUpdateRequest"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, BodySubmitCdarApiV1CdarSubmitPost bodySubmitCdarApiV1CdarSubmitPost, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, ClientUpdateRequest clientUpdateRequest, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (bodySubmitCdarApiV1CdarSubmitPost.Request == null)
-                throw new ArgumentNullException(nameof(bodySubmitCdarApiV1CdarSubmitPost.Request), "Property is required for class BodySubmitCdarApiV1CdarSubmitPost.");
-
-            writer.WritePropertyName("request");
-            JsonSerializer.Serialize(writer, bodySubmitCdarApiV1CdarSubmitPost.Request, jsonSerializerOptions);
-            if (bodySubmitCdarApiV1CdarSubmitPost.PdpCredentialsOption.IsSet)
-                if (bodySubmitCdarApiV1CdarSubmitPost.PdpCredentialsOption.Value != null)
-                {
-                    writer.WritePropertyName("pdp_credentials");
-                    JsonSerializer.Serialize(writer, bodySubmitCdarApiV1CdarSubmitPost.PdpCredentials, jsonSerializerOptions);
-                }
+            if (clientUpdateRequest.NameOption.IsSet)
+                if (clientUpdateRequest.NameOption.Value != null)
+                    writer.WriteString("name", clientUpdateRequest.Name);
                 else
-                    writer.WriteNull("pdp_credentials");
+                    writer.WriteNull("name");
+
+            if (clientUpdateRequest.DescriptionOption.IsSet)
+                if (clientUpdateRequest.DescriptionOption.Value != null)
+                    writer.WriteString("description", clientUpdateRequest.Description);
+                else
+                    writer.WriteNull("description");
+
+            if (clientUpdateRequest.SiretOption.IsSet)
+                if (clientUpdateRequest.SiretOption.Value != null)
+                    writer.WriteString("siret", clientUpdateRequest.Siret);
+                else
+                    writer.WriteNull("siret");
         }
     }
 }

@@ -48,7 +48,7 @@ namespace FactPulse.SDK.Model
         /// <param name="operationNature">operationNature</param>
         /// <param name="invoicingFramework">invoicingFramework</param>
         [JsonConstructor]
-        public SimplifiedInvoiceData(string number, Dictionary<string, Object> supplier, Dictionary<string, Object> recipient, List<Dictionary<string, Object>> lines, Option<string?> date = default, Option<int?> dueDays = default, Option<string?> comment = default, Option<string?> purchaseOrderReference = default, Option<string?> contractReference = default, Option<FactureElectroniqueModelsInvoiceTypeCode?> invoiceType = default, Option<string?> precedingInvoiceReference = default, Option<OperationNature?> operationNature = default, Option<InvoicingFrameworkCode?> invoicingFramework = default)
+        public SimplifiedInvoiceData(string number, Dictionary<string, Object> supplier, Dictionary<string, Object> recipient, List<Dictionary<string, Object>> lines, Option<string?> date = default, Option<int?> dueDays = default, Option<string?> comment = default, Option<string?> purchaseOrderReference = default, Option<string?> contractReference = default, Option<InvoiceTypeCode?> invoiceType = default, Option<string?> precedingInvoiceReference = default, Option<OperationNature?> operationNature = default, Option<InvoicingFrameworkCode?> invoicingFramework = default)
         {
             Number = number;
             Supplier = supplier;
@@ -73,14 +73,14 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<FactureElectroniqueModelsInvoiceTypeCode?> InvoiceTypeOption { get; private set; }
+        public Option<InvoiceTypeCode?> InvoiceTypeOption { get; private set; }
 
         /// <summary>
         /// Document type (UNTDID 1001). Default: 380 (Invoice).
         /// </summary>
         /// <value>Document type (UNTDID 1001). Default: 380 (Invoice).</value>
         [JsonPropertyName("invoiceType")]
-        public FactureElectroniqueModelsInvoiceTypeCode? InvoiceType { get { return this.InvoiceTypeOption; } set { this.InvoiceTypeOption = new(value); } }
+        public InvoiceTypeCode? InvoiceType { get { return this.InvoiceTypeOption; } set { this.InvoiceTypeOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of OperationNature
@@ -294,7 +294,7 @@ namespace FactPulse.SDK.Model
             Option<string?> comment = default;
             Option<string?> purchaseOrderReference = default;
             Option<string?> contractReference = default;
-            Option<FactureElectroniqueModelsInvoiceTypeCode?> invoiceType = default;
+            Option<InvoiceTypeCode?> invoiceType = default;
             Option<string?> precedingInvoiceReference = default;
             Option<OperationNature?> operationNature = default;
             Option<InvoicingFrameworkCode?> invoicingFramework = default;
@@ -344,7 +344,7 @@ namespace FactPulse.SDK.Model
                         case "invoiceType":
                             string? invoiceTypeRawValue = utf8JsonReader.GetString();
                             if (invoiceTypeRawValue != null)
-                                invoiceType = new Option<FactureElectroniqueModelsInvoiceTypeCode?>(FactureElectroniqueModelsInvoiceTypeCodeValueConverter.FromStringOrDefault(invoiceTypeRawValue));
+                                invoiceType = new Option<InvoiceTypeCode?>(InvoiceTypeCodeValueConverter.FromStringOrDefault(invoiceTypeRawValue));
                             break;
                         case "precedingInvoiceReference":
                             precedingInvoiceReference = new Option<string?>(utf8JsonReader.GetString());
@@ -471,7 +471,7 @@ namespace FactPulse.SDK.Model
 
             if (simplifiedInvoiceData.InvoiceTypeOption.IsSet)
             {
-                var invoiceTypeRawValue = FactureElectroniqueModelsInvoiceTypeCodeValueConverter.ToJsonValue(simplifiedInvoiceData.InvoiceType!.Value);
+                var invoiceTypeRawValue = InvoiceTypeCodeValueConverter.ToJsonValue(simplifiedInvoiceData.InvoiceType!.Value);
                 writer.WriteString("invoiceType", invoiceTypeRawValue);
             }
             if (simplifiedInvoiceData.PrecedingInvoiceReferenceOption.IsSet)

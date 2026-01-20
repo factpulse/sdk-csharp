@@ -37,7 +37,7 @@ namespace FactPulse.SDK.Model
         /// <param name="rate">rate</param>
         /// <param name="amount">amount</param>
         [JsonConstructor]
-        public PaymentAmountByRate(Rate rate, Amount amount)
+        public PaymentAmountByRate(Rate rate, Amount1 amount)
         {
             Rate = rate;
             Amount = amount;
@@ -56,7 +56,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets Amount
         /// </summary>
         [JsonPropertyName("amount")]
-        public Amount Amount { get; set; }
+        public Amount1 Amount { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -106,7 +106,7 @@ namespace FactPulse.SDK.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<Rate?> rate = default;
-            Option<Amount?> amount = default;
+            Option<Amount1?> amount = default;
 
             while (utf8JsonReader.Read())
             {
@@ -127,7 +127,7 @@ namespace FactPulse.SDK.Model
                             rate = new Option<Rate?>(JsonSerializer.Deserialize<Rate>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "amount":
-                            amount = new Option<Amount?>(JsonSerializer.Deserialize<Amount>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            amount = new Option<Amount1?>(JsonSerializer.Deserialize<Amount1>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         default:
                             break;

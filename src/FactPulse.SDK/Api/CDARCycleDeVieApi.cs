@@ -126,59 +126,93 @@ namespace FactPulse.SDK.Api
         /// Générer et soumettre un message CDAR
         /// </summary>
         /// <remarks>
-        /// Génère un message CDAR et le soumet à la plateforme PA/PDP.  Nécessite une authentification AFNOR valide.  **Types de flux (flowType):** - &#x60;CustomerInvoiceLC&#x60;: Cycle de vie côté client (acheteur) - &#x60;SupplierInvoiceLC&#x60;: Cycle de vie côté fournisseur (vendeur)
+        /// Génère un message CDAR et le soumet à la plateforme PA/PDP.  **Stratégies d&#39;authentification:** 1. **JWT avec client_uid** (recommandé): credentials PDP récupérés du backend 2. **Zero-storage**: Fournir pdpFlowServiceUrl, pdpClientId, pdpClientSecret dans la requête  **Types de flux (flowType):** - &#x60;CustomerInvoiceLC&#x60;: Cycle de vie côté client (acheteur) - &#x60;SupplierInvoiceLC&#x60;: Cycle de vie côté fournisseur (vendeur)
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="bodySubmitCdarApiV1CdarSubmitPost"></param>
-        /// <param name="jwtToken"> (optional)</param>
-        /// <param name="clientUid"> (optional)</param>
+        /// <param name="submitCDARRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitCdarApiV1CdarSubmitPostApiResponse"/>&gt;</returns>
-        Task<ISubmitCdarApiV1CdarSubmitPostApiResponse> SubmitCdarApiV1CdarSubmitPostAsync(int userId, BodySubmitCdarApiV1CdarSubmitPost bodySubmitCdarApiV1CdarSubmitPost, Option<string?> jwtToken = default, Option<string?> clientUid = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISubmitCdarApiV1CdarSubmitPostApiResponse> SubmitCdarApiV1CdarSubmitPostAsync(SubmitCDARRequest submitCDARRequest, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Générer et soumettre un message CDAR
         /// </summary>
         /// <remarks>
-        /// Génère un message CDAR et le soumet à la plateforme PA/PDP.  Nécessite une authentification AFNOR valide.  **Types de flux (flowType):** - &#x60;CustomerInvoiceLC&#x60;: Cycle de vie côté client (acheteur) - &#x60;SupplierInvoiceLC&#x60;: Cycle de vie côté fournisseur (vendeur)
+        /// Génère un message CDAR et le soumet à la plateforme PA/PDP.  **Stratégies d&#39;authentification:** 1. **JWT avec client_uid** (recommandé): credentials PDP récupérés du backend 2. **Zero-storage**: Fournir pdpFlowServiceUrl, pdpClientId, pdpClientSecret dans la requête  **Types de flux (flowType):** - &#x60;CustomerInvoiceLC&#x60;: Cycle de vie côté client (acheteur) - &#x60;SupplierInvoiceLC&#x60;: Cycle de vie côté fournisseur (vendeur)
         /// </remarks>
-        /// <param name="userId"></param>
-        /// <param name="bodySubmitCdarApiV1CdarSubmitPost"></param>
-        /// <param name="jwtToken"> (optional)</param>
-        /// <param name="clientUid"> (optional)</param>
+        /// <param name="submitCDARRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitCdarApiV1CdarSubmitPostApiResponse"/>?&gt;</returns>
-        Task<ISubmitCdarApiV1CdarSubmitPostApiResponse?> SubmitCdarApiV1CdarSubmitPostOrDefaultAsync(int userId, BodySubmitCdarApiV1CdarSubmitPost bodySubmitCdarApiV1CdarSubmitPost, Option<string?> jwtToken = default, Option<string?> clientUid = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISubmitCdarApiV1CdarSubmitPostApiResponse?> SubmitCdarApiV1CdarSubmitPostOrDefaultAsync(SubmitCDARRequest submitCDARRequest, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Soumettre un XML CDAR pré-généré
         /// </summary>
         /// <remarks>
-        /// Soumet un message XML CDAR pré-généré à la plateforme PA/PDP.  Utile pour soumettre des XML générés par d&#39;autres systèmes.
+        /// Soumet un message XML CDAR pré-généré à la plateforme PA/PDP.  Utile pour soumettre des XML générés par d&#39;autres systèmes.  **Stratégies d&#39;authentification:** 1. **JWT avec client_uid** (recommandé): credentials PDP récupérés du backend 2. **Zero-storage**: Fournir pdpFlowServiceUrl, pdpClientId, pdpClientSecret dans la requête
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="bodySubmitCdarXmlApiV1CdarSubmitXmlPost"></param>
-        /// <param name="jwtToken"> (optional)</param>
-        /// <param name="clientUid"> (optional)</param>
+        /// <param name="submitCDARXMLRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse"/>&gt;</returns>
-        Task<ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse> SubmitCdarXmlApiV1CdarSubmitXmlPostAsync(int userId, BodySubmitCdarXmlApiV1CdarSubmitXmlPost bodySubmitCdarXmlApiV1CdarSubmitXmlPost, Option<string?> jwtToken = default, Option<string?> clientUid = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse> SubmitCdarXmlApiV1CdarSubmitXmlPostAsync(SubmitCDARXMLRequest submitCDARXMLRequest, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Soumettre un XML CDAR pré-généré
         /// </summary>
         /// <remarks>
-        /// Soumet un message XML CDAR pré-généré à la plateforme PA/PDP.  Utile pour soumettre des XML générés par d&#39;autres systèmes.
+        /// Soumet un message XML CDAR pré-généré à la plateforme PA/PDP.  Utile pour soumettre des XML générés par d&#39;autres systèmes.  **Stratégies d&#39;authentification:** 1. **JWT avec client_uid** (recommandé): credentials PDP récupérés du backend 2. **Zero-storage**: Fournir pdpFlowServiceUrl, pdpClientId, pdpClientSecret dans la requête
         /// </remarks>
-        /// <param name="userId"></param>
-        /// <param name="bodySubmitCdarXmlApiV1CdarSubmitXmlPost"></param>
-        /// <param name="jwtToken"> (optional)</param>
-        /// <param name="clientUid"> (optional)</param>
+        /// <param name="submitCDARXMLRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse"/>?&gt;</returns>
-        Task<ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse?> SubmitCdarXmlApiV1CdarSubmitXmlPostOrDefaultAsync(int userId, BodySubmitCdarXmlApiV1CdarSubmitXmlPost bodySubmitCdarXmlApiV1CdarSubmitXmlPost, Option<string?> jwtToken = default, Option<string?> clientUid = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse?> SubmitCdarXmlApiV1CdarSubmitXmlPostOrDefaultAsync(SubmitCDARXMLRequest submitCDARXMLRequest, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// [Simplifié] Soumettre un statut ENCAISSÉE (212)
+        /// </summary>
+        /// <remarks>
+        /// **Endpoint simplifié pour OD** - Soumet un statut ENCAISSÉE (212) pour une facture.  Ce statut est **obligatoire pour le PPF** (BR-FR-CDV-14 requiert le montant encaissé).  **Cas d&#39;usage:** L&#39;acheteur confirme le paiement d&#39;une facture.  **Authentification:** JWT Bearer (recommandé) ou credentials PDP dans la requête.
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="encaisseeRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse"/>&gt;</returns>
+        Task<ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse> SubmitEncaisseeApiV1CdarEncaisseePostAsync(EncaisseeRequest encaisseeRequest, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// [Simplifié] Soumettre un statut ENCAISSÉE (212)
+        /// </summary>
+        /// <remarks>
+        /// **Endpoint simplifié pour OD** - Soumet un statut ENCAISSÉE (212) pour une facture.  Ce statut est **obligatoire pour le PPF** (BR-FR-CDV-14 requiert le montant encaissé).  **Cas d&#39;usage:** L&#39;acheteur confirme le paiement d&#39;une facture.  **Authentification:** JWT Bearer (recommandé) ou credentials PDP dans la requête.
+        /// </remarks>
+        /// <param name="encaisseeRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse"/>?&gt;</returns>
+        Task<ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse?> SubmitEncaisseeApiV1CdarEncaisseePostOrDefaultAsync(EncaisseeRequest encaisseeRequest, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// [Simplifié] Soumettre un statut REFUSÉE (210)
+        /// </summary>
+        /// <remarks>
+        /// **Endpoint simplifié pour OD** - Soumet un statut REFUSÉE (210) pour une facture.  Ce statut est **obligatoire pour le PPF** (BR-FR-CDV-15 requiert un code motif).  **Cas d&#39;usage:** L&#39;acheteur refuse une facture reçue.  **Codes motif autorisés (BR-FR-CDV-CL-09):** - &#x60;TX_TVA_ERR&#x60;: Taux de TVA erroné - &#x60;MONTANTTOTAL_ERR&#x60;: Montant total erroné - &#x60;CALCUL_ERR&#x60;: Erreur de calcul - &#x60;NON_CONFORME&#x60;: Non conforme - &#x60;DOUBLON&#x60;: Doublon - &#x60;DEST_ERR&#x60;: Destinataire erroné - &#x60;TRANSAC_INC&#x60;: Transaction incomplète - &#x60;EMMET_INC&#x60;: Émetteur inconnu - &#x60;CONTRAT_TERM&#x60;: Contrat terminé - &#x60;DOUBLE_FACT&#x60;: Double facturation - &#x60;CMD_ERR&#x60;: Commande erronée - &#x60;ADR_ERR&#x60;: Adresse erronée - &#x60;REF_CT_ABSENT&#x60;: Référence contrat absente  **Authentification:** JWT Bearer (recommandé) ou credentials PDP dans la requête.
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="refuseeRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="ISubmitRefuseeApiV1CdarRefuseePostApiResponse"/>&gt;</returns>
+        Task<ISubmitRefuseeApiV1CdarRefuseePostApiResponse> SubmitRefuseeApiV1CdarRefuseePostAsync(RefuseeRequest refuseeRequest, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// [Simplifié] Soumettre un statut REFUSÉE (210)
+        /// </summary>
+        /// <remarks>
+        /// **Endpoint simplifié pour OD** - Soumet un statut REFUSÉE (210) pour une facture.  Ce statut est **obligatoire pour le PPF** (BR-FR-CDV-15 requiert un code motif).  **Cas d&#39;usage:** L&#39;acheteur refuse une facture reçue.  **Codes motif autorisés (BR-FR-CDV-CL-09):** - &#x60;TX_TVA_ERR&#x60;: Taux de TVA erroné - &#x60;MONTANTTOTAL_ERR&#x60;: Montant total erroné - &#x60;CALCUL_ERR&#x60;: Erreur de calcul - &#x60;NON_CONFORME&#x60;: Non conforme - &#x60;DOUBLON&#x60;: Doublon - &#x60;DEST_ERR&#x60;: Destinataire erroné - &#x60;TRANSAC_INC&#x60;: Transaction incomplète - &#x60;EMMET_INC&#x60;: Émetteur inconnu - &#x60;CONTRAT_TERM&#x60;: Contrat terminé - &#x60;DOUBLE_FACT&#x60;: Double facturation - &#x60;CMD_ERR&#x60;: Commande erronée - &#x60;ADR_ERR&#x60;: Adresse erronée - &#x60;REF_CT_ABSENT&#x60;: Référence contrat absente  **Authentification:** JWT Bearer (recommandé) ou credentials PDP dans la requête.
+        /// </remarks>
+        /// <param name="refuseeRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="ISubmitRefuseeApiV1CdarRefuseePostApiResponse"/>?&gt;</returns>
+        Task<ISubmitRefuseeApiV1CdarRefuseePostApiResponse?> SubmitRefuseeApiV1CdarRefuseePostOrDefaultAsync(RefuseeRequest refuseeRequest, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Valider des données CDAR
@@ -403,6 +437,78 @@ namespace FactPulse.SDK.Api
     }
 
     /// <summary>
+    /// The <see cref="ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse"/>
+    /// </summary>
+    public interface ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.SimplifiedCDARResponse?>, IUnauthorized<FactPulse.SDK.Model.APIError?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 400 BadRequest
+        /// </summary>
+        /// <returns></returns>
+        bool IsBadRequest { get; }
+
+        /// <summary>
+        /// Returns true if the response is 422 UnprocessableContent
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnprocessableContent { get; }
+
+        /// <summary>
+        /// Returns true if the response is 500 InternalServerError
+        /// </summary>
+        /// <returns></returns>
+        bool IsInternalServerError { get; }
+
+        /// <summary>
+        /// Returns true if the response is 401 Unauthorized
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnauthorized { get; }
+    }
+
+    /// <summary>
+    /// The <see cref="ISubmitRefuseeApiV1CdarRefuseePostApiResponse"/>
+    /// </summary>
+    public interface ISubmitRefuseeApiV1CdarRefuseePostApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.SimplifiedCDARResponse?>, IUnauthorized<FactPulse.SDK.Model.APIError?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 400 BadRequest
+        /// </summary>
+        /// <returns></returns>
+        bool IsBadRequest { get; }
+
+        /// <summary>
+        /// Returns true if the response is 422 UnprocessableContent
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnprocessableContent { get; }
+
+        /// <summary>
+        /// Returns true if the response is 500 InternalServerError
+        /// </summary>
+        /// <returns></returns>
+        bool IsInternalServerError { get; }
+
+        /// <summary>
+        /// Returns true if the response is 401 Unauthorized
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnauthorized { get; }
+    }
+
+    /// <summary>
     /// The <see cref="IValidateCdarApiV1CdarValidatePostApiResponse"/>
     /// </summary>
     public interface IValidateCdarApiV1CdarValidatePostApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.ValidateCDARResponse?>, IUnauthorized<FactPulse.SDK.Model.APIError?>
@@ -561,6 +667,46 @@ namespace FactPulse.SDK.Api
         internal void ExecuteOnErrorSubmitCdarXmlApiV1CdarSubmitXmlPost(Exception exception)
         {
             OnErrorSubmitCdarXmlApiV1CdarSubmitXmlPost?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
+        public event EventHandler<ApiResponseEventArgs>? OnSubmitEncaisseeApiV1CdarEncaisseePost;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs>? OnErrorSubmitEncaisseeApiV1CdarEncaisseePost;
+
+        internal void ExecuteOnSubmitEncaisseeApiV1CdarEncaisseePost(CDARCycleDeVieApi.SubmitEncaisseeApiV1CdarEncaisseePostApiResponse apiResponse)
+        {
+            OnSubmitEncaisseeApiV1CdarEncaisseePost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorSubmitEncaisseeApiV1CdarEncaisseePost(Exception exception)
+        {
+            OnErrorSubmitEncaisseeApiV1CdarEncaisseePost?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
+        public event EventHandler<ApiResponseEventArgs>? OnSubmitRefuseeApiV1CdarRefuseePost;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs>? OnErrorSubmitRefuseeApiV1CdarRefuseePost;
+
+        internal void ExecuteOnSubmitRefuseeApiV1CdarRefuseePost(CDARCycleDeVieApi.SubmitRefuseeApiV1CdarRefuseePostApiResponse apiResponse)
+        {
+            OnSubmitRefuseeApiV1CdarRefuseePost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorSubmitRefuseeApiV1CdarRefuseePost(Exception exception)
+        {
+            OnErrorSubmitRefuseeApiV1CdarRefuseePost?.Invoke(this, new ExceptionEventArgs(exception));
         }
 
         /// <summary>
@@ -1660,31 +1806,28 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatSubmitCdarApiV1CdarSubmitPost(ref int userId, BodySubmitCdarApiV1CdarSubmitPost bodySubmitCdarApiV1CdarSubmitPost, ref Option<string?> jwtToken, ref Option<string?> clientUid);
+        partial void FormatSubmitCdarApiV1CdarSubmitPost(SubmitCDARRequest submitCDARRequest);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="bodySubmitCdarApiV1CdarSubmitPost"></param>
+        /// <param name="submitCDARRequest"></param>
         /// <returns></returns>
-        private void ValidateSubmitCdarApiV1CdarSubmitPost(BodySubmitCdarApiV1CdarSubmitPost bodySubmitCdarApiV1CdarSubmitPost)
+        private void ValidateSubmitCdarApiV1CdarSubmitPost(SubmitCDARRequest submitCDARRequest)
         {
-            if (bodySubmitCdarApiV1CdarSubmitPost == null)
-                throw new ArgumentNullException(nameof(bodySubmitCdarApiV1CdarSubmitPost));
+            if (submitCDARRequest == null)
+                throw new ArgumentNullException(nameof(submitCDARRequest));
         }
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="userId"></param>
-        /// <param name="bodySubmitCdarApiV1CdarSubmitPost"></param>
-        /// <param name="jwtToken"></param>
-        /// <param name="clientUid"></param>
-        private void AfterSubmitCdarApiV1CdarSubmitPostDefaultImplementation(ISubmitCdarApiV1CdarSubmitPostApiResponse apiResponseLocalVar, int userId, BodySubmitCdarApiV1CdarSubmitPost bodySubmitCdarApiV1CdarSubmitPost, Option<string?> jwtToken, Option<string?> clientUid)
+        /// <param name="submitCDARRequest"></param>
+        private void AfterSubmitCdarApiV1CdarSubmitPostDefaultImplementation(ISubmitCdarApiV1CdarSubmitPostApiResponse apiResponseLocalVar, SubmitCDARRequest submitCDARRequest)
         {
             bool suppressDefaultLog = false;
-            AfterSubmitCdarApiV1CdarSubmitPost(ref suppressDefaultLog, apiResponseLocalVar, userId, bodySubmitCdarApiV1CdarSubmitPost, jwtToken, clientUid);
+            AfterSubmitCdarApiV1CdarSubmitPost(ref suppressDefaultLog, apiResponseLocalVar, submitCDARRequest);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -1694,11 +1837,8 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="userId"></param>
-        /// <param name="bodySubmitCdarApiV1CdarSubmitPost"></param>
-        /// <param name="jwtToken"></param>
-        /// <param name="clientUid"></param>
-        partial void AfterSubmitCdarApiV1CdarSubmitPost(ref bool suppressDefaultLog, ISubmitCdarApiV1CdarSubmitPostApiResponse apiResponseLocalVar, int userId, BodySubmitCdarApiV1CdarSubmitPost bodySubmitCdarApiV1CdarSubmitPost, Option<string?> jwtToken, Option<string?> clientUid);
+        /// <param name="submitCDARRequest"></param>
+        partial void AfterSubmitCdarApiV1CdarSubmitPost(ref bool suppressDefaultLog, ISubmitCdarApiV1CdarSubmitPostApiResponse apiResponseLocalVar, SubmitCDARRequest submitCDARRequest);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1706,14 +1846,11 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="userId"></param>
-        /// <param name="bodySubmitCdarApiV1CdarSubmitPost"></param>
-        /// <param name="jwtToken"></param>
-        /// <param name="clientUid"></param>
-        private void OnErrorSubmitCdarApiV1CdarSubmitPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, int userId, BodySubmitCdarApiV1CdarSubmitPost bodySubmitCdarApiV1CdarSubmitPost, Option<string?> jwtToken, Option<string?> clientUid)
+        /// <param name="submitCDARRequest"></param>
+        private void OnErrorSubmitCdarApiV1CdarSubmitPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitCDARRequest submitCDARRequest)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorSubmitCdarApiV1CdarSubmitPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, userId, bodySubmitCdarApiV1CdarSubmitPost, jwtToken, clientUid);
+            OnErrorSubmitCdarApiV1CdarSubmitPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, submitCDARRequest);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -1725,26 +1862,20 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="userId"></param>
-        /// <param name="bodySubmitCdarApiV1CdarSubmitPost"></param>
-        /// <param name="jwtToken"></param>
-        /// <param name="clientUid"></param>
-        partial void OnErrorSubmitCdarApiV1CdarSubmitPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, int userId, BodySubmitCdarApiV1CdarSubmitPost bodySubmitCdarApiV1CdarSubmitPost, Option<string?> jwtToken, Option<string?> clientUid);
+        /// <param name="submitCDARRequest"></param>
+        partial void OnErrorSubmitCdarApiV1CdarSubmitPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitCDARRequest submitCDARRequest);
 
         /// <summary>
-        /// Générer et soumettre un message CDAR Génère un message CDAR et le soumet à la plateforme PA/PDP.  Nécessite une authentification AFNOR valide.  **Types de flux (flowType):** - &#x60;CustomerInvoiceLC&#x60;: Cycle de vie côté client (acheteur) - &#x60;SupplierInvoiceLC&#x60;: Cycle de vie côté fournisseur (vendeur)
+        /// Générer et soumettre un message CDAR Génère un message CDAR et le soumet à la plateforme PA/PDP.  **Stratégies d&#39;authentification:** 1. **JWT avec client_uid** (recommandé): credentials PDP récupérés du backend 2. **Zero-storage**: Fournir pdpFlowServiceUrl, pdpClientId, pdpClientSecret dans la requête  **Types de flux (flowType):** - &#x60;CustomerInvoiceLC&#x60;: Cycle de vie côté client (acheteur) - &#x60;SupplierInvoiceLC&#x60;: Cycle de vie côté fournisseur (vendeur)
         /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="bodySubmitCdarApiV1CdarSubmitPost"></param>
-        /// <param name="jwtToken"> (optional)</param>
-        /// <param name="clientUid"> (optional)</param>
+        /// <param name="submitCDARRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitCdarApiV1CdarSubmitPostApiResponse"/>&gt;</returns>
-        public async Task<ISubmitCdarApiV1CdarSubmitPostApiResponse?> SubmitCdarApiV1CdarSubmitPostOrDefaultAsync(int userId, BodySubmitCdarApiV1CdarSubmitPost bodySubmitCdarApiV1CdarSubmitPost, Option<string?> jwtToken = default, Option<string?> clientUid = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISubmitCdarApiV1CdarSubmitPostApiResponse?> SubmitCdarApiV1CdarSubmitPostOrDefaultAsync(SubmitCDARRequest submitCDARRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await SubmitCdarApiV1CdarSubmitPostAsync(userId, bodySubmitCdarApiV1CdarSubmitPost, jwtToken, clientUid, cancellationToken).ConfigureAwait(false);
+                return await SubmitCdarApiV1CdarSubmitPostAsync(submitCDARRequest, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -1753,24 +1884,21 @@ namespace FactPulse.SDK.Api
         }
 
         /// <summary>
-        /// Générer et soumettre un message CDAR Génère un message CDAR et le soumet à la plateforme PA/PDP.  Nécessite une authentification AFNOR valide.  **Types de flux (flowType):** - &#x60;CustomerInvoiceLC&#x60;: Cycle de vie côté client (acheteur) - &#x60;SupplierInvoiceLC&#x60;: Cycle de vie côté fournisseur (vendeur)
+        /// Générer et soumettre un message CDAR Génère un message CDAR et le soumet à la plateforme PA/PDP.  **Stratégies d&#39;authentification:** 1. **JWT avec client_uid** (recommandé): credentials PDP récupérés du backend 2. **Zero-storage**: Fournir pdpFlowServiceUrl, pdpClientId, pdpClientSecret dans la requête  **Types de flux (flowType):** - &#x60;CustomerInvoiceLC&#x60;: Cycle de vie côté client (acheteur) - &#x60;SupplierInvoiceLC&#x60;: Cycle de vie côté fournisseur (vendeur)
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="bodySubmitCdarApiV1CdarSubmitPost"></param>
-        /// <param name="jwtToken"> (optional)</param>
-        /// <param name="clientUid"> (optional)</param>
+        /// <param name="submitCDARRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitCdarApiV1CdarSubmitPostApiResponse"/>&gt;</returns>
-        public async Task<ISubmitCdarApiV1CdarSubmitPostApiResponse> SubmitCdarApiV1CdarSubmitPostAsync(int userId, BodySubmitCdarApiV1CdarSubmitPost bodySubmitCdarApiV1CdarSubmitPost, Option<string?> jwtToken = default, Option<string?> clientUid = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISubmitCdarApiV1CdarSubmitPostApiResponse> SubmitCdarApiV1CdarSubmitPostAsync(SubmitCDARRequest submitCDARRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateSubmitCdarApiV1CdarSubmitPost(bodySubmitCdarApiV1CdarSubmitPost);
+                ValidateSubmitCdarApiV1CdarSubmitPost(submitCDARRequest);
 
-                FormatSubmitCdarApiV1CdarSubmitPost(ref userId, bodySubmitCdarApiV1CdarSubmitPost, ref jwtToken, ref clientUid);
+                FormatSubmitCdarApiV1CdarSubmitPost(submitCDARRequest);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -1781,21 +1909,9 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/cdar/submit"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/cdar/submit");
 
-                    System.Collections.Specialized.NameValueCollection parseQueryStringLocalVar = System.Web.HttpUtility.ParseQueryString(string.Empty);
-
-                    parseQueryStringLocalVar["user_id"] = ClientUtils.ParameterToString(userId);
-
-                    if (jwtToken.IsSet)
-                        parseQueryStringLocalVar["jwt_token"] = ClientUtils.ParameterToString(jwtToken.Value);
-
-                    if (clientUid.IsSet)
-                        parseQueryStringLocalVar["client_uid"] = ClientUtils.ParameterToString(clientUid.Value);
-
-                    uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
-
-                    httpRequestMessageLocalVar.Content = (bodySubmitCdarApiV1CdarSubmitPost as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (submitCDARRequest as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(bodySubmitCdarApiV1CdarSubmitPost, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(submitCDARRequest, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
@@ -1842,7 +1958,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterSubmitCdarApiV1CdarSubmitPostDefaultImplementation(apiResponseLocalVar, userId, bodySubmitCdarApiV1CdarSubmitPost, jwtToken, clientUid);
+                        AfterSubmitCdarApiV1CdarSubmitPostDefaultImplementation(apiResponseLocalVar, submitCDARRequest);
 
                         Events.ExecuteOnSubmitCdarApiV1CdarSubmitPost(apiResponseLocalVar);
 
@@ -1856,7 +1972,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorSubmitCdarApiV1CdarSubmitPostDefaultImplementation(e, "/api/v1/cdar/submit", uriBuilderLocalVar.Path, userId, bodySubmitCdarApiV1CdarSubmitPost, jwtToken, clientUid);
+                OnErrorSubmitCdarApiV1CdarSubmitPostDefaultImplementation(e, "/api/v1/cdar/submit", uriBuilderLocalVar.Path, submitCDARRequest);
                 Events.ExecuteOnErrorSubmitCdarApiV1CdarSubmitPost(e);
                 throw;
             }
@@ -2011,31 +2127,28 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatSubmitCdarXmlApiV1CdarSubmitXmlPost(ref int userId, BodySubmitCdarXmlApiV1CdarSubmitXmlPost bodySubmitCdarXmlApiV1CdarSubmitXmlPost, ref Option<string?> jwtToken, ref Option<string?> clientUid);
+        partial void FormatSubmitCdarXmlApiV1CdarSubmitXmlPost(SubmitCDARXMLRequest submitCDARXMLRequest);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
-        /// <param name="bodySubmitCdarXmlApiV1CdarSubmitXmlPost"></param>
+        /// <param name="submitCDARXMLRequest"></param>
         /// <returns></returns>
-        private void ValidateSubmitCdarXmlApiV1CdarSubmitXmlPost(BodySubmitCdarXmlApiV1CdarSubmitXmlPost bodySubmitCdarXmlApiV1CdarSubmitXmlPost)
+        private void ValidateSubmitCdarXmlApiV1CdarSubmitXmlPost(SubmitCDARXMLRequest submitCDARXMLRequest)
         {
-            if (bodySubmitCdarXmlApiV1CdarSubmitXmlPost == null)
-                throw new ArgumentNullException(nameof(bodySubmitCdarXmlApiV1CdarSubmitXmlPost));
+            if (submitCDARXMLRequest == null)
+                throw new ArgumentNullException(nameof(submitCDARXMLRequest));
         }
 
         /// <summary>
         /// Processes the server response
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="userId"></param>
-        /// <param name="bodySubmitCdarXmlApiV1CdarSubmitXmlPost"></param>
-        /// <param name="jwtToken"></param>
-        /// <param name="clientUid"></param>
-        private void AfterSubmitCdarXmlApiV1CdarSubmitXmlPostDefaultImplementation(ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse apiResponseLocalVar, int userId, BodySubmitCdarXmlApiV1CdarSubmitXmlPost bodySubmitCdarXmlApiV1CdarSubmitXmlPost, Option<string?> jwtToken, Option<string?> clientUid)
+        /// <param name="submitCDARXMLRequest"></param>
+        private void AfterSubmitCdarXmlApiV1CdarSubmitXmlPostDefaultImplementation(ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse apiResponseLocalVar, SubmitCDARXMLRequest submitCDARXMLRequest)
         {
             bool suppressDefaultLog = false;
-            AfterSubmitCdarXmlApiV1CdarSubmitXmlPost(ref suppressDefaultLog, apiResponseLocalVar, userId, bodySubmitCdarXmlApiV1CdarSubmitXmlPost, jwtToken, clientUid);
+            AfterSubmitCdarXmlApiV1CdarSubmitXmlPost(ref suppressDefaultLog, apiResponseLocalVar, submitCDARXMLRequest);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -2045,11 +2158,8 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
-        /// <param name="userId"></param>
-        /// <param name="bodySubmitCdarXmlApiV1CdarSubmitXmlPost"></param>
-        /// <param name="jwtToken"></param>
-        /// <param name="clientUid"></param>
-        partial void AfterSubmitCdarXmlApiV1CdarSubmitXmlPost(ref bool suppressDefaultLog, ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse apiResponseLocalVar, int userId, BodySubmitCdarXmlApiV1CdarSubmitXmlPost bodySubmitCdarXmlApiV1CdarSubmitXmlPost, Option<string?> jwtToken, Option<string?> clientUid);
+        /// <param name="submitCDARXMLRequest"></param>
+        partial void AfterSubmitCdarXmlApiV1CdarSubmitXmlPost(ref bool suppressDefaultLog, ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse apiResponseLocalVar, SubmitCDARXMLRequest submitCDARXMLRequest);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -2057,14 +2167,11 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="userId"></param>
-        /// <param name="bodySubmitCdarXmlApiV1CdarSubmitXmlPost"></param>
-        /// <param name="jwtToken"></param>
-        /// <param name="clientUid"></param>
-        private void OnErrorSubmitCdarXmlApiV1CdarSubmitXmlPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, int userId, BodySubmitCdarXmlApiV1CdarSubmitXmlPost bodySubmitCdarXmlApiV1CdarSubmitXmlPost, Option<string?> jwtToken, Option<string?> clientUid)
+        /// <param name="submitCDARXMLRequest"></param>
+        private void OnErrorSubmitCdarXmlApiV1CdarSubmitXmlPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitCDARXMLRequest submitCDARXMLRequest)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorSubmitCdarXmlApiV1CdarSubmitXmlPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, userId, bodySubmitCdarXmlApiV1CdarSubmitXmlPost, jwtToken, clientUid);
+            OnErrorSubmitCdarXmlApiV1CdarSubmitXmlPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, submitCDARXMLRequest);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -2076,26 +2183,20 @@ namespace FactPulse.SDK.Api
         /// <param name="exceptionLocalVar"></param>
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
-        /// <param name="userId"></param>
-        /// <param name="bodySubmitCdarXmlApiV1CdarSubmitXmlPost"></param>
-        /// <param name="jwtToken"></param>
-        /// <param name="clientUid"></param>
-        partial void OnErrorSubmitCdarXmlApiV1CdarSubmitXmlPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, int userId, BodySubmitCdarXmlApiV1CdarSubmitXmlPost bodySubmitCdarXmlApiV1CdarSubmitXmlPost, Option<string?> jwtToken, Option<string?> clientUid);
+        /// <param name="submitCDARXMLRequest"></param>
+        partial void OnErrorSubmitCdarXmlApiV1CdarSubmitXmlPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitCDARXMLRequest submitCDARXMLRequest);
 
         /// <summary>
-        /// Soumettre un XML CDAR pré-généré Soumet un message XML CDAR pré-généré à la plateforme PA/PDP.  Utile pour soumettre des XML générés par d&#39;autres systèmes.
+        /// Soumettre un XML CDAR pré-généré Soumet un message XML CDAR pré-généré à la plateforme PA/PDP.  Utile pour soumettre des XML générés par d&#39;autres systèmes.  **Stratégies d&#39;authentification:** 1. **JWT avec client_uid** (recommandé): credentials PDP récupérés du backend 2. **Zero-storage**: Fournir pdpFlowServiceUrl, pdpClientId, pdpClientSecret dans la requête
         /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="bodySubmitCdarXmlApiV1CdarSubmitXmlPost"></param>
-        /// <param name="jwtToken"> (optional)</param>
-        /// <param name="clientUid"> (optional)</param>
+        /// <param name="submitCDARXMLRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse"/>&gt;</returns>
-        public async Task<ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse?> SubmitCdarXmlApiV1CdarSubmitXmlPostOrDefaultAsync(int userId, BodySubmitCdarXmlApiV1CdarSubmitXmlPost bodySubmitCdarXmlApiV1CdarSubmitXmlPost, Option<string?> jwtToken = default, Option<string?> clientUid = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse?> SubmitCdarXmlApiV1CdarSubmitXmlPostOrDefaultAsync(SubmitCDARXMLRequest submitCDARXMLRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await SubmitCdarXmlApiV1CdarSubmitXmlPostAsync(userId, bodySubmitCdarXmlApiV1CdarSubmitXmlPost, jwtToken, clientUid, cancellationToken).ConfigureAwait(false);
+                return await SubmitCdarXmlApiV1CdarSubmitXmlPostAsync(submitCDARXMLRequest, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -2104,24 +2205,21 @@ namespace FactPulse.SDK.Api
         }
 
         /// <summary>
-        /// Soumettre un XML CDAR pré-généré Soumet un message XML CDAR pré-généré à la plateforme PA/PDP.  Utile pour soumettre des XML générés par d&#39;autres systèmes.
+        /// Soumettre un XML CDAR pré-généré Soumet un message XML CDAR pré-généré à la plateforme PA/PDP.  Utile pour soumettre des XML générés par d&#39;autres systèmes.  **Stratégies d&#39;authentification:** 1. **JWT avec client_uid** (recommandé): credentials PDP récupérés du backend 2. **Zero-storage**: Fournir pdpFlowServiceUrl, pdpClientId, pdpClientSecret dans la requête
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="userId"></param>
-        /// <param name="bodySubmitCdarXmlApiV1CdarSubmitXmlPost"></param>
-        /// <param name="jwtToken"> (optional)</param>
-        /// <param name="clientUid"> (optional)</param>
+        /// <param name="submitCDARXMLRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse"/>&gt;</returns>
-        public async Task<ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse> SubmitCdarXmlApiV1CdarSubmitXmlPostAsync(int userId, BodySubmitCdarXmlApiV1CdarSubmitXmlPost bodySubmitCdarXmlApiV1CdarSubmitXmlPost, Option<string?> jwtToken = default, Option<string?> clientUid = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse> SubmitCdarXmlApiV1CdarSubmitXmlPostAsync(SubmitCDARXMLRequest submitCDARXMLRequest, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                ValidateSubmitCdarXmlApiV1CdarSubmitXmlPost(bodySubmitCdarXmlApiV1CdarSubmitXmlPost);
+                ValidateSubmitCdarXmlApiV1CdarSubmitXmlPost(submitCDARXMLRequest);
 
-                FormatSubmitCdarXmlApiV1CdarSubmitXmlPost(ref userId, bodySubmitCdarXmlApiV1CdarSubmitXmlPost, ref jwtToken, ref clientUid);
+                FormatSubmitCdarXmlApiV1CdarSubmitXmlPost(submitCDARXMLRequest);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -2132,21 +2230,9 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/cdar/submit-xml"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/cdar/submit-xml");
 
-                    System.Collections.Specialized.NameValueCollection parseQueryStringLocalVar = System.Web.HttpUtility.ParseQueryString(string.Empty);
-
-                    parseQueryStringLocalVar["user_id"] = ClientUtils.ParameterToString(userId);
-
-                    if (jwtToken.IsSet)
-                        parseQueryStringLocalVar["jwt_token"] = ClientUtils.ParameterToString(jwtToken.Value);
-
-                    if (clientUid.IsSet)
-                        parseQueryStringLocalVar["client_uid"] = ClientUtils.ParameterToString(clientUid.Value);
-
-                    uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
-
-                    httpRequestMessageLocalVar.Content = (bodySubmitCdarXmlApiV1CdarSubmitXmlPost as object) is System.IO.Stream stream
+                    httpRequestMessageLocalVar.Content = (submitCDARXMLRequest as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
-                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(bodySubmitCdarXmlApiV1CdarSubmitXmlPost, _jsonSerializerOptions));
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(submitCDARXMLRequest, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
@@ -2193,7 +2279,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterSubmitCdarXmlApiV1CdarSubmitXmlPostDefaultImplementation(apiResponseLocalVar, userId, bodySubmitCdarXmlApiV1CdarSubmitXmlPost, jwtToken, clientUid);
+                        AfterSubmitCdarXmlApiV1CdarSubmitXmlPostDefaultImplementation(apiResponseLocalVar, submitCDARXMLRequest);
 
                         Events.ExecuteOnSubmitCdarXmlApiV1CdarSubmitXmlPost(apiResponseLocalVar);
 
@@ -2207,7 +2293,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorSubmitCdarXmlApiV1CdarSubmitXmlPostDefaultImplementation(e, "/api/v1/cdar/submit-xml", uriBuilderLocalVar.Path, userId, bodySubmitCdarXmlApiV1CdarSubmitXmlPost, jwtToken, clientUid);
+                OnErrorSubmitCdarXmlApiV1CdarSubmitXmlPostDefaultImplementation(e, "/api/v1/cdar/submit-xml", uriBuilderLocalVar.Path, submitCDARXMLRequest);
                 Events.ExecuteOnErrorSubmitCdarXmlApiV1CdarSubmitXmlPost(e);
                 throw;
             }
@@ -2281,6 +2367,648 @@ namespace FactPulse.SDK.Api
             /// <param name="result"></param>
             /// <returns></returns>
             public bool TryOk([NotNullWhen(true)]out FactPulse.SDK.Model.SubmitCDARResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 400 BadRequest
+            /// </summary>
+            /// <returns></returns>
+            public bool IsBadRequest => 400 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnprocessableContent => 422 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 500 InternalServerError
+            /// </summary>
+            /// <returns></returns>
+            public bool IsInternalServerError => 500 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 401 Unauthorized
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnauthorized => 401 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 401 Unauthorized
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.APIError? Unauthorized()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsUnauthorized
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.APIError>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 401 Unauthorized and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryUnauthorized([NotNullWhen(true)]out FactPulse.SDK.Model.APIError? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Unauthorized();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)401);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
+        partial void FormatSubmitEncaisseeApiV1CdarEncaisseePost(EncaisseeRequest encaisseeRequest);
+
+        /// <summary>
+        /// Validates the request parameters
+        /// </summary>
+        /// <param name="encaisseeRequest"></param>
+        /// <returns></returns>
+        private void ValidateSubmitEncaisseeApiV1CdarEncaisseePost(EncaisseeRequest encaisseeRequest)
+        {
+            if (encaisseeRequest == null)
+                throw new ArgumentNullException(nameof(encaisseeRequest));
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="encaisseeRequest"></param>
+        private void AfterSubmitEncaisseeApiV1CdarEncaisseePostDefaultImplementation(ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse apiResponseLocalVar, EncaisseeRequest encaisseeRequest)
+        {
+            bool suppressDefaultLog = false;
+            AfterSubmitEncaisseeApiV1CdarEncaisseePost(ref suppressDefaultLog, apiResponseLocalVar, encaisseeRequest);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="encaisseeRequest"></param>
+        partial void AfterSubmitEncaisseeApiV1CdarEncaisseePost(ref bool suppressDefaultLog, ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse apiResponseLocalVar, EncaisseeRequest encaisseeRequest);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="encaisseeRequest"></param>
+        private void OnErrorSubmitEncaisseeApiV1CdarEncaisseePostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, EncaisseeRequest encaisseeRequest)
+        {
+            bool suppressDefaultLogLocalVar = false;
+            OnErrorSubmitEncaisseeApiV1CdarEncaisseePost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, encaisseeRequest);
+            if (!suppressDefaultLogLocalVar)
+                Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLogLocalVar"></param>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="encaisseeRequest"></param>
+        partial void OnErrorSubmitEncaisseeApiV1CdarEncaisseePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, EncaisseeRequest encaisseeRequest);
+
+        /// <summary>
+        /// [Simplifié] Soumettre un statut ENCAISSÉE (212) **Endpoint simplifié pour OD** - Soumet un statut ENCAISSÉE (212) pour une facture.  Ce statut est **obligatoire pour le PPF** (BR-FR-CDV-14 requiert le montant encaissé).  **Cas d&#39;usage:** L&#39;acheteur confirme le paiement d&#39;une facture.  **Authentification:** JWT Bearer (recommandé) ou credentials PDP dans la requête.
+        /// </summary>
+        /// <param name="encaisseeRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse"/>&gt;</returns>
+        public async Task<ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse?> SubmitEncaisseeApiV1CdarEncaisseePostOrDefaultAsync(EncaisseeRequest encaisseeRequest, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await SubmitEncaisseeApiV1CdarEncaisseePostAsync(encaisseeRequest, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// [Simplifié] Soumettre un statut ENCAISSÉE (212) **Endpoint simplifié pour OD** - Soumet un statut ENCAISSÉE (212) pour une facture.  Ce statut est **obligatoire pour le PPF** (BR-FR-CDV-14 requiert le montant encaissé).  **Cas d&#39;usage:** L&#39;acheteur confirme le paiement d&#39;une facture.  **Authentification:** JWT Bearer (recommandé) ou credentials PDP dans la requête.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="encaisseeRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse"/>&gt;</returns>
+        public async Task<ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse> SubmitEncaisseeApiV1CdarEncaisseePostAsync(EncaisseeRequest encaisseeRequest, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                ValidateSubmitEncaisseeApiV1CdarEncaisseePost(encaisseeRequest);
+
+                FormatSubmitEncaisseeApiV1CdarEncaisseePost(encaisseeRequest);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
+                        ? "/api/v1/cdar/encaissee"
+                        : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/cdar/encaissee");
+
+                    httpRequestMessageLocalVar.Content = (encaisseeRequest as object) is System.IO.Stream stream
+                        ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(encaisseeRequest, _jsonSerializerOptions));
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+
+                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
+
+                    string[] contentTypes = new string[] {
+                        "application/json"
+                    };
+
+                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
+
+                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
+                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+
+                    if (acceptLocalVar != null)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Post;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        ILogger<SubmitEncaisseeApiV1CdarEncaisseePostApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<SubmitEncaisseeApiV1CdarEncaisseePostApiResponse>();
+                        SubmitEncaisseeApiV1CdarEncaisseePostApiResponse apiResponseLocalVar;
+
+                        switch ((int)httpResponseMessageLocalVar.StatusCode) {
+                            default: {
+                                string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+                                apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/api/v1/cdar/encaissee", requestedAtLocalVar, _jsonSerializerOptions);
+
+                                break;
+                            }
+                        }
+
+                        AfterSubmitEncaisseeApiV1CdarEncaisseePostDefaultImplementation(apiResponseLocalVar, encaisseeRequest);
+
+                        Events.ExecuteOnSubmitEncaisseeApiV1CdarEncaisseePost(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorSubmitEncaisseeApiV1CdarEncaisseePostDefaultImplementation(e, "/api/v1/cdar/encaissee", uriBuilderLocalVar.Path, encaisseeRequest);
+                Events.ExecuteOnErrorSubmitEncaisseeApiV1CdarEncaisseePost(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="SubmitEncaisseeApiV1CdarEncaisseePostApiResponse"/>
+        /// </summary>
+        public partial class SubmitEncaisseeApiV1CdarEncaisseePostApiResponse : FactPulse.SDK.Client.ApiResponse, ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<SubmitEncaisseeApiV1CdarEncaisseePostApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="SubmitEncaisseeApiV1CdarEncaisseePostApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public SubmitEncaisseeApiV1CdarEncaisseePostApiResponse(ILogger<SubmitEncaisseeApiV1CdarEncaisseePostApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            /// <summary>
+            /// The <see cref="SubmitEncaisseeApiV1CdarEncaisseePostApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="contentStream"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public SubmitEncaisseeApiV1CdarEncaisseePostApiResponse(ILogger<SubmitEncaisseeApiV1CdarEncaisseePostApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.SimplifiedCDARResponse? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.SimplifiedCDARResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out FactPulse.SDK.Model.SimplifiedCDARResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 400 BadRequest
+            /// </summary>
+            /// <returns></returns>
+            public bool IsBadRequest => 400 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnprocessableContent => 422 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 500 InternalServerError
+            /// </summary>
+            /// <returns></returns>
+            public bool IsInternalServerError => 500 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 401 Unauthorized
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnauthorized => 401 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 401 Unauthorized
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.APIError? Unauthorized()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsUnauthorized
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.APIError>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 401 Unauthorized and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryUnauthorized([NotNullWhen(true)]out FactPulse.SDK.Model.APIError? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Unauthorized();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)401);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
+        partial void FormatSubmitRefuseeApiV1CdarRefuseePost(RefuseeRequest refuseeRequest);
+
+        /// <summary>
+        /// Validates the request parameters
+        /// </summary>
+        /// <param name="refuseeRequest"></param>
+        /// <returns></returns>
+        private void ValidateSubmitRefuseeApiV1CdarRefuseePost(RefuseeRequest refuseeRequest)
+        {
+            if (refuseeRequest == null)
+                throw new ArgumentNullException(nameof(refuseeRequest));
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="refuseeRequest"></param>
+        private void AfterSubmitRefuseeApiV1CdarRefuseePostDefaultImplementation(ISubmitRefuseeApiV1CdarRefuseePostApiResponse apiResponseLocalVar, RefuseeRequest refuseeRequest)
+        {
+            bool suppressDefaultLog = false;
+            AfterSubmitRefuseeApiV1CdarRefuseePost(ref suppressDefaultLog, apiResponseLocalVar, refuseeRequest);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="refuseeRequest"></param>
+        partial void AfterSubmitRefuseeApiV1CdarRefuseePost(ref bool suppressDefaultLog, ISubmitRefuseeApiV1CdarRefuseePostApiResponse apiResponseLocalVar, RefuseeRequest refuseeRequest);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="refuseeRequest"></param>
+        private void OnErrorSubmitRefuseeApiV1CdarRefuseePostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, RefuseeRequest refuseeRequest)
+        {
+            bool suppressDefaultLogLocalVar = false;
+            OnErrorSubmitRefuseeApiV1CdarRefuseePost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, refuseeRequest);
+            if (!suppressDefaultLogLocalVar)
+                Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLogLocalVar"></param>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="refuseeRequest"></param>
+        partial void OnErrorSubmitRefuseeApiV1CdarRefuseePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, RefuseeRequest refuseeRequest);
+
+        /// <summary>
+        /// [Simplifié] Soumettre un statut REFUSÉE (210) **Endpoint simplifié pour OD** - Soumet un statut REFUSÉE (210) pour une facture.  Ce statut est **obligatoire pour le PPF** (BR-FR-CDV-15 requiert un code motif).  **Cas d&#39;usage:** L&#39;acheteur refuse une facture reçue.  **Codes motif autorisés (BR-FR-CDV-CL-09):** - &#x60;TX_TVA_ERR&#x60;: Taux de TVA erroné - &#x60;MONTANTTOTAL_ERR&#x60;: Montant total erroné - &#x60;CALCUL_ERR&#x60;: Erreur de calcul - &#x60;NON_CONFORME&#x60;: Non conforme - &#x60;DOUBLON&#x60;: Doublon - &#x60;DEST_ERR&#x60;: Destinataire erroné - &#x60;TRANSAC_INC&#x60;: Transaction incomplète - &#x60;EMMET_INC&#x60;: Émetteur inconnu - &#x60;CONTRAT_TERM&#x60;: Contrat terminé - &#x60;DOUBLE_FACT&#x60;: Double facturation - &#x60;CMD_ERR&#x60;: Commande erronée - &#x60;ADR_ERR&#x60;: Adresse erronée - &#x60;REF_CT_ABSENT&#x60;: Référence contrat absente  **Authentification:** JWT Bearer (recommandé) ou credentials PDP dans la requête.
+        /// </summary>
+        /// <param name="refuseeRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="ISubmitRefuseeApiV1CdarRefuseePostApiResponse"/>&gt;</returns>
+        public async Task<ISubmitRefuseeApiV1CdarRefuseePostApiResponse?> SubmitRefuseeApiV1CdarRefuseePostOrDefaultAsync(RefuseeRequest refuseeRequest, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await SubmitRefuseeApiV1CdarRefuseePostAsync(refuseeRequest, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// [Simplifié] Soumettre un statut REFUSÉE (210) **Endpoint simplifié pour OD** - Soumet un statut REFUSÉE (210) pour une facture.  Ce statut est **obligatoire pour le PPF** (BR-FR-CDV-15 requiert un code motif).  **Cas d&#39;usage:** L&#39;acheteur refuse une facture reçue.  **Codes motif autorisés (BR-FR-CDV-CL-09):** - &#x60;TX_TVA_ERR&#x60;: Taux de TVA erroné - &#x60;MONTANTTOTAL_ERR&#x60;: Montant total erroné - &#x60;CALCUL_ERR&#x60;: Erreur de calcul - &#x60;NON_CONFORME&#x60;: Non conforme - &#x60;DOUBLON&#x60;: Doublon - &#x60;DEST_ERR&#x60;: Destinataire erroné - &#x60;TRANSAC_INC&#x60;: Transaction incomplète - &#x60;EMMET_INC&#x60;: Émetteur inconnu - &#x60;CONTRAT_TERM&#x60;: Contrat terminé - &#x60;DOUBLE_FACT&#x60;: Double facturation - &#x60;CMD_ERR&#x60;: Commande erronée - &#x60;ADR_ERR&#x60;: Adresse erronée - &#x60;REF_CT_ABSENT&#x60;: Référence contrat absente  **Authentification:** JWT Bearer (recommandé) ou credentials PDP dans la requête.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="refuseeRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="ISubmitRefuseeApiV1CdarRefuseePostApiResponse"/>&gt;</returns>
+        public async Task<ISubmitRefuseeApiV1CdarRefuseePostApiResponse> SubmitRefuseeApiV1CdarRefuseePostAsync(RefuseeRequest refuseeRequest, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                ValidateSubmitRefuseeApiV1CdarRefuseePost(refuseeRequest);
+
+                FormatSubmitRefuseeApiV1CdarRefuseePost(refuseeRequest);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
+                        ? "/api/v1/cdar/refusee"
+                        : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/cdar/refusee");
+
+                    httpRequestMessageLocalVar.Content = (refuseeRequest as object) is System.IO.Stream stream
+                        ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(refuseeRequest, _jsonSerializerOptions));
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+
+                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
+
+                    string[] contentTypes = new string[] {
+                        "application/json"
+                    };
+
+                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
+
+                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
+                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+
+                    if (acceptLocalVar != null)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Post;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        ILogger<SubmitRefuseeApiV1CdarRefuseePostApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<SubmitRefuseeApiV1CdarRefuseePostApiResponse>();
+                        SubmitRefuseeApiV1CdarRefuseePostApiResponse apiResponseLocalVar;
+
+                        switch ((int)httpResponseMessageLocalVar.StatusCode) {
+                            default: {
+                                string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+                                apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/api/v1/cdar/refusee", requestedAtLocalVar, _jsonSerializerOptions);
+
+                                break;
+                            }
+                        }
+
+                        AfterSubmitRefuseeApiV1CdarRefuseePostDefaultImplementation(apiResponseLocalVar, refuseeRequest);
+
+                        Events.ExecuteOnSubmitRefuseeApiV1CdarRefuseePost(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorSubmitRefuseeApiV1CdarRefuseePostDefaultImplementation(e, "/api/v1/cdar/refusee", uriBuilderLocalVar.Path, refuseeRequest);
+                Events.ExecuteOnErrorSubmitRefuseeApiV1CdarRefuseePost(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="SubmitRefuseeApiV1CdarRefuseePostApiResponse"/>
+        /// </summary>
+        public partial class SubmitRefuseeApiV1CdarRefuseePostApiResponse : FactPulse.SDK.Client.ApiResponse, ISubmitRefuseeApiV1CdarRefuseePostApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<SubmitRefuseeApiV1CdarRefuseePostApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="SubmitRefuseeApiV1CdarRefuseePostApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public SubmitRefuseeApiV1CdarRefuseePostApiResponse(ILogger<SubmitRefuseeApiV1CdarRefuseePostApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            /// <summary>
+            /// The <see cref="SubmitRefuseeApiV1CdarRefuseePostApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="contentStream"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public SubmitRefuseeApiV1CdarRefuseePostApiResponse(ILogger<SubmitRefuseeApiV1CdarRefuseePostApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.SimplifiedCDARResponse? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.SimplifiedCDARResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out FactPulse.SDK.Model.SimplifiedCDARResponse? result)
             {
                 result = null;
 

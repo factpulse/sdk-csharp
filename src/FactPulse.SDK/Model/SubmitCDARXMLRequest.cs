@@ -37,12 +37,20 @@ namespace FactPulse.SDK.Model
         /// <param name="xml">XML CDAR à soumettre</param>
         /// <param name="flowType">Type de flux AFNOR (default to &quot;CustomerInvoiceLC&quot;)</param>
         /// <param name="filename">filename</param>
+        /// <param name="pdpFlowServiceUrl">pdpFlowServiceUrl</param>
+        /// <param name="pdpTokenUrl">pdpTokenUrl</param>
+        /// <param name="pdpClientId">pdpClientId</param>
+        /// <param name="pdpClientSecret">pdpClientSecret</param>
         [JsonConstructor]
-        public SubmitCDARXMLRequest(string xml, Option<string?> flowType = default, Option<string?> filename = default)
+        public SubmitCDARXMLRequest(string xml, Option<string?> flowType = default, Option<string?> filename = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default)
         {
             Xml = xml;
             FlowTypeOption = flowType;
             FilenameOption = filename;
+            PdpFlowServiceUrlOption = pdpFlowServiceUrl;
+            PdpTokenUrlOption = pdpTokenUrl;
+            PdpClientIdOption = pdpClientId;
+            PdpClientSecretOption = pdpClientSecret;
             OnCreated();
         }
 
@@ -83,6 +91,58 @@ namespace FactPulse.SDK.Model
         public string? Filename { get { return this.FilenameOption; } set { this.FilenameOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of PdpFlowServiceUrl
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> PdpFlowServiceUrlOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets PdpFlowServiceUrl
+        /// </summary>
+        [JsonPropertyName("pdpFlowServiceUrl")]
+        public string? PdpFlowServiceUrl { get { return this.PdpFlowServiceUrlOption; } set { this.PdpFlowServiceUrlOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of PdpTokenUrl
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> PdpTokenUrlOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets PdpTokenUrl
+        /// </summary>
+        [JsonPropertyName("pdpTokenUrl")]
+        public string? PdpTokenUrl { get { return this.PdpTokenUrlOption; } set { this.PdpTokenUrlOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of PdpClientId
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> PdpClientIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets PdpClientId
+        /// </summary>
+        [JsonPropertyName("pdpClientId")]
+        public string? PdpClientId { get { return this.PdpClientIdOption; } set { this.PdpClientIdOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of PdpClientSecret
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> PdpClientSecretOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets PdpClientSecret
+        /// </summary>
+        [JsonPropertyName("pdpClientSecret")]
+        public string? PdpClientSecret { get { return this.PdpClientSecretOption; } set { this.PdpClientSecretOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -93,6 +153,10 @@ namespace FactPulse.SDK.Model
             sb.Append("  Xml: ").Append(Xml).Append("\n");
             sb.Append("  FlowType: ").Append(FlowType).Append("\n");
             sb.Append("  Filename: ").Append(Filename).Append("\n");
+            sb.Append("  PdpFlowServiceUrl: ").Append(PdpFlowServiceUrl).Append("\n");
+            sb.Append("  PdpTokenUrl: ").Append(PdpTokenUrl).Append("\n");
+            sb.Append("  PdpClientId: ").Append(PdpClientId).Append("\n");
+            sb.Append("  PdpClientSecret: ").Append(PdpClientSecret).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -133,6 +197,10 @@ namespace FactPulse.SDK.Model
             Option<string?> xml = default;
             Option<string?> flowType = default;
             Option<string?> filename = default;
+            Option<string?> pdpFlowServiceUrl = default;
+            Option<string?> pdpTokenUrl = default;
+            Option<string?> pdpClientId = default;
+            Option<string?> pdpClientSecret = default;
 
             while (utf8JsonReader.Read())
             {
@@ -158,6 +226,18 @@ namespace FactPulse.SDK.Model
                         case "filename":
                             filename = new Option<string?>(utf8JsonReader.GetString());
                             break;
+                        case "pdpFlowServiceUrl":
+                            pdpFlowServiceUrl = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "pdpTokenUrl":
+                            pdpTokenUrl = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "pdpClientId":
+                            pdpClientId = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "pdpClientSecret":
+                            pdpClientSecret = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         default:
                             break;
                     }
@@ -173,7 +253,7 @@ namespace FactPulse.SDK.Model
             if (flowType.IsSet && flowType.Value == null)
                 throw new ArgumentNullException(nameof(flowType), "Property is not nullable for class SubmitCDARXMLRequest.");
 
-            return new SubmitCDARXMLRequest(xml.Value!, flowType, filename);
+            return new SubmitCDARXMLRequest(xml.Value!, flowType, filename, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
         }
 
         /// <summary>
@@ -216,6 +296,30 @@ namespace FactPulse.SDK.Model
                     writer.WriteString("filename", submitCDARXMLRequest.Filename);
                 else
                     writer.WriteNull("filename");
+
+            if (submitCDARXMLRequest.PdpFlowServiceUrlOption.IsSet)
+                if (submitCDARXMLRequest.PdpFlowServiceUrlOption.Value != null)
+                    writer.WriteString("pdpFlowServiceUrl", submitCDARXMLRequest.PdpFlowServiceUrl);
+                else
+                    writer.WriteNull("pdpFlowServiceUrl");
+
+            if (submitCDARXMLRequest.PdpTokenUrlOption.IsSet)
+                if (submitCDARXMLRequest.PdpTokenUrlOption.Value != null)
+                    writer.WriteString("pdpTokenUrl", submitCDARXMLRequest.PdpTokenUrl);
+                else
+                    writer.WriteNull("pdpTokenUrl");
+
+            if (submitCDARXMLRequest.PdpClientIdOption.IsSet)
+                if (submitCDARXMLRequest.PdpClientIdOption.Value != null)
+                    writer.WriteString("pdpClientId", submitCDARXMLRequest.PdpClientId);
+                else
+                    writer.WriteNull("pdpClientId");
+
+            if (submitCDARXMLRequest.PdpClientSecretOption.IsSet)
+                if (submitCDARXMLRequest.PdpClientSecretOption.Value != null)
+                    writer.WriteString("pdpClientSecret", submitCDARXMLRequest.PdpClientSecret);
+                else
+                    writer.WriteNull("pdpClientSecret");
         }
     }
 }

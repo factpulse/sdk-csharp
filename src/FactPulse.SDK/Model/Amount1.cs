@@ -27,7 +27,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Allowance/charge amount (BT-92/99/136/141).
+    /// Payment amount
     /// </summary>
     public partial class Amount1 : IValidatableObject
     {

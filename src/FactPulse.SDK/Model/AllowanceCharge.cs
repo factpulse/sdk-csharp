@@ -43,7 +43,7 @@ namespace FactPulse.SDK.Model
         /// <param name="vatCategory">vatCategory</param>
         /// <param name="vatRate">vatRate</param>
         [JsonConstructor]
-        public AllowanceCharge(bool isCharge, Amount1 amount, Option<BaseAmount?> baseAmount = default, Option<Percentage?> percentage = default, Option<string?> reason = default, Option<AllowanceChargeReasonCode?> reasonCode = default, Option<VATCategory?> vatCategory = default, Option<VatRate?> vatRate = default)
+        public AllowanceCharge(bool isCharge, Amount2 amount, Option<BaseAmount?> baseAmount = default, Option<Percentage?> percentage = default, Option<string?> reason = default, Option<AllowanceChargeReasonCode?> reasonCode = default, Option<VATCategory?> vatCategory = default, Option<VatRate?> vatRate = default)
         {
             IsCharge = isCharge;
             Amount = amount;
@@ -95,7 +95,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets Amount
         /// </summary>
         [JsonPropertyName("amount")]
-        public Amount1 Amount { get; set; }
+        public Amount2 Amount { get; set; }
 
         /// <summary>
         /// Used to track the state of BaseAmount
@@ -203,7 +203,7 @@ namespace FactPulse.SDK.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<bool?> isCharge = default;
-            Option<Amount1?> amount = default;
+            Option<Amount2?> amount = default;
             Option<BaseAmount?> baseAmount = default;
             Option<Percentage?> percentage = default;
             Option<string?> reason = default;
@@ -230,7 +230,7 @@ namespace FactPulse.SDK.Model
                             isCharge = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
                         case "amount":
-                            amount = new Option<Amount1?>(JsonSerializer.Deserialize<Amount1>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            amount = new Option<Amount2?>(JsonSerializer.Deserialize<Amount2>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "base_amount":
                             baseAmount = new Option<BaseAmount?>(JsonSerializer.Deserialize<BaseAmount>(ref utf8JsonReader, jsonSerializerOptions));

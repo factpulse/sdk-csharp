@@ -27,7 +27,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Payment amount
+    /// Montant encaissé en EUR (obligatoire, BR-FR-CDV-14)
     /// </summary>
     public partial class Amount : IValidatableObject
     {
@@ -179,7 +179,7 @@ namespace FactPulse.SDK.Model
             writer.WriteStartObject();
 
             if (amount.DecimalOption.IsSet && amount.DecimalOption.Value != null)
-                writer.WriteNumber("Rate", amount.DecimalOption.Value.Value);
+                writer.WriteNumber("UnitNetPrice", amount.DecimalOption.Value.Value);
 
             if (amount.StringOption.IsSet && amount.StringOption.Value != null)
                 writer.WriteString("Rate", amount.StringOption.Value);

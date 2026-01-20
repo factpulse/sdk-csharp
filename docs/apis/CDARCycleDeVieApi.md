@@ -10,6 +10,8 @@ All URIs are relative to *https://factpulse.fr*
 | [**GetStatusCodesApiV1CdarStatusCodesGet**](CDARCycleDeVieApi.md#getstatuscodesapiv1cdarstatuscodesget) | **GET** /api/v1/cdar/status-codes | Liste des codes statut CDAR |
 | [**SubmitCdarApiV1CdarSubmitPost**](CDARCycleDeVieApi.md#submitcdarapiv1cdarsubmitpost) | **POST** /api/v1/cdar/submit | Générer et soumettre un message CDAR |
 | [**SubmitCdarXmlApiV1CdarSubmitXmlPost**](CDARCycleDeVieApi.md#submitcdarxmlapiv1cdarsubmitxmlpost) | **POST** /api/v1/cdar/submit-xml | Soumettre un XML CDAR pré-généré |
+| [**SubmitEncaisseeApiV1CdarEncaisseePost**](CDARCycleDeVieApi.md#submitencaisseeapiv1cdarencaisseepost) | **POST** /api/v1/cdar/encaissee | [Simplifié] Soumettre un statut ENCAISSÉE (212) |
+| [**SubmitRefuseeApiV1CdarRefuseePost**](CDARCycleDeVieApi.md#submitrefuseeapiv1cdarrefuseepost) | **POST** /api/v1/cdar/refusee | [Simplifié] Soumettre un statut REFUSÉE (210) |
 | [**ValidateCdarApiV1CdarValidatePost**](CDARCycleDeVieApi.md#validatecdarapiv1cdarvalidatepost) | **POST** /api/v1/cdar/validate | Valider des données CDAR |
 
 <a id="generatecdarapiv1cdargeneratepost"></a>
@@ -159,21 +161,18 @@ No authorization required
 
 <a id="submitcdarapiv1cdarsubmitpost"></a>
 # **SubmitCdarApiV1CdarSubmitPost**
-> SubmitCDARResponse SubmitCdarApiV1CdarSubmitPost (int userId, BodySubmitCdarApiV1CdarSubmitPost bodySubmitCdarApiV1CdarSubmitPost, string jwtToken = null, string clientUid = null)
+> SubmitCDARResponse SubmitCdarApiV1CdarSubmitPost (SubmitCDARRequest submitCDARRequest)
 
 Générer et soumettre un message CDAR
 
-Génère un message CDAR et le soumet à la plateforme PA/PDP.  Nécessite une authentification AFNOR valide.  **Types de flux (flowType):** - `CustomerInvoiceLC`: Cycle de vie côté client (acheteur) - `SupplierInvoiceLC`: Cycle de vie côté fournisseur (vendeur)
+Génère un message CDAR et le soumet à la plateforme PA/PDP.  **Stratégies d'authentification:** 1. **JWT avec client_uid** (recommandé): credentials PDP récupérés du backend 2. **Zero-storage**: Fournir pdpFlowServiceUrl, pdpClientId, pdpClientSecret dans la requête  **Types de flux (flowType):** - `CustomerInvoiceLC`: Cycle de vie côté client (acheteur) - `SupplierInvoiceLC`: Cycle de vie côté fournisseur (vendeur)
 
 
 ### Parameters
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **userId** | **int** |  |  |
-| **bodySubmitCdarApiV1CdarSubmitPost** | [**BodySubmitCdarApiV1CdarSubmitPost**](BodySubmitCdarApiV1CdarSubmitPost.md) |  |  |
-| **jwtToken** | **string** |  | [optional]  |
-| **clientUid** | **string** |  | [optional]  |
+| **submitCDARRequest** | [**SubmitCDARRequest**](SubmitCDARRequest.md) |  |  |
 
 ### Return type
 
@@ -202,25 +201,102 @@ Génère un message CDAR et le soumet à la plateforme PA/PDP.  Nécessite une a
 
 <a id="submitcdarxmlapiv1cdarsubmitxmlpost"></a>
 # **SubmitCdarXmlApiV1CdarSubmitXmlPost**
-> SubmitCDARResponse SubmitCdarXmlApiV1CdarSubmitXmlPost (int userId, BodySubmitCdarXmlApiV1CdarSubmitXmlPost bodySubmitCdarXmlApiV1CdarSubmitXmlPost, string jwtToken = null, string clientUid = null)
+> SubmitCDARResponse SubmitCdarXmlApiV1CdarSubmitXmlPost (SubmitCDARXMLRequest submitCDARXMLRequest)
 
 Soumettre un XML CDAR pré-généré
 
-Soumet un message XML CDAR pré-généré à la plateforme PA/PDP.  Utile pour soumettre des XML générés par d'autres systèmes.
+Soumet un message XML CDAR pré-généré à la plateforme PA/PDP.  Utile pour soumettre des XML générés par d'autres systèmes.  **Stratégies d'authentification:** 1. **JWT avec client_uid** (recommandé): credentials PDP récupérés du backend 2. **Zero-storage**: Fournir pdpFlowServiceUrl, pdpClientId, pdpClientSecret dans la requête
 
 
 ### Parameters
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **userId** | **int** |  |  |
-| **bodySubmitCdarXmlApiV1CdarSubmitXmlPost** | [**BodySubmitCdarXmlApiV1CdarSubmitXmlPost**](BodySubmitCdarXmlApiV1CdarSubmitXmlPost.md) |  |  |
-| **jwtToken** | **string** |  | [optional]  |
-| **clientUid** | **string** |  | [optional]  |
+| **submitCDARXMLRequest** | [**SubmitCDARXMLRequest**](SubmitCDARXMLRequest.md) |  |  |
 
 ### Return type
 
 [**SubmitCDARResponse**](SubmitCDARResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **400** | Requête invalide |  -  |
+| **422** | Erreur de validation |  -  |
+| **500** | Erreur serveur |  -  |
+| **401** | Authentication required - Invalid or missing JWT token |  -  |
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a id="submitencaisseeapiv1cdarencaisseepost"></a>
+# **SubmitEncaisseeApiV1CdarEncaisseePost**
+> SimplifiedCDARResponse SubmitEncaisseeApiV1CdarEncaisseePost (EncaisseeRequest encaisseeRequest)
+
+[Simplifié] Soumettre un statut ENCAISSÉE (212)
+
+**Endpoint simplifié pour OD** - Soumet un statut ENCAISSÉE (212) pour une facture.  Ce statut est **obligatoire pour le PPF** (BR-FR-CDV-14 requiert le montant encaissé).  **Cas d'usage:** L'acheteur confirme le paiement d'une facture.  **Authentification:** JWT Bearer (recommandé) ou credentials PDP dans la requête.
+
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **encaisseeRequest** | [**EncaisseeRequest**](EncaisseeRequest.md) |  |  |
+
+### Return type
+
+[**SimplifiedCDARResponse**](SimplifiedCDARResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **400** | Requête invalide |  -  |
+| **422** | Erreur de validation |  -  |
+| **500** | Erreur serveur |  -  |
+| **401** | Authentication required - Invalid or missing JWT token |  -  |
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a id="submitrefuseeapiv1cdarrefuseepost"></a>
+# **SubmitRefuseeApiV1CdarRefuseePost**
+> SimplifiedCDARResponse SubmitRefuseeApiV1CdarRefuseePost (RefuseeRequest refuseeRequest)
+
+[Simplifié] Soumettre un statut REFUSÉE (210)
+
+**Endpoint simplifié pour OD** - Soumet un statut REFUSÉE (210) pour une facture.  Ce statut est **obligatoire pour le PPF** (BR-FR-CDV-15 requiert un code motif).  **Cas d'usage:** L'acheteur refuse une facture reçue.  **Codes motif autorisés (BR-FR-CDV-CL-09):** - `TX_TVA_ERR`: Taux de TVA erroné - `MONTANTTOTAL_ERR`: Montant total erroné - `CALCUL_ERR`: Erreur de calcul - `NON_CONFORME`: Non conforme - `DOUBLON`: Doublon - `DEST_ERR`: Destinataire erroné - `TRANSAC_INC`: Transaction incomplète - `EMMET_INC`: Émetteur inconnu - `CONTRAT_TERM`: Contrat terminé - `DOUBLE_FACT`: Double facturation - `CMD_ERR`: Commande erronée - `ADR_ERR`: Adresse erronée - `REF_CT_ABSENT`: Référence contrat absente  **Authentification:** JWT Bearer (recommandé) ou credentials PDP dans la requête.
+
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **refuseeRequest** | [**RefuseeRequest**](RefuseeRequest.md) |  |  |
+
+### Return type
+
+[**SimplifiedCDARResponse**](SimplifiedCDARResponse.md)
 
 ### Authorization
 

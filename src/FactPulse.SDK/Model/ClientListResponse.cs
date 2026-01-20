@@ -27,43 +27,56 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// BodySubmitCdarXmlApiV1CdarSubmitXmlPost
+    /// Paginated client list response.
     /// </summary>
-    public partial class BodySubmitCdarXmlApiV1CdarSubmitXmlPost : IValidatableObject
+    public partial class ClientListResponse : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="BodySubmitCdarXmlApiV1CdarSubmitXmlPost" /> class.
+        /// Initializes a new instance of the <see cref="ClientListResponse" /> class.
         /// </summary>
-        /// <param name="request">request</param>
-        /// <param name="pdpCredentials">pdpCredentials</param>
+        /// <param name="results">List of clients</param>
+        /// <param name="total">Total number of clients</param>
+        /// <param name="page">Current page</param>
+        /// <param name="pageSize">Page size</param>
         [JsonConstructor]
-        public BodySubmitCdarXmlApiV1CdarSubmitXmlPost(SubmitCDARXMLRequest request, Option<PDPCredentials?> pdpCredentials = default)
+        public ClientListResponse(List<ClientSummary> results, int total, int page, int pageSize)
         {
-            Request = request;
-            PdpCredentialsOption = pdpCredentials;
+            Results = results;
+            Total = total;
+            Page = page;
+            PageSize = pageSize;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Request
+        /// List of clients
         /// </summary>
-        [JsonPropertyName("request")]
-        public SubmitCDARXMLRequest Request { get; set; }
+        /// <value>List of clients</value>
+        [JsonPropertyName("results")]
+        public List<ClientSummary> Results { get; set; }
 
         /// <summary>
-        /// Used to track the state of PdpCredentials
+        /// Total number of clients
         /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<PDPCredentials?> PdpCredentialsOption { get; private set; }
+        /// <value>Total number of clients</value>
+        [JsonPropertyName("total")]
+        public int Total { get; set; }
 
         /// <summary>
-        /// Gets or Sets PdpCredentials
+        /// Current page
         /// </summary>
-        [JsonPropertyName("pdp_credentials")]
-        public PDPCredentials? PdpCredentials { get { return this.PdpCredentialsOption; } set { this.PdpCredentialsOption = new(value); } }
+        /// <value>Current page</value>
+        [JsonPropertyName("page")]
+        public int Page { get; set; }
+
+        /// <summary>
+        /// Page size
+        /// </summary>
+        /// <value>Page size</value>
+        [JsonPropertyName("pageSize")]
+        public int PageSize { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -72,9 +85,11 @@ namespace FactPulse.SDK.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class BodySubmitCdarXmlApiV1CdarSubmitXmlPost {\n");
-            sb.Append("  Request: ").Append(Request).Append("\n");
-            sb.Append("  PdpCredentials: ").Append(PdpCredentials).Append("\n");
+            sb.Append("class ClientListResponse {\n");
+            sb.Append("  Results: ").Append(Results).Append("\n");
+            sb.Append("  Total: ").Append(Total).Append("\n");
+            sb.Append("  Page: ").Append(Page).Append("\n");
+            sb.Append("  PageSize: ").Append(PageSize).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -91,19 +106,19 @@ namespace FactPulse.SDK.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="BodySubmitCdarXmlApiV1CdarSubmitXmlPost" />
+    /// A Json converter for type <see cref="ClientListResponse" />
     /// </summary>
-    public class BodySubmitCdarXmlApiV1CdarSubmitXmlPostJsonConverter : JsonConverter<BodySubmitCdarXmlApiV1CdarSubmitXmlPost>
+    public class ClientListResponseJsonConverter : JsonConverter<ClientListResponse>
     {
         /// <summary>
-        /// Deserializes json to <see cref="BodySubmitCdarXmlApiV1CdarSubmitXmlPost" />
+        /// Deserializes json to <see cref="ClientListResponse" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override BodySubmitCdarXmlApiV1CdarSubmitXmlPost Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override ClientListResponse Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -112,8 +127,10 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<SubmitCDARXMLRequest?> request = default;
-            Option<PDPCredentials?> pdpCredentials = default;
+            Option<List<ClientSummary>?> results = default;
+            Option<int?> total = default;
+            Option<int?> page = default;
+            Option<int?> pageSize = default;
 
             while (utf8JsonReader.Read())
             {
@@ -130,11 +147,17 @@ namespace FactPulse.SDK.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "request":
-                            request = new Option<SubmitCDARXMLRequest?>(JsonSerializer.Deserialize<SubmitCDARXMLRequest>(ref utf8JsonReader, jsonSerializerOptions)!);
+                        case "results":
+                            results = new Option<List<ClientSummary>?>(JsonSerializer.Deserialize<List<ClientSummary>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
-                        case "pdp_credentials":
-                            pdpCredentials = new Option<PDPCredentials?>(JsonSerializer.Deserialize<PDPCredentials>(ref utf8JsonReader, jsonSerializerOptions));
+                        case "total":
+                            total = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
+                        case "page":
+                            page = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
+                        case "pageSize":
+                            pageSize = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         default:
                             break;
@@ -142,52 +165,67 @@ namespace FactPulse.SDK.Model
                 }
             }
 
-            if (!request.IsSet)
-                throw new ArgumentException("Property is required for class BodySubmitCdarXmlApiV1CdarSubmitXmlPost.", nameof(request));
+            if (!results.IsSet)
+                throw new ArgumentException("Property is required for class ClientListResponse.", nameof(results));
 
-            if (request.IsSet && request.Value == null)
-                throw new ArgumentNullException(nameof(request), "Property is not nullable for class BodySubmitCdarXmlApiV1CdarSubmitXmlPost.");
+            if (!total.IsSet)
+                throw new ArgumentException("Property is required for class ClientListResponse.", nameof(total));
 
-            return new BodySubmitCdarXmlApiV1CdarSubmitXmlPost(request.Value!, pdpCredentials);
+            if (!page.IsSet)
+                throw new ArgumentException("Property is required for class ClientListResponse.", nameof(page));
+
+            if (!pageSize.IsSet)
+                throw new ArgumentException("Property is required for class ClientListResponse.", nameof(pageSize));
+
+            if (results.IsSet && results.Value == null)
+                throw new ArgumentNullException(nameof(results), "Property is not nullable for class ClientListResponse.");
+
+            if (total.IsSet && total.Value == null)
+                throw new ArgumentNullException(nameof(total), "Property is not nullable for class ClientListResponse.");
+
+            if (page.IsSet && page.Value == null)
+                throw new ArgumentNullException(nameof(page), "Property is not nullable for class ClientListResponse.");
+
+            if (pageSize.IsSet && pageSize.Value == null)
+                throw new ArgumentNullException(nameof(pageSize), "Property is not nullable for class ClientListResponse.");
+
+            return new ClientListResponse(results.Value!, total.Value!.Value!, page.Value!.Value!, pageSize.Value!.Value!);
         }
 
         /// <summary>
-        /// Serializes a <see cref="BodySubmitCdarXmlApiV1CdarSubmitXmlPost" />
+        /// Serializes a <see cref="ClientListResponse" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="bodySubmitCdarXmlApiV1CdarSubmitXmlPost"></param>
+        /// <param name="clientListResponse"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, BodySubmitCdarXmlApiV1CdarSubmitXmlPost bodySubmitCdarXmlApiV1CdarSubmitXmlPost, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, ClientListResponse clientListResponse, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, bodySubmitCdarXmlApiV1CdarSubmitXmlPost, jsonSerializerOptions);
+            WriteProperties(writer, clientListResponse, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="BodySubmitCdarXmlApiV1CdarSubmitXmlPost" />
+        /// Serializes the properties of <see cref="ClientListResponse" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="bodySubmitCdarXmlApiV1CdarSubmitXmlPost"></param>
+        /// <param name="clientListResponse"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, BodySubmitCdarXmlApiV1CdarSubmitXmlPost bodySubmitCdarXmlApiV1CdarSubmitXmlPost, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, ClientListResponse clientListResponse, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (bodySubmitCdarXmlApiV1CdarSubmitXmlPost.Request == null)
-                throw new ArgumentNullException(nameof(bodySubmitCdarXmlApiV1CdarSubmitXmlPost.Request), "Property is required for class BodySubmitCdarXmlApiV1CdarSubmitXmlPost.");
+            if (clientListResponse.Results == null)
+                throw new ArgumentNullException(nameof(clientListResponse.Results), "Property is required for class ClientListResponse.");
 
-            writer.WritePropertyName("request");
-            JsonSerializer.Serialize(writer, bodySubmitCdarXmlApiV1CdarSubmitXmlPost.Request, jsonSerializerOptions);
-            if (bodySubmitCdarXmlApiV1CdarSubmitXmlPost.PdpCredentialsOption.IsSet)
-                if (bodySubmitCdarXmlApiV1CdarSubmitXmlPost.PdpCredentialsOption.Value != null)
-                {
-                    writer.WritePropertyName("pdp_credentials");
-                    JsonSerializer.Serialize(writer, bodySubmitCdarXmlApiV1CdarSubmitXmlPost.PdpCredentials, jsonSerializerOptions);
-                }
-                else
-                    writer.WriteNull("pdp_credentials");
+            writer.WritePropertyName("results");
+            JsonSerializer.Serialize(writer, clientListResponse.Results, jsonSerializerOptions);
+            writer.WriteNumber("total", clientListResponse.Total);
+
+            writer.WriteNumber("page", clientListResponse.Page);
+
+            writer.WriteNumber("pageSize", clientListResponse.PageSize);
         }
     }
 }

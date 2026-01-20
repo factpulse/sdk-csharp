@@ -102,11 +102,8 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task SubmitCdarApiV1CdarSubmitPostAsyncTest()
         {
-            int userId = default!;
-            BodySubmitCdarApiV1CdarSubmitPost bodySubmitCdarApiV1CdarSubmitPost = default!;
-            Client.Option<string?> jwtToken = default!;
-            Client.Option<string?> clientUid = default!;
-            var response = await _instance.SubmitCdarApiV1CdarSubmitPostAsync(userId, bodySubmitCdarApiV1CdarSubmitPost, jwtToken, clientUid);
+            SubmitCDARRequest submitCDARRequest = default!;
+            var response = await _instance.SubmitCdarApiV1CdarSubmitPostAsync(submitCDARRequest);
             var model = response.Ok();
             Assert.IsType<SubmitCDARResponse>(model);
         }
@@ -117,13 +114,34 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task SubmitCdarXmlApiV1CdarSubmitXmlPostAsyncTest()
         {
-            int userId = default!;
-            BodySubmitCdarXmlApiV1CdarSubmitXmlPost bodySubmitCdarXmlApiV1CdarSubmitXmlPost = default!;
-            Client.Option<string?> jwtToken = default!;
-            Client.Option<string?> clientUid = default!;
-            var response = await _instance.SubmitCdarXmlApiV1CdarSubmitXmlPostAsync(userId, bodySubmitCdarXmlApiV1CdarSubmitXmlPost, jwtToken, clientUid);
+            SubmitCDARXMLRequest submitCDARXMLRequest = default!;
+            var response = await _instance.SubmitCdarXmlApiV1CdarSubmitXmlPostAsync(submitCDARXMLRequest);
             var model = response.Ok();
             Assert.IsType<SubmitCDARResponse>(model);
+        }
+
+        /// <summary>
+        /// Test SubmitEncaisseeApiV1CdarEncaisseePost
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task SubmitEncaisseeApiV1CdarEncaisseePostAsyncTest()
+        {
+            EncaisseeRequest encaisseeRequest = default!;
+            var response = await _instance.SubmitEncaisseeApiV1CdarEncaisseePostAsync(encaisseeRequest);
+            var model = response.Ok();
+            Assert.IsType<SimplifiedCDARResponse>(model);
+        }
+
+        /// <summary>
+        /// Test SubmitRefuseeApiV1CdarRefuseePost
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task SubmitRefuseeApiV1CdarRefuseePostAsyncTest()
+        {
+            RefuseeRequest refuseeRequest = default!;
+            var response = await _instance.SubmitRefuseeApiV1CdarRefuseePostAsync(refuseeRequest);
+            var model = response.Ok();
+            Assert.IsType<SimplifiedCDARResponse>(model);
         }
 
         /// <summary>
