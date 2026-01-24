@@ -2,7 +2,7 @@
 /*
  * FactPulse REST API
  *
- *  REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X Invoice Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Validation and Compliance - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata, electronic signatures - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules) - **Asynchronous Processing**: Celery support for heavy validations (VeraPDF)  ### 📡 AFNOR PDP/PA Integration (XP Z12-013) - **Flow Submission**: Send invoices to Partner Dematerialization Platforms - **Flow Search**: View submitted invoices - **Download**: Retrieve PDF/A-3 with XML - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user (stored credentials or zero-storage)  ### ✍️ PDF Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification - **Certificate Generation**: Self-signed X.509 certificates for testing  ### 🔄 Asynchronous Processing - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **No timeout**: Ideal for large files or heavy validations  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://factpulse.fr/api/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://factpulse.fr/documentation-api/     
+ *  REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X - Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Factur-X - Validation - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules)  ### ✍️ Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification  ### 📋 Flux 6 - Invoice Lifecycle (CDAR) - **CDAR Messages**: Acknowledgements, invoice statuses - **PPF Statuses**: REFUSED (210), PAID (212)  ### 📊 Flux 10 - E-Reporting - **Tax Declarations**: International B2B, B2C - **Flow Types**: 10.1 (B2B transactions), 10.2 (B2B payments), 10.3 (B2C transactions), 10.4 (B2C payments)  ### 📡 AFNOR PDP/PA (XP Z12-013) - **Flow Service**: Submit and search flows to PDPs - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user  ### 🏛️ Chorus Pro - **Public Sector Invoicing**: Complete API for Chorus Pro  ### ⏳ Async Tasks - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **Webhooks**: Automatic notifications when tasks complete  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://factpulse.fr/api/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://factpulse.fr/documentation-api/     
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: contact@factpulse.fr
@@ -13,7 +13,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Net;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using System.Net.Http;
@@ -29,47 +31,47 @@ namespace FactPulse.SDK.Api
     /// Represents a collection of functions to interact with the API endpoints
     /// This class is registered as transient.
     /// </summary>
-    public interface IDocumentConversionApi : IApi
+    public interface IFacturXConversionApi : IApi
     {
         /// <summary>
         /// The class containing the events
         /// </summary>
-        DocumentConversionApiEvents Events { get; }
+        FacturXConversionApiEvents Events { get; }
 
         /// <summary>
-        /// Convertir un document en Factur-X (mode asynchrone)
+        /// Convert a document to Factur-X (async mode)
         /// </summary>
         /// <remarks>
-        /// Lance une conversion asynchrone via Celery.  ## Workflow  1. **Upload** : Le document est envoyé en multipart/form-data 2. **Task Celery** : La tâche est mise en file d&#39;attente 3. **Callback** : Notification par webhook à la fin  ## Réponses possibles  - **202** : Tâche acceptée, en cours de traitement - **400** : Fichier invalide
+        /// Launch an asynchronous conversion via Celery.  ## Workflow  1. **Upload**: Document is sent as multipart/form-data 2. **Celery Task**: Task is queued for processing 3. **Callback**: Webhook notification on completion  ## Possible responses  - **202**: Task accepted, processing - **400**: Invalid file
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="file">Document à convertir (PDF, DOCX, XLSX, JPG, PNG)</param>
-        /// <param name="output">Format de sortie: pdf, xml, both (optional, default to &quot;pdf&quot;)</param>
+        /// <param name="file">Document to convert (PDF, DOCX, XLSX, JPG, PNG)</param>
+        /// <param name="output">Output format: pdf, xml, both (optional, default to &quot;pdf&quot;)</param>
         /// <param name="callbackUrl"> (optional)</param>
-        /// <param name="webhookMode">Mode de livraison du contenu: &#39;inline&#39; (base64 dans webhook) ou &#39;download_url&#39; (URL temporaire 1h) (optional, default to &quot;inline&quot;)</param>
+        /// <param name="webhookMode">Content delivery mode: &#39;inline&#39; (base64 in webhook) or &#39;download_url&#39; (temporary URL, 1h TTL) (optional, default to &quot;inline&quot;)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IConvertDocumentAsyncApiV1ConvertAsyncPostApiResponse"/>&gt;</returns>
         Task<IConvertDocumentAsyncApiV1ConvertAsyncPostApiResponse> ConvertDocumentAsyncApiV1ConvertAsyncPostAsync(System.IO.Stream file, Option<string> output = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Convertir un document en Factur-X (mode asynchrone)
+        /// Convert a document to Factur-X (async mode)
         /// </summary>
         /// <remarks>
-        /// Lance une conversion asynchrone via Celery.  ## Workflow  1. **Upload** : Le document est envoyé en multipart/form-data 2. **Task Celery** : La tâche est mise en file d&#39;attente 3. **Callback** : Notification par webhook à la fin  ## Réponses possibles  - **202** : Tâche acceptée, en cours de traitement - **400** : Fichier invalide
+        /// Launch an asynchronous conversion via Celery.  ## Workflow  1. **Upload**: Document is sent as multipart/form-data 2. **Celery Task**: Task is queued for processing 3. **Callback**: Webhook notification on completion  ## Possible responses  - **202**: Task accepted, processing - **400**: Invalid file
         /// </remarks>
-        /// <param name="file">Document à convertir (PDF, DOCX, XLSX, JPG, PNG)</param>
-        /// <param name="output">Format de sortie: pdf, xml, both (optional, default to &quot;pdf&quot;)</param>
+        /// <param name="file">Document to convert (PDF, DOCX, XLSX, JPG, PNG)</param>
+        /// <param name="output">Output format: pdf, xml, both (optional, default to &quot;pdf&quot;)</param>
         /// <param name="callbackUrl"> (optional)</param>
-        /// <param name="webhookMode">Mode de livraison du contenu: &#39;inline&#39; (base64 dans webhook) ou &#39;download_url&#39; (URL temporaire 1h) (optional, default to &quot;inline&quot;)</param>
+        /// <param name="webhookMode">Content delivery mode: &#39;inline&#39; (base64 in webhook) or &#39;download_url&#39; (temporary URL, 1h TTL) (optional, default to &quot;inline&quot;)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IConvertDocumentAsyncApiV1ConvertAsyncPostApiResponse"/>?&gt;</returns>
         Task<IConvertDocumentAsyncApiV1ConvertAsyncPostApiResponse?> ConvertDocumentAsyncApiV1ConvertAsyncPostOrDefaultAsync(System.IO.Stream file, Option<string> output = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Télécharger un fichier généré
+        /// Download a generated file
         /// </summary>
         /// <remarks>
-        /// Télécharge le fichier Factur-X PDF ou XML généré.  ## Fichiers disponibles  - &#x60;facturx.pdf&#x60; : PDF/A-3 avec XML embarqué - &#x60;facturx.xml&#x60; : XML CII seul (Cross Industry Invoice)  Les fichiers sont disponibles pendant 24 heures après génération.
+        /// Download the generated Factur-X PDF or XML file.  ## Available files  - &#x60;facturx.pdf&#x60;: PDF/A-3 with embedded XML - &#x60;facturx.xml&#x60;: XML CII only (Cross Industry Invoice)  Files are available for 24 hours after generation.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="conversionId">Conversion ID returned by POST /convert (UUID format)</param>
@@ -79,10 +81,10 @@ namespace FactPulse.SDK.Api
         Task<IDownloadFileApiV1ConvertConversionIdDownloadFilenameGetApiResponse> DownloadFileApiV1ConvertConversionIdDownloadFilenameGetAsync(string conversionId, string filename, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Télécharger un fichier généré
+        /// Download a generated file
         /// </summary>
         /// <remarks>
-        /// Télécharge le fichier Factur-X PDF ou XML généré.  ## Fichiers disponibles  - &#x60;facturx.pdf&#x60; : PDF/A-3 avec XML embarqué - &#x60;facturx.xml&#x60; : XML CII seul (Cross Industry Invoice)  Les fichiers sont disponibles pendant 24 heures après génération.
+        /// Download the generated Factur-X PDF or XML file.  ## Available files  - &#x60;facturx.pdf&#x60;: PDF/A-3 with embedded XML - &#x60;facturx.xml&#x60;: XML CII only (Cross Industry Invoice)  Files are available for 24 hours after generation.
         /// </remarks>
         /// <param name="conversionId">Conversion ID returned by POST /convert (UUID format)</param>
         /// <param name="filename">File to download: &#39;facturx.pdf&#39; or &#39;facturx.xml&#39;</param>
@@ -91,10 +93,10 @@ namespace FactPulse.SDK.Api
         Task<IDownloadFileApiV1ConvertConversionIdDownloadFilenameGetApiResponse?> DownloadFileApiV1ConvertConversionIdDownloadFilenameGetOrDefaultAsync(string conversionId, string filename, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Vérifier le statut d&#39;une conversion
+        /// Check conversion status
         /// </summary>
         /// <remarks>
-        /// Retourne le statut actuel d&#39;une conversion asynchrone.
+        /// Returns the current status of an asynchronous conversion.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="conversionId">Conversion ID returned by POST /convert (UUID format)</param>
@@ -103,10 +105,10 @@ namespace FactPulse.SDK.Api
         Task<IGetConversionStatusApiV1ConvertConversionIdStatusGetApiResponse> GetConversionStatusApiV1ConvertConversionIdStatusGetAsync(string conversionId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Vérifier le statut d&#39;une conversion
+        /// Check conversion status
         /// </summary>
         /// <remarks>
-        /// Retourne le statut actuel d&#39;une conversion asynchrone.
+        /// Returns the current status of an asynchronous conversion.
         /// </remarks>
         /// <param name="conversionId">Conversion ID returned by POST /convert (UUID format)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -114,10 +116,10 @@ namespace FactPulse.SDK.Api
         Task<IGetConversionStatusApiV1ConvertConversionIdStatusGetApiResponse?> GetConversionStatusApiV1ConvertConversionIdStatusGetOrDefaultAsync(string conversionId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Reprendre une conversion avec corrections
+        /// Resume a conversion with corrections
         /// </summary>
         /// <remarks>
-        /// Reprend une conversion après complétion des données manquantes ou correction des erreurs.  L&#39;extraction OCR est conservée, les données sont mises à jour avec les corrections, puis une nouvelle validation Schematron est effectuée.
+        /// Resume a conversion after completing missing data or correcting errors.  The OCR extraction is preserved, data is updated with corrections, then a new Schematron validation is performed.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="conversionId">Conversion ID returned by POST /convert (UUID format)</param>
@@ -127,10 +129,10 @@ namespace FactPulse.SDK.Api
         Task<IResumeConversionApiV1ConvertConversionIdResumePostApiResponse> ResumeConversionApiV1ConvertConversionIdResumePostAsync(string conversionId, ConvertResumeRequest convertResumeRequest, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Reprendre une conversion avec corrections
+        /// Resume a conversion with corrections
         /// </summary>
         /// <remarks>
-        /// Reprend une conversion après complétion des données manquantes ou correction des erreurs.  L&#39;extraction OCR est conservée, les données sont mises à jour avec les corrections, puis une nouvelle validation Schematron est effectuée.
+        /// Resume a conversion after completing missing data or correcting errors.  The OCR extraction is preserved, data is updated with corrections, then a new Schematron validation is performed.
         /// </remarks>
         /// <param name="conversionId">Conversion ID returned by POST /convert (UUID format)</param>
         /// <param name="convertResumeRequest"></param>
@@ -262,7 +264,7 @@ namespace FactPulse.SDK.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public class DocumentConversionApiEvents
+    public class FacturXConversionApiEvents
     {
         /// <summary>
         /// The event raised after the server response
@@ -274,7 +276,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorConvertDocumentAsyncApiV1ConvertAsyncPost;
 
-        internal void ExecuteOnConvertDocumentAsyncApiV1ConvertAsyncPost(DocumentConversionApi.ConvertDocumentAsyncApiV1ConvertAsyncPostApiResponse apiResponse)
+        internal void ExecuteOnConvertDocumentAsyncApiV1ConvertAsyncPost(FacturXConversionApi.ConvertDocumentAsyncApiV1ConvertAsyncPostApiResponse apiResponse)
         {
             OnConvertDocumentAsyncApiV1ConvertAsyncPost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -294,7 +296,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorDownloadFileApiV1ConvertConversionIdDownloadFilenameGet;
 
-        internal void ExecuteOnDownloadFileApiV1ConvertConversionIdDownloadFilenameGet(DocumentConversionApi.DownloadFileApiV1ConvertConversionIdDownloadFilenameGetApiResponse apiResponse)
+        internal void ExecuteOnDownloadFileApiV1ConvertConversionIdDownloadFilenameGet(FacturXConversionApi.DownloadFileApiV1ConvertConversionIdDownloadFilenameGetApiResponse apiResponse)
         {
             OnDownloadFileApiV1ConvertConversionIdDownloadFilenameGet?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -314,7 +316,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetConversionStatusApiV1ConvertConversionIdStatusGet;
 
-        internal void ExecuteOnGetConversionStatusApiV1ConvertConversionIdStatusGet(DocumentConversionApi.GetConversionStatusApiV1ConvertConversionIdStatusGetApiResponse apiResponse)
+        internal void ExecuteOnGetConversionStatusApiV1ConvertConversionIdStatusGet(FacturXConversionApi.GetConversionStatusApiV1ConvertConversionIdStatusGetApiResponse apiResponse)
         {
             OnGetConversionStatusApiV1ConvertConversionIdStatusGet?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -334,7 +336,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorResumeConversionApiV1ConvertConversionIdResumePost;
 
-        internal void ExecuteOnResumeConversionApiV1ConvertConversionIdResumePost(DocumentConversionApi.ResumeConversionApiV1ConvertConversionIdResumePostApiResponse apiResponse)
+        internal void ExecuteOnResumeConversionApiV1ConvertConversionIdResumePost(FacturXConversionApi.ResumeConversionApiV1ConvertConversionIdResumePostApiResponse apiResponse)
         {
             OnResumeConversionApiV1ConvertConversionIdResumePost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -348,7 +350,7 @@ namespace FactPulse.SDK.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public sealed partial class DocumentConversionApi : IDocumentConversionApi
+    public sealed partial class FacturXConversionApi : IFacturXConversionApi
     {
         private JsonSerializerOptions _jsonSerializerOptions;
 
@@ -360,7 +362,7 @@ namespace FactPulse.SDK.Api
         /// <summary>
         /// The logger
         /// </summary>
-        public ILogger<DocumentConversionApi> Logger { get; }
+        public ILogger<FacturXConversionApi> Logger { get; }
 
         /// <summary>
         /// The HttpClient
@@ -370,7 +372,7 @@ namespace FactPulse.SDK.Api
         /// <summary>
         /// The class containing the events
         /// </summary>
-        public DocumentConversionApiEvents Events { get; }
+        public FacturXConversionApiEvents Events { get; }
 
         /// <summary>
         /// A token provider of type <see cref="BearerToken"/>
@@ -378,17 +380,17 @@ namespace FactPulse.SDK.Api
         public TokenProvider<BearerToken> BearerTokenProvider { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DocumentConversionApi"/> class.
+        /// Initializes a new instance of the <see cref="FacturXConversionApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public DocumentConversionApi(ILogger<DocumentConversionApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, DocumentConversionApiEvents documentConversionApiEvents,
+        public FacturXConversionApi(ILogger<FacturXConversionApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, FacturXConversionApiEvents facturXConversionApiEvents,
             TokenProvider<BearerToken> bearerTokenProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
             LoggerFactory = loggerFactory;
-            Logger = LoggerFactory.CreateLogger<DocumentConversionApi>();
+            Logger = LoggerFactory.CreateLogger<FacturXConversionApi>();
             HttpClient = httpClient;
-            Events = documentConversionApiEvents;
+            Events = facturXConversionApiEvents;
             BearerTokenProvider = bearerTokenProvider;
         }
 
@@ -472,12 +474,12 @@ namespace FactPulse.SDK.Api
         partial void OnErrorConvertDocumentAsyncApiV1ConvertAsyncPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream file, Option<string> output, Option<string?> callbackUrl, Option<string> webhookMode);
 
         /// <summary>
-        /// Convertir un document en Factur-X (mode asynchrone) Lance une conversion asynchrone via Celery.  ## Workflow  1. **Upload** : Le document est envoyé en multipart/form-data 2. **Task Celery** : La tâche est mise en file d&#39;attente 3. **Callback** : Notification par webhook à la fin  ## Réponses possibles  - **202** : Tâche acceptée, en cours de traitement - **400** : Fichier invalide
+        /// Convert a document to Factur-X (async mode) Launch an asynchronous conversion via Celery.  ## Workflow  1. **Upload**: Document is sent as multipart/form-data 2. **Celery Task**: Task is queued for processing 3. **Callback**: Webhook notification on completion  ## Possible responses  - **202**: Task accepted, processing - **400**: Invalid file
         /// </summary>
-        /// <param name="file">Document à convertir (PDF, DOCX, XLSX, JPG, PNG)</param>
-        /// <param name="output">Format de sortie: pdf, xml, both (optional, default to &quot;pdf&quot;)</param>
+        /// <param name="file">Document to convert (PDF, DOCX, XLSX, JPG, PNG)</param>
+        /// <param name="output">Output format: pdf, xml, both (optional, default to &quot;pdf&quot;)</param>
         /// <param name="callbackUrl"> (optional)</param>
-        /// <param name="webhookMode">Mode de livraison du contenu: &#39;inline&#39; (base64 dans webhook) ou &#39;download_url&#39; (URL temporaire 1h) (optional, default to &quot;inline&quot;)</param>
+        /// <param name="webhookMode">Content delivery mode: &#39;inline&#39; (base64 in webhook) or &#39;download_url&#39; (temporary URL, 1h TTL) (optional, default to &quot;inline&quot;)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IConvertDocumentAsyncApiV1ConvertAsyncPostApiResponse"/>&gt;</returns>
         public async Task<IConvertDocumentAsyncApiV1ConvertAsyncPostApiResponse?> ConvertDocumentAsyncApiV1ConvertAsyncPostOrDefaultAsync(System.IO.Stream file, Option<string> output = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default)
@@ -493,13 +495,13 @@ namespace FactPulse.SDK.Api
         }
 
         /// <summary>
-        /// Convertir un document en Factur-X (mode asynchrone) Lance une conversion asynchrone via Celery.  ## Workflow  1. **Upload** : Le document est envoyé en multipart/form-data 2. **Task Celery** : La tâche est mise en file d&#39;attente 3. **Callback** : Notification par webhook à la fin  ## Réponses possibles  - **202** : Tâche acceptée, en cours de traitement - **400** : Fichier invalide
+        /// Convert a document to Factur-X (async mode) Launch an asynchronous conversion via Celery.  ## Workflow  1. **Upload**: Document is sent as multipart/form-data 2. **Celery Task**: Task is queued for processing 3. **Callback**: Webhook notification on completion  ## Possible responses  - **202**: Task accepted, processing - **400**: Invalid file
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="file">Document à convertir (PDF, DOCX, XLSX, JPG, PNG)</param>
-        /// <param name="output">Format de sortie: pdf, xml, both (optional, default to &quot;pdf&quot;)</param>
+        /// <param name="file">Document to convert (PDF, DOCX, XLSX, JPG, PNG)</param>
+        /// <param name="output">Output format: pdf, xml, both (optional, default to &quot;pdf&quot;)</param>
         /// <param name="callbackUrl"> (optional)</param>
-        /// <param name="webhookMode">Mode de livraison du contenu: &#39;inline&#39; (base64 dans webhook) ou &#39;download_url&#39; (URL temporaire 1h) (optional, default to &quot;inline&quot;)</param>
+        /// <param name="webhookMode">Content delivery mode: &#39;inline&#39; (base64 in webhook) or &#39;download_url&#39; (temporary URL, 1h TTL) (optional, default to &quot;inline&quot;)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IConvertDocumentAsyncApiV1ConvertAsyncPostApiResponse"/>&gt;</returns>
         public async Task<IConvertDocumentAsyncApiV1ConvertAsyncPostApiResponse> ConvertDocumentAsyncApiV1ConvertAsyncPostAsync(System.IO.Stream file, Option<string> output = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default)
@@ -560,10 +562,10 @@ namespace FactPulse.SDK.Api
                         "application/json"
                     };
 
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
 
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
 
                     httpRequestMessageLocalVar.Method = HttpMethod.Post;
 
@@ -852,7 +854,7 @@ namespace FactPulse.SDK.Api
         partial void OnErrorDownloadFileApiV1ConvertConversionIdDownloadFilenameGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string conversionId, string filename);
 
         /// <summary>
-        /// Télécharger un fichier généré Télécharge le fichier Factur-X PDF ou XML généré.  ## Fichiers disponibles  - &#x60;facturx.pdf&#x60; : PDF/A-3 avec XML embarqué - &#x60;facturx.xml&#x60; : XML CII seul (Cross Industry Invoice)  Les fichiers sont disponibles pendant 24 heures après génération.
+        /// Download a generated file Download the generated Factur-X PDF or XML file.  ## Available files  - &#x60;facturx.pdf&#x60;: PDF/A-3 with embedded XML - &#x60;facturx.xml&#x60;: XML CII only (Cross Industry Invoice)  Files are available for 24 hours after generation.
         /// </summary>
         /// <param name="conversionId">Conversion ID returned by POST /convert (UUID format)</param>
         /// <param name="filename">File to download: &#39;facturx.pdf&#39; or &#39;facturx.xml&#39;</param>
@@ -871,7 +873,7 @@ namespace FactPulse.SDK.Api
         }
 
         /// <summary>
-        /// Télécharger un fichier généré Télécharge le fichier Factur-X PDF ou XML généré.  ## Fichiers disponibles  - &#x60;facturx.pdf&#x60; : PDF/A-3 avec XML embarqué - &#x60;facturx.xml&#x60; : XML CII seul (Cross Industry Invoice)  Les fichiers sont disponibles pendant 24 heures après génération.
+        /// Download a generated file Download the generated Factur-X PDF or XML file.  ## Available files  - &#x60;facturx.pdf&#x60;: PDF/A-3 with embedded XML - &#x60;facturx.xml&#x60;: XML CII only (Cross Industry Invoice)  Files are available for 24 hours after generation.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="conversionId">Conversion ID returned by POST /convert (UUID format)</param>
@@ -912,10 +914,10 @@ namespace FactPulse.SDK.Api
                         "application/json"
                     };
 
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
 
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
 
                     httpRequestMessageLocalVar.Method = HttpMethod.Get;
 
@@ -1190,7 +1192,7 @@ namespace FactPulse.SDK.Api
         partial void OnErrorGetConversionStatusApiV1ConvertConversionIdStatusGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string conversionId);
 
         /// <summary>
-        /// Vérifier le statut d&#39;une conversion Retourne le statut actuel d&#39;une conversion asynchrone.
+        /// Check conversion status Returns the current status of an asynchronous conversion.
         /// </summary>
         /// <param name="conversionId">Conversion ID returned by POST /convert (UUID format)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1208,7 +1210,7 @@ namespace FactPulse.SDK.Api
         }
 
         /// <summary>
-        /// Vérifier le statut d&#39;une conversion Retourne le statut actuel d&#39;une conversion asynchrone.
+        /// Check conversion status Returns the current status of an asynchronous conversion.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="conversionId">Conversion ID returned by POST /convert (UUID format)</param>
@@ -1247,10 +1249,10 @@ namespace FactPulse.SDK.Api
                         "application/json"
                     };
 
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
 
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
 
                     httpRequestMessageLocalVar.Method = HttpMethod.Get;
 
@@ -1527,7 +1529,7 @@ namespace FactPulse.SDK.Api
         partial void OnErrorResumeConversionApiV1ConvertConversionIdResumePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string conversionId, ConvertResumeRequest convertResumeRequest);
 
         /// <summary>
-        /// Reprendre une conversion avec corrections Reprend une conversion après complétion des données manquantes ou correction des erreurs.  L&#39;extraction OCR est conservée, les données sont mises à jour avec les corrections, puis une nouvelle validation Schematron est effectuée.
+        /// Resume a conversion with corrections Resume a conversion after completing missing data or correcting errors.  The OCR extraction is preserved, data is updated with corrections, then a new Schematron validation is performed.
         /// </summary>
         /// <param name="conversionId">Conversion ID returned by POST /convert (UUID format)</param>
         /// <param name="convertResumeRequest"></param>
@@ -1546,7 +1548,7 @@ namespace FactPulse.SDK.Api
         }
 
         /// <summary>
-        /// Reprendre une conversion avec corrections Reprend une conversion après complétion des données manquantes ou correction des erreurs.  L&#39;extraction OCR est conservée, les données sont mises à jour avec les corrections, puis une nouvelle validation Schematron est effectuée.
+        /// Resume a conversion with corrections Resume a conversion after completing missing data or correcting errors.  The OCR extraction is preserved, data is updated with corrections, then a new Schematron validation is performed.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="conversionId">Conversion ID returned by POST /convert (UUID format)</param>
@@ -1599,10 +1601,10 @@ namespace FactPulse.SDK.Api
                         "application/json"
                     };
 
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
 
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
 
                     httpRequestMessageLocalVar.Method = HttpMethod.Post;
 

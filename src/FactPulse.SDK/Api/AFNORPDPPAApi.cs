@@ -2,7 +2,7 @@
 /*
  * FactPulse REST API
  *
- *  REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X Invoice Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Validation and Compliance - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata, electronic signatures - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules) - **Asynchronous Processing**: Celery support for heavy validations (VeraPDF)  ### 📡 AFNOR PDP/PA Integration (XP Z12-013) - **Flow Submission**: Send invoices to Partner Dematerialization Platforms - **Flow Search**: View submitted invoices - **Download**: Retrieve PDF/A-3 with XML - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user (stored credentials or zero-storage)  ### ✍️ PDF Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification - **Certificate Generation**: Self-signed X.509 certificates for testing  ### 🔄 Asynchronous Processing - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **No timeout**: Ideal for large files or heavy validations  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://factpulse.fr/api/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://factpulse.fr/documentation-api/     
+ *  REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X - Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Factur-X - Validation - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules)  ### ✍️ Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification  ### 📋 Flux 6 - Invoice Lifecycle (CDAR) - **CDAR Messages**: Acknowledgements, invoice statuses - **PPF Statuses**: REFUSED (210), PAID (212)  ### 📊 Flux 10 - E-Reporting - **Tax Declarations**: International B2B, B2C - **Flow Types**: 10.1 (B2B transactions), 10.2 (B2B payments), 10.3 (B2C transactions), 10.4 (B2C payments)  ### 📡 AFNOR PDP/PA (XP Z12-013) - **Flow Service**: Submit and search flows to PDPs - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user  ### 🏛️ Chorus Pro - **Public Sector Invoicing**: Complete API for Chorus Pro  ### ⏳ Async Tasks - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **Webhooks**: Automatic notifications when tasks complete  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://factpulse.fr/api/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://factpulse.fr/documentation-api/     
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: contact@factpulse.fr
@@ -13,7 +13,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Net;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using System.Net.Http;
@@ -35,27 +37,6 @@ namespace FactPulse.SDK.Api
         /// The class containing the events
         /// </summary>
         AFNORPDPPAApiEvents Events { get; }
-
-        /// <summary>
-        /// Retrieve stored AFNOR credentials
-        /// </summary>
-        /// <remarks>
-        /// Retrieves stored AFNOR/PDP credentials for the JWT&#39;s client_uid. This endpoint is used by the SDK in &#39;stored&#39; mode to retrieve credentials before performing AFNOR OAuth itself.
-        /// </remarks>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse"/>&gt;</returns>
-        Task<IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse> GetAfnorCredentialsApiV1AfnorCredentialsGetAsync(System.Threading.CancellationToken cancellationToken = default);
-
-        /// <summary>
-        /// Retrieve stored AFNOR credentials
-        /// </summary>
-        /// <remarks>
-        /// Retrieves stored AFNOR/PDP credentials for the JWT&#39;s client_uid. This endpoint is used by the SDK in &#39;stored&#39; mode to retrieve credentials before performing AFNOR OAuth itself.
-        /// </remarks>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse"/>?&gt;</returns>
-        Task<IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse?> GetAfnorCredentialsApiV1AfnorCredentialsGetOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieve and extract an incoming invoice
@@ -83,10 +64,10 @@ namespace FactPulse.SDK.Api
         Task<IGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetApiResponse?> GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetOrDefaultAsync(string flowId, Option<bool> includeDocument = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// OAuth2 endpoint for AFNOR authentication
+        /// Test PDP OAuth2 credentials
         /// </summary>
         /// <remarks>
-        /// OAuth2 proxy endpoint to obtain an AFNOR access token. Proxies to AFNOR mock (sandbox) or real PDP depending on MOCK_AFNOR_BASE_URL. This endpoint is public (no Django auth required) as it is called by the AFNOR SDK.
+        /// OAuth2 proxy to validate PDP credentials. Use this endpoint to verify that OAuth credentials (client_id, client_secret) are valid before saving a PDP configuration. This endpoint is public (no authentication required).
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -94,44 +75,14 @@ namespace FactPulse.SDK.Api
         Task<IOauthTokenProxyApiV1AfnorOauthTokenPostApiResponse> OauthTokenProxyApiV1AfnorOauthTokenPostAsync(System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// OAuth2 endpoint for AFNOR authentication
+        /// Test PDP OAuth2 credentials
         /// </summary>
         /// <remarks>
-        /// OAuth2 proxy endpoint to obtain an AFNOR access token. Proxies to AFNOR mock (sandbox) or real PDP depending on MOCK_AFNOR_BASE_URL. This endpoint is public (no Django auth required) as it is called by the AFNOR SDK.
+        /// OAuth2 proxy to validate PDP credentials. Use this endpoint to verify that OAuth credentials (client_id, client_secret) are valid before saving a PDP configuration. This endpoint is public (no authentication required).
         /// </remarks>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IOauthTokenProxyApiV1AfnorOauthTokenPostApiResponse"/>?&gt;</returns>
         Task<IOauthTokenProxyApiV1AfnorOauthTokenPostApiResponse?> OauthTokenProxyApiV1AfnorOauthTokenPostOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default);
-    }
-
-    /// <summary>
-    /// The <see cref="IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse"/>
-    /// </summary>
-    public interface IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<Object?>
-    {
-        /// <summary>
-        /// Returns true if the response is 200 Ok
-        /// </summary>
-        /// <returns></returns>
-        bool IsOk { get; }
-
-        /// <summary>
-        /// Returns true if the response is 400 BadRequest
-        /// </summary>
-        /// <returns></returns>
-        bool IsBadRequest { get; }
-
-        /// <summary>
-        /// Returns true if the response is 401 Unauthorized
-        /// </summary>
-        /// <returns></returns>
-        bool IsUnauthorized { get; }
-
-        /// <summary>
-        /// Returns true if the response is 404 NotFound
-        /// </summary>
-        /// <returns></returns>
-        bool IsNotFound { get; }
     }
 
     /// <summary>
@@ -192,6 +143,12 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <returns></returns>
         bool IsUnauthorized { get; }
+
+        /// <summary>
+        /// Returns true if the response is 503 ServiceUnavailable
+        /// </summary>
+        /// <returns></returns>
+        bool IsServiceUnavailable { get; }
     }
 
     /// <summary>
@@ -199,26 +156,6 @@ namespace FactPulse.SDK.Api
     /// </summary>
     public class AFNORPDPPAApiEvents
     {
-        /// <summary>
-        /// The event raised after the server response
-        /// </summary>
-        public event EventHandler<ApiResponseEventArgs>? OnGetAfnorCredentialsApiV1AfnorCredentialsGet;
-
-        /// <summary>
-        /// The event raised after an error querying the server
-        /// </summary>
-        public event EventHandler<ExceptionEventArgs>? OnErrorGetAfnorCredentialsApiV1AfnorCredentialsGet;
-
-        internal void ExecuteOnGetAfnorCredentialsApiV1AfnorCredentialsGet(AFNORPDPPAApi.GetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse apiResponse)
-        {
-            OnGetAfnorCredentialsApiV1AfnorCredentialsGet?.Invoke(this, new ApiResponseEventArgs(apiResponse));
-        }
-
-        internal void ExecuteOnErrorGetAfnorCredentialsApiV1AfnorCredentialsGet(Exception exception)
-        {
-            OnErrorGetAfnorCredentialsApiV1AfnorCredentialsGet?.Invoke(this, new ExceptionEventArgs(exception));
-        }
-
         /// <summary>
         /// The event raised after the server response
         /// </summary>
@@ -305,253 +242,6 @@ namespace FactPulse.SDK.Api
             HttpClient = httpClient;
             Events = aFNORPDPPAApiEvents;
             BearerTokenProvider = bearerTokenProvider;
-        }
-
-        /// <summary>
-        /// Processes the server response
-        /// </summary>
-        /// <param name="apiResponseLocalVar"></param>
-        private void AfterGetAfnorCredentialsApiV1AfnorCredentialsGetDefaultImplementation(IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse apiResponseLocalVar)
-        {
-            bool suppressDefaultLog = false;
-            AfterGetAfnorCredentialsApiV1AfnorCredentialsGet(ref suppressDefaultLog, apiResponseLocalVar);
-            if (!suppressDefaultLog)
-                Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
-        }
-
-        /// <summary>
-        /// Processes the server response
-        /// </summary>
-        /// <param name="suppressDefaultLog"></param>
-        /// <param name="apiResponseLocalVar"></param>
-        partial void AfterGetAfnorCredentialsApiV1AfnorCredentialsGet(ref bool suppressDefaultLog, IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse apiResponseLocalVar);
-
-        /// <summary>
-        /// Logs exceptions that occur while retrieving the server response
-        /// </summary>
-        /// <param name="exceptionLocalVar"></param>
-        /// <param name="pathFormatLocalVar"></param>
-        /// <param name="pathLocalVar"></param>
-        private void OnErrorGetAfnorCredentialsApiV1AfnorCredentialsGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar)
-        {
-            bool suppressDefaultLogLocalVar = false;
-            OnErrorGetAfnorCredentialsApiV1AfnorCredentialsGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar);
-            if (!suppressDefaultLogLocalVar)
-                Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
-        }
-
-        /// <summary>
-        /// A partial method that gives developers a way to provide customized exception handling
-        /// </summary>
-        /// <param name="suppressDefaultLogLocalVar"></param>
-        /// <param name="exceptionLocalVar"></param>
-        /// <param name="pathFormatLocalVar"></param>
-        /// <param name="pathLocalVar"></param>
-        partial void OnErrorGetAfnorCredentialsApiV1AfnorCredentialsGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar);
-
-        /// <summary>
-        /// Retrieve stored AFNOR credentials Retrieves stored AFNOR/PDP credentials for the JWT&#39;s client_uid. This endpoint is used by the SDK in &#39;stored&#39; mode to retrieve credentials before performing AFNOR OAuth itself.
-        /// </summary>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse"/>&gt;</returns>
-        public async Task<IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse?> GetAfnorCredentialsApiV1AfnorCredentialsGetOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default)
-        {
-            try
-            {
-                return await GetAfnorCredentialsApiV1AfnorCredentialsGetAsync(cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Retrieve stored AFNOR credentials Retrieves stored AFNOR/PDP credentials for the JWT&#39;s client_uid. This endpoint is used by the SDK in &#39;stored&#39; mode to retrieve credentials before performing AFNOR OAuth itself.
-        /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse"/>&gt;</returns>
-        public async Task<IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse> GetAfnorCredentialsApiV1AfnorCredentialsGetAsync(System.Threading.CancellationToken cancellationToken = default)
-        {
-            UriBuilder uriBuilderLocalVar = new UriBuilder();
-
-            try
-            {
-                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
-                {
-                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
-                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
-                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
-                    uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
-                        ? "/api/v1/afnor/credentials"
-                        : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/credentials");
-
-                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
-                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
-
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
-
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
-
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
-
-                    string[] acceptLocalVars = new string[] {
-                        "application/json"
-                    };
-
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
-
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
-
-                    httpRequestMessageLocalVar.Method = HttpMethod.Get;
-
-                    DateTime requestedAtLocalVar = DateTime.UtcNow;
-
-                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
-                    {
-                        ILogger<GetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<GetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse>();
-                        GetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse apiResponseLocalVar;
-
-                        switch ((int)httpResponseMessageLocalVar.StatusCode) {
-                            default: {
-                                string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
-                                apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/api/v1/afnor/credentials", requestedAtLocalVar, _jsonSerializerOptions);
-
-                                break;
-                            }
-                        }
-
-                        AfterGetAfnorCredentialsApiV1AfnorCredentialsGetDefaultImplementation(apiResponseLocalVar);
-
-                        Events.ExecuteOnGetAfnorCredentialsApiV1AfnorCredentialsGet(apiResponseLocalVar);
-
-                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
-                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
-                                tokenBaseLocalVar.BeginRateLimit();
-
-                        return apiResponseLocalVar;
-                    }
-                }
-            }
-            catch(Exception e)
-            {
-                OnErrorGetAfnorCredentialsApiV1AfnorCredentialsGetDefaultImplementation(e, "/api/v1/afnor/credentials", uriBuilderLocalVar.Path);
-                Events.ExecuteOnErrorGetAfnorCredentialsApiV1AfnorCredentialsGet(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// The <see cref="GetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse"/>
-        /// </summary>
-        public partial class GetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse : FactPulse.SDK.Client.ApiResponse, IGetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse
-        {
-            /// <summary>
-            /// The logger
-            /// </summary>
-            public ILogger<GetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse> Logger { get; }
-
-            /// <summary>
-            /// The <see cref="GetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse"/>
-            /// </summary>
-            /// <param name="logger"></param>
-            /// <param name="httpRequestMessage"></param>
-            /// <param name="httpResponseMessage"></param>
-            /// <param name="rawContent"></param>
-            /// <param name="path"></param>
-            /// <param name="requestedAt"></param>
-            /// <param name="jsonSerializerOptions"></param>
-            public GetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse(ILogger<GetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
-            {
-                Logger = logger;
-                OnCreated(httpRequestMessage, httpResponseMessage);
-            }
-
-            /// <summary>
-            /// The <see cref="GetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse"/>
-            /// </summary>
-            /// <param name="logger"></param>
-            /// <param name="httpRequestMessage"></param>
-            /// <param name="httpResponseMessage"></param>
-            /// <param name="contentStream"></param>
-            /// <param name="path"></param>
-            /// <param name="requestedAt"></param>
-            /// <param name="jsonSerializerOptions"></param>
-            public GetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse(ILogger<GetAfnorCredentialsApiV1AfnorCredentialsGetApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
-            {
-                Logger = logger;
-                OnCreated(httpRequestMessage, httpResponseMessage);
-            }
-
-            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
-
-            /// <summary>
-            /// Returns true if the response is 200 Ok
-            /// </summary>
-            /// <returns></returns>
-            public bool IsOk => 200 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 200 Ok
-            /// </summary>
-            /// <returns></returns>
-            public Object? Ok()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<Object>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 200 Ok and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out Object? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = Ok();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
-                }
-
-                return result != null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 400 BadRequest
-            /// </summary>
-            /// <returns></returns>
-            public bool IsBadRequest => 400 == (int)StatusCode;
-
-            /// <summary>
-            /// Returns true if the response is 401 Unauthorized
-            /// </summary>
-            /// <returns></returns>
-            public bool IsUnauthorized => 401 == (int)StatusCode;
-
-            /// <summary>
-            /// Returns true if the response is 404 NotFound
-            /// </summary>
-            /// <returns></returns>
-            public bool IsNotFound => 404 == (int)StatusCode;
-
-            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
-            {
-                bool suppressDefaultLog = false;
-                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
-                if (!suppressDefaultLog)
-                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
-            }
-
-            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
         partial void FormatGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet(ref string flowId, ref Option<bool> includeDocument);
@@ -684,10 +374,10 @@ namespace FactPulse.SDK.Api
                         "application/json"
                     };
 
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
 
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
 
                     httpRequestMessageLocalVar.Method = HttpMethod.Get;
 
@@ -925,7 +615,7 @@ namespace FactPulse.SDK.Api
         partial void OnErrorOauthTokenProxyApiV1AfnorOauthTokenPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar);
 
         /// <summary>
-        /// OAuth2 endpoint for AFNOR authentication OAuth2 proxy endpoint to obtain an AFNOR access token. Proxies to AFNOR mock (sandbox) or real PDP depending on MOCK_AFNOR_BASE_URL. This endpoint is public (no Django auth required) as it is called by the AFNOR SDK.
+        /// Test PDP OAuth2 credentials OAuth2 proxy to validate PDP credentials. Use this endpoint to verify that OAuth credentials (client_id, client_secret) are valid before saving a PDP configuration. This endpoint is public (no authentication required).
         /// </summary>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IOauthTokenProxyApiV1AfnorOauthTokenPostApiResponse"/>&gt;</returns>
@@ -942,7 +632,7 @@ namespace FactPulse.SDK.Api
         }
 
         /// <summary>
-        /// OAuth2 endpoint for AFNOR authentication OAuth2 proxy endpoint to obtain an AFNOR access token. Proxies to AFNOR mock (sandbox) or real PDP depending on MOCK_AFNOR_BASE_URL. This endpoint is public (no Django auth required) as it is called by the AFNOR SDK.
+        /// Test PDP OAuth2 credentials OAuth2 proxy to validate PDP credentials. Use this endpoint to verify that OAuth credentials (client_id, client_secret) are valid before saving a PDP configuration. This endpoint is public (no authentication required).
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -968,10 +658,10 @@ namespace FactPulse.SDK.Api
                         "application/json"
                     };
 
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
 
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
 
                     httpRequestMessageLocalVar.Method = HttpMethod.Post;
 
@@ -1094,6 +784,12 @@ namespace FactPulse.SDK.Api
             /// </summary>
             /// <returns></returns>
             public bool IsUnauthorized => 401 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 503 ServiceUnavailable
+            /// </summary>
+            /// <returns></returns>
+            public bool IsServiceUnavailable => 503 == (int)StatusCode;
 
             private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
             {

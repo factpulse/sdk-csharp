@@ -2,7 +2,7 @@
 /*
  * FactPulse REST API
  *
- *  REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X Invoice Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Validation and Compliance - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata, electronic signatures - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules) - **Asynchronous Processing**: Celery support for heavy validations (VeraPDF)  ### 📡 AFNOR PDP/PA Integration (XP Z12-013) - **Flow Submission**: Send invoices to Partner Dematerialization Platforms - **Flow Search**: View submitted invoices - **Download**: Retrieve PDF/A-3 with XML - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user (stored credentials or zero-storage)  ### ✍️ PDF Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification - **Certificate Generation**: Self-signed X.509 certificates for testing  ### 🔄 Asynchronous Processing - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **No timeout**: Ideal for large files or heavy validations  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://factpulse.fr/api/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://factpulse.fr/documentation-api/     
+ *  REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X - Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Factur-X - Validation - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules)  ### ✍️ Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification  ### 📋 Flux 6 - Invoice Lifecycle (CDAR) - **CDAR Messages**: Acknowledgements, invoice statuses - **PPF Statuses**: REFUSED (210), PAID (212)  ### 📊 Flux 10 - E-Reporting - **Tax Declarations**: International B2B, B2C - **Flow Types**: 10.1 (B2B transactions), 10.2 (B2B payments), 10.3 (B2C transactions), 10.4 (B2C payments)  ### 📡 AFNOR PDP/PA (XP Z12-013) - **Flow Service**: Submit and search flows to PDPs - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user  ### 🏛️ Chorus Pro - **Public Sector Invoicing**: Complete API for Chorus Pro  ### ⏳ Async Tasks - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **Webhooks**: Automatic notifications when tasks complete  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://factpulse.fr/api/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://factpulse.fr/documentation-api/     
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: contact@factpulse.fr
@@ -13,7 +13,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Net;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using System.Net.Http;
@@ -29,12 +31,12 @@ namespace FactPulse.SDK.Api
     /// Represents a collection of functions to interact with the API endpoints
     /// This class is registered as transient.
     /// </summary>
-    public interface IEReportingApi : IApi
+    public interface IFlux10EReportingApi : IApi
     {
         /// <summary>
         /// The class containing the events
         /// </summary>
-        EReportingApiEvents Events { get; }
+        Flux10EReportingApiEvents Events { get; }
 
         /// <summary>
         /// Generate aggregated e-reporting XML (PPF-compliant)
@@ -277,29 +279,31 @@ namespace FactPulse.SDK.Api
         Task<IValidateEreportingApiV1EreportingValidatePostApiResponse?> ValidateEreportingApiV1EreportingValidatePostOrDefaultAsync(ValidateEReportingRequest validateEReportingRequest, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Validate e-reporting XML against PPF XSD schemas and business rules
+        /// Validate e-reporting XML (PPF Annexe 6 v1.9 compliant)
         /// </summary>
         /// <remarks>
-        /// Validates an e-reporting XML file against:  1. **XSD schemas**: Official PPF e-reporting XSD (structure, types, cardinality) 2. **Business rules**: ISO codes and enum validation    - Currency codes (ISO 4217: EUR, USD, GBP, etc.)    - Country codes (ISO 3166-1 alpha-2: FR, DE, US, etc.)    - Scheme IDs (0009&#x3D;SIRET, 0002&#x3D;SIREN, etc.)    - Role codes (UNCL 3035: SE&#x3D;Seller, BY&#x3D;Buyer, WK&#x3D;Working party, etc.)  Returns validation status and detailed error messages if invalid.
+        /// Validates an e-reporting XML file against PPF specifications (Annexe 6 v1.9):  **Validation levels:** 1. **XSD (REJ_SEMAN)**: Structure, types, cardinality 2. **Semantic (REJ_SEMAN)**: Authorized values from codelists 3. **Coherence (REJ_COH)**: Data consistency (totals &#x3D; sum of breakdowns) 4. **Period (REJ_PER)**: Transaction dates within declared period  **Validated codes:** - SchemeID (ISO 6523): 0002&#x3D;SIREN, 0009&#x3D;SIRET, 0224&#x3D;RoutingCode, etc. - RoleCode (UNCL 3035): SE&#x3D;Seller, BY&#x3D;Buyer, WK&#x3D;Working party - CategoryCode (TT-81): TLB1, TPS1, TNT1, TMA1 - TaxCategoryCode (UNTDID 5305): S, Z, E, AE, K, G, O - Currency (ISO 4217), Country (ISO 3166-1)  Returns structured validation errors with PPF rejection codes.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="xmlFile">E-reporting XML file to validate</param>
-        /// <param name="validateBusinessRules">Also validate business rules (ISO codes, enums) (optional, default to true)</param>
+        /// <param name="validateCoherence">Validate data coherence (REJ_COH) (optional, default to true)</param>
+        /// <param name="validatePeriod">Validate period coherence (REJ_PER) (optional, default to true)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse"/>&gt;</returns>
-        Task<IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse> ValidateXmlEreportingApiV1EreportingValidateXmlPostAsync(System.IO.Stream xmlFile, Option<bool> validateBusinessRules = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse> ValidateXmlEreportingApiV1EreportingValidateXmlPostAsync(System.IO.Stream xmlFile, Option<bool> validateCoherence = default, Option<bool> validatePeriod = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Validate e-reporting XML against PPF XSD schemas and business rules
+        /// Validate e-reporting XML (PPF Annexe 6 v1.9 compliant)
         /// </summary>
         /// <remarks>
-        /// Validates an e-reporting XML file against:  1. **XSD schemas**: Official PPF e-reporting XSD (structure, types, cardinality) 2. **Business rules**: ISO codes and enum validation    - Currency codes (ISO 4217: EUR, USD, GBP, etc.)    - Country codes (ISO 3166-1 alpha-2: FR, DE, US, etc.)    - Scheme IDs (0009&#x3D;SIRET, 0002&#x3D;SIREN, etc.)    - Role codes (UNCL 3035: SE&#x3D;Seller, BY&#x3D;Buyer, WK&#x3D;Working party, etc.)  Returns validation status and detailed error messages if invalid.
+        /// Validates an e-reporting XML file against PPF specifications (Annexe 6 v1.9):  **Validation levels:** 1. **XSD (REJ_SEMAN)**: Structure, types, cardinality 2. **Semantic (REJ_SEMAN)**: Authorized values from codelists 3. **Coherence (REJ_COH)**: Data consistency (totals &#x3D; sum of breakdowns) 4. **Period (REJ_PER)**: Transaction dates within declared period  **Validated codes:** - SchemeID (ISO 6523): 0002&#x3D;SIREN, 0009&#x3D;SIRET, 0224&#x3D;RoutingCode, etc. - RoleCode (UNCL 3035): SE&#x3D;Seller, BY&#x3D;Buyer, WK&#x3D;Working party - CategoryCode (TT-81): TLB1, TPS1, TNT1, TMA1 - TaxCategoryCode (UNTDID 5305): S, Z, E, AE, K, G, O - Currency (ISO 4217), Country (ISO 3166-1)  Returns structured validation errors with PPF rejection codes.
         /// </remarks>
         /// <param name="xmlFile">E-reporting XML file to validate</param>
-        /// <param name="validateBusinessRules">Also validate business rules (ISO codes, enums) (optional, default to true)</param>
+        /// <param name="validateCoherence">Validate data coherence (REJ_COH) (optional, default to true)</param>
+        /// <param name="validatePeriod">Validate period coherence (REJ_PER) (optional, default to true)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse"/>?&gt;</returns>
-        Task<IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse?> ValidateXmlEreportingApiV1EreportingValidateXmlPostOrDefaultAsync(System.IO.Stream xmlFile, Option<bool> validateBusinessRules = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse?> ValidateXmlEreportingApiV1EreportingValidateXmlPostOrDefaultAsync(System.IO.Stream xmlFile, Option<bool> validateCoherence = default, Option<bool> validatePeriod = default, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -689,7 +693,7 @@ namespace FactPulse.SDK.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public class EReportingApiEvents
+    public class Flux10EReportingApiEvents
     {
         /// <summary>
         /// The event raised after the server response
@@ -701,7 +705,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPost;
 
-        internal void ExecuteOnGenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPost(EReportingApi.GenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPostApiResponse apiResponse)
+        internal void ExecuteOnGenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPost(Flux10EReportingApi.GenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPostApiResponse apiResponse)
         {
             OnGenerateAggregatedEreportingApiV1EreportingGenerateAggregatedPost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -721,7 +725,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGenerateEreportingApiV1EreportingGeneratePost;
 
-        internal void ExecuteOnGenerateEreportingApiV1EreportingGeneratePost(EReportingApi.GenerateEreportingApiV1EreportingGeneratePostApiResponse apiResponse)
+        internal void ExecuteOnGenerateEreportingApiV1EreportingGeneratePost(Flux10EReportingApi.GenerateEreportingApiV1EreportingGeneratePostApiResponse apiResponse)
         {
             OnGenerateEreportingApiV1EreportingGeneratePost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -741,7 +745,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGenerateEreportingDownloadApiV1EreportingGenerateDownloadPost;
 
-        internal void ExecuteOnGenerateEreportingDownloadApiV1EreportingGenerateDownloadPost(EReportingApi.GenerateEreportingDownloadApiV1EreportingGenerateDownloadPostApiResponse apiResponse)
+        internal void ExecuteOnGenerateEreportingDownloadApiV1EreportingGenerateDownloadPost(Flux10EReportingApi.GenerateEreportingDownloadApiV1EreportingGenerateDownloadPostApiResponse apiResponse)
         {
             OnGenerateEreportingDownloadApiV1EreportingGenerateDownloadPost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -761,7 +765,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorListCategoryCodesApiV1EreportingCategoryCodesGet;
 
-        internal void ExecuteOnListCategoryCodesApiV1EreportingCategoryCodesGet(EReportingApi.ListCategoryCodesApiV1EreportingCategoryCodesGetApiResponse apiResponse)
+        internal void ExecuteOnListCategoryCodesApiV1EreportingCategoryCodesGet(Flux10EReportingApi.ListCategoryCodesApiV1EreportingCategoryCodesGetApiResponse apiResponse)
         {
             OnListCategoryCodesApiV1EreportingCategoryCodesGet?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -781,7 +785,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorListFlowTypesApiV1EreportingFlowTypesGet;
 
-        internal void ExecuteOnListFlowTypesApiV1EreportingFlowTypesGet(EReportingApi.ListFlowTypesApiV1EreportingFlowTypesGetApiResponse apiResponse)
+        internal void ExecuteOnListFlowTypesApiV1EreportingFlowTypesGet(Flux10EReportingApi.ListFlowTypesApiV1EreportingFlowTypesGetApiResponse apiResponse)
         {
             OnListFlowTypesApiV1EreportingFlowTypesGet?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -801,7 +805,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost;
 
-        internal void ExecuteOnSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost(EReportingApi.SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostApiResponse apiResponse)
+        internal void ExecuteOnSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost(Flux10EReportingApi.SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostApiResponse apiResponse)
         {
             OnSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -821,7 +825,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorSubmitEreportingApiV1EreportingSubmitPost;
 
-        internal void ExecuteOnSubmitEreportingApiV1EreportingSubmitPost(EReportingApi.SubmitEreportingApiV1EreportingSubmitPostApiResponse apiResponse)
+        internal void ExecuteOnSubmitEreportingApiV1EreportingSubmitPost(Flux10EReportingApi.SubmitEreportingApiV1EreportingSubmitPostApiResponse apiResponse)
         {
             OnSubmitEreportingApiV1EreportingSubmitPost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -841,7 +845,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorSubmitXmlEreportingApiV1EreportingSubmitXmlPost;
 
-        internal void ExecuteOnSubmitXmlEreportingApiV1EreportingSubmitXmlPost(EReportingApi.SubmitXmlEreportingApiV1EreportingSubmitXmlPostApiResponse apiResponse)
+        internal void ExecuteOnSubmitXmlEreportingApiV1EreportingSubmitXmlPost(Flux10EReportingApi.SubmitXmlEreportingApiV1EreportingSubmitXmlPostApiResponse apiResponse)
         {
             OnSubmitXmlEreportingApiV1EreportingSubmitXmlPost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -861,7 +865,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorValidateAggregatedEreportingApiV1EreportingValidateAggregatedPost;
 
-        internal void ExecuteOnValidateAggregatedEreportingApiV1EreportingValidateAggregatedPost(EReportingApi.ValidateAggregatedEreportingApiV1EreportingValidateAggregatedPostApiResponse apiResponse)
+        internal void ExecuteOnValidateAggregatedEreportingApiV1EreportingValidateAggregatedPost(Flux10EReportingApi.ValidateAggregatedEreportingApiV1EreportingValidateAggregatedPostApiResponse apiResponse)
         {
             OnValidateAggregatedEreportingApiV1EreportingValidateAggregatedPost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -881,7 +885,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorValidateEreportingApiV1EreportingValidatePost;
 
-        internal void ExecuteOnValidateEreportingApiV1EreportingValidatePost(EReportingApi.ValidateEreportingApiV1EreportingValidatePostApiResponse apiResponse)
+        internal void ExecuteOnValidateEreportingApiV1EreportingValidatePost(Flux10EReportingApi.ValidateEreportingApiV1EreportingValidatePostApiResponse apiResponse)
         {
             OnValidateEreportingApiV1EreportingValidatePost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -901,7 +905,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorValidateXmlEreportingApiV1EreportingValidateXmlPost;
 
-        internal void ExecuteOnValidateXmlEreportingApiV1EreportingValidateXmlPost(EReportingApi.ValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse apiResponse)
+        internal void ExecuteOnValidateXmlEreportingApiV1EreportingValidateXmlPost(Flux10EReportingApi.ValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse apiResponse)
         {
             OnValidateXmlEreportingApiV1EreportingValidateXmlPost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -915,7 +919,7 @@ namespace FactPulse.SDK.Api
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public sealed partial class EReportingApi : IEReportingApi
+    public sealed partial class Flux10EReportingApi : IFlux10EReportingApi
     {
         private JsonSerializerOptions _jsonSerializerOptions;
 
@@ -927,7 +931,7 @@ namespace FactPulse.SDK.Api
         /// <summary>
         /// The logger
         /// </summary>
-        public ILogger<EReportingApi> Logger { get; }
+        public ILogger<Flux10EReportingApi> Logger { get; }
 
         /// <summary>
         /// The HttpClient
@@ -937,7 +941,7 @@ namespace FactPulse.SDK.Api
         /// <summary>
         /// The class containing the events
         /// </summary>
-        public EReportingApiEvents Events { get; }
+        public Flux10EReportingApiEvents Events { get; }
 
         /// <summary>
         /// A token provider of type <see cref="BearerToken"/>
@@ -945,17 +949,17 @@ namespace FactPulse.SDK.Api
         public TokenProvider<BearerToken> BearerTokenProvider { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="EReportingApi"/> class.
+        /// Initializes a new instance of the <see cref="Flux10EReportingApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public EReportingApi(ILogger<EReportingApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, EReportingApiEvents eReportingApiEvents,
+        public Flux10EReportingApi(ILogger<Flux10EReportingApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, Flux10EReportingApiEvents flux10EReportingApiEvents,
             TokenProvider<BearerToken> bearerTokenProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
             LoggerFactory = loggerFactory;
-            Logger = LoggerFactory.CreateLogger<EReportingApi>();
+            Logger = LoggerFactory.CreateLogger<Flux10EReportingApi>();
             HttpClient = httpClient;
-            Events = eReportingApiEvents;
+            Events = flux10EReportingApiEvents;
             BearerTokenProvider = bearerTokenProvider;
         }
 
@@ -1088,10 +1092,10 @@ namespace FactPulse.SDK.Api
                         "application/json"
                     };
 
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
 
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
 
                     httpRequestMessageLocalVar.Method = HttpMethod.Post;
 
@@ -1409,10 +1413,10 @@ namespace FactPulse.SDK.Api
                         "application/json"
                     };
 
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
 
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
 
                     httpRequestMessageLocalVar.Method = HttpMethod.Post;
 
@@ -1743,10 +1747,10 @@ namespace FactPulse.SDK.Api
                         "application/json"
                     };
 
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
 
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
 
                     httpRequestMessageLocalVar.Method = HttpMethod.Post;
 
@@ -1989,10 +1993,10 @@ namespace FactPulse.SDK.Api
                         "application/json"
                     };
 
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
 
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
 
                     httpRequestMessageLocalVar.Method = HttpMethod.Get;
 
@@ -2225,10 +2229,10 @@ namespace FactPulse.SDK.Api
                         "application/json"
                     };
 
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
 
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
 
                     httpRequestMessageLocalVar.Method = HttpMethod.Get;
 
@@ -2504,10 +2508,10 @@ namespace FactPulse.SDK.Api
                         "application/json"
                     };
 
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
 
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
 
                     httpRequestMessageLocalVar.Method = HttpMethod.Post;
 
@@ -2825,10 +2829,10 @@ namespace FactPulse.SDK.Api
                         "application/json"
                     };
 
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
 
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
 
                     httpRequestMessageLocalVar.Method = HttpMethod.Post;
 
@@ -3204,10 +3208,10 @@ namespace FactPulse.SDK.Api
                         "application/json"
                     };
 
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
 
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
 
                     httpRequestMessageLocalVar.Method = HttpMethod.Post;
 
@@ -3525,10 +3529,10 @@ namespace FactPulse.SDK.Api
                         "application/json"
                     };
 
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
 
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
 
                     httpRequestMessageLocalVar.Method = HttpMethod.Post;
 
@@ -3846,10 +3850,10 @@ namespace FactPulse.SDK.Api
                         "application/json"
                     };
 
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
 
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
 
                     httpRequestMessageLocalVar.Method = HttpMethod.Post;
 
@@ -4038,7 +4042,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatValidateXmlEreportingApiV1EreportingValidateXmlPost(ref System.IO.Stream xmlFile, ref Option<bool> validateBusinessRules);
+        partial void FormatValidateXmlEreportingApiV1EreportingValidateXmlPost(ref System.IO.Stream xmlFile, ref Option<bool> validateCoherence, ref Option<bool> validatePeriod);
 
         /// <summary>
         /// Validates the request parameters
@@ -4056,11 +4060,12 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="xmlFile"></param>
-        /// <param name="validateBusinessRules"></param>
-        private void AfterValidateXmlEreportingApiV1EreportingValidateXmlPostDefaultImplementation(IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse apiResponseLocalVar, System.IO.Stream xmlFile, Option<bool> validateBusinessRules)
+        /// <param name="validateCoherence"></param>
+        /// <param name="validatePeriod"></param>
+        private void AfterValidateXmlEreportingApiV1EreportingValidateXmlPostDefaultImplementation(IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse apiResponseLocalVar, System.IO.Stream xmlFile, Option<bool> validateCoherence, Option<bool> validatePeriod)
         {
             bool suppressDefaultLog = false;
-            AfterValidateXmlEreportingApiV1EreportingValidateXmlPost(ref suppressDefaultLog, apiResponseLocalVar, xmlFile, validateBusinessRules);
+            AfterValidateXmlEreportingApiV1EreportingValidateXmlPost(ref suppressDefaultLog, apiResponseLocalVar, xmlFile, validateCoherence, validatePeriod);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -4071,8 +4076,9 @@ namespace FactPulse.SDK.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="xmlFile"></param>
-        /// <param name="validateBusinessRules"></param>
-        partial void AfterValidateXmlEreportingApiV1EreportingValidateXmlPost(ref bool suppressDefaultLog, IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse apiResponseLocalVar, System.IO.Stream xmlFile, Option<bool> validateBusinessRules);
+        /// <param name="validateCoherence"></param>
+        /// <param name="validatePeriod"></param>
+        partial void AfterValidateXmlEreportingApiV1EreportingValidateXmlPost(ref bool suppressDefaultLog, IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse apiResponseLocalVar, System.IO.Stream xmlFile, Option<bool> validateCoherence, Option<bool> validatePeriod);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -4081,11 +4087,12 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="xmlFile"></param>
-        /// <param name="validateBusinessRules"></param>
-        private void OnErrorValidateXmlEreportingApiV1EreportingValidateXmlPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream xmlFile, Option<bool> validateBusinessRules)
+        /// <param name="validateCoherence"></param>
+        /// <param name="validatePeriod"></param>
+        private void OnErrorValidateXmlEreportingApiV1EreportingValidateXmlPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream xmlFile, Option<bool> validateCoherence, Option<bool> validatePeriod)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorValidateXmlEreportingApiV1EreportingValidateXmlPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, xmlFile, validateBusinessRules);
+            OnErrorValidateXmlEreportingApiV1EreportingValidateXmlPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, xmlFile, validateCoherence, validatePeriod);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -4098,21 +4105,23 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="xmlFile"></param>
-        /// <param name="validateBusinessRules"></param>
-        partial void OnErrorValidateXmlEreportingApiV1EreportingValidateXmlPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream xmlFile, Option<bool> validateBusinessRules);
+        /// <param name="validateCoherence"></param>
+        /// <param name="validatePeriod"></param>
+        partial void OnErrorValidateXmlEreportingApiV1EreportingValidateXmlPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream xmlFile, Option<bool> validateCoherence, Option<bool> validatePeriod);
 
         /// <summary>
-        /// Validate e-reporting XML against PPF XSD schemas and business rules Validates an e-reporting XML file against:  1. **XSD schemas**: Official PPF e-reporting XSD (structure, types, cardinality) 2. **Business rules**: ISO codes and enum validation    - Currency codes (ISO 4217: EUR, USD, GBP, etc.)    - Country codes (ISO 3166-1 alpha-2: FR, DE, US, etc.)    - Scheme IDs (0009&#x3D;SIRET, 0002&#x3D;SIREN, etc.)    - Role codes (UNCL 3035: SE&#x3D;Seller, BY&#x3D;Buyer, WK&#x3D;Working party, etc.)  Returns validation status and detailed error messages if invalid.
+        /// Validate e-reporting XML (PPF Annexe 6 v1.9 compliant) Validates an e-reporting XML file against PPF specifications (Annexe 6 v1.9):  **Validation levels:** 1. **XSD (REJ_SEMAN)**: Structure, types, cardinality 2. **Semantic (REJ_SEMAN)**: Authorized values from codelists 3. **Coherence (REJ_COH)**: Data consistency (totals &#x3D; sum of breakdowns) 4. **Period (REJ_PER)**: Transaction dates within declared period  **Validated codes:** - SchemeID (ISO 6523): 0002&#x3D;SIREN, 0009&#x3D;SIRET, 0224&#x3D;RoutingCode, etc. - RoleCode (UNCL 3035): SE&#x3D;Seller, BY&#x3D;Buyer, WK&#x3D;Working party - CategoryCode (TT-81): TLB1, TPS1, TNT1, TMA1 - TaxCategoryCode (UNTDID 5305): S, Z, E, AE, K, G, O - Currency (ISO 4217), Country (ISO 3166-1)  Returns structured validation errors with PPF rejection codes.
         /// </summary>
         /// <param name="xmlFile">E-reporting XML file to validate</param>
-        /// <param name="validateBusinessRules">Also validate business rules (ISO codes, enums) (optional, default to true)</param>
+        /// <param name="validateCoherence">Validate data coherence (REJ_COH) (optional, default to true)</param>
+        /// <param name="validatePeriod">Validate period coherence (REJ_PER) (optional, default to true)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse"/>&gt;</returns>
-        public async Task<IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse?> ValidateXmlEreportingApiV1EreportingValidateXmlPostOrDefaultAsync(System.IO.Stream xmlFile, Option<bool> validateBusinessRules = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse?> ValidateXmlEreportingApiV1EreportingValidateXmlPostOrDefaultAsync(System.IO.Stream xmlFile, Option<bool> validateCoherence = default, Option<bool> validatePeriod = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await ValidateXmlEreportingApiV1EreportingValidateXmlPostAsync(xmlFile, validateBusinessRules, cancellationToken).ConfigureAwait(false);
+                return await ValidateXmlEreportingApiV1EreportingValidateXmlPostAsync(xmlFile, validateCoherence, validatePeriod, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -4121,14 +4130,15 @@ namespace FactPulse.SDK.Api
         }
 
         /// <summary>
-        /// Validate e-reporting XML against PPF XSD schemas and business rules Validates an e-reporting XML file against:  1. **XSD schemas**: Official PPF e-reporting XSD (structure, types, cardinality) 2. **Business rules**: ISO codes and enum validation    - Currency codes (ISO 4217: EUR, USD, GBP, etc.)    - Country codes (ISO 3166-1 alpha-2: FR, DE, US, etc.)    - Scheme IDs (0009&#x3D;SIRET, 0002&#x3D;SIREN, etc.)    - Role codes (UNCL 3035: SE&#x3D;Seller, BY&#x3D;Buyer, WK&#x3D;Working party, etc.)  Returns validation status and detailed error messages if invalid.
+        /// Validate e-reporting XML (PPF Annexe 6 v1.9 compliant) Validates an e-reporting XML file against PPF specifications (Annexe 6 v1.9):  **Validation levels:** 1. **XSD (REJ_SEMAN)**: Structure, types, cardinality 2. **Semantic (REJ_SEMAN)**: Authorized values from codelists 3. **Coherence (REJ_COH)**: Data consistency (totals &#x3D; sum of breakdowns) 4. **Period (REJ_PER)**: Transaction dates within declared period  **Validated codes:** - SchemeID (ISO 6523): 0002&#x3D;SIREN, 0009&#x3D;SIRET, 0224&#x3D;RoutingCode, etc. - RoleCode (UNCL 3035): SE&#x3D;Seller, BY&#x3D;Buyer, WK&#x3D;Working party - CategoryCode (TT-81): TLB1, TPS1, TNT1, TMA1 - TaxCategoryCode (UNTDID 5305): S, Z, E, AE, K, G, O - Currency (ISO 4217), Country (ISO 3166-1)  Returns structured validation errors with PPF rejection codes.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="xmlFile">E-reporting XML file to validate</param>
-        /// <param name="validateBusinessRules">Also validate business rules (ISO codes, enums) (optional, default to true)</param>
+        /// <param name="validateCoherence">Validate data coherence (REJ_COH) (optional, default to true)</param>
+        /// <param name="validatePeriod">Validate period coherence (REJ_PER) (optional, default to true)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse"/>&gt;</returns>
-        public async Task<IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse> ValidateXmlEreportingApiV1EreportingValidateXmlPostAsync(System.IO.Stream xmlFile, Option<bool> validateBusinessRules = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse> ValidateXmlEreportingApiV1EreportingValidateXmlPostAsync(System.IO.Stream xmlFile, Option<bool> validateCoherence = default, Option<bool> validatePeriod = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -4136,7 +4146,7 @@ namespace FactPulse.SDK.Api
             {
                 ValidateValidateXmlEreportingApiV1EreportingValidateXmlPost(xmlFile);
 
-                FormatValidateXmlEreportingApiV1EreportingValidateXmlPost(ref xmlFile, ref validateBusinessRules);
+                FormatValidateXmlEreportingApiV1EreportingValidateXmlPost(ref xmlFile, ref validateCoherence, ref validatePeriod);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -4149,8 +4159,11 @@ namespace FactPulse.SDK.Api
 
                     System.Collections.Specialized.NameValueCollection parseQueryStringLocalVar = System.Web.HttpUtility.ParseQueryString(string.Empty);
 
-                    if (validateBusinessRules.IsSet)
-                        parseQueryStringLocalVar["validate_business_rules"] = ClientUtils.ParameterToString(validateBusinessRules.Value);
+                    if (validateCoherence.IsSet)
+                        parseQueryStringLocalVar["validate_coherence"] = ClientUtils.ParameterToString(validateCoherence.Value);
+
+                    if (validatePeriod.IsSet)
+                        parseQueryStringLocalVar["validate_period"] = ClientUtils.ParameterToString(validatePeriod.Value);
 
                     uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
 
@@ -4184,10 +4197,10 @@ namespace FactPulse.SDK.Api
                         "application/json"
                     };
 
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
 
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
 
                     httpRequestMessageLocalVar.Method = HttpMethod.Post;
 
@@ -4207,7 +4220,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterValidateXmlEreportingApiV1EreportingValidateXmlPostDefaultImplementation(apiResponseLocalVar, xmlFile, validateBusinessRules);
+                        AfterValidateXmlEreportingApiV1EreportingValidateXmlPostDefaultImplementation(apiResponseLocalVar, xmlFile, validateCoherence, validatePeriod);
 
                         Events.ExecuteOnValidateXmlEreportingApiV1EreportingValidateXmlPost(apiResponseLocalVar);
 
@@ -4221,7 +4234,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorValidateXmlEreportingApiV1EreportingValidateXmlPostDefaultImplementation(e, "/api/v1/ereporting/validate-xml", uriBuilderLocalVar.Path, xmlFile, validateBusinessRules);
+                OnErrorValidateXmlEreportingApiV1EreportingValidateXmlPostDefaultImplementation(e, "/api/v1/ereporting/validate-xml", uriBuilderLocalVar.Path, xmlFile, validateCoherence, validatePeriod);
                 Events.ExecuteOnErrorValidateXmlEreportingApiV1EreportingValidateXmlPost(e);
                 throw;
             }

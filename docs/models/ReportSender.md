@@ -1,11 +1,11 @@
 # FactPulse.SDK.Model.ReportSender
-Report sender/issuer information.
+Report sender information (PA transmitting the report).  In PPF architecture, the sender is typically the PA (Plateforme Agréée) transmitting on behalf of the declarant (issuer).
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Siren** | **string** | SIREN or SIRET number | 
+**Siren** | **string** | SIREN or SIRET number of the sender (PA or company) | 
 **Name** | **string** | Company name | 
 **VatId** | **string** |  | [optional] 
 

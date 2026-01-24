@@ -1,5 +1,5 @@
 # FactPulse.SDK.Model.Buyercountry
-Buyer country code (ISO 3166-1 alpha-2). Must be different from FR for B2B int.
+Buyer country code (ISO 3166-1 alpha-2). FR for Bi2B, other for B2Bi.
 
 ## Properties
 

@@ -1,5 +1,5 @@
 # FactPulse.SDK.Model.InvoiceInput
-Invoice for B2B international reporting (flux 10.1).  Used for unitary declaration of international B2B invoices.
+Invoice for B2B international reporting (flux 10.1).  Used for unitary declaration of international B2B invoices. Supports three scenarios: - B2Bi: French seller → Foreign buyer (issuer role = SE) - Bi2B: Foreign seller → French buyer (issuer role = BY) - Bi2Bi: Foreign seller → Foreign buyer (issuer role = SE or BY)  Source: Annexe 6 v1.9, bloc TG-8 \"Invoice\"
 
 ## Properties
 
@@ -7,7 +7,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **InvoiceId** | **string** | Invoice identifier | 
 **IssueDate** | **DateOnly** | Invoice issue date | 
-**SellerSiren** | **string** | Seller SIREN/SIRET | 
 **BuyerCountry** | [**Buyercountry**](Buyercountry.md) |  | 
 **TaxExclusiveAmount** | [**Taxexclusiveamount1**](Taxexclusiveamount1.md) |  | 
 **TaxAmount** | [**Taxamount1**](Taxamount1.md) |  | 
@@ -15,6 +14,8 @@ Name | Type | Description | Notes
 **TypeCode** | **FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode** | Invoice type code | [optional] 
 **Currency** | [**Currency**](Currency.md) |  | [optional] 
 **DueDate** | **DateOnly** |  | [optional] 
+**SellerId** | **string** |  | [optional] 
+**SellerSiren** | **string** |  | [optional] 
 **SellerVatId** | **string** |  | [optional] 
 **SellerCountry** | [**Sellercountry**](Sellercountry.md) |  | [optional] 
 **BuyerId** | **string** |  | [optional] 

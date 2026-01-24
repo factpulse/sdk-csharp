@@ -2,7 +2,7 @@
 /*
  * FactPulse REST API
  *
- *  REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X Invoice Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Validation and Compliance - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata, electronic signatures - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules) - **Asynchronous Processing**: Celery support for heavy validations (VeraPDF)  ### 📡 AFNOR PDP/PA Integration (XP Z12-013) - **Flow Submission**: Send invoices to Partner Dematerialization Platforms - **Flow Search**: View submitted invoices - **Download**: Retrieve PDF/A-3 with XML - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user (stored credentials or zero-storage)  ### ✍️ PDF Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification - **Certificate Generation**: Self-signed X.509 certificates for testing  ### 🔄 Asynchronous Processing - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **No timeout**: Ideal for large files or heavy validations  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://factpulse.fr/api/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://factpulse.fr/documentation-api/     
+ *  REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X - Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Factur-X - Validation - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules)  ### ✍️ Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification  ### 📋 Flux 6 - Invoice Lifecycle (CDAR) - **CDAR Messages**: Acknowledgements, invoice statuses - **PPF Statuses**: REFUSED (210), PAID (212)  ### 📊 Flux 10 - E-Reporting - **Tax Declarations**: International B2B, B2C - **Flow Types**: 10.1 (B2B transactions), 10.2 (B2B payments), 10.3 (B2C transactions), 10.4 (B2C payments)  ### 📡 AFNOR PDP/PA (XP Z12-013) - **Flow Service**: Submit and search flows to PDPs - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user  ### 🏛️ Chorus Pro - **Public Sector Invoicing**: Complete API for Chorus Pro  ### ⏳ Async Tasks - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **Webhooks**: Automatic notifications when tasks complete  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://factpulse.fr/api/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://factpulse.fr/documentation-api/     
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: contact@factpulse.fr
@@ -13,7 +13,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Net;
+using System.IO;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using System.Net.Http;
@@ -29,18 +31,18 @@ namespace FactPulse.SDK.Api
     /// Represents a collection of functions to interact with the API endpoints
     /// This class is registered as transient.
     /// </summary>
-    public interface ICDARCycleDeVieApi : IApi
+    public interface IFlux6InvoiceLifecycleCDARApi : IApi
     {
         /// <summary>
         /// The class containing the events
         /// </summary>
-        CDARCycleDeVieApiEvents Events { get; }
+        Flux6InvoiceLifecycleCDARApiEvents Events { get; }
 
         /// <summary>
-        /// Générer un message CDAR
+        /// Generate a CDAR message
         /// </summary>
         /// <remarks>
-        /// Génère un message XML CDAR (Cross Domain Acknowledgement and Response) pour communiquer le statut d&#39;une facture.  **Types de messages:** - **23** (Traitement): Message de cycle de vie standard - **305** (Transmission): Message de transmission entre plateformes  **Règles métier:** - BR-FR-CDV-14: Le statut 212 (ENCAISSEE) requiert un montant encaissé - BR-FR-CDV-15: Les statuts 206/207/208/210/213/501 requièrent un code motif
+        /// Generate a CDAR XML message (Cross Domain Acknowledgement and Response) to communicate the status of an invoice.  **Message types:** - **23** (Processing): Standard lifecycle message - **305** (Transmission): Inter-platform transmission message  **Business rules:** - BR-FR-CDV-14: Status 212 (PAID) requires a paid amount - BR-FR-CDV-15: Statuses 206/207/208/210/213/501 require a reason code
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="createCDARRequest"></param>
@@ -49,10 +51,10 @@ namespace FactPulse.SDK.Api
         Task<IGenerateCdarApiV1CdarGeneratePostApiResponse> GenerateCdarApiV1CdarGeneratePostAsync(CreateCDARRequest createCDARRequest, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Générer un message CDAR
+        /// Generate a CDAR message
         /// </summary>
         /// <remarks>
-        /// Génère un message XML CDAR (Cross Domain Acknowledgement and Response) pour communiquer le statut d&#39;une facture.  **Types de messages:** - **23** (Traitement): Message de cycle de vie standard - **305** (Transmission): Message de transmission entre plateformes  **Règles métier:** - BR-FR-CDV-14: Le statut 212 (ENCAISSEE) requiert un montant encaissé - BR-FR-CDV-15: Les statuts 206/207/208/210/213/501 requièrent un code motif
+        /// Generate a CDAR XML message (Cross Domain Acknowledgement and Response) to communicate the status of an invoice.  **Message types:** - **23** (Processing): Standard lifecycle message - **305** (Transmission): Inter-platform transmission message  **Business rules:** - BR-FR-CDV-14: Status 212 (PAID) requires a paid amount - BR-FR-CDV-15: Statuses 206/207/208/210/213/501 require a reason code
         /// </remarks>
         /// <param name="createCDARRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -60,10 +62,10 @@ namespace FactPulse.SDK.Api
         Task<IGenerateCdarApiV1CdarGeneratePostApiResponse?> GenerateCdarApiV1CdarGeneratePostOrDefaultAsync(CreateCDARRequest createCDARRequest, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Liste des codes action CDAR
+        /// List of CDAR action codes
         /// </summary>
         /// <remarks>
-        /// Retourne la liste complète des codes action (BR-FR-CDV-CL-10).  Ces codes indiquent l&#39;action demandée sur la facture.
+        /// Returns the complete list of action codes (BR-FR-CDV-CL-10).  These codes indicate the requested action on the invoice.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -71,20 +73,20 @@ namespace FactPulse.SDK.Api
         Task<IGetActionCodesApiV1CdarActionCodesGetApiResponse> GetActionCodesApiV1CdarActionCodesGetAsync(System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Liste des codes action CDAR
+        /// List of CDAR action codes
         /// </summary>
         /// <remarks>
-        /// Retourne la liste complète des codes action (BR-FR-CDV-CL-10).  Ces codes indiquent l&#39;action demandée sur la facture.
+        /// Returns the complete list of action codes (BR-FR-CDV-CL-10).  These codes indicate the requested action on the invoice.
         /// </remarks>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetActionCodesApiV1CdarActionCodesGetApiResponse"/>?&gt;</returns>
         Task<IGetActionCodesApiV1CdarActionCodesGetApiResponse?> GetActionCodesApiV1CdarActionCodesGetOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Liste des codes motif CDAR
+        /// List of CDAR reason codes
         /// </summary>
         /// <remarks>
-        /// Retourne la liste complète des codes motif de statut (BR-FR-CDV-CL-09).  Ces codes expliquent la raison d&#39;un statut particulier.
+        /// Returns the complete list of status reason codes (BR-FR-CDV-CL-09).  These codes explain the reason for a particular status.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -92,20 +94,20 @@ namespace FactPulse.SDK.Api
         Task<IGetReasonCodesApiV1CdarReasonCodesGetApiResponse> GetReasonCodesApiV1CdarReasonCodesGetAsync(System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Liste des codes motif CDAR
+        /// List of CDAR reason codes
         /// </summary>
         /// <remarks>
-        /// Retourne la liste complète des codes motif de statut (BR-FR-CDV-CL-09).  Ces codes expliquent la raison d&#39;un statut particulier.
+        /// Returns the complete list of status reason codes (BR-FR-CDV-CL-09).  These codes explain the reason for a particular status.
         /// </remarks>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetReasonCodesApiV1CdarReasonCodesGetApiResponse"/>?&gt;</returns>
         Task<IGetReasonCodesApiV1CdarReasonCodesGetApiResponse?> GetReasonCodesApiV1CdarReasonCodesGetOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Liste des codes statut CDAR
+        /// List of CDAR status codes
         /// </summary>
         /// <remarks>
-        /// Retourne la liste complète des codes statut de facture (BR-FR-CDV-CL-06).  Ces codes indiquent l&#39;état du cycle de vie d&#39;une facture.
+        /// Returns the complete list of invoice status codes (BR-FR-CDV-CL-06).  These codes indicate the lifecycle state of an invoice.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -113,20 +115,20 @@ namespace FactPulse.SDK.Api
         Task<IGetStatusCodesApiV1CdarStatusCodesGetApiResponse> GetStatusCodesApiV1CdarStatusCodesGetAsync(System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Liste des codes statut CDAR
+        /// List of CDAR status codes
         /// </summary>
         /// <remarks>
-        /// Retourne la liste complète des codes statut de facture (BR-FR-CDV-CL-06).  Ces codes indiquent l&#39;état du cycle de vie d&#39;une facture.
+        /// Returns the complete list of invoice status codes (BR-FR-CDV-CL-06).  These codes indicate the lifecycle state of an invoice.
         /// </remarks>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetStatusCodesApiV1CdarStatusCodesGetApiResponse"/>?&gt;</returns>
         Task<IGetStatusCodesApiV1CdarStatusCodesGetApiResponse?> GetStatusCodesApiV1CdarStatusCodesGetOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Générer et soumettre un message CDAR
+        /// Generate and submit a CDAR message
         /// </summary>
         /// <remarks>
-        /// Génère un message CDAR et le soumet à la plateforme PA/PDP.  **Stratégies d&#39;authentification:** 1. **JWT avec client_uid** (recommandé): credentials PDP récupérés du backend 2. **Zero-storage**: Fournir pdpFlowServiceUrl, pdpClientId, pdpClientSecret dans la requête  **Types de flux (flowType):** - &#x60;CustomerInvoiceLC&#x60;: Cycle de vie côté client (acheteur) - &#x60;SupplierInvoiceLC&#x60;: Cycle de vie côté fournisseur (vendeur)
+        /// Generate a CDAR message and submit it to the PA/PDP platform.  **Authentication strategies:** 1. **JWT with client_uid** (recommended): PDP credentials retrieved from backend 2. **Zero-storage**: Provide pdpFlowServiceUrl, pdpClientId, pdpClientSecret in the request  **Flow types (flowType):** - &#x60;CustomerInvoiceLC&#x60;: Client-side lifecycle (buyer) - &#x60;SupplierInvoiceLC&#x60;: Supplier-side lifecycle (seller)
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="submitCDARRequest"></param>
@@ -135,10 +137,10 @@ namespace FactPulse.SDK.Api
         Task<ISubmitCdarApiV1CdarSubmitPostApiResponse> SubmitCdarApiV1CdarSubmitPostAsync(SubmitCDARRequest submitCDARRequest, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Générer et soumettre un message CDAR
+        /// Generate and submit a CDAR message
         /// </summary>
         /// <remarks>
-        /// Génère un message CDAR et le soumet à la plateforme PA/PDP.  **Stratégies d&#39;authentification:** 1. **JWT avec client_uid** (recommandé): credentials PDP récupérés du backend 2. **Zero-storage**: Fournir pdpFlowServiceUrl, pdpClientId, pdpClientSecret dans la requête  **Types de flux (flowType):** - &#x60;CustomerInvoiceLC&#x60;: Cycle de vie côté client (acheteur) - &#x60;SupplierInvoiceLC&#x60;: Cycle de vie côté fournisseur (vendeur)
+        /// Generate a CDAR message and submit it to the PA/PDP platform.  **Authentication strategies:** 1. **JWT with client_uid** (recommended): PDP credentials retrieved from backend 2. **Zero-storage**: Provide pdpFlowServiceUrl, pdpClientId, pdpClientSecret in the request  **Flow types (flowType):** - &#x60;CustomerInvoiceLC&#x60;: Client-side lifecycle (buyer) - &#x60;SupplierInvoiceLC&#x60;: Supplier-side lifecycle (seller)
         /// </remarks>
         /// <param name="submitCDARRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -146,10 +148,10 @@ namespace FactPulse.SDK.Api
         Task<ISubmitCdarApiV1CdarSubmitPostApiResponse?> SubmitCdarApiV1CdarSubmitPostOrDefaultAsync(SubmitCDARRequest submitCDARRequest, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Soumettre un XML CDAR pré-généré
+        /// Submit a pre-generated CDAR XML
         /// </summary>
         /// <remarks>
-        /// Soumet un message XML CDAR pré-généré à la plateforme PA/PDP.  Utile pour soumettre des XML générés par d&#39;autres systèmes.  **Stratégies d&#39;authentification:** 1. **JWT avec client_uid** (recommandé): credentials PDP récupérés du backend 2. **Zero-storage**: Fournir pdpFlowServiceUrl, pdpClientId, pdpClientSecret dans la requête
+        /// Submit a pre-generated CDAR XML message to the PA/PDP platform.  Useful for submitting XML generated by other systems.  **Validation:** The XML is validated against XSD and Schematron BR-FR-CDV rules BEFORE submission. Invalid XML will be rejected with detailed error messages.  **Authentication strategies:** 1. **JWT with client_uid** (recommended): PDP credentials retrieved from backend 2. **Zero-storage**: Provide pdpFlowServiceUrl, pdpClientId, pdpClientSecret in the request
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="submitCDARXMLRequest"></param>
@@ -158,10 +160,10 @@ namespace FactPulse.SDK.Api
         Task<ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse> SubmitCdarXmlApiV1CdarSubmitXmlPostAsync(SubmitCDARXMLRequest submitCDARXMLRequest, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Soumettre un XML CDAR pré-généré
+        /// Submit a pre-generated CDAR XML
         /// </summary>
         /// <remarks>
-        /// Soumet un message XML CDAR pré-généré à la plateforme PA/PDP.  Utile pour soumettre des XML générés par d&#39;autres systèmes.  **Stratégies d&#39;authentification:** 1. **JWT avec client_uid** (recommandé): credentials PDP récupérés du backend 2. **Zero-storage**: Fournir pdpFlowServiceUrl, pdpClientId, pdpClientSecret dans la requête
+        /// Submit a pre-generated CDAR XML message to the PA/PDP platform.  Useful for submitting XML generated by other systems.  **Validation:** The XML is validated against XSD and Schematron BR-FR-CDV rules BEFORE submission. Invalid XML will be rejected with detailed error messages.  **Authentication strategies:** 1. **JWT with client_uid** (recommended): PDP credentials retrieved from backend 2. **Zero-storage**: Provide pdpFlowServiceUrl, pdpClientId, pdpClientSecret in the request
         /// </remarks>
         /// <param name="submitCDARXMLRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -169,10 +171,10 @@ namespace FactPulse.SDK.Api
         Task<ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse?> SubmitCdarXmlApiV1CdarSubmitXmlPostOrDefaultAsync(SubmitCDARXMLRequest submitCDARXMLRequest, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// [Simplifié] Soumettre un statut ENCAISSÉE (212)
+        /// [Simplified] Submit PAID status (212) - Issued invoice
         /// </summary>
         /// <remarks>
-        /// **Endpoint simplifié pour OD** - Soumet un statut ENCAISSÉE (212) pour une facture.  Ce statut est **obligatoire pour le PPF** (BR-FR-CDV-14 requiert le montant encaissé).  **Cas d&#39;usage:** L&#39;acheteur confirme le paiement d&#39;une facture.  **Authentification:** JWT Bearer (recommandé) ou credentials PDP dans la requête.
+        /// **Simplified endpoint for OD** - Submit a PAID status (212) for an **ISSUED** invoice.  This status is **mandatory for PPF** (BR-FR-CDV-14 requires the paid amount).  **Use case:** The **seller** confirms payment receipt for an invoice they issued.  **Who issues this status?** - **Issuer (IssuerTradeParty):** The seller (SE &#x3D; Seller) who received payment - **Recipient (RecipientTradeParty):** The buyer (BY &#x3D; Buyer) who paid  **Reference:** XP Z12-014 Annex B, example UC1_F202500003_07-CDV-212_Encaissee.xml  **Authentication:** JWT Bearer (recommended) or PDP credentials in request.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="encaisseeRequest"></param>
@@ -181,10 +183,10 @@ namespace FactPulse.SDK.Api
         Task<ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse> SubmitEncaisseeApiV1CdarEncaisseePostAsync(EncaisseeRequest encaisseeRequest, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// [Simplifié] Soumettre un statut ENCAISSÉE (212)
+        /// [Simplified] Submit PAID status (212) - Issued invoice
         /// </summary>
         /// <remarks>
-        /// **Endpoint simplifié pour OD** - Soumet un statut ENCAISSÉE (212) pour une facture.  Ce statut est **obligatoire pour le PPF** (BR-FR-CDV-14 requiert le montant encaissé).  **Cas d&#39;usage:** L&#39;acheteur confirme le paiement d&#39;une facture.  **Authentification:** JWT Bearer (recommandé) ou credentials PDP dans la requête.
+        /// **Simplified endpoint for OD** - Submit a PAID status (212) for an **ISSUED** invoice.  This status is **mandatory for PPF** (BR-FR-CDV-14 requires the paid amount).  **Use case:** The **seller** confirms payment receipt for an invoice they issued.  **Who issues this status?** - **Issuer (IssuerTradeParty):** The seller (SE &#x3D; Seller) who received payment - **Recipient (RecipientTradeParty):** The buyer (BY &#x3D; Buyer) who paid  **Reference:** XP Z12-014 Annex B, example UC1_F202500003_07-CDV-212_Encaissee.xml  **Authentication:** JWT Bearer (recommended) or PDP credentials in request.
         /// </remarks>
         /// <param name="encaisseeRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -192,10 +194,10 @@ namespace FactPulse.SDK.Api
         Task<ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse?> SubmitEncaisseeApiV1CdarEncaisseePostOrDefaultAsync(EncaisseeRequest encaisseeRequest, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// [Simplifié] Soumettre un statut REFUSÉE (210)
+        /// [Simplified] Submit REFUSED status (210) - Received invoice
         /// </summary>
         /// <remarks>
-        /// **Endpoint simplifié pour OD** - Soumet un statut REFUSÉE (210) pour une facture.  Ce statut est **obligatoire pour le PPF** (BR-FR-CDV-15 requiert un code motif).  **Cas d&#39;usage:** L&#39;acheteur refuse une facture reçue.  **Codes motif autorisés (BR-FR-CDV-CL-09):** - &#x60;TX_TVA_ERR&#x60;: Taux de TVA erroné - &#x60;MONTANTTOTAL_ERR&#x60;: Montant total erroné - &#x60;CALCUL_ERR&#x60;: Erreur de calcul - &#x60;NON_CONFORME&#x60;: Non conforme - &#x60;DOUBLON&#x60;: Doublon - &#x60;DEST_ERR&#x60;: Destinataire erroné - &#x60;TRANSAC_INC&#x60;: Transaction incomplète - &#x60;EMMET_INC&#x60;: Émetteur inconnu - &#x60;CONTRAT_TERM&#x60;: Contrat terminé - &#x60;DOUBLE_FACT&#x60;: Double facturation - &#x60;CMD_ERR&#x60;: Commande erronée - &#x60;ADR_ERR&#x60;: Adresse erronée - &#x60;REF_CT_ABSENT&#x60;: Référence contrat absente  **Authentification:** JWT Bearer (recommandé) ou credentials PDP dans la requête.
+        /// **Simplified endpoint for OD** - Submit a REFUSED status (210) for a **RECEIVED** invoice.  This status is **mandatory for PPF** (BR-FR-CDV-15 requires a reason code).  **Use case:** The **buyer** refuses an invoice they received.  **Who issues this status?** - **Issuer (IssuerTradeParty):** The buyer (BY &#x3D; Buyer) refusing the invoice - **Recipient (RecipientTradeParty):** The seller (SE &#x3D; Seller) who issued the invoice  **Reference:** XP Z12-014 Annex B, example UC3_F202500005_04-CDV-210_Refusee.xml  **Allowed reason codes (BR-FR-CDV-CL-09):** - &#x60;TX_TVA_ERR&#x60;: Incorrect VAT rate - &#x60;MONTANTTOTAL_ERR&#x60;: Incorrect total amount - &#x60;CALCUL_ERR&#x60;: Calculation error - &#x60;NON_CONFORME&#x60;: Non-compliant - &#x60;DOUBLON&#x60;: Duplicate - &#x60;DEST_ERR&#x60;: Wrong recipient - &#x60;TRANSAC_INC&#x60;: Incomplete transaction - &#x60;EMMET_INC&#x60;: Unknown issuer - &#x60;CONTRAT_TERM&#x60;: Contract terminated - &#x60;DOUBLE_FACT&#x60;: Double billing - &#x60;CMD_ERR&#x60;: Order error - &#x60;ADR_ERR&#x60;: Address error - &#x60;REF_CT_ABSENT&#x60;: Missing contract reference  **Authentication:** JWT Bearer (recommended) or PDP credentials in request.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="refuseeRequest"></param>
@@ -204,10 +206,10 @@ namespace FactPulse.SDK.Api
         Task<ISubmitRefuseeApiV1CdarRefuseePostApiResponse> SubmitRefuseeApiV1CdarRefuseePostAsync(RefuseeRequest refuseeRequest, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// [Simplifié] Soumettre un statut REFUSÉE (210)
+        /// [Simplified] Submit REFUSED status (210) - Received invoice
         /// </summary>
         /// <remarks>
-        /// **Endpoint simplifié pour OD** - Soumet un statut REFUSÉE (210) pour une facture.  Ce statut est **obligatoire pour le PPF** (BR-FR-CDV-15 requiert un code motif).  **Cas d&#39;usage:** L&#39;acheteur refuse une facture reçue.  **Codes motif autorisés (BR-FR-CDV-CL-09):** - &#x60;TX_TVA_ERR&#x60;: Taux de TVA erroné - &#x60;MONTANTTOTAL_ERR&#x60;: Montant total erroné - &#x60;CALCUL_ERR&#x60;: Erreur de calcul - &#x60;NON_CONFORME&#x60;: Non conforme - &#x60;DOUBLON&#x60;: Doublon - &#x60;DEST_ERR&#x60;: Destinataire erroné - &#x60;TRANSAC_INC&#x60;: Transaction incomplète - &#x60;EMMET_INC&#x60;: Émetteur inconnu - &#x60;CONTRAT_TERM&#x60;: Contrat terminé - &#x60;DOUBLE_FACT&#x60;: Double facturation - &#x60;CMD_ERR&#x60;: Commande erronée - &#x60;ADR_ERR&#x60;: Adresse erronée - &#x60;REF_CT_ABSENT&#x60;: Référence contrat absente  **Authentification:** JWT Bearer (recommandé) ou credentials PDP dans la requête.
+        /// **Simplified endpoint for OD** - Submit a REFUSED status (210) for a **RECEIVED** invoice.  This status is **mandatory for PPF** (BR-FR-CDV-15 requires a reason code).  **Use case:** The **buyer** refuses an invoice they received.  **Who issues this status?** - **Issuer (IssuerTradeParty):** The buyer (BY &#x3D; Buyer) refusing the invoice - **Recipient (RecipientTradeParty):** The seller (SE &#x3D; Seller) who issued the invoice  **Reference:** XP Z12-014 Annex B, example UC3_F202500005_04-CDV-210_Refusee.xml  **Allowed reason codes (BR-FR-CDV-CL-09):** - &#x60;TX_TVA_ERR&#x60;: Incorrect VAT rate - &#x60;MONTANTTOTAL_ERR&#x60;: Incorrect total amount - &#x60;CALCUL_ERR&#x60;: Calculation error - &#x60;NON_CONFORME&#x60;: Non-compliant - &#x60;DOUBLON&#x60;: Duplicate - &#x60;DEST_ERR&#x60;: Wrong recipient - &#x60;TRANSAC_INC&#x60;: Incomplete transaction - &#x60;EMMET_INC&#x60;: Unknown issuer - &#x60;CONTRAT_TERM&#x60;: Contract terminated - &#x60;DOUBLE_FACT&#x60;: Double billing - &#x60;CMD_ERR&#x60;: Order error - &#x60;ADR_ERR&#x60;: Address error - &#x60;REF_CT_ABSENT&#x60;: Missing contract reference  **Authentication:** JWT Bearer (recommended) or PDP credentials in request.
         /// </remarks>
         /// <param name="refuseeRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -215,10 +217,10 @@ namespace FactPulse.SDK.Api
         Task<ISubmitRefuseeApiV1CdarRefuseePostApiResponse?> SubmitRefuseeApiV1CdarRefuseePostOrDefaultAsync(RefuseeRequest refuseeRequest, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Valider des données CDAR
+        /// Validate CDAR structured data
         /// </summary>
         /// <remarks>
-        /// Valide les données CDAR sans générer le XML.  Vérifie: - Les formats des champs (SIREN, dates, etc.) - Les codes enums (statut, motif, action) - Les règles métier BR-FR-CDV-*
+        /// Validate CDAR structured data without generating XML.  **Note:** This endpoint validates structured data fields only. Use &#x60;/validate-xml&#x60; to validate a pre-generated CDAR XML file against XSD and Schematron.  Checks: - Field formats (SIREN, dates, etc.) - Enum codes (status, reason, action) - Business rules BR-FR-CDV-*
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="validateCDARRequest"></param>
@@ -227,15 +229,38 @@ namespace FactPulse.SDK.Api
         Task<IValidateCdarApiV1CdarValidatePostApiResponse> ValidateCdarApiV1CdarValidatePostAsync(ValidateCDARRequest validateCDARRequest, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Valider des données CDAR
+        /// Validate CDAR structured data
         /// </summary>
         /// <remarks>
-        /// Valide les données CDAR sans générer le XML.  Vérifie: - Les formats des champs (SIREN, dates, etc.) - Les codes enums (statut, motif, action) - Les règles métier BR-FR-CDV-*
+        /// Validate CDAR structured data without generating XML.  **Note:** This endpoint validates structured data fields only. Use &#x60;/validate-xml&#x60; to validate a pre-generated CDAR XML file against XSD and Schematron.  Checks: - Field formats (SIREN, dates, etc.) - Enum codes (status, reason, action) - Business rules BR-FR-CDV-*
         /// </remarks>
         /// <param name="validateCDARRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateCdarApiV1CdarValidatePostApiResponse"/>?&gt;</returns>
         Task<IValidateCdarApiV1CdarValidatePostApiResponse?> ValidateCdarApiV1CdarValidatePostOrDefaultAsync(ValidateCDARRequest validateCDARRequest, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Validate CDAR XML against XSD and Schematron BR-FR-CDV
+        /// </summary>
+        /// <remarks>
+        /// Validates a CDAR XML file against:  1. **XSD schema**: UN/CEFACT D22B CrossDomainAcknowledgementAndResponse 2. **Schematron BR-FR-CDV**: French business rules for invoice lifecycle  Returns validation status and detailed error messages if invalid.  **Note:** Use &#x60;/validate&#x60; to validate structured data fields (JSON).
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="xmlFile">CDAR XML file to validate</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse"/>&gt;</returns>
+        Task<IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse> ValidateXmlCdarApiV1CdarValidateXmlPostAsync(System.IO.Stream xmlFile, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Validate CDAR XML against XSD and Schematron BR-FR-CDV
+        /// </summary>
+        /// <remarks>
+        /// Validates a CDAR XML file against:  1. **XSD schema**: UN/CEFACT D22B CrossDomainAcknowledgementAndResponse 2. **Schematron BR-FR-CDV**: French business rules for invoice lifecycle  Returns validation status and detailed error messages if invalid.  **Note:** Use &#x60;/validate&#x60; to validate structured data fields (JSON).
+        /// </remarks>
+        /// <param name="xmlFile">CDAR XML file to validate</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse"/>?&gt;</returns>
+        Task<IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse?> ValidateXmlCdarApiV1CdarValidateXmlPostOrDefaultAsync(System.IO.Stream xmlFile, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -545,9 +570,45 @@ namespace FactPulse.SDK.Api
     }
 
     /// <summary>
+    /// The <see cref="IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse"/>
+    /// </summary>
+    public interface IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<Dictionary<string, Object>?>, IUnauthorized<FactPulse.SDK.Model.APIError?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 400 BadRequest
+        /// </summary>
+        /// <returns></returns>
+        bool IsBadRequest { get; }
+
+        /// <summary>
+        /// Returns true if the response is 422 UnprocessableContent
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnprocessableContent { get; }
+
+        /// <summary>
+        /// Returns true if the response is 500 InternalServerError
+        /// </summary>
+        /// <returns></returns>
+        bool IsInternalServerError { get; }
+
+        /// <summary>
+        /// Returns true if the response is 401 Unauthorized
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnauthorized { get; }
+    }
+
+    /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public class CDARCycleDeVieApiEvents
+    public class Flux6InvoiceLifecycleCDARApiEvents
     {
         /// <summary>
         /// The event raised after the server response
@@ -559,7 +620,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGenerateCdarApiV1CdarGeneratePost;
 
-        internal void ExecuteOnGenerateCdarApiV1CdarGeneratePost(CDARCycleDeVieApi.GenerateCdarApiV1CdarGeneratePostApiResponse apiResponse)
+        internal void ExecuteOnGenerateCdarApiV1CdarGeneratePost(Flux6InvoiceLifecycleCDARApi.GenerateCdarApiV1CdarGeneratePostApiResponse apiResponse)
         {
             OnGenerateCdarApiV1CdarGeneratePost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -579,7 +640,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetActionCodesApiV1CdarActionCodesGet;
 
-        internal void ExecuteOnGetActionCodesApiV1CdarActionCodesGet(CDARCycleDeVieApi.GetActionCodesApiV1CdarActionCodesGetApiResponse apiResponse)
+        internal void ExecuteOnGetActionCodesApiV1CdarActionCodesGet(Flux6InvoiceLifecycleCDARApi.GetActionCodesApiV1CdarActionCodesGetApiResponse apiResponse)
         {
             OnGetActionCodesApiV1CdarActionCodesGet?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -599,7 +660,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetReasonCodesApiV1CdarReasonCodesGet;
 
-        internal void ExecuteOnGetReasonCodesApiV1CdarReasonCodesGet(CDARCycleDeVieApi.GetReasonCodesApiV1CdarReasonCodesGetApiResponse apiResponse)
+        internal void ExecuteOnGetReasonCodesApiV1CdarReasonCodesGet(Flux6InvoiceLifecycleCDARApi.GetReasonCodesApiV1CdarReasonCodesGetApiResponse apiResponse)
         {
             OnGetReasonCodesApiV1CdarReasonCodesGet?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -619,7 +680,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorGetStatusCodesApiV1CdarStatusCodesGet;
 
-        internal void ExecuteOnGetStatusCodesApiV1CdarStatusCodesGet(CDARCycleDeVieApi.GetStatusCodesApiV1CdarStatusCodesGetApiResponse apiResponse)
+        internal void ExecuteOnGetStatusCodesApiV1CdarStatusCodesGet(Flux6InvoiceLifecycleCDARApi.GetStatusCodesApiV1CdarStatusCodesGetApiResponse apiResponse)
         {
             OnGetStatusCodesApiV1CdarStatusCodesGet?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -639,7 +700,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorSubmitCdarApiV1CdarSubmitPost;
 
-        internal void ExecuteOnSubmitCdarApiV1CdarSubmitPost(CDARCycleDeVieApi.SubmitCdarApiV1CdarSubmitPostApiResponse apiResponse)
+        internal void ExecuteOnSubmitCdarApiV1CdarSubmitPost(Flux6InvoiceLifecycleCDARApi.SubmitCdarApiV1CdarSubmitPostApiResponse apiResponse)
         {
             OnSubmitCdarApiV1CdarSubmitPost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -659,7 +720,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorSubmitCdarXmlApiV1CdarSubmitXmlPost;
 
-        internal void ExecuteOnSubmitCdarXmlApiV1CdarSubmitXmlPost(CDARCycleDeVieApi.SubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse apiResponse)
+        internal void ExecuteOnSubmitCdarXmlApiV1CdarSubmitXmlPost(Flux6InvoiceLifecycleCDARApi.SubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse apiResponse)
         {
             OnSubmitCdarXmlApiV1CdarSubmitXmlPost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -679,7 +740,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorSubmitEncaisseeApiV1CdarEncaisseePost;
 
-        internal void ExecuteOnSubmitEncaisseeApiV1CdarEncaisseePost(CDARCycleDeVieApi.SubmitEncaisseeApiV1CdarEncaisseePostApiResponse apiResponse)
+        internal void ExecuteOnSubmitEncaisseeApiV1CdarEncaisseePost(Flux6InvoiceLifecycleCDARApi.SubmitEncaisseeApiV1CdarEncaisseePostApiResponse apiResponse)
         {
             OnSubmitEncaisseeApiV1CdarEncaisseePost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -699,7 +760,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorSubmitRefuseeApiV1CdarRefuseePost;
 
-        internal void ExecuteOnSubmitRefuseeApiV1CdarRefuseePost(CDARCycleDeVieApi.SubmitRefuseeApiV1CdarRefuseePostApiResponse apiResponse)
+        internal void ExecuteOnSubmitRefuseeApiV1CdarRefuseePost(Flux6InvoiceLifecycleCDARApi.SubmitRefuseeApiV1CdarRefuseePostApiResponse apiResponse)
         {
             OnSubmitRefuseeApiV1CdarRefuseePost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -719,7 +780,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         public event EventHandler<ExceptionEventArgs>? OnErrorValidateCdarApiV1CdarValidatePost;
 
-        internal void ExecuteOnValidateCdarApiV1CdarValidatePost(CDARCycleDeVieApi.ValidateCdarApiV1CdarValidatePostApiResponse apiResponse)
+        internal void ExecuteOnValidateCdarApiV1CdarValidatePost(Flux6InvoiceLifecycleCDARApi.ValidateCdarApiV1CdarValidatePostApiResponse apiResponse)
         {
             OnValidateCdarApiV1CdarValidatePost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
         }
@@ -728,12 +789,32 @@ namespace FactPulse.SDK.Api
         {
             OnErrorValidateCdarApiV1CdarValidatePost?.Invoke(this, new ExceptionEventArgs(exception));
         }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
+        public event EventHandler<ApiResponseEventArgs>? OnValidateXmlCdarApiV1CdarValidateXmlPost;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs>? OnErrorValidateXmlCdarApiV1CdarValidateXmlPost;
+
+        internal void ExecuteOnValidateXmlCdarApiV1CdarValidateXmlPost(Flux6InvoiceLifecycleCDARApi.ValidateXmlCdarApiV1CdarValidateXmlPostApiResponse apiResponse)
+        {
+            OnValidateXmlCdarApiV1CdarValidateXmlPost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorValidateXmlCdarApiV1CdarValidateXmlPost(Exception exception)
+        {
+            OnErrorValidateXmlCdarApiV1CdarValidateXmlPost?.Invoke(this, new ExceptionEventArgs(exception));
+        }
     }
 
     /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
-    public sealed partial class CDARCycleDeVieApi : ICDARCycleDeVieApi
+    public sealed partial class Flux6InvoiceLifecycleCDARApi : IFlux6InvoiceLifecycleCDARApi
     {
         private JsonSerializerOptions _jsonSerializerOptions;
 
@@ -745,7 +826,7 @@ namespace FactPulse.SDK.Api
         /// <summary>
         /// The logger
         /// </summary>
-        public ILogger<CDARCycleDeVieApi> Logger { get; }
+        public ILogger<Flux6InvoiceLifecycleCDARApi> Logger { get; }
 
         /// <summary>
         /// The HttpClient
@@ -755,7 +836,7 @@ namespace FactPulse.SDK.Api
         /// <summary>
         /// The class containing the events
         /// </summary>
-        public CDARCycleDeVieApiEvents Events { get; }
+        public Flux6InvoiceLifecycleCDARApiEvents Events { get; }
 
         /// <summary>
         /// A token provider of type <see cref="BearerToken"/>
@@ -763,17 +844,17 @@ namespace FactPulse.SDK.Api
         public TokenProvider<BearerToken> BearerTokenProvider { get; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CDARCycleDeVieApi"/> class.
+        /// Initializes a new instance of the <see cref="Flux6InvoiceLifecycleCDARApi"/> class.
         /// </summary>
         /// <returns></returns>
-        public CDARCycleDeVieApi(ILogger<CDARCycleDeVieApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, CDARCycleDeVieApiEvents cDARCycleDeVieApiEvents,
+        public Flux6InvoiceLifecycleCDARApi(ILogger<Flux6InvoiceLifecycleCDARApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, Flux6InvoiceLifecycleCDARApiEvents flux6InvoiceLifecycleCDARApiEvents,
             TokenProvider<BearerToken> bearerTokenProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
             LoggerFactory = loggerFactory;
-            Logger = LoggerFactory.CreateLogger<CDARCycleDeVieApi>();
+            Logger = LoggerFactory.CreateLogger<Flux6InvoiceLifecycleCDARApi>();
             HttpClient = httpClient;
-            Events = cDARCycleDeVieApiEvents;
+            Events = flux6InvoiceLifecycleCDARApiEvents;
             BearerTokenProvider = bearerTokenProvider;
         }
 
@@ -837,7 +918,7 @@ namespace FactPulse.SDK.Api
         partial void OnErrorGenerateCdarApiV1CdarGeneratePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, CreateCDARRequest createCDARRequest);
 
         /// <summary>
-        /// Générer un message CDAR Génère un message XML CDAR (Cross Domain Acknowledgement and Response) pour communiquer le statut d&#39;une facture.  **Types de messages:** - **23** (Traitement): Message de cycle de vie standard - **305** (Transmission): Message de transmission entre plateformes  **Règles métier:** - BR-FR-CDV-14: Le statut 212 (ENCAISSEE) requiert un montant encaissé - BR-FR-CDV-15: Les statuts 206/207/208/210/213/501 requièrent un code motif
+        /// Generate a CDAR message Generate a CDAR XML message (Cross Domain Acknowledgement and Response) to communicate the status of an invoice.  **Message types:** - **23** (Processing): Standard lifecycle message - **305** (Transmission): Inter-platform transmission message  **Business rules:** - BR-FR-CDV-14: Status 212 (PAID) requires a paid amount - BR-FR-CDV-15: Statuses 206/207/208/210/213/501 require a reason code
         /// </summary>
         /// <param name="createCDARRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -855,7 +936,7 @@ namespace FactPulse.SDK.Api
         }
 
         /// <summary>
-        /// Générer un message CDAR Génère un message XML CDAR (Cross Domain Acknowledgement and Response) pour communiquer le statut d&#39;une facture.  **Types de messages:** - **23** (Traitement): Message de cycle de vie standard - **305** (Transmission): Message de transmission entre plateformes  **Règles métier:** - BR-FR-CDV-14: Le statut 212 (ENCAISSEE) requiert un montant encaissé - BR-FR-CDV-15: Les statuts 206/207/208/210/213/501 requièrent un code motif
+        /// Generate a CDAR message Generate a CDAR XML message (Cross Domain Acknowledgement and Response) to communicate the status of an invoice.  **Message types:** - **23** (Processing): Standard lifecycle message - **305** (Transmission): Inter-platform transmission message  **Business rules:** - BR-FR-CDV-14: Status 212 (PAID) requires a paid amount - BR-FR-CDV-15: Statuses 206/207/208/210/213/501 require a reason code
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="createCDARRequest"></param>
@@ -906,10 +987,10 @@ namespace FactPulse.SDK.Api
                         "application/json"
                     };
 
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
 
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
 
                     httpRequestMessageLocalVar.Method = HttpMethod.Post;
 
@@ -1141,7 +1222,7 @@ namespace FactPulse.SDK.Api
         partial void OnErrorGetActionCodesApiV1CdarActionCodesGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar);
 
         /// <summary>
-        /// Liste des codes action CDAR Retourne la liste complète des codes action (BR-FR-CDV-CL-10).  Ces codes indiquent l&#39;action demandée sur la facture.
+        /// List of CDAR action codes Returns the complete list of action codes (BR-FR-CDV-CL-10).  These codes indicate the requested action on the invoice.
         /// </summary>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetActionCodesApiV1CdarActionCodesGetApiResponse"/>&gt;</returns>
@@ -1158,7 +1239,7 @@ namespace FactPulse.SDK.Api
         }
 
         /// <summary>
-        /// Liste des codes action CDAR Retourne la liste complète des codes action (BR-FR-CDV-CL-10).  Ces codes indiquent l&#39;action demandée sur la facture.
+        /// List of CDAR action codes Returns the complete list of action codes (BR-FR-CDV-CL-10).  These codes indicate the requested action on the invoice.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1184,10 +1265,10 @@ namespace FactPulse.SDK.Api
                         "application/json"
                     };
 
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
 
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
 
                     httpRequestMessageLocalVar.Method = HttpMethod.Get;
 
@@ -1377,7 +1458,7 @@ namespace FactPulse.SDK.Api
         partial void OnErrorGetReasonCodesApiV1CdarReasonCodesGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar);
 
         /// <summary>
-        /// Liste des codes motif CDAR Retourne la liste complète des codes motif de statut (BR-FR-CDV-CL-09).  Ces codes expliquent la raison d&#39;un statut particulier.
+        /// List of CDAR reason codes Returns the complete list of status reason codes (BR-FR-CDV-CL-09).  These codes explain the reason for a particular status.
         /// </summary>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetReasonCodesApiV1CdarReasonCodesGetApiResponse"/>&gt;</returns>
@@ -1394,7 +1475,7 @@ namespace FactPulse.SDK.Api
         }
 
         /// <summary>
-        /// Liste des codes motif CDAR Retourne la liste complète des codes motif de statut (BR-FR-CDV-CL-09).  Ces codes expliquent la raison d&#39;un statut particulier.
+        /// List of CDAR reason codes Returns the complete list of status reason codes (BR-FR-CDV-CL-09).  These codes explain the reason for a particular status.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1420,10 +1501,10 @@ namespace FactPulse.SDK.Api
                         "application/json"
                     };
 
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
 
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
 
                     httpRequestMessageLocalVar.Method = HttpMethod.Get;
 
@@ -1613,7 +1694,7 @@ namespace FactPulse.SDK.Api
         partial void OnErrorGetStatusCodesApiV1CdarStatusCodesGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar);
 
         /// <summary>
-        /// Liste des codes statut CDAR Retourne la liste complète des codes statut de facture (BR-FR-CDV-CL-06).  Ces codes indiquent l&#39;état du cycle de vie d&#39;une facture.
+        /// List of CDAR status codes Returns the complete list of invoice status codes (BR-FR-CDV-CL-06).  These codes indicate the lifecycle state of an invoice.
         /// </summary>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetStatusCodesApiV1CdarStatusCodesGetApiResponse"/>&gt;</returns>
@@ -1630,7 +1711,7 @@ namespace FactPulse.SDK.Api
         }
 
         /// <summary>
-        /// Liste des codes statut CDAR Retourne la liste complète des codes statut de facture (BR-FR-CDV-CL-06).  Ces codes indiquent l&#39;état du cycle de vie d&#39;une facture.
+        /// List of CDAR status codes Returns the complete list of invoice status codes (BR-FR-CDV-CL-06).  These codes indicate the lifecycle state of an invoice.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1656,10 +1737,10 @@ namespace FactPulse.SDK.Api
                         "application/json"
                     };
 
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
 
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
 
                     httpRequestMessageLocalVar.Method = HttpMethod.Get;
 
@@ -1866,7 +1947,7 @@ namespace FactPulse.SDK.Api
         partial void OnErrorSubmitCdarApiV1CdarSubmitPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitCDARRequest submitCDARRequest);
 
         /// <summary>
-        /// Générer et soumettre un message CDAR Génère un message CDAR et le soumet à la plateforme PA/PDP.  **Stratégies d&#39;authentification:** 1. **JWT avec client_uid** (recommandé): credentials PDP récupérés du backend 2. **Zero-storage**: Fournir pdpFlowServiceUrl, pdpClientId, pdpClientSecret dans la requête  **Types de flux (flowType):** - &#x60;CustomerInvoiceLC&#x60;: Cycle de vie côté client (acheteur) - &#x60;SupplierInvoiceLC&#x60;: Cycle de vie côté fournisseur (vendeur)
+        /// Generate and submit a CDAR message Generate a CDAR message and submit it to the PA/PDP platform.  **Authentication strategies:** 1. **JWT with client_uid** (recommended): PDP credentials retrieved from backend 2. **Zero-storage**: Provide pdpFlowServiceUrl, pdpClientId, pdpClientSecret in the request  **Flow types (flowType):** - &#x60;CustomerInvoiceLC&#x60;: Client-side lifecycle (buyer) - &#x60;SupplierInvoiceLC&#x60;: Supplier-side lifecycle (seller)
         /// </summary>
         /// <param name="submitCDARRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1884,7 +1965,7 @@ namespace FactPulse.SDK.Api
         }
 
         /// <summary>
-        /// Générer et soumettre un message CDAR Génère un message CDAR et le soumet à la plateforme PA/PDP.  **Stratégies d&#39;authentification:** 1. **JWT avec client_uid** (recommandé): credentials PDP récupérés du backend 2. **Zero-storage**: Fournir pdpFlowServiceUrl, pdpClientId, pdpClientSecret dans la requête  **Types de flux (flowType):** - &#x60;CustomerInvoiceLC&#x60;: Cycle de vie côté client (acheteur) - &#x60;SupplierInvoiceLC&#x60;: Cycle de vie côté fournisseur (vendeur)
+        /// Generate and submit a CDAR message Generate a CDAR message and submit it to the PA/PDP platform.  **Authentication strategies:** 1. **JWT with client_uid** (recommended): PDP credentials retrieved from backend 2. **Zero-storage**: Provide pdpFlowServiceUrl, pdpClientId, pdpClientSecret in the request  **Flow types (flowType):** - &#x60;CustomerInvoiceLC&#x60;: Client-side lifecycle (buyer) - &#x60;SupplierInvoiceLC&#x60;: Supplier-side lifecycle (seller)
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="submitCDARRequest"></param>
@@ -1935,10 +2016,10 @@ namespace FactPulse.SDK.Api
                         "application/json"
                     };
 
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
 
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
 
                     httpRequestMessageLocalVar.Method = HttpMethod.Post;
 
@@ -2187,7 +2268,7 @@ namespace FactPulse.SDK.Api
         partial void OnErrorSubmitCdarXmlApiV1CdarSubmitXmlPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitCDARXMLRequest submitCDARXMLRequest);
 
         /// <summary>
-        /// Soumettre un XML CDAR pré-généré Soumet un message XML CDAR pré-généré à la plateforme PA/PDP.  Utile pour soumettre des XML générés par d&#39;autres systèmes.  **Stratégies d&#39;authentification:** 1. **JWT avec client_uid** (recommandé): credentials PDP récupérés du backend 2. **Zero-storage**: Fournir pdpFlowServiceUrl, pdpClientId, pdpClientSecret dans la requête
+        /// Submit a pre-generated CDAR XML Submit a pre-generated CDAR XML message to the PA/PDP platform.  Useful for submitting XML generated by other systems.  **Validation:** The XML is validated against XSD and Schematron BR-FR-CDV rules BEFORE submission. Invalid XML will be rejected with detailed error messages.  **Authentication strategies:** 1. **JWT with client_uid** (recommended): PDP credentials retrieved from backend 2. **Zero-storage**: Provide pdpFlowServiceUrl, pdpClientId, pdpClientSecret in the request
         /// </summary>
         /// <param name="submitCDARXMLRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2205,7 +2286,7 @@ namespace FactPulse.SDK.Api
         }
 
         /// <summary>
-        /// Soumettre un XML CDAR pré-généré Soumet un message XML CDAR pré-généré à la plateforme PA/PDP.  Utile pour soumettre des XML générés par d&#39;autres systèmes.  **Stratégies d&#39;authentification:** 1. **JWT avec client_uid** (recommandé): credentials PDP récupérés du backend 2. **Zero-storage**: Fournir pdpFlowServiceUrl, pdpClientId, pdpClientSecret dans la requête
+        /// Submit a pre-generated CDAR XML Submit a pre-generated CDAR XML message to the PA/PDP platform.  Useful for submitting XML generated by other systems.  **Validation:** The XML is validated against XSD and Schematron BR-FR-CDV rules BEFORE submission. Invalid XML will be rejected with detailed error messages.  **Authentication strategies:** 1. **JWT with client_uid** (recommended): PDP credentials retrieved from backend 2. **Zero-storage**: Provide pdpFlowServiceUrl, pdpClientId, pdpClientSecret in the request
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="submitCDARXMLRequest"></param>
@@ -2256,10 +2337,10 @@ namespace FactPulse.SDK.Api
                         "application/json"
                     };
 
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
 
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
 
                     httpRequestMessageLocalVar.Method = HttpMethod.Post;
 
@@ -2508,7 +2589,7 @@ namespace FactPulse.SDK.Api
         partial void OnErrorSubmitEncaisseeApiV1CdarEncaisseePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, EncaisseeRequest encaisseeRequest);
 
         /// <summary>
-        /// [Simplifié] Soumettre un statut ENCAISSÉE (212) **Endpoint simplifié pour OD** - Soumet un statut ENCAISSÉE (212) pour une facture.  Ce statut est **obligatoire pour le PPF** (BR-FR-CDV-14 requiert le montant encaissé).  **Cas d&#39;usage:** L&#39;acheteur confirme le paiement d&#39;une facture.  **Authentification:** JWT Bearer (recommandé) ou credentials PDP dans la requête.
+        /// [Simplified] Submit PAID status (212) - Issued invoice **Simplified endpoint for OD** - Submit a PAID status (212) for an **ISSUED** invoice.  This status is **mandatory for PPF** (BR-FR-CDV-14 requires the paid amount).  **Use case:** The **seller** confirms payment receipt for an invoice they issued.  **Who issues this status?** - **Issuer (IssuerTradeParty):** The seller (SE &#x3D; Seller) who received payment - **Recipient (RecipientTradeParty):** The buyer (BY &#x3D; Buyer) who paid  **Reference:** XP Z12-014 Annex B, example UC1_F202500003_07-CDV-212_Encaissee.xml  **Authentication:** JWT Bearer (recommended) or PDP credentials in request.
         /// </summary>
         /// <param name="encaisseeRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2526,7 +2607,7 @@ namespace FactPulse.SDK.Api
         }
 
         /// <summary>
-        /// [Simplifié] Soumettre un statut ENCAISSÉE (212) **Endpoint simplifié pour OD** - Soumet un statut ENCAISSÉE (212) pour une facture.  Ce statut est **obligatoire pour le PPF** (BR-FR-CDV-14 requiert le montant encaissé).  **Cas d&#39;usage:** L&#39;acheteur confirme le paiement d&#39;une facture.  **Authentification:** JWT Bearer (recommandé) ou credentials PDP dans la requête.
+        /// [Simplified] Submit PAID status (212) - Issued invoice **Simplified endpoint for OD** - Submit a PAID status (212) for an **ISSUED** invoice.  This status is **mandatory for PPF** (BR-FR-CDV-14 requires the paid amount).  **Use case:** The **seller** confirms payment receipt for an invoice they issued.  **Who issues this status?** - **Issuer (IssuerTradeParty):** The seller (SE &#x3D; Seller) who received payment - **Recipient (RecipientTradeParty):** The buyer (BY &#x3D; Buyer) who paid  **Reference:** XP Z12-014 Annex B, example UC1_F202500003_07-CDV-212_Encaissee.xml  **Authentication:** JWT Bearer (recommended) or PDP credentials in request.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="encaisseeRequest"></param>
@@ -2577,10 +2658,10 @@ namespace FactPulse.SDK.Api
                         "application/json"
                     };
 
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
 
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
 
                     httpRequestMessageLocalVar.Method = HttpMethod.Post;
 
@@ -2829,7 +2910,7 @@ namespace FactPulse.SDK.Api
         partial void OnErrorSubmitRefuseeApiV1CdarRefuseePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, RefuseeRequest refuseeRequest);
 
         /// <summary>
-        /// [Simplifié] Soumettre un statut REFUSÉE (210) **Endpoint simplifié pour OD** - Soumet un statut REFUSÉE (210) pour une facture.  Ce statut est **obligatoire pour le PPF** (BR-FR-CDV-15 requiert un code motif).  **Cas d&#39;usage:** L&#39;acheteur refuse une facture reçue.  **Codes motif autorisés (BR-FR-CDV-CL-09):** - &#x60;TX_TVA_ERR&#x60;: Taux de TVA erroné - &#x60;MONTANTTOTAL_ERR&#x60;: Montant total erroné - &#x60;CALCUL_ERR&#x60;: Erreur de calcul - &#x60;NON_CONFORME&#x60;: Non conforme - &#x60;DOUBLON&#x60;: Doublon - &#x60;DEST_ERR&#x60;: Destinataire erroné - &#x60;TRANSAC_INC&#x60;: Transaction incomplète - &#x60;EMMET_INC&#x60;: Émetteur inconnu - &#x60;CONTRAT_TERM&#x60;: Contrat terminé - &#x60;DOUBLE_FACT&#x60;: Double facturation - &#x60;CMD_ERR&#x60;: Commande erronée - &#x60;ADR_ERR&#x60;: Adresse erronée - &#x60;REF_CT_ABSENT&#x60;: Référence contrat absente  **Authentification:** JWT Bearer (recommandé) ou credentials PDP dans la requête.
+        /// [Simplified] Submit REFUSED status (210) - Received invoice **Simplified endpoint for OD** - Submit a REFUSED status (210) for a **RECEIVED** invoice.  This status is **mandatory for PPF** (BR-FR-CDV-15 requires a reason code).  **Use case:** The **buyer** refuses an invoice they received.  **Who issues this status?** - **Issuer (IssuerTradeParty):** The buyer (BY &#x3D; Buyer) refusing the invoice - **Recipient (RecipientTradeParty):** The seller (SE &#x3D; Seller) who issued the invoice  **Reference:** XP Z12-014 Annex B, example UC3_F202500005_04-CDV-210_Refusee.xml  **Allowed reason codes (BR-FR-CDV-CL-09):** - &#x60;TX_TVA_ERR&#x60;: Incorrect VAT rate - &#x60;MONTANTTOTAL_ERR&#x60;: Incorrect total amount - &#x60;CALCUL_ERR&#x60;: Calculation error - &#x60;NON_CONFORME&#x60;: Non-compliant - &#x60;DOUBLON&#x60;: Duplicate - &#x60;DEST_ERR&#x60;: Wrong recipient - &#x60;TRANSAC_INC&#x60;: Incomplete transaction - &#x60;EMMET_INC&#x60;: Unknown issuer - &#x60;CONTRAT_TERM&#x60;: Contract terminated - &#x60;DOUBLE_FACT&#x60;: Double billing - &#x60;CMD_ERR&#x60;: Order error - &#x60;ADR_ERR&#x60;: Address error - &#x60;REF_CT_ABSENT&#x60;: Missing contract reference  **Authentication:** JWT Bearer (recommended) or PDP credentials in request.
         /// </summary>
         /// <param name="refuseeRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -2847,7 +2928,7 @@ namespace FactPulse.SDK.Api
         }
 
         /// <summary>
-        /// [Simplifié] Soumettre un statut REFUSÉE (210) **Endpoint simplifié pour OD** - Soumet un statut REFUSÉE (210) pour une facture.  Ce statut est **obligatoire pour le PPF** (BR-FR-CDV-15 requiert un code motif).  **Cas d&#39;usage:** L&#39;acheteur refuse une facture reçue.  **Codes motif autorisés (BR-FR-CDV-CL-09):** - &#x60;TX_TVA_ERR&#x60;: Taux de TVA erroné - &#x60;MONTANTTOTAL_ERR&#x60;: Montant total erroné - &#x60;CALCUL_ERR&#x60;: Erreur de calcul - &#x60;NON_CONFORME&#x60;: Non conforme - &#x60;DOUBLON&#x60;: Doublon - &#x60;DEST_ERR&#x60;: Destinataire erroné - &#x60;TRANSAC_INC&#x60;: Transaction incomplète - &#x60;EMMET_INC&#x60;: Émetteur inconnu - &#x60;CONTRAT_TERM&#x60;: Contrat terminé - &#x60;DOUBLE_FACT&#x60;: Double facturation - &#x60;CMD_ERR&#x60;: Commande erronée - &#x60;ADR_ERR&#x60;: Adresse erronée - &#x60;REF_CT_ABSENT&#x60;: Référence contrat absente  **Authentification:** JWT Bearer (recommandé) ou credentials PDP dans la requête.
+        /// [Simplified] Submit REFUSED status (210) - Received invoice **Simplified endpoint for OD** - Submit a REFUSED status (210) for a **RECEIVED** invoice.  This status is **mandatory for PPF** (BR-FR-CDV-15 requires a reason code).  **Use case:** The **buyer** refuses an invoice they received.  **Who issues this status?** - **Issuer (IssuerTradeParty):** The buyer (BY &#x3D; Buyer) refusing the invoice - **Recipient (RecipientTradeParty):** The seller (SE &#x3D; Seller) who issued the invoice  **Reference:** XP Z12-014 Annex B, example UC3_F202500005_04-CDV-210_Refusee.xml  **Allowed reason codes (BR-FR-CDV-CL-09):** - &#x60;TX_TVA_ERR&#x60;: Incorrect VAT rate - &#x60;MONTANTTOTAL_ERR&#x60;: Incorrect total amount - &#x60;CALCUL_ERR&#x60;: Calculation error - &#x60;NON_CONFORME&#x60;: Non-compliant - &#x60;DOUBLON&#x60;: Duplicate - &#x60;DEST_ERR&#x60;: Wrong recipient - &#x60;TRANSAC_INC&#x60;: Incomplete transaction - &#x60;EMMET_INC&#x60;: Unknown issuer - &#x60;CONTRAT_TERM&#x60;: Contract terminated - &#x60;DOUBLE_FACT&#x60;: Double billing - &#x60;CMD_ERR&#x60;: Order error - &#x60;ADR_ERR&#x60;: Address error - &#x60;REF_CT_ABSENT&#x60;: Missing contract reference  **Authentication:** JWT Bearer (recommended) or PDP credentials in request.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="refuseeRequest"></param>
@@ -2898,10 +2979,10 @@ namespace FactPulse.SDK.Api
                         "application/json"
                     };
 
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
 
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
 
                     httpRequestMessageLocalVar.Method = HttpMethod.Post;
 
@@ -3150,7 +3231,7 @@ namespace FactPulse.SDK.Api
         partial void OnErrorValidateCdarApiV1CdarValidatePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, ValidateCDARRequest validateCDARRequest);
 
         /// <summary>
-        /// Valider des données CDAR Valide les données CDAR sans générer le XML.  Vérifie: - Les formats des champs (SIREN, dates, etc.) - Les codes enums (statut, motif, action) - Les règles métier BR-FR-CDV-*
+        /// Validate CDAR structured data Validate CDAR structured data without generating XML.  **Note:** This endpoint validates structured data fields only. Use &#x60;/validate-xml&#x60; to validate a pre-generated CDAR XML file against XSD and Schematron.  Checks: - Field formats (SIREN, dates, etc.) - Enum codes (status, reason, action) - Business rules BR-FR-CDV-*
         /// </summary>
         /// <param name="validateCDARRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -3168,7 +3249,7 @@ namespace FactPulse.SDK.Api
         }
 
         /// <summary>
-        /// Valider des données CDAR Valide les données CDAR sans générer le XML.  Vérifie: - Les formats des champs (SIREN, dates, etc.) - Les codes enums (statut, motif, action) - Les règles métier BR-FR-CDV-*
+        /// Validate CDAR structured data Validate CDAR structured data without generating XML.  **Note:** This endpoint validates structured data fields only. Use &#x60;/validate-xml&#x60; to validate a pre-generated CDAR XML file against XSD and Schematron.  Checks: - Field formats (SIREN, dates, etc.) - Enum codes (status, reason, action) - Business rules BR-FR-CDV-*
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="validateCDARRequest"></param>
@@ -3219,10 +3300,10 @@ namespace FactPulse.SDK.Api
                         "application/json"
                     };
 
-                    string? acceptLocalVar = ClientUtils.SelectHeaderAccept(acceptLocalVars);
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
 
-                    if (acceptLocalVar != null)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue(acceptLocalVar));
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
 
                     httpRequestMessageLocalVar.Method = HttpMethod.Post;
 
@@ -3330,6 +3411,331 @@ namespace FactPulse.SDK.Api
             /// <param name="result"></param>
             /// <returns></returns>
             public bool TryOk([NotNullWhen(true)]out FactPulse.SDK.Model.ValidateCDARResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 400 BadRequest
+            /// </summary>
+            /// <returns></returns>
+            public bool IsBadRequest => 400 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnprocessableContent => 422 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 500 InternalServerError
+            /// </summary>
+            /// <returns></returns>
+            public bool IsInternalServerError => 500 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 401 Unauthorized
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnauthorized => 401 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 401 Unauthorized
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.APIError? Unauthorized()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsUnauthorized
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.APIError>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 401 Unauthorized and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryUnauthorized([NotNullWhen(true)]out FactPulse.SDK.Model.APIError? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Unauthorized();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)401);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
+        partial void FormatValidateXmlCdarApiV1CdarValidateXmlPost(ref System.IO.Stream xmlFile);
+
+        /// <summary>
+        /// Validates the request parameters
+        /// </summary>
+        /// <param name="xmlFile"></param>
+        /// <returns></returns>
+        private void ValidateValidateXmlCdarApiV1CdarValidateXmlPost(System.IO.Stream xmlFile)
+        {
+            if (xmlFile == null)
+                throw new ArgumentNullException(nameof(xmlFile));
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="xmlFile"></param>
+        private void AfterValidateXmlCdarApiV1CdarValidateXmlPostDefaultImplementation(IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse apiResponseLocalVar, System.IO.Stream xmlFile)
+        {
+            bool suppressDefaultLog = false;
+            AfterValidateXmlCdarApiV1CdarValidateXmlPost(ref suppressDefaultLog, apiResponseLocalVar, xmlFile);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="xmlFile"></param>
+        partial void AfterValidateXmlCdarApiV1CdarValidateXmlPost(ref bool suppressDefaultLog, IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse apiResponseLocalVar, System.IO.Stream xmlFile);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="xmlFile"></param>
+        private void OnErrorValidateXmlCdarApiV1CdarValidateXmlPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream xmlFile)
+        {
+            bool suppressDefaultLogLocalVar = false;
+            OnErrorValidateXmlCdarApiV1CdarValidateXmlPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, xmlFile);
+            if (!suppressDefaultLogLocalVar)
+                Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLogLocalVar"></param>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="xmlFile"></param>
+        partial void OnErrorValidateXmlCdarApiV1CdarValidateXmlPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream xmlFile);
+
+        /// <summary>
+        /// Validate CDAR XML against XSD and Schematron BR-FR-CDV Validates a CDAR XML file against:  1. **XSD schema**: UN/CEFACT D22B CrossDomainAcknowledgementAndResponse 2. **Schematron BR-FR-CDV**: French business rules for invoice lifecycle  Returns validation status and detailed error messages if invalid.  **Note:** Use &#x60;/validate&#x60; to validate structured data fields (JSON).
+        /// </summary>
+        /// <param name="xmlFile">CDAR XML file to validate</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse"/>&gt;</returns>
+        public async Task<IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse?> ValidateXmlCdarApiV1CdarValidateXmlPostOrDefaultAsync(System.IO.Stream xmlFile, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await ValidateXmlCdarApiV1CdarValidateXmlPostAsync(xmlFile, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Validate CDAR XML against XSD and Schematron BR-FR-CDV Validates a CDAR XML file against:  1. **XSD schema**: UN/CEFACT D22B CrossDomainAcknowledgementAndResponse 2. **Schematron BR-FR-CDV**: French business rules for invoice lifecycle  Returns validation status and detailed error messages if invalid.  **Note:** Use &#x60;/validate&#x60; to validate structured data fields (JSON).
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="xmlFile">CDAR XML file to validate</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse"/>&gt;</returns>
+        public async Task<IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse> ValidateXmlCdarApiV1CdarValidateXmlPostAsync(System.IO.Stream xmlFile, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                ValidateValidateXmlCdarApiV1CdarValidateXmlPost(xmlFile);
+
+                FormatValidateXmlCdarApiV1CdarValidateXmlPost(ref xmlFile);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
+                        ? "/api/v1/cdar/validate-xml"
+                        : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/cdar/validate-xml");
+
+                    MultipartContent multipartContentLocalVar = new MultipartContent();
+
+                    httpRequestMessageLocalVar.Content = multipartContentLocalVar;
+
+                    List<KeyValuePair<string?, string?>> formParameterLocalVars = new List<KeyValuePair<string?, string?>>();
+
+                    multipartContentLocalVar.Add(new FormUrlEncodedContent(formParameterLocalVars));                    multipartContentLocalVar.Add(new StreamContent(xmlFile));
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+
+                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
+
+                    string[] contentTypes = new string[] {
+                        "multipart/form-data"
+                    };
+
+                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
+
+                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
+                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
+
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Post;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        ILogger<ValidateXmlCdarApiV1CdarValidateXmlPostApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<ValidateXmlCdarApiV1CdarValidateXmlPostApiResponse>();
+                        ValidateXmlCdarApiV1CdarValidateXmlPostApiResponse apiResponseLocalVar;
+
+                        switch ((int)httpResponseMessageLocalVar.StatusCode) {
+                            default: {
+                                string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+                                apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/api/v1/cdar/validate-xml", requestedAtLocalVar, _jsonSerializerOptions);
+
+                                break;
+                            }
+                        }
+
+                        AfterValidateXmlCdarApiV1CdarValidateXmlPostDefaultImplementation(apiResponseLocalVar, xmlFile);
+
+                        Events.ExecuteOnValidateXmlCdarApiV1CdarValidateXmlPost(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorValidateXmlCdarApiV1CdarValidateXmlPostDefaultImplementation(e, "/api/v1/cdar/validate-xml", uriBuilderLocalVar.Path, xmlFile);
+                Events.ExecuteOnErrorValidateXmlCdarApiV1CdarValidateXmlPost(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="ValidateXmlCdarApiV1CdarValidateXmlPostApiResponse"/>
+        /// </summary>
+        public partial class ValidateXmlCdarApiV1CdarValidateXmlPostApiResponse : FactPulse.SDK.Client.ApiResponse, IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<ValidateXmlCdarApiV1CdarValidateXmlPostApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="ValidateXmlCdarApiV1CdarValidateXmlPostApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public ValidateXmlCdarApiV1CdarValidateXmlPostApiResponse(ILogger<ValidateXmlCdarApiV1CdarValidateXmlPostApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            /// <summary>
+            /// The <see cref="ValidateXmlCdarApiV1CdarValidateXmlPostApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="contentStream"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public ValidateXmlCdarApiV1CdarValidateXmlPostApiResponse(ILogger<ValidateXmlCdarApiV1CdarValidateXmlPostApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public Dictionary<string, Object>? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, Object>>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out Dictionary<string, Object>? result)
             {
                 result = null;
 

@@ -2,7 +2,7 @@
 /*
  * FactPulse REST API
  *
- *  REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X Invoice Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Validation and Compliance - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata, electronic signatures - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules) - **Asynchronous Processing**: Celery support for heavy validations (VeraPDF)  ### 📡 AFNOR PDP/PA Integration (XP Z12-013) - **Flow Submission**: Send invoices to Partner Dematerialization Platforms - **Flow Search**: View submitted invoices - **Download**: Retrieve PDF/A-3 with XML - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user (stored credentials or zero-storage)  ### ✍️ PDF Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification - **Certificate Generation**: Self-signed X.509 certificates for testing  ### 🔄 Asynchronous Processing - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **No timeout**: Ideal for large files or heavy validations  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://factpulse.fr/api/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://factpulse.fr/documentation-api/     
+ *  REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X - Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Factur-X - Validation - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules)  ### ✍️ Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification  ### 📋 Flux 6 - Invoice Lifecycle (CDAR) - **CDAR Messages**: Acknowledgements, invoice statuses - **PPF Statuses**: REFUSED (210), PAID (212)  ### 📊 Flux 10 - E-Reporting - **Tax Declarations**: International B2B, B2C - **Flow Types**: 10.1 (B2B transactions), 10.2 (B2B payments), 10.3 (B2C transactions), 10.4 (B2C payments)  ### 📡 AFNOR PDP/PA (XP Z12-013) - **Flow Service**: Submit and search flows to PDPs - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user  ### 🏛️ Chorus Pro - **Public Sector Invoicing**: Complete API for Chorus Pro  ### ⏳ Async Tasks - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **Webhooks**: Automatic notifications when tasks complete  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://factpulse.fr/api/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://factpulse.fr/documentation-api/     
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: contact@factpulse.fr
@@ -27,7 +27,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Requête simplifiée pour soumettre un statut REFUSÉE (210).  Statut obligatoire PPF - Le destinataire refuse la facture. Un code motif est OBLIGATOIRE (BR-FR-CDV-15).  Codes motif autorisés (BR-FR-CDV-CL-09_MDT-113_210): - TX_TVA_ERR: Taux de TVA erroné - MONTANTTOTAL_ERR: Montant total erroné - CALCUL_ERR: Erreur de calcul - NON_CONFORME: Non conforme - DOUBLON: Doublon - DEST_ERR: Destinataire erroné - TRANSAC_INC: Transaction incomplète - EMMET_INC: Émetteur inconnu - CONTRAT_TERM: Contrat terminé - DOUBLE_FACT: Double facturation - CMD_ERR: Commande erronée - ADR_ERR: Adresse erronée - REF_CT_ABSENT: Référence contrat absente
+    /// Requête simplifiée pour soumettre un statut REFUSÉE (210).  **Usage** : Pour une facture REÇUE (vous êtes acheteur). L&#39;acheteur refuse la facture et envoie le statut au vendeur.  Statut obligatoire PPF - Un code motif est OBLIGATOIRE (BR-FR-CDV-15).  Codes motif autorisés (BR-FR-CDV-CL-09_MDT-113_210): - TX_TVA_ERR, MONTANTTOTAL_ERR, CALCUL_ERR, NON_CONFORME, DOUBLON, - DEST_ERR, TRANSAC_INC, EMMET_INC, CONTRAT_TERM, DOUBLE_FACT, - CMD_ERR, ADR_ERR, REF_CT_ABSENT
     /// </summary>
     public partial class RefuseeRequest : IValidatableObject
     {
@@ -36,27 +36,31 @@ namespace FactPulse.SDK.Model
         /// </summary>
         /// <param name="invoiceId">Identifiant de la facture (BT-1)</param>
         /// <param name="invoiceIssueDate">Date d&#39;émission de la facture (YYYY-MM-DD)</param>
-        /// <param name="reasonCode">Code motif du refus (obligatoire). Valeurs autorisées: TX_TVA_ERR, MONTANTTOTAL_ERR, CALCUL_ERR, NON_CONFORME, DOUBLON, DEST_ERR, TRANSAC_INC, EMMET_INC, CONTRAT_TERM, DOUBLE_FACT, CMD_ERR, ADR_ERR, REF_CT_ABSENT</param>
+        /// <param name="invoiceSellerSiren">SIREN du vendeur (destinataire du statut, MDT-129)</param>
+        /// <param name="invoiceSellerElectronicAddress">Adresse électronique du vendeur (MDT-73)</param>
+        /// <param name="reasonCode">Code motif du refus (obligatoire). Valeurs: TX_TVA_ERR, MONTANTTOTAL_ERR, CALCUL_ERR, NON_CONFORME, DOUBLON, DEST_ERR, TRANSAC_INC, EMMET_INC, CONTRAT_TERM, DOUBLE_FACT, CMD_ERR, ADR_ERR, REF_CT_ABSENT</param>
+        /// <param name="reasonText">reasonText</param>
         /// <param name="senderSiren">senderSiren</param>
-        /// <param name="flowType">Type de flux: SupplierInvoiceLC (acheteur) ou CustomerInvoiceLC (vendeur) (default to &quot;SupplierInvoiceLC&quot;)</param>
+        /// <param name="flowType">Type de flux (SupplierInvoiceLC pour facture reçue) (default to &quot;SupplierInvoiceLC&quot;)</param>
         /// <param name="pdpFlowServiceUrl">pdpFlowServiceUrl</param>
         /// <param name="pdpTokenUrl">pdpTokenUrl</param>
         /// <param name="pdpClientId">pdpClientId</param>
         /// <param name="pdpClientSecret">pdpClientSecret</param>
-        /// <param name="reasonText">reasonText</param>
         [JsonConstructor]
-        public RefuseeRequest(string invoiceId, DateOnly invoiceIssueDate, string reasonCode, Option<string?> senderSiren = default, Option<string?> flowType = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default, Option<string?> reasonText = default)
+        public RefuseeRequest(string invoiceId, DateOnly invoiceIssueDate, string invoiceSellerSiren, string invoiceSellerElectronicAddress, string reasonCode, Option<string?> reasonText = default, Option<string?> senderSiren = default, Option<string?> flowType = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default)
         {
             InvoiceId = invoiceId;
             InvoiceIssueDate = invoiceIssueDate;
+            InvoiceSellerSiren = invoiceSellerSiren;
+            InvoiceSellerElectronicAddress = invoiceSellerElectronicAddress;
             ReasonCode = reasonCode;
+            ReasonTextOption = reasonText;
             SenderSirenOption = senderSiren;
             FlowTypeOption = flowType;
             PdpFlowServiceUrlOption = pdpFlowServiceUrl;
             PdpTokenUrlOption = pdpTokenUrl;
             PdpClientIdOption = pdpClientId;
             PdpClientSecretOption = pdpClientSecret;
-            ReasonTextOption = reasonText;
             OnCreated();
         }
 
@@ -77,11 +81,38 @@ namespace FactPulse.SDK.Model
         public DateOnly InvoiceIssueDate { get; set; }
 
         /// <summary>
-        /// Code motif du refus (obligatoire). Valeurs autorisées: TX_TVA_ERR, MONTANTTOTAL_ERR, CALCUL_ERR, NON_CONFORME, DOUBLON, DEST_ERR, TRANSAC_INC, EMMET_INC, CONTRAT_TERM, DOUBLE_FACT, CMD_ERR, ADR_ERR, REF_CT_ABSENT
+        /// SIREN du vendeur (destinataire du statut, MDT-129)
         /// </summary>
-        /// <value>Code motif du refus (obligatoire). Valeurs autorisées: TX_TVA_ERR, MONTANTTOTAL_ERR, CALCUL_ERR, NON_CONFORME, DOUBLON, DEST_ERR, TRANSAC_INC, EMMET_INC, CONTRAT_TERM, DOUBLE_FACT, CMD_ERR, ADR_ERR, REF_CT_ABSENT</value>
+        /// <value>SIREN du vendeur (destinataire du statut, MDT-129)</value>
+        [JsonPropertyName("invoiceSellerSiren")]
+        public string InvoiceSellerSiren { get; set; }
+
+        /// <summary>
+        /// Adresse électronique du vendeur (MDT-73)
+        /// </summary>
+        /// <value>Adresse électronique du vendeur (MDT-73)</value>
+        [JsonPropertyName("invoiceSellerElectronicAddress")]
+        public string InvoiceSellerElectronicAddress { get; set; }
+
+        /// <summary>
+        /// Code motif du refus (obligatoire). Valeurs: TX_TVA_ERR, MONTANTTOTAL_ERR, CALCUL_ERR, NON_CONFORME, DOUBLON, DEST_ERR, TRANSAC_INC, EMMET_INC, CONTRAT_TERM, DOUBLE_FACT, CMD_ERR, ADR_ERR, REF_CT_ABSENT
+        /// </summary>
+        /// <value>Code motif du refus (obligatoire). Valeurs: TX_TVA_ERR, MONTANTTOTAL_ERR, CALCUL_ERR, NON_CONFORME, DOUBLON, DEST_ERR, TRANSAC_INC, EMMET_INC, CONTRAT_TERM, DOUBLE_FACT, CMD_ERR, ADR_ERR, REF_CT_ABSENT</value>
         [JsonPropertyName("reasonCode")]
         public string ReasonCode { get; set; }
+
+        /// <summary>
+        /// Used to track the state of ReasonText
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> ReasonTextOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ReasonText
+        /// </summary>
+        [JsonPropertyName("reasonText")]
+        public string? ReasonText { get { return this.ReasonTextOption; } set { this.ReasonTextOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of SenderSiren
@@ -104,9 +135,9 @@ namespace FactPulse.SDK.Model
         public Option<string?> FlowTypeOption { get; private set; }
 
         /// <summary>
-        /// Type de flux: SupplierInvoiceLC (acheteur) ou CustomerInvoiceLC (vendeur)
+        /// Type de flux (SupplierInvoiceLC pour facture reçue)
         /// </summary>
-        /// <value>Type de flux: SupplierInvoiceLC (acheteur) ou CustomerInvoiceLC (vendeur)</value>
+        /// <value>Type de flux (SupplierInvoiceLC pour facture reçue)</value>
         [JsonPropertyName("flowType")]
         public string? FlowType { get { return this.FlowTypeOption; } set { this.FlowTypeOption = new(value); } }
 
@@ -163,19 +194,6 @@ namespace FactPulse.SDK.Model
         public string? PdpClientSecret { get { return this.PdpClientSecretOption; } set { this.PdpClientSecretOption = new(value); } }
 
         /// <summary>
-        /// Used to track the state of ReasonText
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> ReasonTextOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets ReasonText
-        /// </summary>
-        [JsonPropertyName("reasonText")]
-        public string? ReasonText { get { return this.ReasonTextOption; } set { this.ReasonTextOption = new(value); } }
-
-        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -185,14 +203,16 @@ namespace FactPulse.SDK.Model
             sb.Append("class RefuseeRequest {\n");
             sb.Append("  InvoiceId: ").Append(InvoiceId).Append("\n");
             sb.Append("  InvoiceIssueDate: ").Append(InvoiceIssueDate).Append("\n");
+            sb.Append("  InvoiceSellerSiren: ").Append(InvoiceSellerSiren).Append("\n");
+            sb.Append("  InvoiceSellerElectronicAddress: ").Append(InvoiceSellerElectronicAddress).Append("\n");
             sb.Append("  ReasonCode: ").Append(ReasonCode).Append("\n");
+            sb.Append("  ReasonText: ").Append(ReasonText).Append("\n");
             sb.Append("  SenderSiren: ").Append(SenderSiren).Append("\n");
             sb.Append("  FlowType: ").Append(FlowType).Append("\n");
             sb.Append("  PdpFlowServiceUrl: ").Append(PdpFlowServiceUrl).Append("\n");
             sb.Append("  PdpTokenUrl: ").Append(PdpTokenUrl).Append("\n");
             sb.Append("  PdpClientId: ").Append(PdpClientId).Append("\n");
             sb.Append("  PdpClientSecret: ").Append(PdpClientSecret).Append("\n");
-            sb.Append("  ReasonText: ").Append(ReasonText).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -237,14 +257,16 @@ namespace FactPulse.SDK.Model
 
             Option<string?> invoiceId = default;
             Option<DateOnly?> invoiceIssueDate = default;
+            Option<string?> invoiceSellerSiren = default;
+            Option<string?> invoiceSellerElectronicAddress = default;
             Option<string?> reasonCode = default;
+            Option<string?> reasonText = default;
             Option<string?> senderSiren = default;
             Option<string?> flowType = default;
             Option<string?> pdpFlowServiceUrl = default;
             Option<string?> pdpTokenUrl = default;
             Option<string?> pdpClientId = default;
             Option<string?> pdpClientSecret = default;
-            Option<string?> reasonText = default;
 
             while (utf8JsonReader.Read())
             {
@@ -267,8 +289,17 @@ namespace FactPulse.SDK.Model
                         case "invoiceIssueDate":
                             invoiceIssueDate = new Option<DateOnly?>(JsonSerializer.Deserialize<DateOnly>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
+                        case "invoiceSellerSiren":
+                            invoiceSellerSiren = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
+                        case "invoiceSellerElectronicAddress":
+                            invoiceSellerElectronicAddress = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
                         case "reasonCode":
                             reasonCode = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
+                        case "reasonText":
+                            reasonText = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "senderSiren":
                             senderSiren = new Option<string?>(utf8JsonReader.GetString());
@@ -288,9 +319,6 @@ namespace FactPulse.SDK.Model
                         case "pdpClientSecret":
                             pdpClientSecret = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "reasonText":
-                            reasonText = new Option<string?>(utf8JsonReader.GetString());
-                            break;
                         default:
                             break;
                     }
@@ -303,6 +331,12 @@ namespace FactPulse.SDK.Model
             if (!invoiceIssueDate.IsSet)
                 throw new ArgumentException("Property is required for class RefuseeRequest.", nameof(invoiceIssueDate));
 
+            if (!invoiceSellerSiren.IsSet)
+                throw new ArgumentException("Property is required for class RefuseeRequest.", nameof(invoiceSellerSiren));
+
+            if (!invoiceSellerElectronicAddress.IsSet)
+                throw new ArgumentException("Property is required for class RefuseeRequest.", nameof(invoiceSellerElectronicAddress));
+
             if (!reasonCode.IsSet)
                 throw new ArgumentException("Property is required for class RefuseeRequest.", nameof(reasonCode));
 
@@ -312,13 +346,19 @@ namespace FactPulse.SDK.Model
             if (invoiceIssueDate.IsSet && invoiceIssueDate.Value == null)
                 throw new ArgumentNullException(nameof(invoiceIssueDate), "Property is not nullable for class RefuseeRequest.");
 
+            if (invoiceSellerSiren.IsSet && invoiceSellerSiren.Value == null)
+                throw new ArgumentNullException(nameof(invoiceSellerSiren), "Property is not nullable for class RefuseeRequest.");
+
+            if (invoiceSellerElectronicAddress.IsSet && invoiceSellerElectronicAddress.Value == null)
+                throw new ArgumentNullException(nameof(invoiceSellerElectronicAddress), "Property is not nullable for class RefuseeRequest.");
+
             if (reasonCode.IsSet && reasonCode.Value == null)
                 throw new ArgumentNullException(nameof(reasonCode), "Property is not nullable for class RefuseeRequest.");
 
             if (flowType.IsSet && flowType.Value == null)
                 throw new ArgumentNullException(nameof(flowType), "Property is not nullable for class RefuseeRequest.");
 
-            return new RefuseeRequest(invoiceId.Value!, invoiceIssueDate.Value!.Value!, reasonCode.Value!, senderSiren, flowType, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret, reasonText);
+            return new RefuseeRequest(invoiceId.Value!, invoiceIssueDate.Value!.Value!, invoiceSellerSiren.Value!, invoiceSellerElectronicAddress.Value!, reasonCode.Value!, reasonText, senderSiren, flowType, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
         }
 
         /// <summary>
@@ -348,6 +388,12 @@ namespace FactPulse.SDK.Model
             if (refuseeRequest.InvoiceId == null)
                 throw new ArgumentNullException(nameof(refuseeRequest.InvoiceId), "Property is required for class RefuseeRequest.");
 
+            if (refuseeRequest.InvoiceSellerSiren == null)
+                throw new ArgumentNullException(nameof(refuseeRequest.InvoiceSellerSiren), "Property is required for class RefuseeRequest.");
+
+            if (refuseeRequest.InvoiceSellerElectronicAddress == null)
+                throw new ArgumentNullException(nameof(refuseeRequest.InvoiceSellerElectronicAddress), "Property is required for class RefuseeRequest.");
+
             if (refuseeRequest.ReasonCode == null)
                 throw new ArgumentNullException(nameof(refuseeRequest.ReasonCode), "Property is required for class RefuseeRequest.");
 
@@ -358,7 +404,17 @@ namespace FactPulse.SDK.Model
 
             writer.WriteString("invoiceIssueDate", refuseeRequest.InvoiceIssueDate.ToString(InvoiceIssueDateFormat));
 
+            writer.WriteString("invoiceSellerSiren", refuseeRequest.InvoiceSellerSiren);
+
+            writer.WriteString("invoiceSellerElectronicAddress", refuseeRequest.InvoiceSellerElectronicAddress);
+
             writer.WriteString("reasonCode", refuseeRequest.ReasonCode);
+
+            if (refuseeRequest.ReasonTextOption.IsSet)
+                if (refuseeRequest.ReasonTextOption.Value != null)
+                    writer.WriteString("reasonText", refuseeRequest.ReasonText);
+                else
+                    writer.WriteNull("reasonText");
 
             if (refuseeRequest.SenderSirenOption.IsSet)
                 if (refuseeRequest.SenderSirenOption.Value != null)
@@ -392,12 +448,6 @@ namespace FactPulse.SDK.Model
                     writer.WriteString("pdpClientSecret", refuseeRequest.PdpClientSecret);
                 else
                     writer.WriteNull("pdpClientSecret");
-
-            if (refuseeRequest.ReasonTextOption.IsSet)
-                if (refuseeRequest.ReasonTextOption.Value != null)
-                    writer.WriteString("reasonText", refuseeRequest.ReasonText);
-                else
-                    writer.WriteNull("reasonText");
         }
     }
 }

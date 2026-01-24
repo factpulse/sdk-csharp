@@ -7,13 +7,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **InvoiceNumber** | **string** |  | 
 **PaymentDueDate** | **string** |  | 
-**SubmissionMode** | **SubmissionMode** |  | 
 **Recipient** | [**Recipient**](Recipient.md) |  | 
 **Supplier** | [**Supplier**](Supplier.md) |  | 
 **InvoicingFramework** | [**InvoicingFramework**](InvoicingFramework.md) |  | 
 **References** | [**InvoiceReferences**](InvoiceReferences.md) |  | 
 **Totals** | [**InvoiceTotals**](InvoiceTotals.md) |  | 
 **InvoiceDate** | **string** |  | [optional] 
+**SubmissionMode** | **SubmissionMode** |  | [optional] 
 **InvoiceLines** | [**List&lt;InvoiceLine&gt;**](InvoiceLine.md) |  | [optional] 
 **VatLines** | [**List&lt;VATLine&gt;**](VATLine.md) |  | [optional] 
 **Notes** | [**List&lt;InvoiceNote&gt;**](InvoiceNote.md) |  | [optional] 

@@ -1,26 +1,27 @@
-# FactPulse.SDK.Api.CDARCycleDeVieApi
+# FactPulse.SDK.Api.Flux6InvoiceLifecycleCDARApi
 
 All URIs are relative to *https://factpulse.fr*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**GenerateCdarApiV1CdarGeneratePost**](CDARCycleDeVieApi.md#generatecdarapiv1cdargeneratepost) | **POST** /api/v1/cdar/generate | Générer un message CDAR |
-| [**GetActionCodesApiV1CdarActionCodesGet**](CDARCycleDeVieApi.md#getactioncodesapiv1cdaractioncodesget) | **GET** /api/v1/cdar/action-codes | Liste des codes action CDAR |
-| [**GetReasonCodesApiV1CdarReasonCodesGet**](CDARCycleDeVieApi.md#getreasoncodesapiv1cdarreasoncodesget) | **GET** /api/v1/cdar/reason-codes | Liste des codes motif CDAR |
-| [**GetStatusCodesApiV1CdarStatusCodesGet**](CDARCycleDeVieApi.md#getstatuscodesapiv1cdarstatuscodesget) | **GET** /api/v1/cdar/status-codes | Liste des codes statut CDAR |
-| [**SubmitCdarApiV1CdarSubmitPost**](CDARCycleDeVieApi.md#submitcdarapiv1cdarsubmitpost) | **POST** /api/v1/cdar/submit | Générer et soumettre un message CDAR |
-| [**SubmitCdarXmlApiV1CdarSubmitXmlPost**](CDARCycleDeVieApi.md#submitcdarxmlapiv1cdarsubmitxmlpost) | **POST** /api/v1/cdar/submit-xml | Soumettre un XML CDAR pré-généré |
-| [**SubmitEncaisseeApiV1CdarEncaisseePost**](CDARCycleDeVieApi.md#submitencaisseeapiv1cdarencaisseepost) | **POST** /api/v1/cdar/encaissee | [Simplifié] Soumettre un statut ENCAISSÉE (212) |
-| [**SubmitRefuseeApiV1CdarRefuseePost**](CDARCycleDeVieApi.md#submitrefuseeapiv1cdarrefuseepost) | **POST** /api/v1/cdar/refusee | [Simplifié] Soumettre un statut REFUSÉE (210) |
-| [**ValidateCdarApiV1CdarValidatePost**](CDARCycleDeVieApi.md#validatecdarapiv1cdarvalidatepost) | **POST** /api/v1/cdar/validate | Valider des données CDAR |
+| [**GenerateCdarApiV1CdarGeneratePost**](Flux6InvoiceLifecycleCDARApi.md#generatecdarapiv1cdargeneratepost) | **POST** /api/v1/cdar/generate | Generate a CDAR message |
+| [**GetActionCodesApiV1CdarActionCodesGet**](Flux6InvoiceLifecycleCDARApi.md#getactioncodesapiv1cdaractioncodesget) | **GET** /api/v1/cdar/action-codes | List of CDAR action codes |
+| [**GetReasonCodesApiV1CdarReasonCodesGet**](Flux6InvoiceLifecycleCDARApi.md#getreasoncodesapiv1cdarreasoncodesget) | **GET** /api/v1/cdar/reason-codes | List of CDAR reason codes |
+| [**GetStatusCodesApiV1CdarStatusCodesGet**](Flux6InvoiceLifecycleCDARApi.md#getstatuscodesapiv1cdarstatuscodesget) | **GET** /api/v1/cdar/status-codes | List of CDAR status codes |
+| [**SubmitCdarApiV1CdarSubmitPost**](Flux6InvoiceLifecycleCDARApi.md#submitcdarapiv1cdarsubmitpost) | **POST** /api/v1/cdar/submit | Generate and submit a CDAR message |
+| [**SubmitCdarXmlApiV1CdarSubmitXmlPost**](Flux6InvoiceLifecycleCDARApi.md#submitcdarxmlapiv1cdarsubmitxmlpost) | **POST** /api/v1/cdar/submit-xml | Submit a pre-generated CDAR XML |
+| [**SubmitEncaisseeApiV1CdarEncaisseePost**](Flux6InvoiceLifecycleCDARApi.md#submitencaisseeapiv1cdarencaisseepost) | **POST** /api/v1/cdar/encaissee | [Simplified] Submit PAID status (212) - Issued invoice |
+| [**SubmitRefuseeApiV1CdarRefuseePost**](Flux6InvoiceLifecycleCDARApi.md#submitrefuseeapiv1cdarrefuseepost) | **POST** /api/v1/cdar/refusee | [Simplified] Submit REFUSED status (210) - Received invoice |
+| [**ValidateCdarApiV1CdarValidatePost**](Flux6InvoiceLifecycleCDARApi.md#validatecdarapiv1cdarvalidatepost) | **POST** /api/v1/cdar/validate | Validate CDAR structured data |
+| [**ValidateXmlCdarApiV1CdarValidateXmlPost**](Flux6InvoiceLifecycleCDARApi.md#validatexmlcdarapiv1cdarvalidatexmlpost) | **POST** /api/v1/cdar/validate-xml | Validate CDAR XML against XSD and Schematron BR-FR-CDV |
 
 <a id="generatecdarapiv1cdargeneratepost"></a>
 # **GenerateCdarApiV1CdarGeneratePost**
 > GenerateCDARResponse GenerateCdarApiV1CdarGeneratePost (CreateCDARRequest createCDARRequest)
 
-Générer un message CDAR
+Generate a CDAR message
 
-Génère un message XML CDAR (Cross Domain Acknowledgement and Response) pour communiquer le statut d'une facture.  **Types de messages:** - **23** (Traitement): Message de cycle de vie standard - **305** (Transmission): Message de transmission entre plateformes  **Règles métier:** - BR-FR-CDV-14: Le statut 212 (ENCAISSEE) requiert un montant encaissé - BR-FR-CDV-15: Les statuts 206/207/208/210/213/501 requièrent un code motif
+Generate a CDAR XML message (Cross Domain Acknowledgement and Response) to communicate the status of an invoice.  **Message types:** - **23** (Processing): Standard lifecycle message - **305** (Transmission): Inter-platform transmission message  **Business rules:** - BR-FR-CDV-14: Status 212 (PAID) requires a paid amount - BR-FR-CDV-15: Statuses 206/207/208/210/213/501 require a reason code
 
 
 ### Parameters
@@ -47,9 +48,9 @@ Génère un message XML CDAR (Cross Domain Acknowledgement and Response) pour co
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
-| **400** | Requête invalide |  -  |
-| **422** | Erreur de validation |  -  |
-| **500** | Erreur serveur |  -  |
+| **400** | Invalid request |  -  |
+| **422** | Validation error |  -  |
+| **500** | Server error |  -  |
 | **401** | Authentication required - Invalid or missing JWT token |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
@@ -58,9 +59,9 @@ Génère un message XML CDAR (Cross Domain Acknowledgement and Response) pour co
 # **GetActionCodesApiV1CdarActionCodesGet**
 > ActionCodesResponse GetActionCodesApiV1CdarActionCodesGet ()
 
-Liste des codes action CDAR
+List of CDAR action codes
 
-Retourne la liste complète des codes action (BR-FR-CDV-CL-10).  Ces codes indiquent l'action demandée sur la facture.
+Returns the complete list of action codes (BR-FR-CDV-CL-10).  These codes indicate the requested action on the invoice.
 
 
 ### Parameters
@@ -83,9 +84,9 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
-| **400** | Requête invalide |  -  |
-| **422** | Erreur de validation |  -  |
-| **500** | Erreur serveur |  -  |
+| **400** | Invalid request |  -  |
+| **422** | Validation error |  -  |
+| **500** | Server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
@@ -93,9 +94,9 @@ No authorization required
 # **GetReasonCodesApiV1CdarReasonCodesGet**
 > ReasonCodesResponse GetReasonCodesApiV1CdarReasonCodesGet ()
 
-Liste des codes motif CDAR
+List of CDAR reason codes
 
-Retourne la liste complète des codes motif de statut (BR-FR-CDV-CL-09).  Ces codes expliquent la raison d'un statut particulier.
+Returns the complete list of status reason codes (BR-FR-CDV-CL-09).  These codes explain the reason for a particular status.
 
 
 ### Parameters
@@ -118,9 +119,9 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
-| **400** | Requête invalide |  -  |
-| **422** | Erreur de validation |  -  |
-| **500** | Erreur serveur |  -  |
+| **400** | Invalid request |  -  |
+| **422** | Validation error |  -  |
+| **500** | Server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
@@ -128,9 +129,9 @@ No authorization required
 # **GetStatusCodesApiV1CdarStatusCodesGet**
 > StatusCodesResponse GetStatusCodesApiV1CdarStatusCodesGet ()
 
-Liste des codes statut CDAR
+List of CDAR status codes
 
-Retourne la liste complète des codes statut de facture (BR-FR-CDV-CL-06).  Ces codes indiquent l'état du cycle de vie d'une facture.
+Returns the complete list of invoice status codes (BR-FR-CDV-CL-06).  These codes indicate the lifecycle state of an invoice.
 
 
 ### Parameters
@@ -153,9 +154,9 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
-| **400** | Requête invalide |  -  |
-| **422** | Erreur de validation |  -  |
-| **500** | Erreur serveur |  -  |
+| **400** | Invalid request |  -  |
+| **422** | Validation error |  -  |
+| **500** | Server error |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
@@ -163,9 +164,9 @@ No authorization required
 # **SubmitCdarApiV1CdarSubmitPost**
 > SubmitCDARResponse SubmitCdarApiV1CdarSubmitPost (SubmitCDARRequest submitCDARRequest)
 
-Générer et soumettre un message CDAR
+Generate and submit a CDAR message
 
-Génère un message CDAR et le soumet à la plateforme PA/PDP.  **Stratégies d'authentification:** 1. **JWT avec client_uid** (recommandé): credentials PDP récupérés du backend 2. **Zero-storage**: Fournir pdpFlowServiceUrl, pdpClientId, pdpClientSecret dans la requête  **Types de flux (flowType):** - `CustomerInvoiceLC`: Cycle de vie côté client (acheteur) - `SupplierInvoiceLC`: Cycle de vie côté fournisseur (vendeur)
+Generate a CDAR message and submit it to the PA/PDP platform.  **Authentication strategies:** 1. **JWT with client_uid** (recommended): PDP credentials retrieved from backend 2. **Zero-storage**: Provide pdpFlowServiceUrl, pdpClientId, pdpClientSecret in the request  **Flow types (flowType):** - `CustomerInvoiceLC`: Client-side lifecycle (buyer) - `SupplierInvoiceLC`: Supplier-side lifecycle (seller)
 
 
 ### Parameters
@@ -192,9 +193,9 @@ Génère un message CDAR et le soumet à la plateforme PA/PDP.  **Stratégies d'
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
-| **400** | Requête invalide |  -  |
-| **422** | Erreur de validation |  -  |
-| **500** | Erreur serveur |  -  |
+| **400** | Invalid request |  -  |
+| **422** | Validation error |  -  |
+| **500** | Server error |  -  |
 | **401** | Authentication required - Invalid or missing JWT token |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
@@ -203,9 +204,9 @@ Génère un message CDAR et le soumet à la plateforme PA/PDP.  **Stratégies d'
 # **SubmitCdarXmlApiV1CdarSubmitXmlPost**
 > SubmitCDARResponse SubmitCdarXmlApiV1CdarSubmitXmlPost (SubmitCDARXMLRequest submitCDARXMLRequest)
 
-Soumettre un XML CDAR pré-généré
+Submit a pre-generated CDAR XML
 
-Soumet un message XML CDAR pré-généré à la plateforme PA/PDP.  Utile pour soumettre des XML générés par d'autres systèmes.  **Stratégies d'authentification:** 1. **JWT avec client_uid** (recommandé): credentials PDP récupérés du backend 2. **Zero-storage**: Fournir pdpFlowServiceUrl, pdpClientId, pdpClientSecret dans la requête
+Submit a pre-generated CDAR XML message to the PA/PDP platform.  Useful for submitting XML generated by other systems.  **Validation:** The XML is validated against XSD and Schematron BR-FR-CDV rules BEFORE submission. Invalid XML will be rejected with detailed error messages.  **Authentication strategies:** 1. **JWT with client_uid** (recommended): PDP credentials retrieved from backend 2. **Zero-storage**: Provide pdpFlowServiceUrl, pdpClientId, pdpClientSecret in the request
 
 
 ### Parameters
@@ -232,9 +233,9 @@ Soumet un message XML CDAR pré-généré à la plateforme PA/PDP.  Utile pour s
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
-| **400** | Requête invalide |  -  |
-| **422** | Erreur de validation |  -  |
-| **500** | Erreur serveur |  -  |
+| **400** | Invalid request |  -  |
+| **422** | Validation error |  -  |
+| **500** | Server error |  -  |
 | **401** | Authentication required - Invalid or missing JWT token |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
@@ -243,9 +244,9 @@ Soumet un message XML CDAR pré-généré à la plateforme PA/PDP.  Utile pour s
 # **SubmitEncaisseeApiV1CdarEncaisseePost**
 > SimplifiedCDARResponse SubmitEncaisseeApiV1CdarEncaisseePost (EncaisseeRequest encaisseeRequest)
 
-[Simplifié] Soumettre un statut ENCAISSÉE (212)
+[Simplified] Submit PAID status (212) - Issued invoice
 
-**Endpoint simplifié pour OD** - Soumet un statut ENCAISSÉE (212) pour une facture.  Ce statut est **obligatoire pour le PPF** (BR-FR-CDV-14 requiert le montant encaissé).  **Cas d'usage:** L'acheteur confirme le paiement d'une facture.  **Authentification:** JWT Bearer (recommandé) ou credentials PDP dans la requête.
+**Simplified endpoint for OD** - Submit a PAID status (212) for an **ISSUED** invoice.  This status is **mandatory for PPF** (BR-FR-CDV-14 requires the paid amount).  **Use case:** The **seller** confirms payment receipt for an invoice they issued.  **Who issues this status?** - **Issuer (IssuerTradeParty):** The seller (SE = Seller) who received payment - **Recipient (RecipientTradeParty):** The buyer (BY = Buyer) who paid  **Reference:** XP Z12-014 Annex B, example UC1_F202500003_07-CDV-212_Encaissee.xml  **Authentication:** JWT Bearer (recommended) or PDP credentials in request.
 
 
 ### Parameters
@@ -272,9 +273,9 @@ Soumet un message XML CDAR pré-généré à la plateforme PA/PDP.  Utile pour s
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
-| **400** | Requête invalide |  -  |
-| **422** | Erreur de validation |  -  |
-| **500** | Erreur serveur |  -  |
+| **400** | Invalid request |  -  |
+| **422** | Validation error |  -  |
+| **500** | Server error |  -  |
 | **401** | Authentication required - Invalid or missing JWT token |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
@@ -283,9 +284,9 @@ Soumet un message XML CDAR pré-généré à la plateforme PA/PDP.  Utile pour s
 # **SubmitRefuseeApiV1CdarRefuseePost**
 > SimplifiedCDARResponse SubmitRefuseeApiV1CdarRefuseePost (RefuseeRequest refuseeRequest)
 
-[Simplifié] Soumettre un statut REFUSÉE (210)
+[Simplified] Submit REFUSED status (210) - Received invoice
 
-**Endpoint simplifié pour OD** - Soumet un statut REFUSÉE (210) pour une facture.  Ce statut est **obligatoire pour le PPF** (BR-FR-CDV-15 requiert un code motif).  **Cas d'usage:** L'acheteur refuse une facture reçue.  **Codes motif autorisés (BR-FR-CDV-CL-09):** - `TX_TVA_ERR`: Taux de TVA erroné - `MONTANTTOTAL_ERR`: Montant total erroné - `CALCUL_ERR`: Erreur de calcul - `NON_CONFORME`: Non conforme - `DOUBLON`: Doublon - `DEST_ERR`: Destinataire erroné - `TRANSAC_INC`: Transaction incomplète - `EMMET_INC`: Émetteur inconnu - `CONTRAT_TERM`: Contrat terminé - `DOUBLE_FACT`: Double facturation - `CMD_ERR`: Commande erronée - `ADR_ERR`: Adresse erronée - `REF_CT_ABSENT`: Référence contrat absente  **Authentification:** JWT Bearer (recommandé) ou credentials PDP dans la requête.
+**Simplified endpoint for OD** - Submit a REFUSED status (210) for a **RECEIVED** invoice.  This status is **mandatory for PPF** (BR-FR-CDV-15 requires a reason code).  **Use case:** The **buyer** refuses an invoice they received.  **Who issues this status?** - **Issuer (IssuerTradeParty):** The buyer (BY = Buyer) refusing the invoice - **Recipient (RecipientTradeParty):** The seller (SE = Seller) who issued the invoice  **Reference:** XP Z12-014 Annex B, example UC3_F202500005_04-CDV-210_Refusee.xml  **Allowed reason codes (BR-FR-CDV-CL-09):** - `TX_TVA_ERR`: Incorrect VAT rate - `MONTANTTOTAL_ERR`: Incorrect total amount - `CALCUL_ERR`: Calculation error - `NON_CONFORME`: Non-compliant - `DOUBLON`: Duplicate - `DEST_ERR`: Wrong recipient - `TRANSAC_INC`: Incomplete transaction - `EMMET_INC`: Unknown issuer - `CONTRAT_TERM`: Contract terminated - `DOUBLE_FACT`: Double billing - `CMD_ERR`: Order error - `ADR_ERR`: Address error - `REF_CT_ABSENT`: Missing contract reference  **Authentication:** JWT Bearer (recommended) or PDP credentials in request.
 
 
 ### Parameters
@@ -312,9 +313,9 @@ Soumet un message XML CDAR pré-généré à la plateforme PA/PDP.  Utile pour s
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
-| **400** | Requête invalide |  -  |
-| **422** | Erreur de validation |  -  |
-| **500** | Erreur serveur |  -  |
+| **400** | Invalid request |  -  |
+| **422** | Validation error |  -  |
+| **500** | Server error |  -  |
 | **401** | Authentication required - Invalid or missing JWT token |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
@@ -323,9 +324,9 @@ Soumet un message XML CDAR pré-généré à la plateforme PA/PDP.  Utile pour s
 # **ValidateCdarApiV1CdarValidatePost**
 > ValidateCDARResponse ValidateCdarApiV1CdarValidatePost (ValidateCDARRequest validateCDARRequest)
 
-Valider des données CDAR
+Validate CDAR structured data
 
-Valide les données CDAR sans générer le XML.  Vérifie: - Les formats des champs (SIREN, dates, etc.) - Les codes enums (statut, motif, action) - Les règles métier BR-FR-CDV-*
+Validate CDAR structured data without generating XML.  **Note:** This endpoint validates structured data fields only. Use `/validate-xml` to validate a pre-generated CDAR XML file against XSD and Schematron.  Checks: - Field formats (SIREN, dates, etc.) - Enum codes (status, reason, action) - Business rules BR-FR-CDV-*
 
 
 ### Parameters
@@ -352,9 +353,49 @@ Valide les données CDAR sans générer le XML.  Vérifie: - Les formats des cha
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
-| **400** | Requête invalide |  -  |
-| **422** | Erreur de validation |  -  |
-| **500** | Erreur serveur |  -  |
+| **400** | Invalid request |  -  |
+| **422** | Validation error |  -  |
+| **500** | Server error |  -  |
+| **401** | Authentication required - Invalid or missing JWT token |  -  |
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a id="validatexmlcdarapiv1cdarvalidatexmlpost"></a>
+# **ValidateXmlCdarApiV1CdarValidateXmlPost**
+> Dictionary&lt;string, Object&gt; ValidateXmlCdarApiV1CdarValidateXmlPost (System.IO.Stream xmlFile)
+
+Validate CDAR XML against XSD and Schematron BR-FR-CDV
+
+Validates a CDAR XML file against:  1. **XSD schema**: UN/CEFACT D22B CrossDomainAcknowledgementAndResponse 2. **Schematron BR-FR-CDV**: French business rules for invoice lifecycle  Returns validation status and detailed error messages if invalid.  **Note:** Use `/validate` to validate structured data fields (JSON).
+
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **xmlFile** | **System.IO.Stream****System.IO.Stream** | CDAR XML file to validate |  |
+
+### Return type
+
+**Dictionary<string, Object>**
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **400** | Invalid request |  -  |
+| **422** | Validation error |  -  |
+| **500** | Server error |  -  |
 | **401** | Authentication required - Invalid or missing JWT token |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)

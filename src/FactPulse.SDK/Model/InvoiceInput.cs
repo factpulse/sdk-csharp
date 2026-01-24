@@ -2,7 +2,7 @@
 /*
  * FactPulse REST API
  *
- *  REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X Invoice Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Validation and Compliance - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata, electronic signatures - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules) - **Asynchronous Processing**: Celery support for heavy validations (VeraPDF)  ### 📡 AFNOR PDP/PA Integration (XP Z12-013) - **Flow Submission**: Send invoices to Partner Dematerialization Platforms - **Flow Search**: View submitted invoices - **Download**: Retrieve PDF/A-3 with XML - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user (stored credentials or zero-storage)  ### ✍️ PDF Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification - **Certificate Generation**: Self-signed X.509 certificates for testing  ### 🔄 Asynchronous Processing - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **No timeout**: Ideal for large files or heavy validations  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://factpulse.fr/api/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://factpulse.fr/documentation-api/     
+ *  REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X - Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Factur-X - Validation - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules)  ### ✍️ Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification  ### 📋 Flux 6 - Invoice Lifecycle (CDAR) - **CDAR Messages**: Acknowledgements, invoice statuses - **PPF Statuses**: REFUSED (210), PAID (212)  ### 📊 Flux 10 - E-Reporting - **Tax Declarations**: International B2B, B2C - **Flow Types**: 10.1 (B2B transactions), 10.2 (B2B payments), 10.3 (B2C transactions), 10.4 (B2C payments)  ### 📡 AFNOR PDP/PA (XP Z12-013) - **Flow Service**: Submit and search flows to PDPs - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user  ### 🏛️ Chorus Pro - **Public Sector Invoicing**: Complete API for Chorus Pro  ### ⏳ Async Tasks - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **Webhooks**: Automatic notifications when tasks complete  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://factpulse.fr/api/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://factpulse.fr/documentation-api/     
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: contact@factpulse.fr
@@ -27,7 +27,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Invoice for B2B international reporting (flux 10.1).  Used for unitary declaration of international B2B invoices.
+    /// Invoice for B2B international reporting (flux 10.1).  Used for unitary declaration of international B2B invoices. Supports three scenarios: - B2Bi: French seller → Foreign buyer (issuer role &#x3D; SE) - Bi2B: Foreign seller → French buyer (issuer role &#x3D; BY) - Bi2Bi: Foreign seller → Foreign buyer (issuer role &#x3D; SE or BY)  Source: Annexe 6 v1.9, bloc TG-8 \&quot;Invoice\&quot;
     /// </summary>
     public partial class InvoiceInput : IValidatableObject
     {
@@ -36,7 +36,6 @@ namespace FactPulse.SDK.Model
         /// </summary>
         /// <param name="invoiceId">Invoice identifier</param>
         /// <param name="issueDate">Invoice issue date</param>
-        /// <param name="sellerSiren">Seller SIREN/SIRET</param>
         /// <param name="buyerCountry">buyerCountry</param>
         /// <param name="taxExclusiveAmount">taxExclusiveAmount</param>
         /// <param name="taxAmount">taxAmount</param>
@@ -44,6 +43,8 @@ namespace FactPulse.SDK.Model
         /// <param name="typeCode">Invoice type code</param>
         /// <param name="currency">currency</param>
         /// <param name="dueDate">dueDate</param>
+        /// <param name="sellerId">sellerId</param>
+        /// <param name="sellerSiren">sellerSiren</param>
         /// <param name="sellerVatId">sellerVatId</param>
         /// <param name="sellerCountry">sellerCountry</param>
         /// <param name="buyerId">buyerId</param>
@@ -51,11 +52,10 @@ namespace FactPulse.SDK.Model
         /// <param name="referencedInvoiceId">referencedInvoiceId</param>
         /// <param name="referencedInvoiceDate">referencedInvoiceDate</param>
         [JsonConstructor]
-        public InvoiceInput(string invoiceId, DateOnly issueDate, string sellerSiren, Buyercountry buyerCountry, Taxexclusiveamount1 taxExclusiveAmount, Taxamount1 taxAmount, List<TaxBreakdownInput> taxBreakdown, Option<FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode?> typeCode = default, Option<Currency?> currency = default, Option<DateOnly?> dueDate = default, Option<string?> sellerVatId = default, Option<Sellercountry?> sellerCountry = default, Option<string?> buyerId = default, Option<string?> buyerVatId = default, Option<string?> referencedInvoiceId = default, Option<DateOnly?> referencedInvoiceDate = default)
+        public InvoiceInput(string invoiceId, DateOnly issueDate, Buyercountry buyerCountry, Taxexclusiveamount1 taxExclusiveAmount, Taxamount1 taxAmount, List<TaxBreakdownInput> taxBreakdown, Option<FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode?> typeCode = default, Option<Currency?> currency = default, Option<DateOnly?> dueDate = default, Option<string?> sellerId = default, Option<string?> sellerSiren = default, Option<string?> sellerVatId = default, Option<Sellercountry?> sellerCountry = default, Option<string?> buyerId = default, Option<string?> buyerVatId = default, Option<string?> referencedInvoiceId = default, Option<DateOnly?> referencedInvoiceDate = default)
         {
             InvoiceId = invoiceId;
             IssueDate = issueDate;
-            SellerSiren = sellerSiren;
             BuyerCountry = buyerCountry;
             TaxExclusiveAmount = taxExclusiveAmount;
             TaxAmount = taxAmount;
@@ -63,6 +63,8 @@ namespace FactPulse.SDK.Model
             TypeCodeOption = typeCode;
             CurrencyOption = currency;
             DueDateOption = dueDate;
+            SellerIdOption = sellerId;
+            SellerSirenOption = sellerSiren;
             SellerVatIdOption = sellerVatId;
             SellerCountryOption = sellerCountry;
             BuyerIdOption = buyerId;
@@ -103,14 +105,6 @@ namespace FactPulse.SDK.Model
         /* <example>2025-01-15</example> */
         [JsonPropertyName("issueDate")]
         public DateOnly IssueDate { get; set; }
-
-        /// <summary>
-        /// Seller SIREN/SIRET
-        /// </summary>
-        /// <value>Seller SIREN/SIRET</value>
-        /* <example>123456789</example> */
-        [JsonPropertyName("sellerSiren")]
-        public string SellerSiren { get; set; }
 
         /// <summary>
         /// Gets or Sets BuyerCountry
@@ -162,6 +156,32 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonPropertyName("dueDate")]
         public DateOnly? DueDate { get { return this.DueDateOption; } set { this.DueDateOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of SellerId
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> SellerIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets SellerId
+        /// </summary>
+        [JsonPropertyName("sellerId")]
+        public string? SellerId { get { return this.SellerIdOption; } set { this.SellerIdOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of SellerSiren
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> SellerSirenOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets SellerSiren
+        /// </summary>
+        [JsonPropertyName("sellerSiren")]
+        public string? SellerSiren { get { return this.SellerSirenOption; } set { this.SellerSirenOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of SellerVatId
@@ -251,7 +271,6 @@ namespace FactPulse.SDK.Model
             sb.Append("class InvoiceInput {\n");
             sb.Append("  InvoiceId: ").Append(InvoiceId).Append("\n");
             sb.Append("  IssueDate: ").Append(IssueDate).Append("\n");
-            sb.Append("  SellerSiren: ").Append(SellerSiren).Append("\n");
             sb.Append("  BuyerCountry: ").Append(BuyerCountry).Append("\n");
             sb.Append("  TaxExclusiveAmount: ").Append(TaxExclusiveAmount).Append("\n");
             sb.Append("  TaxAmount: ").Append(TaxAmount).Append("\n");
@@ -259,6 +278,8 @@ namespace FactPulse.SDK.Model
             sb.Append("  TypeCode: ").Append(TypeCode).Append("\n");
             sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("  DueDate: ").Append(DueDate).Append("\n");
+            sb.Append("  SellerId: ").Append(SellerId).Append("\n");
+            sb.Append("  SellerSiren: ").Append(SellerSiren).Append("\n");
             sb.Append("  SellerVatId: ").Append(SellerVatId).Append("\n");
             sb.Append("  SellerCountry: ").Append(SellerCountry).Append("\n");
             sb.Append("  BuyerId: ").Append(BuyerId).Append("\n");
@@ -319,7 +340,6 @@ namespace FactPulse.SDK.Model
 
             Option<string?> invoiceId = default;
             Option<DateOnly?> issueDate = default;
-            Option<string?> sellerSiren = default;
             Option<Buyercountry?> buyerCountry = default;
             Option<Taxexclusiveamount1?> taxExclusiveAmount = default;
             Option<Taxamount1?> taxAmount = default;
@@ -327,6 +347,8 @@ namespace FactPulse.SDK.Model
             Option<FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode?> typeCode = default;
             Option<Currency?> currency = default;
             Option<DateOnly?> dueDate = default;
+            Option<string?> sellerId = default;
+            Option<string?> sellerSiren = default;
             Option<string?> sellerVatId = default;
             Option<Sellercountry?> sellerCountry = default;
             Option<string?> buyerId = default;
@@ -355,9 +377,6 @@ namespace FactPulse.SDK.Model
                         case "issueDate":
                             issueDate = new Option<DateOnly?>(JsonSerializer.Deserialize<DateOnly>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
-                        case "sellerSiren":
-                            sellerSiren = new Option<string?>(utf8JsonReader.GetString()!);
-                            break;
                         case "buyerCountry":
                             buyerCountry = new Option<Buyercountry?>(JsonSerializer.Deserialize<Buyercountry>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
@@ -380,6 +399,12 @@ namespace FactPulse.SDK.Model
                             break;
                         case "dueDate":
                             dueDate = new Option<DateOnly?>(JsonSerializer.Deserialize<DateOnly?>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "sellerId":
+                            sellerId = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "sellerSiren":
+                            sellerSiren = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "sellerVatId":
                             sellerVatId = new Option<string?>(utf8JsonReader.GetString());
@@ -411,9 +436,6 @@ namespace FactPulse.SDK.Model
             if (!issueDate.IsSet)
                 throw new ArgumentException("Property is required for class InvoiceInput.", nameof(issueDate));
 
-            if (!sellerSiren.IsSet)
-                throw new ArgumentException("Property is required for class InvoiceInput.", nameof(sellerSiren));
-
             if (!buyerCountry.IsSet)
                 throw new ArgumentException("Property is required for class InvoiceInput.", nameof(buyerCountry));
 
@@ -431,9 +453,6 @@ namespace FactPulse.SDK.Model
 
             if (issueDate.IsSet && issueDate.Value == null)
                 throw new ArgumentNullException(nameof(issueDate), "Property is not nullable for class InvoiceInput.");
-
-            if (sellerSiren.IsSet && sellerSiren.Value == null)
-                throw new ArgumentNullException(nameof(sellerSiren), "Property is not nullable for class InvoiceInput.");
 
             if (buyerCountry.IsSet && buyerCountry.Value == null)
                 throw new ArgumentNullException(nameof(buyerCountry), "Property is not nullable for class InvoiceInput.");
@@ -456,7 +475,7 @@ namespace FactPulse.SDK.Model
             if (sellerCountry.IsSet && sellerCountry.Value == null)
                 throw new ArgumentNullException(nameof(sellerCountry), "Property is not nullable for class InvoiceInput.");
 
-            return new InvoiceInput(invoiceId.Value!, issueDate.Value!.Value!, sellerSiren.Value!, buyerCountry.Value!, taxExclusiveAmount.Value!, taxAmount.Value!, taxBreakdown.Value!, typeCode, currency, dueDate, sellerVatId, sellerCountry, buyerId, buyerVatId, referencedInvoiceId, referencedInvoiceDate);
+            return new InvoiceInput(invoiceId.Value!, issueDate.Value!.Value!, buyerCountry.Value!, taxExclusiveAmount.Value!, taxAmount.Value!, taxBreakdown.Value!, typeCode, currency, dueDate, sellerId, sellerSiren, sellerVatId, sellerCountry, buyerId, buyerVatId, referencedInvoiceId, referencedInvoiceDate);
         }
 
         /// <summary>
@@ -486,9 +505,6 @@ namespace FactPulse.SDK.Model
             if (invoiceInput.InvoiceId == null)
                 throw new ArgumentNullException(nameof(invoiceInput.InvoiceId), "Property is required for class InvoiceInput.");
 
-            if (invoiceInput.SellerSiren == null)
-                throw new ArgumentNullException(nameof(invoiceInput.SellerSiren), "Property is required for class InvoiceInput.");
-
             if (invoiceInput.BuyerCountry == null)
                 throw new ArgumentNullException(nameof(invoiceInput.BuyerCountry), "Property is required for class InvoiceInput.");
 
@@ -510,8 +526,6 @@ namespace FactPulse.SDK.Model
             writer.WriteString("invoiceId", invoiceInput.InvoiceId);
 
             writer.WriteString("issueDate", invoiceInput.IssueDate.ToString(IssueDateFormat));
-
-            writer.WriteString("sellerSiren", invoiceInput.SellerSiren);
 
             writer.WritePropertyName("buyerCountry");
             JsonSerializer.Serialize(writer, invoiceInput.BuyerCountry, jsonSerializerOptions);
@@ -536,6 +550,18 @@ namespace FactPulse.SDK.Model
                     writer.WriteString("dueDate", invoiceInput.DueDateOption.Value!.Value.ToString(DueDateFormat));
                 else
                     writer.WriteNull("dueDate");
+
+            if (invoiceInput.SellerIdOption.IsSet)
+                if (invoiceInput.SellerIdOption.Value != null)
+                    writer.WriteString("sellerId", invoiceInput.SellerId);
+                else
+                    writer.WriteNull("sellerId");
+
+            if (invoiceInput.SellerSirenOption.IsSet)
+                if (invoiceInput.SellerSirenOption.Value != null)
+                    writer.WriteString("sellerSiren", invoiceInput.SellerSiren);
+                else
+                    writer.WriteNull("sellerSiren");
 
             if (invoiceInput.SellerVatIdOption.IsSet)
                 if (invoiceInput.SellerVatIdOption.Value != null)

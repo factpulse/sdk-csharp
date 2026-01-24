@@ -1,31 +1,31 @@
-# FactPulse.SDK.Api.DocumentConversionApi
+# FactPulse.SDK.Api.FacturXConversionApi
 
 All URIs are relative to *https://factpulse.fr*
 
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
-| [**ConvertDocumentAsyncApiV1ConvertAsyncPost**](DocumentConversionApi.md#convertdocumentasyncapiv1convertasyncpost) | **POST** /api/v1/convert/async | Convertir un document en Factur-X (mode asynchrone) |
-| [**DownloadFileApiV1ConvertConversionIdDownloadFilenameGet**](DocumentConversionApi.md#downloadfileapiv1convertconversioniddownloadfilenameget) | **GET** /api/v1/convert/{conversion_id}/download/{filename} | Télécharger un fichier généré |
-| [**GetConversionStatusApiV1ConvertConversionIdStatusGet**](DocumentConversionApi.md#getconversionstatusapiv1convertconversionidstatusget) | **GET** /api/v1/convert/{conversion_id}/status | Vérifier le statut d&#39;une conversion |
-| [**ResumeConversionApiV1ConvertConversionIdResumePost**](DocumentConversionApi.md#resumeconversionapiv1convertconversionidresumepost) | **POST** /api/v1/convert/{conversion_id}/resume | Reprendre une conversion avec corrections |
+| [**ConvertDocumentAsyncApiV1ConvertAsyncPost**](FacturXConversionApi.md#convertdocumentasyncapiv1convertasyncpost) | **POST** /api/v1/convert/async | Convert a document to Factur-X (async mode) |
+| [**DownloadFileApiV1ConvertConversionIdDownloadFilenameGet**](FacturXConversionApi.md#downloadfileapiv1convertconversioniddownloadfilenameget) | **GET** /api/v1/convert/{conversion_id}/download/{filename} | Download a generated file |
+| [**GetConversionStatusApiV1ConvertConversionIdStatusGet**](FacturXConversionApi.md#getconversionstatusapiv1convertconversionidstatusget) | **GET** /api/v1/convert/{conversion_id}/status | Check conversion status |
+| [**ResumeConversionApiV1ConvertConversionIdResumePost**](FacturXConversionApi.md#resumeconversionapiv1convertconversionidresumepost) | **POST** /api/v1/convert/{conversion_id}/resume | Resume a conversion with corrections |
 
 <a id="convertdocumentasyncapiv1convertasyncpost"></a>
 # **ConvertDocumentAsyncApiV1ConvertAsyncPost**
 > Object ConvertDocumentAsyncApiV1ConvertAsyncPost (System.IO.Stream file, string output = null, string callbackUrl = null, string webhookMode = null)
 
-Convertir un document en Factur-X (mode asynchrone)
+Convert a document to Factur-X (async mode)
 
-Lance une conversion asynchrone via Celery.  ## Workflow  1. **Upload** : Le document est envoyé en multipart/form-data 2. **Task Celery** : La tâche est mise en file d'attente 3. **Callback** : Notification par webhook à la fin  ## Réponses possibles  - **202** : Tâche acceptée, en cours de traitement - **400** : Fichier invalide
+Launch an asynchronous conversion via Celery.  ## Workflow  1. **Upload**: Document is sent as multipart/form-data 2. **Celery Task**: Task is queued for processing 3. **Callback**: Webhook notification on completion  ## Possible responses  - **202**: Task accepted, processing - **400**: Invalid file
 
 
 ### Parameters
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **file** | **System.IO.Stream****System.IO.Stream** | Document à convertir (PDF, DOCX, XLSX, JPG, PNG) |  |
-| **output** | **string** | Format de sortie: pdf, xml, both | [optional] [default to &quot;pdf&quot;] |
+| **file** | **System.IO.Stream****System.IO.Stream** | Document to convert (PDF, DOCX, XLSX, JPG, PNG) |  |
+| **output** | **string** | Output format: pdf, xml, both | [optional] [default to &quot;pdf&quot;] |
 | **callbackUrl** | **string** |  | [optional]  |
-| **webhookMode** | **string** | Mode de livraison du contenu: &#39;inline&#39; (base64 dans webhook) ou &#39;download_url&#39; (URL temporaire 1h) | [optional] [default to &quot;inline&quot;] |
+| **webhookMode** | **string** | Content delivery mode: &#39;inline&#39; (base64 in webhook) or &#39;download_url&#39; (temporary URL, 1h TTL) | [optional] [default to &quot;inline&quot;] |
 
 ### Return type
 
@@ -45,8 +45,8 @@ Lance une conversion asynchrone via Celery.  ## Workflow  1. **Upload** : Le doc
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
-| **202** | Tâche acceptée |  -  |
-| **400** | Fichier invalide |  -  |
+| **202** | Task accepted |  -  |
+| **400** | Invalid file |  -  |
 | **422** | Validation Error |  -  |
 | **401** | Authentication required - Invalid or missing JWT token |  -  |
 
@@ -56,9 +56,9 @@ Lance une conversion asynchrone via Celery.  ## Workflow  1. **Upload** : Le doc
 # **DownloadFileApiV1ConvertConversionIdDownloadFilenameGet**
 > Object DownloadFileApiV1ConvertConversionIdDownloadFilenameGet (string conversionId, string filename)
 
-Télécharger un fichier généré
+Download a generated file
 
-Télécharge le fichier Factur-X PDF ou XML généré.  ## Fichiers disponibles  - `facturx.pdf` : PDF/A-3 avec XML embarqué - `facturx.xml` : XML CII seul (Cross Industry Invoice)  Les fichiers sont disponibles pendant 24 heures après génération.
+Download the generated Factur-X PDF or XML file.  ## Available files  - `facturx.pdf`: PDF/A-3 with embedded XML - `facturx.xml`: XML CII only (Cross Industry Invoice)  Files are available for 24 hours after generation.
 
 
 ### Parameters
@@ -85,8 +85,8 @@ Télécharge le fichier Factur-X PDF ou XML généré.  ## Fichiers disponibles 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | Fichier téléchargé |  -  |
-| **404** | Fichier non trouvé ou expiré |  -  |
+| **200** | File downloaded |  -  |
+| **404** | File not found or expired |  -  |
 | **422** | Validation Error |  -  |
 | **401** | Authentication required - Invalid or missing JWT token |  -  |
 
@@ -96,9 +96,9 @@ Télécharge le fichier Factur-X PDF ou XML généré.  ## Fichiers disponibles 
 # **GetConversionStatusApiV1ConvertConversionIdStatusGet**
 > Dictionary&lt;string, Object&gt; GetConversionStatusApiV1ConvertConversionIdStatusGet (string conversionId)
 
-Vérifier le statut d'une conversion
+Check conversion status
 
-Retourne le statut actuel d'une conversion asynchrone.
+Returns the current status of an asynchronous conversion.
 
 
 ### Parameters
@@ -134,9 +134,9 @@ Retourne le statut actuel d'une conversion asynchrone.
 # **ResumeConversionApiV1ConvertConversionIdResumePost**
 > ConvertSuccessResponse ResumeConversionApiV1ConvertConversionIdResumePost (string conversionId, ConvertResumeRequest convertResumeRequest)
 
-Reprendre une conversion avec corrections
+Resume a conversion with corrections
 
-Reprend une conversion après complétion des données manquantes ou correction des erreurs.  L'extraction OCR est conservée, les données sont mises à jour avec les corrections, puis une nouvelle validation Schematron est effectuée.
+Resume a conversion after completing missing data or correcting errors.  The OCR extraction is preserved, data is updated with corrections, then a new Schematron validation is performed.
 
 
 ### Parameters
@@ -164,8 +164,8 @@ Reprend une conversion après complétion des données manquantes ou correction 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Successful Response |  -  |
-| **404** | Conversion non trouvée ou expirée |  -  |
-| **422** | Validation toujours en échec |  -  |
+| **404** | Conversion not found or expired |  -  |
+| **422** | Validation still failing |  -  |
 | **401** | Authentication required - Invalid or missing JWT token |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
