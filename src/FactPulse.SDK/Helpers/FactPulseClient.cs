@@ -62,6 +62,55 @@ namespace FactPulse.SDK
         public async Task<Dictionary<string, object>> GetAsync(string path)
             => await RequestAsync("GET", path, null, true);
 
+        /// <summary>POST multipart request to /api/v1/{path}</summary>
+        public async Task<Dictionary<string, object>> PostMultipartAsync(string path, Dictionary<string, string> formData, Dictionary<string, byte[]> files)
+        {
+            await EnsureAuthAsync();
+            var url = $"{_apiUrl}/api/v1/{path}";
+
+            using var content = new MultipartFormDataContent();
+
+            // Add form fields
+            if (formData != null)
+            {
+                foreach (var kvp in formData)
+                    content.Add(new StringContent(kvp.Value), kvp.Key);
+            }
+
+            // Add files
+            if (files != null)
+            {
+                foreach (var kvp in files)
+                {
+                    var fileContent = new ByteArrayContent(kvp.Value);
+                    fileContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/octet-stream");
+                    content.Add(fileContent, kvp.Key, kvp.Key);
+                }
+            }
+
+            var request = new HttpRequestMessage(HttpMethod.Post, url);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _token);
+            request.Content = content;
+
+            var response = await _httpClient.SendAsync(request);
+
+            if ((int)response.StatusCode == 401)
+            {
+                InvalidateToken();
+                return await PostMultipartAsync(path, formData, files);
+            }
+
+            // Check if response is binary (PDF)
+            var contentType = response.Content.Headers.ContentType?.MediaType ?? "";
+            if (contentType.Contains("application/pdf") || contentType.Contains("application/octet-stream"))
+            {
+                var bytes = await response.Content.ReadAsByteArrayAsync();
+                return new Dictionary<string, object> { { "content", bytes } };
+            }
+
+            return await ParseResponseAsync(response);
+        }
+
         private async Task<Dictionary<string, object>> RequestAsync(string method, string path, object data, bool retryAuth)
         {
             await EnsureAuthAsync();

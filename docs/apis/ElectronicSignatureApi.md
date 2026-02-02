@@ -30,7 +30,7 @@ Generates a self-signed X.509 certificate for PDF electronic signature testing. 
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -76,7 +76,7 @@ Signs an uploaded PDF with the electronic certificate configured for the client 
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -125,7 +125,7 @@ Signs an uploaded PDF asynchronously via a Celery task.      **Difference with /
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -165,7 +165,7 @@ Validates electronic signatures present in an uploaded PDF.      **Verifications
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 

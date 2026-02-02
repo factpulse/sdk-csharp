@@ -18,7 +18,7 @@ dotnet add package FactPulse.SDK
 
 Or via NuGet Package Manager:
 
-```
+```powershell
 Install-Package FactPulse.SDK
 ```
 
@@ -48,12 +48,14 @@ var result = await client.PostAsync("processing/invoices/submit-complete-async",
         ["number"] = "INV-2025-001",
         ["supplier"] = new Dictionary<string, object>
         {
+            ["name"] = "ACME Corporation",
             ["siret"] = "12345678901234",
             ["iban"] = "FR7630001007941234567890185",
             ["routing_address"] = "12345678901234"
         },
         ["recipient"] = new Dictionary<string, object>
         {
+            ["name"] = "Client Company SA",
             ["siret"] = "98765432109876",
             ["routing_address"] = "98765432109876"
         },
@@ -229,6 +231,16 @@ catch (FactPulseException e)
     Console.WriteLine($"Details: {string.Join(", ", e.Details)}");
 }
 ```
+
+## Available Helpers
+
+The SDK provides the following helper classes:
+
+- `FactPulseClient`: Main HTTP client with auto-auth and polling
+- `FactPulseException`: Base exception class
+- `FactPulseAuthException`: Authentication failure
+- `FactPulseValidationException`: Validation errors with details
+- `FactPulsePollingTimeoutException`: Task polling timeout
 
 ## Resources
 

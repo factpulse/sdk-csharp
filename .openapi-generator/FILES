@@ -172,9 +172,9 @@ docs/models/ErrorSource.md
 docs/models/ExtractionInfo.md
 docs/models/FacturXInvoice.md
 docs/models/FacturXPDFInfo.md
-docs/models/FactureElectroniqueRestApiSchemasCdarValidationErrorResponse.md
-docs/models/FactureElectroniqueRestApiSchemasChorusProChorusProCredentials.md
 docs/models/FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode.md
+docs/models/FactureElectroniqueRestApiSchemasProcessingChorusProCredentials.md
+docs/models/FactureElectroniqueRestApiSchemasValidationValidationErrorResponse.md
 docs/models/FieldStatus.md
 docs/models/FileInfo.md
 docs/models/FilesInfo.md
@@ -214,6 +214,8 @@ docs/models/InvoiceTypeCodeOutput.md
 docs/models/InvoicingFramework.md
 docs/models/InvoicingFrameworkCode.md
 docs/models/IssuerRoleCode.md
+docs/models/KeyRotationRequest.md
+docs/models/KeyRotationResponse.md
 docs/models/LineNetAmount.md
 docs/models/LineSubType.md
 docs/models/LineTotalAmount.md
@@ -325,6 +327,9 @@ docs/models/ValidationSuccessResponse.md
 docs/models/VatRate.md
 docs/models/VerificationSuccessResponse.md
 docs/models/VerifiedFieldSchema.md
+docs/models/WebhookSecretDeleteResponse.md
+docs/models/WebhookSecretGenerateResponse.md
+docs/models/WebhookSecretStatusResponse.md
 docs/scripts/git_push.ps1
 docs/scripts/git_push.sh
 src/FactPulse.SDK.Test/Api/AFNORPDPPAApiTests.cs
@@ -498,9 +503,9 @@ src/FactPulse.SDK.Test/Model/ErrorSourceTests.cs
 src/FactPulse.SDK.Test/Model/ExtractionInfoTests.cs
 src/FactPulse.SDK.Test/Model/FacturXInvoiceTests.cs
 src/FactPulse.SDK.Test/Model/FacturXPDFInfoTests.cs
-src/FactPulse.SDK.Test/Model/FactureElectroniqueRestApiSchemasCdarValidationErrorResponseTests.cs
-src/FactPulse.SDK.Test/Model/FactureElectroniqueRestApiSchemasChorusProChorusProCredentialsTests.cs
 src/FactPulse.SDK.Test/Model/FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeTests.cs
+src/FactPulse.SDK.Test/Model/FactureElectroniqueRestApiSchemasProcessingChorusProCredentialsTests.cs
+src/FactPulse.SDK.Test/Model/FactureElectroniqueRestApiSchemasValidationValidationErrorResponseTests.cs
 src/FactPulse.SDK.Test/Model/FieldStatusTests.cs
 src/FactPulse.SDK.Test/Model/FileInfoTests.cs
 src/FactPulse.SDK.Test/Model/FilesInfoTests.cs
@@ -540,6 +545,8 @@ src/FactPulse.SDK.Test/Model/InvoiceTypeCodeTests.cs
 src/FactPulse.SDK.Test/Model/InvoicingFrameworkCodeTests.cs
 src/FactPulse.SDK.Test/Model/InvoicingFrameworkTests.cs
 src/FactPulse.SDK.Test/Model/IssuerRoleCodeTests.cs
+src/FactPulse.SDK.Test/Model/KeyRotationRequestTests.cs
+src/FactPulse.SDK.Test/Model/KeyRotationResponseTests.cs
 src/FactPulse.SDK.Test/Model/LineNetAmountTests.cs
 src/FactPulse.SDK.Test/Model/LineSubTypeTests.cs
 src/FactPulse.SDK.Test/Model/LineTotalAmountTests.cs
@@ -651,6 +658,9 @@ src/FactPulse.SDK.Test/Model/ValidationSuccessResponseTests.cs
 src/FactPulse.SDK.Test/Model/VatRateTests.cs
 src/FactPulse.SDK.Test/Model/VerificationSuccessResponseTests.cs
 src/FactPulse.SDK.Test/Model/VerifiedFieldSchemaTests.cs
+src/FactPulse.SDK.Test/Model/WebhookSecretDeleteResponseTests.cs
+src/FactPulse.SDK.Test/Model/WebhookSecretGenerateResponseTests.cs
+src/FactPulse.SDK.Test/Model/WebhookSecretStatusResponseTests.cs
 src/FactPulse.SDK.Test/README.md
 src/FactPulse.SDK/Api/AFNORPDPPAApi.cs
 src/FactPulse.SDK/Api/AFNORPDPPADirectoryServiceApi.cs
@@ -670,6 +680,7 @@ src/FactPulse.SDK/Api/HealthApi.cs
 src/FactPulse.SDK/Api/IApi.cs
 src/FactPulse.SDK/Client/ApiException.cs
 src/FactPulse.SDK/Client/ApiFactory.cs
+src/FactPulse.SDK/Client/ApiKeyToken.cs
 src/FactPulse.SDK/Client/ApiResponseEventArgs.cs
 src/FactPulse.SDK/Client/ApiResponse`1.cs
 src/FactPulse.SDK/Client/BearerToken.cs
@@ -844,9 +855,9 @@ src/FactPulse.SDK/Model/ErrorSource.cs
 src/FactPulse.SDK/Model/ExtractionInfo.cs
 src/FactPulse.SDK/Model/FacturXInvoice.cs
 src/FactPulse.SDK/Model/FacturXPDFInfo.cs
-src/FactPulse.SDK/Model/FactureElectroniqueRestApiSchemasCdarValidationErrorResponse.cs
-src/FactPulse.SDK/Model/FactureElectroniqueRestApiSchemasChorusProChorusProCredentials.cs
 src/FactPulse.SDK/Model/FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode.cs
+src/FactPulse.SDK/Model/FactureElectroniqueRestApiSchemasProcessingChorusProCredentials.cs
+src/FactPulse.SDK/Model/FactureElectroniqueRestApiSchemasValidationValidationErrorResponse.cs
 src/FactPulse.SDK/Model/FieldStatus.cs
 src/FactPulse.SDK/Model/FileInfo.cs
 src/FactPulse.SDK/Model/FilesInfo.cs
@@ -886,6 +897,8 @@ src/FactPulse.SDK/Model/InvoiceTypeCodeOutput.cs
 src/FactPulse.SDK/Model/InvoicingFramework.cs
 src/FactPulse.SDK/Model/InvoicingFrameworkCode.cs
 src/FactPulse.SDK/Model/IssuerRoleCode.cs
+src/FactPulse.SDK/Model/KeyRotationRequest.cs
+src/FactPulse.SDK/Model/KeyRotationResponse.cs
 src/FactPulse.SDK/Model/LineNetAmount.cs
 src/FactPulse.SDK/Model/LineSubType.cs
 src/FactPulse.SDK/Model/LineTotalAmount.cs
@@ -997,4 +1010,7 @@ src/FactPulse.SDK/Model/ValidationSuccessResponse.cs
 src/FactPulse.SDK/Model/VatRate.cs
 src/FactPulse.SDK/Model/VerificationSuccessResponse.cs
 src/FactPulse.SDK/Model/VerifiedFieldSchema.cs
+src/FactPulse.SDK/Model/WebhookSecretDeleteResponse.cs
+src/FactPulse.SDK/Model/WebhookSecretGenerateResponse.cs
+src/FactPulse.SDK/Model/WebhookSecretStatusResponse.cs
 src/FactPulse.SDK/README.md

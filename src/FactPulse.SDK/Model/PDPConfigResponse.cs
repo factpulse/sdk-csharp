@@ -41,6 +41,7 @@ namespace FactPulse.SDK.Model
         /// <param name="flowServiceUrl">flowServiceUrl</param>
         /// <param name="tokenUrl">tokenUrl</param>
         /// <param name="oauthClientId">oauthClientId</param>
+        /// <param name="encryptionMode">encryptionMode</param>
         /// <param name="secretStatus">secretStatus</param>
         /// <param name="lastTestAt">lastTestAt</param>
         /// <param name="lastTestSuccess">lastTestSuccess</param>
@@ -49,7 +50,7 @@ namespace FactPulse.SDK.Model
         /// <param name="updatedAt">updatedAt</param>
         /// <param name="message">message</param>
         [JsonConstructor]
-        public PDPConfigResponse(bool isConfigured, Option<int?> id = default, Option<bool?> isActive = default, Option<bool?> modeSandbox = default, Option<string?> flowServiceUrl = default, Option<string?> tokenUrl = default, Option<string?> oauthClientId = default, Option<SecretStatus?> secretStatus = default, Option<DateTime?> lastTestAt = default, Option<bool?> lastTestSuccess = default, Option<string?> lastTestError = default, Option<DateTime?> createdAt = default, Option<DateTime?> updatedAt = default, Option<string?> message = default)
+        public PDPConfigResponse(bool isConfigured, Option<int?> id = default, Option<bool?> isActive = default, Option<bool?> modeSandbox = default, Option<string?> flowServiceUrl = default, Option<string?> tokenUrl = default, Option<string?> oauthClientId = default, Option<string?> encryptionMode = default, Option<SecretStatus?> secretStatus = default, Option<DateTime?> lastTestAt = default, Option<bool?> lastTestSuccess = default, Option<string?> lastTestError = default, Option<DateTime?> createdAt = default, Option<DateTime?> updatedAt = default, Option<string?> message = default)
         {
             IsConfigured = isConfigured;
             IdOption = id;
@@ -58,6 +59,7 @@ namespace FactPulse.SDK.Model
             FlowServiceUrlOption = flowServiceUrl;
             TokenUrlOption = tokenUrl;
             OauthClientIdOption = oauthClientId;
+            EncryptionModeOption = encryptionMode;
             SecretStatusOption = secretStatus;
             LastTestAtOption = lastTestAt;
             LastTestSuccessOption = lastTestSuccess;
@@ -154,6 +156,19 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonPropertyName("oauthClientId")]
         public string? OauthClientId { get { return this.OauthClientIdOption; } set { this.OauthClientIdOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of EncryptionMode
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> EncryptionModeOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets EncryptionMode
+        /// </summary>
+        [JsonPropertyName("encryptionMode")]
+        public string? EncryptionMode { get { return this.EncryptionModeOption; } set { this.EncryptionModeOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of SecretStatus
@@ -261,6 +276,7 @@ namespace FactPulse.SDK.Model
             sb.Append("  FlowServiceUrl: ").Append(FlowServiceUrl).Append("\n");
             sb.Append("  TokenUrl: ").Append(TokenUrl).Append("\n");
             sb.Append("  OauthClientId: ").Append(OauthClientId).Append("\n");
+            sb.Append("  EncryptionMode: ").Append(EncryptionMode).Append("\n");
             sb.Append("  SecretStatus: ").Append(SecretStatus).Append("\n");
             sb.Append("  LastTestAt: ").Append(LastTestAt).Append("\n");
             sb.Append("  LastTestSuccess: ").Append(LastTestSuccess).Append("\n");
@@ -327,6 +343,7 @@ namespace FactPulse.SDK.Model
             Option<string?> flowServiceUrl = default;
             Option<string?> tokenUrl = default;
             Option<string?> oauthClientId = default;
+            Option<string?> encryptionMode = default;
             Option<SecretStatus?> secretStatus = default;
             Option<DateTime?> lastTestAt = default;
             Option<bool?> lastTestSuccess = default;
@@ -371,6 +388,9 @@ namespace FactPulse.SDK.Model
                         case "oauthClientId":
                             oauthClientId = new Option<string?>(utf8JsonReader.GetString());
                             break;
+                        case "encryptionMode":
+                            encryptionMode = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         case "secretStatus":
                             secretStatus = new Option<SecretStatus?>(JsonSerializer.Deserialize<SecretStatus>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
@@ -404,7 +424,7 @@ namespace FactPulse.SDK.Model
             if (isConfigured.IsSet && isConfigured.Value == null)
                 throw new ArgumentNullException(nameof(isConfigured), "Property is not nullable for class PDPConfigResponse.");
 
-            return new PDPConfigResponse(isConfigured.Value!.Value!, id, isActive, modeSandbox, flowServiceUrl, tokenUrl, oauthClientId, secretStatus, lastTestAt, lastTestSuccess, lastTestError, createdAt, updatedAt, message);
+            return new PDPConfigResponse(isConfigured.Value!.Value!, id, isActive, modeSandbox, flowServiceUrl, tokenUrl, oauthClientId, encryptionMode, secretStatus, lastTestAt, lastTestSuccess, lastTestError, createdAt, updatedAt, message);
         }
 
         /// <summary>
@@ -468,6 +488,12 @@ namespace FactPulse.SDK.Model
                     writer.WriteString("oauthClientId", pDPConfigResponse.OauthClientId);
                 else
                     writer.WriteNull("oauthClientId");
+
+            if (pDPConfigResponse.EncryptionModeOption.IsSet)
+                if (pDPConfigResponse.EncryptionModeOption.Value != null)
+                    writer.WriteString("encryptionMode", pDPConfigResponse.EncryptionMode);
+                else
+                    writer.WriteNull("encryptionMode");
 
             if (pDPConfigResponse.SecretStatusOption.IsSet)
                 if (pDPConfigResponse.SecretStatusOption.Value != null)

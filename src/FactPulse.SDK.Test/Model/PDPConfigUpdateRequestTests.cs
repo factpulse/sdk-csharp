@@ -107,5 +107,14 @@ namespace FactPulse.SDK.Test.Model
         {
             // TODO unit test for the property 'ModeSandbox'
         }
+
+        /// <summary>
+        /// Test the property 'EncryptionMode'
+        /// </summary>
+        [Fact]
+        public void EncryptionModeTest()
+        {
+            // TODO unit test for the property 'EncryptionMode'
+        }
     }
 }

@@ -53,6 +53,10 @@ namespace FactPulse.SDK.Test.Api
         public static IHostBuilder CreateHostBuilder(string[] args) => Host.CreateDefaultBuilder(args)
             .ConfigureApi((context, services, options) =>
             {
+                string apiKeyTokenValue1 = context.Configuration["<token>"] ?? throw new Exception("Token not found.");
+                ApiKeyToken apiKeyToken1 = new(apiKeyTokenValue1, ClientUtils.ApiKeyHeader.X_API_Key, timeout: TimeSpan.FromSeconds(1));
+                options.AddTokens(apiKeyToken1);
+
                 string bearerTokenValue1 = context.Configuration["<token>"] ?? throw new Exception("Token not found.");
                 BearerToken bearerToken1 = new(bearerTokenValue1, timeout: TimeSpan.FromSeconds(1));
                 options.AddTokens(bearerToken1);

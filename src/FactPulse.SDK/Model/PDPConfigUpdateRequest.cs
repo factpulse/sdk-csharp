@@ -27,7 +27,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// PDP configuration update request.
+    /// PDP configuration update request.  For encryption_mode&#x3D;&#39;double&#39;, the X-Encryption-Key header must also be provided containing a base64-encoded AES-256 key (32 bytes).
     /// </summary>
     public partial class PDPConfigUpdateRequest : IValidatableObject
     {
@@ -40,8 +40,9 @@ namespace FactPulse.SDK.Model
         /// <param name="clientSecret">OAuth Client Secret (sent but never returned)</param>
         /// <param name="isActive">Whether config is active (default to true)</param>
         /// <param name="modeSandbox">Sandbox mode (default to false)</param>
+        /// <param name="encryptionMode">encryptionMode</param>
         [JsonConstructor]
-        public PDPConfigUpdateRequest(string flowServiceUrl, string tokenUrl, string oauthClientId, string clientSecret, Option<bool?> isActive = default, Option<bool?> modeSandbox = default)
+        public PDPConfigUpdateRequest(string flowServiceUrl, string tokenUrl, string oauthClientId, string clientSecret, Option<bool?> isActive = default, Option<bool?> modeSandbox = default, Option<EncryptionModeEnum?> encryptionMode = default)
         {
             FlowServiceUrl = flowServiceUrl;
             TokenUrl = tokenUrl;
@@ -49,10 +50,93 @@ namespace FactPulse.SDK.Model
             ClientSecret = clientSecret;
             IsActiveOption = isActive;
             ModeSandboxOption = modeSandbox;
+            EncryptionModeOption = encryptionMode;
             OnCreated();
         }
 
         partial void OnCreated();
+
+        /// <summary>
+        /// Defines EncryptionMode
+        /// </summary>
+        public enum EncryptionModeEnum
+        {
+            /// <summary>
+            /// Enum Fernet for value: fernet
+            /// </summary>
+            Fernet = 1,
+
+            /// <summary>
+            /// Enum Double for value: double
+            /// </summary>
+            Double = 2
+        }
+
+        /// <summary>
+        /// Returns a <see cref="EncryptionModeEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static EncryptionModeEnum EncryptionModeEnumFromString(string value)
+        {
+            if (value.Equals("fernet"))
+                return EncryptionModeEnum.Fernet;
+
+            if (value.Equals("double"))
+                return EncryptionModeEnum.Double;
+
+            throw new NotImplementedException($"Could not convert value to type EncryptionModeEnum: '{value}'");
+        }
+
+        /// <summary>
+        /// Returns a <see cref="EncryptionModeEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static EncryptionModeEnum? EncryptionModeEnumFromStringOrDefault(string value)
+        {
+            if (value.Equals("fernet"))
+                return EncryptionModeEnum.Fernet;
+
+            if (value.Equals("double"))
+                return EncryptionModeEnum.Double;
+
+            return null;
+        }
+
+        /// <summary>
+        /// Converts the <see cref="EncryptionModeEnum"/> to the json value
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static string? EncryptionModeEnumToJsonValue(EncryptionModeEnum? value)
+        {
+            if (value == null)
+                return null;
+
+            if (value == EncryptionModeEnum.Fernet)
+                return "fernet";
+
+            if (value == EncryptionModeEnum.Double)
+                return "double";
+
+            throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
+
+        /// <summary>
+        /// Used to track the state of EncryptionMode
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<EncryptionModeEnum?> EncryptionModeOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets EncryptionMode
+        /// </summary>
+        [JsonPropertyName("encryptionMode")]
+        public EncryptionModeEnum? EncryptionMode { get { return this.EncryptionModeOption; } set { this.EncryptionModeOption = new(value); } }
 
         /// <summary>
         /// PDP Flow Service URL
@@ -124,6 +208,7 @@ namespace FactPulse.SDK.Model
             sb.Append("  ClientSecret: ").Append(ClientSecret).Append("\n");
             sb.Append("  IsActive: ").Append(IsActive).Append("\n");
             sb.Append("  ModeSandbox: ").Append(ModeSandbox).Append("\n");
+            sb.Append("  EncryptionMode: ").Append(EncryptionMode).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -167,6 +252,7 @@ namespace FactPulse.SDK.Model
             Option<string?> clientSecret = default;
             Option<bool?> isActive = default;
             Option<bool?> modeSandbox = default;
+            Option<PDPConfigUpdateRequest.EncryptionModeEnum?> encryptionMode = default;
 
             while (utf8JsonReader.Read())
             {
@@ -200,6 +286,11 @@ namespace FactPulse.SDK.Model
                             break;
                         case "modeSandbox":
                             modeSandbox = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
+                            break;
+                        case "encryptionMode":
+                            string? encryptionModeRawValue = utf8JsonReader.GetString();
+                            if (encryptionModeRawValue != null)
+                                encryptionMode = new Option<PDPConfigUpdateRequest.EncryptionModeEnum?>(PDPConfigUpdateRequest.EncryptionModeEnumFromStringOrDefault(encryptionModeRawValue));
                             break;
                         default:
                             break;
@@ -237,7 +328,7 @@ namespace FactPulse.SDK.Model
             if (modeSandbox.IsSet && modeSandbox.Value == null)
                 throw new ArgumentNullException(nameof(modeSandbox), "Property is not nullable for class PDPConfigUpdateRequest.");
 
-            return new PDPConfigUpdateRequest(flowServiceUrl.Value!, tokenUrl.Value!, oauthClientId.Value!, clientSecret.Value!, isActive, modeSandbox);
+            return new PDPConfigUpdateRequest(flowServiceUrl.Value!, tokenUrl.Value!, oauthClientId.Value!, clientSecret.Value!, isActive, modeSandbox, encryptionMode);
         }
 
         /// <summary>
@@ -289,6 +380,12 @@ namespace FactPulse.SDK.Model
 
             if (pDPConfigUpdateRequest.ModeSandboxOption.IsSet)
                 writer.WriteBoolean("modeSandbox", pDPConfigUpdateRequest.ModeSandboxOption.Value!.Value);
+
+            var encryptionModeRawValue = PDPConfigUpdateRequest.EncryptionModeEnumToJsonValue(pDPConfigUpdateRequest.EncryptionModeOption.Value!.Value);
+            if (encryptionModeRawValue != null)
+                writer.WriteString("encryptionMode", encryptionModeRawValue);
+            else
+                writer.WriteNull("encryptionMode");
         }
     }
 }

@@ -29,7 +29,7 @@ Retrieves the status and result of an asynchronous verification task.  **Possibl
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -70,7 +70,7 @@ Verifies PDF/XML Factur-X compliance asynchronously.  **IMPORTANT**: Only Factur
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -108,7 +108,7 @@ Verifies compliance between the PDF and its embedded Factur-X XML.  **IMPORTANT*
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 

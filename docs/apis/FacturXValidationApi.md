@@ -32,7 +32,7 @@ Validates a complete Factur-X PDF according to European and French standards.  #
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -75,7 +75,7 @@ Validates a Factur-X PDF asynchronously with polling system.  ## How it works  1
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -116,7 +116,7 @@ Validates a Factur-X XML file against Schematron business rules according to EN 
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 

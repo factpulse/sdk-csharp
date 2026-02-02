@@ -88,6 +88,30 @@ namespace FactPulse.SDK.Test.Api
         }
 
         /// <summary>
+        /// Test DeleteWebhookSecretApiV1ClientsUidWebhookSecretDelete
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteAsyncTest()
+        {
+            Guid uid = default!;
+            var response = await _instance.DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteAsync(uid);
+            var model = response.Ok();
+            Assert.IsType<WebhookSecretDeleteResponse>(model);
+        }
+
+        /// <summary>
+        /// Test GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostAsyncTest()
+        {
+            Guid uid = default!;
+            var response = await _instance.GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostAsync(uid);
+            var model = response.Ok();
+            Assert.IsType<WebhookSecretGenerateResponse>(model);
+        }
+
+        /// <summary>
         /// Test GetClientApiV1ClientsUidGet
         /// </summary>
         [Fact (Skip = "not implemented")]
@@ -112,6 +136,18 @@ namespace FactPulse.SDK.Test.Api
         }
 
         /// <summary>
+        /// Test GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetAsyncTest()
+        {
+            Guid uid = default!;
+            var response = await _instance.GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetAsync(uid);
+            var model = response.Ok();
+            Assert.IsType<WebhookSecretStatusResponse>(model);
+        }
+
+        /// <summary>
         /// Test ListClientsApiV1ClientsGet
         /// </summary>
         [Fact (Skip = "not implemented")]
@@ -122,6 +158,19 @@ namespace FactPulse.SDK.Test.Api
             var response = await _instance.ListClientsApiV1ClientsGetAsync(page, pageSize);
             var model = response.Ok();
             Assert.IsType<ClientListResponse>(model);
+        }
+
+        /// <summary>
+        /// Test RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPost
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostAsyncTest()
+        {
+            Guid uid = default!;
+            KeyRotationRequest keyRotationRequest = default!;
+            var response = await _instance.RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostAsync(uid, keyRotationRequest);
+            var model = response.Ok();
+            Assert.IsType<KeyRotationResponse>(model);
         }
 
         /// <summary>
@@ -145,7 +194,8 @@ namespace FactPulse.SDK.Test.Api
         {
             Guid uid = default!;
             PDPConfigUpdateRequest pDPConfigUpdateRequest = default!;
-            var response = await _instance.UpdatePdpConfigApiV1ClientsUidPdpConfigPutAsync(uid, pDPConfigUpdateRequest);
+            Client.Option<string?> xEncryptionKey = default!;
+            var response = await _instance.UpdatePdpConfigApiV1ClientsUidPdpConfigPutAsync(uid, pDPConfigUpdateRequest, xEncryptionKey);
             var model = response.Ok();
             Assert.IsType<PDPConfigResponse>(model);
         }

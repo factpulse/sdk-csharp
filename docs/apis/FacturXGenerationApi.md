@@ -36,7 +36,7 @@ Generates an electronic invoice in Factur-X format compliant with European stand
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -75,7 +75,7 @@ Unified endpoint to submit a complete invoice to different destinations.     **F
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -115,7 +115,7 @@ Asynchronous version of the `/invoices/submit-complete` endpoint using Celery fo
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 

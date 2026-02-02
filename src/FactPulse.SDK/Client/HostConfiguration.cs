@@ -232,10 +232,10 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new ExtractionInfoJsonConverter());
             _jsonOptions.Converters.Add(new FacturXInvoiceJsonConverter());
             _jsonOptions.Converters.Add(new FacturXPDFInfoJsonConverter());
-            _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasCdarValidationErrorResponseJsonConverter());
-            _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasChorusProChorusProCredentialsJsonConverter());
             _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeJsonConverter());
             _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeNullableJsonConverter());
+            _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasProcessingChorusProCredentialsJsonConverter());
+            _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasValidationValidationErrorResponseJsonConverter());
             _jsonOptions.Converters.Add(new FieldStatusJsonConverter());
             _jsonOptions.Converters.Add(new FieldStatusNullableJsonConverter());
             _jsonOptions.Converters.Add(new FileInfoJsonConverter());
@@ -285,6 +285,8 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new InvoicingFrameworkCodeNullableJsonConverter());
             _jsonOptions.Converters.Add(new IssuerRoleCodeJsonConverter());
             _jsonOptions.Converters.Add(new IssuerRoleCodeNullableJsonConverter());
+            _jsonOptions.Converters.Add(new KeyRotationRequestJsonConverter());
+            _jsonOptions.Converters.Add(new KeyRotationResponseJsonConverter());
             _jsonOptions.Converters.Add(new LineNetAmountJsonConverter());
             _jsonOptions.Converters.Add(new LineSubTypeJsonConverter());
             _jsonOptions.Converters.Add(new LineSubTypeNullableJsonConverter());
@@ -410,6 +412,9 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new VatRateJsonConverter());
             _jsonOptions.Converters.Add(new VerificationSuccessResponseJsonConverter());
             _jsonOptions.Converters.Add(new VerifiedFieldSchemaJsonConverter());
+            _jsonOptions.Converters.Add(new WebhookSecretDeleteResponseJsonConverter());
+            _jsonOptions.Converters.Add(new WebhookSecretGenerateResponseJsonConverter());
+            _jsonOptions.Converters.Add(new WebhookSecretStatusResponseJsonConverter());
             JsonSerializerOptionsProvider jsonSerializerOptionsProvider = new(_jsonOptions);
             _services.AddSingleton(jsonSerializerOptionsProvider);
             _services.AddSingleton<IApiFactory, ApiFactory>();
@@ -445,21 +450,21 @@ namespace FactPulse.SDK.Client
 
             List<IHttpClientBuilder> builders = new List<IHttpClientBuilder>();
 
-            builders.Add(_services.AddHttpClient<IAFNORPDPPAApi, AFNORPDPPAApi>(client));
-            builders.Add(_services.AddHttpClient<IAFNORPDPPADirectoryServiceApi, AFNORPDPPADirectoryServiceApi>(client));
-            builders.Add(_services.AddHttpClient<IAFNORPDPPAFlowServiceApi, AFNORPDPPAFlowServiceApi>(client));
-            builders.Add(_services.AddHttpClient<IAsyncTasksApi, AsyncTasksApi>(client));
-            builders.Add(_services.AddHttpClient<IChorusProApi, ChorusProApi>(client));
-            builders.Add(_services.AddHttpClient<IClientManagementApi, ClientManagementApi>(client));
-            builders.Add(_services.AddHttpClient<IDownloadsApi, DownloadsApi>(client));
-            builders.Add(_services.AddHttpClient<IElectronicSignatureApi, ElectronicSignatureApi>(client));
-            builders.Add(_services.AddHttpClient<IFacturXConversionApi, FacturXConversionApi>(client));
-            builders.Add(_services.AddHttpClient<IFacturXGenerationApi, FacturXGenerationApi>(client));
-            builders.Add(_services.AddHttpClient<IFacturXPDFXMLVerificationApi, FacturXPDFXMLVerificationApi>(client));
-            builders.Add(_services.AddHttpClient<IFacturXValidationApi, FacturXValidationApi>(client));
-            builders.Add(_services.AddHttpClient<IFlux10EReportingApi, Flux10EReportingApi>(client));
-            builders.Add(_services.AddHttpClient<IFlux6InvoiceLifecycleCDARApi, Flux6InvoiceLifecycleCDARApi>(client));
-            builders.Add(_services.AddHttpClient<IHealthApi, HealthApi>(client));
+            builders.Add(_services.AddHttpClient<IAFNORPDPPAApi, AFNORPDPPAApi>("FactPulse.SDK.Api.IAFNORPDPPAApi", client));
+            builders.Add(_services.AddHttpClient<IAFNORPDPPADirectoryServiceApi, AFNORPDPPADirectoryServiceApi>("FactPulse.SDK.Api.IAFNORPDPPADirectoryServiceApi", client));
+            builders.Add(_services.AddHttpClient<IAFNORPDPPAFlowServiceApi, AFNORPDPPAFlowServiceApi>("FactPulse.SDK.Api.IAFNORPDPPAFlowServiceApi", client));
+            builders.Add(_services.AddHttpClient<IAsyncTasksApi, AsyncTasksApi>("FactPulse.SDK.Api.IAsyncTasksApi", client));
+            builders.Add(_services.AddHttpClient<IChorusProApi, ChorusProApi>("FactPulse.SDK.Api.IChorusProApi", client));
+            builders.Add(_services.AddHttpClient<IClientManagementApi, ClientManagementApi>("FactPulse.SDK.Api.IClientManagementApi", client));
+            builders.Add(_services.AddHttpClient<IDownloadsApi, DownloadsApi>("FactPulse.SDK.Api.IDownloadsApi", client));
+            builders.Add(_services.AddHttpClient<IElectronicSignatureApi, ElectronicSignatureApi>("FactPulse.SDK.Api.IElectronicSignatureApi", client));
+            builders.Add(_services.AddHttpClient<IFacturXConversionApi, FacturXConversionApi>("FactPulse.SDK.Api.IFacturXConversionApi", client));
+            builders.Add(_services.AddHttpClient<IFacturXGenerationApi, FacturXGenerationApi>("FactPulse.SDK.Api.IFacturXGenerationApi", client));
+            builders.Add(_services.AddHttpClient<IFacturXPDFXMLVerificationApi, FacturXPDFXMLVerificationApi>("FactPulse.SDK.Api.IFacturXPDFXMLVerificationApi", client));
+            builders.Add(_services.AddHttpClient<IFacturXValidationApi, FacturXValidationApi>("FactPulse.SDK.Api.IFacturXValidationApi", client));
+            builders.Add(_services.AddHttpClient<IFlux10EReportingApi, Flux10EReportingApi>("FactPulse.SDK.Api.IFlux10EReportingApi", client));
+            builders.Add(_services.AddHttpClient<IFlux6InvoiceLifecycleCDARApi, Flux6InvoiceLifecycleCDARApi>("FactPulse.SDK.Api.IFlux6InvoiceLifecycleCDARApi", client));
+            builders.Add(_services.AddHttpClient<IHealthApi, HealthApi>("FactPulse.SDK.Api.IHealthApi", client));
             
             if (builder != null)
                 foreach (IHttpClientBuilder instance in builders)

@@ -47,9 +47,10 @@ namespace FactPulse.SDK.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="flowId">AFNOR flow ID (UUID format)</param>
         /// <param name="includeDocument">Include base64-encoded document in response (optional, default to false)</param>
+        /// <param name="xEncryptionKey">Client encryption key for double encryption mode. Must be a base64-encoded AES-256 key (32 bytes). Required only when accessing resources encrypted with encryption_mode&#x3D;&#39;double&#39;. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetApiResponse"/>&gt;</returns>
-        Task<IGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetApiResponse> GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetAsync(string flowId, Option<bool> includeDocument = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetApiResponse> GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetAsync(string flowId, Option<bool> includeDocument = default, Option<string?> xEncryptionKey = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Retrieve and extract an incoming invoice
@@ -59,9 +60,10 @@ namespace FactPulse.SDK.Api
         /// </remarks>
         /// <param name="flowId">AFNOR flow ID (UUID format)</param>
         /// <param name="includeDocument">Include base64-encoded document in response (optional, default to false)</param>
+        /// <param name="xEncryptionKey">Client encryption key for double encryption mode. Must be a base64-encoded AES-256 key (32 bytes). Required only when accessing resources encrypted with encryption_mode&#x3D;&#39;double&#39;. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetApiResponse"/>?&gt;</returns>
-        Task<IGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetApiResponse?> GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetOrDefaultAsync(string flowId, Option<bool> includeDocument = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetApiResponse?> GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetOrDefaultAsync(string flowId, Option<bool> includeDocument = default, Option<string?> xEncryptionKey = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Test PDP OAuth2 credentials
@@ -225,6 +227,11 @@ namespace FactPulse.SDK.Api
         public AFNORPDPPAApiEvents Events { get; }
 
         /// <summary>
+        /// A token provider of type <see cref="ApiKeyProvider"/>
+        /// </summary>
+        public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
+
+        /// <summary>
         /// A token provider of type <see cref="BearerToken"/>
         /// </summary>
         public TokenProvider<BearerToken> BearerTokenProvider { get; }
@@ -234,6 +241,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <returns></returns>
         public AFNORPDPPAApi(ILogger<AFNORPDPPAApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, AFNORPDPPAApiEvents aFNORPDPPAApiEvents,
+            TokenProvider<ApiKeyToken> apiKeyProvider,
             TokenProvider<BearerToken> bearerTokenProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
@@ -241,10 +249,11 @@ namespace FactPulse.SDK.Api
             Logger = LoggerFactory.CreateLogger<AFNORPDPPAApi>();
             HttpClient = httpClient;
             Events = aFNORPDPPAApiEvents;
+            ApiKeyProvider = apiKeyProvider;
             BearerTokenProvider = bearerTokenProvider;
         }
 
-        partial void FormatGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet(ref string flowId, ref Option<bool> includeDocument);
+        partial void FormatGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet(ref string flowId, ref Option<bool> includeDocument, ref Option<string?> xEncryptionKey);
 
         /// <summary>
         /// Validates the request parameters
@@ -263,10 +272,11 @@ namespace FactPulse.SDK.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="flowId"></param>
         /// <param name="includeDocument"></param>
-        private void AfterGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetDefaultImplementation(IGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetApiResponse apiResponseLocalVar, string flowId, Option<bool> includeDocument)
+        /// <param name="xEncryptionKey"></param>
+        private void AfterGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetDefaultImplementation(IGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetApiResponse apiResponseLocalVar, string flowId, Option<bool> includeDocument, Option<string?> xEncryptionKey)
         {
             bool suppressDefaultLog = false;
-            AfterGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet(ref suppressDefaultLog, apiResponseLocalVar, flowId, includeDocument);
+            AfterGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet(ref suppressDefaultLog, apiResponseLocalVar, flowId, includeDocument, xEncryptionKey);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -278,7 +288,8 @@ namespace FactPulse.SDK.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="flowId"></param>
         /// <param name="includeDocument"></param>
-        partial void AfterGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet(ref bool suppressDefaultLog, IGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetApiResponse apiResponseLocalVar, string flowId, Option<bool> includeDocument);
+        /// <param name="xEncryptionKey"></param>
+        partial void AfterGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet(ref bool suppressDefaultLog, IGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetApiResponse apiResponseLocalVar, string flowId, Option<bool> includeDocument, Option<string?> xEncryptionKey);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -288,10 +299,11 @@ namespace FactPulse.SDK.Api
         /// <param name="pathLocalVar"></param>
         /// <param name="flowId"></param>
         /// <param name="includeDocument"></param>
-        private void OnErrorGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string flowId, Option<bool> includeDocument)
+        /// <param name="xEncryptionKey"></param>
+        private void OnErrorGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string flowId, Option<bool> includeDocument, Option<string?> xEncryptionKey)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, flowId, includeDocument);
+            OnErrorGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, flowId, includeDocument, xEncryptionKey);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -305,20 +317,22 @@ namespace FactPulse.SDK.Api
         /// <param name="pathLocalVar"></param>
         /// <param name="flowId"></param>
         /// <param name="includeDocument"></param>
-        partial void OnErrorGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string flowId, Option<bool> includeDocument);
+        /// <param name="xEncryptionKey"></param>
+        partial void OnErrorGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string flowId, Option<bool> includeDocument, Option<string?> xEncryptionKey);
 
         /// <summary>
         /// Retrieve and extract an incoming invoice Downloads an incoming flow from the AFNOR PDP and extracts invoice metadata into a unified JSON format. Supports Factur-X, CII, and UBL formats.
         /// </summary>
         /// <param name="flowId">AFNOR flow ID (UUID format)</param>
         /// <param name="includeDocument">Include base64-encoded document in response (optional, default to false)</param>
+        /// <param name="xEncryptionKey">Client encryption key for double encryption mode. Must be a base64-encoded AES-256 key (32 bytes). Required only when accessing resources encrypted with encryption_mode&#x3D;&#39;double&#39;. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetApiResponse"/>&gt;</returns>
-        public async Task<IGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetApiResponse?> GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetOrDefaultAsync(string flowId, Option<bool> includeDocument = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetApiResponse?> GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetOrDefaultAsync(string flowId, Option<bool> includeDocument = default, Option<string?> xEncryptionKey = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetAsync(flowId, includeDocument, cancellationToken).ConfigureAwait(false);
+                return await GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetAsync(flowId, includeDocument, xEncryptionKey, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -332,9 +346,10 @@ namespace FactPulse.SDK.Api
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="flowId">AFNOR flow ID (UUID format)</param>
         /// <param name="includeDocument">Include base64-encoded document in response (optional, default to false)</param>
+        /// <param name="xEncryptionKey">Client encryption key for double encryption mode. Must be a base64-encoded AES-256 key (32 bytes). Required only when accessing resources encrypted with encryption_mode&#x3D;&#39;double&#39;. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetApiResponse"/>&gt;</returns>
-        public async Task<IGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetApiResponse> GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetAsync(string flowId, Option<bool> includeDocument = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetApiResponse> GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetAsync(string flowId, Option<bool> includeDocument = default, Option<string?> xEncryptionKey = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -342,7 +357,7 @@ namespace FactPulse.SDK.Api
             {
                 ValidateGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet(flowId);
 
-                FormatGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet(ref flowId, ref includeDocument);
+                FormatGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet(ref flowId, ref includeDocument, ref xEncryptionKey);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -361,14 +376,21 @@ namespace FactPulse.SDK.Api
 
                     uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
 
+                    if (xEncryptionKey.IsSet)
+                        httpRequestMessageLocalVar.Headers.Add("X-Encryption-Key", ClientUtils.ParameterToString(xEncryptionKey.Value));
+
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+                    BearerToken bearerTokenLocalVar2 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
 
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar2);
 
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
+                    bearerTokenLocalVar2.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -397,7 +419,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetDefaultImplementation(apiResponseLocalVar, flowId, includeDocument);
+                        AfterGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetDefaultImplementation(apiResponseLocalVar, flowId, includeDocument, xEncryptionKey);
 
                         Events.ExecuteOnGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet(apiResponseLocalVar);
 
@@ -411,7 +433,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetDefaultImplementation(e, "/api/v1/afnor/incoming-flows/{flow_id}", uriBuilderLocalVar.Path, flowId, includeDocument);
+                OnErrorGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetDefaultImplementation(e, "/api/v1/afnor/incoming-flows/{flow_id}", uriBuilderLocalVar.Path, flowId, includeDocument, xEncryptionKey);
                 Events.ExecuteOnErrorGetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet(e);
                 throw;
             }

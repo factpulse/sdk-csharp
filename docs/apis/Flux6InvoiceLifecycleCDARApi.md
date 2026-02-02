@@ -36,7 +36,7 @@ Generate a CDAR XML message (Cross Domain Acknowledgement and Response) to commu
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -341,7 +341,7 @@ Validate CDAR structured data without generating XML.  **Note:** This endpoint v
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -381,7 +381,7 @@ Validates a CDAR XML file against:  1. **XSD schema**: UN/CEFACT D22B CrossDomai
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 

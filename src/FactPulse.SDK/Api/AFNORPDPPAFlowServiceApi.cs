@@ -451,6 +451,11 @@ namespace FactPulse.SDK.Api
         public AFNORPDPPAFlowServiceApiEvents Events { get; }
 
         /// <summary>
+        /// A token provider of type <see cref="ApiKeyProvider"/>
+        /// </summary>
+        public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
+
+        /// <summary>
         /// A token provider of type <see cref="BearerToken"/>
         /// </summary>
         public TokenProvider<BearerToken> BearerTokenProvider { get; }
@@ -460,6 +465,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <returns></returns>
         public AFNORPDPPAFlowServiceApi(ILogger<AFNORPDPPAFlowServiceApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, AFNORPDPPAFlowServiceApiEvents aFNORPDPPAFlowServiceApiEvents,
+            TokenProvider<ApiKeyToken> apiKeyProvider,
             TokenProvider<BearerToken> bearerTokenProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
@@ -467,6 +473,7 @@ namespace FactPulse.SDK.Api
             Logger = LoggerFactory.CreateLogger<AFNORPDPPAFlowServiceApi>();
             HttpClient = httpClient;
             Events = aFNORPDPPAFlowServiceApiEvents;
+            ApiKeyProvider = apiKeyProvider;
             BearerTokenProvider = bearerTokenProvider;
         }
 

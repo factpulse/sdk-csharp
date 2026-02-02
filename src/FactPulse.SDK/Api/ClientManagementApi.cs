@@ -108,6 +108,52 @@ namespace FactPulse.SDK.Api
         Task<IDeactivateClientApiV1ClientsUidDesactiverPostApiResponse?> DeactivateClientApiV1ClientsUidDesactiverPostOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Delete webhook secret
+        /// </summary>
+        /// <remarks>
+        /// Delete the webhook secret for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **After deletion**: Webhooks for this client will use the global server key for HMAC signature instead of a client-specific key.
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="uid"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse"/>&gt;</returns>
+        Task<IDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse> DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Delete webhook secret
+        /// </summary>
+        /// <remarks>
+        /// Delete the webhook secret for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **After deletion**: Webhooks for this client will use the global server key for HMAC signature instead of a client-specific key.
+        /// </remarks>
+        /// <param name="uid"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse"/>?&gt;</returns>
+        Task<IDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse?> DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Generate webhook secret
+        /// </summary>
+        /// <remarks>
+        /// Generate or regenerate the webhook secret for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Important**: Save the returned secret immediately - it will never be shown again. The secret is used to sign webhooks sent by the server (HMAC-SHA256).  **If a secret already exists**: It will be replaced by the new one.
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="uid"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse"/>&gt;</returns>
+        Task<IGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse> GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Generate webhook secret
+        /// </summary>
+        /// <remarks>
+        /// Generate or regenerate the webhook secret for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Important**: Save the returned secret immediately - it will never be shown again. The secret is used to sign webhooks sent by the server (HMAC-SHA256).  **If a secret already exists**: It will be replaced by the new one.
+        /// </remarks>
+        /// <param name="uid"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse"/>?&gt;</returns>
+        Task<IGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse?> GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Get client details
         /// </summary>
         /// <remarks>
@@ -154,6 +200,29 @@ namespace FactPulse.SDK.Api
         Task<IGetPdpConfigApiV1ClientsUidPdpConfigGetApiResponse?> GetPdpConfigApiV1ClientsUidPdpConfigGetOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Get webhook secret status
+        /// </summary>
+        /// <remarks>
+        /// Check if a webhook secret is configured for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Response**: - &#x60;hasSecret&#x60;: Whether a webhook secret is configured - &#x60;createdAt&#x60;: When the secret was created (if exists)  **Note**: The secret value is never returned, only its status.
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="uid"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse"/>&gt;</returns>
+        Task<IGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse> GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get webhook secret status
+        /// </summary>
+        /// <remarks>
+        /// Check if a webhook secret is configured for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Response**: - &#x60;hasSecret&#x60;: Whether a webhook secret is configured - &#x60;createdAt&#x60;: When the secret was created (if exists)  **Note**: The secret value is never returned, only its status.
+        /// </remarks>
+        /// <param name="uid"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse"/>?&gt;</returns>
+        Task<IGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse?> GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// List clients
         /// </summary>
         /// <remarks>
@@ -177,6 +246,31 @@ namespace FactPulse.SDK.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IListClientsApiV1ClientsGetApiResponse"/>?&gt;</returns>
         Task<IListClientsApiV1ClientsGetApiResponse?> ListClientsApiV1ClientsGetOrDefaultAsync(Option<int> page = default, Option<int> pageSize = default, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Rotate client encryption key
+        /// </summary>
+        /// <remarks>
+        /// Rotate the client encryption key for all secrets in double encryption mode.  **Scope**: Client level (JWT with client_uid that must match {uid})  **What this does**: 1. Decrypts all secrets (PDP, Chorus Pro) using the old key 2. Re-encrypts them using the new key 3. Saves to database  **Important notes**: - Both keys must be base64-encoded AES-256 keys (32 bytes each) - The old key becomes invalid immediately after rotation - Only secrets encrypted with &#x60;encryptionMode: \&quot;double\&quot;&#x60; are affected - If the client has no double-encrypted secrets, returns 404  **Security**: - The old key must be valid (decryption is verified) - If decryption fails, rotation is aborted (atomic operation) - Neither key is logged or stored by the server
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="uid"></param>
+        /// <param name="keyRotationRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse"/>&gt;</returns>
+        Task<IRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse> RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostAsync(Guid uid, KeyRotationRequest keyRotationRequest, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Rotate client encryption key
+        /// </summary>
+        /// <remarks>
+        /// Rotate the client encryption key for all secrets in double encryption mode.  **Scope**: Client level (JWT with client_uid that must match {uid})  **What this does**: 1. Decrypts all secrets (PDP, Chorus Pro) using the old key 2. Re-encrypts them using the new key 3. Saves to database  **Important notes**: - Both keys must be base64-encoded AES-256 keys (32 bytes each) - The old key becomes invalid immediately after rotation - Only secrets encrypted with &#x60;encryptionMode: \&quot;double\&quot;&#x60; are affected - If the client has no double-encrypted secrets, returns 404  **Security**: - The old key must be valid (decryption is verified) - If decryption fails, rotation is aborted (atomic operation) - Neither key is logged or stored by the server
+        /// </remarks>
+        /// <param name="uid"></param>
+        /// <param name="keyRotationRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse"/>?&gt;</returns>
+        Task<IRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse?> RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostOrDefaultAsync(Guid uid, KeyRotationRequest keyRotationRequest, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Update a client
@@ -207,26 +301,28 @@ namespace FactPulse.SDK.Api
         /// Configure client PDP
         /// </summary>
         /// <remarks>
-        /// Configure or update the PDP (PA/PDP) configuration for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Required fields**: - &#x60;flowServiceUrl&#x60;: PDP Flow Service URL - &#x60;tokenUrl&#x60;: PDP OAuth token URL - &#x60;oauthClientId&#x60;: OAuth Client ID - &#x60;clientSecret&#x60;: OAuth Client Secret (sent but NEVER returned)  **Optional fields**: - &#x60;isActive&#x60;: Enable/disable the config (default: true) - &#x60;modeSandbox&#x60;: Sandbox mode (default: false)  **Security**: The &#x60;clientSecret&#x60; is stored encrypted on Django side and is never returned in API responses.
+        /// Configure or update the PDP (PA/PDP) configuration for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Required fields**: - &#x60;flowServiceUrl&#x60;: PDP Flow Service URL - &#x60;tokenUrl&#x60;: PDP OAuth token URL - &#x60;oauthClientId&#x60;: OAuth Client ID - &#x60;clientSecret&#x60;: OAuth Client Secret (sent but NEVER returned)  **Optional fields**: - &#x60;isActive&#x60;: Enable/disable the config (default: true) - &#x60;modeSandbox&#x60;: Sandbox mode (default: false) - &#x60;encryptionMode&#x60;: Encryption mode (default: \&quot;fernet\&quot;)   - \&quot;fernet\&quot;: Server-side encryption only   - \&quot;double\&quot;: Client AES-256-GCM + Server Fernet (requires X-Encryption-Key header)  **Double Encryption Mode**: When &#x60;encryptionMode&#x60; is set to \&quot;double\&quot;, you MUST also provide the &#x60;X-Encryption-Key&#x60; header containing a base64-encoded AES-256 key (32 bytes). This key is used to encrypt the &#x60;clientSecret&#x60; on the client side before the server encrypts it again with Fernet. The server cannot decrypt the secret without the client key.  **Security**: The &#x60;clientSecret&#x60; is stored encrypted on Django side and is never returned in API responses.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="uid"></param>
         /// <param name="pDPConfigUpdateRequest"></param>
+        /// <param name="xEncryptionKey">Client encryption key for double encryption mode. Must be a base64-encoded AES-256 key (32 bytes). Required only when accessing resources encrypted with encryption_mode&#x3D;&#39;double&#39;. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IUpdatePdpConfigApiV1ClientsUidPdpConfigPutApiResponse"/>&gt;</returns>
-        Task<IUpdatePdpConfigApiV1ClientsUidPdpConfigPutApiResponse> UpdatePdpConfigApiV1ClientsUidPdpConfigPutAsync(Guid uid, PDPConfigUpdateRequest pDPConfigUpdateRequest, System.Threading.CancellationToken cancellationToken = default);
+        Task<IUpdatePdpConfigApiV1ClientsUidPdpConfigPutApiResponse> UpdatePdpConfigApiV1ClientsUidPdpConfigPutAsync(Guid uid, PDPConfigUpdateRequest pDPConfigUpdateRequest, Option<string?> xEncryptionKey = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Configure client PDP
         /// </summary>
         /// <remarks>
-        /// Configure or update the PDP (PA/PDP) configuration for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Required fields**: - &#x60;flowServiceUrl&#x60;: PDP Flow Service URL - &#x60;tokenUrl&#x60;: PDP OAuth token URL - &#x60;oauthClientId&#x60;: OAuth Client ID - &#x60;clientSecret&#x60;: OAuth Client Secret (sent but NEVER returned)  **Optional fields**: - &#x60;isActive&#x60;: Enable/disable the config (default: true) - &#x60;modeSandbox&#x60;: Sandbox mode (default: false)  **Security**: The &#x60;clientSecret&#x60; is stored encrypted on Django side and is never returned in API responses.
+        /// Configure or update the PDP (PA/PDP) configuration for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Required fields**: - &#x60;flowServiceUrl&#x60;: PDP Flow Service URL - &#x60;tokenUrl&#x60;: PDP OAuth token URL - &#x60;oauthClientId&#x60;: OAuth Client ID - &#x60;clientSecret&#x60;: OAuth Client Secret (sent but NEVER returned)  **Optional fields**: - &#x60;isActive&#x60;: Enable/disable the config (default: true) - &#x60;modeSandbox&#x60;: Sandbox mode (default: false) - &#x60;encryptionMode&#x60;: Encryption mode (default: \&quot;fernet\&quot;)   - \&quot;fernet\&quot;: Server-side encryption only   - \&quot;double\&quot;: Client AES-256-GCM + Server Fernet (requires X-Encryption-Key header)  **Double Encryption Mode**: When &#x60;encryptionMode&#x60; is set to \&quot;double\&quot;, you MUST also provide the &#x60;X-Encryption-Key&#x60; header containing a base64-encoded AES-256 key (32 bytes). This key is used to encrypt the &#x60;clientSecret&#x60; on the client side before the server encrypts it again with Fernet. The server cannot decrypt the secret without the client key.  **Security**: The &#x60;clientSecret&#x60; is stored encrypted on Django side and is never returned in API responses.
         /// </remarks>
         /// <param name="uid"></param>
         /// <param name="pDPConfigUpdateRequest"></param>
+        /// <param name="xEncryptionKey">Client encryption key for double encryption mode. Must be a base64-encoded AES-256 key (32 bytes). Required only when accessing resources encrypted with encryption_mode&#x3D;&#39;double&#39;. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IUpdatePdpConfigApiV1ClientsUidPdpConfigPutApiResponse"/>?&gt;</returns>
-        Task<IUpdatePdpConfigApiV1ClientsUidPdpConfigPutApiResponse?> UpdatePdpConfigApiV1ClientsUidPdpConfigPutOrDefaultAsync(Guid uid, PDPConfigUpdateRequest pDPConfigUpdateRequest, System.Threading.CancellationToken cancellationToken = default);
+        Task<IUpdatePdpConfigApiV1ClientsUidPdpConfigPutApiResponse?> UpdatePdpConfigApiV1ClientsUidPdpConfigPutOrDefaultAsync(Guid uid, PDPConfigUpdateRequest pDPConfigUpdateRequest, Option<string?> xEncryptionKey = default, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -374,6 +470,102 @@ namespace FactPulse.SDK.Api
     }
 
     /// <summary>
+    /// The <see cref="IDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse"/>
+    /// </summary>
+    public interface IDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.WebhookSecretDeleteResponse?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 400 BadRequest
+        /// </summary>
+        /// <returns></returns>
+        bool IsBadRequest { get; }
+
+        /// <summary>
+        /// Returns true if the response is 401 Unauthorized
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnauthorized { get; }
+
+        /// <summary>
+        /// Returns true if the response is 403 Forbidden
+        /// </summary>
+        /// <returns></returns>
+        bool IsForbidden { get; }
+
+        /// <summary>
+        /// Returns true if the response is 404 NotFound
+        /// </summary>
+        /// <returns></returns>
+        bool IsNotFound { get; }
+
+        /// <summary>
+        /// Returns true if the response is 500 InternalServerError
+        /// </summary>
+        /// <returns></returns>
+        bool IsInternalServerError { get; }
+
+        /// <summary>
+        /// Returns true if the response is 422 UnprocessableContent
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnprocessableContent { get; }
+    }
+
+    /// <summary>
+    /// The <see cref="IGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse"/>
+    /// </summary>
+    public interface IGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.WebhookSecretGenerateResponse?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 400 BadRequest
+        /// </summary>
+        /// <returns></returns>
+        bool IsBadRequest { get; }
+
+        /// <summary>
+        /// Returns true if the response is 401 Unauthorized
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnauthorized { get; }
+
+        /// <summary>
+        /// Returns true if the response is 403 Forbidden
+        /// </summary>
+        /// <returns></returns>
+        bool IsForbidden { get; }
+
+        /// <summary>
+        /// Returns true if the response is 404 NotFound
+        /// </summary>
+        /// <returns></returns>
+        bool IsNotFound { get; }
+
+        /// <summary>
+        /// Returns true if the response is 500 InternalServerError
+        /// </summary>
+        /// <returns></returns>
+        bool IsInternalServerError { get; }
+
+        /// <summary>
+        /// Returns true if the response is 422 UnprocessableContent
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnprocessableContent { get; }
+    }
+
+    /// <summary>
     /// The <see cref="IGetClientApiV1ClientsUidGetApiResponse"/>
     /// </summary>
     public interface IGetClientApiV1ClientsUidGetApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.ClientDetail?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>
@@ -470,9 +662,105 @@ namespace FactPulse.SDK.Api
     }
 
     /// <summary>
+    /// The <see cref="IGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse"/>
+    /// </summary>
+    public interface IGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.WebhookSecretStatusResponse?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 400 BadRequest
+        /// </summary>
+        /// <returns></returns>
+        bool IsBadRequest { get; }
+
+        /// <summary>
+        /// Returns true if the response is 401 Unauthorized
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnauthorized { get; }
+
+        /// <summary>
+        /// Returns true if the response is 403 Forbidden
+        /// </summary>
+        /// <returns></returns>
+        bool IsForbidden { get; }
+
+        /// <summary>
+        /// Returns true if the response is 404 NotFound
+        /// </summary>
+        /// <returns></returns>
+        bool IsNotFound { get; }
+
+        /// <summary>
+        /// Returns true if the response is 500 InternalServerError
+        /// </summary>
+        /// <returns></returns>
+        bool IsInternalServerError { get; }
+
+        /// <summary>
+        /// Returns true if the response is 422 UnprocessableContent
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnprocessableContent { get; }
+    }
+
+    /// <summary>
     /// The <see cref="IListClientsApiV1ClientsGetApiResponse"/>
     /// </summary>
     public interface IListClientsApiV1ClientsGetApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.ClientListResponse?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 400 BadRequest
+        /// </summary>
+        /// <returns></returns>
+        bool IsBadRequest { get; }
+
+        /// <summary>
+        /// Returns true if the response is 401 Unauthorized
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnauthorized { get; }
+
+        /// <summary>
+        /// Returns true if the response is 403 Forbidden
+        /// </summary>
+        /// <returns></returns>
+        bool IsForbidden { get; }
+
+        /// <summary>
+        /// Returns true if the response is 404 NotFound
+        /// </summary>
+        /// <returns></returns>
+        bool IsNotFound { get; }
+
+        /// <summary>
+        /// Returns true if the response is 500 InternalServerError
+        /// </summary>
+        /// <returns></returns>
+        bool IsInternalServerError { get; }
+
+        /// <summary>
+        /// Returns true if the response is 422 UnprocessableContent
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnprocessableContent { get; }
+    }
+
+    /// <summary>
+    /// The <see cref="IRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse"/>
+    /// </summary>
+    public interface IRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.KeyRotationResponse?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -681,6 +969,46 @@ namespace FactPulse.SDK.Api
         /// <summary>
         /// The event raised after the server response
         /// </summary>
+        public event EventHandler<ApiResponseEventArgs>? OnDeleteWebhookSecretApiV1ClientsUidWebhookSecretDelete;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs>? OnErrorDeleteWebhookSecretApiV1ClientsUidWebhookSecretDelete;
+
+        internal void ExecuteOnDeleteWebhookSecretApiV1ClientsUidWebhookSecretDelete(ClientManagementApi.DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse apiResponse)
+        {
+            OnDeleteWebhookSecretApiV1ClientsUidWebhookSecretDelete?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorDeleteWebhookSecretApiV1ClientsUidWebhookSecretDelete(Exception exception)
+        {
+            OnErrorDeleteWebhookSecretApiV1ClientsUidWebhookSecretDelete?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
+        public event EventHandler<ApiResponseEventArgs>? OnGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs>? OnErrorGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost;
+
+        internal void ExecuteOnGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost(ClientManagementApi.GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse apiResponse)
+        {
+            OnGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost(Exception exception)
+        {
+            OnErrorGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
         public event EventHandler<ApiResponseEventArgs>? OnGetClientApiV1ClientsUidGet;
 
         /// <summary>
@@ -721,6 +1049,26 @@ namespace FactPulse.SDK.Api
         /// <summary>
         /// The event raised after the server response
         /// </summary>
+        public event EventHandler<ApiResponseEventArgs>? OnGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs>? OnErrorGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet;
+
+        internal void ExecuteOnGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet(ClientManagementApi.GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse apiResponse)
+        {
+            OnGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet(Exception exception)
+        {
+            OnErrorGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
         public event EventHandler<ApiResponseEventArgs>? OnListClientsApiV1ClientsGet;
 
         /// <summary>
@@ -736,6 +1084,26 @@ namespace FactPulse.SDK.Api
         internal void ExecuteOnErrorListClientsApiV1ClientsGet(Exception exception)
         {
             OnErrorListClientsApiV1ClientsGet?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
+        public event EventHandler<ApiResponseEventArgs>? OnRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPost;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs>? OnErrorRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPost;
+
+        internal void ExecuteOnRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPost(ClientManagementApi.RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse apiResponse)
+        {
+            OnRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPost(Exception exception)
+        {
+            OnErrorRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPost?.Invoke(this, new ExceptionEventArgs(exception));
         }
 
         /// <summary>
@@ -807,6 +1175,11 @@ namespace FactPulse.SDK.Api
         public ClientManagementApiEvents Events { get; }
 
         /// <summary>
+        /// A token provider of type <see cref="ApiKeyProvider"/>
+        /// </summary>
+        public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
+
+        /// <summary>
         /// A token provider of type <see cref="BearerToken"/>
         /// </summary>
         public TokenProvider<BearerToken> BearerTokenProvider { get; }
@@ -816,6 +1189,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <returns></returns>
         public ClientManagementApi(ILogger<ClientManagementApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, ClientManagementApiEvents clientManagementApiEvents,
+            TokenProvider<ApiKeyToken> apiKeyProvider,
             TokenProvider<BearerToken> bearerTokenProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
@@ -823,6 +1197,7 @@ namespace FactPulse.SDK.Api
             Logger = LoggerFactory.CreateLogger<ClientManagementApi>();
             HttpClient = httpClient;
             Events = clientManagementApiEvents;
+            ApiKeyProvider = apiKeyProvider;
             BearerTokenProvider = bearerTokenProvider;
         }
 
@@ -918,13 +1293,17 @@ namespace FactPulse.SDK.Api
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Buid%7D", Uri.EscapeDataString(uid.ToString()));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+                    BearerToken bearerTokenLocalVar2 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
 
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar2);
 
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
+                    bearerTokenLocalVar2.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -1242,13 +1621,17 @@ namespace FactPulse.SDK.Api
                         : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(clientCreateRequest, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+                    BearerToken bearerTokenLocalVar2 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
 
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar2);
 
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
+                    bearerTokenLocalVar2.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] contentTypes = new string[] {
                         "application/json"
@@ -1559,13 +1942,17 @@ namespace FactPulse.SDK.Api
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Buid%7D", Uri.EscapeDataString(uid.ToString()));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+                    BearerToken bearerTokenLocalVar2 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
 
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar2);
 
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
+                    bearerTokenLocalVar2.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -1775,6 +2162,630 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
+        partial void FormatDeleteWebhookSecretApiV1ClientsUidWebhookSecretDelete(ref Guid uid);
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="uid"></param>
+        private void AfterDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteDefaultImplementation(IDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse apiResponseLocalVar, Guid uid)
+        {
+            bool suppressDefaultLog = false;
+            AfterDeleteWebhookSecretApiV1ClientsUidWebhookSecretDelete(ref suppressDefaultLog, apiResponseLocalVar, uid);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="uid"></param>
+        partial void AfterDeleteWebhookSecretApiV1ClientsUidWebhookSecretDelete(ref bool suppressDefaultLog, IDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse apiResponseLocalVar, Guid uid);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="uid"></param>
+        private void OnErrorDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Guid uid)
+        {
+            bool suppressDefaultLogLocalVar = false;
+            OnErrorDeleteWebhookSecretApiV1ClientsUidWebhookSecretDelete(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, uid);
+            if (!suppressDefaultLogLocalVar)
+                Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLogLocalVar"></param>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="uid"></param>
+        partial void OnErrorDeleteWebhookSecretApiV1ClientsUidWebhookSecretDelete(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Guid uid);
+
+        /// <summary>
+        /// Delete webhook secret Delete the webhook secret for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **After deletion**: Webhooks for this client will use the global server key for HMAC signature instead of a client-specific key.
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse"/>&gt;</returns>
+        public async Task<IDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse?> DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteAsync(uid, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Delete webhook secret Delete the webhook secret for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **After deletion**: Webhooks for this client will use the global server key for HMAC signature instead of a client-specific key.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="uid"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse"/>&gt;</returns>
+        public async Task<IDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse> DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                FormatDeleteWebhookSecretApiV1ClientsUidWebhookSecretDelete(ref uid);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
+                        ? "/api/v1/clients/{uid}/webhook-secret"
+                        : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/clients/{uid}/webhook-secret");
+                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Buid%7D", Uri.EscapeDataString(uid.ToString()));
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar2 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar2);
+
+                    bearerTokenLocalVar2.UseInHeader(httpRequestMessageLocalVar, "");
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
+
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Delete;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        ILogger<DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse>();
+                        DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse apiResponseLocalVar;
+
+                        switch ((int)httpResponseMessageLocalVar.StatusCode) {
+                            default: {
+                                string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+                                apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/api/v1/clients/{uid}/webhook-secret", requestedAtLocalVar, _jsonSerializerOptions);
+
+                                break;
+                            }
+                        }
+
+                        AfterDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteDefaultImplementation(apiResponseLocalVar, uid);
+
+                        Events.ExecuteOnDeleteWebhookSecretApiV1ClientsUidWebhookSecretDelete(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteDefaultImplementation(e, "/api/v1/clients/{uid}/webhook-secret", uriBuilderLocalVar.Path, uid);
+                Events.ExecuteOnErrorDeleteWebhookSecretApiV1ClientsUidWebhookSecretDelete(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse"/>
+        /// </summary>
+        public partial class DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse : FactPulse.SDK.Client.ApiResponse, IDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse(ILogger<DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            /// <summary>
+            /// The <see cref="DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="contentStream"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse(ILogger<DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.WebhookSecretDeleteResponse? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.WebhookSecretDeleteResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out FactPulse.SDK.Model.WebhookSecretDeleteResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 400 BadRequest
+            /// </summary>
+            /// <returns></returns>
+            public bool IsBadRequest => 400 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 401 Unauthorized
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnauthorized => 401 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 403 Forbidden
+            /// </summary>
+            /// <returns></returns>
+            public bool IsForbidden => 403 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 404 NotFound
+            /// </summary>
+            /// <returns></returns>
+            public bool IsNotFound => 404 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 500 InternalServerError
+            /// </summary>
+            /// <returns></returns>
+            public bool IsInternalServerError => 500 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnprocessableContent => 422 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.HTTPValidationError? UnprocessableContent()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsUnprocessableContent
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.HTTPValidationError>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryUnprocessableContent([NotNullWhen(true)]out FactPulse.SDK.Model.HTTPValidationError? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = UnprocessableContent();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)422);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
+        partial void FormatGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost(ref Guid uid);
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="uid"></param>
+        private void AfterGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostDefaultImplementation(IGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse apiResponseLocalVar, Guid uid)
+        {
+            bool suppressDefaultLog = false;
+            AfterGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost(ref suppressDefaultLog, apiResponseLocalVar, uid);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="uid"></param>
+        partial void AfterGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost(ref bool suppressDefaultLog, IGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse apiResponseLocalVar, Guid uid);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="uid"></param>
+        private void OnErrorGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Guid uid)
+        {
+            bool suppressDefaultLogLocalVar = false;
+            OnErrorGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, uid);
+            if (!suppressDefaultLogLocalVar)
+                Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLogLocalVar"></param>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="uid"></param>
+        partial void OnErrorGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Guid uid);
+
+        /// <summary>
+        /// Generate webhook secret Generate or regenerate the webhook secret for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Important**: Save the returned secret immediately - it will never be shown again. The secret is used to sign webhooks sent by the server (HMAC-SHA256).  **If a secret already exists**: It will be replaced by the new one.
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse"/>&gt;</returns>
+        public async Task<IGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse?> GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostAsync(uid, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Generate webhook secret Generate or regenerate the webhook secret for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Important**: Save the returned secret immediately - it will never be shown again. The secret is used to sign webhooks sent by the server (HMAC-SHA256).  **If a secret already exists**: It will be replaced by the new one.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="uid"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse"/>&gt;</returns>
+        public async Task<IGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse> GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                FormatGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost(ref uid);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
+                        ? "/api/v1/clients/{uid}/webhook-secret/generate"
+                        : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/clients/{uid}/webhook-secret/generate");
+                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Buid%7D", Uri.EscapeDataString(uid.ToString()));
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar2 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar2);
+
+                    bearerTokenLocalVar2.UseInHeader(httpRequestMessageLocalVar, "");
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
+
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Post;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        ILogger<GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse>();
+                        GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse apiResponseLocalVar;
+
+                        switch ((int)httpResponseMessageLocalVar.StatusCode) {
+                            default: {
+                                string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+                                apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/api/v1/clients/{uid}/webhook-secret/generate", requestedAtLocalVar, _jsonSerializerOptions);
+
+                                break;
+                            }
+                        }
+
+                        AfterGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostDefaultImplementation(apiResponseLocalVar, uid);
+
+                        Events.ExecuteOnGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostDefaultImplementation(e, "/api/v1/clients/{uid}/webhook-secret/generate", uriBuilderLocalVar.Path, uid);
+                Events.ExecuteOnErrorGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse"/>
+        /// </summary>
+        public partial class GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse : FactPulse.SDK.Client.ApiResponse, IGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse(ILogger<GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            /// <summary>
+            /// The <see cref="GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="contentStream"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse(ILogger<GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.WebhookSecretGenerateResponse? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.WebhookSecretGenerateResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out FactPulse.SDK.Model.WebhookSecretGenerateResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 400 BadRequest
+            /// </summary>
+            /// <returns></returns>
+            public bool IsBadRequest => 400 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 401 Unauthorized
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnauthorized => 401 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 403 Forbidden
+            /// </summary>
+            /// <returns></returns>
+            public bool IsForbidden => 403 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 404 NotFound
+            /// </summary>
+            /// <returns></returns>
+            public bool IsNotFound => 404 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 500 InternalServerError
+            /// </summary>
+            /// <returns></returns>
+            public bool IsInternalServerError => 500 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnprocessableContent => 422 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.HTTPValidationError? UnprocessableContent()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsUnprocessableContent
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.HTTPValidationError>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryUnprocessableContent([NotNullWhen(true)]out FactPulse.SDK.Model.HTTPValidationError? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = UnprocessableContent();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)422);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
         partial void FormatGetClientApiV1ClientsUidGet(ref Guid uid);
 
         /// <summary>
@@ -1867,13 +2878,17 @@ namespace FactPulse.SDK.Api
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Buid%7D", Uri.EscapeDataString(uid.ToString()));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+                    BearerToken bearerTokenLocalVar2 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
 
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar2);
 
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
+                    bearerTokenLocalVar2.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -2175,13 +3190,17 @@ namespace FactPulse.SDK.Api
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Buid%7D", Uri.EscapeDataString(uid.ToString()));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+                    BearerToken bearerTokenLocalVar2 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
 
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar2);
 
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
+                    bearerTokenLocalVar2.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -2391,6 +3410,318 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
+        partial void FormatGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet(ref Guid uid);
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="uid"></param>
+        private void AfterGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetDefaultImplementation(IGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse apiResponseLocalVar, Guid uid)
+        {
+            bool suppressDefaultLog = false;
+            AfterGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet(ref suppressDefaultLog, apiResponseLocalVar, uid);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="uid"></param>
+        partial void AfterGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet(ref bool suppressDefaultLog, IGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse apiResponseLocalVar, Guid uid);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="uid"></param>
+        private void OnErrorGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Guid uid)
+        {
+            bool suppressDefaultLogLocalVar = false;
+            OnErrorGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, uid);
+            if (!suppressDefaultLogLocalVar)
+                Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLogLocalVar"></param>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="uid"></param>
+        partial void OnErrorGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Guid uid);
+
+        /// <summary>
+        /// Get webhook secret status Check if a webhook secret is configured for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Response**: - &#x60;hasSecret&#x60;: Whether a webhook secret is configured - &#x60;createdAt&#x60;: When the secret was created (if exists)  **Note**: The secret value is never returned, only its status.
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse"/>&gt;</returns>
+        public async Task<IGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse?> GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetAsync(uid, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Get webhook secret status Check if a webhook secret is configured for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Response**: - &#x60;hasSecret&#x60;: Whether a webhook secret is configured - &#x60;createdAt&#x60;: When the secret was created (if exists)  **Note**: The secret value is never returned, only its status.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="uid"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse"/>&gt;</returns>
+        public async Task<IGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse> GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                FormatGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet(ref uid);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
+                        ? "/api/v1/clients/{uid}/webhook-secret/status"
+                        : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/clients/{uid}/webhook-secret/status");
+                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Buid%7D", Uri.EscapeDataString(uid.ToString()));
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar2 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar2);
+
+                    bearerTokenLocalVar2.UseInHeader(httpRequestMessageLocalVar, "");
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
+
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Get;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        ILogger<GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse>();
+                        GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse apiResponseLocalVar;
+
+                        switch ((int)httpResponseMessageLocalVar.StatusCode) {
+                            default: {
+                                string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+                                apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/api/v1/clients/{uid}/webhook-secret/status", requestedAtLocalVar, _jsonSerializerOptions);
+
+                                break;
+                            }
+                        }
+
+                        AfterGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetDefaultImplementation(apiResponseLocalVar, uid);
+
+                        Events.ExecuteOnGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetDefaultImplementation(e, "/api/v1/clients/{uid}/webhook-secret/status", uriBuilderLocalVar.Path, uid);
+                Events.ExecuteOnErrorGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse"/>
+        /// </summary>
+        public partial class GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse : FactPulse.SDK.Client.ApiResponse, IGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse(ILogger<GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            /// <summary>
+            /// The <see cref="GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="contentStream"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse(ILogger<GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.WebhookSecretStatusResponse? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.WebhookSecretStatusResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out FactPulse.SDK.Model.WebhookSecretStatusResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 400 BadRequest
+            /// </summary>
+            /// <returns></returns>
+            public bool IsBadRequest => 400 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 401 Unauthorized
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnauthorized => 401 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 403 Forbidden
+            /// </summary>
+            /// <returns></returns>
+            public bool IsForbidden => 403 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 404 NotFound
+            /// </summary>
+            /// <returns></returns>
+            public bool IsNotFound => 404 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 500 InternalServerError
+            /// </summary>
+            /// <returns></returns>
+            public bool IsInternalServerError => 500 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnprocessableContent => 422 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.HTTPValidationError? UnprocessableContent()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsUnprocessableContent
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.HTTPValidationError>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryUnprocessableContent([NotNullWhen(true)]out FactPulse.SDK.Model.HTTPValidationError? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = UnprocessableContent();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)422);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
         partial void FormatListClientsApiV1ClientsGet(ref Option<int> page, ref Option<int> pageSize);
 
         /// <summary>
@@ -2498,13 +3829,17 @@ namespace FactPulse.SDK.Api
                     uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+                    BearerToken bearerTokenLocalVar2 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
 
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar2);
 
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
+                    bearerTokenLocalVar2.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -2714,6 +4049,350 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
+        partial void FormatRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPost(ref Guid uid, KeyRotationRequest keyRotationRequest);
+
+        /// <summary>
+        /// Validates the request parameters
+        /// </summary>
+        /// <param name="keyRotationRequest"></param>
+        /// <returns></returns>
+        private void ValidateRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPost(KeyRotationRequest keyRotationRequest)
+        {
+            if (keyRotationRequest == null)
+                throw new ArgumentNullException(nameof(keyRotationRequest));
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="uid"></param>
+        /// <param name="keyRotationRequest"></param>
+        private void AfterRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostDefaultImplementation(IRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse apiResponseLocalVar, Guid uid, KeyRotationRequest keyRotationRequest)
+        {
+            bool suppressDefaultLog = false;
+            AfterRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPost(ref suppressDefaultLog, apiResponseLocalVar, uid, keyRotationRequest);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="uid"></param>
+        /// <param name="keyRotationRequest"></param>
+        partial void AfterRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPost(ref bool suppressDefaultLog, IRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse apiResponseLocalVar, Guid uid, KeyRotationRequest keyRotationRequest);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="uid"></param>
+        /// <param name="keyRotationRequest"></param>
+        private void OnErrorRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Guid uid, KeyRotationRequest keyRotationRequest)
+        {
+            bool suppressDefaultLogLocalVar = false;
+            OnErrorRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, uid, keyRotationRequest);
+            if (!suppressDefaultLogLocalVar)
+                Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLogLocalVar"></param>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="uid"></param>
+        /// <param name="keyRotationRequest"></param>
+        partial void OnErrorRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Guid uid, KeyRotationRequest keyRotationRequest);
+
+        /// <summary>
+        /// Rotate client encryption key Rotate the client encryption key for all secrets in double encryption mode.  **Scope**: Client level (JWT with client_uid that must match {uid})  **What this does**: 1. Decrypts all secrets (PDP, Chorus Pro) using the old key 2. Re-encrypts them using the new key 3. Saves to database  **Important notes**: - Both keys must be base64-encoded AES-256 keys (32 bytes each) - The old key becomes invalid immediately after rotation - Only secrets encrypted with &#x60;encryptionMode: \&quot;double\&quot;&#x60; are affected - If the client has no double-encrypted secrets, returns 404  **Security**: - The old key must be valid (decryption is verified) - If decryption fails, rotation is aborted (atomic operation) - Neither key is logged or stored by the server
+        /// </summary>
+        /// <param name="uid"></param>
+        /// <param name="keyRotationRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse"/>&gt;</returns>
+        public async Task<IRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse?> RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostOrDefaultAsync(Guid uid, KeyRotationRequest keyRotationRequest, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostAsync(uid, keyRotationRequest, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Rotate client encryption key Rotate the client encryption key for all secrets in double encryption mode.  **Scope**: Client level (JWT with client_uid that must match {uid})  **What this does**: 1. Decrypts all secrets (PDP, Chorus Pro) using the old key 2. Re-encrypts them using the new key 3. Saves to database  **Important notes**: - Both keys must be base64-encoded AES-256 keys (32 bytes each) - The old key becomes invalid immediately after rotation - Only secrets encrypted with &#x60;encryptionMode: \&quot;double\&quot;&#x60; are affected - If the client has no double-encrypted secrets, returns 404  **Security**: - The old key must be valid (decryption is verified) - If decryption fails, rotation is aborted (atomic operation) - Neither key is logged or stored by the server
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="uid"></param>
+        /// <param name="keyRotationRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse"/>&gt;</returns>
+        public async Task<IRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse> RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostAsync(Guid uid, KeyRotationRequest keyRotationRequest, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                ValidateRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPost(keyRotationRequest);
+
+                FormatRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPost(ref uid, keyRotationRequest);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
+                        ? "/api/v1/clients/{uid}/rotate-encryption-key"
+                        : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/clients/{uid}/rotate-encryption-key");
+                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Buid%7D", Uri.EscapeDataString(uid.ToString()));
+
+                    httpRequestMessageLocalVar.Content = (keyRotationRequest as object) is System.IO.Stream stream
+                        ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(keyRotationRequest, _jsonSerializerOptions));
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar2 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar2);
+
+                    bearerTokenLocalVar2.UseInHeader(httpRequestMessageLocalVar, "");
+
+                    string[] contentTypes = new string[] {
+                        "application/json"
+                    };
+
+                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
+
+                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
+                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
+
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Post;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        ILogger<RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse>();
+                        RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse apiResponseLocalVar;
+
+                        switch ((int)httpResponseMessageLocalVar.StatusCode) {
+                            default: {
+                                string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+                                apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/api/v1/clients/{uid}/rotate-encryption-key", requestedAtLocalVar, _jsonSerializerOptions);
+
+                                break;
+                            }
+                        }
+
+                        AfterRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostDefaultImplementation(apiResponseLocalVar, uid, keyRotationRequest);
+
+                        Events.ExecuteOnRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPost(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostDefaultImplementation(e, "/api/v1/clients/{uid}/rotate-encryption-key", uriBuilderLocalVar.Path, uid, keyRotationRequest);
+                Events.ExecuteOnErrorRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPost(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse"/>
+        /// </summary>
+        public partial class RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse : FactPulse.SDK.Client.ApiResponse, IRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse(ILogger<RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            /// <summary>
+            /// The <see cref="RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="contentStream"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse(ILogger<RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.KeyRotationResponse? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.KeyRotationResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out FactPulse.SDK.Model.KeyRotationResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 400 BadRequest
+            /// </summary>
+            /// <returns></returns>
+            public bool IsBadRequest => 400 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 401 Unauthorized
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnauthorized => 401 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 403 Forbidden
+            /// </summary>
+            /// <returns></returns>
+            public bool IsForbidden => 403 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 404 NotFound
+            /// </summary>
+            /// <returns></returns>
+            public bool IsNotFound => 404 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 500 InternalServerError
+            /// </summary>
+            /// <returns></returns>
+            public bool IsInternalServerError => 500 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnprocessableContent => 422 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.HTTPValidationError? UnprocessableContent()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsUnprocessableContent
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.HTTPValidationError>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryUnprocessableContent([NotNullWhen(true)]out FactPulse.SDK.Model.HTTPValidationError? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = UnprocessableContent();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)422);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
         partial void FormatUpdateClientApiV1ClientsUidPatch(ref Guid uid, ClientUpdateRequest clientUpdateRequest);
 
         /// <summary>
@@ -2829,13 +4508,17 @@ namespace FactPulse.SDK.Api
                         : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(clientUpdateRequest, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+                    BearerToken bearerTokenLocalVar2 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
 
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar2);
 
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
+                    bearerTokenLocalVar2.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] contentTypes = new string[] {
                         "application/json"
@@ -3054,7 +4737,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatUpdatePdpConfigApiV1ClientsUidPdpConfigPut(ref Guid uid, PDPConfigUpdateRequest pDPConfigUpdateRequest);
+        partial void FormatUpdatePdpConfigApiV1ClientsUidPdpConfigPut(ref Guid uid, PDPConfigUpdateRequest pDPConfigUpdateRequest, ref Option<string?> xEncryptionKey);
 
         /// <summary>
         /// Validates the request parameters
@@ -3073,10 +4756,11 @@ namespace FactPulse.SDK.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="uid"></param>
         /// <param name="pDPConfigUpdateRequest"></param>
-        private void AfterUpdatePdpConfigApiV1ClientsUidPdpConfigPutDefaultImplementation(IUpdatePdpConfigApiV1ClientsUidPdpConfigPutApiResponse apiResponseLocalVar, Guid uid, PDPConfigUpdateRequest pDPConfigUpdateRequest)
+        /// <param name="xEncryptionKey"></param>
+        private void AfterUpdatePdpConfigApiV1ClientsUidPdpConfigPutDefaultImplementation(IUpdatePdpConfigApiV1ClientsUidPdpConfigPutApiResponse apiResponseLocalVar, Guid uid, PDPConfigUpdateRequest pDPConfigUpdateRequest, Option<string?> xEncryptionKey)
         {
             bool suppressDefaultLog = false;
-            AfterUpdatePdpConfigApiV1ClientsUidPdpConfigPut(ref suppressDefaultLog, apiResponseLocalVar, uid, pDPConfigUpdateRequest);
+            AfterUpdatePdpConfigApiV1ClientsUidPdpConfigPut(ref suppressDefaultLog, apiResponseLocalVar, uid, pDPConfigUpdateRequest, xEncryptionKey);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -3088,7 +4772,8 @@ namespace FactPulse.SDK.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="uid"></param>
         /// <param name="pDPConfigUpdateRequest"></param>
-        partial void AfterUpdatePdpConfigApiV1ClientsUidPdpConfigPut(ref bool suppressDefaultLog, IUpdatePdpConfigApiV1ClientsUidPdpConfigPutApiResponse apiResponseLocalVar, Guid uid, PDPConfigUpdateRequest pDPConfigUpdateRequest);
+        /// <param name="xEncryptionKey"></param>
+        partial void AfterUpdatePdpConfigApiV1ClientsUidPdpConfigPut(ref bool suppressDefaultLog, IUpdatePdpConfigApiV1ClientsUidPdpConfigPutApiResponse apiResponseLocalVar, Guid uid, PDPConfigUpdateRequest pDPConfigUpdateRequest, Option<string?> xEncryptionKey);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -3098,10 +4783,11 @@ namespace FactPulse.SDK.Api
         /// <param name="pathLocalVar"></param>
         /// <param name="uid"></param>
         /// <param name="pDPConfigUpdateRequest"></param>
-        private void OnErrorUpdatePdpConfigApiV1ClientsUidPdpConfigPutDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Guid uid, PDPConfigUpdateRequest pDPConfigUpdateRequest)
+        /// <param name="xEncryptionKey"></param>
+        private void OnErrorUpdatePdpConfigApiV1ClientsUidPdpConfigPutDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Guid uid, PDPConfigUpdateRequest pDPConfigUpdateRequest, Option<string?> xEncryptionKey)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorUpdatePdpConfigApiV1ClientsUidPdpConfigPut(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, uid, pDPConfigUpdateRequest);
+            OnErrorUpdatePdpConfigApiV1ClientsUidPdpConfigPut(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, uid, pDPConfigUpdateRequest, xEncryptionKey);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -3115,20 +4801,22 @@ namespace FactPulse.SDK.Api
         /// <param name="pathLocalVar"></param>
         /// <param name="uid"></param>
         /// <param name="pDPConfigUpdateRequest"></param>
-        partial void OnErrorUpdatePdpConfigApiV1ClientsUidPdpConfigPut(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Guid uid, PDPConfigUpdateRequest pDPConfigUpdateRequest);
+        /// <param name="xEncryptionKey"></param>
+        partial void OnErrorUpdatePdpConfigApiV1ClientsUidPdpConfigPut(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Guid uid, PDPConfigUpdateRequest pDPConfigUpdateRequest, Option<string?> xEncryptionKey);
 
         /// <summary>
-        /// Configure client PDP Configure or update the PDP (PA/PDP) configuration for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Required fields**: - &#x60;flowServiceUrl&#x60;: PDP Flow Service URL - &#x60;tokenUrl&#x60;: PDP OAuth token URL - &#x60;oauthClientId&#x60;: OAuth Client ID - &#x60;clientSecret&#x60;: OAuth Client Secret (sent but NEVER returned)  **Optional fields**: - &#x60;isActive&#x60;: Enable/disable the config (default: true) - &#x60;modeSandbox&#x60;: Sandbox mode (default: false)  **Security**: The &#x60;clientSecret&#x60; is stored encrypted on Django side and is never returned in API responses.
+        /// Configure client PDP Configure or update the PDP (PA/PDP) configuration for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Required fields**: - &#x60;flowServiceUrl&#x60;: PDP Flow Service URL - &#x60;tokenUrl&#x60;: PDP OAuth token URL - &#x60;oauthClientId&#x60;: OAuth Client ID - &#x60;clientSecret&#x60;: OAuth Client Secret (sent but NEVER returned)  **Optional fields**: - &#x60;isActive&#x60;: Enable/disable the config (default: true) - &#x60;modeSandbox&#x60;: Sandbox mode (default: false) - &#x60;encryptionMode&#x60;: Encryption mode (default: \&quot;fernet\&quot;)   - \&quot;fernet\&quot;: Server-side encryption only   - \&quot;double\&quot;: Client AES-256-GCM + Server Fernet (requires X-Encryption-Key header)  **Double Encryption Mode**: When &#x60;encryptionMode&#x60; is set to \&quot;double\&quot;, you MUST also provide the &#x60;X-Encryption-Key&#x60; header containing a base64-encoded AES-256 key (32 bytes). This key is used to encrypt the &#x60;clientSecret&#x60; on the client side before the server encrypts it again with Fernet. The server cannot decrypt the secret without the client key.  **Security**: The &#x60;clientSecret&#x60; is stored encrypted on Django side and is never returned in API responses.
         /// </summary>
         /// <param name="uid"></param>
         /// <param name="pDPConfigUpdateRequest"></param>
+        /// <param name="xEncryptionKey">Client encryption key for double encryption mode. Must be a base64-encoded AES-256 key (32 bytes). Required only when accessing resources encrypted with encryption_mode&#x3D;&#39;double&#39;. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IUpdatePdpConfigApiV1ClientsUidPdpConfigPutApiResponse"/>&gt;</returns>
-        public async Task<IUpdatePdpConfigApiV1ClientsUidPdpConfigPutApiResponse?> UpdatePdpConfigApiV1ClientsUidPdpConfigPutOrDefaultAsync(Guid uid, PDPConfigUpdateRequest pDPConfigUpdateRequest, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IUpdatePdpConfigApiV1ClientsUidPdpConfigPutApiResponse?> UpdatePdpConfigApiV1ClientsUidPdpConfigPutOrDefaultAsync(Guid uid, PDPConfigUpdateRequest pDPConfigUpdateRequest, Option<string?> xEncryptionKey = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await UpdatePdpConfigApiV1ClientsUidPdpConfigPutAsync(uid, pDPConfigUpdateRequest, cancellationToken).ConfigureAwait(false);
+                return await UpdatePdpConfigApiV1ClientsUidPdpConfigPutAsync(uid, pDPConfigUpdateRequest, xEncryptionKey, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -3137,14 +4825,15 @@ namespace FactPulse.SDK.Api
         }
 
         /// <summary>
-        /// Configure client PDP Configure or update the PDP (PA/PDP) configuration for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Required fields**: - &#x60;flowServiceUrl&#x60;: PDP Flow Service URL - &#x60;tokenUrl&#x60;: PDP OAuth token URL - &#x60;oauthClientId&#x60;: OAuth Client ID - &#x60;clientSecret&#x60;: OAuth Client Secret (sent but NEVER returned)  **Optional fields**: - &#x60;isActive&#x60;: Enable/disable the config (default: true) - &#x60;modeSandbox&#x60;: Sandbox mode (default: false)  **Security**: The &#x60;clientSecret&#x60; is stored encrypted on Django side and is never returned in API responses.
+        /// Configure client PDP Configure or update the PDP (PA/PDP) configuration for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Required fields**: - &#x60;flowServiceUrl&#x60;: PDP Flow Service URL - &#x60;tokenUrl&#x60;: PDP OAuth token URL - &#x60;oauthClientId&#x60;: OAuth Client ID - &#x60;clientSecret&#x60;: OAuth Client Secret (sent but NEVER returned)  **Optional fields**: - &#x60;isActive&#x60;: Enable/disable the config (default: true) - &#x60;modeSandbox&#x60;: Sandbox mode (default: false) - &#x60;encryptionMode&#x60;: Encryption mode (default: \&quot;fernet\&quot;)   - \&quot;fernet\&quot;: Server-side encryption only   - \&quot;double\&quot;: Client AES-256-GCM + Server Fernet (requires X-Encryption-Key header)  **Double Encryption Mode**: When &#x60;encryptionMode&#x60; is set to \&quot;double\&quot;, you MUST also provide the &#x60;X-Encryption-Key&#x60; header containing a base64-encoded AES-256 key (32 bytes). This key is used to encrypt the &#x60;clientSecret&#x60; on the client side before the server encrypts it again with Fernet. The server cannot decrypt the secret without the client key.  **Security**: The &#x60;clientSecret&#x60; is stored encrypted on Django side and is never returned in API responses.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="uid"></param>
         /// <param name="pDPConfigUpdateRequest"></param>
+        /// <param name="xEncryptionKey">Client encryption key for double encryption mode. Must be a base64-encoded AES-256 key (32 bytes). Required only when accessing resources encrypted with encryption_mode&#x3D;&#39;double&#39;. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IUpdatePdpConfigApiV1ClientsUidPdpConfigPutApiResponse"/>&gt;</returns>
-        public async Task<IUpdatePdpConfigApiV1ClientsUidPdpConfigPutApiResponse> UpdatePdpConfigApiV1ClientsUidPdpConfigPutAsync(Guid uid, PDPConfigUpdateRequest pDPConfigUpdateRequest, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IUpdatePdpConfigApiV1ClientsUidPdpConfigPutApiResponse> UpdatePdpConfigApiV1ClientsUidPdpConfigPutAsync(Guid uid, PDPConfigUpdateRequest pDPConfigUpdateRequest, Option<string?> xEncryptionKey = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -3152,7 +4841,7 @@ namespace FactPulse.SDK.Api
             {
                 ValidateUpdatePdpConfigApiV1ClientsUidPdpConfigPut(pDPConfigUpdateRequest);
 
-                FormatUpdatePdpConfigApiV1ClientsUidPdpConfigPut(ref uid, pDPConfigUpdateRequest);
+                FormatUpdatePdpConfigApiV1ClientsUidPdpConfigPut(ref uid, pDPConfigUpdateRequest, ref xEncryptionKey);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -3164,18 +4853,25 @@ namespace FactPulse.SDK.Api
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/clients/{uid}/pdp-config");
                     uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Buid%7D", Uri.EscapeDataString(uid.ToString()));
 
+                    if (xEncryptionKey.IsSet)
+                        httpRequestMessageLocalVar.Headers.Add("X-Encryption-Key", ClientUtils.ParameterToString(xEncryptionKey.Value));
+
                     httpRequestMessageLocalVar.Content = (pDPConfigUpdateRequest as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
                         : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(pDPConfigUpdateRequest, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+                    BearerToken bearerTokenLocalVar2 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
 
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar2);
 
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
+                    bearerTokenLocalVar2.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] contentTypes = new string[] {
                         "application/json"
@@ -3213,7 +4909,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterUpdatePdpConfigApiV1ClientsUidPdpConfigPutDefaultImplementation(apiResponseLocalVar, uid, pDPConfigUpdateRequest);
+                        AfterUpdatePdpConfigApiV1ClientsUidPdpConfigPutDefaultImplementation(apiResponseLocalVar, uid, pDPConfigUpdateRequest, xEncryptionKey);
 
                         Events.ExecuteOnUpdatePdpConfigApiV1ClientsUidPdpConfigPut(apiResponseLocalVar);
 
@@ -3227,7 +4923,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorUpdatePdpConfigApiV1ClientsUidPdpConfigPutDefaultImplementation(e, "/api/v1/clients/{uid}/pdp-config", uriBuilderLocalVar.Path, uid, pDPConfigUpdateRequest);
+                OnErrorUpdatePdpConfigApiV1ClientsUidPdpConfigPutDefaultImplementation(e, "/api/v1/clients/{uid}/pdp-config", uriBuilderLocalVar.Path, uid, pDPConfigUpdateRequest, xEncryptionKey);
                 Events.ExecuteOnErrorUpdatePdpConfigApiV1ClientsUidPdpConfigPut(e);
                 throw;
             }

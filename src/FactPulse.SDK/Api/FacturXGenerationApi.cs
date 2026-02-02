@@ -298,6 +298,11 @@ namespace FactPulse.SDK.Api
         public FacturXGenerationApiEvents Events { get; }
 
         /// <summary>
+        /// A token provider of type <see cref="ApiKeyProvider"/>
+        /// </summary>
+        public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
+
+        /// <summary>
         /// A token provider of type <see cref="BearerToken"/>
         /// </summary>
         public TokenProvider<BearerToken> BearerTokenProvider { get; }
@@ -307,6 +312,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <returns></returns>
         public FacturXGenerationApi(ILogger<FacturXGenerationApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, FacturXGenerationApiEvents facturXGenerationApiEvents,
+            TokenProvider<ApiKeyToken> apiKeyProvider,
             TokenProvider<BearerToken> bearerTokenProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
@@ -314,6 +320,7 @@ namespace FactPulse.SDK.Api
             Logger = LoggerFactory.CreateLogger<FacturXGenerationApi>();
             HttpClient = httpClient;
             Events = facturXGenerationApiEvents;
+            ApiKeyProvider = apiKeyProvider;
             BearerTokenProvider = bearerTokenProvider;
         }
 
@@ -498,13 +505,17 @@ namespace FactPulse.SDK.Api
                         formParameterLocalVars.Add(new KeyValuePair<string?, string?>("skip_br_fr", ClientUtils.ParameterToString(skipBrFr.Value)));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+                    BearerToken bearerTokenLocalVar2 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
 
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar2);
 
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
+                    bearerTokenLocalVar2.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] contentTypes = new string[] {
                         "multipart/form-data"
@@ -813,13 +824,17 @@ namespace FactPulse.SDK.Api
                         : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(submitCompleteInvoiceRequest, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+                    BearerToken bearerTokenLocalVar2 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
 
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar2);
 
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
+                    bearerTokenLocalVar2.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] contentTypes = new string[] {
                         "application/json"
@@ -1180,13 +1195,17 @@ namespace FactPulse.SDK.Api
                         : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(submitCompleteInvoiceRequest, _jsonSerializerOptions));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+                    BearerToken bearerTokenLocalVar2 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
 
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar2);
 
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
+                    bearerTokenLocalVar2.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] contentTypes = new string[] {
                         "application/json"

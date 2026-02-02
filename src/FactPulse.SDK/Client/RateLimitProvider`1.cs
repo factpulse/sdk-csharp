@@ -22,7 +22,11 @@ namespace FactPulse.SDK.Client
     /// <typeparam name="TTokenBase"></typeparam>
     public class RateLimitProvider<TTokenBase> : TokenProvider<TTokenBase> where TTokenBase : TokenBase
     {
-        public Dictionary<string, global::System.Threading.Channels.Channel<TTokenBase>> AvailableTokens { get; } = new();
+        /// <summary>
+        /// Dictionary mapping header names to channels of available tokens for rate limiting.
+        /// Each channel buffers tokens that have become available and are ready for use.
+        /// </summary>
+        protected internal Dictionary<string, global::System.Threading.Channels.Channel<TTokenBase>> AvailableTokens { get; } = new();
 
         /// <summary>
         /// Instantiates a ThrottledTokenProvider. Your tokens will be rate limited based on the token's timeout.
@@ -33,22 +37,48 @@ namespace FactPulse.SDK.Client
             foreach(TTokenBase token in container.Tokens)
                 token.StartTimer(token.Timeout ?? TimeSpan.FromMilliseconds(40));
 
-            global::System.Threading.Channels.BoundedChannelOptions options = new global::System.Threading.Channels.BoundedChannelOptions(container.Tokens.Count)
+            if (container is TokenContainer<ApiKeyToken> apiKeyTokenContainer)
             {
-                FullMode = global::System.Threading.Channels.BoundedChannelFullMode.DropOldest
-            };
+                string[] headers = apiKeyTokenContainer.Tokens.Select(t => ClientUtils.ApiKeyHeaderToString(t.Header)).Distinct().ToArray();
 
-            AvailableTokens.Add(string.Empty, global::System.Threading.Channels.Channel.CreateBounded<TTokenBase>(options));
+                foreach (string header in headers)
+                {
+                    global::System.Threading.Channels.BoundedChannelOptions options = new global::System.Threading.Channels.BoundedChannelOptions(apiKeyTokenContainer.Tokens.Count(t => ClientUtils.ApiKeyHeaderToString(t.Header).Equals(header)))
+                    {
+                        FullMode = global::System.Threading.Channels.BoundedChannelFullMode.DropOldest
+                    };
+
+                    AvailableTokens.Add(header, global::System.Threading.Channels.Channel.CreateBounded<TTokenBase>(options));
+                }
+            }
+            else
+            {
+                global::System.Threading.Channels.BoundedChannelOptions options = new global::System.Threading.Channels.BoundedChannelOptions(container.Tokens.Count)
+                {
+                    FullMode = global::System.Threading.Channels.BoundedChannelFullMode.DropOldest
+                };
+
+                AvailableTokens.Add(string.Empty, global::System.Threading.Channels.Channel.CreateBounded<TTokenBase>(options));
+            }
 
             foreach (var availableToken in AvailableTokens)
                 foreach(TTokenBase token in container.Tokens)
                 {
-                    token.TokenBecameAvailable += ((sender) => availableToken.Value.Writer.TryWrite((TTokenBase)sender));
+                    if (token is ApiKeyToken apiKeyToken)
+                    {
+                        if (ClientUtils.ApiKeyHeaderToString(apiKeyToken.Header) == availableToken.Key)
+                        {
+                            token.TokenBecameAvailable += ((sender) => availableToken.Value.Writer.TryWrite((TTokenBase)sender));
+                        }
+                    } else
+                    {
+                        token.TokenBecameAvailable += ((sender) => availableToken.Value.Writer.TryWrite((TTokenBase)sender));
+                    }
                 }
         }
 
         /// <inheritdoc/>
-        public override async System.Threading.Tasks.ValueTask<TTokenBase> GetAsync(string header = "", System.Threading.CancellationToken cancellation = default)
+        protected internal override async System.Threading.Tasks.ValueTask<TTokenBase> GetAsync(string header = "", System.Threading.CancellationToken cancellation = default)
         {
             if (!AvailableTokens.TryGetValue(header, out global::System.Threading.Channels.Channel<TTokenBase>? tokens))
                 throw new KeyNotFoundException($"Could not locate a token for header '{header}'.");

@@ -71,5 +71,23 @@ namespace FactPulse.SDK.Test.Model
         {
             // TODO unit test for the property 'Message'
         }
+
+        /// <summary>
+        /// Test the property 'EncryptionMode'
+        /// </summary>
+        [Fact]
+        public void EncryptionModeTest()
+        {
+            // TODO unit test for the property 'EncryptionMode'
+        }
+
+        /// <summary>
+        /// Test the property 'RequiresClientKey'
+        /// </summary>
+        [Fact]
+        public void RequiresClientKeyTest()
+        {
+            // TODO unit test for the property 'RequiresClientKey'
+        }
     }
 }

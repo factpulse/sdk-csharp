@@ -36,11 +36,15 @@ namespace FactPulse.SDK.Model
         /// </summary>
         /// <param name="status">Secret status: &#39;active&#39;, &#39;missing&#39;, etc.</param>
         /// <param name="message">Descriptive status message</param>
+        /// <param name="encryptionMode">encryptionMode</param>
+        /// <param name="requiresClientKey">requiresClientKey</param>
         [JsonConstructor]
-        public SecretStatus(string status, string message)
+        public SecretStatus(string status, string message, Option<string?> encryptionMode = default, Option<bool?> requiresClientKey = default)
         {
             Status = status;
             Message = message;
+            EncryptionModeOption = encryptionMode;
+            RequiresClientKeyOption = requiresClientKey;
             OnCreated();
         }
 
@@ -61,6 +65,32 @@ namespace FactPulse.SDK.Model
         public string Message { get; set; }
 
         /// <summary>
+        /// Used to track the state of EncryptionMode
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> EncryptionModeOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets EncryptionMode
+        /// </summary>
+        [JsonPropertyName("encryptionMode")]
+        public string? EncryptionMode { get { return this.EncryptionModeOption; } set { this.EncryptionModeOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of RequiresClientKey
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> RequiresClientKeyOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets RequiresClientKey
+        /// </summary>
+        [JsonPropertyName("requiresClientKey")]
+        public bool? RequiresClientKey { get { return this.RequiresClientKeyOption; } set { this.RequiresClientKeyOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -70,6 +100,8 @@ namespace FactPulse.SDK.Model
             sb.Append("class SecretStatus {\n");
             sb.Append("  Status: ").Append(Status).Append("\n");
             sb.Append("  Message: ").Append(Message).Append("\n");
+            sb.Append("  EncryptionMode: ").Append(EncryptionMode).Append("\n");
+            sb.Append("  RequiresClientKey: ").Append(RequiresClientKey).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -109,6 +141,8 @@ namespace FactPulse.SDK.Model
 
             Option<string?> status = default;
             Option<string?> message = default;
+            Option<string?> encryptionMode = default;
+            Option<bool?> requiresClientKey = default;
 
             while (utf8JsonReader.Read())
             {
@@ -131,6 +165,12 @@ namespace FactPulse.SDK.Model
                         case "message":
                             message = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
+                        case "encryptionMode":
+                            encryptionMode = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "requiresClientKey":
+                            requiresClientKey = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
+                            break;
                         default:
                             break;
                     }
@@ -149,7 +189,7 @@ namespace FactPulse.SDK.Model
             if (message.IsSet && message.Value == null)
                 throw new ArgumentNullException(nameof(message), "Property is not nullable for class SecretStatus.");
 
-            return new SecretStatus(status.Value!, message.Value!);
+            return new SecretStatus(status.Value!, message.Value!, encryptionMode, requiresClientKey);
         }
 
         /// <summary>
@@ -185,6 +225,18 @@ namespace FactPulse.SDK.Model
             writer.WriteString("status", secretStatus.Status);
 
             writer.WriteString("message", secretStatus.Message);
+
+            if (secretStatus.EncryptionModeOption.IsSet)
+                if (secretStatus.EncryptionModeOption.Value != null)
+                    writer.WriteString("encryptionMode", secretStatus.EncryptionMode);
+                else
+                    writer.WriteNull("encryptionMode");
+
+            if (secretStatus.RequiresClientKeyOption.IsSet)
+                if (secretStatus.RequiresClientKeyOption.Value != null)
+                    writer.WriteBoolean("requiresClientKey", secretStatus.RequiresClientKeyOption.Value!.Value);
+                else
+                    writer.WriteNull("requiresClientKey");
         }
     }
 }

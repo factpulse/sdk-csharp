@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **FlowServiceUrl** | **string** |  | [optional] 
 **TokenUrl** | **string** |  | [optional] 
 **OauthClientId** | **string** |  | [optional] 
+**EncryptionMode** | **string** |  | [optional] 
 **SecretStatus** | [**SecretStatus**](SecretStatus.md) |  | [optional] 
 **LastTestAt** | **DateTime** |  | [optional] 
 **LastTestSuccess** | **bool** |  | [optional] 

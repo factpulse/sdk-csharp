@@ -9,7 +9,7 @@ All URIs are relative to *https://factpulse.fr*
 
 <a id="getfluxentrantapiv1afnorincomingflowsflowidget"></a>
 # **GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet**
-> IncomingInvoice GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet (string flowId, bool includeDocument = null)
+> IncomingInvoice GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGet (string flowId, bool includeDocument = null, string xEncryptionKey = null)
 
 Retrieve and extract an incoming invoice
 
@@ -22,6 +22,7 @@ Downloads an incoming flow from the AFNOR PDP and extracts invoice metadata into
 |------|------|-------------|-------|
 | **flowId** | **string** | AFNOR flow ID (UUID format) |  |
 | **includeDocument** | **bool** | Include base64-encoded document in response | [optional] [default to false] |
+| **xEncryptionKey** | **string** | Client encryption key for double encryption mode. Must be a base64-encoded AES-256 key (32 bytes). Required only when accessing resources encrypted with encryption_mode&#x3D;&#39;double&#39;. | [optional]  |
 
 ### Return type
 
@@ -29,7 +30,7 @@ Downloads an incoming flow from the AFNOR PDP and extracts invoice metadata into
 
 ### Authorization
 
-[HTTPBearer](../README.md#HTTPBearer)
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 

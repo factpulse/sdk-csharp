@@ -249,6 +249,11 @@ namespace FactPulse.SDK.Api
         public HealthApiEvents Events { get; }
 
         /// <summary>
+        /// A token provider of type <see cref="ApiKeyProvider"/>
+        /// </summary>
+        public TokenProvider<ApiKeyToken> ApiKeyProvider { get; }
+
+        /// <summary>
         /// A token provider of type <see cref="BearerToken"/>
         /// </summary>
         public TokenProvider<BearerToken> BearerTokenProvider { get; }
@@ -258,6 +263,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <returns></returns>
         public HealthApi(ILogger<HealthApi> logger, ILoggerFactory loggerFactory, HttpClient httpClient, JsonSerializerOptionsProvider jsonSerializerOptionsProvider, HealthApiEvents healthApiEvents,
+            TokenProvider<ApiKeyToken> apiKeyProvider,
             TokenProvider<BearerToken> bearerTokenProvider)
         {
             _jsonSerializerOptions = jsonSerializerOptionsProvider.Options;
@@ -265,6 +271,7 @@ namespace FactPulse.SDK.Api
             Logger = LoggerFactory.CreateLogger<HealthApi>();
             HttpClient = httpClient;
             Events = healthApiEvents;
+            ApiKeyProvider = apiKeyProvider;
             BearerTokenProvider = bearerTokenProvider;
         }
 
@@ -349,13 +356,17 @@ namespace FactPulse.SDK.Api
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/me");
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
-                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+                    BearerToken bearerTokenLocalVar2 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
 
-                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar2);
 
-                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
+                    bearerTokenLocalVar2.UseInHeader(httpRequestMessageLocalVar, "");
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"

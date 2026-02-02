@@ -59,7 +59,8 @@ namespace FactPulse.SDK.Test.Api
         {
             string flowId = default!;
             Client.Option<bool> includeDocument = default!;
-            var response = await _instance.GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetAsync(flowId, includeDocument);
+            Client.Option<string?> xEncryptionKey = default!;
+            var response = await _instance.GetFluxEntrantApiV1AfnorIncomingFlowsFlowIdGetAsync(flowId, includeDocument, xEncryptionKey);
             var model = response.Ok();
             Assert.IsType<IncomingInvoice>(model);
         }
