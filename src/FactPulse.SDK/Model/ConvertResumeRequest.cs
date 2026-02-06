@@ -27,7 +27,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Requete de reprise de conversion avec corrections.  Le champ &#x60;overrides&#x60; accepte n&#39;importe quel sous-ensemble de FacturXInvoice. Seuls les champs fournis seront mis a jour (merge profond).  Exemple:     {         \&quot;overrides\&quot;: {             \&quot;supplier\&quot;: {                 \&quot;name\&quot;: \&quot;Ma Société\&quot;,                 \&quot;siret\&quot;: \&quot;12345678901234\&quot;             },             \&quot;totals\&quot;: {                 \&quot;total_net_amount\&quot;: 1000.00             }         }     }
+    /// Requete de reprise de conversion avec corrections.  Le champ &#x60;overrides&#x60; accepte n&#39;importe quel sous-ensemble de FacturXInvoice. Seuls les champs fournis seront mis a jour (merge profond).  Exemple:     {         \&quot;overrides\&quot;: {             \&quot;supplier\&quot;: {                 \&quot;name\&quot;: \&quot;Ma Société\&quot;,                 \&quot;siret\&quot;: \&quot;12345678901234\&quot;             },             \&quot;totals\&quot;: {                 \&quot;total_net_amount\&quot;: 1000.00             }         },         \&quot;callback_url\&quot;: \&quot;https://example.com/webhook\&quot;,         \&quot;webhook_mode\&quot;: \&quot;inline\&quot;     }
     /// </summary>
     public partial class ConvertResumeRequest : IValidatableObject
     {
@@ -35,10 +35,14 @@ namespace FactPulse.SDK.Model
         /// Initializes a new instance of the <see cref="ConvertResumeRequest" /> class.
         /// </summary>
         /// <param name="overrides">Sous-ensemble de FacturXInvoice a mettre a jour (merge profond)</param>
+        /// <param name="callbackUrl">callbackUrl</param>
+        /// <param name="webhookMode">Mode de livraison webhook: &#39;inline&#39; ou &#39;download_url&#39; (default to &quot;inline&quot;)</param>
         [JsonConstructor]
-        public ConvertResumeRequest(Option<Dictionary<string, Object>?> overrides = default)
+        public ConvertResumeRequest(Option<Dictionary<string, Object>?> overrides = default, Option<string?> callbackUrl = default, Option<string?> webhookMode = default)
         {
             OverridesOption = overrides;
+            CallbackUrlOption = callbackUrl;
+            WebhookModeOption = webhookMode;
             OnCreated();
         }
 
@@ -59,6 +63,33 @@ namespace FactPulse.SDK.Model
         public Dictionary<string, Object>? Overrides { get { return this.OverridesOption; } set { this.OverridesOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of CallbackUrl
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> CallbackUrlOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets CallbackUrl
+        /// </summary>
+        [JsonPropertyName("callback_url")]
+        public string? CallbackUrl { get { return this.CallbackUrlOption; } set { this.CallbackUrlOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of WebhookMode
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> WebhookModeOption { get; private set; }
+
+        /// <summary>
+        /// Mode de livraison webhook: &#39;inline&#39; ou &#39;download_url&#39;
+        /// </summary>
+        /// <value>Mode de livraison webhook: &#39;inline&#39; ou &#39;download_url&#39;</value>
+        [JsonPropertyName("webhook_mode")]
+        public string? WebhookMode { get { return this.WebhookModeOption; } set { this.WebhookModeOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -67,6 +98,8 @@ namespace FactPulse.SDK.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class ConvertResumeRequest {\n");
             sb.Append("  Overrides: ").Append(Overrides).Append("\n");
+            sb.Append("  CallbackUrl: ").Append(CallbackUrl).Append("\n");
+            sb.Append("  WebhookMode: ").Append(WebhookMode).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -105,6 +138,8 @@ namespace FactPulse.SDK.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<Dictionary<string, Object>?> overrides = default;
+            Option<string?> callbackUrl = default;
+            Option<string?> webhookMode = default;
 
             while (utf8JsonReader.Read())
             {
@@ -124,6 +159,12 @@ namespace FactPulse.SDK.Model
                         case "overrides":
                             overrides = new Option<Dictionary<string, Object>?>(JsonSerializer.Deserialize<Dictionary<string, Object>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
+                        case "callback_url":
+                            callbackUrl = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "webhook_mode":
+                            webhookMode = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
                         default:
                             break;
                     }
@@ -133,7 +174,10 @@ namespace FactPulse.SDK.Model
             if (overrides.IsSet && overrides.Value == null)
                 throw new ArgumentNullException(nameof(overrides), "Property is not nullable for class ConvertResumeRequest.");
 
-            return new ConvertResumeRequest(overrides);
+            if (webhookMode.IsSet && webhookMode.Value == null)
+                throw new ArgumentNullException(nameof(webhookMode), "Property is not nullable for class ConvertResumeRequest.");
+
+            return new ConvertResumeRequest(overrides, callbackUrl, webhookMode);
         }
 
         /// <summary>
@@ -163,11 +207,22 @@ namespace FactPulse.SDK.Model
             if (convertResumeRequest.OverridesOption.IsSet && convertResumeRequest.Overrides == null)
                 throw new ArgumentNullException(nameof(convertResumeRequest.Overrides), "Property is required for class ConvertResumeRequest.");
 
+            if (convertResumeRequest.WebhookModeOption.IsSet && convertResumeRequest.WebhookMode == null)
+                throw new ArgumentNullException(nameof(convertResumeRequest.WebhookMode), "Property is required for class ConvertResumeRequest.");
+
             if (convertResumeRequest.OverridesOption.IsSet)
             {
                 writer.WritePropertyName("overrides");
                 JsonSerializer.Serialize(writer, convertResumeRequest.Overrides, jsonSerializerOptions);
             }
+            if (convertResumeRequest.CallbackUrlOption.IsSet)
+                if (convertResumeRequest.CallbackUrlOption.Value != null)
+                    writer.WriteString("callback_url", convertResumeRequest.CallbackUrl);
+                else
+                    writer.WriteNull("callback_url");
+
+            if (convertResumeRequest.WebhookModeOption.IsSet)
+                writer.WriteString("webhook_mode", convertResumeRequest.WebhookMode);
         }
     }
 }

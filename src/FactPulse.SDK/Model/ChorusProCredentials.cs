@@ -27,72 +27,96 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Chorus Pro credentials for Zero-Trust mode.  **Zero-Trust Mode**: Credentials are passed in each request and are NEVER stored.  **Security**: - Credentials are never persisted in the database - They are used only for the duration of the request - Secure transmission via HTTPS  **Use cases**: - High-security environments (banks, administrations) - Strict GDPR compliance - Tests with temporary credentials - Users who don&#39;t want to store their credentials
+    /// Optional Chorus Pro credentials.  **MODE 1 - JWT retrieval (recommended):** Do not provide this &#x60;credentials&#x60; field in the payload. Credentials will be automatically retrieved via client_uid from JWT (0-trust).  **MODE 2 - Credentials in payload:** Provide all required fields below. Useful for tests or third-party integrations.
     /// </summary>
     public partial class ChorusProCredentials : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ChorusProCredentials" /> class.
         /// </summary>
-        /// <param name="pisteClientId">PISTE Client ID (government API portal)</param>
-        /// <param name="pisteClientSecret">PISTE Client Secret</param>
-        /// <param name="chorusProLogin">Chorus Pro login</param>
-        /// <param name="chorusProPassword">Chorus Pro password</param>
-        /// <param name="sandbox">Use sandbox environment (true) or production (false) (default to true)</param>
+        /// <param name="pisteClientId">pisteClientId</param>
+        /// <param name="pisteClientSecret">pisteClientSecret</param>
+        /// <param name="chorusLogin">chorusLogin</param>
+        /// <param name="chorusPassword">chorusPassword</param>
+        /// <param name="sandboxMode">[MODE 2] Use sandbox mode (default: True) (default to true)</param>
         [JsonConstructor]
-        public ChorusProCredentials(string pisteClientId, string pisteClientSecret, string chorusProLogin, string chorusProPassword, Option<bool?> sandbox = default)
+        public ChorusProCredentials(Option<string?> pisteClientId = default, Option<string?> pisteClientSecret = default, Option<string?> chorusLogin = default, Option<string?> chorusPassword = default, Option<bool?> sandboxMode = default)
         {
-            PisteClientId = pisteClientId;
-            PisteClientSecret = pisteClientSecret;
-            ChorusProLogin = chorusProLogin;
-            ChorusProPassword = chorusProPassword;
-            SandboxOption = sandbox;
+            PisteClientIdOption = pisteClientId;
+            PisteClientSecretOption = pisteClientSecret;
+            ChorusLoginOption = chorusLogin;
+            ChorusPasswordOption = chorusPassword;
+            SandboxModeOption = sandboxMode;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// PISTE Client ID (government API portal)
-        /// </summary>
-        /// <value>PISTE Client ID (government API portal)</value>
-        [JsonPropertyName("pisteClientId")]
-        public string PisteClientId { get; set; }
-
-        /// <summary>
-        /// PISTE Client Secret
-        /// </summary>
-        /// <value>PISTE Client Secret</value>
-        [JsonPropertyName("pisteClientSecret")]
-        public string PisteClientSecret { get; set; }
-
-        /// <summary>
-        /// Chorus Pro login
-        /// </summary>
-        /// <value>Chorus Pro login</value>
-        [JsonPropertyName("chorusProLogin")]
-        public string ChorusProLogin { get; set; }
-
-        /// <summary>
-        /// Chorus Pro password
-        /// </summary>
-        /// <value>Chorus Pro password</value>
-        [JsonPropertyName("chorusProPassword")]
-        public string ChorusProPassword { get; set; }
-
-        /// <summary>
-        /// Used to track the state of Sandbox
+        /// Used to track the state of PisteClientId
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<bool?> SandboxOption { get; private set; }
+        public Option<string?> PisteClientIdOption { get; private set; }
 
         /// <summary>
-        /// Use sandbox environment (true) or production (false)
+        /// Gets or Sets PisteClientId
         /// </summary>
-        /// <value>Use sandbox environment (true) or production (false)</value>
-        [JsonPropertyName("sandbox")]
-        public bool? Sandbox { get { return this.SandboxOption; } set { this.SandboxOption = new(value); } }
+        [JsonPropertyName("pisteClientId")]
+        public string? PisteClientId { get { return this.PisteClientIdOption; } set { this.PisteClientIdOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of PisteClientSecret
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> PisteClientSecretOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets PisteClientSecret
+        /// </summary>
+        [JsonPropertyName("pisteClientSecret")]
+        public string? PisteClientSecret { get { return this.PisteClientSecretOption; } set { this.PisteClientSecretOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of ChorusLogin
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> ChorusLoginOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ChorusLogin
+        /// </summary>
+        [JsonPropertyName("chorusLogin")]
+        public string? ChorusLogin { get { return this.ChorusLoginOption; } set { this.ChorusLoginOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of ChorusPassword
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> ChorusPasswordOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ChorusPassword
+        /// </summary>
+        [JsonPropertyName("chorusPassword")]
+        public string? ChorusPassword { get { return this.ChorusPasswordOption; } set { this.ChorusPasswordOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of SandboxMode
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<bool?> SandboxModeOption { get; private set; }
+
+        /// <summary>
+        /// [MODE 2] Use sandbox mode (default: True)
+        /// </summary>
+        /// <value>[MODE 2] Use sandbox mode (default: True)</value>
+        [JsonPropertyName("sandboxMode")]
+        public bool? SandboxMode { get { return this.SandboxModeOption; } set { this.SandboxModeOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -104,9 +128,9 @@ namespace FactPulse.SDK.Model
             sb.Append("class ChorusProCredentials {\n");
             sb.Append("  PisteClientId: ").Append(PisteClientId).Append("\n");
             sb.Append("  PisteClientSecret: ").Append(PisteClientSecret).Append("\n");
-            sb.Append("  ChorusProLogin: ").Append(ChorusProLogin).Append("\n");
-            sb.Append("  ChorusProPassword: ").Append(ChorusProPassword).Append("\n");
-            sb.Append("  Sandbox: ").Append(Sandbox).Append("\n");
+            sb.Append("  ChorusLogin: ").Append(ChorusLogin).Append("\n");
+            sb.Append("  ChorusPassword: ").Append(ChorusPassword).Append("\n");
+            sb.Append("  SandboxMode: ").Append(SandboxMode).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -146,9 +170,9 @@ namespace FactPulse.SDK.Model
 
             Option<string?> pisteClientId = default;
             Option<string?> pisteClientSecret = default;
-            Option<string?> chorusProLogin = default;
-            Option<string?> chorusProPassword = default;
-            Option<bool?> sandbox = default;
+            Option<string?> chorusLogin = default;
+            Option<string?> chorusPassword = default;
+            Option<bool?> sandboxMode = default;
 
             while (utf8JsonReader.Read())
             {
@@ -166,19 +190,19 @@ namespace FactPulse.SDK.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "pisteClientId":
-                            pisteClientId = new Option<string?>(utf8JsonReader.GetString()!);
+                            pisteClientId = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "pisteClientSecret":
-                            pisteClientSecret = new Option<string?>(utf8JsonReader.GetString()!);
+                            pisteClientSecret = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "chorusProLogin":
-                            chorusProLogin = new Option<string?>(utf8JsonReader.GetString()!);
+                        case "chorusLogin":
+                            chorusLogin = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "chorusProPassword":
-                            chorusProPassword = new Option<string?>(utf8JsonReader.GetString()!);
+                        case "chorusPassword":
+                            chorusPassword = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "sandbox":
-                            sandbox = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
+                        case "sandboxMode":
+                            sandboxMode = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
                         default:
                             break;
@@ -186,34 +210,10 @@ namespace FactPulse.SDK.Model
                 }
             }
 
-            if (!pisteClientId.IsSet)
-                throw new ArgumentException("Property is required for class ChorusProCredentials.", nameof(pisteClientId));
+            if (sandboxMode.IsSet && sandboxMode.Value == null)
+                throw new ArgumentNullException(nameof(sandboxMode), "Property is not nullable for class ChorusProCredentials.");
 
-            if (!pisteClientSecret.IsSet)
-                throw new ArgumentException("Property is required for class ChorusProCredentials.", nameof(pisteClientSecret));
-
-            if (!chorusProLogin.IsSet)
-                throw new ArgumentException("Property is required for class ChorusProCredentials.", nameof(chorusProLogin));
-
-            if (!chorusProPassword.IsSet)
-                throw new ArgumentException("Property is required for class ChorusProCredentials.", nameof(chorusProPassword));
-
-            if (pisteClientId.IsSet && pisteClientId.Value == null)
-                throw new ArgumentNullException(nameof(pisteClientId), "Property is not nullable for class ChorusProCredentials.");
-
-            if (pisteClientSecret.IsSet && pisteClientSecret.Value == null)
-                throw new ArgumentNullException(nameof(pisteClientSecret), "Property is not nullable for class ChorusProCredentials.");
-
-            if (chorusProLogin.IsSet && chorusProLogin.Value == null)
-                throw new ArgumentNullException(nameof(chorusProLogin), "Property is not nullable for class ChorusProCredentials.");
-
-            if (chorusProPassword.IsSet && chorusProPassword.Value == null)
-                throw new ArgumentNullException(nameof(chorusProPassword), "Property is not nullable for class ChorusProCredentials.");
-
-            if (sandbox.IsSet && sandbox.Value == null)
-                throw new ArgumentNullException(nameof(sandbox), "Property is not nullable for class ChorusProCredentials.");
-
-            return new ChorusProCredentials(pisteClientId.Value!, pisteClientSecret.Value!, chorusProLogin.Value!, chorusProPassword.Value!, sandbox);
+            return new ChorusProCredentials(pisteClientId, pisteClientSecret, chorusLogin, chorusPassword, sandboxMode);
         }
 
         /// <summary>
@@ -240,28 +240,32 @@ namespace FactPulse.SDK.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, ChorusProCredentials chorusProCredentials, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (chorusProCredentials.PisteClientId == null)
-                throw new ArgumentNullException(nameof(chorusProCredentials.PisteClientId), "Property is required for class ChorusProCredentials.");
+            if (chorusProCredentials.PisteClientIdOption.IsSet)
+                if (chorusProCredentials.PisteClientIdOption.Value != null)
+                    writer.WriteString("pisteClientId", chorusProCredentials.PisteClientId);
+                else
+                    writer.WriteNull("pisteClientId");
 
-            if (chorusProCredentials.PisteClientSecret == null)
-                throw new ArgumentNullException(nameof(chorusProCredentials.PisteClientSecret), "Property is required for class ChorusProCredentials.");
+            if (chorusProCredentials.PisteClientSecretOption.IsSet)
+                if (chorusProCredentials.PisteClientSecretOption.Value != null)
+                    writer.WriteString("pisteClientSecret", chorusProCredentials.PisteClientSecret);
+                else
+                    writer.WriteNull("pisteClientSecret");
 
-            if (chorusProCredentials.ChorusProLogin == null)
-                throw new ArgumentNullException(nameof(chorusProCredentials.ChorusProLogin), "Property is required for class ChorusProCredentials.");
+            if (chorusProCredentials.ChorusLoginOption.IsSet)
+                if (chorusProCredentials.ChorusLoginOption.Value != null)
+                    writer.WriteString("chorusLogin", chorusProCredentials.ChorusLogin);
+                else
+                    writer.WriteNull("chorusLogin");
 
-            if (chorusProCredentials.ChorusProPassword == null)
-                throw new ArgumentNullException(nameof(chorusProCredentials.ChorusProPassword), "Property is required for class ChorusProCredentials.");
+            if (chorusProCredentials.ChorusPasswordOption.IsSet)
+                if (chorusProCredentials.ChorusPasswordOption.Value != null)
+                    writer.WriteString("chorusPassword", chorusProCredentials.ChorusPassword);
+                else
+                    writer.WriteNull("chorusPassword");
 
-            writer.WriteString("pisteClientId", chorusProCredentials.PisteClientId);
-
-            writer.WriteString("pisteClientSecret", chorusProCredentials.PisteClientSecret);
-
-            writer.WriteString("chorusProLogin", chorusProCredentials.ChorusProLogin);
-
-            writer.WriteString("chorusProPassword", chorusProCredentials.ChorusProPassword);
-
-            if (chorusProCredentials.SandboxOption.IsSet)
-                writer.WriteBoolean("sandbox", chorusProCredentials.SandboxOption.Value!.Value);
+            if (chorusProCredentials.SandboxModeOption.IsSet)
+                writer.WriteBoolean("sandboxMode", chorusProCredentials.SandboxModeOption.Value!.Value);
         }
     }
 }

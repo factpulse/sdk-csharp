@@ -8,6 +8,7 @@ All URIs are relative to *https://factpulse.fr*
 | [**DownloadFileApiV1ConvertConversionIdDownloadFilenameGet**](FacturXConversionApi.md#downloadfileapiv1convertconversioniddownloadfilenameget) | **GET** /api/v1/convert/{conversion_id}/download/{filename} | Download a generated file |
 | [**GetConversionStatusApiV1ConvertConversionIdStatusGet**](FacturXConversionApi.md#getconversionstatusapiv1convertconversionidstatusget) | **GET** /api/v1/convert/{conversion_id}/status | Check conversion status |
 | [**ResumeConversionApiV1ConvertConversionIdResumePost**](FacturXConversionApi.md#resumeconversionapiv1convertconversionidresumepost) | **POST** /api/v1/convert/{conversion_id}/resume | Resume a conversion with corrections |
+| [**ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost**](FacturXConversionApi.md#resumeconversionasyncapiv1convertconversionidresumeasyncpost) | **POST** /api/v1/convert/{conversion_id}/resume/async | Resume a conversion asynchronously |
 
 <a id="convertdocumentasyncapiv1convertasyncpost"></a>
 # **ConvertDocumentAsyncApiV1ConvertAsyncPost**
@@ -166,6 +167,47 @@ Resume a conversion after completing missing data or correcting errors.  The OCR
 | **200** | Successful Response |  -  |
 | **404** | Conversion not found or expired |  -  |
 | **422** | Validation still failing |  -  |
+| **401** | Authentication required - Invalid or missing JWT token |  -  |
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a id="resumeconversionasyncapiv1convertconversionidresumeasyncpost"></a>
+# **ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost**
+> Object ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost (string conversionId, ConvertResumeRequest convertResumeRequest)
+
+Resume a conversion asynchronously
+
+Resume a conversion after completing missing data or correcting errors (async mode).  The OCR extraction is preserved, data is updated with corrections, then processing is performed asynchronously via Celery.  ## Workflow  1. **Submit corrections**: Corrections are validated and task is queued 2. **Celery Task**: Task processes corrections and generates Factur-X 3. **Callback**: Webhook notification on completion  ## Possible responses  - **202**: Task accepted, processing - **404**: Conversion not found or expired
+
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **conversionId** | **string** | Conversion ID returned by POST /convert (UUID format) |  |
+| **convertResumeRequest** | [**ConvertResumeRequest**](ConvertResumeRequest.md) |  |  |
+
+### Return type
+
+**Object**
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **202** | Task accepted |  -  |
+| **404** | Conversion not found or expired |  -  |
+| **422** | Validation Error |  -  |
 | **401** | Authentication required - Invalid or missing JWT token |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)

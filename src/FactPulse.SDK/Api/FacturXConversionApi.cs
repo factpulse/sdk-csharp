@@ -139,6 +139,31 @@ namespace FactPulse.SDK.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IResumeConversionApiV1ConvertConversionIdResumePostApiResponse"/>?&gt;</returns>
         Task<IResumeConversionApiV1ConvertConversionIdResumePostApiResponse?> ResumeConversionApiV1ConvertConversionIdResumePostOrDefaultAsync(string conversionId, ConvertResumeRequest convertResumeRequest, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Resume a conversion asynchronously
+        /// </summary>
+        /// <remarks>
+        /// Resume a conversion after completing missing data or correcting errors (async mode).  The OCR extraction is preserved, data is updated with corrections, then processing is performed asynchronously via Celery.  ## Workflow  1. **Submit corrections**: Corrections are validated and task is queued 2. **Celery Task**: Task processes corrections and generates Factur-X 3. **Callback**: Webhook notification on completion  ## Possible responses  - **202**: Task accepted, processing - **404**: Conversion not found or expired
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversionId">Conversion ID returned by POST /convert (UUID format)</param>
+        /// <param name="convertResumeRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostApiResponse"/>&gt;</returns>
+        Task<IResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostApiResponse> ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostAsync(string conversionId, ConvertResumeRequest convertResumeRequest, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Resume a conversion asynchronously
+        /// </summary>
+        /// <remarks>
+        /// Resume a conversion after completing missing data or correcting errors (async mode).  The OCR extraction is preserved, data is updated with corrections, then processing is performed asynchronously via Celery.  ## Workflow  1. **Submit corrections**: Corrections are validated and task is queued 2. **Celery Task**: Task processes corrections and generates Factur-X 3. **Callback**: Webhook notification on completion  ## Possible responses  - **202**: Task accepted, processing - **404**: Conversion not found or expired
+        /// </remarks>
+        /// <param name="conversionId">Conversion ID returned by POST /convert (UUID format)</param>
+        /// <param name="convertResumeRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostApiResponse"/>?&gt;</returns>
+        Task<IResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostApiResponse?> ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostOrDefaultAsync(string conversionId, ConvertResumeRequest convertResumeRequest, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -262,6 +287,42 @@ namespace FactPulse.SDK.Api
     }
 
     /// <summary>
+    /// The <see cref="IResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostApiResponse"/>
+    /// </summary>
+    public interface IResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<Object?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>, IUnauthorized<FactPulse.SDK.Model.APIError?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 202 Accepted
+        /// </summary>
+        /// <returns></returns>
+        bool IsAccepted { get; }
+
+        /// <summary>
+        /// Returns true if the response is 404 NotFound
+        /// </summary>
+        /// <returns></returns>
+        bool IsNotFound { get; }
+
+        /// <summary>
+        /// Returns true if the response is 422 UnprocessableContent
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnprocessableContent { get; }
+
+        /// <summary>
+        /// Returns true if the response is 401 Unauthorized
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnauthorized { get; }
+    }
+
+    /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
     public class FacturXConversionApiEvents
@@ -344,6 +405,26 @@ namespace FactPulse.SDK.Api
         internal void ExecuteOnErrorResumeConversionApiV1ConvertConversionIdResumePost(Exception exception)
         {
             OnErrorResumeConversionApiV1ConvertConversionIdResumePost?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
+        public event EventHandler<ApiResponseEventArgs>? OnResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs>? OnErrorResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost;
+
+        internal void ExecuteOnResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost(FacturXConversionApi.ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostApiResponse apiResponse)
+        {
+            OnResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost(Exception exception)
+        {
+            OnErrorResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost?.Invoke(this, new ExceptionEventArgs(exception));
         }
     }
 
@@ -1779,6 +1860,374 @@ namespace FactPulse.SDK.Api
             /// <param name="result"></param>
             /// <returns></returns>
             public bool TryUnprocessableContent([NotNullWhen(true)]out FactPulse.SDK.Model.ConvertValidationFailedResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = UnprocessableContent();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)422);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 401 Unauthorized
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnauthorized => 401 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 401 Unauthorized
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.APIError? Unauthorized()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsUnauthorized
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.APIError>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 401 Unauthorized and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryUnauthorized([NotNullWhen(true)]out FactPulse.SDK.Model.APIError? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Unauthorized();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)401);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
+        partial void FormatResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost(ref string conversionId, ConvertResumeRequest convertResumeRequest);
+
+        /// <summary>
+        /// Validates the request parameters
+        /// </summary>
+        /// <param name="conversionId"></param>
+        /// <param name="convertResumeRequest"></param>
+        /// <returns></returns>
+        private void ValidateResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost(string conversionId, ConvertResumeRequest convertResumeRequest)
+        {
+            if (conversionId == null)
+                throw new ArgumentNullException(nameof(conversionId));
+
+            if (convertResumeRequest == null)
+                throw new ArgumentNullException(nameof(convertResumeRequest));
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="conversionId"></param>
+        /// <param name="convertResumeRequest"></param>
+        private void AfterResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostDefaultImplementation(IResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostApiResponse apiResponseLocalVar, string conversionId, ConvertResumeRequest convertResumeRequest)
+        {
+            bool suppressDefaultLog = false;
+            AfterResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost(ref suppressDefaultLog, apiResponseLocalVar, conversionId, convertResumeRequest);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="conversionId"></param>
+        /// <param name="convertResumeRequest"></param>
+        partial void AfterResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost(ref bool suppressDefaultLog, IResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostApiResponse apiResponseLocalVar, string conversionId, ConvertResumeRequest convertResumeRequest);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="conversionId"></param>
+        /// <param name="convertResumeRequest"></param>
+        private void OnErrorResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string conversionId, ConvertResumeRequest convertResumeRequest)
+        {
+            bool suppressDefaultLogLocalVar = false;
+            OnErrorResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, conversionId, convertResumeRequest);
+            if (!suppressDefaultLogLocalVar)
+                Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLogLocalVar"></param>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="conversionId"></param>
+        /// <param name="convertResumeRequest"></param>
+        partial void OnErrorResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string conversionId, ConvertResumeRequest convertResumeRequest);
+
+        /// <summary>
+        /// Resume a conversion asynchronously Resume a conversion after completing missing data or correcting errors (async mode).  The OCR extraction is preserved, data is updated with corrections, then processing is performed asynchronously via Celery.  ## Workflow  1. **Submit corrections**: Corrections are validated and task is queued 2. **Celery Task**: Task processes corrections and generates Factur-X 3. **Callback**: Webhook notification on completion  ## Possible responses  - **202**: Task accepted, processing - **404**: Conversion not found or expired
+        /// </summary>
+        /// <param name="conversionId">Conversion ID returned by POST /convert (UUID format)</param>
+        /// <param name="convertResumeRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostApiResponse"/>&gt;</returns>
+        public async Task<IResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostApiResponse?> ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostOrDefaultAsync(string conversionId, ConvertResumeRequest convertResumeRequest, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostAsync(conversionId, convertResumeRequest, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Resume a conversion asynchronously Resume a conversion after completing missing data or correcting errors (async mode).  The OCR extraction is preserved, data is updated with corrections, then processing is performed asynchronously via Celery.  ## Workflow  1. **Submit corrections**: Corrections are validated and task is queued 2. **Celery Task**: Task processes corrections and generates Factur-X 3. **Callback**: Webhook notification on completion  ## Possible responses  - **202**: Task accepted, processing - **404**: Conversion not found or expired
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="conversionId">Conversion ID returned by POST /convert (UUID format)</param>
+        /// <param name="convertResumeRequest"></param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostApiResponse"/>&gt;</returns>
+        public async Task<IResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostApiResponse> ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostAsync(string conversionId, ConvertResumeRequest convertResumeRequest, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                ValidateResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost(conversionId, convertResumeRequest);
+
+                FormatResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost(ref conversionId, convertResumeRequest);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
+                        ? "/api/v1/convert/{conversion_id}/resume/async"
+                        : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/convert/{conversion_id}/resume/async");
+                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Bconversion_id%7D", Uri.EscapeDataString(conversionId.ToString()));
+
+                    httpRequestMessageLocalVar.Content = (convertResumeRequest as object) is System.IO.Stream stream
+                        ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
+                        : httpRequestMessageLocalVar.Content = new StringContent(JsonSerializer.Serialize(convertResumeRequest, _jsonSerializerOptions));
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar2 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar2);
+
+                    bearerTokenLocalVar2.UseInHeader(httpRequestMessageLocalVar, "");
+
+                    string[] contentTypes = new string[] {
+                        "application/json"
+                    };
+
+                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
+
+                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
+                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
+
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Post;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        ILogger<ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostApiResponse>();
+                        ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostApiResponse apiResponseLocalVar;
+
+                        switch ((int)httpResponseMessageLocalVar.StatusCode) {
+                            default: {
+                                string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+                                apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/api/v1/convert/{conversion_id}/resume/async", requestedAtLocalVar, _jsonSerializerOptions);
+
+                                break;
+                            }
+                        }
+
+                        AfterResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostDefaultImplementation(apiResponseLocalVar, conversionId, convertResumeRequest);
+
+                        Events.ExecuteOnResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostDefaultImplementation(e, "/api/v1/convert/{conversion_id}/resume/async", uriBuilderLocalVar.Path, conversionId, convertResumeRequest);
+                Events.ExecuteOnErrorResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostApiResponse"/>
+        /// </summary>
+        public partial class ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostApiResponse : FactPulse.SDK.Client.ApiResponse, IResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostApiResponse(ILogger<ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            /// <summary>
+            /// The <see cref="ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="contentStream"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostApiResponse(ILogger<ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public Object? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<Object>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out Object? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 202 Accepted
+            /// </summary>
+            /// <returns></returns>
+            public bool IsAccepted => 202 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 404 NotFound
+            /// </summary>
+            /// <returns></returns>
+            public bool IsNotFound => 404 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnprocessableContent => 422 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.HTTPValidationError? UnprocessableContent()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsUnprocessableContent
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.HTTPValidationError>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryUnprocessableContent([NotNullWhen(true)]out FactPulse.SDK.Model.HTTPValidationError? result)
             {
                 result = null;
 

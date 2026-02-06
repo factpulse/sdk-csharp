@@ -103,5 +103,18 @@ namespace FactPulse.SDK.Test.Api
             var model = response.Ok();
             Assert.IsType<ConvertSuccessResponse>(model);
         }
+
+        /// <summary>
+        /// Test ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostAsyncTest()
+        {
+            string conversionId = default!;
+            ConvertResumeRequest convertResumeRequest = default!;
+            var response = await _instance.ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPostAsync(conversionId, convertResumeRequest);
+            var model = response.Ok();
+            Assert.IsType<Object>(model);
+        }
     }
 }

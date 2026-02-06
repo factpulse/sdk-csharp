@@ -232,9 +232,9 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new ExtractionInfoJsonConverter());
             _jsonOptions.Converters.Add(new FacturXInvoiceJsonConverter());
             _jsonOptions.Converters.Add(new FacturXPDFInfoJsonConverter());
+            _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasChorusProChorusProCredentialsJsonConverter());
             _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeJsonConverter());
             _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeNullableJsonConverter());
-            _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasProcessingChorusProCredentialsJsonConverter());
             _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasValidationValidationErrorResponseJsonConverter());
             _jsonOptions.Converters.Add(new FieldStatusJsonConverter());
             _jsonOptions.Converters.Add(new FieldStatusNullableJsonConverter());

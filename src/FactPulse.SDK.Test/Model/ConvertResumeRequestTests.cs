@@ -62,5 +62,23 @@ namespace FactPulse.SDK.Test.Model
         {
             // TODO unit test for the property 'Overrides'
         }
+
+        /// <summary>
+        /// Test the property 'CallbackUrl'
+        /// </summary>
+        [Fact]
+        public void CallbackUrlTest()
+        {
+            // TODO unit test for the property 'CallbackUrl'
+        }
+
+        /// <summary>
+        /// Test the property 'WebhookMode'
+        /// </summary>
+        [Fact]
+        public void WebhookModeTest()
+        {
+            // TODO unit test for the property 'WebhookMode'
+        }
     }
 }
