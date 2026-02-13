@@ -7,6 +7,7 @@ All URIs are relative to *https://factpulse.fr*
 | [**ConvertDocumentAsyncApiV1ConvertAsyncPost**](FacturXConversionApi.md#convertdocumentasyncapiv1convertasyncpost) | **POST** /api/v1/convert/async | Convert a document to Factur-X (async mode) |
 | [**DownloadFileApiV1ConvertConversionIdDownloadFilenameGet**](FacturXConversionApi.md#downloadfileapiv1convertconversioniddownloadfilenameget) | **GET** /api/v1/convert/{conversion_id}/download/{filename} | Download a generated file |
 | [**GetConversionStatusApiV1ConvertConversionIdStatusGet**](FacturXConversionApi.md#getconversionstatusapiv1convertconversionidstatusget) | **GET** /api/v1/convert/{conversion_id}/status | Check conversion status |
+| [**GetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGet**](FacturXConversionApi.md#getconversiontaskstatusapiv1converttaskstaskidconversionstatusget) | **GET** /api/v1/convert/tasks/{task_id}/conversion-status | Get typed conversion task status |
 | [**ResumeConversionApiV1ConvertConversionIdResumePost**](FacturXConversionApi.md#resumeconversionapiv1convertconversionidresumepost) | **POST** /api/v1/convert/{conversion_id}/resume | Resume a conversion with corrections |
 | [**ResumeConversionAsyncApiV1ConvertConversionIdResumeAsyncPost**](FacturXConversionApi.md#resumeconversionasyncapiv1convertconversionidresumeasyncpost) | **POST** /api/v1/convert/{conversion_id}/resume/async | Resume a conversion asynchronously |
 
@@ -111,6 +112,44 @@ Returns the current status of an asynchronous conversion.
 ### Return type
 
 **Dictionary<string, Object>**
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **401** | Authentication required - Invalid or missing JWT token |  -  |
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a id="getconversiontaskstatusapiv1converttaskstaskidconversionstatusget"></a>
+# **GetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGet**
+> ConversionTaskStatus GetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGet (string taskId)
+
+Get typed conversion task status
+
+Typed status endpoint for document conversion tasks.  Returns a strongly-typed `result` discriminated on `result.status`: - **SUCCESS**: `ConversionSuccessTaskResult` - **PENDING_INPUT**: `ConversionPendingInputResult` (missing fields) - **VALIDATION_FAILED**: `ConversionValidationFailedResult` - **ERROR**: `ConversionErrorResult`
+
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **taskId** | **string** | Celery task ID returned by POST /convert |  |
+
+### Return type
+
+[**ConversionTaskStatus**](ConversionTaskStatus.md)
 
 ### Authorization
 

@@ -2,7 +2,7 @@
 /*
  * FactPulse REST API
  *
- *  REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X - Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Factur-X - Validation - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules)  ### ✍️ Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification  ### 📋 Flux 6 - Invoice Lifecycle (CDAR) - **CDAR Messages**: Acknowledgements, invoice statuses - **PPF Statuses**: REFUSED (210), PAID (212)  ### 📊 Flux 10 - E-Reporting - **Tax Declarations**: International B2B, B2C - **Flow Types**: 10.1 (B2B transactions), 10.2 (B2B payments), 10.3 (B2C transactions), 10.4 (B2C payments)  ### 📡 AFNOR PDP/PA (XP Z12-013) - **Flow Service**: Submit and search flows to PDPs - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user  ### 🏛️ Chorus Pro - **Public Sector Invoicing**: Complete API for Chorus Pro  ### ⏳ Async Tasks - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **Webhooks**: Automatic notifications when tasks complete  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://factpulse.fr/api/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://factpulse.fr/documentation-api/     
+ *  REST API for electronic invoicing in France: Factur-X (CII), UBL 2.1, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Invoice Generation - **Formats**: CII XML, UBL 2.1 XML, or Factur-X PDF/A-3 - **Profiles** (CII/PDF): MINIMUM, BASIC, EN16931, EXTENDED - **UBL**: Always EN16931 compliant - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT), UBL 2.1 (OASIS) - **Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Factur-X - Validation - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules)  ### ✍️ Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification  ### 📋 Flux 6 - Invoice Lifecycle (CDAR) - **CDAR Messages**: Acknowledgements, invoice statuses - **PPF Statuses**: REFUSED (210), PAID (212)  ### 📊 Flux 10 - E-Reporting - **Tax Declarations**: International B2B, B2C - **Flow Types**: 10.1 (B2B transactions), 10.2 (B2B payments), 10.3 (B2C transactions), 10.4 (B2C payments)  ### 📡 AFNOR PDP/PA (XP Z12-013) - **Flow Service**: Submit and search flows to PDPs - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user  ### 🏛️ Chorus Pro - **Public Sector Invoicing**: Complete API for Chorus Pro  ### ⏳ Async Tasks - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **Webhooks**: Automatic notifications when tasks complete  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://factpulse.fr/api/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://factpulse.fr/documentation-api/     
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: contact@factpulse.fr
@@ -27,90 +27,35 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Document type according to BR-FR-04 (UNTDID 1001 codes).  | Code | Name | Description | |- -- -- -|- -- -- -|- -- -- -- -- -- --| | 380 | INVOICE | Commercial invoice | | 389 | SELF_BILLED_INVOICE | Self-billed invoice | | 393 | FACTORED_INVOICE | Factored invoice | | 501 | SELF_BILLED_FACTORED_INVOICE | Self-billed factored invoice | | 386 | PREPAYMENT_INVOICE | Prepayment invoice | | 500 | SELF_BILLED_PREPAYMENT_INVOICE | Self-billed prepayment invoice | | 384 | CORRECTIVE_INVOICE | Corrective invoice | | 471 | SELF_BILLED_CORRECTIVE_INVOICE | Self-billed corrective invoice | | 472 | FACTORED_CORRECTIVE_INVOICE | Factored corrective invoice | | 473 | SELF_BILLED_FACTORED_CORRECTIVE_INVOICE | Self-billed factored corrective invoice | | 381 | CREDIT_NOTE | Credit note | | 261 | SELF_BILLED_CREDIT_NOTE | Self-billed credit note | | 262 | GLOBAL_ALLOWANCE_CREDIT_NOTE | Credit note for global allowance | | 396 | FACTORED_CREDIT_NOTE | Factored credit note | | 502 | SELF_BILLED_FACTORED_CREDIT_NOTE | Self-billed factored credit note | | 503 | PREPAYMENT_CREDIT_NOTE | Credit note for prepayment invoice |
+    /// Invoice type codes (UNTDID 1001).
     /// </summary>
-    /// <value>Document type according to BR-FR-04 (UNTDID 1001 codes).  | Code | Name | Description | |- -- -- -|- -- -- -|- -- -- -- -- -- --| | 380 | INVOICE | Commercial invoice | | 389 | SELF_BILLED_INVOICE | Self-billed invoice | | 393 | FACTORED_INVOICE | Factored invoice | | 501 | SELF_BILLED_FACTORED_INVOICE | Self-billed factored invoice | | 386 | PREPAYMENT_INVOICE | Prepayment invoice | | 500 | SELF_BILLED_PREPAYMENT_INVOICE | Self-billed prepayment invoice | | 384 | CORRECTIVE_INVOICE | Corrective invoice | | 471 | SELF_BILLED_CORRECTIVE_INVOICE | Self-billed corrective invoice | | 472 | FACTORED_CORRECTIVE_INVOICE | Factored corrective invoice | | 473 | SELF_BILLED_FACTORED_CORRECTIVE_INVOICE | Self-billed factored corrective invoice | | 381 | CREDIT_NOTE | Credit note | | 261 | SELF_BILLED_CREDIT_NOTE | Self-billed credit note | | 262 | GLOBAL_ALLOWANCE_CREDIT_NOTE | Credit note for global allowance | | 396 | FACTORED_CREDIT_NOTE | Factored credit note | | 502 | SELF_BILLED_FACTORED_CREDIT_NOTE | Self-billed factored credit note | | 503 | PREPAYMENT_CREDIT_NOTE | Credit note for prepayment invoice |</value>
+    /// <value>Invoice type codes (UNTDID 1001).</value>
     public enum InvoiceTypeCode
     {
         /// <summary>
-        /// Enum INVOICE for value: 380
+        /// Enum _380 for value: 380
         /// </summary>
-        INVOICE = 1,
+        _380 = 1,
 
         /// <summary>
-        /// Enum SELF_BILLED_INVOICE for value: 389
+        /// Enum _381 for value: 381
         /// </summary>
-        SELF_BILLED_INVOICE = 2,
+        _381 = 2,
 
         /// <summary>
-        /// Enum FACTORED_INVOICE for value: 393
+        /// Enum _384 for value: 384
         /// </summary>
-        FACTORED_INVOICE = 3,
+        _384 = 3,
 
         /// <summary>
-        /// Enum SELF_BILLED_FACTORED_INVOICE for value: 501
+        /// Enum _389 for value: 389
         /// </summary>
-        SELF_BILLED_FACTORED_INVOICE = 4,
+        _389 = 4,
 
         /// <summary>
-        /// Enum PREPAYMENT_INVOICE for value: 386
+        /// Enum _386 for value: 386
         /// </summary>
-        PREPAYMENT_INVOICE = 5,
-
-        /// <summary>
-        /// Enum SELF_BILLED_PREPAYMENT_INVOICE for value: 500
-        /// </summary>
-        SELF_BILLED_PREPAYMENT_INVOICE = 6,
-
-        /// <summary>
-        /// Enum CORRECTIVE_INVOICE for value: 384
-        /// </summary>
-        CORRECTIVE_INVOICE = 7,
-
-        /// <summary>
-        /// Enum SELF_BILLED_CORRECTIVE_INVOICE for value: 471
-        /// </summary>
-        SELF_BILLED_CORRECTIVE_INVOICE = 8,
-
-        /// <summary>
-        /// Enum FACTORED_CORRECTIVE_INVOICE for value: 472
-        /// </summary>
-        FACTORED_CORRECTIVE_INVOICE = 9,
-
-        /// <summary>
-        /// Enum SELF_BILLED_FACTORED_CORRECTIVE_INVOICE for value: 473
-        /// </summary>
-        SELF_BILLED_FACTORED_CORRECTIVE_INVOICE = 10,
-
-        /// <summary>
-        /// Enum CREDIT_NOTE for value: 381
-        /// </summary>
-        CREDIT_NOTE = 11,
-
-        /// <summary>
-        /// Enum SELF_BILLED_CREDIT_NOTE for value: 261
-        /// </summary>
-        SELF_BILLED_CREDIT_NOTE = 12,
-
-        /// <summary>
-        /// Enum GLOBAL_ALLOWANCE_CREDIT_NOTE for value: 262
-        /// </summary>
-        GLOBAL_ALLOWANCE_CREDIT_NOTE = 13,
-
-        /// <summary>
-        /// Enum FACTORED_CREDIT_NOTE for value: 396
-        /// </summary>
-        FACTORED_CREDIT_NOTE = 14,
-
-        /// <summary>
-        /// Enum SELF_BILLED_FACTORED_CREDIT_NOTE for value: 502
-        /// </summary>
-        SELF_BILLED_FACTORED_CREDIT_NOTE = 15,
-
-        /// <summary>
-        /// Enum PREPAYMENT_CREDIT_NOTE for value: 503
-        /// </summary>
-        PREPAYMENT_CREDIT_NOTE = 16
+        _386 = 5
     }
 
     /// <summary>
@@ -126,52 +71,19 @@ namespace FactPulse.SDK.Model
         public static InvoiceTypeCode FromString(string value)
         {
             if (value.Equals("380"))
-                return InvoiceTypeCode.INVOICE;
-
-            if (value.Equals("389"))
-                return InvoiceTypeCode.SELF_BILLED_INVOICE;
-
-            if (value.Equals("393"))
-                return InvoiceTypeCode.FACTORED_INVOICE;
-
-            if (value.Equals("501"))
-                return InvoiceTypeCode.SELF_BILLED_FACTORED_INVOICE;
-
-            if (value.Equals("386"))
-                return InvoiceTypeCode.PREPAYMENT_INVOICE;
-
-            if (value.Equals("500"))
-                return InvoiceTypeCode.SELF_BILLED_PREPAYMENT_INVOICE;
-
-            if (value.Equals("384"))
-                return InvoiceTypeCode.CORRECTIVE_INVOICE;
-
-            if (value.Equals("471"))
-                return InvoiceTypeCode.SELF_BILLED_CORRECTIVE_INVOICE;
-
-            if (value.Equals("472"))
-                return InvoiceTypeCode.FACTORED_CORRECTIVE_INVOICE;
-
-            if (value.Equals("473"))
-                return InvoiceTypeCode.SELF_BILLED_FACTORED_CORRECTIVE_INVOICE;
+                return InvoiceTypeCode._380;
 
             if (value.Equals("381"))
-                return InvoiceTypeCode.CREDIT_NOTE;
+                return InvoiceTypeCode._381;
 
-            if (value.Equals("261"))
-                return InvoiceTypeCode.SELF_BILLED_CREDIT_NOTE;
+            if (value.Equals("384"))
+                return InvoiceTypeCode._384;
 
-            if (value.Equals("262"))
-                return InvoiceTypeCode.GLOBAL_ALLOWANCE_CREDIT_NOTE;
+            if (value.Equals("389"))
+                return InvoiceTypeCode._389;
 
-            if (value.Equals("396"))
-                return InvoiceTypeCode.FACTORED_CREDIT_NOTE;
-
-            if (value.Equals("502"))
-                return InvoiceTypeCode.SELF_BILLED_FACTORED_CREDIT_NOTE;
-
-            if (value.Equals("503"))
-                return InvoiceTypeCode.PREPAYMENT_CREDIT_NOTE;
+            if (value.Equals("386"))
+                return InvoiceTypeCode._386;
 
             throw new NotImplementedException($"Could not convert value to type InvoiceTypeCode: '{value}'");
         }
@@ -184,52 +96,19 @@ namespace FactPulse.SDK.Model
         public static InvoiceTypeCode? FromStringOrDefault(string value)
         {
             if (value.Equals("380"))
-                return InvoiceTypeCode.INVOICE;
-
-            if (value.Equals("389"))
-                return InvoiceTypeCode.SELF_BILLED_INVOICE;
-
-            if (value.Equals("393"))
-                return InvoiceTypeCode.FACTORED_INVOICE;
-
-            if (value.Equals("501"))
-                return InvoiceTypeCode.SELF_BILLED_FACTORED_INVOICE;
-
-            if (value.Equals("386"))
-                return InvoiceTypeCode.PREPAYMENT_INVOICE;
-
-            if (value.Equals("500"))
-                return InvoiceTypeCode.SELF_BILLED_PREPAYMENT_INVOICE;
-
-            if (value.Equals("384"))
-                return InvoiceTypeCode.CORRECTIVE_INVOICE;
-
-            if (value.Equals("471"))
-                return InvoiceTypeCode.SELF_BILLED_CORRECTIVE_INVOICE;
-
-            if (value.Equals("472"))
-                return InvoiceTypeCode.FACTORED_CORRECTIVE_INVOICE;
-
-            if (value.Equals("473"))
-                return InvoiceTypeCode.SELF_BILLED_FACTORED_CORRECTIVE_INVOICE;
+                return InvoiceTypeCode._380;
 
             if (value.Equals("381"))
-                return InvoiceTypeCode.CREDIT_NOTE;
+                return InvoiceTypeCode._381;
 
-            if (value.Equals("261"))
-                return InvoiceTypeCode.SELF_BILLED_CREDIT_NOTE;
+            if (value.Equals("384"))
+                return InvoiceTypeCode._384;
 
-            if (value.Equals("262"))
-                return InvoiceTypeCode.GLOBAL_ALLOWANCE_CREDIT_NOTE;
+            if (value.Equals("389"))
+                return InvoiceTypeCode._389;
 
-            if (value.Equals("396"))
-                return InvoiceTypeCode.FACTORED_CREDIT_NOTE;
-
-            if (value.Equals("502"))
-                return InvoiceTypeCode.SELF_BILLED_FACTORED_CREDIT_NOTE;
-
-            if (value.Equals("503"))
-                return InvoiceTypeCode.PREPAYMENT_CREDIT_NOTE;
+            if (value.Equals("386"))
+                return InvoiceTypeCode._386;
 
             return null;
         }
@@ -242,53 +121,20 @@ namespace FactPulse.SDK.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string ToJsonValue(InvoiceTypeCode value)
         {
-            if (value == InvoiceTypeCode.INVOICE)
+            if (value == InvoiceTypeCode._380)
                 return "380";
 
-            if (value == InvoiceTypeCode.SELF_BILLED_INVOICE)
-                return "389";
-
-            if (value == InvoiceTypeCode.FACTORED_INVOICE)
-                return "393";
-
-            if (value == InvoiceTypeCode.SELF_BILLED_FACTORED_INVOICE)
-                return "501";
-
-            if (value == InvoiceTypeCode.PREPAYMENT_INVOICE)
-                return "386";
-
-            if (value == InvoiceTypeCode.SELF_BILLED_PREPAYMENT_INVOICE)
-                return "500";
-
-            if (value == InvoiceTypeCode.CORRECTIVE_INVOICE)
-                return "384";
-
-            if (value == InvoiceTypeCode.SELF_BILLED_CORRECTIVE_INVOICE)
-                return "471";
-
-            if (value == InvoiceTypeCode.FACTORED_CORRECTIVE_INVOICE)
-                return "472";
-
-            if (value == InvoiceTypeCode.SELF_BILLED_FACTORED_CORRECTIVE_INVOICE)
-                return "473";
-
-            if (value == InvoiceTypeCode.CREDIT_NOTE)
+            if (value == InvoiceTypeCode._381)
                 return "381";
 
-            if (value == InvoiceTypeCode.SELF_BILLED_CREDIT_NOTE)
-                return "261";
+            if (value == InvoiceTypeCode._384)
+                return "384";
 
-            if (value == InvoiceTypeCode.GLOBAL_ALLOWANCE_CREDIT_NOTE)
-                return "262";
+            if (value == InvoiceTypeCode._389)
+                return "389";
 
-            if (value == InvoiceTypeCode.FACTORED_CREDIT_NOTE)
-                return "396";
-
-            if (value == InvoiceTypeCode.SELF_BILLED_FACTORED_CREDIT_NOTE)
-                return "502";
-
-            if (value == InvoiceTypeCode.PREPAYMENT_CREDIT_NOTE)
-                return "503";
+            if (value == InvoiceTypeCode._386)
+                return "386";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }

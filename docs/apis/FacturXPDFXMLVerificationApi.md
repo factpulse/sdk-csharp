@@ -5,6 +5,7 @@ All URIs are relative to *https://factpulse.fr*
 | Method | HTTP request | Description |
 |--------|--------------|-------------|
 | [**GetVerificationStatusApiV1VerificationVerifyAsyncTaskIdStatusGet**](FacturXPDFXMLVerificationApi.md#getverificationstatusapiv1verificationverifyasynctaskidstatusget) | **GET** /api/v1/verification/verify-async/{task_id}/status | Get status of an asynchronous verification |
+| [**GetVerificationTypedStatusApiV1VerificationVerifyAsyncTaskIdTypedStatusGet**](FacturXPDFXMLVerificationApi.md#getverificationtypedstatusapiv1verificationverifyasynctaskidtypedstatusget) | **GET** /api/v1/verification/verify-async/{task_id}/typed-status | Get typed status of an asynchronous verification |
 | [**VerifyPdfAsyncApiV1VerificationVerifyAsyncPost**](FacturXPDFXMLVerificationApi.md#verifypdfasyncapiv1verificationverifyasyncpost) | **POST** /api/v1/verification/verify-async | Verify PDF/XML Factur-X compliance (asynchronous) |
 | [**VerifyPdfSyncApiV1VerificationVerifyPost**](FacturXPDFXMLVerificationApi.md#verifypdfsyncapiv1verificationverifypost) | **POST** /api/v1/verification/verify | Verify PDF/XML Factur-X compliance (synchronous) |
 
@@ -26,6 +27,44 @@ Retrieves the status and result of an asynchronous verification task.  **Possibl
 ### Return type
 
 [**AsyncTaskStatus**](AsyncTaskStatus.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **422** | Validation Error |  -  |
+| **401** | Authentication required - Invalid or missing JWT token |  -  |
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a id="getverificationtypedstatusapiv1verificationverifyasynctaskidtypedstatusget"></a>
+# **GetVerificationTypedStatusApiV1VerificationVerifyAsyncTaskIdTypedStatusGet**
+> VerificationTypedTaskStatus GetVerificationTypedStatusApiV1VerificationVerifyAsyncTaskIdTypedStatusGet (string taskId)
+
+Get typed status of an asynchronous verification
+
+Typed status endpoint for async verification tasks.  Returns a strongly-typed `result` (discriminated on `result.status`): - **SUCCESS**: `VerificationSuccessTaskResult` with `verification_result` - **ERROR**: `TaskErrorResult` in AFNOR format
+
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **taskId** | **string** | Celery task ID returned by /verify-async endpoint |  |
+
+### Return type
+
+[**VerificationTypedTaskStatus**](VerificationTypedTaskStatus.md)
 
 ### Authorization
 

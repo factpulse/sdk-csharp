@@ -7,7 +7,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Success** | **bool** | Invoice was successfully submitted | 
 **DestinationType** | **string** | Destination type | 
-**EnrichedInvoice** | [**EnrichedInvoiceInfo**](EnrichedInvoiceInfo.md) | Enriched invoice data | 
+**EnrichedInvoice** | [**EnrichedInvoiceInfo**](EnrichedInvoiceInfo.md) | Enriched invoice data (summary) | 
+**Invoice** | **Dictionary&lt;string, Object&gt;** | Complete enriched invoice data (FacturXInvoice format). Use this to regenerate the same invoice. | 
 **FacturxPdf** | [**FacturXPDFInfo**](FacturXPDFInfo.md) | Generated PDF information | 
 **ContentB64** | **string** | Generated Factur-X PDF (and signed if requested) base64-encoded | 
 **Message** | **string** | Return message | 

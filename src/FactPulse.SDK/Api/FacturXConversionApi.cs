@@ -2,7 +2,7 @@
 /*
  * FactPulse REST API
  *
- *  REST API for electronic invoicing in France: Factur-X, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Factur-X - Generation - **Formats**: XML only or PDF/A-3 with embedded XML - **Profiles**: MINIMUM, BASIC, EN16931, EXTENDED - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT) - **🆕 Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Factur-X - Validation - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules)  ### ✍️ Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification  ### 📋 Flux 6 - Invoice Lifecycle (CDAR) - **CDAR Messages**: Acknowledgements, invoice statuses - **PPF Statuses**: REFUSED (210), PAID (212)  ### 📊 Flux 10 - E-Reporting - **Tax Declarations**: International B2B, B2C - **Flow Types**: 10.1 (B2B transactions), 10.2 (B2B payments), 10.3 (B2C transactions), 10.4 (B2C payments)  ### 📡 AFNOR PDP/PA (XP Z12-013) - **Flow Service**: Submit and search flows to PDPs - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user  ### 🏛️ Chorus Pro - **Public Sector Invoicing**: Complete API for Chorus Pro  ### ⏳ Async Tasks - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **Webhooks**: Automatic notifications when tasks complete  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://factpulse.fr/api/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://factpulse.fr/documentation-api/     
+ *  REST API for electronic invoicing in France: Factur-X (CII), UBL 2.1, AFNOR PDP/PA, electronic signatures.  ## 🎯 Main Features  ### 📄 Invoice Generation - **Formats**: CII XML, UBL 2.1 XML, or Factur-X PDF/A-3 - **Profiles** (CII/PDF): MINIMUM, BASIC, EN16931, EXTENDED - **UBL**: Always EN16931 compliant - **Standards**: EN 16931 (EU directive 2014/55), ISO 19005-3 (PDF/A-3), CII (UN/CEFACT), UBL 2.1 (OASIS) - **Simplified Format**: Generation from SIRET + auto-enrichment (Chorus Pro API + Business Search)  ### ✅ Factur-X - Validation - **XML Validation**: Schematron (45 to 210+ rules depending on profile) - **PDF Validation**: PDF/A-3, Factur-X XMP metadata - **VeraPDF**: Strict PDF/A validation (146+ ISO 19005-3 rules)  ### ✍️ Electronic Signature - **Standards**: PAdES-B-B, PAdES-B-T (RFC 3161 timestamping), PAdES-B-LT (long-term archival) - **eIDAS Levels**: SES (self-signed), AdES (commercial CA), QES (QTSP) - **Validation**: Cryptographic integrity and certificate verification  ### 📋 Flux 6 - Invoice Lifecycle (CDAR) - **CDAR Messages**: Acknowledgements, invoice statuses - **PPF Statuses**: REFUSED (210), PAID (212)  ### 📊 Flux 10 - E-Reporting - **Tax Declarations**: International B2B, B2C - **Flow Types**: 10.1 (B2B transactions), 10.2 (B2B payments), 10.3 (B2C transactions), 10.4 (B2C payments)  ### 📡 AFNOR PDP/PA (XP Z12-013) - **Flow Service**: Submit and search flows to PDPs - **Directory Service**: Company search (SIREN/SIRET) - **Multi-client**: Support for multiple PDP configs per user  ### 🏛️ Chorus Pro - **Public Sector Invoicing**: Complete API for Chorus Pro  ### ⏳ Async Tasks - **Celery**: Asynchronous generation, validation and signing - **Polling**: Status tracking via `/tasks/{task_id}/status` - **Webhooks**: Automatic notifications when tasks complete  ## 🔒 Authentication  All requests require a **JWT token** in the Authorization header: ``` Authorization: Bearer YOUR_JWT_TOKEN ```  ### How to obtain a JWT token?  #### 🔑 Method 1: `/api/token/` API (Recommended)  **URL:** `https://factpulse.fr/api/token/`  This method is **recommended** for integration in your applications and CI/CD workflows.  **Prerequisites:** Having set a password on your account  **For users registered via email/password:** - You already have a password, use it directly  **For users registered via OAuth (Google/GitHub):** - You must first set a password at: https://factpulse.fr/accounts/password/set/ - Once the password is created, you can use the API  **Request example:** ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\"   }' ```  **Optional `client_uid` parameter:**  To select credentials for a specific client (PA/PDP, Chorus Pro, signing certificates), add `client_uid`:  ```bash curl -X POST https://factpulse.fr/api/token/ \\   -H \"Content-Type: application/json\" \\   -d '{     \"username\": \"your_email@example.com\",     \"password\": \"your_password\",     \"client_uid\": \"550e8400-e29b-41d4-a716-446655440000\"   }' ```  The `client_uid` will be included in the JWT and allow the API to automatically use: - AFNOR/PDP credentials configured for this client - Chorus Pro credentials configured for this client - Electronic signature certificates configured for this client  **Response:** ```json {   \"access\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\",  // Access token (validity: 30 min)   \"refresh\": \"eyJ0eXAiOiJKV1QiLCJhbGc...\"  // Refresh token (validity: 7 days) } ```  **Advantages:** - ✅ Full automation (CI/CD, scripts) - ✅ Programmatic token management - ✅ Refresh token support for automatic access renewal - ✅ Easy integration in any language/tool  #### 🖥️ Method 2: Dashboard Generation (Alternative)  **URL:** https://factpulse.fr/api/dashboard/  This method is suitable for quick tests or occasional use via the graphical interface.  **How it works:** - Log in to the dashboard - Use the \"Generate Test Token\" or \"Generate Production Token\" buttons - Works for **all** users (OAuth and email/password), without requiring a password  **Token types:** - **Test Token**: 24h validity, 1000 calls/day quota (free) - **Production Token**: 7 days validity, quota based on your plan  **Advantages:** - ✅ Quick for API testing - ✅ No password required - ✅ Simple visual interface  **Disadvantages:** - ❌ Requires manual action - ❌ No refresh token - ❌ Less suited for automation  ### 📚 Full Documentation  For more information on authentication and API usage: https://factpulse.fr/documentation-api/     
  *
  * The version of the OpenAPI document: 1.0.0
  * Contact: contact@factpulse.fr
@@ -114,6 +114,29 @@ namespace FactPulse.SDK.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetConversionStatusApiV1ConvertConversionIdStatusGetApiResponse"/>?&gt;</returns>
         Task<IGetConversionStatusApiV1ConvertConversionIdStatusGetApiResponse?> GetConversionStatusApiV1ConvertConversionIdStatusGetOrDefaultAsync(string conversionId, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get typed conversion task status
+        /// </summary>
+        /// <remarks>
+        /// Typed status endpoint for document conversion tasks.  Returns a strongly-typed &#x60;result&#x60; discriminated on &#x60;result.status&#x60;: - **SUCCESS**: &#x60;ConversionSuccessTaskResult&#x60; - **PENDING_INPUT**: &#x60;ConversionPendingInputResult&#x60; (missing fields) - **VALIDATION_FAILED**: &#x60;ConversionValidationFailedResult&#x60; - **ERROR**: &#x60;ConversionErrorResult&#x60;
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskId">Celery task ID returned by POST /convert</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetApiResponse"/>&gt;</returns>
+        Task<IGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetApiResponse> GetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetAsync(string taskId, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get typed conversion task status
+        /// </summary>
+        /// <remarks>
+        /// Typed status endpoint for document conversion tasks.  Returns a strongly-typed &#x60;result&#x60; discriminated on &#x60;result.status&#x60;: - **SUCCESS**: &#x60;ConversionSuccessTaskResult&#x60; - **PENDING_INPUT**: &#x60;ConversionPendingInputResult&#x60; (missing fields) - **VALIDATION_FAILED**: &#x60;ConversionValidationFailedResult&#x60; - **ERROR**: &#x60;ConversionErrorResult&#x60;
+        /// </remarks>
+        /// <param name="taskId">Celery task ID returned by POST /convert</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetApiResponse"/>?&gt;</returns>
+        Task<IGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetApiResponse?> GetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetOrDefaultAsync(string taskId, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Resume a conversion with corrections
@@ -236,6 +259,30 @@ namespace FactPulse.SDK.Api
     /// The <see cref="IGetConversionStatusApiV1ConvertConversionIdStatusGetApiResponse"/>
     /// </summary>
     public interface IGetConversionStatusApiV1ConvertConversionIdStatusGetApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<Dictionary<string, Object>?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>, IUnauthorized<FactPulse.SDK.Model.APIError?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 422 UnprocessableContent
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnprocessableContent { get; }
+
+        /// <summary>
+        /// Returns true if the response is 401 Unauthorized
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnauthorized { get; }
+    }
+
+    /// <summary>
+    /// The <see cref="IGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetApiResponse"/>
+    /// </summary>
+    public interface IGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.ConversionTaskStatus?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>, IUnauthorized<FactPulse.SDK.Model.APIError?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -385,6 +432,26 @@ namespace FactPulse.SDK.Api
         internal void ExecuteOnErrorGetConversionStatusApiV1ConvertConversionIdStatusGet(Exception exception)
         {
             OnErrorGetConversionStatusApiV1ConvertConversionIdStatusGet?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
+        public event EventHandler<ApiResponseEventArgs>? OnGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGet;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs>? OnErrorGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGet;
+
+        internal void ExecuteOnGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGet(FacturXConversionApi.GetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetApiResponse apiResponse)
+        {
+            OnGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGet?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGet(Exception exception)
+        {
+            OnErrorGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGet?.Invoke(this, new ExceptionEventArgs(exception));
         }
 
         /// <summary>
@@ -1460,6 +1527,339 @@ namespace FactPulse.SDK.Api
             /// <param name="result"></param>
             /// <returns></returns>
             public bool TryOk([NotNullWhen(true)]out Dictionary<string, Object>? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnprocessableContent => 422 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.HTTPValidationError? UnprocessableContent()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsUnprocessableContent
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.HTTPValidationError>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryUnprocessableContent([NotNullWhen(true)]out FactPulse.SDK.Model.HTTPValidationError? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = UnprocessableContent();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)422);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 401 Unauthorized
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnauthorized => 401 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 401 Unauthorized
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.APIError? Unauthorized()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsUnauthorized
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.APIError>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 401 Unauthorized and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryUnauthorized([NotNullWhen(true)]out FactPulse.SDK.Model.APIError? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Unauthorized();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)401);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
+        partial void FormatGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGet(ref string taskId);
+
+        /// <summary>
+        /// Validates the request parameters
+        /// </summary>
+        /// <param name="taskId"></param>
+        /// <returns></returns>
+        private void ValidateGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGet(string taskId)
+        {
+            if (taskId == null)
+                throw new ArgumentNullException(nameof(taskId));
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="taskId"></param>
+        private void AfterGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetDefaultImplementation(IGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetApiResponse apiResponseLocalVar, string taskId)
+        {
+            bool suppressDefaultLog = false;
+            AfterGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGet(ref suppressDefaultLog, apiResponseLocalVar, taskId);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="taskId"></param>
+        partial void AfterGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGet(ref bool suppressDefaultLog, IGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetApiResponse apiResponseLocalVar, string taskId);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="taskId"></param>
+        private void OnErrorGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string taskId)
+        {
+            bool suppressDefaultLogLocalVar = false;
+            OnErrorGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, taskId);
+            if (!suppressDefaultLogLocalVar)
+                Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLogLocalVar"></param>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="taskId"></param>
+        partial void OnErrorGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string taskId);
+
+        /// <summary>
+        /// Get typed conversion task status Typed status endpoint for document conversion tasks.  Returns a strongly-typed &#x60;result&#x60; discriminated on &#x60;result.status&#x60;: - **SUCCESS**: &#x60;ConversionSuccessTaskResult&#x60; - **PENDING_INPUT**: &#x60;ConversionPendingInputResult&#x60; (missing fields) - **VALIDATION_FAILED**: &#x60;ConversionValidationFailedResult&#x60; - **ERROR**: &#x60;ConversionErrorResult&#x60;
+        /// </summary>
+        /// <param name="taskId">Celery task ID returned by POST /convert</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetApiResponse"/>&gt;</returns>
+        public async Task<IGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetApiResponse?> GetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetOrDefaultAsync(string taskId, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await GetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetAsync(taskId, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Get typed conversion task status Typed status endpoint for document conversion tasks.  Returns a strongly-typed &#x60;result&#x60; discriminated on &#x60;result.status&#x60;: - **SUCCESS**: &#x60;ConversionSuccessTaskResult&#x60; - **PENDING_INPUT**: &#x60;ConversionPendingInputResult&#x60; (missing fields) - **VALIDATION_FAILED**: &#x60;ConversionValidationFailedResult&#x60; - **ERROR**: &#x60;ConversionErrorResult&#x60;
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="taskId">Celery task ID returned by POST /convert</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetApiResponse"/>&gt;</returns>
+        public async Task<IGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetApiResponse> GetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetAsync(string taskId, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                ValidateGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGet(taskId);
+
+                FormatGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGet(ref taskId);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
+                        ? "/api/v1/convert/tasks/{task_id}/conversion-status"
+                        : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/convert/tasks/{task_id}/conversion-status");
+                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Btask_id%7D", Uri.EscapeDataString(taskId.ToString()));
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar2 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar2);
+
+                    bearerTokenLocalVar2.UseInHeader(httpRequestMessageLocalVar, "");
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
+
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Get;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        ILogger<GetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<GetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetApiResponse>();
+                        GetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetApiResponse apiResponseLocalVar;
+
+                        switch ((int)httpResponseMessageLocalVar.StatusCode) {
+                            default: {
+                                string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+                                apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/api/v1/convert/tasks/{task_id}/conversion-status", requestedAtLocalVar, _jsonSerializerOptions);
+
+                                break;
+                            }
+                        }
+
+                        AfterGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetDefaultImplementation(apiResponseLocalVar, taskId);
+
+                        Events.ExecuteOnGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGet(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetDefaultImplementation(e, "/api/v1/convert/tasks/{task_id}/conversion-status", uriBuilderLocalVar.Path, taskId);
+                Events.ExecuteOnErrorGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGet(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="GetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetApiResponse"/>
+        /// </summary>
+        public partial class GetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetApiResponse : FactPulse.SDK.Client.ApiResponse, IGetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<GetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="GetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public GetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetApiResponse(ILogger<GetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            /// <summary>
+            /// The <see cref="GetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="contentStream"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public GetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetApiResponse(ILogger<GetConversionTaskStatusApiV1ConvertTasksTaskIdConversionStatusGetApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.ConversionTaskStatus? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.ConversionTaskStatus>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out FactPulse.SDK.Model.ConversionTaskStatus? result)
             {
                 result = null;
 
