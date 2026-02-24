@@ -37,7 +37,7 @@ namespace FactPulse.SDK.Model
         /// <param name="type">type (default to TypeEnum.ChorusPro)</param>
         /// <param name="credentials">credentials</param>
         [JsonConstructor]
-        public ChorusProDestination(Option<TypeEnum?> type = default, Option<ChorusProCredentials?> credentials = default)
+        public ChorusProDestination(Option<TypeEnum?> type = default, Option<FactureElectroniqueRestApiSchemasProcessingChorusProCredentials?> credentials = default)
         {
             TypeOption = type;
             CredentialsOption = credentials;
@@ -116,13 +116,13 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<ChorusProCredentials?> CredentialsOption { get; private set; }
+        public Option<FactureElectroniqueRestApiSchemasProcessingChorusProCredentials?> CredentialsOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Credentials
         /// </summary>
         [JsonPropertyName("credentials")]
-        public ChorusProCredentials? Credentials { get { return this.CredentialsOption; } set { this.CredentialsOption = new(value); } }
+        public FactureElectroniqueRestApiSchemasProcessingChorusProCredentials? Credentials { get { return this.CredentialsOption; } set { this.CredentialsOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -172,7 +172,7 @@ namespace FactPulse.SDK.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<ChorusProDestination.TypeEnum?> type = default;
-            Option<ChorusProCredentials?> credentials = default;
+            Option<FactureElectroniqueRestApiSchemasProcessingChorusProCredentials?> credentials = default;
 
             while (utf8JsonReader.Read())
             {
@@ -195,7 +195,7 @@ namespace FactPulse.SDK.Model
                                 type = new Option<ChorusProDestination.TypeEnum?>(ChorusProDestination.TypeEnumFromStringOrDefault(typeRawValue));
                             break;
                         case "credentials":
-                            credentials = new Option<ChorusProCredentials?>(JsonSerializer.Deserialize<ChorusProCredentials>(ref utf8JsonReader, jsonSerializerOptions));
+                            credentials = new Option<FactureElectroniqueRestApiSchemasProcessingChorusProCredentials?>(JsonSerializer.Deserialize<FactureElectroniqueRestApiSchemasProcessingChorusProCredentials>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;

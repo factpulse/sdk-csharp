@@ -27,29 +27,51 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Response for validation errors.
+    /// Response for the VATEX codes endpoint.
     /// </summary>
-    public partial class FactureElectroniqueRestApiSchemasValidationValidationErrorResponse : IValidatableObject
+    public partial class VATEXCodesResponse : IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="FactureElectroniqueRestApiSchemasValidationValidationErrorResponse" /> class.
+        /// Initializes a new instance of the <see cref="VATEXCodesResponse" /> class.
         /// </summary>
-        /// <param name="detail">List of detected validation errors.</param>
+        /// <param name="codes">codes</param>
+        /// <param name="count">count</param>
+        /// <param name="source">source (default to &quot;https://docs.peppol.eu/poacc/billing/3.0/codelist/vatex/&quot;)</param>
         [JsonConstructor]
-        public FactureElectroniqueRestApiSchemasValidationValidationErrorResponse(List<string> detail)
+        public VATEXCodesResponse(List<VATEXCodeInfo> codes, int count, Option<string?> source = default)
         {
-            Detail = detail;
+            Codes = codes;
+            Count = count;
+            SourceOption = source;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// List of detected validation errors.
+        /// Gets or Sets Codes
         /// </summary>
-        /// <value>List of detected validation errors.</value>
-        [JsonPropertyName("detail")]
-        public List<string> Detail { get; set; }
+        [JsonPropertyName("codes")]
+        public List<VATEXCodeInfo> Codes { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Count
+        /// </summary>
+        [JsonPropertyName("count")]
+        public int Count { get; set; }
+
+        /// <summary>
+        /// Used to track the state of Source
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> SourceOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Source
+        /// </summary>
+        [JsonPropertyName("source")]
+        public string? Source { get { return this.SourceOption; } set { this.SourceOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -58,8 +80,10 @@ namespace FactPulse.SDK.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("class FactureElectroniqueRestApiSchemasValidationValidationErrorResponse {\n");
-            sb.Append("  Detail: ").Append(Detail).Append("\n");
+            sb.Append("class VATEXCodesResponse {\n");
+            sb.Append("  Codes: ").Append(Codes).Append("\n");
+            sb.Append("  Count: ").Append(Count).Append("\n");
+            sb.Append("  Source: ").Append(Source).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -76,19 +100,19 @@ namespace FactPulse.SDK.Model
     }
 
     /// <summary>
-    /// A Json converter for type <see cref="FactureElectroniqueRestApiSchemasValidationValidationErrorResponse" />
+    /// A Json converter for type <see cref="VATEXCodesResponse" />
     /// </summary>
-    public class FactureElectroniqueRestApiSchemasValidationValidationErrorResponseJsonConverter : JsonConverter<FactureElectroniqueRestApiSchemasValidationValidationErrorResponse>
+    public class VATEXCodesResponseJsonConverter : JsonConverter<VATEXCodesResponse>
     {
         /// <summary>
-        /// Deserializes json to <see cref="FactureElectroniqueRestApiSchemasValidationValidationErrorResponse" />
+        /// Deserializes json to <see cref="VATEXCodesResponse" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
         /// <param name="typeToConvert"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <returns></returns>
         /// <exception cref="JsonException"></exception>
-        public override FactureElectroniqueRestApiSchemasValidationValidationErrorResponse Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
+        public override VATEXCodesResponse Read(ref Utf8JsonReader utf8JsonReader, Type typeToConvert, JsonSerializerOptions jsonSerializerOptions)
         {
             int currentDepth = utf8JsonReader.CurrentDepth;
 
@@ -97,7 +121,9 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<List<string>?> detail = default;
+            Option<List<VATEXCodeInfo>?> codes = default;
+            Option<int?> count = default;
+            Option<string?> source = default;
 
             while (utf8JsonReader.Read())
             {
@@ -114,8 +140,14 @@ namespace FactPulse.SDK.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "detail":
-                            detail = new Option<List<string>?>(JsonSerializer.Deserialize<List<string>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                        case "codes":
+                            codes = new Option<List<VATEXCodeInfo>?>(JsonSerializer.Deserialize<List<VATEXCodeInfo>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
+                        case "count":
+                            count = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
+                            break;
+                        case "source":
+                            source = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         default:
                             break;
@@ -123,44 +155,60 @@ namespace FactPulse.SDK.Model
                 }
             }
 
-            if (!detail.IsSet)
-                throw new ArgumentException("Property is required for class FactureElectroniqueRestApiSchemasValidationValidationErrorResponse.", nameof(detail));
+            if (!codes.IsSet)
+                throw new ArgumentException("Property is required for class VATEXCodesResponse.", nameof(codes));
 
-            if (detail.IsSet && detail.Value == null)
-                throw new ArgumentNullException(nameof(detail), "Property is not nullable for class FactureElectroniqueRestApiSchemasValidationValidationErrorResponse.");
+            if (!count.IsSet)
+                throw new ArgumentException("Property is required for class VATEXCodesResponse.", nameof(count));
 
-            return new FactureElectroniqueRestApiSchemasValidationValidationErrorResponse(detail.Value!);
+            if (codes.IsSet && codes.Value == null)
+                throw new ArgumentNullException(nameof(codes), "Property is not nullable for class VATEXCodesResponse.");
+
+            if (count.IsSet && count.Value == null)
+                throw new ArgumentNullException(nameof(count), "Property is not nullable for class VATEXCodesResponse.");
+
+            if (source.IsSet && source.Value == null)
+                throw new ArgumentNullException(nameof(source), "Property is not nullable for class VATEXCodesResponse.");
+
+            return new VATEXCodesResponse(codes.Value!, count.Value!.Value!, source);
         }
 
         /// <summary>
-        /// Serializes a <see cref="FactureElectroniqueRestApiSchemasValidationValidationErrorResponse" />
+        /// Serializes a <see cref="VATEXCodesResponse" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="factureElectroniqueRestApiSchemasValidationValidationErrorResponse"></param>
+        /// <param name="vATEXCodesResponse"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void Write(Utf8JsonWriter writer, FactureElectroniqueRestApiSchemasValidationValidationErrorResponse factureElectroniqueRestApiSchemasValidationValidationErrorResponse, JsonSerializerOptions jsonSerializerOptions)
+        public override void Write(Utf8JsonWriter writer, VATEXCodesResponse vATEXCodesResponse, JsonSerializerOptions jsonSerializerOptions)
         {
             writer.WriteStartObject();
 
-            WriteProperties(writer, factureElectroniqueRestApiSchemasValidationValidationErrorResponse, jsonSerializerOptions);
+            WriteProperties(writer, vATEXCodesResponse, jsonSerializerOptions);
             writer.WriteEndObject();
         }
 
         /// <summary>
-        /// Serializes the properties of <see cref="FactureElectroniqueRestApiSchemasValidationValidationErrorResponse" />
+        /// Serializes the properties of <see cref="VATEXCodesResponse" />
         /// </summary>
         /// <param name="writer"></param>
-        /// <param name="factureElectroniqueRestApiSchemasValidationValidationErrorResponse"></param>
+        /// <param name="vATEXCodesResponse"></param>
         /// <param name="jsonSerializerOptions"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public void WriteProperties(Utf8JsonWriter writer, FactureElectroniqueRestApiSchemasValidationValidationErrorResponse factureElectroniqueRestApiSchemasValidationValidationErrorResponse, JsonSerializerOptions jsonSerializerOptions)
+        public void WriteProperties(Utf8JsonWriter writer, VATEXCodesResponse vATEXCodesResponse, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (factureElectroniqueRestApiSchemasValidationValidationErrorResponse.Detail == null)
-                throw new ArgumentNullException(nameof(factureElectroniqueRestApiSchemasValidationValidationErrorResponse.Detail), "Property is required for class FactureElectroniqueRestApiSchemasValidationValidationErrorResponse.");
+            if (vATEXCodesResponse.Codes == null)
+                throw new ArgumentNullException(nameof(vATEXCodesResponse.Codes), "Property is required for class VATEXCodesResponse.");
 
-            writer.WritePropertyName("detail");
-            JsonSerializer.Serialize(writer, factureElectroniqueRestApiSchemasValidationValidationErrorResponse.Detail, jsonSerializerOptions);
+            if (vATEXCodesResponse.SourceOption.IsSet && vATEXCodesResponse.Source == null)
+                throw new ArgumentNullException(nameof(vATEXCodesResponse.Source), "Property is required for class VATEXCodesResponse.");
+
+            writer.WritePropertyName("codes");
+            JsonSerializer.Serialize(writer, vATEXCodesResponse.Codes, jsonSerializerOptions);
+            writer.WriteNumber("count", vATEXCodesResponse.Count);
+
+            if (vATEXCodesResponse.SourceOption.IsSet)
+                writer.WriteString("source", vATEXCodesResponse.Source);
         }
     }
 }

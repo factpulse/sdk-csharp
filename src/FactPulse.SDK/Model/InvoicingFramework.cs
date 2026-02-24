@@ -34,14 +34,14 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="InvoicingFramework" /> class.
         /// </summary>
-        /// <param name="invoicingFrameworkCode">Chorus Pro framework code (A1, A2, A9, A12)</param>
+        /// <param name="invoicingFrameworkCode">invoicingFrameworkCode</param>
         /// <param name="operationNature">operationNature</param>
         /// <param name="approverServiceCode">approverServiceCode</param>
         /// <param name="approverStructureCode">approverStructureCode</param>
         [JsonConstructor]
-        public InvoicingFramework(InvoicingFrameworkCode invoicingFrameworkCode, Option<OperationNature?> operationNature = default, Option<string?> approverServiceCode = default, Option<string?> approverStructureCode = default)
+        public InvoicingFramework(Option<InvoicingFrameworkCode?> invoicingFrameworkCode = default, Option<OperationNature?> operationNature = default, Option<string?> approverServiceCode = default, Option<string?> approverStructureCode = default)
         {
-            InvoicingFrameworkCode = invoicingFrameworkCode;
+            InvoicingFrameworkCodeOption = invoicingFrameworkCode;
             OperationNatureOption = operationNature;
             ApproverServiceCodeOption = approverServiceCode;
             ApproverStructureCodeOption = approverStructureCode;
@@ -51,11 +51,17 @@ namespace FactPulse.SDK.Model
         partial void OnCreated();
 
         /// <summary>
-        /// Chorus Pro framework code (A1, A2, A9, A12)
+        /// Used to track the state of InvoicingFrameworkCode
         /// </summary>
-        /// <value>Chorus Pro framework code (A1, A2, A9, A12)</value>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<InvoicingFrameworkCode?> InvoicingFrameworkCodeOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets InvoicingFrameworkCode
+        /// </summary>
         [JsonPropertyName("invoicing_framework_code")]
-        public InvoicingFrameworkCode InvoicingFrameworkCode { get; set; }
+        public InvoicingFrameworkCode? InvoicingFrameworkCode { get { return this.InvoicingFrameworkCodeOption; } set { this.InvoicingFrameworkCodeOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of OperationNature
@@ -187,13 +193,7 @@ namespace FactPulse.SDK.Model
                 }
             }
 
-            if (!invoicingFrameworkCode.IsSet)
-                throw new ArgumentException("Property is required for class InvoicingFramework.", nameof(invoicingFrameworkCode));
-
-            if (invoicingFrameworkCode.IsSet && invoicingFrameworkCode.Value == null)
-                throw new ArgumentNullException(nameof(invoicingFrameworkCode), "Property is not nullable for class InvoicingFramework.");
-
-            return new InvoicingFramework(invoicingFrameworkCode.Value!.Value!, operationNature, approverServiceCode, approverStructureCode);
+            return new InvoicingFramework(invoicingFrameworkCode, operationNature, approverServiceCode, approverStructureCode);
         }
 
         /// <summary>
@@ -220,9 +220,14 @@ namespace FactPulse.SDK.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, InvoicingFramework invoicingFramework, JsonSerializerOptions jsonSerializerOptions)
         {
-            var invoicingFrameworkCodeRawValue = InvoicingFrameworkCodeValueConverter.ToJsonValue(invoicingFramework.InvoicingFrameworkCode);
-            writer.WriteString("invoicing_framework_code", invoicingFrameworkCodeRawValue);
-
+            if (invoicingFramework.InvoicingFrameworkCodeOption.IsSet)
+                if (invoicingFramework.InvoicingFrameworkCodeOption!.Value != null)
+                {
+                    var invoicingFrameworkCodeRawValue = InvoicingFrameworkCodeValueConverter.ToJsonValue(invoicingFramework.InvoicingFrameworkCodeOption.Value!.Value);
+                    writer.WriteString("invoicing_framework_code", invoicingFrameworkCodeRawValue);
+                }
+                else
+                    writer.WriteNull("invoicing_framework_code");
             if (invoicingFramework.OperationNatureOption.IsSet)
                 if (invoicingFramework.OperationNatureOption!.Value != null)
                 {

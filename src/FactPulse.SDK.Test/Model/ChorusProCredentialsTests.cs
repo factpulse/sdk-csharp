@@ -73,30 +73,30 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'ChorusLogin'
+        /// Test the property 'ChorusProLogin'
         /// </summary>
         [Fact]
-        public void ChorusLoginTest()
+        public void ChorusProLoginTest()
         {
-            // TODO unit test for the property 'ChorusLogin'
+            // TODO unit test for the property 'ChorusProLogin'
         }
 
         /// <summary>
-        /// Test the property 'ChorusPassword'
+        /// Test the property 'ChorusProPassword'
         /// </summary>
         [Fact]
-        public void ChorusPasswordTest()
+        public void ChorusProPasswordTest()
         {
-            // TODO unit test for the property 'ChorusPassword'
+            // TODO unit test for the property 'ChorusProPassword'
         }
 
         /// <summary>
-        /// Test the property 'SandboxMode'
+        /// Test the property 'Sandbox'
         /// </summary>
         [Fact]
-        public void SandboxModeTest()
+        public void SandboxTest()
         {
-            // TODO unit test for the property 'SandboxMode'
+            // TODO unit test for the property 'Sandbox'
         }
     }
 }

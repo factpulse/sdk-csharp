@@ -131,6 +131,9 @@ namespace FactPulse.SDK.Test.Api
             var parseApi = _hostUsingConfigureWithAClient.Services.GetRequiredService<IParseApi>();
             Assert.True(parseApi.HttpClient.BaseAddress != null);
 
+            var referencesApi = _hostUsingConfigureWithAClient.Services.GetRequiredService<IReferencesApi>();
+            Assert.True(referencesApi.HttpClient.BaseAddress != null);
+
             var validationApi = _hostUsingConfigureWithAClient.Services.GetRequiredService<IValidationApi>();
             Assert.True(validationApi.HttpClient.BaseAddress != null);
         }
@@ -188,6 +191,9 @@ namespace FactPulse.SDK.Test.Api
 
             var parseApi = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<IParseApi>();
             Assert.True(parseApi.HttpClient.BaseAddress != null);
+
+            var referencesApi = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<IReferencesApi>();
+            Assert.True(referencesApi.HttpClient.BaseAddress != null);
 
             var validationApi = _hostUsingConfigureWithoutAClient.Services.GetRequiredService<IValidationApi>();
             Assert.True(validationApi.HttpClient.BaseAddress != null);
@@ -247,6 +253,9 @@ namespace FactPulse.SDK.Test.Api
             var parseApi = _hostUsingAddWithAClient.Services.GetRequiredService<IParseApi>();
             Assert.True(parseApi.HttpClient.BaseAddress != null);
             
+            var referencesApi = _hostUsingAddWithAClient.Services.GetRequiredService<IReferencesApi>();
+            Assert.True(referencesApi.HttpClient.BaseAddress != null);
+            
             var validationApi = _hostUsingAddWithAClient.Services.GetRequiredService<IValidationApi>();
             Assert.True(validationApi.HttpClient.BaseAddress != null);
         }
@@ -304,6 +313,9 @@ namespace FactPulse.SDK.Test.Api
 
             var parseApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<IParseApi>();
             Assert.True(parseApi.HttpClient.BaseAddress != null);
+
+            var referencesApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<IReferencesApi>();
+            Assert.True(referencesApi.HttpClient.BaseAddress != null);
 
             var validationApi = _hostUsingAddWithoutAClient.Services.GetRequiredService<IValidationApi>();
             Assert.True(validationApi.HttpClient.BaseAddress != null);

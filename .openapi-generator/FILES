@@ -20,6 +20,7 @@ docs/apis/Flux6InvoiceLifecycleCDARApi.md
 docs/apis/HealthApi.md
 docs/apis/InvoiceGenerationApi.md
 docs/apis/ParseApi.md
+docs/apis/ReferencesApi.md
 docs/apis/ValidationApi.md
 docs/models/AFNORAcknowledgement.md
 docs/models/AFNORAcknowledgementDetail.md
@@ -182,9 +183,9 @@ docs/models/ErrorSource.md
 docs/models/ExtractionInfo.md
 docs/models/FacturXInvoice.md
 docs/models/FacturXPDFInfo.md
-docs/models/FactureElectroniqueModelsInvoiceTypeCode.md
-docs/models/FactureElectroniqueRestApiSchemasChorusProChorusProCredentials.md
-docs/models/FactureElectroniqueRestApiSchemasValidationValidationErrorResponse.md
+docs/models/FactureElectroniqueRestApiSchemasCdarValidationErrorResponse.md
+docs/models/FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode.md
+docs/models/FactureElectroniqueRestApiSchemasProcessingChorusProCredentials.md
 docs/models/FieldStatus.md
 docs/models/FileInfo.md
 docs/models/FilesInfo.md
@@ -214,6 +215,7 @@ docs/models/IncomingInvoice.md
 docs/models/IncomingSupplier.md
 docs/models/InvoiceFormat.md
 docs/models/InvoiceInput.md
+docs/models/InvoiceLifecycle.md
 docs/models/InvoiceLine.md
 docs/models/InvoiceLineAllowanceAmount.md
 docs/models/InvoiceNote.md
@@ -229,6 +231,8 @@ docs/models/InvoicingFrameworkCode.md
 docs/models/IssuerRoleCode.md
 docs/models/KeyRotationRequest.md
 docs/models/KeyRotationResponse.md
+docs/models/LifecycleEvent.md
+docs/models/LifecycleResponse.md
 docs/models/LineNetAmount.md
 docs/models/LineSubType.md
 docs/models/LineTotalAmount.md
@@ -331,6 +335,8 @@ docs/models/UnitOfMeasure.md
 docs/models/VATAccountingCode.md
 docs/models/VATAmount.md
 docs/models/VATCategory.md
+docs/models/VATEXCodeInfo.md
+docs/models/VATEXCodesResponse.md
 docs/models/VATLine.md
 docs/models/VATPointDateCode.md
 docs/models/ValidateCDARRequest.md
@@ -374,6 +380,7 @@ src/FactPulse.SDK.Test/Api/Flux6InvoiceLifecycleCDARApiTests.cs
 src/FactPulse.SDK.Test/Api/HealthApiTests.cs
 src/FactPulse.SDK.Test/Api/InvoiceGenerationApiTests.cs
 src/FactPulse.SDK.Test/Api/ParseApiTests.cs
+src/FactPulse.SDK.Test/Api/ReferencesApiTests.cs
 src/FactPulse.SDK.Test/Api/ValidationApiTests.cs
 src/FactPulse.SDK.Test/FactPulse.SDK.Test.csproj
 src/FactPulse.SDK.Test/Model/AFNORAcknowledgementDetailTests.cs
@@ -537,9 +544,9 @@ src/FactPulse.SDK.Test/Model/ErrorSourceTests.cs
 src/FactPulse.SDK.Test/Model/ExtractionInfoTests.cs
 src/FactPulse.SDK.Test/Model/FacturXInvoiceTests.cs
 src/FactPulse.SDK.Test/Model/FacturXPDFInfoTests.cs
-src/FactPulse.SDK.Test/Model/FactureElectroniqueModelsInvoiceTypeCodeTests.cs
-src/FactPulse.SDK.Test/Model/FactureElectroniqueRestApiSchemasChorusProChorusProCredentialsTests.cs
-src/FactPulse.SDK.Test/Model/FactureElectroniqueRestApiSchemasValidationValidationErrorResponseTests.cs
+src/FactPulse.SDK.Test/Model/FactureElectroniqueRestApiSchemasCdarValidationErrorResponseTests.cs
+src/FactPulse.SDK.Test/Model/FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeTests.cs
+src/FactPulse.SDK.Test/Model/FactureElectroniqueRestApiSchemasProcessingChorusProCredentialsTests.cs
 src/FactPulse.SDK.Test/Model/FieldStatusTests.cs
 src/FactPulse.SDK.Test/Model/FileInfoTests.cs
 src/FactPulse.SDK.Test/Model/FilesInfoTests.cs
@@ -569,6 +576,7 @@ src/FactPulse.SDK.Test/Model/IncomingInvoiceTests.cs
 src/FactPulse.SDK.Test/Model/IncomingSupplierTests.cs
 src/FactPulse.SDK.Test/Model/InvoiceFormatTests.cs
 src/FactPulse.SDK.Test/Model/InvoiceInputTests.cs
+src/FactPulse.SDK.Test/Model/InvoiceLifecycleTests.cs
 src/FactPulse.SDK.Test/Model/InvoiceLineAllowanceAmountTests.cs
 src/FactPulse.SDK.Test/Model/InvoiceLineTests.cs
 src/FactPulse.SDK.Test/Model/InvoiceNoteTests.cs
@@ -584,6 +592,8 @@ src/FactPulse.SDK.Test/Model/InvoicingFrameworkTests.cs
 src/FactPulse.SDK.Test/Model/IssuerRoleCodeTests.cs
 src/FactPulse.SDK.Test/Model/KeyRotationRequestTests.cs
 src/FactPulse.SDK.Test/Model/KeyRotationResponseTests.cs
+src/FactPulse.SDK.Test/Model/LifecycleEventTests.cs
+src/FactPulse.SDK.Test/Model/LifecycleResponseTests.cs
 src/FactPulse.SDK.Test/Model/LineNetAmountTests.cs
 src/FactPulse.SDK.Test/Model/LineSubTypeTests.cs
 src/FactPulse.SDK.Test/Model/LineTotalAmountTests.cs
@@ -686,6 +696,8 @@ src/FactPulse.SDK.Test/Model/UnitOfMeasureTests.cs
 src/FactPulse.SDK.Test/Model/VATAccountingCodeTests.cs
 src/FactPulse.SDK.Test/Model/VATAmountTests.cs
 src/FactPulse.SDK.Test/Model/VATCategoryTests.cs
+src/FactPulse.SDK.Test/Model/VATEXCodeInfoTests.cs
+src/FactPulse.SDK.Test/Model/VATEXCodesResponseTests.cs
 src/FactPulse.SDK.Test/Model/VATLineTests.cs
 src/FactPulse.SDK.Test/Model/VATPointDateCodeTests.cs
 src/FactPulse.SDK.Test/Model/ValidateCDARRequestTests.cs
@@ -727,6 +739,7 @@ src/FactPulse.SDK/Api/HealthApi.cs
 src/FactPulse.SDK/Api/IApi.cs
 src/FactPulse.SDK/Api/InvoiceGenerationApi.cs
 src/FactPulse.SDK/Api/ParseApi.cs
+src/FactPulse.SDK/Api/ReferencesApi.cs
 src/FactPulse.SDK/Api/ValidationApi.cs
 src/FactPulse.SDK/Client/ApiException.cs
 src/FactPulse.SDK/Client/ApiFactory.cs
@@ -913,9 +926,9 @@ src/FactPulse.SDK/Model/ErrorSource.cs
 src/FactPulse.SDK/Model/ExtractionInfo.cs
 src/FactPulse.SDK/Model/FacturXInvoice.cs
 src/FactPulse.SDK/Model/FacturXPDFInfo.cs
-src/FactPulse.SDK/Model/FactureElectroniqueModelsInvoiceTypeCode.cs
-src/FactPulse.SDK/Model/FactureElectroniqueRestApiSchemasChorusProChorusProCredentials.cs
-src/FactPulse.SDK/Model/FactureElectroniqueRestApiSchemasValidationValidationErrorResponse.cs
+src/FactPulse.SDK/Model/FactureElectroniqueRestApiSchemasCdarValidationErrorResponse.cs
+src/FactPulse.SDK/Model/FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode.cs
+src/FactPulse.SDK/Model/FactureElectroniqueRestApiSchemasProcessingChorusProCredentials.cs
 src/FactPulse.SDK/Model/FieldStatus.cs
 src/FactPulse.SDK/Model/FileInfo.cs
 src/FactPulse.SDK/Model/FilesInfo.cs
@@ -945,6 +958,7 @@ src/FactPulse.SDK/Model/IncomingInvoice.cs
 src/FactPulse.SDK/Model/IncomingSupplier.cs
 src/FactPulse.SDK/Model/InvoiceFormat.cs
 src/FactPulse.SDK/Model/InvoiceInput.cs
+src/FactPulse.SDK/Model/InvoiceLifecycle.cs
 src/FactPulse.SDK/Model/InvoiceLine.cs
 src/FactPulse.SDK/Model/InvoiceLineAllowanceAmount.cs
 src/FactPulse.SDK/Model/InvoiceNote.cs
@@ -960,6 +974,8 @@ src/FactPulse.SDK/Model/InvoicingFrameworkCode.cs
 src/FactPulse.SDK/Model/IssuerRoleCode.cs
 src/FactPulse.SDK/Model/KeyRotationRequest.cs
 src/FactPulse.SDK/Model/KeyRotationResponse.cs
+src/FactPulse.SDK/Model/LifecycleEvent.cs
+src/FactPulse.SDK/Model/LifecycleResponse.cs
 src/FactPulse.SDK/Model/LineNetAmount.cs
 src/FactPulse.SDK/Model/LineSubType.cs
 src/FactPulse.SDK/Model/LineTotalAmount.cs
@@ -1062,6 +1078,8 @@ src/FactPulse.SDK/Model/UnitOfMeasure.cs
 src/FactPulse.SDK/Model/VATAccountingCode.cs
 src/FactPulse.SDK/Model/VATAmount.cs
 src/FactPulse.SDK/Model/VATCategory.cs
+src/FactPulse.SDK/Model/VATEXCodeInfo.cs
+src/FactPulse.SDK/Model/VATEXCodesResponse.cs
 src/FactPulse.SDK/Model/VATLine.cs
 src/FactPulse.SDK/Model/VATPointDateCode.cs
 src/FactPulse.SDK/Model/ValidateCDARRequest.cs

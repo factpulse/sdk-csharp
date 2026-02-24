@@ -5,8 +5,8 @@ Information about the supplier / seller (BG-4).
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**SupplierId** | **int** |  | 
 **ElectronicAddress** | [**ElectronicAddress**](ElectronicAddress.md) |  | [optional] 
+**SupplierId** | **int** | Chorus Pro supplier structure ID (idFournisseur). Only required for B2G. | [optional] [default to 0]
 **PrivateId** | **string** |  | [optional] 
 **SupplierBankAccountCode** | **int** |  | [optional] 
 **SupplierServiceId** | **int** |  | [optional] 

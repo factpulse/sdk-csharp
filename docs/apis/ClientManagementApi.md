@@ -30,7 +30,7 @@ Activate a deactivated client.  **Scope**: Client level (JWT with client_uid tha
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **uid** | **Guid** |  |  |
+| **uid** | **Guid** | Client unique identifier (UUID) |  |
 
 ### Return type
 
@@ -114,7 +114,7 @@ Deactivate an active client.  **Scope**: Client level (JWT with client_uid that 
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **uid** | **Guid** |  |  |
+| **uid** | **Guid** | Client unique identifier (UUID) |  |
 
 ### Return type
 
@@ -156,7 +156,7 @@ Delete the webhook secret for a client.  **Scope**: Client level (JWT with clien
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **uid** | **Guid** |  |  |
+| **uid** | **Guid** | Client unique identifier (UUID) |  |
 
 ### Return type
 
@@ -198,7 +198,7 @@ Generate or regenerate the webhook secret for a client.  **Scope**: Client level
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **uid** | **Guid** |  |  |
+| **uid** | **Guid** | Client unique identifier (UUID) |  |
 
 ### Return type
 
@@ -240,7 +240,7 @@ Get details of a client.  **Scope**: Client level (JWT with client_uid that must
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **uid** | **Guid** |  |  |
+| **uid** | **Guid** | Client unique identifier (UUID) |  |
 
 ### Return type
 
@@ -282,7 +282,7 @@ Get the PDP (PA/PDP) configuration for a client.  **Scope**: Client level (JWT w
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **uid** | **Guid** |  |  |
+| **uid** | **Guid** | Client unique identifier (UUID) |  |
 
 ### Return type
 
@@ -324,7 +324,7 @@ Check if a webhook secret is configured for a client.  **Scope**: Client level (
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **uid** | **Guid** |  |  |
+| **uid** | **Guid** | Client unique identifier (UUID) |  |
 
 ### Return type
 
@@ -409,7 +409,7 @@ Rotate the client encryption key for all secrets in double encryption mode.  **S
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **uid** | **Guid** |  |  |
+| **uid** | **Guid** | Client unique identifier (UUID) |  |
 | **keyRotationRequest** | [**KeyRotationRequest**](KeyRotationRequest.md) |  |  |
 
 ### Return type
@@ -452,7 +452,7 @@ Update client information (partial update).  **Scope**: Client level (JWT with c
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **uid** | **Guid** |  |  |
+| **uid** | **Guid** | Client unique identifier (UUID) |  |
 | **clientUpdateRequest** | [**ClientUpdateRequest**](ClientUpdateRequest.md) |  |  |
 
 ### Return type
@@ -495,7 +495,7 @@ Configure or update the PDP (PA/PDP) configuration for a client.  **Scope**: Cli
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **uid** | **Guid** |  |  |
+| **uid** | **Guid** | Client unique identifier (UUID) |  |
 | **pDPConfigUpdateRequest** | [**PDPConfigUpdateRequest**](PDPConfigUpdateRequest.md) |  |  |
 | **xEncryptionKey** | **string** | Client encryption key for double encryption mode. Must be a base64-encoded AES-256 key (32 bytes). Required only when accessing resources encrypted with encryption_mode&#x3D;&#39;double&#39;. | [optional]  |
 

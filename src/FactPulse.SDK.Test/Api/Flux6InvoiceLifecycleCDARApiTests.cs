@@ -75,6 +75,23 @@ namespace FactPulse.SDK.Test.Api
         }
 
         /// <summary>
+        /// Test GetLifecycleApiV1CdarLifecycleGet
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task GetLifecycleApiV1CdarLifecycleGetAsyncTest()
+        {
+            Client.Option<int> days = default!;
+            Client.Option<string?> invoiceId = default!;
+            Client.Option<string?> pdpFlowServiceUrl = default!;
+            Client.Option<string?> pdpTokenUrl = default!;
+            Client.Option<string?> pdpClientId = default!;
+            Client.Option<string?> pdpClientSecret = default!;
+            var response = await _instance.GetLifecycleApiV1CdarLifecycleGetAsync(days, invoiceId, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
+            var model = response.Ok();
+            Assert.IsType<LifecycleResponse>(model);
+        }
+
+        /// <summary>
         /// Test GetReasonCodesApiV1CdarReasonCodesGet
         /// </summary>
         [Fact (Skip = "not implemented")]

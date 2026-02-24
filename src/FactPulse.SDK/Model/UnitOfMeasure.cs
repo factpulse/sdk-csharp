@@ -27,9 +27,9 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Enumeration of invoicing units of measure.
+    /// Units of measure for invoice lines (BT-130).  Accepts both legacy French labels and UN/ECE Recommendation 20 codes. UN/ECE codes are preferred for new integrations.  | UN/ECE code | Legacy alias | Description | |- -- -- -- -- -- --|- -- -- -- -- -- -- -|- -- -- -- -- -- --| | C62 | PIECE | Unit / piece | | H87 | - | Piece (ISO synonym) | | HUR | HEURE | Hour | | DAY | JOUR | Day | | MON | - | Month | | MIN | - | Minute | | KGM | KILOGRAMME | Kilogram | | LTR | LITRE | Litre | | MTR | - | Metre | | MTK | - | Square metre | | TNE | - | Metric ton | | KWH | - | Kilowatt-hour | | SET | - | Set | | LS | FORFAIT | Lump sum |
     /// </summary>
-    /// <value>Enumeration of invoicing units of measure.</value>
+    /// <value>Units of measure for invoice lines (BT-130).  Accepts both legacy French labels and UN/ECE Recommendation 20 codes. UN/ECE codes are preferred for new integrations.  | UN/ECE code | Legacy alias | Description | |- -- -- -- -- -- --|- -- -- -- -- -- -- -|- -- -- -- -- -- --| | C62 | PIECE | Unit / piece | | H87 | - | Piece (ISO synonym) | | HUR | HEURE | Hour | | DAY | JOUR | Day | | MON | - | Month | | MIN | - | Minute | | KGM | KILOGRAMME | Kilogram | | LTR | LITRE | Litre | | MTR | - | Metre | | MTK | - | Square metre | | TNE | - | Metric ton | | KWH | - | Kilowatt-hour | | SET | - | Set | | LS | FORFAIT | Lump sum |</value>
     public enum UnitOfMeasure
     {
         /// <summary>
@@ -60,7 +60,77 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Enum FORFAIT for value: FORFAIT
         /// </summary>
-        FORFAIT = 6
+        FORFAIT = 6,
+
+        /// <summary>
+        /// Enum C62 for value: C62
+        /// </summary>
+        C62 = 7,
+
+        /// <summary>
+        /// Enum H87 for value: H87
+        /// </summary>
+        H87 = 8,
+
+        /// <summary>
+        /// Enum HUR for value: HUR
+        /// </summary>
+        HUR = 9,
+
+        /// <summary>
+        /// Enum DAY for value: DAY
+        /// </summary>
+        DAY = 10,
+
+        /// <summary>
+        /// Enum MON for value: MON
+        /// </summary>
+        MON = 11,
+
+        /// <summary>
+        /// Enum MIN for value: MIN
+        /// </summary>
+        MIN = 12,
+
+        /// <summary>
+        /// Enum KGM for value: KGM
+        /// </summary>
+        KGM = 13,
+
+        /// <summary>
+        /// Enum LTR for value: LTR
+        /// </summary>
+        LTR = 14,
+
+        /// <summary>
+        /// Enum MTR for value: MTR
+        /// </summary>
+        MTR = 15,
+
+        /// <summary>
+        /// Enum MTK for value: MTK
+        /// </summary>
+        MTK = 16,
+
+        /// <summary>
+        /// Enum TNE for value: TNE
+        /// </summary>
+        TNE = 17,
+
+        /// <summary>
+        /// Enum KWH for value: KWH
+        /// </summary>
+        KWH = 18,
+
+        /// <summary>
+        /// Enum SET for value: SET
+        /// </summary>
+        SET = 19,
+
+        /// <summary>
+        /// Enum LS for value: LS
+        /// </summary>
+        LS = 20
     }
 
     /// <summary>
@@ -93,6 +163,48 @@ namespace FactPulse.SDK.Model
             if (value.Equals("FORFAIT"))
                 return UnitOfMeasure.FORFAIT;
 
+            if (value.Equals("C62"))
+                return UnitOfMeasure.C62;
+
+            if (value.Equals("H87"))
+                return UnitOfMeasure.H87;
+
+            if (value.Equals("HUR"))
+                return UnitOfMeasure.HUR;
+
+            if (value.Equals("DAY"))
+                return UnitOfMeasure.DAY;
+
+            if (value.Equals("MON"))
+                return UnitOfMeasure.MON;
+
+            if (value.Equals("MIN"))
+                return UnitOfMeasure.MIN;
+
+            if (value.Equals("KGM"))
+                return UnitOfMeasure.KGM;
+
+            if (value.Equals("LTR"))
+                return UnitOfMeasure.LTR;
+
+            if (value.Equals("MTR"))
+                return UnitOfMeasure.MTR;
+
+            if (value.Equals("MTK"))
+                return UnitOfMeasure.MTK;
+
+            if (value.Equals("TNE"))
+                return UnitOfMeasure.TNE;
+
+            if (value.Equals("KWH"))
+                return UnitOfMeasure.KWH;
+
+            if (value.Equals("SET"))
+                return UnitOfMeasure.SET;
+
+            if (value.Equals("LS"))
+                return UnitOfMeasure.LS;
+
             throw new NotImplementedException($"Could not convert value to type UnitOfMeasure: '{value}'");
         }
 
@@ -120,6 +232,48 @@ namespace FactPulse.SDK.Model
 
             if (value.Equals("FORFAIT"))
                 return UnitOfMeasure.FORFAIT;
+
+            if (value.Equals("C62"))
+                return UnitOfMeasure.C62;
+
+            if (value.Equals("H87"))
+                return UnitOfMeasure.H87;
+
+            if (value.Equals("HUR"))
+                return UnitOfMeasure.HUR;
+
+            if (value.Equals("DAY"))
+                return UnitOfMeasure.DAY;
+
+            if (value.Equals("MON"))
+                return UnitOfMeasure.MON;
+
+            if (value.Equals("MIN"))
+                return UnitOfMeasure.MIN;
+
+            if (value.Equals("KGM"))
+                return UnitOfMeasure.KGM;
+
+            if (value.Equals("LTR"))
+                return UnitOfMeasure.LTR;
+
+            if (value.Equals("MTR"))
+                return UnitOfMeasure.MTR;
+
+            if (value.Equals("MTK"))
+                return UnitOfMeasure.MTK;
+
+            if (value.Equals("TNE"))
+                return UnitOfMeasure.TNE;
+
+            if (value.Equals("KWH"))
+                return UnitOfMeasure.KWH;
+
+            if (value.Equals("SET"))
+                return UnitOfMeasure.SET;
+
+            if (value.Equals("LS"))
+                return UnitOfMeasure.LS;
 
             return null;
         }
@@ -149,6 +303,48 @@ namespace FactPulse.SDK.Model
 
             if (value == UnitOfMeasure.FORFAIT)
                 return "FORFAIT";
+
+            if (value == UnitOfMeasure.C62)
+                return "C62";
+
+            if (value == UnitOfMeasure.H87)
+                return "H87";
+
+            if (value == UnitOfMeasure.HUR)
+                return "HUR";
+
+            if (value == UnitOfMeasure.DAY)
+                return "DAY";
+
+            if (value == UnitOfMeasure.MON)
+                return "MON";
+
+            if (value == UnitOfMeasure.MIN)
+                return "MIN";
+
+            if (value == UnitOfMeasure.KGM)
+                return "KGM";
+
+            if (value == UnitOfMeasure.LTR)
+                return "LTR";
+
+            if (value == UnitOfMeasure.MTR)
+                return "MTR";
+
+            if (value == UnitOfMeasure.MTK)
+                return "MTK";
+
+            if (value == UnitOfMeasure.TNE)
+                return "TNE";
+
+            if (value == UnitOfMeasure.KWH)
+                return "KWH";
+
+            if (value == UnitOfMeasure.SET)
+                return "SET";
+
+            if (value == UnitOfMeasure.LS)
+                return "LS";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }

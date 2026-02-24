@@ -20,7 +20,7 @@ Check if a temporary file exists and get its metadata without downloading.  Usef
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **downloadId** | **string** |  |  |
+| **downloadId** | **string** | Unique identifier of the temporary file to check |  |
 
 ### Return type
 
@@ -60,7 +60,7 @@ Download a file stored temporarily after asynchronous processing.  **Usage**: - 
 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
-| **downloadId** | **string** |  |  |
+| **downloadId** | **string** | Unique identifier of the temporary file to download |  |
 | **deleteAfter** | **bool** | If true, delete the file after download (one-time download) | [optional] [default to false] |
 
 ### Return type

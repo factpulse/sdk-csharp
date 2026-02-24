@@ -91,15 +91,6 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'InvoicingFramework'
-        /// </summary>
-        [Fact]
-        public void InvoicingFrameworkTest()
-        {
-            // TODO unit test for the property 'InvoicingFramework'
-        }
-
-        /// <summary>
         /// Test the property 'References'
         /// </summary>
         [Fact]
@@ -133,6 +124,15 @@ namespace FactPulse.SDK.Test.Model
         public void SubmissionModeTest()
         {
             // TODO unit test for the property 'SubmissionMode'
+        }
+
+        /// <summary>
+        /// Test the property 'InvoicingFramework'
+        /// </summary>
+        [Fact]
+        public void InvoicingFrameworkTest()
+        {
+            // TODO unit test for the property 'InvoicingFramework'
         }
 
         /// <summary>

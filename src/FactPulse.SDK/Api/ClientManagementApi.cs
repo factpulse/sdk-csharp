@@ -45,7 +45,7 @@ namespace FactPulse.SDK.Api
         /// Activate a deactivated client.  **Scope**: Client level (JWT with client_uid that must match {uid})
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IActivateClientApiV1ClientsUidActiverPostApiResponse"/>&gt;</returns>
         Task<IActivateClientApiV1ClientsUidActiverPostApiResponse> ActivateClientApiV1ClientsUidActiverPostAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
@@ -56,7 +56,7 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Activate a deactivated client.  **Scope**: Client level (JWT with client_uid that must match {uid})
         /// </remarks>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IActivateClientApiV1ClientsUidActiverPostApiResponse"/>?&gt;</returns>
         Task<IActivateClientApiV1ClientsUidActiverPostApiResponse?> ActivateClientApiV1ClientsUidActiverPostOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
@@ -91,7 +91,7 @@ namespace FactPulse.SDK.Api
         /// Deactivate an active client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Note**: A deactivated client cannot be used for API calls (AFNOR, Chorus Pro, etc.).
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IDeactivateClientApiV1ClientsUidDesactiverPostApiResponse"/>&gt;</returns>
         Task<IDeactivateClientApiV1ClientsUidDesactiverPostApiResponse> DeactivateClientApiV1ClientsUidDesactiverPostAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
@@ -102,7 +102,7 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Deactivate an active client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Note**: A deactivated client cannot be used for API calls (AFNOR, Chorus Pro, etc.).
         /// </remarks>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IDeactivateClientApiV1ClientsUidDesactiverPostApiResponse"/>?&gt;</returns>
         Task<IDeactivateClientApiV1ClientsUidDesactiverPostApiResponse?> DeactivateClientApiV1ClientsUidDesactiverPostOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
@@ -114,7 +114,7 @@ namespace FactPulse.SDK.Api
         /// Delete the webhook secret for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **After deletion**: Webhooks for this client will use the global server key for HMAC signature instead of a client-specific key.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse"/>&gt;</returns>
         Task<IDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse> DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
@@ -125,7 +125,7 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Delete the webhook secret for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **After deletion**: Webhooks for this client will use the global server key for HMAC signature instead of a client-specific key.
         /// </remarks>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse"/>?&gt;</returns>
         Task<IDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse?> DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
@@ -137,7 +137,7 @@ namespace FactPulse.SDK.Api
         /// Generate or regenerate the webhook secret for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Important**: Save the returned secret immediately - it will never be shown again. The secret is used to sign webhooks sent by the server (HMAC-SHA256).  **If a secret already exists**: It will be replaced by the new one.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse"/>&gt;</returns>
         Task<IGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse> GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
@@ -148,7 +148,7 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Generate or regenerate the webhook secret for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Important**: Save the returned secret immediately - it will never be shown again. The secret is used to sign webhooks sent by the server (HMAC-SHA256).  **If a secret already exists**: It will be replaced by the new one.
         /// </remarks>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse"/>?&gt;</returns>
         Task<IGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse?> GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
@@ -160,7 +160,7 @@ namespace FactPulse.SDK.Api
         /// Get details of a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Security**: If the JWT contains a client_uid, it must match the {uid} in the URL, otherwise a 403 error is returned.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetClientApiV1ClientsUidGetApiResponse"/>&gt;</returns>
         Task<IGetClientApiV1ClientsUidGetApiResponse> GetClientApiV1ClientsUidGetAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
@@ -171,7 +171,7 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Get details of a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Security**: If the JWT contains a client_uid, it must match the {uid} in the URL, otherwise a 403 error is returned.
         /// </remarks>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetClientApiV1ClientsUidGetApiResponse"/>?&gt;</returns>
         Task<IGetClientApiV1ClientsUidGetApiResponse?> GetClientApiV1ClientsUidGetOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
@@ -183,7 +183,7 @@ namespace FactPulse.SDK.Api
         /// Get the PDP (PA/PDP) configuration for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Security**: The client secret is never returned. Only a status (&#x60;secretStatus&#x60;) indicates whether a secret is configured.  **Response**: - If configured: all config details (URLs, client_id, secret status) - If not configured: &#x60;isConfigured: false&#x60; with a message
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetPdpConfigApiV1ClientsUidPdpConfigGetApiResponse"/>&gt;</returns>
         Task<IGetPdpConfigApiV1ClientsUidPdpConfigGetApiResponse> GetPdpConfigApiV1ClientsUidPdpConfigGetAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
@@ -194,7 +194,7 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Get the PDP (PA/PDP) configuration for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Security**: The client secret is never returned. Only a status (&#x60;secretStatus&#x60;) indicates whether a secret is configured.  **Response**: - If configured: all config details (URLs, client_id, secret status) - If not configured: &#x60;isConfigured: false&#x60; with a message
         /// </remarks>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetPdpConfigApiV1ClientsUidPdpConfigGetApiResponse"/>?&gt;</returns>
         Task<IGetPdpConfigApiV1ClientsUidPdpConfigGetApiResponse?> GetPdpConfigApiV1ClientsUidPdpConfigGetOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
@@ -206,7 +206,7 @@ namespace FactPulse.SDK.Api
         /// Check if a webhook secret is configured for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Response**: - &#x60;hasSecret&#x60;: Whether a webhook secret is configured - &#x60;createdAt&#x60;: When the secret was created (if exists)  **Note**: The secret value is never returned, only its status.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse"/>&gt;</returns>
         Task<IGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse> GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
@@ -217,7 +217,7 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Check if a webhook secret is configured for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Response**: - &#x60;hasSecret&#x60;: Whether a webhook secret is configured - &#x60;createdAt&#x60;: When the secret was created (if exists)  **Note**: The secret value is never returned, only its status.
         /// </remarks>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse"/>?&gt;</returns>
         Task<IGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse?> GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
@@ -254,7 +254,7 @@ namespace FactPulse.SDK.Api
         /// Rotate the client encryption key for all secrets in double encryption mode.  **Scope**: Client level (JWT with client_uid that must match {uid})  **What this does**: 1. Decrypts all secrets (PDP, Chorus Pro) using the old key 2. Re-encrypts them using the new key 3. Saves to database  **Important notes**: - Both keys must be base64-encoded AES-256 keys (32 bytes each) - The old key becomes invalid immediately after rotation - Only secrets encrypted with &#x60;encryptionMode: \&quot;double\&quot;&#x60; are affected - If the client has no double-encrypted secrets, returns 404  **Security**: - The old key must be valid (decryption is verified) - If decryption fails, rotation is aborted (atomic operation) - Neither key is logged or stored by the server
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="keyRotationRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse"/>&gt;</returns>
@@ -266,7 +266,7 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Rotate the client encryption key for all secrets in double encryption mode.  **Scope**: Client level (JWT with client_uid that must match {uid})  **What this does**: 1. Decrypts all secrets (PDP, Chorus Pro) using the old key 2. Re-encrypts them using the new key 3. Saves to database  **Important notes**: - Both keys must be base64-encoded AES-256 keys (32 bytes each) - The old key becomes invalid immediately after rotation - Only secrets encrypted with &#x60;encryptionMode: \&quot;double\&quot;&#x60; are affected - If the client has no double-encrypted secrets, returns 404  **Security**: - The old key must be valid (decryption is verified) - If decryption fails, rotation is aborted (atomic operation) - Neither key is logged or stored by the server
         /// </remarks>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="keyRotationRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse"/>?&gt;</returns>
@@ -279,7 +279,7 @@ namespace FactPulse.SDK.Api
         /// Update client information (partial update).  **Scope**: Client level (JWT with client_uid that must match {uid})  **Updatable fields**: - &#x60;name&#x60;: Client name - &#x60;description&#x60;: Description - &#x60;siret&#x60;: SIRET (14 digits)  Only provided fields are updated.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="clientUpdateRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IUpdateClientApiV1ClientsUidPatchApiResponse"/>&gt;</returns>
@@ -291,7 +291,7 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Update client information (partial update).  **Scope**: Client level (JWT with client_uid that must match {uid})  **Updatable fields**: - &#x60;name&#x60;: Client name - &#x60;description&#x60;: Description - &#x60;siret&#x60;: SIRET (14 digits)  Only provided fields are updated.
         /// </remarks>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="clientUpdateRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IUpdateClientApiV1ClientsUidPatchApiResponse"/>?&gt;</returns>
@@ -304,7 +304,7 @@ namespace FactPulse.SDK.Api
         /// Configure or update the PDP (PA/PDP) configuration for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Required fields**: - &#x60;flowServiceUrl&#x60;: PDP Flow Service URL - &#x60;tokenUrl&#x60;: PDP OAuth token URL - &#x60;oauthClientId&#x60;: OAuth Client ID - &#x60;clientSecret&#x60;: OAuth Client Secret (sent but NEVER returned)  **Optional fields**: - &#x60;isActive&#x60;: Enable/disable the config (default: true) - &#x60;modeSandbox&#x60;: Sandbox mode (default: false) - &#x60;encryptionMode&#x60;: Encryption mode (default: \&quot;fernet\&quot;)   - \&quot;fernet\&quot;: Server-side encryption only   - \&quot;double\&quot;: Client AES-256-GCM + Server Fernet (requires X-Encryption-Key header)  **Double Encryption Mode**: When &#x60;encryptionMode&#x60; is set to \&quot;double\&quot;, you MUST also provide the &#x60;X-Encryption-Key&#x60; header containing a base64-encoded AES-256 key (32 bytes). This key is used to encrypt the &#x60;clientSecret&#x60; on the client side before the server encrypts it again with Fernet. The server cannot decrypt the secret without the client key.  **Security**: The &#x60;clientSecret&#x60; is stored encrypted on Django side and is never returned in API responses.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="pDPConfigUpdateRequest"></param>
         /// <param name="xEncryptionKey">Client encryption key for double encryption mode. Must be a base64-encoded AES-256 key (32 bytes). Required only when accessing resources encrypted with encryption_mode&#x3D;&#39;double&#39;. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -317,7 +317,7 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Configure or update the PDP (PA/PDP) configuration for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Required fields**: - &#x60;flowServiceUrl&#x60;: PDP Flow Service URL - &#x60;tokenUrl&#x60;: PDP OAuth token URL - &#x60;oauthClientId&#x60;: OAuth Client ID - &#x60;clientSecret&#x60;: OAuth Client Secret (sent but NEVER returned)  **Optional fields**: - &#x60;isActive&#x60;: Enable/disable the config (default: true) - &#x60;modeSandbox&#x60;: Sandbox mode (default: false) - &#x60;encryptionMode&#x60;: Encryption mode (default: \&quot;fernet\&quot;)   - \&quot;fernet\&quot;: Server-side encryption only   - \&quot;double\&quot;: Client AES-256-GCM + Server Fernet (requires X-Encryption-Key header)  **Double Encryption Mode**: When &#x60;encryptionMode&#x60; is set to \&quot;double\&quot;, you MUST also provide the &#x60;X-Encryption-Key&#x60; header containing a base64-encoded AES-256 key (32 bytes). This key is used to encrypt the &#x60;clientSecret&#x60; on the client side before the server encrypts it again with Fernet. The server cannot decrypt the secret without the client key.  **Security**: The &#x60;clientSecret&#x60; is stored encrypted on Django side and is never returned in API responses.
         /// </remarks>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="pDPConfigUpdateRequest"></param>
         /// <param name="xEncryptionKey">Client encryption key for double encryption mode. Must be a base64-encoded AES-256 key (32 bytes). Required only when accessing resources encrypted with encryption_mode&#x3D;&#39;double&#39;. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1252,7 +1252,7 @@ namespace FactPulse.SDK.Api
         /// <summary>
         /// Activate a client Activate a deactivated client.  **Scope**: Client level (JWT with client_uid that must match {uid})
         /// </summary>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IActivateClientApiV1ClientsUidActiverPostApiResponse"/>&gt;</returns>
         public async Task<IActivateClientApiV1ClientsUidActiverPostApiResponse?> ActivateClientApiV1ClientsUidActiverPostOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default)
@@ -1271,7 +1271,7 @@ namespace FactPulse.SDK.Api
         /// Activate a client Activate a deactivated client.  **Scope**: Client level (JWT with client_uid that must match {uid})
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IActivateClientApiV1ClientsUidActiverPostApiResponse"/>&gt;</returns>
         public async Task<IActivateClientApiV1ClientsUidActiverPostApiResponse> ActivateClientApiV1ClientsUidActiverPostAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default)
@@ -1901,7 +1901,7 @@ namespace FactPulse.SDK.Api
         /// <summary>
         /// Deactivate a client Deactivate an active client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Note**: A deactivated client cannot be used for API calls (AFNOR, Chorus Pro, etc.).
         /// </summary>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IDeactivateClientApiV1ClientsUidDesactiverPostApiResponse"/>&gt;</returns>
         public async Task<IDeactivateClientApiV1ClientsUidDesactiverPostApiResponse?> DeactivateClientApiV1ClientsUidDesactiverPostOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default)
@@ -1920,7 +1920,7 @@ namespace FactPulse.SDK.Api
         /// Deactivate a client Deactivate an active client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Note**: A deactivated client cannot be used for API calls (AFNOR, Chorus Pro, etc.).
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IDeactivateClientApiV1ClientsUidDesactiverPostApiResponse"/>&gt;</returns>
         public async Task<IDeactivateClientApiV1ClientsUidDesactiverPostApiResponse> DeactivateClientApiV1ClientsUidDesactiverPostAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default)
@@ -2213,7 +2213,7 @@ namespace FactPulse.SDK.Api
         /// <summary>
         /// Delete webhook secret Delete the webhook secret for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **After deletion**: Webhooks for this client will use the global server key for HMAC signature instead of a client-specific key.
         /// </summary>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse"/>&gt;</returns>
         public async Task<IDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse?> DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default)
@@ -2232,7 +2232,7 @@ namespace FactPulse.SDK.Api
         /// Delete webhook secret Delete the webhook secret for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **After deletion**: Webhooks for this client will use the global server key for HMAC signature instead of a client-specific key.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse"/>&gt;</returns>
         public async Task<IDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse> DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default)
@@ -2525,7 +2525,7 @@ namespace FactPulse.SDK.Api
         /// <summary>
         /// Generate webhook secret Generate or regenerate the webhook secret for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Important**: Save the returned secret immediately - it will never be shown again. The secret is used to sign webhooks sent by the server (HMAC-SHA256).  **If a secret already exists**: It will be replaced by the new one.
         /// </summary>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse"/>&gt;</returns>
         public async Task<IGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse?> GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default)
@@ -2544,7 +2544,7 @@ namespace FactPulse.SDK.Api
         /// Generate webhook secret Generate or regenerate the webhook secret for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Important**: Save the returned secret immediately - it will never be shown again. The secret is used to sign webhooks sent by the server (HMAC-SHA256).  **If a secret already exists**: It will be replaced by the new one.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse"/>&gt;</returns>
         public async Task<IGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse> GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default)
@@ -2837,7 +2837,7 @@ namespace FactPulse.SDK.Api
         /// <summary>
         /// Get client details Get details of a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Security**: If the JWT contains a client_uid, it must match the {uid} in the URL, otherwise a 403 error is returned.
         /// </summary>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetClientApiV1ClientsUidGetApiResponse"/>&gt;</returns>
         public async Task<IGetClientApiV1ClientsUidGetApiResponse?> GetClientApiV1ClientsUidGetOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default)
@@ -2856,7 +2856,7 @@ namespace FactPulse.SDK.Api
         /// Get client details Get details of a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Security**: If the JWT contains a client_uid, it must match the {uid} in the URL, otherwise a 403 error is returned.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetClientApiV1ClientsUidGetApiResponse"/>&gt;</returns>
         public async Task<IGetClientApiV1ClientsUidGetApiResponse> GetClientApiV1ClientsUidGetAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default)
@@ -3149,7 +3149,7 @@ namespace FactPulse.SDK.Api
         /// <summary>
         /// Get client PDP configuration Get the PDP (PA/PDP) configuration for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Security**: The client secret is never returned. Only a status (&#x60;secretStatus&#x60;) indicates whether a secret is configured.  **Response**: - If configured: all config details (URLs, client_id, secret status) - If not configured: &#x60;isConfigured: false&#x60; with a message
         /// </summary>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetPdpConfigApiV1ClientsUidPdpConfigGetApiResponse"/>&gt;</returns>
         public async Task<IGetPdpConfigApiV1ClientsUidPdpConfigGetApiResponse?> GetPdpConfigApiV1ClientsUidPdpConfigGetOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default)
@@ -3168,7 +3168,7 @@ namespace FactPulse.SDK.Api
         /// Get client PDP configuration Get the PDP (PA/PDP) configuration for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Security**: The client secret is never returned. Only a status (&#x60;secretStatus&#x60;) indicates whether a secret is configured.  **Response**: - If configured: all config details (URLs, client_id, secret status) - If not configured: &#x60;isConfigured: false&#x60; with a message
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetPdpConfigApiV1ClientsUidPdpConfigGetApiResponse"/>&gt;</returns>
         public async Task<IGetPdpConfigApiV1ClientsUidPdpConfigGetApiResponse> GetPdpConfigApiV1ClientsUidPdpConfigGetAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default)
@@ -3461,7 +3461,7 @@ namespace FactPulse.SDK.Api
         /// <summary>
         /// Get webhook secret status Check if a webhook secret is configured for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Response**: - &#x60;hasSecret&#x60;: Whether a webhook secret is configured - &#x60;createdAt&#x60;: When the secret was created (if exists)  **Note**: The secret value is never returned, only its status.
         /// </summary>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse"/>&gt;</returns>
         public async Task<IGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse?> GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default)
@@ -3480,7 +3480,7 @@ namespace FactPulse.SDK.Api
         /// Get webhook secret status Check if a webhook secret is configured for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Response**: - &#x60;hasSecret&#x60;: Whether a webhook secret is configured - &#x60;createdAt&#x60;: When the secret was created (if exists)  **Note**: The secret value is never returned, only its status.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse"/>&gt;</returns>
         public async Task<IGetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetApiResponse> GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGetAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default)
@@ -4115,7 +4115,7 @@ namespace FactPulse.SDK.Api
         /// <summary>
         /// Rotate client encryption key Rotate the client encryption key for all secrets in double encryption mode.  **Scope**: Client level (JWT with client_uid that must match {uid})  **What this does**: 1. Decrypts all secrets (PDP, Chorus Pro) using the old key 2. Re-encrypts them using the new key 3. Saves to database  **Important notes**: - Both keys must be base64-encoded AES-256 keys (32 bytes each) - The old key becomes invalid immediately after rotation - Only secrets encrypted with &#x60;encryptionMode: \&quot;double\&quot;&#x60; are affected - If the client has no double-encrypted secrets, returns 404  **Security**: - The old key must be valid (decryption is verified) - If decryption fails, rotation is aborted (atomic operation) - Neither key is logged or stored by the server
         /// </summary>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="keyRotationRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse"/>&gt;</returns>
@@ -4135,7 +4135,7 @@ namespace FactPulse.SDK.Api
         /// Rotate client encryption key Rotate the client encryption key for all secrets in double encryption mode.  **Scope**: Client level (JWT with client_uid that must match {uid})  **What this does**: 1. Decrypts all secrets (PDP, Chorus Pro) using the old key 2. Re-encrypts them using the new key 3. Saves to database  **Important notes**: - Both keys must be base64-encoded AES-256 keys (32 bytes each) - The old key becomes invalid immediately after rotation - Only secrets encrypted with &#x60;encryptionMode: \&quot;double\&quot;&#x60; are affected - If the client has no double-encrypted secrets, returns 404  **Security**: - The old key must be valid (decryption is verified) - If decryption fails, rotation is aborted (atomic operation) - Neither key is logged or stored by the server
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="keyRotationRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IRotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPostApiResponse"/>&gt;</returns>
@@ -4459,7 +4459,7 @@ namespace FactPulse.SDK.Api
         /// <summary>
         /// Update a client Update client information (partial update).  **Scope**: Client level (JWT with client_uid that must match {uid})  **Updatable fields**: - &#x60;name&#x60;: Client name - &#x60;description&#x60;: Description - &#x60;siret&#x60;: SIRET (14 digits)  Only provided fields are updated.
         /// </summary>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="clientUpdateRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IUpdateClientApiV1ClientsUidPatchApiResponse"/>&gt;</returns>
@@ -4479,7 +4479,7 @@ namespace FactPulse.SDK.Api
         /// Update a client Update client information (partial update).  **Scope**: Client level (JWT with client_uid that must match {uid})  **Updatable fields**: - &#x60;name&#x60;: Client name - &#x60;description&#x60;: Description - &#x60;siret&#x60;: SIRET (14 digits)  Only provided fields are updated.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="clientUpdateRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IUpdateClientApiV1ClientsUidPatchApiResponse"/>&gt;</returns>
@@ -4807,7 +4807,7 @@ namespace FactPulse.SDK.Api
         /// <summary>
         /// Configure client PDP Configure or update the PDP (PA/PDP) configuration for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Required fields**: - &#x60;flowServiceUrl&#x60;: PDP Flow Service URL - &#x60;tokenUrl&#x60;: PDP OAuth token URL - &#x60;oauthClientId&#x60;: OAuth Client ID - &#x60;clientSecret&#x60;: OAuth Client Secret (sent but NEVER returned)  **Optional fields**: - &#x60;isActive&#x60;: Enable/disable the config (default: true) - &#x60;modeSandbox&#x60;: Sandbox mode (default: false) - &#x60;encryptionMode&#x60;: Encryption mode (default: \&quot;fernet\&quot;)   - \&quot;fernet\&quot;: Server-side encryption only   - \&quot;double\&quot;: Client AES-256-GCM + Server Fernet (requires X-Encryption-Key header)  **Double Encryption Mode**: When &#x60;encryptionMode&#x60; is set to \&quot;double\&quot;, you MUST also provide the &#x60;X-Encryption-Key&#x60; header containing a base64-encoded AES-256 key (32 bytes). This key is used to encrypt the &#x60;clientSecret&#x60; on the client side before the server encrypts it again with Fernet. The server cannot decrypt the secret without the client key.  **Security**: The &#x60;clientSecret&#x60; is stored encrypted on Django side and is never returned in API responses.
         /// </summary>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="pDPConfigUpdateRequest"></param>
         /// <param name="xEncryptionKey">Client encryption key for double encryption mode. Must be a base64-encoded AES-256 key (32 bytes). Required only when accessing resources encrypted with encryption_mode&#x3D;&#39;double&#39;. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -4828,7 +4828,7 @@ namespace FactPulse.SDK.Api
         /// Configure client PDP Configure or update the PDP (PA/PDP) configuration for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Required fields**: - &#x60;flowServiceUrl&#x60;: PDP Flow Service URL - &#x60;tokenUrl&#x60;: PDP OAuth token URL - &#x60;oauthClientId&#x60;: OAuth Client ID - &#x60;clientSecret&#x60;: OAuth Client Secret (sent but NEVER returned)  **Optional fields**: - &#x60;isActive&#x60;: Enable/disable the config (default: true) - &#x60;modeSandbox&#x60;: Sandbox mode (default: false) - &#x60;encryptionMode&#x60;: Encryption mode (default: \&quot;fernet\&quot;)   - \&quot;fernet\&quot;: Server-side encryption only   - \&quot;double\&quot;: Client AES-256-GCM + Server Fernet (requires X-Encryption-Key header)  **Double Encryption Mode**: When &#x60;encryptionMode&#x60; is set to \&quot;double\&quot;, you MUST also provide the &#x60;X-Encryption-Key&#x60; header containing a base64-encoded AES-256 key (32 bytes). This key is used to encrypt the &#x60;clientSecret&#x60; on the client side before the server encrypts it again with Fernet. The server cannot decrypt the secret without the client key.  **Security**: The &#x60;clientSecret&#x60; is stored encrypted on Django side and is never returned in API responses.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uid"></param>
+        /// <param name="uid">Client unique identifier (UUID)</param>
         /// <param name="pDPConfigUpdateRequest"></param>
         /// <param name="xEncryptionKey">Client encryption key for double encryption mode. Must be a base64-encoded AES-256 key (32 bytes). Required only when accessing resources encrypted with encryption_mode&#x3D;&#39;double&#39;. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>

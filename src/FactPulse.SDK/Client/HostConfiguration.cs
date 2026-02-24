@@ -240,10 +240,10 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new ExtractionInfoJsonConverter());
             _jsonOptions.Converters.Add(new FacturXInvoiceJsonConverter());
             _jsonOptions.Converters.Add(new FacturXPDFInfoJsonConverter());
-            _jsonOptions.Converters.Add(new FactureElectroniqueModelsInvoiceTypeCodeJsonConverter());
-            _jsonOptions.Converters.Add(new FactureElectroniqueModelsInvoiceTypeCodeNullableJsonConverter());
-            _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasChorusProChorusProCredentialsJsonConverter());
-            _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasValidationValidationErrorResponseJsonConverter());
+            _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasCdarValidationErrorResponseJsonConverter());
+            _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeJsonConverter());
+            _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeNullableJsonConverter());
+            _jsonOptions.Converters.Add(new FactureElectroniqueRestApiSchemasProcessingChorusProCredentialsJsonConverter());
             _jsonOptions.Converters.Add(new FieldStatusJsonConverter());
             _jsonOptions.Converters.Add(new FieldStatusNullableJsonConverter());
             _jsonOptions.Converters.Add(new FileInfoJsonConverter());
@@ -279,6 +279,7 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new InvoiceFormatJsonConverter());
             _jsonOptions.Converters.Add(new InvoiceFormatNullableJsonConverter());
             _jsonOptions.Converters.Add(new InvoiceInputJsonConverter());
+            _jsonOptions.Converters.Add(new InvoiceLifecycleJsonConverter());
             _jsonOptions.Converters.Add(new InvoiceLineJsonConverter());
             _jsonOptions.Converters.Add(new InvoiceLineAllowanceAmountJsonConverter());
             _jsonOptions.Converters.Add(new InvoiceNoteJsonConverter());
@@ -298,6 +299,8 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new IssuerRoleCodeNullableJsonConverter());
             _jsonOptions.Converters.Add(new KeyRotationRequestJsonConverter());
             _jsonOptions.Converters.Add(new KeyRotationResponseJsonConverter());
+            _jsonOptions.Converters.Add(new LifecycleEventJsonConverter());
+            _jsonOptions.Converters.Add(new LifecycleResponseJsonConverter());
             _jsonOptions.Converters.Add(new LineNetAmountJsonConverter());
             _jsonOptions.Converters.Add(new LineSubTypeJsonConverter());
             _jsonOptions.Converters.Add(new LineSubTypeNullableJsonConverter());
@@ -413,6 +416,8 @@ namespace FactPulse.SDK.Client
             _jsonOptions.Converters.Add(new VATAmountJsonConverter());
             _jsonOptions.Converters.Add(new VATCategoryJsonConverter());
             _jsonOptions.Converters.Add(new VATCategoryNullableJsonConverter());
+            _jsonOptions.Converters.Add(new VATEXCodeInfoJsonConverter());
+            _jsonOptions.Converters.Add(new VATEXCodesResponseJsonConverter());
             _jsonOptions.Converters.Add(new VATLineJsonConverter());
             _jsonOptions.Converters.Add(new VATPointDateCodeJsonConverter());
             _jsonOptions.Converters.Add(new VATPointDateCodeNullableJsonConverter());
@@ -456,6 +461,7 @@ namespace FactPulse.SDK.Client
             _services.AddSingleton<HealthApiEvents>();
             _services.AddSingleton<InvoiceGenerationApiEvents>();
             _services.AddSingleton<ParseApiEvents>();
+            _services.AddSingleton<ReferencesApiEvents>();
             _services.AddSingleton<ValidationApiEvents>();
         }
 
@@ -490,6 +496,7 @@ namespace FactPulse.SDK.Client
             builders.Add(_services.AddHttpClient<IHealthApi, HealthApi>("FactPulse.SDK.Api.IHealthApi", client));
             builders.Add(_services.AddHttpClient<IInvoiceGenerationApi, InvoiceGenerationApi>("FactPulse.SDK.Api.IInvoiceGenerationApi", client));
             builders.Add(_services.AddHttpClient<IParseApi, ParseApi>("FactPulse.SDK.Api.IParseApi", client));
+            builders.Add(_services.AddHttpClient<IReferencesApi, ReferencesApi>("FactPulse.SDK.Api.IReferencesApi", client));
             builders.Add(_services.AddHttpClient<IValidationApi, ValidationApi>("FactPulse.SDK.Api.IValidationApi", client));
             
             if (builder != null)

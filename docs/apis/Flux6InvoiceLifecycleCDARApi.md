@@ -6,6 +6,7 @@ All URIs are relative to *https://factpulse.fr*
 |--------|--------------|-------------|
 | [**GenerateCdarApiV1CdarGeneratePost**](Flux6InvoiceLifecycleCDARApi.md#generatecdarapiv1cdargeneratepost) | **POST** /api/v1/cdar/generate | Generate a CDAR message |
 | [**GetActionCodesApiV1CdarActionCodesGet**](Flux6InvoiceLifecycleCDARApi.md#getactioncodesapiv1cdaractioncodesget) | **GET** /api/v1/cdar/action-codes | List of CDAR action codes |
+| [**GetLifecycleApiV1CdarLifecycleGet**](Flux6InvoiceLifecycleCDARApi.md#getlifecycleapiv1cdarlifecycleget) | **GET** /api/v1/cdar/lifecycle | [Simplified] Get lifecycle events for invoices |
 | [**GetReasonCodesApiV1CdarReasonCodesGet**](Flux6InvoiceLifecycleCDARApi.md#getreasoncodesapiv1cdarreasoncodesget) | **GET** /api/v1/cdar/reason-codes | List of CDAR reason codes |
 | [**GetStatusCodesApiV1CdarStatusCodesGet**](Flux6InvoiceLifecycleCDARApi.md#getstatuscodesapiv1cdarstatuscodesget) | **GET** /api/v1/cdar/status-codes | List of CDAR status codes |
 | [**SubmitCdarApiV1CdarSubmitPost**](Flux6InvoiceLifecycleCDARApi.md#submitcdarapiv1cdarsubmitpost) | **POST** /api/v1/cdar/submit | Generate and submit a CDAR message |
@@ -87,6 +88,51 @@ No authorization required
 | **400** | Invalid request |  -  |
 | **422** | Validation error |  -  |
 | **500** | Server error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a id="getlifecycleapiv1cdarlifecycleget"></a>
+# **GetLifecycleApiV1CdarLifecycleGet**
+> LifecycleResponse GetLifecycleApiV1CdarLifecycleGet (int days = null, string invoiceId = null, string pdpFlowServiceUrl = null, string pdpTokenUrl = null, string pdpClientId = null, string pdpClientSecret = null)
+
+[Simplified] Get lifecycle events for invoices
+
+Returns lifecycle events (CDAR) grouped by invoice reference.  **How it works (AFNOR XP Z12-013 compliant):** 1. Searches lifecycle flows on the PDP by flowType + flowDirection + date range 2. Downloads and parses each CDAR XML to extract the invoice reference 3. Groups events by invoice, sorted chronologically  **Parameters:** - `days`: Number of days to look back (default: 7) - `invoiceId`: Optional filter on a specific invoice reference  **Authentication:** JWT Bearer (recommended) or PDP credentials as query parameters.
+
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **days** | **int** | Number of days to look back | [optional] [default to 7] |
+| **invoiceId** | **string** | Filter by invoice reference | [optional]  |
+| **pdpFlowServiceUrl** | **string** | PDP Flow Service URL | [optional]  |
+| **pdpTokenUrl** | **string** | PDP OAuth token URL | [optional]  |
+| **pdpClientId** | **string** | PDP Client ID | [optional]  |
+| **pdpClientSecret** | **string** | PDP Client Secret | [optional]  |
+
+### Return type
+
+[**LifecycleResponse**](LifecycleResponse.md)
+
+### Authorization
+
+[HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **400** | Invalid request |  -  |
+| **422** | Validation error |  -  |
+| **500** | Server error |  -  |
+| **401** | Authentication required - Invalid or missing JWT token |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 

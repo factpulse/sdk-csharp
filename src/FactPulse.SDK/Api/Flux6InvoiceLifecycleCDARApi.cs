@@ -83,6 +83,39 @@ namespace FactPulse.SDK.Api
         Task<IGetActionCodesApiV1CdarActionCodesGetApiResponse?> GetActionCodesApiV1CdarActionCodesGetOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// [Simplified] Get lifecycle events for invoices
+        /// </summary>
+        /// <remarks>
+        /// Returns lifecycle events (CDAR) grouped by invoice reference.  **How it works (AFNOR XP Z12-013 compliant):** 1. Searches lifecycle flows on the PDP by flowType + flowDirection + date range 2. Downloads and parses each CDAR XML to extract the invoice reference 3. Groups events by invoice, sorted chronologically  **Parameters:** - &#x60;days&#x60;: Number of days to look back (default: 7) - &#x60;invoiceId&#x60;: Optional filter on a specific invoice reference  **Authentication:** JWT Bearer (recommended) or PDP credentials as query parameters.
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="days">Number of days to look back (optional, default to 7)</param>
+        /// <param name="invoiceId">Filter by invoice reference (optional)</param>
+        /// <param name="pdpFlowServiceUrl">PDP Flow Service URL (optional)</param>
+        /// <param name="pdpTokenUrl">PDP OAuth token URL (optional)</param>
+        /// <param name="pdpClientId">PDP Client ID (optional)</param>
+        /// <param name="pdpClientSecret">PDP Client Secret (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetLifecycleApiV1CdarLifecycleGetApiResponse"/>&gt;</returns>
+        Task<IGetLifecycleApiV1CdarLifecycleGetApiResponse> GetLifecycleApiV1CdarLifecycleGetAsync(Option<int> days = default, Option<string?> invoiceId = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// [Simplified] Get lifecycle events for invoices
+        /// </summary>
+        /// <remarks>
+        /// Returns lifecycle events (CDAR) grouped by invoice reference.  **How it works (AFNOR XP Z12-013 compliant):** 1. Searches lifecycle flows on the PDP by flowType + flowDirection + date range 2. Downloads and parses each CDAR XML to extract the invoice reference 3. Groups events by invoice, sorted chronologically  **Parameters:** - &#x60;days&#x60;: Number of days to look back (default: 7) - &#x60;invoiceId&#x60;: Optional filter on a specific invoice reference  **Authentication:** JWT Bearer (recommended) or PDP credentials as query parameters.
+        /// </remarks>
+        /// <param name="days">Number of days to look back (optional, default to 7)</param>
+        /// <param name="invoiceId">Filter by invoice reference (optional)</param>
+        /// <param name="pdpFlowServiceUrl">PDP Flow Service URL (optional)</param>
+        /// <param name="pdpTokenUrl">PDP OAuth token URL (optional)</param>
+        /// <param name="pdpClientId">PDP Client ID (optional)</param>
+        /// <param name="pdpClientSecret">PDP Client Secret (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetLifecycleApiV1CdarLifecycleGetApiResponse"/>?&gt;</returns>
+        Task<IGetLifecycleApiV1CdarLifecycleGetApiResponse?> GetLifecycleApiV1CdarLifecycleGetOrDefaultAsync(Option<int> days = default, Option<string?> invoiceId = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// List of CDAR reason codes
         /// </summary>
         /// <remarks>
@@ -327,6 +360,42 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <returns></returns>
         bool IsInternalServerError { get; }
+    }
+
+    /// <summary>
+    /// The <see cref="IGetLifecycleApiV1CdarLifecycleGetApiResponse"/>
+    /// </summary>
+    public interface IGetLifecycleApiV1CdarLifecycleGetApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.LifecycleResponse?>, IUnauthorized<FactPulse.SDK.Model.APIError?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 400 BadRequest
+        /// </summary>
+        /// <returns></returns>
+        bool IsBadRequest { get; }
+
+        /// <summary>
+        /// Returns true if the response is 422 UnprocessableContent
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnprocessableContent { get; }
+
+        /// <summary>
+        /// Returns true if the response is 500 InternalServerError
+        /// </summary>
+        /// <returns></returns>
+        bool IsInternalServerError { get; }
+
+        /// <summary>
+        /// Returns true if the response is 401 Unauthorized
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnauthorized { get; }
     }
 
     /// <summary>
@@ -648,6 +717,26 @@ namespace FactPulse.SDK.Api
         internal void ExecuteOnErrorGetActionCodesApiV1CdarActionCodesGet(Exception exception)
         {
             OnErrorGetActionCodesApiV1CdarActionCodesGet?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
+        public event EventHandler<ApiResponseEventArgs>? OnGetLifecycleApiV1CdarLifecycleGet;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs>? OnErrorGetLifecycleApiV1CdarLifecycleGet;
+
+        internal void ExecuteOnGetLifecycleApiV1CdarLifecycleGet(Flux6InvoiceLifecycleCDARApi.GetLifecycleApiV1CdarLifecycleGetApiResponse apiResponse)
+        {
+            OnGetLifecycleApiV1CdarLifecycleGet?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorGetLifecycleApiV1CdarLifecycleGet(Exception exception)
+        {
+            OnErrorGetLifecycleApiV1CdarLifecycleGet?.Invoke(this, new ExceptionEventArgs(exception));
         }
 
         /// <summary>
@@ -1414,6 +1503,353 @@ namespace FactPulse.SDK.Api
             /// </summary>
             /// <returns></returns>
             public bool IsInternalServerError => 500 == (int)StatusCode;
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
+        partial void FormatGetLifecycleApiV1CdarLifecycleGet(ref Option<int> days, ref Option<string?> invoiceId, ref Option<string?> pdpFlowServiceUrl, ref Option<string?> pdpTokenUrl, ref Option<string?> pdpClientId, ref Option<string?> pdpClientSecret);
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="days"></param>
+        /// <param name="invoiceId"></param>
+        /// <param name="pdpFlowServiceUrl"></param>
+        /// <param name="pdpTokenUrl"></param>
+        /// <param name="pdpClientId"></param>
+        /// <param name="pdpClientSecret"></param>
+        private void AfterGetLifecycleApiV1CdarLifecycleGetDefaultImplementation(IGetLifecycleApiV1CdarLifecycleGetApiResponse apiResponseLocalVar, Option<int> days, Option<string?> invoiceId, Option<string?> pdpFlowServiceUrl, Option<string?> pdpTokenUrl, Option<string?> pdpClientId, Option<string?> pdpClientSecret)
+        {
+            bool suppressDefaultLog = false;
+            AfterGetLifecycleApiV1CdarLifecycleGet(ref suppressDefaultLog, apiResponseLocalVar, days, invoiceId, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="days"></param>
+        /// <param name="invoiceId"></param>
+        /// <param name="pdpFlowServiceUrl"></param>
+        /// <param name="pdpTokenUrl"></param>
+        /// <param name="pdpClientId"></param>
+        /// <param name="pdpClientSecret"></param>
+        partial void AfterGetLifecycleApiV1CdarLifecycleGet(ref bool suppressDefaultLog, IGetLifecycleApiV1CdarLifecycleGetApiResponse apiResponseLocalVar, Option<int> days, Option<string?> invoiceId, Option<string?> pdpFlowServiceUrl, Option<string?> pdpTokenUrl, Option<string?> pdpClientId, Option<string?> pdpClientSecret);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="days"></param>
+        /// <param name="invoiceId"></param>
+        /// <param name="pdpFlowServiceUrl"></param>
+        /// <param name="pdpTokenUrl"></param>
+        /// <param name="pdpClientId"></param>
+        /// <param name="pdpClientSecret"></param>
+        private void OnErrorGetLifecycleApiV1CdarLifecycleGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<int> days, Option<string?> invoiceId, Option<string?> pdpFlowServiceUrl, Option<string?> pdpTokenUrl, Option<string?> pdpClientId, Option<string?> pdpClientSecret)
+        {
+            bool suppressDefaultLogLocalVar = false;
+            OnErrorGetLifecycleApiV1CdarLifecycleGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, days, invoiceId, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
+            if (!suppressDefaultLogLocalVar)
+                Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLogLocalVar"></param>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="days"></param>
+        /// <param name="invoiceId"></param>
+        /// <param name="pdpFlowServiceUrl"></param>
+        /// <param name="pdpTokenUrl"></param>
+        /// <param name="pdpClientId"></param>
+        /// <param name="pdpClientSecret"></param>
+        partial void OnErrorGetLifecycleApiV1CdarLifecycleGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<int> days, Option<string?> invoiceId, Option<string?> pdpFlowServiceUrl, Option<string?> pdpTokenUrl, Option<string?> pdpClientId, Option<string?> pdpClientSecret);
+
+        /// <summary>
+        /// [Simplified] Get lifecycle events for invoices Returns lifecycle events (CDAR) grouped by invoice reference.  **How it works (AFNOR XP Z12-013 compliant):** 1. Searches lifecycle flows on the PDP by flowType + flowDirection + date range 2. Downloads and parses each CDAR XML to extract the invoice reference 3. Groups events by invoice, sorted chronologically  **Parameters:** - &#x60;days&#x60;: Number of days to look back (default: 7) - &#x60;invoiceId&#x60;: Optional filter on a specific invoice reference  **Authentication:** JWT Bearer (recommended) or PDP credentials as query parameters.
+        /// </summary>
+        /// <param name="days">Number of days to look back (optional, default to 7)</param>
+        /// <param name="invoiceId">Filter by invoice reference (optional)</param>
+        /// <param name="pdpFlowServiceUrl">PDP Flow Service URL (optional)</param>
+        /// <param name="pdpTokenUrl">PDP OAuth token URL (optional)</param>
+        /// <param name="pdpClientId">PDP Client ID (optional)</param>
+        /// <param name="pdpClientSecret">PDP Client Secret (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetLifecycleApiV1CdarLifecycleGetApiResponse"/>&gt;</returns>
+        public async Task<IGetLifecycleApiV1CdarLifecycleGetApiResponse?> GetLifecycleApiV1CdarLifecycleGetOrDefaultAsync(Option<int> days = default, Option<string?> invoiceId = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await GetLifecycleApiV1CdarLifecycleGetAsync(days, invoiceId, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// [Simplified] Get lifecycle events for invoices Returns lifecycle events (CDAR) grouped by invoice reference.  **How it works (AFNOR XP Z12-013 compliant):** 1. Searches lifecycle flows on the PDP by flowType + flowDirection + date range 2. Downloads and parses each CDAR XML to extract the invoice reference 3. Groups events by invoice, sorted chronologically  **Parameters:** - &#x60;days&#x60;: Number of days to look back (default: 7) - &#x60;invoiceId&#x60;: Optional filter on a specific invoice reference  **Authentication:** JWT Bearer (recommended) or PDP credentials as query parameters.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="days">Number of days to look back (optional, default to 7)</param>
+        /// <param name="invoiceId">Filter by invoice reference (optional)</param>
+        /// <param name="pdpFlowServiceUrl">PDP Flow Service URL (optional)</param>
+        /// <param name="pdpTokenUrl">PDP OAuth token URL (optional)</param>
+        /// <param name="pdpClientId">PDP Client ID (optional)</param>
+        /// <param name="pdpClientSecret">PDP Client Secret (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetLifecycleApiV1CdarLifecycleGetApiResponse"/>&gt;</returns>
+        public async Task<IGetLifecycleApiV1CdarLifecycleGetApiResponse> GetLifecycleApiV1CdarLifecycleGetAsync(Option<int> days = default, Option<string?> invoiceId = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                FormatGetLifecycleApiV1CdarLifecycleGet(ref days, ref invoiceId, ref pdpFlowServiceUrl, ref pdpTokenUrl, ref pdpClientId, ref pdpClientSecret);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
+                        ? "/api/v1/cdar/lifecycle"
+                        : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/cdar/lifecycle");
+
+                    System.Collections.Specialized.NameValueCollection parseQueryStringLocalVar = System.Web.HttpUtility.ParseQueryString(string.Empty);
+
+                    if (days.IsSet)
+                        parseQueryStringLocalVar["days"] = ClientUtils.ParameterToString(days.Value);
+
+                    if (invoiceId.IsSet)
+                        parseQueryStringLocalVar["invoiceId"] = ClientUtils.ParameterToString(invoiceId.Value);
+
+                    if (pdpFlowServiceUrl.IsSet)
+                        parseQueryStringLocalVar["pdpFlowServiceUrl"] = ClientUtils.ParameterToString(pdpFlowServiceUrl.Value);
+
+                    if (pdpTokenUrl.IsSet)
+                        parseQueryStringLocalVar["pdpTokenUrl"] = ClientUtils.ParameterToString(pdpTokenUrl.Value);
+
+                    if (pdpClientId.IsSet)
+                        parseQueryStringLocalVar["pdpClientId"] = ClientUtils.ParameterToString(pdpClientId.Value);
+
+                    if (pdpClientSecret.IsSet)
+                        parseQueryStringLocalVar["pdpClientSecret"] = ClientUtils.ParameterToString(pdpClientSecret.Value);
+
+                    uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar1 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar1);
+
+                    bearerTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar, "");
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
+
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Get;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        ILogger<GetLifecycleApiV1CdarLifecycleGetApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<GetLifecycleApiV1CdarLifecycleGetApiResponse>();
+                        GetLifecycleApiV1CdarLifecycleGetApiResponse apiResponseLocalVar;
+
+                        switch ((int)httpResponseMessageLocalVar.StatusCode) {
+                            default: {
+                                string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+                                apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/api/v1/cdar/lifecycle", requestedAtLocalVar, _jsonSerializerOptions);
+
+                                break;
+                            }
+                        }
+
+                        AfterGetLifecycleApiV1CdarLifecycleGetDefaultImplementation(apiResponseLocalVar, days, invoiceId, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
+
+                        Events.ExecuteOnGetLifecycleApiV1CdarLifecycleGet(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorGetLifecycleApiV1CdarLifecycleGetDefaultImplementation(e, "/api/v1/cdar/lifecycle", uriBuilderLocalVar.Path, days, invoiceId, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
+                Events.ExecuteOnErrorGetLifecycleApiV1CdarLifecycleGet(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="GetLifecycleApiV1CdarLifecycleGetApiResponse"/>
+        /// </summary>
+        public partial class GetLifecycleApiV1CdarLifecycleGetApiResponse : FactPulse.SDK.Client.ApiResponse, IGetLifecycleApiV1CdarLifecycleGetApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<GetLifecycleApiV1CdarLifecycleGetApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="GetLifecycleApiV1CdarLifecycleGetApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public GetLifecycleApiV1CdarLifecycleGetApiResponse(ILogger<GetLifecycleApiV1CdarLifecycleGetApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            /// <summary>
+            /// The <see cref="GetLifecycleApiV1CdarLifecycleGetApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="contentStream"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public GetLifecycleApiV1CdarLifecycleGetApiResponse(ILogger<GetLifecycleApiV1CdarLifecycleGetApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.LifecycleResponse? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.LifecycleResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out FactPulse.SDK.Model.LifecycleResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 400 BadRequest
+            /// </summary>
+            /// <returns></returns>
+            public bool IsBadRequest => 400 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnprocessableContent => 422 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 500 InternalServerError
+            /// </summary>
+            /// <returns></returns>
+            public bool IsInternalServerError => 500 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 401 Unauthorized
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnauthorized => 401 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 401 Unauthorized
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.APIError? Unauthorized()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsUnauthorized
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.APIError>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 401 Unauthorized and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryUnauthorized([NotNullWhen(true)]out FactPulse.SDK.Model.APIError? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Unauthorized();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)401);
+                }
+
+                return result != null;
+            }
 
             private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
             {

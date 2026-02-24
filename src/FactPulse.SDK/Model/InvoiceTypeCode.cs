@@ -27,35 +27,90 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Invoice type codes (UNTDID 1001).
+    /// Document type according to BR-FR-04 (UNTDID 1001 codes).  | Code | Name | Description | |- -- -- -|- -- -- -|- -- -- -- -- -- --| | 380 | INVOICE | Commercial invoice | | 389 | SELF_BILLED_INVOICE | Self-billed invoice | | 393 | FACTORED_INVOICE | Factored invoice | | 501 | SELF_BILLED_FACTORED_INVOICE | Self-billed factored invoice | | 386 | PREPAYMENT_INVOICE | Prepayment invoice | | 500 | SELF_BILLED_PREPAYMENT_INVOICE | Self-billed prepayment invoice | | 384 | CORRECTIVE_INVOICE | Corrective invoice | | 471 | SELF_BILLED_CORRECTIVE_INVOICE | Self-billed corrective invoice | | 472 | FACTORED_CORRECTIVE_INVOICE | Factored corrective invoice | | 473 | SELF_BILLED_FACTORED_CORRECTIVE_INVOICE | Self-billed factored corrective invoice | | 381 | CREDIT_NOTE | Credit note | | 261 | SELF_BILLED_CREDIT_NOTE | Self-billed credit note | | 262 | GLOBAL_ALLOWANCE_CREDIT_NOTE | Credit note for global allowance | | 396 | FACTORED_CREDIT_NOTE | Factored credit note | | 502 | SELF_BILLED_FACTORED_CREDIT_NOTE | Self-billed factored credit note | | 503 | PREPAYMENT_CREDIT_NOTE | Credit note for prepayment invoice |
     /// </summary>
-    /// <value>Invoice type codes (UNTDID 1001).</value>
+    /// <value>Document type according to BR-FR-04 (UNTDID 1001 codes).  | Code | Name | Description | |- -- -- -|- -- -- -|- -- -- -- -- -- --| | 380 | INVOICE | Commercial invoice | | 389 | SELF_BILLED_INVOICE | Self-billed invoice | | 393 | FACTORED_INVOICE | Factored invoice | | 501 | SELF_BILLED_FACTORED_INVOICE | Self-billed factored invoice | | 386 | PREPAYMENT_INVOICE | Prepayment invoice | | 500 | SELF_BILLED_PREPAYMENT_INVOICE | Self-billed prepayment invoice | | 384 | CORRECTIVE_INVOICE | Corrective invoice | | 471 | SELF_BILLED_CORRECTIVE_INVOICE | Self-billed corrective invoice | | 472 | FACTORED_CORRECTIVE_INVOICE | Factored corrective invoice | | 473 | SELF_BILLED_FACTORED_CORRECTIVE_INVOICE | Self-billed factored corrective invoice | | 381 | CREDIT_NOTE | Credit note | | 261 | SELF_BILLED_CREDIT_NOTE | Self-billed credit note | | 262 | GLOBAL_ALLOWANCE_CREDIT_NOTE | Credit note for global allowance | | 396 | FACTORED_CREDIT_NOTE | Factored credit note | | 502 | SELF_BILLED_FACTORED_CREDIT_NOTE | Self-billed factored credit note | | 503 | PREPAYMENT_CREDIT_NOTE | Credit note for prepayment invoice |</value>
     public enum InvoiceTypeCode
     {
         /// <summary>
-        /// Enum _380 for value: 380
+        /// Enum INVOICE for value: 380
         /// </summary>
-        _380 = 1,
+        INVOICE = 1,
 
         /// <summary>
-        /// Enum _381 for value: 381
+        /// Enum SELF_BILLED_INVOICE for value: 389
         /// </summary>
-        _381 = 2,
+        SELF_BILLED_INVOICE = 2,
 
         /// <summary>
-        /// Enum _384 for value: 384
+        /// Enum FACTORED_INVOICE for value: 393
         /// </summary>
-        _384 = 3,
+        FACTORED_INVOICE = 3,
 
         /// <summary>
-        /// Enum _389 for value: 389
+        /// Enum SELF_BILLED_FACTORED_INVOICE for value: 501
         /// </summary>
-        _389 = 4,
+        SELF_BILLED_FACTORED_INVOICE = 4,
 
         /// <summary>
-        /// Enum _386 for value: 386
+        /// Enum PREPAYMENT_INVOICE for value: 386
         /// </summary>
-        _386 = 5
+        PREPAYMENT_INVOICE = 5,
+
+        /// <summary>
+        /// Enum SELF_BILLED_PREPAYMENT_INVOICE for value: 500
+        /// </summary>
+        SELF_BILLED_PREPAYMENT_INVOICE = 6,
+
+        /// <summary>
+        /// Enum CORRECTIVE_INVOICE for value: 384
+        /// </summary>
+        CORRECTIVE_INVOICE = 7,
+
+        /// <summary>
+        /// Enum SELF_BILLED_CORRECTIVE_INVOICE for value: 471
+        /// </summary>
+        SELF_BILLED_CORRECTIVE_INVOICE = 8,
+
+        /// <summary>
+        /// Enum FACTORED_CORRECTIVE_INVOICE for value: 472
+        /// </summary>
+        FACTORED_CORRECTIVE_INVOICE = 9,
+
+        /// <summary>
+        /// Enum SELF_BILLED_FACTORED_CORRECTIVE_INVOICE for value: 473
+        /// </summary>
+        SELF_BILLED_FACTORED_CORRECTIVE_INVOICE = 10,
+
+        /// <summary>
+        /// Enum CREDIT_NOTE for value: 381
+        /// </summary>
+        CREDIT_NOTE = 11,
+
+        /// <summary>
+        /// Enum SELF_BILLED_CREDIT_NOTE for value: 261
+        /// </summary>
+        SELF_BILLED_CREDIT_NOTE = 12,
+
+        /// <summary>
+        /// Enum GLOBAL_ALLOWANCE_CREDIT_NOTE for value: 262
+        /// </summary>
+        GLOBAL_ALLOWANCE_CREDIT_NOTE = 13,
+
+        /// <summary>
+        /// Enum FACTORED_CREDIT_NOTE for value: 396
+        /// </summary>
+        FACTORED_CREDIT_NOTE = 14,
+
+        /// <summary>
+        /// Enum SELF_BILLED_FACTORED_CREDIT_NOTE for value: 502
+        /// </summary>
+        SELF_BILLED_FACTORED_CREDIT_NOTE = 15,
+
+        /// <summary>
+        /// Enum PREPAYMENT_CREDIT_NOTE for value: 503
+        /// </summary>
+        PREPAYMENT_CREDIT_NOTE = 16
     }
 
     /// <summary>
@@ -71,19 +126,52 @@ namespace FactPulse.SDK.Model
         public static InvoiceTypeCode FromString(string value)
         {
             if (value.Equals("380"))
-                return InvoiceTypeCode._380;
-
-            if (value.Equals("381"))
-                return InvoiceTypeCode._381;
-
-            if (value.Equals("384"))
-                return InvoiceTypeCode._384;
+                return InvoiceTypeCode.INVOICE;
 
             if (value.Equals("389"))
-                return InvoiceTypeCode._389;
+                return InvoiceTypeCode.SELF_BILLED_INVOICE;
+
+            if (value.Equals("393"))
+                return InvoiceTypeCode.FACTORED_INVOICE;
+
+            if (value.Equals("501"))
+                return InvoiceTypeCode.SELF_BILLED_FACTORED_INVOICE;
 
             if (value.Equals("386"))
-                return InvoiceTypeCode._386;
+                return InvoiceTypeCode.PREPAYMENT_INVOICE;
+
+            if (value.Equals("500"))
+                return InvoiceTypeCode.SELF_BILLED_PREPAYMENT_INVOICE;
+
+            if (value.Equals("384"))
+                return InvoiceTypeCode.CORRECTIVE_INVOICE;
+
+            if (value.Equals("471"))
+                return InvoiceTypeCode.SELF_BILLED_CORRECTIVE_INVOICE;
+
+            if (value.Equals("472"))
+                return InvoiceTypeCode.FACTORED_CORRECTIVE_INVOICE;
+
+            if (value.Equals("473"))
+                return InvoiceTypeCode.SELF_BILLED_FACTORED_CORRECTIVE_INVOICE;
+
+            if (value.Equals("381"))
+                return InvoiceTypeCode.CREDIT_NOTE;
+
+            if (value.Equals("261"))
+                return InvoiceTypeCode.SELF_BILLED_CREDIT_NOTE;
+
+            if (value.Equals("262"))
+                return InvoiceTypeCode.GLOBAL_ALLOWANCE_CREDIT_NOTE;
+
+            if (value.Equals("396"))
+                return InvoiceTypeCode.FACTORED_CREDIT_NOTE;
+
+            if (value.Equals("502"))
+                return InvoiceTypeCode.SELF_BILLED_FACTORED_CREDIT_NOTE;
+
+            if (value.Equals("503"))
+                return InvoiceTypeCode.PREPAYMENT_CREDIT_NOTE;
 
             throw new NotImplementedException($"Could not convert value to type InvoiceTypeCode: '{value}'");
         }
@@ -96,19 +184,52 @@ namespace FactPulse.SDK.Model
         public static InvoiceTypeCode? FromStringOrDefault(string value)
         {
             if (value.Equals("380"))
-                return InvoiceTypeCode._380;
-
-            if (value.Equals("381"))
-                return InvoiceTypeCode._381;
-
-            if (value.Equals("384"))
-                return InvoiceTypeCode._384;
+                return InvoiceTypeCode.INVOICE;
 
             if (value.Equals("389"))
-                return InvoiceTypeCode._389;
+                return InvoiceTypeCode.SELF_BILLED_INVOICE;
+
+            if (value.Equals("393"))
+                return InvoiceTypeCode.FACTORED_INVOICE;
+
+            if (value.Equals("501"))
+                return InvoiceTypeCode.SELF_BILLED_FACTORED_INVOICE;
 
             if (value.Equals("386"))
-                return InvoiceTypeCode._386;
+                return InvoiceTypeCode.PREPAYMENT_INVOICE;
+
+            if (value.Equals("500"))
+                return InvoiceTypeCode.SELF_BILLED_PREPAYMENT_INVOICE;
+
+            if (value.Equals("384"))
+                return InvoiceTypeCode.CORRECTIVE_INVOICE;
+
+            if (value.Equals("471"))
+                return InvoiceTypeCode.SELF_BILLED_CORRECTIVE_INVOICE;
+
+            if (value.Equals("472"))
+                return InvoiceTypeCode.FACTORED_CORRECTIVE_INVOICE;
+
+            if (value.Equals("473"))
+                return InvoiceTypeCode.SELF_BILLED_FACTORED_CORRECTIVE_INVOICE;
+
+            if (value.Equals("381"))
+                return InvoiceTypeCode.CREDIT_NOTE;
+
+            if (value.Equals("261"))
+                return InvoiceTypeCode.SELF_BILLED_CREDIT_NOTE;
+
+            if (value.Equals("262"))
+                return InvoiceTypeCode.GLOBAL_ALLOWANCE_CREDIT_NOTE;
+
+            if (value.Equals("396"))
+                return InvoiceTypeCode.FACTORED_CREDIT_NOTE;
+
+            if (value.Equals("502"))
+                return InvoiceTypeCode.SELF_BILLED_FACTORED_CREDIT_NOTE;
+
+            if (value.Equals("503"))
+                return InvoiceTypeCode.PREPAYMENT_CREDIT_NOTE;
 
             return null;
         }
@@ -121,20 +242,53 @@ namespace FactPulse.SDK.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string ToJsonValue(InvoiceTypeCode value)
         {
-            if (value == InvoiceTypeCode._380)
+            if (value == InvoiceTypeCode.INVOICE)
                 return "380";
 
-            if (value == InvoiceTypeCode._381)
-                return "381";
-
-            if (value == InvoiceTypeCode._384)
-                return "384";
-
-            if (value == InvoiceTypeCode._389)
+            if (value == InvoiceTypeCode.SELF_BILLED_INVOICE)
                 return "389";
 
-            if (value == InvoiceTypeCode._386)
+            if (value == InvoiceTypeCode.FACTORED_INVOICE)
+                return "393";
+
+            if (value == InvoiceTypeCode.SELF_BILLED_FACTORED_INVOICE)
+                return "501";
+
+            if (value == InvoiceTypeCode.PREPAYMENT_INVOICE)
                 return "386";
+
+            if (value == InvoiceTypeCode.SELF_BILLED_PREPAYMENT_INVOICE)
+                return "500";
+
+            if (value == InvoiceTypeCode.CORRECTIVE_INVOICE)
+                return "384";
+
+            if (value == InvoiceTypeCode.SELF_BILLED_CORRECTIVE_INVOICE)
+                return "471";
+
+            if (value == InvoiceTypeCode.FACTORED_CORRECTIVE_INVOICE)
+                return "472";
+
+            if (value == InvoiceTypeCode.SELF_BILLED_FACTORED_CORRECTIVE_INVOICE)
+                return "473";
+
+            if (value == InvoiceTypeCode.CREDIT_NOTE)
+                return "381";
+
+            if (value == InvoiceTypeCode.SELF_BILLED_CREDIT_NOTE)
+                return "261";
+
+            if (value == InvoiceTypeCode.GLOBAL_ALLOWANCE_CREDIT_NOTE)
+                return "262";
+
+            if (value == InvoiceTypeCode.FACTORED_CREDIT_NOTE)
+                return "396";
+
+            if (value == InvoiceTypeCode.SELF_BILLED_FACTORED_CREDIT_NOTE)
+                return "502";
+
+            if (value == InvoiceTypeCode.PREPAYMENT_CREDIT_NOTE)
+                return "503";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }

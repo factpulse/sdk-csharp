@@ -34,8 +34,8 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Supplier" /> class.
         /// </summary>
-        /// <param name="supplierId">supplierId</param>
         /// <param name="electronicAddress">electronicAddress</param>
+        /// <param name="supplierId">Chorus Pro supplier structure ID (idFournisseur). Only required for B2G. (default to 0)</param>
         /// <param name="privateId">privateId</param>
         /// <param name="supplierBankAccountCode">supplierBankAccountCode</param>
         /// <param name="supplierServiceId">supplierServiceId</param>
@@ -53,10 +53,10 @@ namespace FactPulse.SDK.Model
         /// <param name="contact">contact</param>
         /// <param name="globalIds">globalIds</param>
         [JsonConstructor]
-        public Supplier(int supplierId, Option<ElectronicAddress?> electronicAddress = default, Option<string?> privateId = default, Option<int?> supplierBankAccountCode = default, Option<int?> supplierServiceId = default, Option<string?> name = default, Option<string?> tradingBusinessName = default, Option<string?> legalDescription = default, Option<string?> siren = default, Option<string?> siret = default, Option<string?> vatNumber = default, Option<string?> iban = default, Option<string?> bic = default, Option<string?> bankAccountName = default, Option<string?> proprietaryId = default, Option<PostalAddress?> postalAddress = default, Option<Contact?> contact = default, Option<List<ElectronicAddress>?> globalIds = default)
+        public Supplier(Option<ElectronicAddress?> electronicAddress = default, Option<int?> supplierId = default, Option<string?> privateId = default, Option<int?> supplierBankAccountCode = default, Option<int?> supplierServiceId = default, Option<string?> name = default, Option<string?> tradingBusinessName = default, Option<string?> legalDescription = default, Option<string?> siren = default, Option<string?> siret = default, Option<string?> vatNumber = default, Option<string?> iban = default, Option<string?> bic = default, Option<string?> bankAccountName = default, Option<string?> proprietaryId = default, Option<PostalAddress?> postalAddress = default, Option<Contact?> contact = default, Option<List<ElectronicAddress>?> globalIds = default)
         {
-            SupplierId = supplierId;
             ElectronicAddressOption = electronicAddress;
+            SupplierIdOption = supplierId;
             PrivateIdOption = privateId;
             SupplierBankAccountCodeOption = supplierBankAccountCode;
             SupplierServiceIdOption = supplierServiceId;
@@ -79,12 +79,6 @@ namespace FactPulse.SDK.Model
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets SupplierId
-        /// </summary>
-        [JsonPropertyName("supplier_id")]
-        public int SupplierId { get; set; }
-
-        /// <summary>
         /// Used to track the state of ElectronicAddress
         /// </summary>
         [JsonIgnore]
@@ -96,6 +90,20 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonPropertyName("electronic_address")]
         public ElectronicAddress? ElectronicAddress { get { return this.ElectronicAddressOption; } set { this.ElectronicAddressOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of SupplierId
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<int?> SupplierIdOption { get; private set; }
+
+        /// <summary>
+        /// Chorus Pro supplier structure ID (idFournisseur). Only required for B2G.
+        /// </summary>
+        /// <value>Chorus Pro supplier structure ID (idFournisseur). Only required for B2G.</value>
+        [JsonPropertyName("supplier_id")]
+        public int? SupplierId { get { return this.SupplierIdOption; } set { this.SupplierIdOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of PrivateId
@@ -313,8 +321,8 @@ namespace FactPulse.SDK.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class Supplier {\n");
-            sb.Append("  SupplierId: ").Append(SupplierId).Append("\n");
             sb.Append("  ElectronicAddress: ").Append(ElectronicAddress).Append("\n");
+            sb.Append("  SupplierId: ").Append(SupplierId).Append("\n");
             sb.Append("  PrivateId: ").Append(PrivateId).Append("\n");
             sb.Append("  SupplierBankAccountCode: ").Append(SupplierBankAccountCode).Append("\n");
             sb.Append("  SupplierServiceId: ").Append(SupplierServiceId).Append("\n");
@@ -368,8 +376,8 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<int?> supplierId = default;
             Option<ElectronicAddress?> electronicAddress = default;
+            Option<int?> supplierId = default;
             Option<string?> privateId = default;
             Option<int?> supplierBankAccountCode = default;
             Option<int?> supplierServiceId = default;
@@ -402,11 +410,11 @@ namespace FactPulse.SDK.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "supplier_id":
-                            supplierId = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
-                            break;
                         case "electronic_address":
                             electronicAddress = new Option<ElectronicAddress?>(JsonSerializer.Deserialize<ElectronicAddress>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "supplier_id":
+                            supplierId = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "private_id":
                             privateId = new Option<string?>(utf8JsonReader.GetString());
@@ -462,13 +470,10 @@ namespace FactPulse.SDK.Model
                 }
             }
 
-            if (!supplierId.IsSet)
-                throw new ArgumentException("Property is required for class Supplier.", nameof(supplierId));
-
             if (supplierId.IsSet && supplierId.Value == null)
                 throw new ArgumentNullException(nameof(supplierId), "Property is not nullable for class Supplier.");
 
-            return new Supplier(supplierId.Value!.Value!, electronicAddress, privateId, supplierBankAccountCode, supplierServiceId, name, tradingBusinessName, legalDescription, siren, siret, vatNumber, iban, bic, bankAccountName, proprietaryId, postalAddress, contact, globalIds);
+            return new Supplier(electronicAddress, supplierId, privateId, supplierBankAccountCode, supplierServiceId, name, tradingBusinessName, legalDescription, siren, siret, vatNumber, iban, bic, bankAccountName, proprietaryId, postalAddress, contact, globalIds);
         }
 
         /// <summary>
@@ -495,8 +500,6 @@ namespace FactPulse.SDK.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, Supplier supplier, JsonSerializerOptions jsonSerializerOptions)
         {
-            writer.WriteNumber("supplier_id", supplier.SupplierId);
-
             if (supplier.ElectronicAddressOption.IsSet)
                 if (supplier.ElectronicAddressOption.Value != null)
                 {
@@ -505,6 +508,9 @@ namespace FactPulse.SDK.Model
                 }
                 else
                     writer.WriteNull("electronic_address");
+            if (supplier.SupplierIdOption.IsSet)
+                writer.WriteNumber("supplier_id", supplier.SupplierIdOption.Value!.Value);
+
             if (supplier.PrivateIdOption.IsSet)
                 if (supplier.PrivateIdOption.Value != null)
                     writer.WriteString("private_id", supplier.PrivateId);

@@ -38,11 +38,11 @@ namespace FactPulse.SDK.Model
         /// <param name="paymentDueDate">paymentDueDate</param>
         /// <param name="recipient">recipient</param>
         /// <param name="supplier">supplier</param>
-        /// <param name="invoicingFramework">invoicingFramework</param>
         /// <param name="references">references</param>
         /// <param name="totals">totals</param>
         /// <param name="invoiceDate">invoiceDate</param>
         /// <param name="submissionMode">submissionMode</param>
+        /// <param name="invoicingFramework">invoicingFramework</param>
         /// <param name="invoiceLines">invoiceLines</param>
         /// <param name="vatLines">vatLines</param>
         /// <param name="notes">notes</param>
@@ -65,17 +65,17 @@ namespace FactPulse.SDK.Model
         /// <param name="buyerAccountingReference">buyerAccountingReference</param>
         /// <param name="paymentCard">paymentCard</param>
         [JsonConstructor]
-        public FacturXInvoice(string invoiceNumber, string paymentDueDate, Recipient recipient, Supplier supplier, InvoicingFramework invoicingFramework, InvoiceReferences references, InvoiceTotals totals, Option<string?> invoiceDate = default, Option<SubmissionMode?> submissionMode = default, Option<List<InvoiceLine>?> invoiceLines = default, Option<List<VATLine>?> vatLines = default, Option<List<InvoiceNote>?> notes = default, Option<string?> comment = default, Option<int?> currentUserId = default, Option<List<SupplementaryAttachment>?> supplementaryAttachments = default, Option<Payee?> payee = default, Option<DeliveryParty?> deliveryParty = default, Option<TaxRepresentative?> taxRepresentative = default, Option<string?> deliveryDate = default, Option<string?> billingPeriodStart = default, Option<string?> billingPeriodEnd = default, Option<string?> paymentReference = default, Option<string?> creditorReferenceId = default, Option<string?> directDebitMandateId = default, Option<string?> debtorIban = default, Option<string?> paymentTerms = default, Option<List<AllowanceCharge>?> allowancesCharges = default, Option<List<AdditionalDocument>?> additionalDocuments = default, Option<string?> buyerAccountingReference = default, Option<PaymentCard?> paymentCard = default)
+        public FacturXInvoice(string invoiceNumber, string paymentDueDate, Recipient recipient, Supplier supplier, InvoiceReferences references, InvoiceTotals totals, Option<string?> invoiceDate = default, Option<SubmissionMode?> submissionMode = default, Option<InvoicingFramework?> invoicingFramework = default, Option<List<InvoiceLine>?> invoiceLines = default, Option<List<VATLine>?> vatLines = default, Option<List<InvoiceNote>?> notes = default, Option<string?> comment = default, Option<int?> currentUserId = default, Option<List<SupplementaryAttachment>?> supplementaryAttachments = default, Option<Payee?> payee = default, Option<DeliveryParty?> deliveryParty = default, Option<TaxRepresentative?> taxRepresentative = default, Option<string?> deliveryDate = default, Option<string?> billingPeriodStart = default, Option<string?> billingPeriodEnd = default, Option<string?> paymentReference = default, Option<string?> creditorReferenceId = default, Option<string?> directDebitMandateId = default, Option<string?> debtorIban = default, Option<string?> paymentTerms = default, Option<List<AllowanceCharge>?> allowancesCharges = default, Option<List<AdditionalDocument>?> additionalDocuments = default, Option<string?> buyerAccountingReference = default, Option<PaymentCard?> paymentCard = default)
         {
             InvoiceNumber = invoiceNumber;
             PaymentDueDate = paymentDueDate;
             Recipient = recipient;
             Supplier = supplier;
-            InvoicingFramework = invoicingFramework;
             References = references;
             Totals = totals;
             InvoiceDateOption = invoiceDate;
             SubmissionModeOption = submissionMode;
+            InvoicingFrameworkOption = invoicingFramework;
             InvoiceLinesOption = invoiceLines;
             VatLinesOption = vatLines;
             NotesOption = notes;
@@ -140,12 +140,6 @@ namespace FactPulse.SDK.Model
         public Supplier Supplier { get; set; }
 
         /// <summary>
-        /// Gets or Sets InvoicingFramework
-        /// </summary>
-        [JsonPropertyName("invoicing_framework")]
-        public InvoicingFramework InvoicingFramework { get; set; }
-
-        /// <summary>
         /// Gets or Sets References
         /// </summary>
         [JsonPropertyName("references")]
@@ -169,6 +163,19 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonPropertyName("invoice_date")]
         public string? InvoiceDate { get { return this.InvoiceDateOption; } set { this.InvoiceDateOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of InvoicingFramework
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<InvoicingFramework?> InvoicingFrameworkOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets InvoicingFramework
+        /// </summary>
+        [JsonPropertyName("invoicing_framework")]
+        public InvoicingFramework? InvoicingFramework { get { return this.InvoicingFrameworkOption; } set { this.InvoicingFrameworkOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of InvoiceLines
@@ -455,11 +462,11 @@ namespace FactPulse.SDK.Model
             sb.Append("  PaymentDueDate: ").Append(PaymentDueDate).Append("\n");
             sb.Append("  Recipient: ").Append(Recipient).Append("\n");
             sb.Append("  Supplier: ").Append(Supplier).Append("\n");
-            sb.Append("  InvoicingFramework: ").Append(InvoicingFramework).Append("\n");
             sb.Append("  References: ").Append(References).Append("\n");
             sb.Append("  Totals: ").Append(Totals).Append("\n");
             sb.Append("  InvoiceDate: ").Append(InvoiceDate).Append("\n");
             sb.Append("  SubmissionMode: ").Append(SubmissionMode).Append("\n");
+            sb.Append("  InvoicingFramework: ").Append(InvoicingFramework).Append("\n");
             sb.Append("  InvoiceLines: ").Append(InvoiceLines).Append("\n");
             sb.Append("  VatLines: ").Append(VatLines).Append("\n");
             sb.Append("  Notes: ").Append(Notes).Append("\n");
@@ -522,11 +529,11 @@ namespace FactPulse.SDK.Model
             Option<string?> paymentDueDate = default;
             Option<Recipient?> recipient = default;
             Option<Supplier?> supplier = default;
-            Option<InvoicingFramework?> invoicingFramework = default;
             Option<InvoiceReferences?> references = default;
             Option<InvoiceTotals?> totals = default;
             Option<string?> invoiceDate = default;
             Option<SubmissionMode?> submissionMode = default;
+            Option<InvoicingFramework?> invoicingFramework = default;
             Option<List<InvoiceLine>?> invoiceLines = default;
             Option<List<VATLine>?> vatLines = default;
             Option<List<InvoiceNote>?> notes = default;
@@ -576,9 +583,6 @@ namespace FactPulse.SDK.Model
                         case "supplier":
                             supplier = new Option<Supplier?>(JsonSerializer.Deserialize<Supplier>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
-                        case "invoicing_framework":
-                            invoicingFramework = new Option<InvoicingFramework?>(JsonSerializer.Deserialize<InvoicingFramework>(ref utf8JsonReader, jsonSerializerOptions)!);
-                            break;
                         case "references":
                             references = new Option<InvoiceReferences?>(JsonSerializer.Deserialize<InvoiceReferences>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
@@ -592,6 +596,9 @@ namespace FactPulse.SDK.Model
                             string? submissionModeRawValue = utf8JsonReader.GetString();
                             if (submissionModeRawValue != null)
                                 submissionMode = new Option<SubmissionMode?>(SubmissionModeValueConverter.FromStringOrDefault(submissionModeRawValue));
+                            break;
+                        case "invoicing_framework":
+                            invoicingFramework = new Option<InvoicingFramework?>(JsonSerializer.Deserialize<InvoicingFramework>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "invoice_lines":
                             invoiceLines = new Option<List<InvoiceLine>?>(JsonSerializer.Deserialize<List<InvoiceLine>>(ref utf8JsonReader, jsonSerializerOptions)!);
@@ -674,9 +681,6 @@ namespace FactPulse.SDK.Model
             if (!supplier.IsSet)
                 throw new ArgumentException("Property is required for class FacturXInvoice.", nameof(supplier));
 
-            if (!invoicingFramework.IsSet)
-                throw new ArgumentException("Property is required for class FacturXInvoice.", nameof(invoicingFramework));
-
             if (!references.IsSet)
                 throw new ArgumentException("Property is required for class FacturXInvoice.", nameof(references));
 
@@ -694,9 +698,6 @@ namespace FactPulse.SDK.Model
 
             if (supplier.IsSet && supplier.Value == null)
                 throw new ArgumentNullException(nameof(supplier), "Property is not nullable for class FacturXInvoice.");
-
-            if (invoicingFramework.IsSet && invoicingFramework.Value == null)
-                throw new ArgumentNullException(nameof(invoicingFramework), "Property is not nullable for class FacturXInvoice.");
 
             if (references.IsSet && references.Value == null)
                 throw new ArgumentNullException(nameof(references), "Property is not nullable for class FacturXInvoice.");
@@ -719,7 +720,7 @@ namespace FactPulse.SDK.Model
             if (notes.IsSet && notes.Value == null)
                 throw new ArgumentNullException(nameof(notes), "Property is not nullable for class FacturXInvoice.");
 
-            return new FacturXInvoice(invoiceNumber.Value!, paymentDueDate.Value!, recipient.Value!, supplier.Value!, invoicingFramework.Value!, references.Value!, totals.Value!, invoiceDate, submissionMode, invoiceLines, vatLines, notes, comment, currentUserId, supplementaryAttachments, payee, deliveryParty, taxRepresentative, deliveryDate, billingPeriodStart, billingPeriodEnd, paymentReference, creditorReferenceId, directDebitMandateId, debtorIban, paymentTerms, allowancesCharges, additionalDocuments, buyerAccountingReference, paymentCard);
+            return new FacturXInvoice(invoiceNumber.Value!, paymentDueDate.Value!, recipient.Value!, supplier.Value!, references.Value!, totals.Value!, invoiceDate, submissionMode, invoicingFramework, invoiceLines, vatLines, notes, comment, currentUserId, supplementaryAttachments, payee, deliveryParty, taxRepresentative, deliveryDate, billingPeriodStart, billingPeriodEnd, paymentReference, creditorReferenceId, directDebitMandateId, debtorIban, paymentTerms, allowancesCharges, additionalDocuments, buyerAccountingReference, paymentCard);
         }
 
         /// <summary>
@@ -758,9 +759,6 @@ namespace FactPulse.SDK.Model
             if (facturXInvoice.Supplier == null)
                 throw new ArgumentNullException(nameof(facturXInvoice.Supplier), "Property is required for class FacturXInvoice.");
 
-            if (facturXInvoice.InvoicingFramework == null)
-                throw new ArgumentNullException(nameof(facturXInvoice.InvoicingFramework), "Property is required for class FacturXInvoice.");
-
             if (facturXInvoice.References == null)
                 throw new ArgumentNullException(nameof(facturXInvoice.References), "Property is required for class FacturXInvoice.");
 
@@ -787,8 +785,6 @@ namespace FactPulse.SDK.Model
             JsonSerializer.Serialize(writer, facturXInvoice.Recipient, jsonSerializerOptions);
             writer.WritePropertyName("supplier");
             JsonSerializer.Serialize(writer, facturXInvoice.Supplier, jsonSerializerOptions);
-            writer.WritePropertyName("invoicing_framework");
-            JsonSerializer.Serialize(writer, facturXInvoice.InvoicingFramework, jsonSerializerOptions);
             writer.WritePropertyName("references");
             JsonSerializer.Serialize(writer, facturXInvoice.References, jsonSerializerOptions);
             writer.WritePropertyName("totals");
@@ -801,6 +797,14 @@ namespace FactPulse.SDK.Model
                 var submissionModeRawValue = SubmissionModeValueConverter.ToJsonValue(facturXInvoice.SubmissionMode!.Value);
                 writer.WriteString("submission_mode", submissionModeRawValue);
             }
+            if (facturXInvoice.InvoicingFrameworkOption.IsSet)
+                if (facturXInvoice.InvoicingFrameworkOption.Value != null)
+                {
+                    writer.WritePropertyName("invoicing_framework");
+                    JsonSerializer.Serialize(writer, facturXInvoice.InvoicingFramework, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("invoicing_framework");
             if (facturXInvoice.InvoiceLinesOption.IsSet)
             {
                 writer.WritePropertyName("invoice_lines");

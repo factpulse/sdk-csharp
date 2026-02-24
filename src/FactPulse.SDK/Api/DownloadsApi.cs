@@ -45,7 +45,7 @@ namespace FactPulse.SDK.Api
         /// Check if a temporary file exists and get its metadata without downloading.  Useful for: - Verifying a download URL is still valid - Getting file size before downloading - Checking expiration time  **Security**: Requires authentication, only file owner can check.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="downloadId"></param>
+        /// <param name="downloadId">Unique identifier of the temporary file to check</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICheckFileApiV1DownloadDownloadIdHeadApiResponse"/>&gt;</returns>
         Task<ICheckFileApiV1DownloadDownloadIdHeadApiResponse> CheckFileApiV1DownloadDownloadIdHeadAsync(string downloadId, System.Threading.CancellationToken cancellationToken = default);
@@ -56,7 +56,7 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Check if a temporary file exists and get its metadata without downloading.  Useful for: - Verifying a download URL is still valid - Getting file size before downloading - Checking expiration time  **Security**: Requires authentication, only file owner can check.
         /// </remarks>
-        /// <param name="downloadId"></param>
+        /// <param name="downloadId">Unique identifier of the temporary file to check</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICheckFileApiV1DownloadDownloadIdHeadApiResponse"/>?&gt;</returns>
         Task<ICheckFileApiV1DownloadDownloadIdHeadApiResponse?> CheckFileApiV1DownloadDownloadIdHeadOrDefaultAsync(string downloadId, System.Threading.CancellationToken cancellationToken = default);
@@ -68,7 +68,7 @@ namespace FactPulse.SDK.Api
         /// Download a file stored temporarily after asynchronous processing.  **Usage**: - This URL is provided in webhook notifications when using &#x60;webhook_mode: \&quot;download_url\&quot;&#x60; - Files are automatically deleted after 1 hour - Each file can only be downloaded until it expires  **Security**: - Requires a valid JWT token - Only the user who initiated the task can download the file
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="downloadId"></param>
+        /// <param name="downloadId">Unique identifier of the temporary file to download</param>
         /// <param name="deleteAfter">If true, delete the file after download (one-time download) (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IDownloadFileApiV1DownloadDownloadIdGetApiResponse"/>&gt;</returns>
@@ -80,7 +80,7 @@ namespace FactPulse.SDK.Api
         /// <remarks>
         /// Download a file stored temporarily after asynchronous processing.  **Usage**: - This URL is provided in webhook notifications when using &#x60;webhook_mode: \&quot;download_url\&quot;&#x60; - Files are automatically deleted after 1 hour - Each file can only be downloaded until it expires  **Security**: - Requires a valid JWT token - Only the user who initiated the task can download the file
         /// </remarks>
-        /// <param name="downloadId"></param>
+        /// <param name="downloadId">Unique identifier of the temporary file to download</param>
         /// <param name="deleteAfter">If true, delete the file after download (one-time download) (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IDownloadFileApiV1DownloadDownloadIdGetApiResponse"/>?&gt;</returns>
@@ -321,7 +321,7 @@ namespace FactPulse.SDK.Api
         /// <summary>
         /// Check if a file exists Check if a temporary file exists and get its metadata without downloading.  Useful for: - Verifying a download URL is still valid - Getting file size before downloading - Checking expiration time  **Security**: Requires authentication, only file owner can check.
         /// </summary>
-        /// <param name="downloadId"></param>
+        /// <param name="downloadId">Unique identifier of the temporary file to check</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICheckFileApiV1DownloadDownloadIdHeadApiResponse"/>&gt;</returns>
         public async Task<ICheckFileApiV1DownloadDownloadIdHeadApiResponse?> CheckFileApiV1DownloadDownloadIdHeadOrDefaultAsync(string downloadId, System.Threading.CancellationToken cancellationToken = default)
@@ -340,7 +340,7 @@ namespace FactPulse.SDK.Api
         /// Check if a file exists Check if a temporary file exists and get its metadata without downloading.  Useful for: - Verifying a download URL is still valid - Getting file size before downloading - Checking expiration time  **Security**: Requires authentication, only file owner can check.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="downloadId"></param>
+        /// <param name="downloadId">Unique identifier of the temporary file to check</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICheckFileApiV1DownloadDownloadIdHeadApiResponse"/>&gt;</returns>
         public async Task<ICheckFileApiV1DownloadDownloadIdHeadApiResponse> CheckFileApiV1DownloadDownloadIdHeadAsync(string downloadId, System.Threading.CancellationToken cancellationToken = default)
@@ -638,7 +638,7 @@ namespace FactPulse.SDK.Api
         /// <summary>
         /// Download a temporary file Download a file stored temporarily after asynchronous processing.  **Usage**: - This URL is provided in webhook notifications when using &#x60;webhook_mode: \&quot;download_url\&quot;&#x60; - Files are automatically deleted after 1 hour - Each file can only be downloaded until it expires  **Security**: - Requires a valid JWT token - Only the user who initiated the task can download the file
         /// </summary>
-        /// <param name="downloadId"></param>
+        /// <param name="downloadId">Unique identifier of the temporary file to download</param>
         /// <param name="deleteAfter">If true, delete the file after download (one-time download) (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IDownloadFileApiV1DownloadDownloadIdGetApiResponse"/>&gt;</returns>
@@ -658,7 +658,7 @@ namespace FactPulse.SDK.Api
         /// Download a temporary file Download a file stored temporarily after asynchronous processing.  **Usage**: - This URL is provided in webhook notifications when using &#x60;webhook_mode: \&quot;download_url\&quot;&#x60; - Files are automatically deleted after 1 hour - Each file can only be downloaded until it expires  **Security**: - Requires a valid JWT token - Only the user who initiated the task can download the file
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="downloadId"></param>
+        /// <param name="downloadId">Unique identifier of the temporary file to download</param>
         /// <param name="deleteAfter">If true, delete the file after download (one-time download) (optional, default to false)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IDownloadFileApiV1DownloadDownloadIdGetApiResponse"/>&gt;</returns>

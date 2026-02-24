@@ -55,21 +55,21 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'SupplierId'
-        /// </summary>
-        [Fact]
-        public void SupplierIdTest()
-        {
-            // TODO unit test for the property 'SupplierId'
-        }
-
-        /// <summary>
         /// Test the property 'ElectronicAddress'
         /// </summary>
         [Fact]
         public void ElectronicAddressTest()
         {
             // TODO unit test for the property 'ElectronicAddress'
+        }
+
+        /// <summary>
+        /// Test the property 'SupplierId'
+        /// </summary>
+        [Fact]
+        public void SupplierIdTest()
+        {
+            // TODO unit test for the property 'SupplierId'
         }
 
         /// <summary>

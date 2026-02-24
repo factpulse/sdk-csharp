@@ -37,7 +37,7 @@ namespace FactPulse.SDK.Model
         /// <param name="chorusInvoiceId">Chorus Pro invoice ID</param>
         /// <param name="credentials">credentials</param>
         [JsonConstructor]
-        public GetInvoiceRequest(int chorusInvoiceId, Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?> credentials = default)
+        public GetInvoiceRequest(int chorusInvoiceId, Option<ChorusProCredentials?> credentials = default)
         {
             ChorusInvoiceId = chorusInvoiceId;
             CredentialsOption = credentials;
@@ -58,13 +58,13 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?> CredentialsOption { get; private set; }
+        public Option<ChorusProCredentials?> CredentialsOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Credentials
         /// </summary>
         [JsonPropertyName("credentials")]
-        public FactureElectroniqueRestApiSchemasChorusProChorusProCredentials? Credentials { get { return this.CredentialsOption; } set { this.CredentialsOption = new(value); } }
+        public ChorusProCredentials? Credentials { get { return this.CredentialsOption; } set { this.CredentialsOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -114,7 +114,7 @@ namespace FactPulse.SDK.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<int?> chorusInvoiceId = default;
-            Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?> credentials = default;
+            Option<ChorusProCredentials?> credentials = default;
 
             while (utf8JsonReader.Read())
             {
@@ -135,7 +135,7 @@ namespace FactPulse.SDK.Model
                             chorusInvoiceId = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "credentials":
-                            credentials = new Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?>(JsonSerializer.Deserialize<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials>(ref utf8JsonReader, jsonSerializerOptions));
+                            credentials = new Option<ChorusProCredentials?>(JsonSerializer.Deserialize<ChorusProCredentials>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
