@@ -38,7 +38,7 @@ namespace FactPulse.SDK.Model
         /// <param name="credentials">credentials</param>
         /// <param name="languageCode">Language code (fr, en) (default to &quot;fr&quot;)</param>
         [JsonConstructor]
-        public GetStructureRequest(int structureId, Option<ChorusProCredentials?> credentials = default, Option<string?> languageCode = default)
+        public GetStructureRequest(int structureId, Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?> credentials = default, Option<string?> languageCode = default)
         {
             StructureId = structureId;
             CredentialsOption = credentials;
@@ -60,13 +60,13 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<ChorusProCredentials?> CredentialsOption { get; private set; }
+        public Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?> CredentialsOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Credentials
         /// </summary>
         [JsonPropertyName("credentials")]
-        public ChorusProCredentials? Credentials { get { return this.CredentialsOption; } set { this.CredentialsOption = new(value); } }
+        public FactureElectroniqueRestApiSchemasChorusProChorusProCredentials? Credentials { get { return this.CredentialsOption; } set { this.CredentialsOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of LanguageCode
@@ -131,7 +131,7 @@ namespace FactPulse.SDK.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<int?> structureId = default;
-            Option<ChorusProCredentials?> credentials = default;
+            Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?> credentials = default;
             Option<string?> languageCode = default;
 
             while (utf8JsonReader.Read())
@@ -153,7 +153,7 @@ namespace FactPulse.SDK.Model
                             structureId = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "credentials":
-                            credentials = new Option<ChorusProCredentials?>(JsonSerializer.Deserialize<ChorusProCredentials>(ref utf8JsonReader, jsonSerializerOptions));
+                            credentials = new Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?>(JsonSerializer.Deserialize<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "languageCode":
                             languageCode = new Option<string?>(utf8JsonReader.GetString()!);

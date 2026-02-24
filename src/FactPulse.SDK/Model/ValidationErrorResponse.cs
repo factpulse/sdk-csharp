@@ -27,29 +27,69 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Response for validation errors.
+    /// Erreur de validation.
     /// </summary>
     public partial class ValidationErrorResponse : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ValidationErrorResponse" /> class.
         /// </summary>
-        /// <param name="detail">List of detected validation errors.</param>
+        /// <param name="field">Champ concerné</param>
+        /// <param name="message">Message d&#39;erreur</param>
+        /// <param name="rule">rule</param>
+        /// <param name="severity">Sévérité (error/warning) (default to &quot;error&quot;)</param>
         [JsonConstructor]
-        public ValidationErrorResponse(List<string> detail)
+        public ValidationErrorResponse(string field, string message, Option<string?> rule = default, Option<string?> severity = default)
         {
-            Detail = detail;
+            Field = field;
+            Message = message;
+            RuleOption = rule;
+            SeverityOption = severity;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// List of detected validation errors.
+        /// Champ concerné
         /// </summary>
-        /// <value>List of detected validation errors.</value>
-        [JsonPropertyName("detail")]
-        public List<string> Detail { get; set; }
+        /// <value>Champ concerné</value>
+        [JsonPropertyName("field")]
+        public string Field { get; set; }
+
+        /// <summary>
+        /// Message d&#39;erreur
+        /// </summary>
+        /// <value>Message d&#39;erreur</value>
+        [JsonPropertyName("message")]
+        public string Message { get; set; }
+
+        /// <summary>
+        /// Used to track the state of Rule
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> RuleOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Rule
+        /// </summary>
+        [JsonPropertyName("rule")]
+        public string? Rule { get { return this.RuleOption; } set { this.RuleOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Severity
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> SeverityOption { get; private set; }
+
+        /// <summary>
+        /// Sévérité (error/warning)
+        /// </summary>
+        /// <value>Sévérité (error/warning)</value>
+        [JsonPropertyName("severity")]
+        public string? Severity { get { return this.SeverityOption; } set { this.SeverityOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -59,7 +99,10 @@ namespace FactPulse.SDK.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class ValidationErrorResponse {\n");
-            sb.Append("  Detail: ").Append(Detail).Append("\n");
+            sb.Append("  Field: ").Append(Field).Append("\n");
+            sb.Append("  Message: ").Append(Message).Append("\n");
+            sb.Append("  Rule: ").Append(Rule).Append("\n");
+            sb.Append("  Severity: ").Append(Severity).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -97,7 +140,10 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<List<string>?> detail = default;
+            Option<string?> field = default;
+            Option<string?> message = default;
+            Option<string?> rule = default;
+            Option<string?> severity = default;
 
             while (utf8JsonReader.Read())
             {
@@ -114,8 +160,17 @@ namespace FactPulse.SDK.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "detail":
-                            detail = new Option<List<string>?>(JsonSerializer.Deserialize<List<string>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                        case "field":
+                            field = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
+                        case "message":
+                            message = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
+                        case "rule":
+                            rule = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "severity":
+                            severity = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         default:
                             break;
@@ -123,13 +178,22 @@ namespace FactPulse.SDK.Model
                 }
             }
 
-            if (!detail.IsSet)
-                throw new ArgumentException("Property is required for class ValidationErrorResponse.", nameof(detail));
+            if (!field.IsSet)
+                throw new ArgumentException("Property is required for class ValidationErrorResponse.", nameof(field));
 
-            if (detail.IsSet && detail.Value == null)
-                throw new ArgumentNullException(nameof(detail), "Property is not nullable for class ValidationErrorResponse.");
+            if (!message.IsSet)
+                throw new ArgumentException("Property is required for class ValidationErrorResponse.", nameof(message));
 
-            return new ValidationErrorResponse(detail.Value!);
+            if (field.IsSet && field.Value == null)
+                throw new ArgumentNullException(nameof(field), "Property is not nullable for class ValidationErrorResponse.");
+
+            if (message.IsSet && message.Value == null)
+                throw new ArgumentNullException(nameof(message), "Property is not nullable for class ValidationErrorResponse.");
+
+            if (severity.IsSet && severity.Value == null)
+                throw new ArgumentNullException(nameof(severity), "Property is not nullable for class ValidationErrorResponse.");
+
+            return new ValidationErrorResponse(field.Value!, message.Value!, rule, severity);
         }
 
         /// <summary>
@@ -156,11 +220,27 @@ namespace FactPulse.SDK.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, ValidationErrorResponse validationErrorResponse, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (validationErrorResponse.Detail == null)
-                throw new ArgumentNullException(nameof(validationErrorResponse.Detail), "Property is required for class ValidationErrorResponse.");
+            if (validationErrorResponse.Field == null)
+                throw new ArgumentNullException(nameof(validationErrorResponse.Field), "Property is required for class ValidationErrorResponse.");
 
-            writer.WritePropertyName("detail");
-            JsonSerializer.Serialize(writer, validationErrorResponse.Detail, jsonSerializerOptions);
+            if (validationErrorResponse.Message == null)
+                throw new ArgumentNullException(nameof(validationErrorResponse.Message), "Property is required for class ValidationErrorResponse.");
+
+            if (validationErrorResponse.SeverityOption.IsSet && validationErrorResponse.Severity == null)
+                throw new ArgumentNullException(nameof(validationErrorResponse.Severity), "Property is required for class ValidationErrorResponse.");
+
+            writer.WriteString("field", validationErrorResponse.Field);
+
+            writer.WriteString("message", validationErrorResponse.Message);
+
+            if (validationErrorResponse.RuleOption.IsSet)
+                if (validationErrorResponse.RuleOption.Value != null)
+                    writer.WriteString("rule", validationErrorResponse.Rule);
+                else
+                    writer.WriteNull("rule");
+
+            if (validationErrorResponse.SeverityOption.IsSet)
+                writer.WriteString("severity", validationErrorResponse.Severity);
         }
     }
 }

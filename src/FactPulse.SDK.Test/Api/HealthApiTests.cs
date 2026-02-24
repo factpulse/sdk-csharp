@@ -60,27 +60,5 @@ namespace FactPulse.SDK.Test.Api
             var model = response.Ok();
             Assert.IsType<Object>(model);
         }
-
-        /// <summary>
-        /// Test HealthcheckHealthcheckGet
-        /// </summary>
-        [Fact (Skip = "not implemented")]
-        public async Task HealthcheckHealthcheckGetAsyncTest()
-        {
-            var response = await _instance.HealthcheckHealthcheckGetAsync();
-            var model = response.Ok();
-            Assert.IsType<Object>(model);
-        }
-
-        /// <summary>
-        /// Test RootGet
-        /// </summary>
-        [Fact (Skip = "not implemented")]
-        public async Task RootGetAsyncTest()
-        {
-            var response = await _instance.RootGetAsync();
-            var model = response.Ok();
-            Assert.IsType<Object>(model);
-        }
     }
 }
