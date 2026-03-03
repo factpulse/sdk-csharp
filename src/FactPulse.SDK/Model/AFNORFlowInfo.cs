@@ -27,25 +27,25 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Signaling of the flow: - The tracking id is an external identifier and is used to track the flow by the sender - The sha256 is the fingerprint of the attached file:   - if provided in the request: it should be checked once received   - if not provided in the request: it should be computed and returned in the response 
+    /// Signaling of the flow
     /// </summary>
     public partial class AFNORFlowInfo : IValidatableObject
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AFNORFlowInfo" /> class.
         /// </summary>
-        /// <param name="flowSyntax">flowSyntax</param>
-        /// <param name="trackingId">Unique identifier supporting UUID but not only, for flexibility purpose</param>
         /// <param name="name">Name of the file</param>
+        /// <param name="flowSyntax">flowSyntax</param>
+        /// <param name="trackingId">The tracking id is an external identifier and is used to track the flow by the sender</param>
         /// <param name="processingRule">processingRule</param>
         /// <param name="flowProfile">flowProfile</param>
-        /// <param name="sha256">sha256</param>
+        /// <param name="sha256">The sha256 is the fingerprint of the attached file: - if provided in the request: it should be checked once received - if not provided in the request: it may be computed and returned in the response </param>
         [JsonConstructor]
-        public AFNORFlowInfo(AFNORFlowSyntax flowSyntax, Option<string?> trackingId = default, Option<string?> name = default, Option<AFNORProcessingRule?> processingRule = default, Option<AFNORFlowProfile?> flowProfile = default, Option<string?> sha256 = default)
+        public AFNORFlowInfo(string name, AFNORFlowSyntax flowSyntax, Option<string?> trackingId = default, Option<AFNORProcessingRule?> processingRule = default, Option<AFNORFlowProfile?> flowProfile = default, Option<byte[]?> sha256 = default)
         {
+            Name = name;
             FlowSyntax = flowSyntax;
             TrackingIdOption = trackingId;
-            NameOption = name;
             ProcessingRuleOption = processingRule;
             FlowProfileOption = flowProfile;
             Sha256Option = sha256;
@@ -87,6 +87,13 @@ namespace FactPulse.SDK.Model
         public AFNORFlowProfile? FlowProfile { get { return this.FlowProfileOption; } set { this.FlowProfileOption = new(value); } }
 
         /// <summary>
+        /// Name of the file
+        /// </summary>
+        /// <value>Name of the file</value>
+        [JsonPropertyName("name")]
+        public string Name { get; set; }
+
+        /// <summary>
         /// Used to track the state of TrackingId
         /// </summary>
         [JsonIgnore]
@@ -94,38 +101,25 @@ namespace FactPulse.SDK.Model
         public Option<string?> TrackingIdOption { get; private set; }
 
         /// <summary>
-        /// Unique identifier supporting UUID but not only, for flexibility purpose
+        /// The tracking id is an external identifier and is used to track the flow by the sender
         /// </summary>
-        /// <value>Unique identifier supporting UUID but not only, for flexibility purpose</value>
+        /// <value>The tracking id is an external identifier and is used to track the flow by the sender</value>
         [JsonPropertyName("trackingId")]
         public string? TrackingId { get { return this.TrackingIdOption; } set { this.TrackingIdOption = new(value); } }
-
-        /// <summary>
-        /// Used to track the state of Name
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> NameOption { get; private set; }
-
-        /// <summary>
-        /// Name of the file
-        /// </summary>
-        /// <value>Name of the file</value>
-        [JsonPropertyName("name")]
-        public string? Name { get { return this.NameOption; } set { this.NameOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Sha256
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<string?> Sha256Option { get; private set; }
+        public Option<byte[]?> Sha256Option { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Sha256
+        /// The sha256 is the fingerprint of the attached file: - if provided in the request: it should be checked once received - if not provided in the request: it may be computed and returned in the response 
         /// </summary>
+        /// <value>The sha256 is the fingerprint of the attached file: - if provided in the request: it should be checked once received - if not provided in the request: it may be computed and returned in the response </value>
         [JsonPropertyName("sha256")]
-        public string? Sha256 { get { return this.Sha256Option; } set { this.Sha256Option = new(value); } }
+        public byte[]? Sha256 { get { return this.Sha256Option; } set { this.Sha256Option = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -135,9 +129,9 @@ namespace FactPulse.SDK.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class AFNORFlowInfo {\n");
+            sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  FlowSyntax: ").Append(FlowSyntax).Append("\n");
             sb.Append("  TrackingId: ").Append(TrackingId).Append("\n");
-            sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  ProcessingRule: ").Append(ProcessingRule).Append("\n");
             sb.Append("  FlowProfile: ").Append(FlowProfile).Append("\n");
             sb.Append("  Sha256: ").Append(Sha256).Append("\n");
@@ -152,26 +146,16 @@ namespace FactPulse.SDK.Model
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
-            // TrackingId (string) maxLength
-            if (this.TrackingId != null && this.TrackingId.Length > 36)
-            {
-                yield return new ValidationResult("Invalid value for TrackingId, length must be less than 36.", new [] { "TrackingId" });
-            }
-
             // Name (string) maxLength
             if (this.Name != null && this.Name.Length > 255)
             {
                 yield return new ValidationResult("Invalid value for Name, length must be less than 255.", new [] { "Name" });
             }
 
-            if (this.Sha256Option.Value != null) {
-                // Sha256 (string) pattern
-                Regex regexSha256 = new Regex(@"^[a-f0-9]{64}$", RegexOptions.CultureInvariant);
-
-                if (this.Sha256Option.Value != null &&!regexSha256.Match(this.Sha256Option.Value).Success)
-                {
-                    yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for Sha256, must match a pattern of " + regexSha256, new [] { "Sha256" });
-                }
+            // TrackingId (string) maxLength
+            if (this.TrackingId != null && this.TrackingId.Length > 36)
+            {
+                yield return new ValidationResult("Invalid value for TrackingId, length must be less than 36.", new [] { "TrackingId" });
             }
 
             yield break;
@@ -200,12 +184,12 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
+            Option<string?> name = default;
             Option<AFNORFlowSyntax?> flowSyntax = default;
             Option<string?> trackingId = default;
-            Option<string?> name = default;
             Option<AFNORProcessingRule?> processingRule = default;
             Option<AFNORFlowProfile?> flowProfile = default;
-            Option<string?> sha256 = default;
+            Option<byte[]?> sha256 = default;
 
             while (utf8JsonReader.Read())
             {
@@ -222,6 +206,9 @@ namespace FactPulse.SDK.Model
 
                     switch (localVarJsonPropertyName)
                     {
+                        case "name":
+                            name = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
                         case "flowSyntax":
                             string? flowSyntaxRawValue = utf8JsonReader.GetString();
                             if (flowSyntaxRawValue != null)
@@ -229,9 +216,6 @@ namespace FactPulse.SDK.Model
                             break;
                         case "trackingId":
                             trackingId = new Option<string?>(utf8JsonReader.GetString()!);
-                            break;
-                        case "name":
-                            name = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "processingRule":
                             string? processingRuleRawValue = utf8JsonReader.GetString();
@@ -244,7 +228,7 @@ namespace FactPulse.SDK.Model
                                 flowProfile = new Option<AFNORFlowProfile?>(AFNORFlowProfileValueConverter.FromStringOrDefault(flowProfileRawValue));
                             break;
                         case "sha256":
-                            sha256 = new Option<string?>(utf8JsonReader.GetString()!);
+                            sha256 = new Option<byte[]?>(JsonSerializer.Deserialize<byte[]>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         default:
                             break;
@@ -252,17 +236,20 @@ namespace FactPulse.SDK.Model
                 }
             }
 
+            if (!name.IsSet)
+                throw new ArgumentException("Property is required for class AFNORFlowInfo.", nameof(name));
+
             if (!flowSyntax.IsSet)
                 throw new ArgumentException("Property is required for class AFNORFlowInfo.", nameof(flowSyntax));
+
+            if (name.IsSet && name.Value == null)
+                throw new ArgumentNullException(nameof(name), "Property is not nullable for class AFNORFlowInfo.");
 
             if (flowSyntax.IsSet && flowSyntax.Value == null)
                 throw new ArgumentNullException(nameof(flowSyntax), "Property is not nullable for class AFNORFlowInfo.");
 
             if (trackingId.IsSet && trackingId.Value == null)
                 throw new ArgumentNullException(nameof(trackingId), "Property is not nullable for class AFNORFlowInfo.");
-
-            if (name.IsSet && name.Value == null)
-                throw new ArgumentNullException(nameof(name), "Property is not nullable for class AFNORFlowInfo.");
 
             if (processingRule.IsSet && processingRule.Value == null)
                 throw new ArgumentNullException(nameof(processingRule), "Property is not nullable for class AFNORFlowInfo.");
@@ -273,7 +260,7 @@ namespace FactPulse.SDK.Model
             if (sha256.IsSet && sha256.Value == null)
                 throw new ArgumentNullException(nameof(sha256), "Property is not nullable for class AFNORFlowInfo.");
 
-            return new AFNORFlowInfo(flowSyntax.Value!.Value!, trackingId, name, processingRule, flowProfile, sha256);
+            return new AFNORFlowInfo(name.Value!, flowSyntax.Value!.Value!, trackingId, processingRule, flowProfile, sha256);
         }
 
         /// <summary>
@@ -300,23 +287,22 @@ namespace FactPulse.SDK.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, AFNORFlowInfo aFNORFlowInfo, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (aFNORFlowInfo.Name == null)
+                throw new ArgumentNullException(nameof(aFNORFlowInfo.Name), "Property is required for class AFNORFlowInfo.");
+
             if (aFNORFlowInfo.TrackingIdOption.IsSet && aFNORFlowInfo.TrackingId == null)
                 throw new ArgumentNullException(nameof(aFNORFlowInfo.TrackingId), "Property is required for class AFNORFlowInfo.");
 
-            if (aFNORFlowInfo.NameOption.IsSet && aFNORFlowInfo.Name == null)
-                throw new ArgumentNullException(nameof(aFNORFlowInfo.Name), "Property is required for class AFNORFlowInfo.");
-
             if (aFNORFlowInfo.Sha256Option.IsSet && aFNORFlowInfo.Sha256 == null)
                 throw new ArgumentNullException(nameof(aFNORFlowInfo.Sha256), "Property is required for class AFNORFlowInfo.");
+
+            writer.WriteString("name", aFNORFlowInfo.Name);
 
             var flowSyntaxRawValue = AFNORFlowSyntaxValueConverter.ToJsonValue(aFNORFlowInfo.FlowSyntax);
             writer.WriteString("flowSyntax", flowSyntaxRawValue);
 
             if (aFNORFlowInfo.TrackingIdOption.IsSet)
                 writer.WriteString("trackingId", aFNORFlowInfo.TrackingId);
-
-            if (aFNORFlowInfo.NameOption.IsSet)
-                writer.WriteString("name", aFNORFlowInfo.Name);
 
             if (aFNORFlowInfo.ProcessingRuleOption.IsSet)
             {
@@ -329,7 +315,10 @@ namespace FactPulse.SDK.Model
                 writer.WriteString("flowProfile", flowProfileRawValue);
             }
             if (aFNORFlowInfo.Sha256Option.IsSet)
-                writer.WriteString("sha256", aFNORFlowInfo.Sha256);
+            {
+                writer.WritePropertyName("sha256");
+                JsonSerializer.Serialize(writer, aFNORFlowInfo.Sha256, jsonSerializerOptions);
+            }
         }
     }
 }

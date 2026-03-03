@@ -55,6 +55,15 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'Name'
+        /// </summary>
+        [Fact]
+        public void NameTest()
+        {
+            // TODO unit test for the property 'Name'
+        }
+
+        /// <summary>
         /// Test the property 'FlowSyntax'
         /// </summary>
         [Fact]
@@ -70,15 +79,6 @@ namespace FactPulse.SDK.Test.Model
         public void TrackingIdTest()
         {
             // TODO unit test for the property 'TrackingId'
-        }
-
-        /// <summary>
-        /// Test the property 'Name'
-        /// </summary>
-        [Fact]
-        public void NameTest()
-        {
-            // TODO unit test for the property 'Name'
         }
 
         /// <summary>

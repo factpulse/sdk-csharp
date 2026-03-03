@@ -76,7 +76,7 @@ namespace FactPulse.SDK.Model
         /// Sorting criteria on a field and an order (ascending or descending).
         /// </summary>
         /// <value>Sorting criteria on a field and an order (ascending or descending).</value>
-        /* <example>[{champ&#x3D;addressingIdentifier, order&#x3D;ascending}]</example> */
+        /* <example>[{field&#x3D;addressingIdentifier, order&#x3D;ascending}]</example> */
         [JsonPropertyName("sorting")]
         public List<AFNORSearchDirectoryLineSortingInner>? Sorting { get { return this.SortingOption; } set { this.SortingOption = new(value); } }
 
@@ -91,7 +91,7 @@ namespace FactPulse.SDK.Model
         /// Allows you to filter the desired fields in the response.
         /// </summary>
         /// <value>Allows you to filter the desired fields in the response.</value>
-        /* <example>[addressingIdentifier, siren, siret, addressingSuffix, idInstance]</example> */
+        /* <example>[addressingIdentifier, siren, siret, addressingSuffix]</example> */
         [JsonPropertyName("fields")]
         public List<AFNORDirectoryLineField>? Fields { get { return this.FieldsOption; } set { this.FieldsOption = new(value); } }
 

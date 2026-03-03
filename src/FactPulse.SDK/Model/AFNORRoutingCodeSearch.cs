@@ -159,7 +159,7 @@ namespace FactPulse.SDK.Model
         /// Allows you to filter the desired fields in the response.
         /// </summary>
         /// <value>Allows you to filter the desired fields in the response.</value>
-        /* <example>[siret, routingIdentifierType, routingCodeName, routingIdentifier, managesLegalCommitmentCode, administrativeStatus, address, idInstance]</example> */
+        /* <example>[siret, routingIdentifierType, routingCodeName, routingIdentifier, managesLegalCommitmentCode, administrativeStatus, address]</example> */
         [JsonPropertyName("fields")]
         public List<AFNORRoutingCodeField>? Fields { get { return this.FieldsOption; } set { this.FieldsOption = new(value); } }
 

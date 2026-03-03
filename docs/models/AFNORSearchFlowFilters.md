@@ -5,7 +5,7 @@ Filtering criteria, at least one is required
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**UpdatedAfter** | **DateTime** |  | [optional] 
+**UpdatedAfter** | **DateTime** | The comparison with current date is strict : updatedAt &gt; updatedAfter | [optional] 
 **UpdatedBefore** | **DateTime** |  | [optional] 
 **ProcessingRule** | [**List&lt;AFNORProcessingRule&gt;**](AFNORProcessingRule.md) |  | [optional] 
 **FlowType** | [**List&lt;AFNORFlowType&gt;**](AFNORFlowType.md) |  | [optional] 

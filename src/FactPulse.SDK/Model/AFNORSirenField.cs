@@ -53,9 +53,9 @@ namespace FactPulse.SDK.Model
         AdministrativeStatus = 4,
 
         /// <summary>
-        /// Enum IdInstance for value: idInstance
+        /// Enum Instructions for value: instructions
         /// </summary>
-        IdInstance = 5
+        Instructions = 5
     }
 
     /// <summary>
@@ -82,8 +82,8 @@ namespace FactPulse.SDK.Model
             if (value.Equals("administrativeStatus"))
                 return AFNORSirenField.AdministrativeStatus;
 
-            if (value.Equals("idInstance"))
-                return AFNORSirenField.IdInstance;
+            if (value.Equals("instructions"))
+                return AFNORSirenField.Instructions;
 
             throw new NotImplementedException($"Could not convert value to type AFNORSirenField: '{value}'");
         }
@@ -107,8 +107,8 @@ namespace FactPulse.SDK.Model
             if (value.Equals("administrativeStatus"))
                 return AFNORSirenField.AdministrativeStatus;
 
-            if (value.Equals("idInstance"))
-                return AFNORSirenField.IdInstance;
+            if (value.Equals("instructions"))
+                return AFNORSirenField.Instructions;
 
             return null;
         }
@@ -133,8 +133,8 @@ namespace FactPulse.SDK.Model
             if (value == AFNORSirenField.AdministrativeStatus)
                 return "administrativeStatus";
 
-            if (value == AFNORSirenField.IdInstance)
-                return "idInstance";
+            if (value == AFNORSirenField.Instructions)
+                return "instructions";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }

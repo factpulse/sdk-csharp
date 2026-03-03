@@ -38,7 +38,7 @@ namespace FactPulse.SDK.Model
         /// <param name="totalNumberOfResults">The total number of results</param>
         /// <param name="results">results</param>
         [JsonConstructor]
-        public AFNORDirectoryLineSearchPost200Response(Option<AFNORSearchDirectoryLine?> search = default, Option<int?> totalNumberOfResults = default, Option<List<AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode>?> results = default)
+        public AFNORDirectoryLineSearchPost200Response(Option<AFNORSearchDirectoryLine?> search = default, Option<int?> totalNumberOfResults = default, Option<List<AFNORDirectoryLinePayloadStatusLegalUnitFacilityRoutingCode>?> results = default)
         {
             SearchOption = search;
             TotalNumberOfResultsOption = totalNumberOfResults;
@@ -81,13 +81,13 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode>?> ResultsOption { get; private set; }
+        public Option<List<AFNORDirectoryLinePayloadStatusLegalUnitFacilityRoutingCode>?> ResultsOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Results
         /// </summary>
         [JsonPropertyName("results")]
-        public List<AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode>? Results { get { return this.ResultsOption; } set { this.ResultsOption = new(value); } }
+        public List<AFNORDirectoryLinePayloadStatusLegalUnitFacilityRoutingCode>? Results { get { return this.ResultsOption; } set { this.ResultsOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -139,7 +139,7 @@ namespace FactPulse.SDK.Model
 
             Option<AFNORSearchDirectoryLine?> search = default;
             Option<int?> totalNumberOfResults = default;
-            Option<List<AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode>?> results = default;
+            Option<List<AFNORDirectoryLinePayloadStatusLegalUnitFacilityRoutingCode>?> results = default;
 
             while (utf8JsonReader.Read())
             {
@@ -163,7 +163,7 @@ namespace FactPulse.SDK.Model
                             totalNumberOfResults = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
                         case "results":
-                            results = new Option<List<AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode>?>(JsonSerializer.Deserialize<List<AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCode>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            results = new Option<List<AFNORDirectoryLinePayloadStatusLegalUnitFacilityRoutingCode>?>(JsonSerializer.Deserialize<List<AFNORDirectoryLinePayloadStatusLegalUnitFacilityRoutingCode>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         default:
                             break;

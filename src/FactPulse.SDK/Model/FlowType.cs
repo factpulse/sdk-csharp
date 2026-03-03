@@ -27,9 +27,9 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// AFNOR XP Z12-013 FlowType enum.  Values from swagger specification v1.1.0: - Invoice flows (factures) - Lifecycle flows (cycle de vie) - E-reporting flows (transactions/paiements)
+    /// AFNOR XP Z12-013 FlowType enum.  Values from swagger specification v1.2.0: - Invoice flows (factures) - Lifecycle flows (cycle de vie) - E-reporting flows (transactions/paiements)
     /// </summary>
-    /// <value>AFNOR XP Z12-013 FlowType enum.  Values from swagger specification v1.1.0: - Invoice flows (factures) - Lifecycle flows (cycle de vie) - E-reporting flows (transactions/paiements)</value>
+    /// <value>AFNOR XP Z12-013 FlowType enum.  Values from swagger specification v1.2.0: - Invoice flows (factures) - Lifecycle flows (cycle de vie) - E-reporting flows (transactions/paiements)</value>
     public enum FlowType
     {
         /// <summary>

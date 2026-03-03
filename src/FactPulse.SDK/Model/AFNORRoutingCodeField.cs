@@ -65,12 +65,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Enum Address for value: address
         /// </summary>
-        Address = 7,
-
-        /// <summary>
-        /// Enum IdInstance for value: idInstance
-        /// </summary>
-        IdInstance = 8
+        Address = 7
     }
 
     /// <summary>
@@ -106,9 +101,6 @@ namespace FactPulse.SDK.Model
             if (value.Equals("address"))
                 return AFNORRoutingCodeField.Address;
 
-            if (value.Equals("idInstance"))
-                return AFNORRoutingCodeField.IdInstance;
-
             throw new NotImplementedException($"Could not convert value to type AFNORRoutingCodeField: '{value}'");
         }
 
@@ -139,9 +131,6 @@ namespace FactPulse.SDK.Model
 
             if (value.Equals("address"))
                 return AFNORRoutingCodeField.Address;
-
-            if (value.Equals("idInstance"))
-                return AFNORRoutingCodeField.IdInstance;
 
             return null;
         }
@@ -174,9 +163,6 @@ namespace FactPulse.SDK.Model
 
             if (value == AFNORRoutingCodeField.Address)
                 return "address";
-
-            if (value == AFNORRoutingCodeField.IdInstance)
-                return "idInstance";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }

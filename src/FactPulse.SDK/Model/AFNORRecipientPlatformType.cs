@@ -27,9 +27,9 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// The type of platform for document reception
+    /// The type of platform for document reception (from UNCL 3035 list) :   - WK : Value added network provider (PA)   - DFH : Government service requestor (PPF) 
     /// </summary>
-    /// <value>The type of platform for document reception</value>
+    /// <value>The type of platform for document reception (from UNCL 3035 list) :   - WK : Value added network provider (PA)   - DFH : Government service requestor (PPF) </value>
     public enum AFNORRecipientPlatformType
     {
         /// <summary>

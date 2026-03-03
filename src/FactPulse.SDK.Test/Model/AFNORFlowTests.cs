@@ -55,6 +55,33 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'Name'
+        /// </summary>
+        [Fact]
+        public void NameTest()
+        {
+            // TODO unit test for the property 'Name'
+        }
+
+        /// <summary>
+        /// Test the property 'FlowSyntax'
+        /// </summary>
+        [Fact]
+        public void FlowSyntaxTest()
+        {
+            // TODO unit test for the property 'FlowSyntax'
+        }
+
+        /// <summary>
+        /// Test the property 'FlowId'
+        /// </summary>
+        [Fact]
+        public void FlowIdTest()
+        {
+            // TODO unit test for the property 'FlowId'
+        }
+
+        /// <summary>
         /// Test the property 'SubmittedAt'
         /// </summary>
         [Fact]
@@ -73,39 +100,12 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'FlowId'
-        /// </summary>
-        [Fact]
-        public void FlowIdTest()
-        {
-            // TODO unit test for the property 'FlowId'
-        }
-
-        /// <summary>
-        /// Test the property 'TrackingId'
-        /// </summary>
-        [Fact]
-        public void TrackingIdTest()
-        {
-            // TODO unit test for the property 'TrackingId'
-        }
-
-        /// <summary>
         /// Test the property 'FlowType'
         /// </summary>
         [Fact]
         public void FlowTypeTest()
         {
             // TODO unit test for the property 'FlowType'
-        }
-
-        /// <summary>
-        /// Test the property 'ProcessingRule'
-        /// </summary>
-        [Fact]
-        public void ProcessingRuleTest()
-        {
-            // TODO unit test for the property 'ProcessingRule'
         }
 
         /// <summary>
@@ -127,12 +127,30 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'FlowSyntax'
+        /// Test the property 'Acknowledgement'
         /// </summary>
         [Fact]
-        public void FlowSyntaxTest()
+        public void AcknowledgementTest()
         {
-            // TODO unit test for the property 'FlowSyntax'
+            // TODO unit test for the property 'Acknowledgement'
+        }
+
+        /// <summary>
+        /// Test the property 'TrackingId'
+        /// </summary>
+        [Fact]
+        public void TrackingIdTest()
+        {
+            // TODO unit test for the property 'TrackingId'
+        }
+
+        /// <summary>
+        /// Test the property 'ProcessingRule'
+        /// </summary>
+        [Fact]
+        public void ProcessingRuleTest()
+        {
+            // TODO unit test for the property 'ProcessingRule'
         }
 
         /// <summary>
@@ -142,15 +160,6 @@ namespace FactPulse.SDK.Test.Model
         public void FlowProfileTest()
         {
             // TODO unit test for the property 'FlowProfile'
-        }
-
-        /// <summary>
-        /// Test the property 'Acknowledgement'
-        /// </summary>
-        [Fact]
-        public void AcknowledgementTest()
-        {
-            // TODO unit test for the property 'Acknowledgement'
         }
     }
 }

@@ -27,9 +27,9 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// AFNOR XP Z12-013 ProcessingRule (Annexe A, lignes 212-216).  Valeurs EXACTES de la spec (case-sensitive).
+    /// AFNOR XP Z12-013 ProcessingRule (Annexe A v1.2.0).  Valeurs EXACTES de la spec (case-sensitive).
     /// </summary>
-    /// <value>AFNOR XP Z12-013 ProcessingRule (Annexe A, lignes 212-216).  Valeurs EXACTES de la spec (case-sensitive).</value>
+    /// <value>AFNOR XP Z12-013 ProcessingRule (Annexe A v1.2.0).  Valeurs EXACTES de la spec (case-sensitive).</value>
     public enum ProcessingRule
     {
         /// <summary>
@@ -48,19 +48,34 @@ namespace FactPulse.SDK.Model
         B2C = 3,
 
         /// <summary>
+        /// Enum B2G for value: B2G
+        /// </summary>
+        B2G = 4,
+
+        /// <summary>
+        /// Enum B2GInt for value: B2GInt
+        /// </summary>
+        B2GInt = 5,
+
+        /// <summary>
         /// Enum OutOfScope for value: OutOfScope
         /// </summary>
-        OutOfScope = 4,
+        OutOfScope = 6,
+
+        /// <summary>
+        /// Enum B2GOutOfScope for value: B2GOutOfScope
+        /// </summary>
+        B2GOutOfScope = 7,
 
         /// <summary>
         /// Enum ArchiveOnly for value: ArchiveOnly
         /// </summary>
-        ArchiveOnly = 5,
+        ArchiveOnly = 8,
 
         /// <summary>
         /// Enum NotApplicable for value: NotApplicable
         /// </summary>
-        NotApplicable = 6
+        NotApplicable = 9
     }
 
     /// <summary>
@@ -84,8 +99,17 @@ namespace FactPulse.SDK.Model
             if (value.Equals("B2C"))
                 return ProcessingRule.B2C;
 
+            if (value.Equals("B2G"))
+                return ProcessingRule.B2G;
+
+            if (value.Equals("B2GInt"))
+                return ProcessingRule.B2GInt;
+
             if (value.Equals("OutOfScope"))
                 return ProcessingRule.OutOfScope;
+
+            if (value.Equals("B2GOutOfScope"))
+                return ProcessingRule.B2GOutOfScope;
 
             if (value.Equals("ArchiveOnly"))
                 return ProcessingRule.ArchiveOnly;
@@ -112,8 +136,17 @@ namespace FactPulse.SDK.Model
             if (value.Equals("B2C"))
                 return ProcessingRule.B2C;
 
+            if (value.Equals("B2G"))
+                return ProcessingRule.B2G;
+
+            if (value.Equals("B2GInt"))
+                return ProcessingRule.B2GInt;
+
             if (value.Equals("OutOfScope"))
                 return ProcessingRule.OutOfScope;
+
+            if (value.Equals("B2GOutOfScope"))
+                return ProcessingRule.B2GOutOfScope;
 
             if (value.Equals("ArchiveOnly"))
                 return ProcessingRule.ArchiveOnly;
@@ -141,8 +174,17 @@ namespace FactPulse.SDK.Model
             if (value == ProcessingRule.B2C)
                 return "B2C";
 
+            if (value == ProcessingRule.B2G)
+                return "B2G";
+
+            if (value == ProcessingRule.B2GInt)
+                return "B2GInt";
+
             if (value == ProcessingRule.OutOfScope)
                 return "OutOfScope";
+
+            if (value == ProcessingRule.B2GOutOfScope)
+                return "B2GOutOfScope";
 
             if (value == ProcessingRule.ArchiveOnly)
                 return "ArchiveOnly";

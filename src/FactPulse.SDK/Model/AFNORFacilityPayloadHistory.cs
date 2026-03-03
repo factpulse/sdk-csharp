@@ -38,20 +38,20 @@ namespace FactPulse.SDK.Model
         /// <param name="siren">SIREN number</param>
         /// <param name="name">business name</param>
         /// <param name="facilityType">facilityType</param>
-        /// <param name="diffusible">diffusible</param>
         /// <param name="administrativeStatus">administrativeStatus</param>
+        /// <param name="siretInstructions">siretInstructions</param>
         /// <param name="address">address</param>
         /// <param name="b2gAdditionalData">b2gAdditionalData</param>
         /// <param name="legalUnit">legalUnit</param>
         [JsonConstructor]
-        public AFNORFacilityPayloadHistory(Option<string?> siret = default, Option<string?> siren = default, Option<string?> name = default, Option<AFNORFacilityType?> facilityType = default, Option<AFNORDiffusionStatus?> diffusible = default, Option<AFNORFacilityAdministrativeStatus?> administrativeStatus = default, Option<AFNORAddressRead?> address = default, Option<AFNORFacilityPayloadHistoryUleB2gAdditionalData?> b2gAdditionalData = default, Option<AFNORLegalUnitPayloadIncludedNoSiren?> legalUnit = default)
+        public AFNORFacilityPayloadHistory(Option<string?> siret = default, Option<string?> siren = default, Option<string?> name = default, Option<AFNORFacilityType?> facilityType = default, Option<AFNORFacilityAdministrativeStatus?> administrativeStatus = default, Option<AFNORSiretInstructions?> siretInstructions = default, Option<AFNORAddressRead?> address = default, Option<AFNORFacilityPayloadHistoryUleB2gAdditionalData?> b2gAdditionalData = default, Option<AFNORLegalUnitPayloadIncluded?> legalUnit = default)
         {
             SiretOption = siret;
             SirenOption = siren;
             NameOption = name;
             FacilityTypeOption = facilityType;
-            DiffusibleOption = diffusible;
             AdministrativeStatusOption = administrativeStatus;
+            SiretInstructionsOption = siretInstructions;
             AddressOption = address;
             B2gAdditionalDataOption = b2gAdditionalData;
             LegalUnitOption = legalUnit;
@@ -72,19 +72,6 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonPropertyName("facilityType")]
         public AFNORFacilityType? FacilityType { get { return this.FacilityTypeOption; } set { this.FacilityTypeOption = new(value); } }
-
-        /// <summary>
-        /// Used to track the state of Diffusible
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<AFNORDiffusionStatus?> DiffusibleOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets Diffusible
-        /// </summary>
-        [JsonPropertyName("diffusible")]
-        public AFNORDiffusionStatus? Diffusible { get { return this.DiffusibleOption; } set { this.DiffusibleOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of AdministrativeStatus
@@ -145,6 +132,19 @@ namespace FactPulse.SDK.Model
         public string? Name { get { return this.NameOption; } set { this.NameOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of SiretInstructions
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<AFNORSiretInstructions?> SiretInstructionsOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets SiretInstructions
+        /// </summary>
+        [JsonPropertyName("siretInstructions")]
+        public AFNORSiretInstructions? SiretInstructions { get { return this.SiretInstructionsOption; } set { this.SiretInstructionsOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of Address
         /// </summary>
         [JsonIgnore]
@@ -175,13 +175,13 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<AFNORLegalUnitPayloadIncludedNoSiren?> LegalUnitOption { get; private set; }
+        public Option<AFNORLegalUnitPayloadIncluded?> LegalUnitOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets LegalUnit
         /// </summary>
         [JsonPropertyName("legalUnit")]
-        public AFNORLegalUnitPayloadIncludedNoSiren? LegalUnit { get { return this.LegalUnitOption; } set { this.LegalUnitOption = new(value); } }
+        public AFNORLegalUnitPayloadIncluded? LegalUnit { get { return this.LegalUnitOption; } set { this.LegalUnitOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -195,8 +195,8 @@ namespace FactPulse.SDK.Model
             sb.Append("  Siren: ").Append(Siren).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  FacilityType: ").Append(FacilityType).Append("\n");
-            sb.Append("  Diffusible: ").Append(Diffusible).Append("\n");
             sb.Append("  AdministrativeStatus: ").Append(AdministrativeStatus).Append("\n");
+            sb.Append("  SiretInstructions: ").Append(SiretInstructions).Append("\n");
             sb.Append("  Address: ").Append(Address).Append("\n");
             sb.Append("  B2gAdditionalData: ").Append(B2gAdditionalData).Append("\n");
             sb.Append("  LegalUnit: ").Append(LegalUnit).Append("\n");
@@ -279,11 +279,11 @@ namespace FactPulse.SDK.Model
             Option<string?> siren = default;
             Option<string?> name = default;
             Option<AFNORFacilityType?> facilityType = default;
-            Option<AFNORDiffusionStatus?> diffusible = default;
             Option<AFNORFacilityAdministrativeStatus?> administrativeStatus = default;
+            Option<AFNORSiretInstructions?> siretInstructions = default;
             Option<AFNORAddressRead?> address = default;
             Option<AFNORFacilityPayloadHistoryUleB2gAdditionalData?> b2gAdditionalData = default;
-            Option<AFNORLegalUnitPayloadIncludedNoSiren?> legalUnit = default;
+            Option<AFNORLegalUnitPayloadIncluded?> legalUnit = default;
 
             while (utf8JsonReader.Read())
             {
@@ -314,15 +314,13 @@ namespace FactPulse.SDK.Model
                             if (facilityTypeRawValue != null)
                                 facilityType = new Option<AFNORFacilityType?>(AFNORFacilityTypeValueConverter.FromStringOrDefault(facilityTypeRawValue));
                             break;
-                        case "diffusible":
-                            string? diffusibleRawValue = utf8JsonReader.GetString();
-                            if (diffusibleRawValue != null)
-                                diffusible = new Option<AFNORDiffusionStatus?>(AFNORDiffusionStatusValueConverter.FromStringOrDefault(diffusibleRawValue));
-                            break;
                         case "administrativeStatus":
                             string? administrativeStatusRawValue = utf8JsonReader.GetString();
                             if (administrativeStatusRawValue != null)
                                 administrativeStatus = new Option<AFNORFacilityAdministrativeStatus?>(AFNORFacilityAdministrativeStatusValueConverter.FromStringOrDefault(administrativeStatusRawValue));
+                            break;
+                        case "siretInstructions":
+                            siretInstructions = new Option<AFNORSiretInstructions?>(JsonSerializer.Deserialize<AFNORSiretInstructions>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "address":
                             address = new Option<AFNORAddressRead?>(JsonSerializer.Deserialize<AFNORAddressRead>(ref utf8JsonReader, jsonSerializerOptions)!);
@@ -331,7 +329,7 @@ namespace FactPulse.SDK.Model
                             b2gAdditionalData = new Option<AFNORFacilityPayloadHistoryUleB2gAdditionalData?>(JsonSerializer.Deserialize<AFNORFacilityPayloadHistoryUleB2gAdditionalData>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "legalUnit":
-                            legalUnit = new Option<AFNORLegalUnitPayloadIncludedNoSiren?>(JsonSerializer.Deserialize<AFNORLegalUnitPayloadIncludedNoSiren>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            legalUnit = new Option<AFNORLegalUnitPayloadIncluded?>(JsonSerializer.Deserialize<AFNORLegalUnitPayloadIncluded>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         default:
                             break;
@@ -351,11 +349,11 @@ namespace FactPulse.SDK.Model
             if (facilityType.IsSet && facilityType.Value == null)
                 throw new ArgumentNullException(nameof(facilityType), "Property is not nullable for class AFNORFacilityPayloadHistory.");
 
-            if (diffusible.IsSet && diffusible.Value == null)
-                throw new ArgumentNullException(nameof(diffusible), "Property is not nullable for class AFNORFacilityPayloadHistory.");
-
             if (administrativeStatus.IsSet && administrativeStatus.Value == null)
                 throw new ArgumentNullException(nameof(administrativeStatus), "Property is not nullable for class AFNORFacilityPayloadHistory.");
+
+            if (siretInstructions.IsSet && siretInstructions.Value == null)
+                throw new ArgumentNullException(nameof(siretInstructions), "Property is not nullable for class AFNORFacilityPayloadHistory.");
 
             if (address.IsSet && address.Value == null)
                 throw new ArgumentNullException(nameof(address), "Property is not nullable for class AFNORFacilityPayloadHistory.");
@@ -366,7 +364,7 @@ namespace FactPulse.SDK.Model
             if (legalUnit.IsSet && legalUnit.Value == null)
                 throw new ArgumentNullException(nameof(legalUnit), "Property is not nullable for class AFNORFacilityPayloadHistory.");
 
-            return new AFNORFacilityPayloadHistory(siret, siren, name, facilityType, diffusible, administrativeStatus, address, b2gAdditionalData, legalUnit);
+            return new AFNORFacilityPayloadHistory(siret, siren, name, facilityType, administrativeStatus, siretInstructions, address, b2gAdditionalData, legalUnit);
         }
 
         /// <summary>
@@ -402,6 +400,9 @@ namespace FactPulse.SDK.Model
             if (aFNORFacilityPayloadHistory.NameOption.IsSet && aFNORFacilityPayloadHistory.Name == null)
                 throw new ArgumentNullException(nameof(aFNORFacilityPayloadHistory.Name), "Property is required for class AFNORFacilityPayloadHistory.");
 
+            if (aFNORFacilityPayloadHistory.SiretInstructionsOption.IsSet && aFNORFacilityPayloadHistory.SiretInstructions == null)
+                throw new ArgumentNullException(nameof(aFNORFacilityPayloadHistory.SiretInstructions), "Property is required for class AFNORFacilityPayloadHistory.");
+
             if (aFNORFacilityPayloadHistory.AddressOption.IsSet && aFNORFacilityPayloadHistory.Address == null)
                 throw new ArgumentNullException(nameof(aFNORFacilityPayloadHistory.Address), "Property is required for class AFNORFacilityPayloadHistory.");
 
@@ -425,15 +426,15 @@ namespace FactPulse.SDK.Model
                 var facilityTypeRawValue = AFNORFacilityTypeValueConverter.ToJsonValue(aFNORFacilityPayloadHistory.FacilityType!.Value);
                 writer.WriteString("facilityType", facilityTypeRawValue);
             }
-            if (aFNORFacilityPayloadHistory.DiffusibleOption.IsSet)
-            {
-                var diffusibleRawValue = AFNORDiffusionStatusValueConverter.ToJsonValue(aFNORFacilityPayloadHistory.Diffusible!.Value);
-                writer.WriteString("diffusible", diffusibleRawValue);
-            }
             if (aFNORFacilityPayloadHistory.AdministrativeStatusOption.IsSet)
             {
                 var administrativeStatusRawValue = AFNORFacilityAdministrativeStatusValueConverter.ToJsonValue(aFNORFacilityPayloadHistory.AdministrativeStatus!.Value);
                 writer.WriteString("administrativeStatus", administrativeStatusRawValue);
+            }
+            if (aFNORFacilityPayloadHistory.SiretInstructionsOption.IsSet)
+            {
+                writer.WritePropertyName("siretInstructions");
+                JsonSerializer.Serialize(writer, aFNORFacilityPayloadHistory.SiretInstructions, jsonSerializerOptions);
             }
             if (aFNORFacilityPayloadHistory.AddressOption.IsSet)
             {

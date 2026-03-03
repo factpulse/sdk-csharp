@@ -32,19 +32,19 @@ namespace FactPulse.SDK.Model
     public enum AFNORAlgorithm
     {
         /// <summary>
-        /// Enum RSA for value: RSA
+        /// Enum RS256 for value: RS256
         /// </summary>
-        RSA = 1,
+        RS256 = 1,
+
+        /// <summary>
+        /// Enum HS256 for value: HS256
+        /// </summary>
+        HS256 = 2,
 
         /// <summary>
         /// Enum ECDSA for value: ECDSA
         /// </summary>
-        ECDSA = 2,
-
-        /// <summary>
-        /// Enum RSAPSS for value: RSA_PSS
-        /// </summary>
-        RSAPSS = 3,
+        ECDSA = 3,
 
         /// <summary>
         /// Enum EDDSA25519 for value: EDDSA_25519
@@ -52,9 +52,14 @@ namespace FactPulse.SDK.Model
         EDDSA25519 = 4,
 
         /// <summary>
+        /// Enum RSAPSS for value: RSA_PSS
+        /// </summary>
+        RSAPSS = 5,
+
+        /// <summary>
         /// Enum EDDSA448 for value: EDDSA_448
         /// </summary>
-        EDDSA448 = 5
+        EDDSA448 = 6
     }
 
     /// <summary>
@@ -69,17 +74,20 @@ namespace FactPulse.SDK.Model
         /// <returns></returns>
         public static AFNORAlgorithm FromString(string value)
         {
-            if (value.Equals("RSA"))
-                return AFNORAlgorithm.RSA;
+            if (value.Equals("RS256"))
+                return AFNORAlgorithm.RS256;
+
+            if (value.Equals("HS256"))
+                return AFNORAlgorithm.HS256;
 
             if (value.Equals("ECDSA"))
                 return AFNORAlgorithm.ECDSA;
 
-            if (value.Equals("RSA_PSS"))
-                return AFNORAlgorithm.RSAPSS;
-
             if (value.Equals("EDDSA_25519"))
                 return AFNORAlgorithm.EDDSA25519;
+
+            if (value.Equals("RSA_PSS"))
+                return AFNORAlgorithm.RSAPSS;
 
             if (value.Equals("EDDSA_448"))
                 return AFNORAlgorithm.EDDSA448;
@@ -94,17 +102,20 @@ namespace FactPulse.SDK.Model
         /// <returns></returns>
         public static AFNORAlgorithm? FromStringOrDefault(string value)
         {
-            if (value.Equals("RSA"))
-                return AFNORAlgorithm.RSA;
+            if (value.Equals("RS256"))
+                return AFNORAlgorithm.RS256;
+
+            if (value.Equals("HS256"))
+                return AFNORAlgorithm.HS256;
 
             if (value.Equals("ECDSA"))
                 return AFNORAlgorithm.ECDSA;
 
-            if (value.Equals("RSA_PSS"))
-                return AFNORAlgorithm.RSAPSS;
-
             if (value.Equals("EDDSA_25519"))
                 return AFNORAlgorithm.EDDSA25519;
+
+            if (value.Equals("RSA_PSS"))
+                return AFNORAlgorithm.RSAPSS;
 
             if (value.Equals("EDDSA_448"))
                 return AFNORAlgorithm.EDDSA448;
@@ -120,17 +131,20 @@ namespace FactPulse.SDK.Model
         /// <exception cref="NotImplementedException"></exception>
         public static string ToJsonValue(AFNORAlgorithm value)
         {
-            if (value == AFNORAlgorithm.RSA)
-                return "RSA";
+            if (value == AFNORAlgorithm.RS256)
+                return "RS256";
+
+            if (value == AFNORAlgorithm.HS256)
+                return "HS256";
 
             if (value == AFNORAlgorithm.ECDSA)
                 return "ECDSA";
 
-            if (value == AFNORAlgorithm.RSAPSS)
-                return "RSA_PSS";
-
             if (value == AFNORAlgorithm.EDDSA25519)
                 return "EDDSA_25519";
+
+            if (value == AFNORAlgorithm.RSAPSS)
+                return "RSA_PSS";
 
             if (value == AFNORAlgorithm.EDDSA448)
                 return "EDDSA_448";

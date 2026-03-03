@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **Siren** | **string** | SIREN number | [optional] 
 **Name** | **string** | business name | [optional] 
 **FacilityType** | **AFNORFacilityType** |  | [optional] 
-**Diffusible** | **AFNORDiffusionStatus** |  | [optional] 
 **AdministrativeStatus** | **AFNORFacilityAdministrativeStatus** |  | [optional] 
 **Address** | [**AFNORAddressRead**](AFNORAddressRead.md) |  | [optional] 
 **B2gAdditionalData** | [**AFNORFacilityPayloadHistoryUleB2gAdditionalData**](AFNORFacilityPayloadHistoryUleB2gAdditionalData.md) |  | [optional] 

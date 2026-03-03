@@ -38,13 +38,15 @@ namespace FactPulse.SDK.Model
         /// <param name="businessName">Business name</param>
         /// <param name="entityType">entityType</param>
         /// <param name="administrativeStatus">administrativeStatus</param>
+        /// <param name="instructions">instructions</param>
         [JsonConstructor]
-        public AFNORLegalUnitPayloadHistory(Option<string?> siren = default, Option<string?> businessName = default, Option<AFNOREntityType?> entityType = default, Option<AFNORLegalUnitAdministrativeStatus?> administrativeStatus = default)
+        public AFNORLegalUnitPayloadHistory(Option<string?> siren = default, Option<string?> businessName = default, Option<AFNOREntityType?> entityType = default, Option<AFNORLegalUnitAdministrativeStatus?> administrativeStatus = default, Option<AFNORSirenInstructions?> instructions = default)
         {
             SirenOption = siren;
             BusinessNameOption = businessName;
             EntityTypeOption = entityType;
             AdministrativeStatusOption = administrativeStatus;
+            InstructionsOption = instructions;
             OnCreated();
         }
 
@@ -107,6 +109,19 @@ namespace FactPulse.SDK.Model
         public string? BusinessName { get { return this.BusinessNameOption; } set { this.BusinessNameOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of Instructions
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<AFNORSirenInstructions?> InstructionsOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Instructions
+        /// </summary>
+        [JsonPropertyName("instructions")]
+        public AFNORSirenInstructions? Instructions { get { return this.InstructionsOption; } set { this.InstructionsOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -118,6 +133,7 @@ namespace FactPulse.SDK.Model
             sb.Append("  BusinessName: ").Append(BusinessName).Append("\n");
             sb.Append("  EntityType: ").Append(EntityType).Append("\n");
             sb.Append("  AdministrativeStatus: ").Append(AdministrativeStatus).Append("\n");
+            sb.Append("  Instructions: ").Append(Instructions).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -181,6 +197,7 @@ namespace FactPulse.SDK.Model
             Option<string?> businessName = default;
             Option<AFNOREntityType?> entityType = default;
             Option<AFNORLegalUnitAdministrativeStatus?> administrativeStatus = default;
+            Option<AFNORSirenInstructions?> instructions = default;
 
             while (utf8JsonReader.Read())
             {
@@ -213,6 +230,9 @@ namespace FactPulse.SDK.Model
                             if (administrativeStatusRawValue != null)
                                 administrativeStatus = new Option<AFNORLegalUnitAdministrativeStatus?>(AFNORLegalUnitAdministrativeStatusValueConverter.FromStringOrDefault(administrativeStatusRawValue));
                             break;
+                        case "instructions":
+                            instructions = new Option<AFNORSirenInstructions?>(JsonSerializer.Deserialize<AFNORSirenInstructions>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
                         default:
                             break;
                     }
@@ -231,7 +251,10 @@ namespace FactPulse.SDK.Model
             if (administrativeStatus.IsSet && administrativeStatus.Value == null)
                 throw new ArgumentNullException(nameof(administrativeStatus), "Property is not nullable for class AFNORLegalUnitPayloadHistory.");
 
-            return new AFNORLegalUnitPayloadHistory(siren, businessName, entityType, administrativeStatus);
+            if (instructions.IsSet && instructions.Value == null)
+                throw new ArgumentNullException(nameof(instructions), "Property is not nullable for class AFNORLegalUnitPayloadHistory.");
+
+            return new AFNORLegalUnitPayloadHistory(siren, businessName, entityType, administrativeStatus, instructions);
         }
 
         /// <summary>
@@ -264,6 +287,9 @@ namespace FactPulse.SDK.Model
             if (aFNORLegalUnitPayloadHistory.BusinessNameOption.IsSet && aFNORLegalUnitPayloadHistory.BusinessName == null)
                 throw new ArgumentNullException(nameof(aFNORLegalUnitPayloadHistory.BusinessName), "Property is required for class AFNORLegalUnitPayloadHistory.");
 
+            if (aFNORLegalUnitPayloadHistory.InstructionsOption.IsSet && aFNORLegalUnitPayloadHistory.Instructions == null)
+                throw new ArgumentNullException(nameof(aFNORLegalUnitPayloadHistory.Instructions), "Property is required for class AFNORLegalUnitPayloadHistory.");
+
             if (aFNORLegalUnitPayloadHistory.SirenOption.IsSet)
                 writer.WriteString("siren", aFNORLegalUnitPayloadHistory.Siren);
 
@@ -279,6 +305,11 @@ namespace FactPulse.SDK.Model
             {
                 var administrativeStatusRawValue = AFNORLegalUnitAdministrativeStatusValueConverter.ToJsonValue(aFNORLegalUnitPayloadHistory.AdministrativeStatus!.Value);
                 writer.WriteString("administrativeStatus", administrativeStatusRawValue);
+            }
+            if (aFNORLegalUnitPayloadHistory.InstructionsOption.IsSet)
+            {
+                writer.WritePropertyName("instructions");
+                JsonSerializer.Serialize(writer, aFNORLegalUnitPayloadHistory.Instructions, jsonSerializerOptions);
             }
         }
     }

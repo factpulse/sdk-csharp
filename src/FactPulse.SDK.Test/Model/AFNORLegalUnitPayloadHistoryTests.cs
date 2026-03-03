@@ -89,5 +89,14 @@ namespace FactPulse.SDK.Test.Model
         {
             // TODO unit test for the property 'AdministrativeStatus'
         }
+
+        /// <summary>
+        /// Test the property 'Instructions'
+        /// </summary>
+        [Fact]
+        public void InstructionsTest()
+        {
+            // TODO unit test for the property 'Instructions'
+        }
     }
 }

@@ -55,6 +55,33 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'FlowId'
+        /// </summary>
+        [Fact]
+        public void FlowIdTest()
+        {
+            // TODO unit test for the property 'FlowId'
+        }
+
+        /// <summary>
+        /// Test the property 'SubmittedAt'
+        /// </summary>
+        [Fact]
+        public void SubmittedAtTest()
+        {
+            // TODO unit test for the property 'SubmittedAt'
+        }
+
+        /// <summary>
+        /// Test the property 'Name'
+        /// </summary>
+        [Fact]
+        public void NameTest()
+        {
+            // TODO unit test for the property 'Name'
+        }
+
+        /// <summary>
         /// Test the property 'FlowSyntax'
         /// </summary>
         [Fact]
@@ -70,15 +97,6 @@ namespace FactPulse.SDK.Test.Model
         public void TrackingIdTest()
         {
             // TODO unit test for the property 'TrackingId'
-        }
-
-        /// <summary>
-        /// Test the property 'Name'
-        /// </summary>
-        [Fact]
-        public void NameTest()
-        {
-            // TODO unit test for the property 'Name'
         }
 
         /// <summary>
@@ -106,24 +124,6 @@ namespace FactPulse.SDK.Test.Model
         public void Sha256Test()
         {
             // TODO unit test for the property 'Sha256'
-        }
-
-        /// <summary>
-        /// Test the property 'FlowId'
-        /// </summary>
-        [Fact]
-        public void FlowIdTest()
-        {
-            // TODO unit test for the property 'FlowId'
-        }
-
-        /// <summary>
-        /// Test the property 'SubmittedAt'
-        /// </summary>
-        [Fact]
-        public void SubmittedAtTest()
-        {
-            // TODO unit test for the property 'SubmittedAt'
         }
     }
 }

@@ -37,7 +37,7 @@ namespace FactPulse.SDK.Model
         /// <param name="op">op</param>
         /// <param name="value">suffix of the directory line which defines an address mesh not attached to a facility</param>
         [JsonConstructor]
-        public AFNORSearchDirectoryLineFiltersAddressingSuffix(Option<AFNORStrictOperator?> op = default, Option<string?> value = default)
+        public AFNORSearchDirectoryLineFiltersAddressingSuffix(Option<AFNORContainsOrStrictOperator?> op = default, Option<string?> value = default)
         {
             OpOption = op;
             ValueOption = value;
@@ -51,13 +51,13 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<AFNORStrictOperator?> OpOption { get; private set; }
+        public Option<AFNORContainsOrStrictOperator?> OpOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Op
         /// </summary>
         [JsonPropertyName("op")]
-        public AFNORStrictOperator? Op { get { return this.OpOption; } set { this.OpOption = new(value); } }
+        public AFNORContainsOrStrictOperator? Op { get { return this.OpOption; } set { this.OpOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Value
@@ -127,7 +127,7 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<AFNORStrictOperator?> op = default;
+            Option<AFNORContainsOrStrictOperator?> op = default;
             Option<string?> value = default;
 
             while (utf8JsonReader.Read())
@@ -148,7 +148,7 @@ namespace FactPulse.SDK.Model
                         case "op":
                             string? opRawValue = utf8JsonReader.GetString();
                             if (opRawValue != null)
-                                op = new Option<AFNORStrictOperator?>(AFNORStrictOperatorValueConverter.FromStringOrDefault(opRawValue));
+                                op = new Option<AFNORContainsOrStrictOperator?>(AFNORContainsOrStrictOperatorValueConverter.FromStringOrDefault(opRawValue));
                             break;
                         case "value":
                             value = new Option<string?>(utf8JsonReader.GetString()!);
@@ -197,7 +197,7 @@ namespace FactPulse.SDK.Model
 
             if (aFNORSearchDirectoryLineFiltersAddressingSuffix.OpOption.IsSet)
             {
-                var opRawValue = AFNORStrictOperatorValueConverter.ToJsonValue(aFNORSearchDirectoryLineFiltersAddressingSuffix.Op!.Value);
+                var opRawValue = AFNORContainsOrStrictOperatorValueConverter.ToJsonValue(aFNORSearchDirectoryLineFiltersAddressingSuffix.Op!.Value);
                 writer.WriteString("op", opRawValue);
             }
             if (aFNORSearchDirectoryLineFiltersAddressingSuffix.ValueOption.IsSet)

@@ -27,9 +27,9 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// - B2B                 : e-invoicing - B2BInt              : International B2B e-reporting - B2C                 : B2C e-reporting - OutOfScope          : Out of scope (not regulated flow) - ArchiveOnly         : Archive only, no transmission - NotApplicable       : Not Applicable 
+    /// - B2B                 : e-invoicing - B2BInt              : International B2B e-reporting - B2C                 : B2C e-reporting - B2G                 : e-invoicing for B2G sales - B2GInt - OutOfScope          : Out of scope (not regulated flow) - B2GOutOfScope - ArchiveOnly         : Archive only, no transmission - NotApplicable       : Not Applicable 
     /// </summary>
-    /// <value>- B2B                 : e-invoicing - B2BInt              : International B2B e-reporting - B2C                 : B2C e-reporting - OutOfScope          : Out of scope (not regulated flow) - ArchiveOnly         : Archive only, no transmission - NotApplicable       : Not Applicable </value>
+    /// <value>- B2B                 : e-invoicing - B2BInt              : International B2B e-reporting - B2C                 : B2C e-reporting - B2G                 : e-invoicing for B2G sales - B2GInt - OutOfScope          : Out of scope (not regulated flow) - B2GOutOfScope - ArchiveOnly         : Archive only, no transmission - NotApplicable       : Not Applicable </value>
     public enum AFNORProcessingRule
     {
         /// <summary>
@@ -48,19 +48,34 @@ namespace FactPulse.SDK.Model
         B2C = 3,
 
         /// <summary>
+        /// Enum B2G for value: B2G
+        /// </summary>
+        B2G = 4,
+
+        /// <summary>
+        /// Enum B2GInt for value: B2GInt
+        /// </summary>
+        B2GInt = 5,
+
+        /// <summary>
         /// Enum OutOfScope for value: OutOfScope
         /// </summary>
-        OutOfScope = 4,
+        OutOfScope = 6,
+
+        /// <summary>
+        /// Enum B2GOutOfScope for value: B2GOutOfScope
+        /// </summary>
+        B2GOutOfScope = 7,
 
         /// <summary>
         /// Enum ArchiveOnly for value: ArchiveOnly
         /// </summary>
-        ArchiveOnly = 5,
+        ArchiveOnly = 8,
 
         /// <summary>
         /// Enum NotApplicable for value: NotApplicable
         /// </summary>
-        NotApplicable = 6
+        NotApplicable = 9
     }
 
     /// <summary>
@@ -84,8 +99,17 @@ namespace FactPulse.SDK.Model
             if (value.Equals("B2C"))
                 return AFNORProcessingRule.B2C;
 
+            if (value.Equals("B2G"))
+                return AFNORProcessingRule.B2G;
+
+            if (value.Equals("B2GInt"))
+                return AFNORProcessingRule.B2GInt;
+
             if (value.Equals("OutOfScope"))
                 return AFNORProcessingRule.OutOfScope;
+
+            if (value.Equals("B2GOutOfScope"))
+                return AFNORProcessingRule.B2GOutOfScope;
 
             if (value.Equals("ArchiveOnly"))
                 return AFNORProcessingRule.ArchiveOnly;
@@ -112,8 +136,17 @@ namespace FactPulse.SDK.Model
             if (value.Equals("B2C"))
                 return AFNORProcessingRule.B2C;
 
+            if (value.Equals("B2G"))
+                return AFNORProcessingRule.B2G;
+
+            if (value.Equals("B2GInt"))
+                return AFNORProcessingRule.B2GInt;
+
             if (value.Equals("OutOfScope"))
                 return AFNORProcessingRule.OutOfScope;
+
+            if (value.Equals("B2GOutOfScope"))
+                return AFNORProcessingRule.B2GOutOfScope;
 
             if (value.Equals("ArchiveOnly"))
                 return AFNORProcessingRule.ArchiveOnly;
@@ -141,8 +174,17 @@ namespace FactPulse.SDK.Model
             if (value == AFNORProcessingRule.B2C)
                 return "B2C";
 
+            if (value == AFNORProcessingRule.B2G)
+                return "B2G";
+
+            if (value == AFNORProcessingRule.B2GInt)
+                return "B2GInt";
+
             if (value == AFNORProcessingRule.OutOfScope)
                 return "OutOfScope";
+
+            if (value == AFNORProcessingRule.B2GOutOfScope)
+                return "B2GOutOfScope";
 
             if (value == AFNORProcessingRule.ArchiveOnly)
                 return "ArchiveOnly";

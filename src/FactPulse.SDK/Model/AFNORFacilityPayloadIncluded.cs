@@ -38,18 +38,16 @@ namespace FactPulse.SDK.Model
         /// <param name="siren">SIREN number</param>
         /// <param name="name">business name</param>
         /// <param name="facilityType">facilityType</param>
-        /// <param name="diffusible">diffusible</param>
         /// <param name="administrativeStatus">administrativeStatus</param>
         /// <param name="address">address</param>
         /// <param name="b2gAdditionalData">b2gAdditionalData</param>
         [JsonConstructor]
-        public AFNORFacilityPayloadIncluded(Option<string?> siret = default, Option<string?> siren = default, Option<string?> name = default, Option<AFNORFacilityType?> facilityType = default, Option<AFNORDiffusionStatus?> diffusible = default, Option<AFNORFacilityAdministrativeStatus?> administrativeStatus = default, Option<AFNORAddressRead?> address = default, Option<AFNORFacilityPayloadHistoryUleB2gAdditionalData?> b2gAdditionalData = default)
+        public AFNORFacilityPayloadIncluded(Option<string?> siret = default, Option<string?> siren = default, Option<string?> name = default, Option<AFNORFacilityType?> facilityType = default, Option<AFNORFacilityAdministrativeStatus?> administrativeStatus = default, Option<AFNORAddressRead?> address = default, Option<AFNORFacilityPayloadHistoryUleB2gAdditionalData?> b2gAdditionalData = default)
         {
             SiretOption = siret;
             SirenOption = siren;
             NameOption = name;
             FacilityTypeOption = facilityType;
-            DiffusibleOption = diffusible;
             AdministrativeStatusOption = administrativeStatus;
             AddressOption = address;
             B2gAdditionalDataOption = b2gAdditionalData;
@@ -70,19 +68,6 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonPropertyName("facilityType")]
         public AFNORFacilityType? FacilityType { get { return this.FacilityTypeOption; } set { this.FacilityTypeOption = new(value); } }
-
-        /// <summary>
-        /// Used to track the state of Diffusible
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<AFNORDiffusionStatus?> DiffusibleOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets Diffusible
-        /// </summary>
-        [JsonPropertyName("diffusible")]
-        public AFNORDiffusionStatus? Diffusible { get { return this.DiffusibleOption; } set { this.DiffusibleOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of AdministrativeStatus
@@ -180,7 +165,6 @@ namespace FactPulse.SDK.Model
             sb.Append("  Siren: ").Append(Siren).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  FacilityType: ").Append(FacilityType).Append("\n");
-            sb.Append("  Diffusible: ").Append(Diffusible).Append("\n");
             sb.Append("  AdministrativeStatus: ").Append(AdministrativeStatus).Append("\n");
             sb.Append("  Address: ").Append(Address).Append("\n");
             sb.Append("  B2gAdditionalData: ").Append(B2gAdditionalData).Append("\n");
@@ -263,7 +247,6 @@ namespace FactPulse.SDK.Model
             Option<string?> siren = default;
             Option<string?> name = default;
             Option<AFNORFacilityType?> facilityType = default;
-            Option<AFNORDiffusionStatus?> diffusible = default;
             Option<AFNORFacilityAdministrativeStatus?> administrativeStatus = default;
             Option<AFNORAddressRead?> address = default;
             Option<AFNORFacilityPayloadHistoryUleB2gAdditionalData?> b2gAdditionalData = default;
@@ -297,11 +280,6 @@ namespace FactPulse.SDK.Model
                             if (facilityTypeRawValue != null)
                                 facilityType = new Option<AFNORFacilityType?>(AFNORFacilityTypeValueConverter.FromStringOrDefault(facilityTypeRawValue));
                             break;
-                        case "diffusible":
-                            string? diffusibleRawValue = utf8JsonReader.GetString();
-                            if (diffusibleRawValue != null)
-                                diffusible = new Option<AFNORDiffusionStatus?>(AFNORDiffusionStatusValueConverter.FromStringOrDefault(diffusibleRawValue));
-                            break;
                         case "administrativeStatus":
                             string? administrativeStatusRawValue = utf8JsonReader.GetString();
                             if (administrativeStatusRawValue != null)
@@ -331,9 +309,6 @@ namespace FactPulse.SDK.Model
             if (facilityType.IsSet && facilityType.Value == null)
                 throw new ArgumentNullException(nameof(facilityType), "Property is not nullable for class AFNORFacilityPayloadIncluded.");
 
-            if (diffusible.IsSet && diffusible.Value == null)
-                throw new ArgumentNullException(nameof(diffusible), "Property is not nullable for class AFNORFacilityPayloadIncluded.");
-
             if (administrativeStatus.IsSet && administrativeStatus.Value == null)
                 throw new ArgumentNullException(nameof(administrativeStatus), "Property is not nullable for class AFNORFacilityPayloadIncluded.");
 
@@ -343,7 +318,7 @@ namespace FactPulse.SDK.Model
             if (b2gAdditionalData.IsSet && b2gAdditionalData.Value == null)
                 throw new ArgumentNullException(nameof(b2gAdditionalData), "Property is not nullable for class AFNORFacilityPayloadIncluded.");
 
-            return new AFNORFacilityPayloadIncluded(siret, siren, name, facilityType, diffusible, administrativeStatus, address, b2gAdditionalData);
+            return new AFNORFacilityPayloadIncluded(siret, siren, name, facilityType, administrativeStatus, address, b2gAdditionalData);
         }
 
         /// <summary>
@@ -398,11 +373,6 @@ namespace FactPulse.SDK.Model
             {
                 var facilityTypeRawValue = AFNORFacilityTypeValueConverter.ToJsonValue(aFNORFacilityPayloadIncluded.FacilityType!.Value);
                 writer.WriteString("facilityType", facilityTypeRawValue);
-            }
-            if (aFNORFacilityPayloadIncluded.DiffusibleOption.IsSet)
-            {
-                var diffusibleRawValue = AFNORDiffusionStatusValueConverter.ToJsonValue(aFNORFacilityPayloadIncluded.Diffusible!.Value);
-                writer.WriteString("diffusible", diffusibleRawValue);
             }
             if (aFNORFacilityPayloadIncluded.AdministrativeStatusOption.IsSet)
             {

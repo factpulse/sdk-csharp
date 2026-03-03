@@ -5,14 +5,14 @@ Identified Flow info: flow info + id + timestamp
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**FlowId** | **string** | Unique identifier supporting UUID but not only, for flexibility purpose | 
+**SubmittedAt** | **DateTime** | The flow submission date and time (the date and time when the flow was created on the system) This property should be used by the API consumer as a time reference to avoid clock synchronization issues  | 
+**Name** | **string** | Name of the file | 
 **FlowSyntax** | **AFNORFlowSyntax** |  | 
-**TrackingId** | **string** | Unique identifier supporting UUID but not only, for flexibility purpose | [optional] 
-**Name** | **string** | Name of the file | [optional] 
+**TrackingId** | **string** | The tracking id is an external identifier and is used to track the flow by the sender | [optional] 
 **ProcessingRule** | **AFNORProcessingRule** |  | [optional] 
 **FlowProfile** | **AFNORFlowProfile** |  | [optional] 
-**Sha256** | **string** |  | [optional] 
-**FlowId** | **string** | Unique identifier supporting UUID but not only, for flexibility purpose | [optional] 
-**SubmittedAt** | **DateTime** | The flow submission date and time (the date and time when the flow was created on the system) This property should be used by the API consumer as a time reference to avoid clock synchronization issues  | [optional] 
+**Sha256** | **byte[]** | The sha256 is the fingerprint of the attached file: - if provided in the request: it should be checked once received - if not provided in the request: it may be computed and returned in the response  | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

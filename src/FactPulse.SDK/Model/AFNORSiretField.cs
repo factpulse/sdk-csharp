@@ -53,19 +53,19 @@ namespace FactPulse.SDK.Model
         FacilityType = 4,
 
         /// <summary>
-        /// Enum Address for value: address
-        /// </summary>
-        Address = 5,
-
-        /// <summary>
-        /// Enum Diffusible for value: diffusible
-        /// </summary>
-        Diffusible = 6,
-
-        /// <summary>
         /// Enum AdministrativeStatus for value: administrativeStatus
         /// </summary>
-        AdministrativeStatus = 7,
+        AdministrativeStatus = 5,
+
+        /// <summary>
+        /// Enum SiretInstructions for value: siretInstructions
+        /// </summary>
+        SiretInstructions = 6,
+
+        /// <summary>
+        /// Enum Address for value: address
+        /// </summary>
+        Address = 7,
 
         /// <summary>
         /// Enum PmStatus for value: pmStatus
@@ -95,12 +95,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Enum ServiceCodeStatus for value: serviceCodeStatus
         /// </summary>
-        ServiceCodeStatus = 13,
-
-        /// <summary>
-        /// Enum IdInstance for value: idInstance
-        /// </summary>
-        IdInstance = 14
+        ServiceCodeStatus = 13
     }
 
     /// <summary>
@@ -127,14 +122,14 @@ namespace FactPulse.SDK.Model
             if (value.Equals("facilityType"))
                 return AFNORSiretField.FacilityType;
 
-            if (value.Equals("address"))
-                return AFNORSiretField.Address;
-
-            if (value.Equals("diffusible"))
-                return AFNORSiretField.Diffusible;
-
             if (value.Equals("administrativeStatus"))
                 return AFNORSiretField.AdministrativeStatus;
+
+            if (value.Equals("siretInstructions"))
+                return AFNORSiretField.SiretInstructions;
+
+            if (value.Equals("address"))
+                return AFNORSiretField.Address;
 
             if (value.Equals("pmStatus"))
                 return AFNORSiretField.PmStatus;
@@ -153,9 +148,6 @@ namespace FactPulse.SDK.Model
 
             if (value.Equals("serviceCodeStatus"))
                 return AFNORSiretField.ServiceCodeStatus;
-
-            if (value.Equals("idInstance"))
-                return AFNORSiretField.IdInstance;
 
             throw new NotImplementedException($"Could not convert value to type AFNORSiretField: '{value}'");
         }
@@ -179,14 +171,14 @@ namespace FactPulse.SDK.Model
             if (value.Equals("facilityType"))
                 return AFNORSiretField.FacilityType;
 
-            if (value.Equals("address"))
-                return AFNORSiretField.Address;
-
-            if (value.Equals("diffusible"))
-                return AFNORSiretField.Diffusible;
-
             if (value.Equals("administrativeStatus"))
                 return AFNORSiretField.AdministrativeStatus;
+
+            if (value.Equals("siretInstructions"))
+                return AFNORSiretField.SiretInstructions;
+
+            if (value.Equals("address"))
+                return AFNORSiretField.Address;
 
             if (value.Equals("pmStatus"))
                 return AFNORSiretField.PmStatus;
@@ -205,9 +197,6 @@ namespace FactPulse.SDK.Model
 
             if (value.Equals("serviceCodeStatus"))
                 return AFNORSiretField.ServiceCodeStatus;
-
-            if (value.Equals("idInstance"))
-                return AFNORSiretField.IdInstance;
 
             return null;
         }
@@ -232,14 +221,14 @@ namespace FactPulse.SDK.Model
             if (value == AFNORSiretField.FacilityType)
                 return "facilityType";
 
-            if (value == AFNORSiretField.Address)
-                return "address";
-
-            if (value == AFNORSiretField.Diffusible)
-                return "diffusible";
-
             if (value == AFNORSiretField.AdministrativeStatus)
                 return "administrativeStatus";
+
+            if (value == AFNORSiretField.SiretInstructions)
+                return "siretInstructions";
+
+            if (value == AFNORSiretField.Address)
+                return "address";
 
             if (value == AFNORSiretField.PmStatus)
                 return "pmStatus";
@@ -258,9 +247,6 @@ namespace FactPulse.SDK.Model
 
             if (value == AFNORSiretField.ServiceCodeStatus)
                 return "serviceCodeStatus";
-
-            if (value == AFNORSiretField.IdInstance)
-                return "idInstance";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }

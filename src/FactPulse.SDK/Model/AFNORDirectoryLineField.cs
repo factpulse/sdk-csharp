@@ -55,12 +55,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Enum AddressingSuffix for value: addressingSuffix
         /// </summary>
-        AddressingSuffix = 5,
-
-        /// <summary>
-        /// Enum IdInstance for value: idInstance
-        /// </summary>
-        IdInstance = 6
+        AddressingSuffix = 5
     }
 
     /// <summary>
@@ -90,9 +85,6 @@ namespace FactPulse.SDK.Model
             if (value.Equals("addressingSuffix"))
                 return AFNORDirectoryLineField.AddressingSuffix;
 
-            if (value.Equals("idInstance"))
-                return AFNORDirectoryLineField.IdInstance;
-
             throw new NotImplementedException($"Could not convert value to type AFNORDirectoryLineField: '{value}'");
         }
 
@@ -117,9 +109,6 @@ namespace FactPulse.SDK.Model
 
             if (value.Equals("addressingSuffix"))
                 return AFNORDirectoryLineField.AddressingSuffix;
-
-            if (value.Equals("idInstance"))
-                return AFNORDirectoryLineField.IdInstance;
 
             return null;
         }
@@ -146,9 +135,6 @@ namespace FactPulse.SDK.Model
 
             if (value == AFNORDirectoryLineField.AddressingSuffix)
                 return "addressingSuffix";
-
-            if (value == AFNORDirectoryLineField.IdInstance)
-                return "idInstance";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }

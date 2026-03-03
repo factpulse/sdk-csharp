@@ -34,7 +34,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AFNORSearchFlowFilters" /> class.
         /// </summary>
-        /// <param name="updatedAfter">updatedAfter</param>
+        /// <param name="updatedAfter">The comparison with current date is strict : updatedAt &gt; updatedAfter</param>
         /// <param name="updatedBefore">updatedBefore</param>
         /// <param name="processingRule">processingRule</param>
         /// <param name="flowType">flowType</param>
@@ -77,8 +77,9 @@ namespace FactPulse.SDK.Model
         public Option<DateTime?> UpdatedAfterOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets UpdatedAfter
+        /// The comparison with current date is strict : updatedAt &gt; updatedAfter
         /// </summary>
+        /// <value>The comparison with current date is strict : updatedAt &gt; updatedAfter</value>
         [JsonPropertyName("updatedAfter")]
         public DateTime? UpdatedAfter { get { return this.UpdatedAfterOption; } set { this.UpdatedAfterOption = new(value); } }
 

@@ -91,21 +91,21 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'Diffusible'
-        /// </summary>
-        [Fact]
-        public void DiffusibleTest()
-        {
-            // TODO unit test for the property 'Diffusible'
-        }
-
-        /// <summary>
         /// Test the property 'AdministrativeStatus'
         /// </summary>
         [Fact]
         public void AdministrativeStatusTest()
         {
             // TODO unit test for the property 'AdministrativeStatus'
+        }
+
+        /// <summary>
+        /// Test the property 'SiretInstructions'
+        /// </summary>
+        [Fact]
+        public void SiretInstructionsTest()
+        {
+            // TODO unit test for the property 'SiretInstructions'
         }
 
         /// <summary>

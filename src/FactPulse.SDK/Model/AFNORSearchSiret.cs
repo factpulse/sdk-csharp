@@ -130,7 +130,7 @@ namespace FactPulse.SDK.Model
         /// Sorting criteria on a field and an order (ascending or descending).
         /// </summary>
         /// <value>Sorting criteria on a field and an order (ascending or descending).</value>
-        /* <example>[{champ&#x3D;siret, order&#x3D;ascending}, {champ&#x3D;name, order&#x3D;descending}]</example> */
+        /* <example>[{field&#x3D;siret, order&#x3D;ascending}, {field&#x3D;name, order&#x3D;descending}]</example> */
         [JsonPropertyName("sorting")]
         public List<AFNORSearchSiretSortingInner>? Sorting { get { return this.SortingOption; } set { this.SortingOption = new(value); } }
 
@@ -145,7 +145,7 @@ namespace FactPulse.SDK.Model
         /// Allows you to filter the desired fields in the response.
         /// </summary>
         /// <value>Allows you to filter the desired fields in the response.</value>
-        /* <example>[siret, siren, name, facilityType, address, diffusible, administrativeStatus, pmStatus, pmOnly, managesPaymentStatus, managesLegalCommitment, managesLegalCommitmentOrService, serviceCodeStatus, idInstance]</example> */
+        /* <example>[siret, siren, name, facilityType, administrativeStatus, siretInstructions, address, pmStatus, pmOnly, managesPaymentStatus, managesLegalCommitment, managesLegalCommitmentOrService, serviceCodeStatus]</example> */
         [JsonPropertyName("fields")]
         public List<AFNORSiretField>? Fields { get { return this.FieldsOption; } set { this.FieldsOption = new(value); } }
 

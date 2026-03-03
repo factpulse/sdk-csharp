@@ -38,7 +38,7 @@ namespace FactPulse.SDK.Model
         /// <param name="credentials">credentials</param>
         /// <param name="identifierType">Identifier type (SIRET, SIREN, UE_HORS_FRANCE, etc.) (default to &quot;SIRET&quot;)</param>
         [JsonConstructor]
-        public GetChorusProIdRequest(string siret, Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?> credentials = default, Option<string?> identifierType = default)
+        public GetChorusProIdRequest(string siret, Option<ChorusProCredentials?> credentials = default, Option<string?> identifierType = default)
         {
             Siret = siret;
             CredentialsOption = credentials;
@@ -60,13 +60,13 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?> CredentialsOption { get; private set; }
+        public Option<ChorusProCredentials?> CredentialsOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Credentials
         /// </summary>
         [JsonPropertyName("credentials")]
-        public FactureElectroniqueRestApiSchemasChorusProChorusProCredentials? Credentials { get { return this.CredentialsOption; } set { this.CredentialsOption = new(value); } }
+        public ChorusProCredentials? Credentials { get { return this.CredentialsOption; } set { this.CredentialsOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of IdentifierType
@@ -131,7 +131,7 @@ namespace FactPulse.SDK.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<string?> siret = default;
-            Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?> credentials = default;
+            Option<ChorusProCredentials?> credentials = default;
             Option<string?> identifierType = default;
 
             while (utf8JsonReader.Read())
@@ -153,7 +153,7 @@ namespace FactPulse.SDK.Model
                             siret = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "credentials":
-                            credentials = new Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?>(JsonSerializer.Deserialize<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials>(ref utf8JsonReader, jsonSerializerOptions));
+                            credentials = new Option<ChorusProCredentials?>(JsonSerializer.Deserialize<ChorusProCredentials>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "identifierType":
                             identifierType = new Option<string?>(utf8JsonReader.GetString()!);

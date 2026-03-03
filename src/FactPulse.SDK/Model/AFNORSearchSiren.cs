@@ -91,7 +91,7 @@ namespace FactPulse.SDK.Model
         /// Allows you to filter the desired fields in the response.
         /// </summary>
         /// <value>Allows you to filter the desired fields in the response.</value>
-        /* <example>[siren, businessName, entityType, administrativeStatus, idInstance]</example> */
+        /* <example>[siren, businessName, entityType, administrativeStatus, instructions]</example> */
         [JsonPropertyName("fields")]
         public List<AFNORSirenField>? Fields { get { return this.FieldsOption; } set { this.FieldsOption = new(value); } }
 

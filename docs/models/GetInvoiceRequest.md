@@ -6,7 +6,7 @@ Get an invoice.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ChorusInvoiceId** | **int** | Chorus Pro invoice ID | 
-**Credentials** | [**FactureElectroniqueRestApiSchemasChorusProChorusProCredentials**](FactureElectroniqueRestApiSchemasChorusProChorusProCredentials.md) |  | [optional] 
+**Credentials** | [**ChorusProCredentials**](ChorusProCredentials.md) |  | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

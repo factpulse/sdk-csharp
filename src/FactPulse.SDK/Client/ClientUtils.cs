@@ -143,20 +143,22 @@ namespace FactPulse.SDK.Client
                 return AFNORAcknowledgementDetail.LevelEnumToJsonValue(aFNORAcknowledgementDetailLevelEnum);
             if (obj is AFNORAlgorithm aFNORAlgorithm)
                 return AFNORAlgorithmValueConverter.ToJsonValue(aFNORAlgorithm);
+            if (obj is AFNORCallbackAuthentication.AuthTypeEnum aFNORCallbackAuthenticationAuthTypeEnum)
+                return AFNORCallbackAuthentication.AuthTypeEnumToJsonValue(aFNORCallbackAuthenticationAuthTypeEnum);
             if (obj is AFNORContainsOperator aFNORContainsOperator)
                 return AFNORContainsOperatorValueConverter.ToJsonValue(aFNORContainsOperator);
+            if (obj is AFNORContainsOrStrictOperator aFNORContainsOrStrictOperator)
+                return AFNORContainsOrStrictOperatorValueConverter.ToJsonValue(aFNORContainsOrStrictOperator);
             if (obj is AFNORDestination.TypeEnum aFNORDestinationTypeEnum)
                 return AFNORDestination.TypeEnumToJsonValue(aFNORDestinationTypeEnum);
-            if (obj is AFNORDiffusionStatus aFNORDiffusionStatus)
-                return AFNORDiffusionStatusValueConverter.ToJsonValue(aFNORDiffusionStatus);
             if (obj is AFNORDirectoryLineField aFNORDirectoryLineField)
                 return AFNORDirectoryLineFieldValueConverter.ToJsonValue(aFNORDirectoryLineField);
+            if (obj is AFNORDirectoryLineStatus aFNORDirectoryLineStatus)
+                return AFNORDirectoryLineStatusValueConverter.ToJsonValue(aFNORDirectoryLineStatus);
             if (obj is AFNOREntityType aFNOREntityType)
                 return AFNOREntityTypeValueConverter.ToJsonValue(aFNOREntityType);
             if (obj is AFNORFacilityAdministrativeStatus aFNORFacilityAdministrativeStatus)
                 return AFNORFacilityAdministrativeStatusValueConverter.ToJsonValue(aFNORFacilityAdministrativeStatus);
-            if (obj is AFNORFacilityNature aFNORFacilityNature)
-                return AFNORFacilityNatureValueConverter.ToJsonValue(aFNORFacilityNature);
             if (obj is AFNORFacilityType aFNORFacilityType)
                 return AFNORFacilityTypeValueConverter.ToJsonValue(aFNORFacilityType);
             if (obj is AFNORFlow.ProcessingRuleSourceEnum aFNORFlowProcessingRuleSourceEnum)
@@ -165,6 +167,8 @@ namespace FactPulse.SDK.Client
                 return AFNORFlowAckStatusValueConverter.ToJsonValue(aFNORFlowAckStatus);
             if (obj is AFNORFlowDirection aFNORFlowDirection)
                 return AFNORFlowDirectionValueConverter.ToJsonValue(aFNORFlowDirection);
+            if (obj is AFNORFlowExtension.ProcessingRuleSourceEnum aFNORFlowExtensionProcessingRuleSourceEnum)
+                return AFNORFlowExtension.ProcessingRuleSourceEnumToJsonValue(aFNORFlowExtensionProcessingRuleSourceEnum);
             if (obj is AFNORFlowProfile aFNORFlowProfile)
                 return AFNORFlowProfileValueConverter.ToJsonValue(aFNORFlowProfile);
             if (obj is AFNORFlowSyntax aFNORFlowSyntax)
@@ -173,8 +177,6 @@ namespace FactPulse.SDK.Client
                 return AFNORFlowTypeValueConverter.ToJsonValue(aFNORFlowType);
             if (obj is AFNORLegalUnitAdministrativeStatus aFNORLegalUnitAdministrativeStatus)
                 return AFNORLegalUnitAdministrativeStatusValueConverter.ToJsonValue(aFNORLegalUnitAdministrativeStatus);
-            if (obj is AFNORPlatformStatus aFNORPlatformStatus)
-                return AFNORPlatformStatusValueConverter.ToJsonValue(aFNORPlatformStatus);
             if (obj is AFNORProcessingRule aFNORProcessingRule)
                 return AFNORProcessingRuleValueConverter.ToJsonValue(aFNORProcessingRule);
             if (obj is AFNORReasonCodeEnum aFNORReasonCodeEnum)
@@ -197,6 +199,8 @@ namespace FactPulse.SDK.Client
                 return AFNORSortingOrderValueConverter.ToJsonValue(aFNORSortingOrder);
             if (obj is AFNORStrictOperator aFNORStrictOperator)
                 return AFNORStrictOperatorValueConverter.ToJsonValue(aFNORStrictOperator);
+            if (obj is AFNORStrictOrStartWithOperator aFNORStrictOrStartWithOperator)
+                return AFNORStrictOrStartWithOperatorValueConverter.ToJsonValue(aFNORStrictOrStartWithOperator);
             if (obj is APIProfile aPIProfile)
                 return APIProfileValueConverter.ToJsonValue(aPIProfile);
             if (obj is AcknowledgmentStatus acknowledgmentStatus)
@@ -233,8 +237,8 @@ namespace FactPulse.SDK.Client
                 return ErrorLevelValueConverter.ToJsonValue(errorLevel);
             if (obj is ErrorSource errorSource)
                 return ErrorSourceValueConverter.ToJsonValue(errorSource);
-            if (obj is FactureElectroniqueModelsInvoiceTypeCode factureElectroniqueModelsInvoiceTypeCode)
-                return FactureElectroniqueModelsInvoiceTypeCodeValueConverter.ToJsonValue(factureElectroniqueModelsInvoiceTypeCode);
+            if (obj is FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode factureElectroniqueRestApiSchemasEreportingInvoiceTypeCode)
+                return FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeValueConverter.ToJsonValue(factureElectroniqueRestApiSchemasEreportingInvoiceTypeCode);
             if (obj is FieldStatus fieldStatus)
                 return FieldStatusValueConverter.ToJsonValue(fieldStatus);
             if (obj is FlowDirection flowDirection)
