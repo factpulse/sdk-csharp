@@ -241,6 +241,8 @@ namespace FactPulse.SDK.Model
             if (authType.IsSet && authType.Value == null)
                 throw new ArgumentNullException(nameof(authType), "Property is not nullable for class AFNORCallbackAuthentication.");
 
+            AFNORCallbackAuthentication.AuthTypeEnum authTypeParsedValue = authType.Value!.Value;
+
             if (aFNORBasicAuthentication != null)
                 return new AFNORCallbackAuthentication(aFNORBasicAuthentication, authTypeParsedValue);
 
