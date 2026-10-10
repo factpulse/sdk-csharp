@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Name** | **string** | business name | [optional] 
 **FacilityType** | **AFNORFacilityType** |  | [optional] 
 **AdministrativeStatus** | **AFNORFacilityAdministrativeStatus** |  | [optional] 
+**Instructions** | [**AFNORSiretInstructions**](AFNORSiretInstructions.md) |  | [optional] 
 **Address** | [**AFNORAddressRead**](AFNORAddressRead.md) |  | [optional] 
 **B2gAdditionalData** | [**AFNORFacilityPayloadHistoryUleB2gAdditionalData**](AFNORFacilityPayloadHistoryUleB2gAdditionalData.md) |  | [optional] 
 

@@ -55,21 +55,12 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'Callback'
+        /// Test the property 'CallbackUrl'
         /// </summary>
         [Fact]
-        public void CallbackTest()
+        public void CallbackUrlTest()
         {
-            // TODO unit test for the property 'Callback'
-        }
-
-        /// <summary>
-        /// Test the property 'Metadata'
-        /// </summary>
-        [Fact]
-        public void MetadataTest()
-        {
-            // TODO unit test for the property 'Metadata'
+            // TODO unit test for the property 'CallbackUrl'
         }
 
         /// <summary>
@@ -79,6 +70,51 @@ namespace FactPulse.SDK.Test.Model
         public void WebhookIdTest()
         {
             // TODO unit test for the property 'WebhookId'
+        }
+
+        /// <summary>
+        /// Test the property 'SigningKey'
+        /// </summary>
+        [Fact]
+        public void SigningKeyTest()
+        {
+            // TODO unit test for the property 'SigningKey'
+        }
+
+        /// <summary>
+        /// Test the property 'CreatedAt'
+        /// </summary>
+        [Fact]
+        public void CreatedAtTest()
+        {
+            // TODO unit test for the property 'CreatedAt'
+        }
+
+        /// <summary>
+        /// Test the property 'FlowTypes'
+        /// </summary>
+        [Fact]
+        public void FlowTypesTest()
+        {
+            // TODO unit test for the property 'FlowTypes'
+        }
+
+        /// <summary>
+        /// Test the property 'FlowDirection'
+        /// </summary>
+        [Fact]
+        public void FlowDirectionTest()
+        {
+            // TODO unit test for the property 'FlowDirection'
+        }
+
+        /// <summary>
+        /// Test the property 'AckStatus'
+        /// </summary>
+        [Fact]
+        public void AckStatusTest()
+        {
+            // TODO unit test for the property 'AckStatus'
         }
     }
 }

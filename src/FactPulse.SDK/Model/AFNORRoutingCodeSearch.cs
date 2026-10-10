@@ -144,7 +144,7 @@ namespace FactPulse.SDK.Model
         /// Sorting criteria on a field and an order (ascending or descending).
         /// </summary>
         /// <value>Sorting criteria on a field and an order (ascending or descending).</value>
-        /* <example>[{field&#x3D;siret, order&#x3D;ascendant}, {field&#x3D;routingIdentifier, order&#x3D;ascendant}]</example> */
+        /* <example>[{field&#x3D;siret, order&#x3D;ascending}, {field&#x3D;routingIdentifier, order&#x3D;ascending}]</example> */
         [JsonPropertyName("sorting")]
         public List<AFNORRoutingCodeSearchSortingInner>? Sorting { get { return this.SortingOption; } set { this.SortingOption = new(value); } }
 
@@ -203,7 +203,7 @@ namespace FactPulse.SDK.Model
         /// Number of results to skip
         /// </summary>
         /// <value>Number of results to skip</value>
-        /* <example>20</example> */
+        /* <example>0</example> */
         [JsonPropertyName("ignore")]
         public int? Ignore { get { return this.IgnoreOption; } set { this.IgnoreOption = new(value); } }
 

@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **ReasonText** | **string** |  | [optional] 
 **ActionCode** | **string** |  | [optional] 
 **EncaisseAmount** | [**Encaisseamount**](Encaisseamount.md) |  | [optional] 
+**EncaisseVatRate** | **decimal** | Taux de TVA du montant encaissé en % (MDT-224, requis par BR-FR-CDV-14 pour le statut 212 ; défaut 20) | [optional] [default to 20M]
 **FlowType** | **string** | Type de flux AFNOR (CustomerInvoiceLC, SupplierInvoiceLC, etc.) | [optional] [default to "CustomerInvoiceLC"]
 **PdpFlowServiceUrl** | **string** |  | [optional] 
 **PdpTokenUrl** | **string** |  | [optional] 

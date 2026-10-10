@@ -55,7 +55,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets String
         /// </summary>
-        public string? String { get { return this.StringOption; } set { this.StringOption = new(value); } }
+        public string? String { get { return this.StringOption.Value; } set { this.StringOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Int
@@ -67,7 +67,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets Int
         /// </summary>
-        public int? Int { get { return this.IntOption; } set { this.IntOption = new(value); } }
+        public int? Int { get { return this.IntOption.Value; } set { this.IntOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object

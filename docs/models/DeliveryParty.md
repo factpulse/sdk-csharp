@@ -6,9 +6,9 @@ Delivery location information (BG-15 Deliver to).  Represents the party or locat
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **string** |  | [optional] 
-**GlobalId** | [**ElectronicAddress**](ElectronicAddress.md) |  | [optional] 
+**GlobalId** | [**ElectronicAddressInput**](ElectronicAddressInput.md) |  | [optional] 
 **Name** | **string** |  | [optional] 
-**PostalAddress** | [**PostalAddress**](PostalAddress.md) |  | [optional] 
+**PostalAddress** | [**PostalAddressInput**](PostalAddressInput.md) |  | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

@@ -8,6 +8,9 @@ Name | Type | Description | Notes
 **Rate** | [**Rate1**](Rate1.md) |  | 
 **TaxableAmount** | [**Taxableamount**](Taxableamount.md) |  | 
 **TaxAmount** | [**Taxamount2**](Taxamount2.md) |  | 
+**TaxCategoryCode** | **string** |  | [optional] 
+**ExemptionReasonCode** | **string** |  | [optional] 
+**ExemptionReason** | **string** |  | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

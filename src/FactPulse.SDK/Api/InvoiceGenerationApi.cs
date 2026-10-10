@@ -55,7 +55,7 @@ namespace FactPulse.SDK.Api
         /// <param name="skipBrFr"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse"/>&gt;</returns>
-        Task<IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse> GenerateInvoiceApiV1ProcessingGenerateInvoicePostAsync(string invoiceData, Option<APIProfile> profile = default, Option<OutputFormat> outputFormat = default, Option<bool> autoEnrich = default, Option<System.IO.Stream?> sourcePdf = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, Option<bool?> skipBrFr = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse> GenerateInvoiceApiV1ProcessingGenerateInvoicePostAsync(string invoiceData, Option<APIProfile> profile = default, Option<OutputFormat> outputFormat = default, Option<bool> autoEnrich = default, Option<FactPulse.SDK.Client.FileParameter?> sourcePdf = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, Option<bool?> skipBrFr = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Generate an electronic invoice (CII / UBL / Factur-X PDF)
@@ -73,30 +73,32 @@ namespace FactPulse.SDK.Api
         /// <param name="skipBrFr"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse"/>?&gt;</returns>
-        Task<IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse?> GenerateInvoiceApiV1ProcessingGenerateInvoicePostOrDefaultAsync(string invoiceData, Option<APIProfile> profile = default, Option<OutputFormat> outputFormat = default, Option<bool> autoEnrich = default, Option<System.IO.Stream?> sourcePdf = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, Option<bool?> skipBrFr = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse?> GenerateInvoiceApiV1ProcessingGenerateInvoicePostOrDefaultAsync(string invoiceData, Option<APIProfile> profile = default, Option<OutputFormat> outputFormat = default, Option<bool> autoEnrich = default, Option<FactPulse.SDK.Client.FileParameter?> sourcePdf = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, Option<bool?> skipBrFr = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Submit a complete invoice (generation + signature + submission)
         /// </summary>
         /// <remarks>
-        /// Unified endpoint to submit a complete invoice to different destinations.     **Facture prête pour Flux 2** - Génère une facture Factur-X complète avec signature optionnelle et soumission vers Chorus Pro ou PDP AFNOR.      **Automated workflow:**     1. **Auto-enrichment** (optional): retrieves data via public APIs and Chorus Pro/AFNOR     2. **Factur-X PDF generation**: creates a PDF/A-3 with embedded XML     3. **Electronic signature** (optional): signs the PDF with a certificate     4. **Submission**: sends to the chosen destination (Chorus Pro or AFNOR PDP)      **Supported destinations:**     - **Chorus Pro**: French B2G platform (invoices to public sector)     - **AFNOR PDP**: Partner Dematerialization Platforms      **Destination credentials - 2 modes available:**      **Mode 1 - Retrieval via JWT (recommended):**     - Credentials are retrieved automatically via the JWT &#x60;client_uid&#x60;     - Do not provide the &#x60;credentials&#x60; field in &#x60;destination&#x60;     - Zero-trust architecture: no secrets in the payload     - Example: &#x60;\&quot;destination\&quot;: {\&quot;type\&quot;: \&quot;chorus_pro\&quot;}&#x60;      **Mode 2 - Credentials in the payload:**     - Provide credentials directly in the payload     - Useful for tests or third-party integrations     - Example: &#x60;\&quot;destination\&quot;: {\&quot;type\&quot;: \&quot;chorus_pro\&quot;, \&quot;credentials\&quot;: {...}}&#x60;       **Electronic signature (optional) - 2 modes available:**      **Mode 1 - Stored certificate (recommended):**     - Certificate is retrieved automatically via the JWT &#x60;client_uid&#x60;     - No key to provide in the payload     - PAdES-B-LT signature with timestamp (eIDAS compliant)     - Example: &#x60;\&quot;signature\&quot;: {\&quot;reason\&quot;: \&quot;Factur-X compliance\&quot;}&#x60;      **Mode 2 - Keys in the payload (for tests):**     - Provide &#x60;key_pem&#x60; and &#x60;cert_pem&#x60; directly     - PEM format accepted: raw or base64     - Useful for tests or special cases without stored certificate     - Example: &#x60;\&quot;signature\&quot;: {\&quot;key_pem\&quot;: \&quot;- -- --BEGIN...\&quot;, \&quot;cert_pem\&quot;: \&quot;- -- --BEGIN...\&quot;}&#x60;      If &#x60;key_pem&#x60; and &#x60;cert_pem&#x60; are provided → Mode 2     Otherwise → Mode 1 (certificate retrieved via &#x60;client_uid&#x60;)
+        /// Unified endpoint to submit a complete invoice to different destinations.     **Facture prête pour Flux 2** - Génère une facture Factur-X complète avec signature optionnelle et soumission vers Chorus Pro ou PDP AFNOR.      **Automated workflow:**     1. **Auto-enrichment** (optional): retrieves data via public APIs and Chorus Pro/AFNOR     2. **Factur-X PDF generation**: creates a PDF/A-3 with embedded XML     3. **Electronic signature** (optional): signs the PDF with a certificate     4. **Submission**: sends to the chosen destination (Chorus Pro or AFNOR PDP)      **Two accepted &#x60;invoiceData&#x60; formats, detected automatically** (same rule as     &#x60;/generate-invoice&#x60;):     - **Simplified format** (&#x60;number&#x60; + &#x60;lines&#x60;): totals, VAT and dates are computed.       Any field of the complete model may be added on top (&#x60;deliveryDate&#x60; BT-72,       &#x60;deliveryParty&#x60; BG-15, &#x60;paymentReference&#x60; BT-83, &#x60;supplier.bic&#x60; BT-86, ...).     - **Complete format** (&#x60;invoiceLines&#x60; present): full &#x60;FacturXInvoice&#x60; structure,       used as provided.      A non-compliant invoice is **not submitted**: the Schematron errors are returned     as a 400 &#x60;SCHEMATRON_VALIDATION_FAILED&#x60;, rather than a 200 followed by an     asynchronous rejection by the PA. This includes the empty-element rule     (PEPPOL-EN16931-R008), which the PAs apply as blocking.      **Supported destinations:**     - **Chorus Pro**: French B2G platform (invoices to public sector)     - **AFNOR PDP**: Partner Dematerialization Platforms      **Destination credentials - 2 modes available:**      **Mode 1 - Retrieval via JWT (recommended):**     - Credentials are retrieved automatically via the JWT &#x60;client_uid&#x60;     - Do not provide the &#x60;credentials&#x60; field in &#x60;destination&#x60;     - Zero-trust architecture: no secrets in the payload     - Example: &#x60;\&quot;destination\&quot;: {\&quot;type\&quot;: \&quot;chorus_pro\&quot;}&#x60;      **Mode 2 - Credentials in the payload:**     - Provide credentials directly in the payload     - Useful for tests or third-party integrations     - Example: &#x60;\&quot;destination\&quot;: {\&quot;type\&quot;: \&quot;chorus_pro\&quot;, \&quot;credentials\&quot;: {...}}&#x60;       **Electronic signature (optional) - 2 modes available:**      **Mode 1 - Stored certificate (recommended):**     - Certificate is retrieved automatically via the JWT &#x60;client_uid&#x60;     - No key to provide in the payload     - PAdES-B-LT signature with timestamp (eIDAS compliant)     - Example: &#x60;\&quot;signature\&quot;: {\&quot;reason\&quot;: \&quot;Factur-X compliance\&quot;}&#x60;      **Mode 2 - Keys in the payload (for tests):**     - Provide &#x60;key_pem&#x60; and &#x60;cert_pem&#x60; directly     - PEM format accepted: raw or base64     - Useful for tests or special cases without stored certificate     - Example: &#x60;\&quot;signature\&quot;: {\&quot;key_pem\&quot;: \&quot;- -- --BEGIN...\&quot;, \&quot;cert_pem\&quot;: \&quot;- -- --BEGIN...\&quot;}&#x60;      If &#x60;key_pem&#x60; and &#x60;cert_pem&#x60; are provided → Mode 2     Otherwise → Mode 1 (certificate retrieved via &#x60;client_uid&#x60;)
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="submitCompleteInvoiceRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostApiResponse"/>&gt;</returns>
-        Task<ISubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostApiResponse> SubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostAsync(SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostApiResponse> SubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostAsync(SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Submit a complete invoice (generation + signature + submission)
         /// </summary>
         /// <remarks>
-        /// Unified endpoint to submit a complete invoice to different destinations.     **Facture prête pour Flux 2** - Génère une facture Factur-X complète avec signature optionnelle et soumission vers Chorus Pro ou PDP AFNOR.      **Automated workflow:**     1. **Auto-enrichment** (optional): retrieves data via public APIs and Chorus Pro/AFNOR     2. **Factur-X PDF generation**: creates a PDF/A-3 with embedded XML     3. **Electronic signature** (optional): signs the PDF with a certificate     4. **Submission**: sends to the chosen destination (Chorus Pro or AFNOR PDP)      **Supported destinations:**     - **Chorus Pro**: French B2G platform (invoices to public sector)     - **AFNOR PDP**: Partner Dematerialization Platforms      **Destination credentials - 2 modes available:**      **Mode 1 - Retrieval via JWT (recommended):**     - Credentials are retrieved automatically via the JWT &#x60;client_uid&#x60;     - Do not provide the &#x60;credentials&#x60; field in &#x60;destination&#x60;     - Zero-trust architecture: no secrets in the payload     - Example: &#x60;\&quot;destination\&quot;: {\&quot;type\&quot;: \&quot;chorus_pro\&quot;}&#x60;      **Mode 2 - Credentials in the payload:**     - Provide credentials directly in the payload     - Useful for tests or third-party integrations     - Example: &#x60;\&quot;destination\&quot;: {\&quot;type\&quot;: \&quot;chorus_pro\&quot;, \&quot;credentials\&quot;: {...}}&#x60;       **Electronic signature (optional) - 2 modes available:**      **Mode 1 - Stored certificate (recommended):**     - Certificate is retrieved automatically via the JWT &#x60;client_uid&#x60;     - No key to provide in the payload     - PAdES-B-LT signature with timestamp (eIDAS compliant)     - Example: &#x60;\&quot;signature\&quot;: {\&quot;reason\&quot;: \&quot;Factur-X compliance\&quot;}&#x60;      **Mode 2 - Keys in the payload (for tests):**     - Provide &#x60;key_pem&#x60; and &#x60;cert_pem&#x60; directly     - PEM format accepted: raw or base64     - Useful for tests or special cases without stored certificate     - Example: &#x60;\&quot;signature\&quot;: {\&quot;key_pem\&quot;: \&quot;- -- --BEGIN...\&quot;, \&quot;cert_pem\&quot;: \&quot;- -- --BEGIN...\&quot;}&#x60;      If &#x60;key_pem&#x60; and &#x60;cert_pem&#x60; are provided → Mode 2     Otherwise → Mode 1 (certificate retrieved via &#x60;client_uid&#x60;)
+        /// Unified endpoint to submit a complete invoice to different destinations.     **Facture prête pour Flux 2** - Génère une facture Factur-X complète avec signature optionnelle et soumission vers Chorus Pro ou PDP AFNOR.      **Automated workflow:**     1. **Auto-enrichment** (optional): retrieves data via public APIs and Chorus Pro/AFNOR     2. **Factur-X PDF generation**: creates a PDF/A-3 with embedded XML     3. **Electronic signature** (optional): signs the PDF with a certificate     4. **Submission**: sends to the chosen destination (Chorus Pro or AFNOR PDP)      **Two accepted &#x60;invoiceData&#x60; formats, detected automatically** (same rule as     &#x60;/generate-invoice&#x60;):     - **Simplified format** (&#x60;number&#x60; + &#x60;lines&#x60;): totals, VAT and dates are computed.       Any field of the complete model may be added on top (&#x60;deliveryDate&#x60; BT-72,       &#x60;deliveryParty&#x60; BG-15, &#x60;paymentReference&#x60; BT-83, &#x60;supplier.bic&#x60; BT-86, ...).     - **Complete format** (&#x60;invoiceLines&#x60; present): full &#x60;FacturXInvoice&#x60; structure,       used as provided.      A non-compliant invoice is **not submitted**: the Schematron errors are returned     as a 400 &#x60;SCHEMATRON_VALIDATION_FAILED&#x60;, rather than a 200 followed by an     asynchronous rejection by the PA. This includes the empty-element rule     (PEPPOL-EN16931-R008), which the PAs apply as blocking.      **Supported destinations:**     - **Chorus Pro**: French B2G platform (invoices to public sector)     - **AFNOR PDP**: Partner Dematerialization Platforms      **Destination credentials - 2 modes available:**      **Mode 1 - Retrieval via JWT (recommended):**     - Credentials are retrieved automatically via the JWT &#x60;client_uid&#x60;     - Do not provide the &#x60;credentials&#x60; field in &#x60;destination&#x60;     - Zero-trust architecture: no secrets in the payload     - Example: &#x60;\&quot;destination\&quot;: {\&quot;type\&quot;: \&quot;chorus_pro\&quot;}&#x60;      **Mode 2 - Credentials in the payload:**     - Provide credentials directly in the payload     - Useful for tests or third-party integrations     - Example: &#x60;\&quot;destination\&quot;: {\&quot;type\&quot;: \&quot;chorus_pro\&quot;, \&quot;credentials\&quot;: {...}}&#x60;       **Electronic signature (optional) - 2 modes available:**      **Mode 1 - Stored certificate (recommended):**     - Certificate is retrieved automatically via the JWT &#x60;client_uid&#x60;     - No key to provide in the payload     - PAdES-B-LT signature with timestamp (eIDAS compliant)     - Example: &#x60;\&quot;signature\&quot;: {\&quot;reason\&quot;: \&quot;Factur-X compliance\&quot;}&#x60;      **Mode 2 - Keys in the payload (for tests):**     - Provide &#x60;key_pem&#x60; and &#x60;cert_pem&#x60; directly     - PEM format accepted: raw or base64     - Useful for tests or special cases without stored certificate     - Example: &#x60;\&quot;signature\&quot;: {\&quot;key_pem\&quot;: \&quot;- -- --BEGIN...\&quot;, \&quot;cert_pem\&quot;: \&quot;- -- --BEGIN...\&quot;}&#x60;      If &#x60;key_pem&#x60; and &#x60;cert_pem&#x60; are provided → Mode 2     Otherwise → Mode 1 (certificate retrieved via &#x60;client_uid&#x60;)
         /// </remarks>
         /// <param name="submitCompleteInvoiceRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostApiResponse"/>?&gt;</returns>
-        Task<ISubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostApiResponse?> SubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostOrDefaultAsync(SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostApiResponse?> SubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostOrDefaultAsync(SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Submit a complete invoice (asynchronous with Celery)
@@ -108,9 +110,10 @@ namespace FactPulse.SDK.Api
         /// <param name="submitCompleteInvoiceRequest"></param>
         /// <param name="callbackUrl">Webhook URL for async notification when submission completes. (optional)</param>
         /// <param name="webhookMode">Webhook content delivery: &#39;inline&#39; (base64 in payload) or &#39;download_url&#39; (temporary URL, 1h TTL) (optional, default to &quot;inline&quot;)</param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostApiResponse"/>&gt;</returns>
-        Task<ISubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostApiResponse> SubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostAsync(SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostApiResponse> SubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostAsync(SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, Option<string?> callbackUrl = default, Option<string> webhookMode = default, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Submit a complete invoice (asynchronous with Celery)
@@ -121,9 +124,10 @@ namespace FactPulse.SDK.Api
         /// <param name="submitCompleteInvoiceRequest"></param>
         /// <param name="callbackUrl">Webhook URL for async notification when submission completes. (optional)</param>
         /// <param name="webhookMode">Webhook content delivery: &#39;inline&#39; (base64 in payload) or &#39;download_url&#39; (temporary URL, 1h TTL) (optional, default to &quot;inline&quot;)</param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostApiResponse"/>?&gt;</returns>
-        Task<ISubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostApiResponse?> SubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostOrDefaultAsync(SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostApiResponse?> SubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostOrDefaultAsync(SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, Option<string?> callbackUrl = default, Option<string> webhookMode = default, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -324,7 +328,7 @@ namespace FactPulse.SDK.Api
             BearerTokenProvider = bearerTokenProvider;
         }
 
-        partial void FormatGenerateInvoiceApiV1ProcessingGenerateInvoicePost(ref string invoiceData, ref Option<APIProfile> profile, ref Option<OutputFormat> outputFormat, ref Option<bool> autoEnrich, ref Option<System.IO.Stream?> sourcePdf, ref Option<string?> callbackUrl, ref Option<string> webhookMode, ref Option<bool?> skipBrFr);
+        partial void FormatGenerateInvoiceApiV1ProcessingGenerateInvoicePost(ref string invoiceData, ref Option<APIProfile> profile, ref Option<OutputFormat> outputFormat, ref Option<bool> autoEnrich, ref Option<FactPulse.SDK.Client.FileParameter?> sourcePdf, ref Option<string?> callbackUrl, ref Option<string> webhookMode, ref Option<bool?> skipBrFr);
 
         /// <summary>
         /// Validates the request parameters
@@ -353,7 +357,7 @@ namespace FactPulse.SDK.Api
         /// <param name="callbackUrl"></param>
         /// <param name="webhookMode"></param>
         /// <param name="skipBrFr"></param>
-        private void AfterGenerateInvoiceApiV1ProcessingGenerateInvoicePostDefaultImplementation(IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse apiResponseLocalVar, string invoiceData, Option<APIProfile> profile, Option<OutputFormat> outputFormat, Option<bool> autoEnrich, Option<System.IO.Stream?> sourcePdf, Option<string?> callbackUrl, Option<string> webhookMode, Option<bool?> skipBrFr)
+        private void AfterGenerateInvoiceApiV1ProcessingGenerateInvoicePostDefaultImplementation(IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse apiResponseLocalVar, string invoiceData, Option<APIProfile> profile, Option<OutputFormat> outputFormat, Option<bool> autoEnrich, Option<FactPulse.SDK.Client.FileParameter?> sourcePdf, Option<string?> callbackUrl, Option<string> webhookMode, Option<bool?> skipBrFr)
         {
             bool suppressDefaultLog = false;
             AfterGenerateInvoiceApiV1ProcessingGenerateInvoicePost(ref suppressDefaultLog, apiResponseLocalVar, invoiceData, profile, outputFormat, autoEnrich, sourcePdf, callbackUrl, webhookMode, skipBrFr);
@@ -374,7 +378,7 @@ namespace FactPulse.SDK.Api
         /// <param name="callbackUrl"></param>
         /// <param name="webhookMode"></param>
         /// <param name="skipBrFr"></param>
-        partial void AfterGenerateInvoiceApiV1ProcessingGenerateInvoicePost(ref bool suppressDefaultLog, IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse apiResponseLocalVar, string invoiceData, Option<APIProfile> profile, Option<OutputFormat> outputFormat, Option<bool> autoEnrich, Option<System.IO.Stream?> sourcePdf, Option<string?> callbackUrl, Option<string> webhookMode, Option<bool?> skipBrFr);
+        partial void AfterGenerateInvoiceApiV1ProcessingGenerateInvoicePost(ref bool suppressDefaultLog, IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse apiResponseLocalVar, string invoiceData, Option<APIProfile> profile, Option<OutputFormat> outputFormat, Option<bool> autoEnrich, Option<FactPulse.SDK.Client.FileParameter?> sourcePdf, Option<string?> callbackUrl, Option<string> webhookMode, Option<bool?> skipBrFr);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -390,7 +394,7 @@ namespace FactPulse.SDK.Api
         /// <param name="callbackUrl"></param>
         /// <param name="webhookMode"></param>
         /// <param name="skipBrFr"></param>
-        private void OnErrorGenerateInvoiceApiV1ProcessingGenerateInvoicePostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string invoiceData, Option<APIProfile> profile, Option<OutputFormat> outputFormat, Option<bool> autoEnrich, Option<System.IO.Stream?> sourcePdf, Option<string?> callbackUrl, Option<string> webhookMode, Option<bool?> skipBrFr)
+        private void OnErrorGenerateInvoiceApiV1ProcessingGenerateInvoicePostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string invoiceData, Option<APIProfile> profile, Option<OutputFormat> outputFormat, Option<bool> autoEnrich, Option<FactPulse.SDK.Client.FileParameter?> sourcePdf, Option<string?> callbackUrl, Option<string> webhookMode, Option<bool?> skipBrFr)
         {
             bool suppressDefaultLogLocalVar = false;
             OnErrorGenerateInvoiceApiV1ProcessingGenerateInvoicePost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, invoiceData, profile, outputFormat, autoEnrich, sourcePdf, callbackUrl, webhookMode, skipBrFr);
@@ -413,7 +417,7 @@ namespace FactPulse.SDK.Api
         /// <param name="callbackUrl"></param>
         /// <param name="webhookMode"></param>
         /// <param name="skipBrFr"></param>
-        partial void OnErrorGenerateInvoiceApiV1ProcessingGenerateInvoicePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string invoiceData, Option<APIProfile> profile, Option<OutputFormat> outputFormat, Option<bool> autoEnrich, Option<System.IO.Stream?> sourcePdf, Option<string?> callbackUrl, Option<string> webhookMode, Option<bool?> skipBrFr);
+        partial void OnErrorGenerateInvoiceApiV1ProcessingGenerateInvoicePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string invoiceData, Option<APIProfile> profile, Option<OutputFormat> outputFormat, Option<bool> autoEnrich, Option<FactPulse.SDK.Client.FileParameter?> sourcePdf, Option<string?> callbackUrl, Option<string> webhookMode, Option<bool?> skipBrFr);
 
         /// <summary>
         /// Generate an electronic invoice (CII / UBL / Factur-X PDF) Generates an electronic invoice compliant with European standards.  Supports **two XML syntaxes** defined by EN 16931: - **CII** (Cross-Industry Invoice, UN/CEFACT) — the Factur-X / ZUGFeRD syntax - **UBL 2.1** (Universal Business Language, OASIS) — the Peppol BIS Billing syntax  ## Applied Standards  - **EN 16931**: European semantic standard for electronic invoicing - **Factur-X / ZUGFeRD** (CII syntax): Franco-German standard - **UBL 2.1** (OASIS): International standard, used by Peppol - **ISO 19005-3** (PDF/A-3): Long-term electronic archiving (PDF output only) - **Schematron**: Business rules validation (EN16931-CII, EN16931-UBL, BR-FR)  ## 🆕 New: Simplified format with auto-enrichment (P0.1)  You can now create an invoice by providing only: - An invoice number - A supplier SIRET + **IBAN** (required) - A recipient SIRET - Invoice lines (description, quantity, net price)  **Simplified format example**: &#x60;&#x60;&#x60;json {   \&quot;number\&quot;: \&quot;FACT-2025-001\&quot;,   \&quot;supplier\&quot;: {     \&quot;siret\&quot;: \&quot;92019522900017\&quot;,     \&quot;iban\&quot;: \&quot;FR7630001007941234567890185\&quot;   },   \&quot;recipient\&quot;: {\&quot;siret\&quot;: \&quot;35600000000048\&quot;},   \&quot;lines\&quot;: [     {\&quot;description\&quot;: \&quot;Service\&quot;, \&quot;quantity\&quot;: 10, \&quot;unitPrice\&quot;: 100.00, \&quot;vatRate\&quot;: 20.0}   ] } &#x60;&#x60;&#x60;  **⚠️ Required fields (simplified format)**: - &#x60;number&#x60;: Unique invoice number - &#x60;supplier.siret&#x60;: Supplier&#39;s SIRET (14 digits) - &#x60;supplier.iban&#x60;: Bank account IBAN (no public API to retrieve it) - &#x60;recipient.siret&#x60;: Recipient&#39;s SIRET - &#x60;lines[]&#x60;: At least one invoice line  **What happens automatically with &#x60;auto_enrich&#x3D;True&#x60;**: - ✅ Name enrichment from Chorus Pro API - ✅ Address enrichment from Business Search API (free, public) - ✅ Automatic intra-EU VAT calculation (FR + key + SIREN) - ✅ Chorus Pro ID retrieval for electronic invoicing - ✅ Net/VAT/Gross totals calculation - ✅ Date generation (today + 30-day due date) - ✅ Multi-rate VAT handling  **Supported identifiers**: - SIRET (14 digits): Specific establishment ⭐ Recommended - SIREN (9 digits): Company (auto-selection of headquarters) - Special types: UE_HORS_FRANCE, RIDET, TAHITI, etc.  ## Checks performed during generation  ### 1. Data validation (Pydantic) - Data types (amounts as Decimal, ISO 8601 dates) - Formats (14-digit SIRET, 9-digit SIREN, IBAN) - Required fields per profile - Amount consistency (Net + VAT &#x3D; Gross)  ### 2. CII-compliant XML generation - Serialization according to Cross Industry Invoice XSD schema - Correct UN/CEFACT namespaces - Hierarchical structure respected - UTF-8 encoding without BOM  ### 3. Schematron validation - Business rules for selected profile (MINIMUM, BASIC, EN16931, EXTENDED) - Element cardinality (required, optional, repeatable) - Calculation rules (totals, VAT, discounts) - European EN 16931 compliance  ### 4. PDF/A-3 conversion (if output_format&#x3D;&#39;pdf&#39;) - Source PDF conversion to PDF/A-3 via Ghostscript - Factur-X XML embedding in PDF - Compliant XMP metadata - ICC sRGB color profile - Removal of forbidden elements (JavaScript, forms)  ## How it works  1. **Submission**: Invoice is queued in Celery for asynchronous processing 2. **Immediate return**: You receive a &#x60;task_id&#x60; (HTTP 202 Accepted) 3. **Tracking**: Use the &#x60;/tasks/{task_id}/status&#x60; endpoint to track progress  ## Webhook notification (recommended)  Instead of polling, you can receive a webhook notification when the task completes:  &#x60;&#x60;&#x60; callback_url&#x3D;https://your-server.com/webhook &#x60;&#x60;&#x60;  The webhook will POST a JSON payload with: - &#x60;event_type&#x60;: &#x60;generation.completed&#x60; or &#x60;generation.failed&#x60; - &#x60;data.task_id&#x60;: The Celery task ID - &#x60;data.content_b64&#x60; or &#x60;data.xml_content&#x60;: The generated content - &#x60;X-Webhook-Signature&#x60; header for HMAC verification  See &#x60;/docs/WEBHOOKS.md&#x60; for full documentation.  ## Output formats  - **xml** / **cii**: CII XML (Factur-X syntax, UN/CEFACT) - **ubl**: UBL 2.1 XML (OASIS, Peppol BIS Billing 3.0) - **pdf**: Factur-X PDF/A-3 with embedded CII XML (requires &#x60;source_pdf&#x60;)  ## Factur-X profiles (CII only)  - **MINIMUM**: Minimal data (simplified invoice) - **BASIC**: Basic information (SMEs) - **EN16931**: European standard (recommended, compliant with directive 2014/55/EU) - **EXTENDED**: All available data (large accounts)  When &#x60;output_format&#x3D;ubl&#x60;, the profile parameter is ignored (UBL always uses EN16931).  ## What you get  After successful processing (status &#x60;completed&#x60;): - **XML only**: Base64-encoded Factur-X compliant XML file - **PDF/A-3**: PDF with embedded XML, ready for sending/archiving - **Metadata**: Profile, Factur-X version, file size - **Validation**: Schematron compliance confirmation  ## Validation  Data is automatically validated according to detected format. On error, a 422 status is returned with invalid field details.
@@ -428,7 +432,7 @@ namespace FactPulse.SDK.Api
         /// <param name="skipBrFr"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse"/>&gt;</returns>
-        public async Task<IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse?> GenerateInvoiceApiV1ProcessingGenerateInvoicePostOrDefaultAsync(string invoiceData, Option<APIProfile> profile = default, Option<OutputFormat> outputFormat = default, Option<bool> autoEnrich = default, Option<System.IO.Stream?> sourcePdf = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, Option<bool?> skipBrFr = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse?> GenerateInvoiceApiV1ProcessingGenerateInvoicePostOrDefaultAsync(string invoiceData, Option<APIProfile> profile = default, Option<OutputFormat> outputFormat = default, Option<bool> autoEnrich = default, Option<FactPulse.SDK.Client.FileParameter?> sourcePdf = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, Option<bool?> skipBrFr = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -454,7 +458,7 @@ namespace FactPulse.SDK.Api
         /// <param name="skipBrFr"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse"/>&gt;</returns>
-        public async Task<IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse> GenerateInvoiceApiV1ProcessingGenerateInvoicePostAsync(string invoiceData, Option<APIProfile> profile = default, Option<OutputFormat> outputFormat = default, Option<bool> autoEnrich = default, Option<System.IO.Stream?> sourcePdf = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, Option<bool?> skipBrFr = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGenerateInvoiceApiV1ProcessingGenerateInvoicePostApiResponse> GenerateInvoiceApiV1ProcessingGenerateInvoicePostAsync(string invoiceData, Option<APIProfile> profile = default, Option<OutputFormat> outputFormat = default, Option<bool> autoEnrich = default, Option<FactPulse.SDK.Client.FileParameter?> sourcePdf = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, Option<bool?> skipBrFr = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -473,36 +477,41 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/processing/generate-invoice"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/processing/generate-invoice");
 
-                    MultipartContent multipartContentLocalVar = new MultipartContent();
+                    MultipartFormDataContent multipartContentLocalVar = new MultipartFormDataContent();
 
                     httpRequestMessageLocalVar.Content = multipartContentLocalVar;
 
-                    List<KeyValuePair<string?, string?>> formParameterLocalVars = new List<KeyValuePair<string?, string?>>();
+                    List<KeyValuePair<string, string?>> formParameterLocalVars = new List<KeyValuePair<string, string?>>();
 
-                    multipartContentLocalVar.Add(new FormUrlEncodedContent(formParameterLocalVars));
-
-                    formParameterLocalVars.Add(new KeyValuePair<string?, string?>("invoice_data", ClientUtils.ParameterToString(invoiceData)));
+                    formParameterLocalVars.Add(new KeyValuePair<string, string?>("invoice_data", ClientUtils.ParameterToString(invoiceData)));
 
                     if (profile.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("profile", ClientUtils.ParameterToString(profile.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("profile", ClientUtils.ParameterToString(profile.Value)));
 
                     if (outputFormat.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("output_format", ClientUtils.ParameterToString(outputFormat.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("output_format", ClientUtils.ParameterToString(outputFormat.Value)));
 
                     if (autoEnrich.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("auto_enrich", ClientUtils.ParameterToString(autoEnrich.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("auto_enrich", ClientUtils.ParameterToString(autoEnrich.Value)));
 
                     if (sourcePdf.IsSet)
-                        multipartContentLocalVar.Add(new StreamContent(sourcePdf.Value));
+                    {
+                        var streamContentLocalVar = new StreamContent(sourcePdf.Value.Content);
+                        streamContentLocalVar.Headers.ContentType = new MediaTypeHeaderValue(sourcePdf.Value.ContentType);
+                        multipartContentLocalVar.Add(streamContentLocalVar, "source_pdf", sourcePdf.Value.FileName ?? "source_pdf");
+                    }
 
                     if (callbackUrl.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("callback_url", ClientUtils.ParameterToString(callbackUrl.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("callback_url", ClientUtils.ParameterToString(callbackUrl.Value)));
 
                     if (webhookMode.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("webhook_mode", ClientUtils.ParameterToString(webhookMode.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("webhook_mode", ClientUtils.ParameterToString(webhookMode.Value)));
 
                     if (skipBrFr.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("skip_br_fr", ClientUtils.ParameterToString(skipBrFr.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("skip_br_fr", ClientUtils.ParameterToString(skipBrFr.Value)));
+
+                    foreach (var formParamLocalVar in formParameterLocalVars)
+                        multipartContentLocalVar.Add(new StringContent(formParamLocalVar.Value ?? string.Empty), formParamLocalVar.Key);
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
@@ -520,11 +529,6 @@ namespace FactPulse.SDK.Api
                     string[] contentTypes = new string[] {
                         "multipart/form-data"
                     };
-
-                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
-
-                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
-                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -716,7 +720,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePost(SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest);
+        partial void FormatSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePost(SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, ref Option<string?> organizationId);
 
         /// <summary>
         /// Validates the request parameters
@@ -734,10 +738,11 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="submitCompleteInvoiceRequest"></param>
-        private void AfterSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostDefaultImplementation(ISubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostApiResponse apiResponseLocalVar, SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest)
+        /// <param name="organizationId"></param>
+        private void AfterSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostDefaultImplementation(ISubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostApiResponse apiResponseLocalVar, SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, Option<string?> organizationId)
         {
             bool suppressDefaultLog = false;
-            AfterSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePost(ref suppressDefaultLog, apiResponseLocalVar, submitCompleteInvoiceRequest);
+            AfterSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePost(ref suppressDefaultLog, apiResponseLocalVar, submitCompleteInvoiceRequest, organizationId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -748,7 +753,8 @@ namespace FactPulse.SDK.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="submitCompleteInvoiceRequest"></param>
-        partial void AfterSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePost(ref bool suppressDefaultLog, ISubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostApiResponse apiResponseLocalVar, SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest);
+        /// <param name="organizationId"></param>
+        partial void AfterSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePost(ref bool suppressDefaultLog, ISubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostApiResponse apiResponseLocalVar, SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, Option<string?> organizationId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -757,10 +763,11 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="submitCompleteInvoiceRequest"></param>
-        private void OnErrorSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest)
+        /// <param name="organizationId"></param>
+        private void OnErrorSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, Option<string?> organizationId)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, submitCompleteInvoiceRequest);
+            OnErrorSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, submitCompleteInvoiceRequest, organizationId);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -773,19 +780,21 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="submitCompleteInvoiceRequest"></param>
-        partial void OnErrorSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest);
+        /// <param name="organizationId"></param>
+        partial void OnErrorSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, Option<string?> organizationId);
 
         /// <summary>
-        /// Submit a complete invoice (generation + signature + submission) Unified endpoint to submit a complete invoice to different destinations.     **Facture prête pour Flux 2** - Génère une facture Factur-X complète avec signature optionnelle et soumission vers Chorus Pro ou PDP AFNOR.      **Automated workflow:**     1. **Auto-enrichment** (optional): retrieves data via public APIs and Chorus Pro/AFNOR     2. **Factur-X PDF generation**: creates a PDF/A-3 with embedded XML     3. **Electronic signature** (optional): signs the PDF with a certificate     4. **Submission**: sends to the chosen destination (Chorus Pro or AFNOR PDP)      **Supported destinations:**     - **Chorus Pro**: French B2G platform (invoices to public sector)     - **AFNOR PDP**: Partner Dematerialization Platforms      **Destination credentials - 2 modes available:**      **Mode 1 - Retrieval via JWT (recommended):**     - Credentials are retrieved automatically via the JWT &#x60;client_uid&#x60;     - Do not provide the &#x60;credentials&#x60; field in &#x60;destination&#x60;     - Zero-trust architecture: no secrets in the payload     - Example: &#x60;\&quot;destination\&quot;: {\&quot;type\&quot;: \&quot;chorus_pro\&quot;}&#x60;      **Mode 2 - Credentials in the payload:**     - Provide credentials directly in the payload     - Useful for tests or third-party integrations     - Example: &#x60;\&quot;destination\&quot;: {\&quot;type\&quot;: \&quot;chorus_pro\&quot;, \&quot;credentials\&quot;: {...}}&#x60;       **Electronic signature (optional) - 2 modes available:**      **Mode 1 - Stored certificate (recommended):**     - Certificate is retrieved automatically via the JWT &#x60;client_uid&#x60;     - No key to provide in the payload     - PAdES-B-LT signature with timestamp (eIDAS compliant)     - Example: &#x60;\&quot;signature\&quot;: {\&quot;reason\&quot;: \&quot;Factur-X compliance\&quot;}&#x60;      **Mode 2 - Keys in the payload (for tests):**     - Provide &#x60;key_pem&#x60; and &#x60;cert_pem&#x60; directly     - PEM format accepted: raw or base64     - Useful for tests or special cases without stored certificate     - Example: &#x60;\&quot;signature\&quot;: {\&quot;key_pem\&quot;: \&quot;- -- --BEGIN...\&quot;, \&quot;cert_pem\&quot;: \&quot;- -- --BEGIN...\&quot;}&#x60;      If &#x60;key_pem&#x60; and &#x60;cert_pem&#x60; are provided → Mode 2     Otherwise → Mode 1 (certificate retrieved via &#x60;client_uid&#x60;)
+        /// Submit a complete invoice (generation + signature + submission) Unified endpoint to submit a complete invoice to different destinations.     **Facture prête pour Flux 2** - Génère une facture Factur-X complète avec signature optionnelle et soumission vers Chorus Pro ou PDP AFNOR.      **Automated workflow:**     1. **Auto-enrichment** (optional): retrieves data via public APIs and Chorus Pro/AFNOR     2. **Factur-X PDF generation**: creates a PDF/A-3 with embedded XML     3. **Electronic signature** (optional): signs the PDF with a certificate     4. **Submission**: sends to the chosen destination (Chorus Pro or AFNOR PDP)      **Two accepted &#x60;invoiceData&#x60; formats, detected automatically** (same rule as     &#x60;/generate-invoice&#x60;):     - **Simplified format** (&#x60;number&#x60; + &#x60;lines&#x60;): totals, VAT and dates are computed.       Any field of the complete model may be added on top (&#x60;deliveryDate&#x60; BT-72,       &#x60;deliveryParty&#x60; BG-15, &#x60;paymentReference&#x60; BT-83, &#x60;supplier.bic&#x60; BT-86, ...).     - **Complete format** (&#x60;invoiceLines&#x60; present): full &#x60;FacturXInvoice&#x60; structure,       used as provided.      A non-compliant invoice is **not submitted**: the Schematron errors are returned     as a 400 &#x60;SCHEMATRON_VALIDATION_FAILED&#x60;, rather than a 200 followed by an     asynchronous rejection by the PA. This includes the empty-element rule     (PEPPOL-EN16931-R008), which the PAs apply as blocking.      **Supported destinations:**     - **Chorus Pro**: French B2G platform (invoices to public sector)     - **AFNOR PDP**: Partner Dematerialization Platforms      **Destination credentials - 2 modes available:**      **Mode 1 - Retrieval via JWT (recommended):**     - Credentials are retrieved automatically via the JWT &#x60;client_uid&#x60;     - Do not provide the &#x60;credentials&#x60; field in &#x60;destination&#x60;     - Zero-trust architecture: no secrets in the payload     - Example: &#x60;\&quot;destination\&quot;: {\&quot;type\&quot;: \&quot;chorus_pro\&quot;}&#x60;      **Mode 2 - Credentials in the payload:**     - Provide credentials directly in the payload     - Useful for tests or third-party integrations     - Example: &#x60;\&quot;destination\&quot;: {\&quot;type\&quot;: \&quot;chorus_pro\&quot;, \&quot;credentials\&quot;: {...}}&#x60;       **Electronic signature (optional) - 2 modes available:**      **Mode 1 - Stored certificate (recommended):**     - Certificate is retrieved automatically via the JWT &#x60;client_uid&#x60;     - No key to provide in the payload     - PAdES-B-LT signature with timestamp (eIDAS compliant)     - Example: &#x60;\&quot;signature\&quot;: {\&quot;reason\&quot;: \&quot;Factur-X compliance\&quot;}&#x60;      **Mode 2 - Keys in the payload (for tests):**     - Provide &#x60;key_pem&#x60; and &#x60;cert_pem&#x60; directly     - PEM format accepted: raw or base64     - Useful for tests or special cases without stored certificate     - Example: &#x60;\&quot;signature\&quot;: {\&quot;key_pem\&quot;: \&quot;- -- --BEGIN...\&quot;, \&quot;cert_pem\&quot;: \&quot;- -- --BEGIN...\&quot;}&#x60;      If &#x60;key_pem&#x60; and &#x60;cert_pem&#x60; are provided → Mode 2     Otherwise → Mode 1 (certificate retrieved via &#x60;client_uid&#x60;)
         /// </summary>
         /// <param name="submitCompleteInvoiceRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostApiResponse"/>&gt;</returns>
-        public async Task<ISubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostApiResponse?> SubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostOrDefaultAsync(SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostApiResponse?> SubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostOrDefaultAsync(SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await SubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostAsync(submitCompleteInvoiceRequest, cancellationToken).ConfigureAwait(false);
+                return await SubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostAsync(submitCompleteInvoiceRequest, organizationId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -794,13 +803,14 @@ namespace FactPulse.SDK.Api
         }
 
         /// <summary>
-        /// Submit a complete invoice (generation + signature + submission) Unified endpoint to submit a complete invoice to different destinations.     **Facture prête pour Flux 2** - Génère une facture Factur-X complète avec signature optionnelle et soumission vers Chorus Pro ou PDP AFNOR.      **Automated workflow:**     1. **Auto-enrichment** (optional): retrieves data via public APIs and Chorus Pro/AFNOR     2. **Factur-X PDF generation**: creates a PDF/A-3 with embedded XML     3. **Electronic signature** (optional): signs the PDF with a certificate     4. **Submission**: sends to the chosen destination (Chorus Pro or AFNOR PDP)      **Supported destinations:**     - **Chorus Pro**: French B2G platform (invoices to public sector)     - **AFNOR PDP**: Partner Dematerialization Platforms      **Destination credentials - 2 modes available:**      **Mode 1 - Retrieval via JWT (recommended):**     - Credentials are retrieved automatically via the JWT &#x60;client_uid&#x60;     - Do not provide the &#x60;credentials&#x60; field in &#x60;destination&#x60;     - Zero-trust architecture: no secrets in the payload     - Example: &#x60;\&quot;destination\&quot;: {\&quot;type\&quot;: \&quot;chorus_pro\&quot;}&#x60;      **Mode 2 - Credentials in the payload:**     - Provide credentials directly in the payload     - Useful for tests or third-party integrations     - Example: &#x60;\&quot;destination\&quot;: {\&quot;type\&quot;: \&quot;chorus_pro\&quot;, \&quot;credentials\&quot;: {...}}&#x60;       **Electronic signature (optional) - 2 modes available:**      **Mode 1 - Stored certificate (recommended):**     - Certificate is retrieved automatically via the JWT &#x60;client_uid&#x60;     - No key to provide in the payload     - PAdES-B-LT signature with timestamp (eIDAS compliant)     - Example: &#x60;\&quot;signature\&quot;: {\&quot;reason\&quot;: \&quot;Factur-X compliance\&quot;}&#x60;      **Mode 2 - Keys in the payload (for tests):**     - Provide &#x60;key_pem&#x60; and &#x60;cert_pem&#x60; directly     - PEM format accepted: raw or base64     - Useful for tests or special cases without stored certificate     - Example: &#x60;\&quot;signature\&quot;: {\&quot;key_pem\&quot;: \&quot;- -- --BEGIN...\&quot;, \&quot;cert_pem\&quot;: \&quot;- -- --BEGIN...\&quot;}&#x60;      If &#x60;key_pem&#x60; and &#x60;cert_pem&#x60; are provided → Mode 2     Otherwise → Mode 1 (certificate retrieved via &#x60;client_uid&#x60;)
+        /// Submit a complete invoice (generation + signature + submission) Unified endpoint to submit a complete invoice to different destinations.     **Facture prête pour Flux 2** - Génère une facture Factur-X complète avec signature optionnelle et soumission vers Chorus Pro ou PDP AFNOR.      **Automated workflow:**     1. **Auto-enrichment** (optional): retrieves data via public APIs and Chorus Pro/AFNOR     2. **Factur-X PDF generation**: creates a PDF/A-3 with embedded XML     3. **Electronic signature** (optional): signs the PDF with a certificate     4. **Submission**: sends to the chosen destination (Chorus Pro or AFNOR PDP)      **Two accepted &#x60;invoiceData&#x60; formats, detected automatically** (same rule as     &#x60;/generate-invoice&#x60;):     - **Simplified format** (&#x60;number&#x60; + &#x60;lines&#x60;): totals, VAT and dates are computed.       Any field of the complete model may be added on top (&#x60;deliveryDate&#x60; BT-72,       &#x60;deliveryParty&#x60; BG-15, &#x60;paymentReference&#x60; BT-83, &#x60;supplier.bic&#x60; BT-86, ...).     - **Complete format** (&#x60;invoiceLines&#x60; present): full &#x60;FacturXInvoice&#x60; structure,       used as provided.      A non-compliant invoice is **not submitted**: the Schematron errors are returned     as a 400 &#x60;SCHEMATRON_VALIDATION_FAILED&#x60;, rather than a 200 followed by an     asynchronous rejection by the PA. This includes the empty-element rule     (PEPPOL-EN16931-R008), which the PAs apply as blocking.      **Supported destinations:**     - **Chorus Pro**: French B2G platform (invoices to public sector)     - **AFNOR PDP**: Partner Dematerialization Platforms      **Destination credentials - 2 modes available:**      **Mode 1 - Retrieval via JWT (recommended):**     - Credentials are retrieved automatically via the JWT &#x60;client_uid&#x60;     - Do not provide the &#x60;credentials&#x60; field in &#x60;destination&#x60;     - Zero-trust architecture: no secrets in the payload     - Example: &#x60;\&quot;destination\&quot;: {\&quot;type\&quot;: \&quot;chorus_pro\&quot;}&#x60;      **Mode 2 - Credentials in the payload:**     - Provide credentials directly in the payload     - Useful for tests or third-party integrations     - Example: &#x60;\&quot;destination\&quot;: {\&quot;type\&quot;: \&quot;chorus_pro\&quot;, \&quot;credentials\&quot;: {...}}&#x60;       **Electronic signature (optional) - 2 modes available:**      **Mode 1 - Stored certificate (recommended):**     - Certificate is retrieved automatically via the JWT &#x60;client_uid&#x60;     - No key to provide in the payload     - PAdES-B-LT signature with timestamp (eIDAS compliant)     - Example: &#x60;\&quot;signature\&quot;: {\&quot;reason\&quot;: \&quot;Factur-X compliance\&quot;}&#x60;      **Mode 2 - Keys in the payload (for tests):**     - Provide &#x60;key_pem&#x60; and &#x60;cert_pem&#x60; directly     - PEM format accepted: raw or base64     - Useful for tests or special cases without stored certificate     - Example: &#x60;\&quot;signature\&quot;: {\&quot;key_pem\&quot;: \&quot;- -- --BEGIN...\&quot;, \&quot;cert_pem\&quot;: \&quot;- -- --BEGIN...\&quot;}&#x60;      If &#x60;key_pem&#x60; and &#x60;cert_pem&#x60; are provided → Mode 2     Otherwise → Mode 1 (certificate retrieved via &#x60;client_uid&#x60;)
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="submitCompleteInvoiceRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostApiResponse"/>&gt;</returns>
-        public async Task<ISubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostApiResponse> SubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostAsync(SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostApiResponse> SubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostAsync(SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -808,7 +818,7 @@ namespace FactPulse.SDK.Api
             {
                 ValidateSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePost(submitCompleteInvoiceRequest);
 
-                FormatSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePost(submitCompleteInvoiceRequest);
+                FormatSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePost(submitCompleteInvoiceRequest, ref organizationId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -818,6 +828,9 @@ namespace FactPulse.SDK.Api
                     uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
                         ? "/api/v1/processing/invoices/submit-complete"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/processing/invoices/submit-complete");
+
+                    if (organizationId.IsSet)
+                        httpRequestMessageLocalVar.Headers.Add("Organization-Id", ClientUtils.ParameterToString(organizationId.Value));
 
                     httpRequestMessageLocalVar.Content = (submitCompleteInvoiceRequest as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
@@ -872,7 +885,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostDefaultImplementation(apiResponseLocalVar, submitCompleteInvoiceRequest);
+                        AfterSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostDefaultImplementation(apiResponseLocalVar, submitCompleteInvoiceRequest, organizationId);
 
                         Events.ExecuteOnSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePost(apiResponseLocalVar);
 
@@ -886,7 +899,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostDefaultImplementation(e, "/api/v1/processing/invoices/submit-complete", uriBuilderLocalVar.Path, submitCompleteInvoiceRequest);
+                OnErrorSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostDefaultImplementation(e, "/api/v1/processing/invoices/submit-complete", uriBuilderLocalVar.Path, submitCompleteInvoiceRequest, organizationId);
                 Events.ExecuteOnErrorSubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePost(e);
                 throw;
             }
@@ -1061,7 +1074,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPost(SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, ref Option<string?> callbackUrl, ref Option<string> webhookMode);
+        partial void FormatSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPost(SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, ref Option<string?> callbackUrl, ref Option<string> webhookMode, ref Option<string?> organizationId);
 
         /// <summary>
         /// Validates the request parameters
@@ -1085,10 +1098,11 @@ namespace FactPulse.SDK.Api
         /// <param name="submitCompleteInvoiceRequest"></param>
         /// <param name="callbackUrl"></param>
         /// <param name="webhookMode"></param>
-        private void AfterSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostDefaultImplementation(ISubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostApiResponse apiResponseLocalVar, SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, Option<string?> callbackUrl, Option<string> webhookMode)
+        /// <param name="organizationId"></param>
+        private void AfterSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostDefaultImplementation(ISubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostApiResponse apiResponseLocalVar, SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, Option<string?> callbackUrl, Option<string> webhookMode, Option<string?> organizationId)
         {
             bool suppressDefaultLog = false;
-            AfterSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPost(ref suppressDefaultLog, apiResponseLocalVar, submitCompleteInvoiceRequest, callbackUrl, webhookMode);
+            AfterSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPost(ref suppressDefaultLog, apiResponseLocalVar, submitCompleteInvoiceRequest, callbackUrl, webhookMode, organizationId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -1101,7 +1115,8 @@ namespace FactPulse.SDK.Api
         /// <param name="submitCompleteInvoiceRequest"></param>
         /// <param name="callbackUrl"></param>
         /// <param name="webhookMode"></param>
-        partial void AfterSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPost(ref bool suppressDefaultLog, ISubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostApiResponse apiResponseLocalVar, SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, Option<string?> callbackUrl, Option<string> webhookMode);
+        /// <param name="organizationId"></param>
+        partial void AfterSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPost(ref bool suppressDefaultLog, ISubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostApiResponse apiResponseLocalVar, SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, Option<string?> callbackUrl, Option<string> webhookMode, Option<string?> organizationId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1112,10 +1127,11 @@ namespace FactPulse.SDK.Api
         /// <param name="submitCompleteInvoiceRequest"></param>
         /// <param name="callbackUrl"></param>
         /// <param name="webhookMode"></param>
-        private void OnErrorSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, Option<string?> callbackUrl, Option<string> webhookMode)
+        /// <param name="organizationId"></param>
+        private void OnErrorSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, Option<string?> callbackUrl, Option<string> webhookMode, Option<string?> organizationId)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, submitCompleteInvoiceRequest, callbackUrl, webhookMode);
+            OnErrorSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, submitCompleteInvoiceRequest, callbackUrl, webhookMode, organizationId);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -1130,7 +1146,8 @@ namespace FactPulse.SDK.Api
         /// <param name="submitCompleteInvoiceRequest"></param>
         /// <param name="callbackUrl"></param>
         /// <param name="webhookMode"></param>
-        partial void OnErrorSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, Option<string?> callbackUrl, Option<string> webhookMode);
+        /// <param name="organizationId"></param>
+        partial void OnErrorSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, Option<string?> callbackUrl, Option<string> webhookMode, Option<string?> organizationId);
 
         /// <summary>
         /// Submit a complete invoice (asynchronous with Celery) Asynchronous version of the &#x60;/invoices/submit-complete&#x60; endpoint using Celery for background processing.     **Facture prête pour Flux 2** - Génère une facture Factur-X complète de manière asynchrone.      **Automated workflow (same as synchronous version):**     1. **Auto-enrichment** (optional): retrieves data via public APIs and Chorus Pro/AFNOR     2. **Factur-X PDF generation**: creates a PDF/A-3 with embedded XML     3. **Electronic signature** (optional): signs the PDF with a certificate     4. **Submission**: sends to the chosen destination (Chorus Pro or AFNOR PDP)      **Supported destinations:**     - **Chorus Pro**: French B2G platform (invoices to public sector)     - **AFNOR PDP**: Partner Dematerialization Platforms      **Differences with synchronous version:**     - ✅ **Non-blocking**: Returns immediately with a &#x60;task_id&#x60; (HTTP 202 Accepted)     - ✅ **Background processing**: Invoice is processed by a Celery worker     - ✅ **Progress tracking**: Use &#x60;/tasks/{task_id}/status&#x60; to track status     - ✅ **Ideal for high volumes**: Allows processing many invoices in parallel      **How to use:**     1. **Submission**: Call this endpoint with your invoice data     2. **Immediate return**: You receive a &#x60;task_id&#x60; (e.g., \&quot;abc123-def456\&quot;)     3. **Tracking**: Call &#x60;/tasks/{task_id}/status&#x60; to check progress     4. **Result**: When &#x60;status &#x3D; \&quot;SUCCESS\&quot;&#x60;, the &#x60;result&#x60; field contains the complete response      **Webhook notification (recommended):**      Instead of polling, add &#x60;?callback_url&#x3D;https://your-server.com/webhook&#x60; to receive automatic notification:     - &#x60;event_type&#x60;: &#x60;submission.completed&#x60;, &#x60;submission.failed&#x60;, or &#x60;submission.partial&#x60;     - &#x60;data.submission_result&#x60;: Complete submission result     - &#x60;X-Webhook-Signature&#x60; header for HMAC verification      **Credentials and signature**: Same modes as the synchronous version (JWT or payload).
@@ -1138,13 +1155,14 @@ namespace FactPulse.SDK.Api
         /// <param name="submitCompleteInvoiceRequest"></param>
         /// <param name="callbackUrl">Webhook URL for async notification when submission completes. (optional)</param>
         /// <param name="webhookMode">Webhook content delivery: &#39;inline&#39; (base64 in payload) or &#39;download_url&#39; (temporary URL, 1h TTL) (optional, default to &quot;inline&quot;)</param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostApiResponse"/>&gt;</returns>
-        public async Task<ISubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostApiResponse?> SubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostOrDefaultAsync(SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostApiResponse?> SubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostOrDefaultAsync(SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, Option<string?> callbackUrl = default, Option<string> webhookMode = default, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await SubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostAsync(submitCompleteInvoiceRequest, callbackUrl, webhookMode, cancellationToken).ConfigureAwait(false);
+                return await SubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostAsync(submitCompleteInvoiceRequest, callbackUrl, webhookMode, organizationId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -1159,9 +1177,10 @@ namespace FactPulse.SDK.Api
         /// <param name="submitCompleteInvoiceRequest"></param>
         /// <param name="callbackUrl">Webhook URL for async notification when submission completes. (optional)</param>
         /// <param name="webhookMode">Webhook content delivery: &#39;inline&#39; (base64 in payload) or &#39;download_url&#39; (temporary URL, 1h TTL) (optional, default to &quot;inline&quot;)</param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostApiResponse"/>&gt;</returns>
-        public async Task<ISubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostApiResponse> SubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostAsync(SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostApiResponse> SubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostAsync(SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, Option<string?> callbackUrl = default, Option<string> webhookMode = default, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -1169,7 +1188,7 @@ namespace FactPulse.SDK.Api
             {
                 ValidateSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPost(submitCompleteInvoiceRequest, webhookMode);
 
-                FormatSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPost(submitCompleteInvoiceRequest, ref callbackUrl, ref webhookMode);
+                FormatSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPost(submitCompleteInvoiceRequest, ref callbackUrl, ref webhookMode, ref organizationId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -1189,6 +1208,9 @@ namespace FactPulse.SDK.Api
                         parseQueryStringLocalVar["webhook_mode"] = ClientUtils.ParameterToString(webhookMode.Value);
 
                     uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
+
+                    if (organizationId.IsSet)
+                        httpRequestMessageLocalVar.Headers.Add("Organization-Id", ClientUtils.ParameterToString(organizationId.Value));
 
                     httpRequestMessageLocalVar.Content = (submitCompleteInvoiceRequest as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
@@ -1243,7 +1265,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostDefaultImplementation(apiResponseLocalVar, submitCompleteInvoiceRequest, callbackUrl, webhookMode);
+                        AfterSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostDefaultImplementation(apiResponseLocalVar, submitCompleteInvoiceRequest, callbackUrl, webhookMode, organizationId);
 
                         Events.ExecuteOnSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPost(apiResponseLocalVar);
 
@@ -1257,7 +1279,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostDefaultImplementation(e, "/api/v1/processing/invoices/submit-complete-async", uriBuilderLocalVar.Path, submitCompleteInvoiceRequest, callbackUrl, webhookMode);
+                OnErrorSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostDefaultImplementation(e, "/api/v1/processing/invoices/submit-complete-async", uriBuilderLocalVar.Path, submitCompleteInvoiceRequest, callbackUrl, webhookMode, organizationId);
                 Events.ExecuteOnErrorSubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPost(e);
                 throw;
             }

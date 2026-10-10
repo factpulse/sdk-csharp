@@ -62,5 +62,23 @@ namespace FactPulse.SDK.Test.Model
         {
             // TODO unit test for the property 'WebhookId'
         }
+
+        /// <summary>
+        /// Test the property 'SigningKey'
+        /// </summary>
+        [Fact]
+        public void SigningKeyTest()
+        {
+            // TODO unit test for the property 'SigningKey'
+        }
+
+        /// <summary>
+        /// Test the property 'CreatedAt'
+        /// </summary>
+        [Fact]
+        public void CreatedAtTest()
+        {
+            // TODO unit test for the property 'CreatedAt'
+        }
     }
 }

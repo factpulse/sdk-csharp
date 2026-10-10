@@ -202,6 +202,66 @@ namespace FactPulse.SDK.Client
     /// An interface for responses of type 
     /// </summary>
     /// <typeparam name="TType"></typeparam>
+    public interface IBadRequest<TType> : IApiResponse
+    {
+        /// <summary>
+        /// Deserializes the response if the response is BadRequest
+        /// </summary>
+        /// <returns></returns>
+        TType BadRequest();
+
+        /// <summary>
+        /// Returns true if the response is BadRequest and the deserialized response is not null
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        bool TryBadRequest([NotNullWhen(true)]out TType? result);
+    }
+
+    /// <summary>
+    /// An interface for responses of type 
+    /// </summary>
+    /// <typeparam name="TType"></typeparam>
+    public interface ITooManyRequests<TType> : IApiResponse
+    {
+        /// <summary>
+        /// Deserializes the response if the response is TooManyRequests
+        /// </summary>
+        /// <returns></returns>
+        TType TooManyRequests();
+
+        /// <summary>
+        /// Returns true if the response is TooManyRequests and the deserialized response is not null
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        bool TryTooManyRequests([NotNullWhen(true)]out TType? result);
+    }
+
+    /// <summary>
+    /// An interface for responses of type 
+    /// </summary>
+    /// <typeparam name="TType"></typeparam>
+    public interface IUnauthorized<TType> : IApiResponse
+    {
+        /// <summary>
+        /// Deserializes the response if the response is Unauthorized
+        /// </summary>
+        /// <returns></returns>
+        TType Unauthorized();
+
+        /// <summary>
+        /// Returns true if the response is Unauthorized and the deserialized response is not null
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        bool TryUnauthorized([NotNullWhen(true)]out TType? result);
+    }
+
+    /// <summary>
+    /// An interface for responses of type 
+    /// </summary>
+    /// <typeparam name="TType"></typeparam>
     public interface IForbidden<TType> : IApiResponse
     {
         /// <summary>
@@ -222,6 +282,26 @@ namespace FactPulse.SDK.Client
     /// An interface for responses of type 
     /// </summary>
     /// <typeparam name="TType"></typeparam>
+    public interface IServiceUnavailable<TType> : IApiResponse
+    {
+        /// <summary>
+        /// Deserializes the response if the response is ServiceUnavailable
+        /// </summary>
+        /// <returns></returns>
+        TType ServiceUnavailable();
+
+        /// <summary>
+        /// Returns true if the response is ServiceUnavailable and the deserialized response is not null
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        bool TryServiceUnavailable([NotNullWhen(true)]out TType? result);
+    }
+
+    /// <summary>
+    /// An interface for responses of type 
+    /// </summary>
+    /// <typeparam name="TType"></typeparam>
     public interface IContentTooLarge<TType> : IApiResponse
     {
         /// <summary>
@@ -236,6 +316,46 @@ namespace FactPulse.SDK.Client
         /// <param name="result"></param>
         /// <returns></returns>
         bool TryContentTooLarge([NotNullWhen(true)]out TType? result);
+    }
+
+    /// <summary>
+    /// An interface for responses of type 
+    /// </summary>
+    /// <typeparam name="TType"></typeparam>
+    public interface IOk<TType> : IApiResponse
+    {
+        /// <summary>
+        /// Deserializes the response if the response is Ok
+        /// </summary>
+        /// <returns></returns>
+        TType Ok();
+
+        /// <summary>
+        /// Returns true if the response is Ok and the deserialized response is not null
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        bool TryOk([NotNullWhen(true)]out TType? result);
+    }
+
+    /// <summary>
+    /// An interface for responses of type 
+    /// </summary>
+    /// <typeparam name="TType"></typeparam>
+    public interface IUnprocessableContent<TType> : IApiResponse
+    {
+        /// <summary>
+        /// Deserializes the response if the response is UnprocessableContent
+        /// </summary>
+        /// <returns></returns>
+        TType UnprocessableContent();
+
+        /// <summary>
+        /// Returns true if the response is UnprocessableContent and the deserialized response is not null
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        bool TryUnprocessableContent([NotNullWhen(true)]out TType? result);
     }
 
     /// <summary>
@@ -296,146 +416,6 @@ namespace FactPulse.SDK.Client
         /// <param name="result"></param>
         /// <returns></returns>
         bool TryCreated([NotNullWhen(true)]out TType? result);
-    }
-
-    /// <summary>
-    /// An interface for responses of type 
-    /// </summary>
-    /// <typeparam name="TType"></typeparam>
-    public interface IBadRequest<TType> : IApiResponse
-    {
-        /// <summary>
-        /// Deserializes the response if the response is BadRequest
-        /// </summary>
-        /// <returns></returns>
-        TType BadRequest();
-
-        /// <summary>
-        /// Returns true if the response is BadRequest and the deserialized response is not null
-        /// </summary>
-        /// <param name="result"></param>
-        /// <returns></returns>
-        bool TryBadRequest([NotNullWhen(true)]out TType? result);
-    }
-
-    /// <summary>
-    /// An interface for responses of type 
-    /// </summary>
-    /// <typeparam name="TType"></typeparam>
-    public interface IPartialContent<TType> : IApiResponse
-    {
-        /// <summary>
-        /// Deserializes the response if the response is PartialContent
-        /// </summary>
-        /// <returns></returns>
-        TType PartialContent();
-
-        /// <summary>
-        /// Returns true if the response is PartialContent and the deserialized response is not null
-        /// </summary>
-        /// <param name="result"></param>
-        /// <returns></returns>
-        bool TryPartialContent([NotNullWhen(true)]out TType? result);
-    }
-
-    /// <summary>
-    /// An interface for responses of type 
-    /// </summary>
-    /// <typeparam name="TType"></typeparam>
-    public interface ITooManyRequests<TType> : IApiResponse
-    {
-        /// <summary>
-        /// Deserializes the response if the response is TooManyRequests
-        /// </summary>
-        /// <returns></returns>
-        TType TooManyRequests();
-
-        /// <summary>
-        /// Returns true if the response is TooManyRequests and the deserialized response is not null
-        /// </summary>
-        /// <param name="result"></param>
-        /// <returns></returns>
-        bool TryTooManyRequests([NotNullWhen(true)]out TType? result);
-    }
-
-    /// <summary>
-    /// An interface for responses of type 
-    /// </summary>
-    /// <typeparam name="TType"></typeparam>
-    public interface IUnauthorized<TType> : IApiResponse
-    {
-        /// <summary>
-        /// Deserializes the response if the response is Unauthorized
-        /// </summary>
-        /// <returns></returns>
-        TType Unauthorized();
-
-        /// <summary>
-        /// Returns true if the response is Unauthorized and the deserialized response is not null
-        /// </summary>
-        /// <param name="result"></param>
-        /// <returns></returns>
-        bool TryUnauthorized([NotNullWhen(true)]out TType? result);
-    }
-
-    /// <summary>
-    /// An interface for responses of type 
-    /// </summary>
-    /// <typeparam name="TType"></typeparam>
-    public interface IServiceUnavailable<TType> : IApiResponse
-    {
-        /// <summary>
-        /// Deserializes the response if the response is ServiceUnavailable
-        /// </summary>
-        /// <returns></returns>
-        TType ServiceUnavailable();
-
-        /// <summary>
-        /// Returns true if the response is ServiceUnavailable and the deserialized response is not null
-        /// </summary>
-        /// <param name="result"></param>
-        /// <returns></returns>
-        bool TryServiceUnavailable([NotNullWhen(true)]out TType? result);
-    }
-
-    /// <summary>
-    /// An interface for responses of type 
-    /// </summary>
-    /// <typeparam name="TType"></typeparam>
-    public interface IOk<TType> : IApiResponse
-    {
-        /// <summary>
-        /// Deserializes the response if the response is Ok
-        /// </summary>
-        /// <returns></returns>
-        TType Ok();
-
-        /// <summary>
-        /// Returns true if the response is Ok and the deserialized response is not null
-        /// </summary>
-        /// <param name="result"></param>
-        /// <returns></returns>
-        bool TryOk([NotNullWhen(true)]out TType? result);
-    }
-
-    /// <summary>
-    /// An interface for responses of type 
-    /// </summary>
-    /// <typeparam name="TType"></typeparam>
-    public interface IUnprocessableContent<TType> : IApiResponse
-    {
-        /// <summary>
-        /// Deserializes the response if the response is UnprocessableContent
-        /// </summary>
-        /// <returns></returns>
-        TType UnprocessableContent();
-
-        /// <summary>
-        /// Returns true if the response is UnprocessableContent and the deserialized response is not null
-        /// </summary>
-        /// <param name="result"></param>
-        /// <returns></returns>
-        bool TryUnprocessableContent([NotNullWhen(true)]out TType? result);
     }
 
     /// <summary>

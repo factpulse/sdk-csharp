@@ -35,7 +35,7 @@ namespace FactPulse.SDK.Model
         /// Initializes a new instance of the <see cref="AFNORSiretSearchPost200Response" /> class.
         /// </summary>
         /// <param name="search">search</param>
-        /// <param name="totalNumberOfResults">The total number of results</param>
+        /// <param name="totalNumberOfResults">The total number of results, if -1 is returned then this value is not managed due to performance issue (default to -1)</param>
         /// <param name="results">results</param>
         [JsonConstructor]
         public AFNORSiretSearchPost200Response(Option<AFNORSearchSiret?> search = default, Option<int?> totalNumberOfResults = default, Option<List<AFNORFacilityPayloadHistory>?> results = default)
@@ -69,9 +69,9 @@ namespace FactPulse.SDK.Model
         public Option<int?> TotalNumberOfResultsOption { get; private set; }
 
         /// <summary>
-        /// The total number of results
+        /// The total number of results, if -1 is returned then this value is not managed due to performance issue
         /// </summary>
-        /// <value>The total number of results</value>
+        /// <value>The total number of results, if -1 is returned then this value is not managed due to performance issue</value>
         /* <example>1500</example> */
         [JsonPropertyName("totalNumberOfResults")]
         public int? TotalNumberOfResults { get { return this.TotalNumberOfResultsOption; } set { this.TotalNumberOfResultsOption = new(value); } }

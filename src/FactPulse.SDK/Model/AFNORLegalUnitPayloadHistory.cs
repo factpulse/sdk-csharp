@@ -63,7 +63,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets EntityType
         /// </summary>
         [JsonPropertyName("entityType")]
-        public AFNOREntityType? EntityType { get { return this.EntityTypeOption; } set { this.EntityTypeOption = new(value); } }
+        public AFNOREntityType? EntityType { get { return this.EntityTypeOption.Value; } set { this.EntityTypeOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of AdministrativeStatus
@@ -76,7 +76,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets AdministrativeStatus
         /// </summary>
         [JsonPropertyName("administrativeStatus")]
-        public AFNORLegalUnitAdministrativeStatus? AdministrativeStatus { get { return this.AdministrativeStatusOption; } set { this.AdministrativeStatusOption = new(value); } }
+        public AFNORLegalUnitAdministrativeStatus? AdministrativeStatus { get { return this.AdministrativeStatusOption.Value; } set { this.AdministrativeStatusOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Siren

@@ -6,7 +6,7 @@ Processing options for generation and submission.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **FacturxProfile** | **APIProfile** | Factur-X profile to use | [optional] 
-**AutoEnrich** | **bool** | Auto-enrich data (Company APIs, Chorus Pro, etc.) | [optional] [default to true]
+**AutoEnrich** | **bool** | Auto-enrich data (Company APIs, Chorus Pro, etc.). Applies to the **simplified format** only: a complete &#x60;FacturXInvoice&#x60; payload is used exactly as provided. | [optional] [default to true]
 **ValidateXml** | **bool** | Validate Factur-X XML with Schematron | [optional] [default to true]
 **VerifyDestinationParameters** | **bool** | Verify required parameters for destination (e.g., service_code for Chorus) | [optional] [default to true]
 

@@ -6,8 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **AddressingIdentifier** | **string** | Addressing identifier of the directory line. | [optional] 
 **PlatformType** | **AFNORRecipientPlatformType** |  | [optional] 
+**DirectoryLineStatus** | **AFNORUniqueDirectoryLineStatus** |  | [optional] 
 **Siren** | **string** | SIREN number | [optional] 
 **Siret** | **string** | SIRET Number | [optional] 
+**RoutingIdentifier** | **string** | Routing identifier od a routing code. | [optional] 
 **AddressingSuffix** | **string** | suffix of the directory line which defines an address mesh not attached to a facility | [optional] 
 **RoutingCode** | [**AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCodeRoutingCode**](AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCodeRoutingCode.md) |  | [optional] 
 **LegalUnit** | [**AFNORLegalUnitPayloadIncluded**](AFNORLegalUnitPayloadIncluded.md) |  | [optional] 

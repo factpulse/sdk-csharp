@@ -37,12 +37,18 @@ namespace FactPulse.SDK.Model
         /// <param name="rate">rate</param>
         /// <param name="taxableAmount">taxableAmount</param>
         /// <param name="taxAmount">taxAmount</param>
+        /// <param name="taxCategoryCode">taxCategoryCode</param>
+        /// <param name="exemptionReasonCode">exemptionReasonCode</param>
+        /// <param name="exemptionReason">exemptionReason</param>
         [JsonConstructor]
-        public TaxBreakdownInput(Rate1 rate, Taxableamount taxableAmount, Taxamount2 taxAmount)
+        public TaxBreakdownInput(Rate1 rate, Taxableamount taxableAmount, Taxamount2 taxAmount, Option<string?> taxCategoryCode = default, Option<string?> exemptionReasonCode = default, Option<string?> exemptionReason = default)
         {
             Rate = rate;
             TaxableAmount = taxableAmount;
             TaxAmount = taxAmount;
+            TaxCategoryCodeOption = taxCategoryCode;
+            ExemptionReasonCodeOption = exemptionReasonCode;
+            ExemptionReasonOption = exemptionReason;
             OnCreated();
         }
 
@@ -67,6 +73,45 @@ namespace FactPulse.SDK.Model
         public Taxamount2 TaxAmount { get; set; }
 
         /// <summary>
+        /// Used to track the state of TaxCategoryCode
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> TaxCategoryCodeOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets TaxCategoryCode
+        /// </summary>
+        [JsonPropertyName("taxCategoryCode")]
+        public string? TaxCategoryCode { get { return this.TaxCategoryCodeOption; } set { this.TaxCategoryCodeOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of ExemptionReasonCode
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> ExemptionReasonCodeOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ExemptionReasonCode
+        /// </summary>
+        [JsonPropertyName("exemptionReasonCode")]
+        public string? ExemptionReasonCode { get { return this.ExemptionReasonCodeOption; } set { this.ExemptionReasonCodeOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of ExemptionReason
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> ExemptionReasonOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets ExemptionReason
+        /// </summary>
+        [JsonPropertyName("exemptionReason")]
+        public string? ExemptionReason { get { return this.ExemptionReasonOption; } set { this.ExemptionReasonOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -77,6 +122,9 @@ namespace FactPulse.SDK.Model
             sb.Append("  Rate: ").Append(Rate).Append("\n");
             sb.Append("  TaxableAmount: ").Append(TaxableAmount).Append("\n");
             sb.Append("  TaxAmount: ").Append(TaxAmount).Append("\n");
+            sb.Append("  TaxCategoryCode: ").Append(TaxCategoryCode).Append("\n");
+            sb.Append("  ExemptionReasonCode: ").Append(ExemptionReasonCode).Append("\n");
+            sb.Append("  ExemptionReason: ").Append(ExemptionReason).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -117,6 +165,9 @@ namespace FactPulse.SDK.Model
             Option<Rate1?> rate = default;
             Option<Taxableamount?> taxableAmount = default;
             Option<Taxamount2?> taxAmount = default;
+            Option<string?> taxCategoryCode = default;
+            Option<string?> exemptionReasonCode = default;
+            Option<string?> exemptionReason = default;
 
             while (utf8JsonReader.Read())
             {
@@ -142,6 +193,15 @@ namespace FactPulse.SDK.Model
                         case "taxAmount":
                             taxAmount = new Option<Taxamount2?>(JsonSerializer.Deserialize<Taxamount2>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
+                        case "taxCategoryCode":
+                            taxCategoryCode = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "exemptionReasonCode":
+                            exemptionReasonCode = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "exemptionReason":
+                            exemptionReason = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         default:
                             break;
                     }
@@ -166,7 +226,7 @@ namespace FactPulse.SDK.Model
             if (taxAmount.IsSet && taxAmount.Value == null)
                 throw new ArgumentNullException(nameof(taxAmount), "Property is not nullable for class TaxBreakdownInput.");
 
-            return new TaxBreakdownInput(rate.Value!, taxableAmount.Value!, taxAmount.Value!);
+            return new TaxBreakdownInput(rate.Value!, taxableAmount.Value!, taxAmount.Value!, taxCategoryCode, exemptionReasonCode, exemptionReason);
         }
 
         /// <summary>
@@ -208,6 +268,23 @@ namespace FactPulse.SDK.Model
             JsonSerializer.Serialize(writer, taxBreakdownInput.TaxableAmount, jsonSerializerOptions);
             writer.WritePropertyName("taxAmount");
             JsonSerializer.Serialize(writer, taxBreakdownInput.TaxAmount, jsonSerializerOptions);
+            if (taxBreakdownInput.TaxCategoryCodeOption.IsSet)
+                if (taxBreakdownInput.TaxCategoryCodeOption.Value != null)
+                    writer.WriteString("taxCategoryCode", taxBreakdownInput.TaxCategoryCode);
+                else
+                    writer.WriteNull("taxCategoryCode");
+
+            if (taxBreakdownInput.ExemptionReasonCodeOption.IsSet)
+                if (taxBreakdownInput.ExemptionReasonCodeOption.Value != null)
+                    writer.WriteString("exemptionReasonCode", taxBreakdownInput.ExemptionReasonCode);
+                else
+                    writer.WriteNull("exemptionReasonCode");
+
+            if (taxBreakdownInput.ExemptionReasonOption.IsSet)
+                if (taxBreakdownInput.ExemptionReasonOption.Value != null)
+                    writer.WriteString("exemptionReason", taxBreakdownInput.ExemptionReason);
+                else
+                    writer.WriteNull("exemptionReason");
         }
     }
 }

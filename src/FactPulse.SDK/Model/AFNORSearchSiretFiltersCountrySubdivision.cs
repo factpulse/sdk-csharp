@@ -57,7 +57,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets Op
         /// </summary>
         [JsonPropertyName("op")]
-        public AFNORStrictOperator? Op { get { return this.OpOption; } set { this.OpOption = new(value); } }
+        public AFNORStrictOperator? Op { get { return this.OpOption.Value; } set { this.OpOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Value

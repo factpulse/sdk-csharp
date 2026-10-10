@@ -38,7 +38,7 @@ namespace FactPulse.SDK.Model
         /// <param name="vatNumber">Tax representative VAT identifier (BT-63).</param>
         /// <param name="postalAddress">Tax representative postal address (BG-12).</param>
         [JsonConstructor]
-        public TaxRepresentative(string name, string vatNumber, PostalAddress postalAddress)
+        public TaxRepresentative(string name, string vatNumber, PostalAddressInput postalAddress)
         {
             Name = name;
             VatNumber = vatNumber;
@@ -67,7 +67,7 @@ namespace FactPulse.SDK.Model
         /// </summary>
         /// <value>Tax representative postal address (BG-12).</value>
         [JsonPropertyName("postal_address")]
-        public PostalAddress PostalAddress { get; set; }
+        public PostalAddressInput PostalAddress { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -119,7 +119,7 @@ namespace FactPulse.SDK.Model
 
             Option<string?> name = default;
             Option<string?> vatNumber = default;
-            Option<PostalAddress?> postalAddress = default;
+            Option<PostalAddressInput?> postalAddress = default;
 
             while (utf8JsonReader.Read())
             {
@@ -143,7 +143,7 @@ namespace FactPulse.SDK.Model
                             vatNumber = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "postal_address":
-                            postalAddress = new Option<PostalAddress?>(JsonSerializer.Deserialize<PostalAddress>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            postalAddress = new Option<PostalAddressInput?>(JsonSerializer.Deserialize<PostalAddressInput>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         default:
                             break;

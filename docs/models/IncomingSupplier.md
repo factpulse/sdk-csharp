@@ -9,8 +9,9 @@ Name | Type | Description | Notes
 **Siren** | **string** |  | [optional] 
 **Siret** | **string** |  | [optional] 
 **VatNumber** | **string** |  | [optional] 
-**PostalAddress** | [**PostalAddress**](PostalAddress.md) |  | [optional] 
-**ElectronicAddress** | [**ElectronicAddress**](ElectronicAddress.md) |  | [optional] 
+**TaxRegistrationId** | **string** |  | [optional] 
+**PostalAddress** | [**PostalAddressOutput**](PostalAddressOutput.md) |  | [optional] 
+**ElectronicAddress** | [**ElectronicAddressOutput**](ElectronicAddressOutput.md) |  | [optional] 
 **Email** | **string** |  | [optional] 
 **Phone** | **string** |  | [optional] 
 

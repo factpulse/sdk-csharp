@@ -1,5 +1,5 @@
 # FactPulse.SDK.Model.ProcessingRule
-AFNOR XP Z12-013 ProcessingRule (Annexe A v1.2.0).  Valeurs EXACTES de la spec (case-sensitive).
+AFNOR XP Z12-013 ProcessingRule (Annexe A v1.3.0).  Valeurs EXACTES de la spec (case-sensitive).
 
 ## Properties
 

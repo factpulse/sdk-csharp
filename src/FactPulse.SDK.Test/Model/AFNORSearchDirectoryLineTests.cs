@@ -82,6 +82,15 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'Include'
+        /// </summary>
+        [Fact]
+        public void IncludeTest()
+        {
+            // TODO unit test for the property 'Include'
+        }
+
+        /// <summary>
         /// Test the property 'Limit'
         /// </summary>
         [Fact]

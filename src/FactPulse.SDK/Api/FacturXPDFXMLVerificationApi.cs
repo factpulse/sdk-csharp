@@ -97,7 +97,7 @@ namespace FactPulse.SDK.Api
         /// <param name="webhookMode">Webhook content delivery: &#39;inline&#39; (base64 in payload) or &#39;download_url&#39; (temporary URL, 1h TTL) (optional, default to &quot;inline&quot;)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IVerifyPdfAsyncApiV1VerificationVerifyAsyncPostApiResponse"/>&gt;</returns>
-        Task<IVerifyPdfAsyncApiV1VerificationVerifyAsyncPostApiResponse> VerifyPdfAsyncApiV1VerificationVerifyAsyncPostAsync(System.IO.Stream pdfFile, Option<bool> forceOcr = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IVerifyPdfAsyncApiV1VerificationVerifyAsyncPostApiResponse> VerifyPdfAsyncApiV1VerificationVerifyAsyncPostAsync(FactPulse.SDK.Client.FileParameter pdfFile, Option<bool> forceOcr = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Verify PDF/XML Factur-X compliance (asynchronous)
@@ -111,7 +111,7 @@ namespace FactPulse.SDK.Api
         /// <param name="webhookMode">Webhook content delivery: &#39;inline&#39; (base64 in payload) or &#39;download_url&#39; (temporary URL, 1h TTL) (optional, default to &quot;inline&quot;)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IVerifyPdfAsyncApiV1VerificationVerifyAsyncPostApiResponse"/>?&gt;</returns>
-        Task<IVerifyPdfAsyncApiV1VerificationVerifyAsyncPostApiResponse?> VerifyPdfAsyncApiV1VerificationVerifyAsyncPostOrDefaultAsync(System.IO.Stream pdfFile, Option<bool> forceOcr = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IVerifyPdfAsyncApiV1VerificationVerifyAsyncPostApiResponse?> VerifyPdfAsyncApiV1VerificationVerifyAsyncPostOrDefaultAsync(FactPulse.SDK.Client.FileParameter pdfFile, Option<bool> forceOcr = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Verify PDF/XML Factur-X compliance (synchronous)
@@ -123,7 +123,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pdfFile">Factur-X PDF file to verify</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IVerifyPdfSyncApiV1VerificationVerifyPostApiResponse"/>&gt;</returns>
-        Task<IVerifyPdfSyncApiV1VerificationVerifyPostApiResponse> VerifyPdfSyncApiV1VerificationVerifyPostAsync(System.IO.Stream pdfFile, System.Threading.CancellationToken cancellationToken = default);
+        Task<IVerifyPdfSyncApiV1VerificationVerifyPostApiResponse> VerifyPdfSyncApiV1VerificationVerifyPostAsync(FactPulse.SDK.Client.FileParameter pdfFile, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Verify PDF/XML Factur-X compliance (synchronous)
@@ -134,7 +134,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pdfFile">Factur-X PDF file to verify</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IVerifyPdfSyncApiV1VerificationVerifyPostApiResponse"/>?&gt;</returns>
-        Task<IVerifyPdfSyncApiV1VerificationVerifyPostApiResponse?> VerifyPdfSyncApiV1VerificationVerifyPostOrDefaultAsync(System.IO.Stream pdfFile, System.Threading.CancellationToken cancellationToken = default);
+        Task<IVerifyPdfSyncApiV1VerificationVerifyPostApiResponse?> VerifyPdfSyncApiV1VerificationVerifyPostOrDefaultAsync(FactPulse.SDK.Client.FileParameter pdfFile, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -1051,7 +1051,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatVerifyPdfAsyncApiV1VerificationVerifyAsyncPost(ref System.IO.Stream pdfFile, ref Option<bool> forceOcr, ref Option<string?> callbackUrl, ref Option<string> webhookMode);
+        partial void FormatVerifyPdfAsyncApiV1VerificationVerifyAsyncPost(ref FactPulse.SDK.Client.FileParameter pdfFile, ref Option<bool> forceOcr, ref Option<string?> callbackUrl, ref Option<string> webhookMode);
 
         /// <summary>
         /// Validates the request parameters
@@ -1059,7 +1059,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pdfFile"></param>
         /// <param name="webhookMode"></param>
         /// <returns></returns>
-        private void ValidateVerifyPdfAsyncApiV1VerificationVerifyAsyncPost(System.IO.Stream pdfFile, Option<string> webhookMode)
+        private void ValidateVerifyPdfAsyncApiV1VerificationVerifyAsyncPost(FactPulse.SDK.Client.FileParameter pdfFile, Option<string> webhookMode)
         {
             if (pdfFile == null)
                 throw new ArgumentNullException(nameof(pdfFile));
@@ -1076,7 +1076,7 @@ namespace FactPulse.SDK.Api
         /// <param name="forceOcr"></param>
         /// <param name="callbackUrl"></param>
         /// <param name="webhookMode"></param>
-        private void AfterVerifyPdfAsyncApiV1VerificationVerifyAsyncPostDefaultImplementation(IVerifyPdfAsyncApiV1VerificationVerifyAsyncPostApiResponse apiResponseLocalVar, System.IO.Stream pdfFile, Option<bool> forceOcr, Option<string?> callbackUrl, Option<string> webhookMode)
+        private void AfterVerifyPdfAsyncApiV1VerificationVerifyAsyncPostDefaultImplementation(IVerifyPdfAsyncApiV1VerificationVerifyAsyncPostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter pdfFile, Option<bool> forceOcr, Option<string?> callbackUrl, Option<string> webhookMode)
         {
             bool suppressDefaultLog = false;
             AfterVerifyPdfAsyncApiV1VerificationVerifyAsyncPost(ref suppressDefaultLog, apiResponseLocalVar, pdfFile, forceOcr, callbackUrl, webhookMode);
@@ -1093,7 +1093,7 @@ namespace FactPulse.SDK.Api
         /// <param name="forceOcr"></param>
         /// <param name="callbackUrl"></param>
         /// <param name="webhookMode"></param>
-        partial void AfterVerifyPdfAsyncApiV1VerificationVerifyAsyncPost(ref bool suppressDefaultLog, IVerifyPdfAsyncApiV1VerificationVerifyAsyncPostApiResponse apiResponseLocalVar, System.IO.Stream pdfFile, Option<bool> forceOcr, Option<string?> callbackUrl, Option<string> webhookMode);
+        partial void AfterVerifyPdfAsyncApiV1VerificationVerifyAsyncPost(ref bool suppressDefaultLog, IVerifyPdfAsyncApiV1VerificationVerifyAsyncPostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter pdfFile, Option<bool> forceOcr, Option<string?> callbackUrl, Option<string> webhookMode);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1105,7 +1105,7 @@ namespace FactPulse.SDK.Api
         /// <param name="forceOcr"></param>
         /// <param name="callbackUrl"></param>
         /// <param name="webhookMode"></param>
-        private void OnErrorVerifyPdfAsyncApiV1VerificationVerifyAsyncPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream pdfFile, Option<bool> forceOcr, Option<string?> callbackUrl, Option<string> webhookMode)
+        private void OnErrorVerifyPdfAsyncApiV1VerificationVerifyAsyncPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter pdfFile, Option<bool> forceOcr, Option<string?> callbackUrl, Option<string> webhookMode)
         {
             bool suppressDefaultLogLocalVar = false;
             OnErrorVerifyPdfAsyncApiV1VerificationVerifyAsyncPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, pdfFile, forceOcr, callbackUrl, webhookMode);
@@ -1124,7 +1124,7 @@ namespace FactPulse.SDK.Api
         /// <param name="forceOcr"></param>
         /// <param name="callbackUrl"></param>
         /// <param name="webhookMode"></param>
-        partial void OnErrorVerifyPdfAsyncApiV1VerificationVerifyAsyncPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream pdfFile, Option<bool> forceOcr, Option<string?> callbackUrl, Option<string> webhookMode);
+        partial void OnErrorVerifyPdfAsyncApiV1VerificationVerifyAsyncPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter pdfFile, Option<bool> forceOcr, Option<string?> callbackUrl, Option<string> webhookMode);
 
         /// <summary>
         /// Verify PDF/XML Factur-X compliance (asynchronous) Verifies PDF/XML Factur-X compliance asynchronously.  **IMPORTANT**: Only Factur-X PDFs (with embedded XML) are accepted. PDFs without Factur-X XML will return a &#x60;NOT_FACTURX&#x60; error in the result.  This version uses a Celery task and can call the OCR service if the PDF is an image or if &#x60;force_ocr&#x3D;true&#x60;.  **Returns immediately** a task ID. Use &#x60;/verify-async/{task_id}/status&#x60; to retrieve the result.  **Verification principle (Factur-X 1.08):** - Principle #2: XML can only contain info present in the PDF - Principle #4: All XML info must be present and compliant in the PDF  **Verified fields:** - Identification: BT-1 (invoice #), BT-2 (date), BT-3 (type), BT-5 (currency), BT-23 (framework) - Seller: BT-27 (name), BT-29 (SIRET), BT-30 (SIREN), BT-31 (VAT) - Buyer: BT-44 (name), BT-46 (SIRET), BT-47 (SIREN), BT-48 (VAT) - Amounts: BT-109 (excl. tax), BT-110 (VAT), BT-112 (incl. tax), BT-115 (amount due) - VAT breakdown: BT-116, BT-117, BT-118, BT-119 - Invoice lines: BT-153, BT-129, BT-146, BT-131 - Mandatory notes: PMT, PMD, AAB - Rule BR-FR-09: SIRET/SIREN consistency  **Advantages over synchronous version:** - OCR support for image PDFs (via DocTR service) - Longer timeout for large documents - Doesn&#39;t block the server  ## Webhook notification (recommended)  Instead of polling, you can receive a webhook notification when verification completes:  &#x60;&#x60;&#x60; callback_url&#x3D;https://your-server.com/webhook &#x60;&#x60;&#x60;  The webhook will POST a JSON payload with: - &#x60;event_type&#x60;: &#x60;verification.completed&#x60; or &#x60;verification.failed&#x60; - &#x60;data.is_compliant&#x60;: Whether the PDF/XML are consistent - &#x60;data.compliance_score&#x60;: Compliance score (0-1) - &#x60;X-Webhook-Signature&#x60; header for HMAC verification
@@ -1135,7 +1135,7 @@ namespace FactPulse.SDK.Api
         /// <param name="webhookMode">Webhook content delivery: &#39;inline&#39; (base64 in payload) or &#39;download_url&#39; (temporary URL, 1h TTL) (optional, default to &quot;inline&quot;)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IVerifyPdfAsyncApiV1VerificationVerifyAsyncPostApiResponse"/>&gt;</returns>
-        public async Task<IVerifyPdfAsyncApiV1VerificationVerifyAsyncPostApiResponse?> VerifyPdfAsyncApiV1VerificationVerifyAsyncPostOrDefaultAsync(System.IO.Stream pdfFile, Option<bool> forceOcr = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IVerifyPdfAsyncApiV1VerificationVerifyAsyncPostApiResponse?> VerifyPdfAsyncApiV1VerificationVerifyAsyncPostOrDefaultAsync(FactPulse.SDK.Client.FileParameter pdfFile, Option<bool> forceOcr = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -1157,7 +1157,7 @@ namespace FactPulse.SDK.Api
         /// <param name="webhookMode">Webhook content delivery: &#39;inline&#39; (base64 in payload) or &#39;download_url&#39; (temporary URL, 1h TTL) (optional, default to &quot;inline&quot;)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IVerifyPdfAsyncApiV1VerificationVerifyAsyncPostApiResponse"/>&gt;</returns>
-        public async Task<IVerifyPdfAsyncApiV1VerificationVerifyAsyncPostApiResponse> VerifyPdfAsyncApiV1VerificationVerifyAsyncPostAsync(System.IO.Stream pdfFile, Option<bool> forceOcr = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IVerifyPdfAsyncApiV1VerificationVerifyAsyncPostApiResponse> VerifyPdfAsyncApiV1VerificationVerifyAsyncPostAsync(FactPulse.SDK.Client.FileParameter pdfFile, Option<bool> forceOcr = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -1176,22 +1176,29 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/verification/verify-async"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/verification/verify-async");
 
-                    MultipartContent multipartContentLocalVar = new MultipartContent();
+                    MultipartFormDataContent multipartContentLocalVar = new MultipartFormDataContent();
 
                     httpRequestMessageLocalVar.Content = multipartContentLocalVar;
 
-                    List<KeyValuePair<string?, string?>> formParameterLocalVars = new List<KeyValuePair<string?, string?>>();
+                    List<KeyValuePair<string, string?>> formParameterLocalVars = new List<KeyValuePair<string, string?>>();
 
-                    multipartContentLocalVar.Add(new FormUrlEncodedContent(formParameterLocalVars));                    multipartContentLocalVar.Add(new StreamContent(pdfFile));
+                    {
+                        var streamContentLocalVar = new StreamContent(pdfFile.Content);
+                        streamContentLocalVar.Headers.ContentType = new MediaTypeHeaderValue(pdfFile.ContentType);
+                        multipartContentLocalVar.Add(streamContentLocalVar, "pdf_file", pdfFile.FileName ?? "pdf_file");
+                    }
 
                     if (forceOcr.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("force_ocr", ClientUtils.ParameterToString(forceOcr.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("force_ocr", ClientUtils.ParameterToString(forceOcr.Value)));
 
                     if (callbackUrl.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("callback_url", ClientUtils.ParameterToString(callbackUrl.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("callback_url", ClientUtils.ParameterToString(callbackUrl.Value)));
 
                     if (webhookMode.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("webhook_mode", ClientUtils.ParameterToString(webhookMode.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("webhook_mode", ClientUtils.ParameterToString(webhookMode.Value)));
+
+                    foreach (var formParamLocalVar in formParameterLocalVars)
+                        multipartContentLocalVar.Add(new StringContent(formParamLocalVar.Value ?? string.Empty), formParamLocalVar.Key);
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
@@ -1209,11 +1216,6 @@ namespace FactPulse.SDK.Api
                     string[] contentTypes = new string[] {
                         "multipart/form-data"
                     };
-
-                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
-
-                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
-                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -1431,14 +1433,14 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatVerifyPdfSyncApiV1VerificationVerifyPost(ref System.IO.Stream pdfFile);
+        partial void FormatVerifyPdfSyncApiV1VerificationVerifyPost(ref FactPulse.SDK.Client.FileParameter pdfFile);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
         /// <param name="pdfFile"></param>
         /// <returns></returns>
-        private void ValidateVerifyPdfSyncApiV1VerificationVerifyPost(System.IO.Stream pdfFile)
+        private void ValidateVerifyPdfSyncApiV1VerificationVerifyPost(FactPulse.SDK.Client.FileParameter pdfFile)
         {
             if (pdfFile == null)
                 throw new ArgumentNullException(nameof(pdfFile));
@@ -1449,7 +1451,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="pdfFile"></param>
-        private void AfterVerifyPdfSyncApiV1VerificationVerifyPostDefaultImplementation(IVerifyPdfSyncApiV1VerificationVerifyPostApiResponse apiResponseLocalVar, System.IO.Stream pdfFile)
+        private void AfterVerifyPdfSyncApiV1VerificationVerifyPostDefaultImplementation(IVerifyPdfSyncApiV1VerificationVerifyPostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter pdfFile)
         {
             bool suppressDefaultLog = false;
             AfterVerifyPdfSyncApiV1VerificationVerifyPost(ref suppressDefaultLog, apiResponseLocalVar, pdfFile);
@@ -1463,7 +1465,7 @@ namespace FactPulse.SDK.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="pdfFile"></param>
-        partial void AfterVerifyPdfSyncApiV1VerificationVerifyPost(ref bool suppressDefaultLog, IVerifyPdfSyncApiV1VerificationVerifyPostApiResponse apiResponseLocalVar, System.IO.Stream pdfFile);
+        partial void AfterVerifyPdfSyncApiV1VerificationVerifyPost(ref bool suppressDefaultLog, IVerifyPdfSyncApiV1VerificationVerifyPostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter pdfFile);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1472,7 +1474,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="pdfFile"></param>
-        private void OnErrorVerifyPdfSyncApiV1VerificationVerifyPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream pdfFile)
+        private void OnErrorVerifyPdfSyncApiV1VerificationVerifyPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter pdfFile)
         {
             bool suppressDefaultLogLocalVar = false;
             OnErrorVerifyPdfSyncApiV1VerificationVerifyPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, pdfFile);
@@ -1488,7 +1490,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="pdfFile"></param>
-        partial void OnErrorVerifyPdfSyncApiV1VerificationVerifyPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream pdfFile);
+        partial void OnErrorVerifyPdfSyncApiV1VerificationVerifyPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter pdfFile);
 
         /// <summary>
         /// Verify PDF/XML Factur-X compliance (synchronous) Verifies compliance between the PDF and its embedded Factur-X XML.  **IMPORTANT**: Only Factur-X PDFs (with embedded XML) are accepted. PDFs without Factur-X XML will be rejected with a 400 error.  This synchronous version uses only native PDF extraction (pdfplumber). For image PDFs requiring OCR, use the &#x60;/verify-async&#x60; endpoint.  **Verification principle (Factur-X 1.08):** - Principle #2: XML can only contain info present in the PDF - Principle #4: All XML info must be present and compliant in the PDF  **Verified fields:** - Identification: BT-1 (invoice #), BT-2 (date), BT-3 (type), BT-5 (currency), BT-23 (framework) - Seller: BT-27 (name), BT-29 (SIRET), BT-30 (SIREN), BT-31 (VAT) - Buyer: BT-44 (name), BT-46 (SIRET), BT-47 (SIREN), BT-48 (VAT) - Amounts: BT-109 (excl. tax), BT-110 (VAT), BT-112 (incl. tax), BT-115 (amount due) - VAT breakdown: BT-116, BT-117, BT-118, BT-119 - Invoice lines: BT-153, BT-129, BT-146, BT-131 - Mandatory notes: PMT, PMD, AAB - Rule BR-FR-09: SIRET/SIREN consistency
@@ -1496,7 +1498,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pdfFile">Factur-X PDF file to verify</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IVerifyPdfSyncApiV1VerificationVerifyPostApiResponse"/>&gt;</returns>
-        public async Task<IVerifyPdfSyncApiV1VerificationVerifyPostApiResponse?> VerifyPdfSyncApiV1VerificationVerifyPostOrDefaultAsync(System.IO.Stream pdfFile, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IVerifyPdfSyncApiV1VerificationVerifyPostApiResponse?> VerifyPdfSyncApiV1VerificationVerifyPostOrDefaultAsync(FactPulse.SDK.Client.FileParameter pdfFile, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -1515,7 +1517,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pdfFile">Factur-X PDF file to verify</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IVerifyPdfSyncApiV1VerificationVerifyPostApiResponse"/>&gt;</returns>
-        public async Task<IVerifyPdfSyncApiV1VerificationVerifyPostApiResponse> VerifyPdfSyncApiV1VerificationVerifyPostAsync(System.IO.Stream pdfFile, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IVerifyPdfSyncApiV1VerificationVerifyPostApiResponse> VerifyPdfSyncApiV1VerificationVerifyPostAsync(FactPulse.SDK.Client.FileParameter pdfFile, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -1534,13 +1536,20 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/verification/verify"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/verification/verify");
 
-                    MultipartContent multipartContentLocalVar = new MultipartContent();
+                    MultipartFormDataContent multipartContentLocalVar = new MultipartFormDataContent();
 
                     httpRequestMessageLocalVar.Content = multipartContentLocalVar;
 
-                    List<KeyValuePair<string?, string?>> formParameterLocalVars = new List<KeyValuePair<string?, string?>>();
+                    List<KeyValuePair<string, string?>> formParameterLocalVars = new List<KeyValuePair<string, string?>>();
 
-                    multipartContentLocalVar.Add(new FormUrlEncodedContent(formParameterLocalVars));                    multipartContentLocalVar.Add(new StreamContent(pdfFile));
+                    {
+                        var streamContentLocalVar = new StreamContent(pdfFile.Content);
+                        streamContentLocalVar.Headers.ContentType = new MediaTypeHeaderValue(pdfFile.ContentType);
+                        multipartContentLocalVar.Add(streamContentLocalVar, "pdf_file", pdfFile.FileName ?? "pdf_file");
+                    }
+
+                    foreach (var formParamLocalVar in formParameterLocalVars)
+                        multipartContentLocalVar.Add(new StringContent(formParamLocalVar.Value ?? string.Empty), formParamLocalVar.Key);
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
@@ -1558,11 +1567,6 @@ namespace FactPulse.SDK.Api
                     string[] contentTypes = new string[] {
                         "multipart/form-data"
                     };
-
-                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
-
-                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
-                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"

@@ -136,7 +136,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets EncryptionMode
         /// </summary>
         [JsonPropertyName("encryptionMode")]
-        public EncryptionModeEnum? EncryptionMode { get { return this.EncryptionModeOption; } set { this.EncryptionModeOption = new(value); } }
+        public EncryptionModeEnum? EncryptionMode { get { return this.EncryptionModeOption.Value; } set { this.EncryptionModeOption = new(value); } }
 
         /// <summary>
         /// PDP Flow Service URL

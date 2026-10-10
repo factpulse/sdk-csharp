@@ -113,7 +113,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets SubmissionMode
         /// </summary>
         [JsonPropertyName("submission_mode")]
-        public SubmissionMode? SubmissionMode { get { return this.SubmissionModeOption; } set { this.SubmissionModeOption = new(value); } }
+        public SubmissionMode? SubmissionMode { get { return this.SubmissionModeOption.Value; } set { this.SubmissionModeOption = new(value); } }
 
         /// <summary>
         /// Gets or Sets InvoiceNumber

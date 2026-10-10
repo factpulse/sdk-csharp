@@ -55,7 +55,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets CountryCode
         /// </summary>
-        public CountryCode? CountryCode { get { return this.CountryCodeOption; } set { this.CountryCodeOption = new(value); } }
+        public CountryCode? CountryCode { get { return this.CountryCodeOption.Value; } set { this.CountryCodeOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of String
@@ -67,7 +67,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets String
         /// </summary>
-        public string? String { get { return this.StringOption; } set { this.StringOption = new(value); } }
+        public string? String { get { return this.StringOption.Value; } set { this.StringOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object

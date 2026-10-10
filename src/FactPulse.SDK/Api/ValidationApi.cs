@@ -50,7 +50,7 @@ namespace FactPulse.SDK.Api
         /// <param name="skipBrFr"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateXmlApiV1ProcessingValidateXmlPostApiResponse"/>&gt;</returns>
-        Task<IValidateXmlApiV1ProcessingValidateXmlPostApiResponse> ValidateXmlApiV1ProcessingValidateXmlPostAsync(System.IO.Stream xmlFile, Option<APIProfile> profile = default, Option<bool?> skipBrFr = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IValidateXmlApiV1ProcessingValidateXmlPostApiResponse> ValidateXmlApiV1ProcessingValidateXmlPostAsync(FactPulse.SDK.Client.FileParameter xmlFile, Option<APIProfile> profile = default, Option<bool?> skipBrFr = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Validate a CII or UBL XML against Schematron rules
@@ -63,7 +63,7 @@ namespace FactPulse.SDK.Api
         /// <param name="skipBrFr"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateXmlApiV1ProcessingValidateXmlPostApiResponse"/>?&gt;</returns>
-        Task<IValidateXmlApiV1ProcessingValidateXmlPostApiResponse?> ValidateXmlApiV1ProcessingValidateXmlPostOrDefaultAsync(System.IO.Stream xmlFile, Option<APIProfile> profile = default, Option<bool?> skipBrFr = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IValidateXmlApiV1ProcessingValidateXmlPostApiResponse?> ValidateXmlApiV1ProcessingValidateXmlPostOrDefaultAsync(FactPulse.SDK.Client.FileParameter xmlFile, Option<APIProfile> profile = default, Option<bool?> skipBrFr = default, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -176,14 +176,14 @@ namespace FactPulse.SDK.Api
             BearerTokenProvider = bearerTokenProvider;
         }
 
-        partial void FormatValidateXmlApiV1ProcessingValidateXmlPost(ref System.IO.Stream xmlFile, ref Option<APIProfile> profile, ref Option<bool?> skipBrFr);
+        partial void FormatValidateXmlApiV1ProcessingValidateXmlPost(ref FactPulse.SDK.Client.FileParameter xmlFile, ref Option<APIProfile> profile, ref Option<bool?> skipBrFr);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
         /// <param name="xmlFile"></param>
         /// <returns></returns>
-        private void ValidateValidateXmlApiV1ProcessingValidateXmlPost(System.IO.Stream xmlFile)
+        private void ValidateValidateXmlApiV1ProcessingValidateXmlPost(FactPulse.SDK.Client.FileParameter xmlFile)
         {
             if (xmlFile == null)
                 throw new ArgumentNullException(nameof(xmlFile));
@@ -196,7 +196,7 @@ namespace FactPulse.SDK.Api
         /// <param name="xmlFile"></param>
         /// <param name="profile"></param>
         /// <param name="skipBrFr"></param>
-        private void AfterValidateXmlApiV1ProcessingValidateXmlPostDefaultImplementation(IValidateXmlApiV1ProcessingValidateXmlPostApiResponse apiResponseLocalVar, System.IO.Stream xmlFile, Option<APIProfile> profile, Option<bool?> skipBrFr)
+        private void AfterValidateXmlApiV1ProcessingValidateXmlPostDefaultImplementation(IValidateXmlApiV1ProcessingValidateXmlPostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter xmlFile, Option<APIProfile> profile, Option<bool?> skipBrFr)
         {
             bool suppressDefaultLog = false;
             AfterValidateXmlApiV1ProcessingValidateXmlPost(ref suppressDefaultLog, apiResponseLocalVar, xmlFile, profile, skipBrFr);
@@ -212,7 +212,7 @@ namespace FactPulse.SDK.Api
         /// <param name="xmlFile"></param>
         /// <param name="profile"></param>
         /// <param name="skipBrFr"></param>
-        partial void AfterValidateXmlApiV1ProcessingValidateXmlPost(ref bool suppressDefaultLog, IValidateXmlApiV1ProcessingValidateXmlPostApiResponse apiResponseLocalVar, System.IO.Stream xmlFile, Option<APIProfile> profile, Option<bool?> skipBrFr);
+        partial void AfterValidateXmlApiV1ProcessingValidateXmlPost(ref bool suppressDefaultLog, IValidateXmlApiV1ProcessingValidateXmlPostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter xmlFile, Option<APIProfile> profile, Option<bool?> skipBrFr);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -223,7 +223,7 @@ namespace FactPulse.SDK.Api
         /// <param name="xmlFile"></param>
         /// <param name="profile"></param>
         /// <param name="skipBrFr"></param>
-        private void OnErrorValidateXmlApiV1ProcessingValidateXmlPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream xmlFile, Option<APIProfile> profile, Option<bool?> skipBrFr)
+        private void OnErrorValidateXmlApiV1ProcessingValidateXmlPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter xmlFile, Option<APIProfile> profile, Option<bool?> skipBrFr)
         {
             bool suppressDefaultLogLocalVar = false;
             OnErrorValidateXmlApiV1ProcessingValidateXmlPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, xmlFile, profile, skipBrFr);
@@ -241,7 +241,7 @@ namespace FactPulse.SDK.Api
         /// <param name="xmlFile"></param>
         /// <param name="profile"></param>
         /// <param name="skipBrFr"></param>
-        partial void OnErrorValidateXmlApiV1ProcessingValidateXmlPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream xmlFile, Option<APIProfile> profile, Option<bool?> skipBrFr);
+        partial void OnErrorValidateXmlApiV1ProcessingValidateXmlPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter xmlFile, Option<APIProfile> profile, Option<bool?> skipBrFr);
 
         /// <summary>
         /// Validate a CII or UBL XML against Schematron rules Validates a CII (Factur-X) or UBL XML file against Schematron business rules.  The XML format is **auto-detected** from namespace: - CII XML → validated with EN16931-CII + profile-specific + BR-FR-CII Schematrons - UBL XML → validated with EN16931-UBL + BR-FR-UBL Schematrons  ## Applied Standard  **Schematron ISO/IEC 19757-3**: Business rules validation language for XML - Semantic validation (beyond XSD syntax) - European EN 16931 business rules - French-specific rules (BR-FR-CII or BR-FR-UBL) - Arithmetic calculations and data consistency  ## Profiles and validated rules (CII only)  ### MINIMUM (45 rules) - Unique invoice identifier - Dates (issue, due date) - Party identifiers (SIRET/SIREN) - Total gross amount  ### BASIC (102 rules) - All MINIMUM rules - Detailed invoice lines - Basic VAT calculations - Payment methods - References (order, contract)  ### EN16931 (178 rules) - All BASIC rules - **European rules (BR-xx)**: 81 business rules - **French rules (FR-xx)**: 12 France-specific rules - **Advanced calculations (CR-xx)**: 32 calculation rules - **Standardized codes (CL-xx)**: 52 code lists  ### EXTENDED (210+ rules) - All EN16931 rules - Logistics information - Advanced accounting data - Multiple external references  ## Checks performed  ### 1. Syntax validation - Correct XML parsing (UTF-8, well-formed) - UN/CEFACT namespaces present - Hierarchical structure respected  ### 2. Business rules (BR-xx) Examples: - &#x60;BR-1&#x60;: Invoice total must equal sum of line totals + document-level amounts - &#x60;BR-CO-10&#x60;: Sum of VAT base amounts must equal invoice net total - &#x60;BR-16&#x60;: Invoice currency code must be in ISO 4217 list  ### 3. French rules (FR-xx) Examples: - &#x60;FR-1&#x60;: Supplier SIRET must have 14 digits - &#x60;FR-2&#x60;: Customer SIRET must have 14 digits (if present) - &#x60;FR-5&#x60;: Intra-EU VAT number must be in format FRxx999999999  ### 4. Calculation rules (CR-xx) - Net + VAT &#x3D; Gross amounts - Sum of lines &#x3D; Document total - Discounts and surcharges correctly applied - Compliant rounding (2 decimals for amounts)  ### 5. Standardized codes (CL-xx) - ISO 3166-1 alpha-2 country codes - ISO 4217 currency codes - UN/ECE Rec 20 measurement units - VAT codes (types, categories, exemptions) - SchemeID for identifiers (0002&#x3D;SIREN, 0009&#x3D;SIRET, etc.)  ## Validation process  1. **XSLT loading**: Schematron file converted to XSLT (Saxon-HE) 2. **Transformation**: Rules applied to XML 3. **Results analysis**: Extraction of errors (&#x60;failed-assert&#x60;) and warnings (&#x60;successful-report&#x60;) 4. **Report**: Structured list of non-conformities  ## Responses  **200 OK**: Compliant XML &#x60;&#x60;&#x60;json {   \&quot;message\&quot;: \&quot;XML is compliant with EN16931 profile\&quot; } &#x60;&#x60;&#x60;  **400 Bad Request**: Non-compliant XML &#x60;&#x60;&#x60;json {   \&quot;detail\&quot;: [     \&quot;[BR-1] Invoice total (120.00) does not match calculated sum (100.00 + 20.00)\&quot;,     \&quot;[FR-1] Supplier SIRET must contain exactly 14 digits\&quot;   ] } &#x60;&#x60;&#x60;  ## Use cases  - **Pre-validation**: Verify XML before PDF/A integration - **Debugging**: Precisely identify generation errors - **Testing**: Validate test or example XMLs - **Compliance**: Ensure European and French rules are met - **Development**: Quick testing without PDF generation  ## Processing time  - MINIMUM profile: ~0.5 second - EN16931 profile: ~1-2 seconds - EXTENDED profile: ~2-3 seconds
@@ -251,7 +251,7 @@ namespace FactPulse.SDK.Api
         /// <param name="skipBrFr"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateXmlApiV1ProcessingValidateXmlPostApiResponse"/>&gt;</returns>
-        public async Task<IValidateXmlApiV1ProcessingValidateXmlPostApiResponse?> ValidateXmlApiV1ProcessingValidateXmlPostOrDefaultAsync(System.IO.Stream xmlFile, Option<APIProfile> profile = default, Option<bool?> skipBrFr = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IValidateXmlApiV1ProcessingValidateXmlPostApiResponse?> ValidateXmlApiV1ProcessingValidateXmlPostOrDefaultAsync(FactPulse.SDK.Client.FileParameter xmlFile, Option<APIProfile> profile = default, Option<bool?> skipBrFr = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -272,7 +272,7 @@ namespace FactPulse.SDK.Api
         /// <param name="skipBrFr"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateXmlApiV1ProcessingValidateXmlPostApiResponse"/>&gt;</returns>
-        public async Task<IValidateXmlApiV1ProcessingValidateXmlPostApiResponse> ValidateXmlApiV1ProcessingValidateXmlPostAsync(System.IO.Stream xmlFile, Option<APIProfile> profile = default, Option<bool?> skipBrFr = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IValidateXmlApiV1ProcessingValidateXmlPostApiResponse> ValidateXmlApiV1ProcessingValidateXmlPostAsync(FactPulse.SDK.Client.FileParameter xmlFile, Option<APIProfile> profile = default, Option<bool?> skipBrFr = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -291,19 +291,26 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/processing/validate-xml"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/processing/validate-xml");
 
-                    MultipartContent multipartContentLocalVar = new MultipartContent();
+                    MultipartFormDataContent multipartContentLocalVar = new MultipartFormDataContent();
 
                     httpRequestMessageLocalVar.Content = multipartContentLocalVar;
 
-                    List<KeyValuePair<string?, string?>> formParameterLocalVars = new List<KeyValuePair<string?, string?>>();
+                    List<KeyValuePair<string, string?>> formParameterLocalVars = new List<KeyValuePair<string, string?>>();
 
-                    multipartContentLocalVar.Add(new FormUrlEncodedContent(formParameterLocalVars));                    multipartContentLocalVar.Add(new StreamContent(xmlFile));
+                    {
+                        var streamContentLocalVar = new StreamContent(xmlFile.Content);
+                        streamContentLocalVar.Headers.ContentType = new MediaTypeHeaderValue(xmlFile.ContentType);
+                        multipartContentLocalVar.Add(streamContentLocalVar, "xml_file", xmlFile.FileName ?? "xml_file");
+                    }
 
                     if (profile.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("profile", ClientUtils.ParameterToString(profile.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("profile", ClientUtils.ParameterToString(profile.Value)));
 
                     if (skipBrFr.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("skip_br_fr", ClientUtils.ParameterToString(skipBrFr.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("skip_br_fr", ClientUtils.ParameterToString(skipBrFr.Value)));
+
+                    foreach (var formParamLocalVar in formParameterLocalVars)
+                        multipartContentLocalVar.Add(new StringContent(formParamLocalVar.Value ?? string.Empty), formParamLocalVar.Key);
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
@@ -321,11 +328,6 @@ namespace FactPulse.SDK.Api
                     string[] contentTypes = new string[] {
                         "multipart/form-data"
                     };
-
-                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
-
-                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
-                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"

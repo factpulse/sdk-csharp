@@ -34,13 +34,15 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AFNORSearchFlowContent" /> class.
         /// </summary>
-        /// <param name="limit">limit</param>
+        /// <param name="limit">Pagination, Maximum number of results that may be returned (default to 25)</param>
+        /// <param name="nextCursor">Pagination management: - If present, says where to start for next page, set nextCursor as the cursor in the next request - If omitted, says that pagination is finished </param>
         /// <param name="filters">filters</param>
         /// <param name="results">results</param>
         [JsonConstructor]
-        public AFNORSearchFlowContent(Option<int?> limit = default, Option<AFNORSearchFlowFilters?> filters = default, Option<List<AFNORFlow>?> results = default)
+        public AFNORSearchFlowContent(Option<int?> limit = default, Option<string?> nextCursor = default, Option<AFNORSearchFlowFilters?> filters = default, Option<List<AFNORFlow>?> results = default)
         {
             LimitOption = limit;
+            NextCursorOption = nextCursor;
             FiltersOption = filters;
             ResultsOption = results;
             OnCreated();
@@ -56,10 +58,26 @@ namespace FactPulse.SDK.Model
         public Option<int?> LimitOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Limit
+        /// Pagination, Maximum number of results that may be returned
         /// </summary>
+        /// <value>Pagination, Maximum number of results that may be returned</value>
         [JsonPropertyName("limit")]
         public int? Limit { get { return this.LimitOption; } set { this.LimitOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of NextCursor
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> NextCursorOption { get; private set; }
+
+        /// <summary>
+        /// Pagination management: - If present, says where to start for next page, set nextCursor as the cursor in the next request - If omitted, says that pagination is finished 
+        /// </summary>
+        /// <value>Pagination management: - If present, says where to start for next page, set nextCursor as the cursor in the next request - If omitted, says that pagination is finished </value>
+        /* <example>eyJjcmVhdGVkX2F0IjoiMjAyNS0wNi0wOVQxMDowMDowMFoiLCJpZCI6MTIzNH0&#x3D;</example> */
+        [JsonPropertyName("nextCursor")]
+        public string? NextCursor { get { return this.NextCursorOption; } set { this.NextCursorOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Filters
@@ -96,6 +114,7 @@ namespace FactPulse.SDK.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class AFNORSearchFlowContent {\n");
             sb.Append("  Limit: ").Append(Limit).Append("\n");
+            sb.Append("  NextCursor: ").Append(NextCursor).Append("\n");
             sb.Append("  Filters: ").Append(Filters).Append("\n");
             sb.Append("  Results: ").Append(Results).Append("\n");
             sb.Append("}\n");
@@ -109,6 +128,12 @@ namespace FactPulse.SDK.Model
         /// <returns>Validation Result</returns>
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
+            // Limit (int) maximum
+            if (this.LimitOption.IsSet && this.LimitOption.Value > (int)100)
+            {
+                yield return new ValidationResult("Invalid value for Limit, must be a value less than or equal to 100.", new [] { "Limit" });
+            }
+
             yield break;
         }
     }
@@ -136,6 +161,7 @@ namespace FactPulse.SDK.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<int?> limit = default;
+            Option<string?> nextCursor = default;
             Option<AFNORSearchFlowFilters?> filters = default;
             Option<List<AFNORFlow>?> results = default;
 
@@ -157,6 +183,9 @@ namespace FactPulse.SDK.Model
                         case "limit":
                             limit = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
+                        case "nextCursor":
+                            nextCursor = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
                         case "filters":
                             filters = new Option<AFNORSearchFlowFilters?>(JsonSerializer.Deserialize<AFNORSearchFlowFilters>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
@@ -172,13 +201,16 @@ namespace FactPulse.SDK.Model
             if (limit.IsSet && limit.Value == null)
                 throw new ArgumentNullException(nameof(limit), "Property is not nullable for class AFNORSearchFlowContent.");
 
+            if (nextCursor.IsSet && nextCursor.Value == null)
+                throw new ArgumentNullException(nameof(nextCursor), "Property is not nullable for class AFNORSearchFlowContent.");
+
             if (filters.IsSet && filters.Value == null)
                 throw new ArgumentNullException(nameof(filters), "Property is not nullable for class AFNORSearchFlowContent.");
 
             if (results.IsSet && results.Value == null)
                 throw new ArgumentNullException(nameof(results), "Property is not nullable for class AFNORSearchFlowContent.");
 
-            return new AFNORSearchFlowContent(limit, filters, results);
+            return new AFNORSearchFlowContent(limit, nextCursor, filters, results);
         }
 
         /// <summary>
@@ -205,6 +237,9 @@ namespace FactPulse.SDK.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, AFNORSearchFlowContent aFNORSearchFlowContent, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (aFNORSearchFlowContent.NextCursorOption.IsSet && aFNORSearchFlowContent.NextCursor == null)
+                throw new ArgumentNullException(nameof(aFNORSearchFlowContent.NextCursor), "Property is required for class AFNORSearchFlowContent.");
+
             if (aFNORSearchFlowContent.FiltersOption.IsSet && aFNORSearchFlowContent.Filters == null)
                 throw new ArgumentNullException(nameof(aFNORSearchFlowContent.Filters), "Property is required for class AFNORSearchFlowContent.");
 
@@ -213,6 +248,9 @@ namespace FactPulse.SDK.Model
 
             if (aFNORSearchFlowContent.LimitOption.IsSet)
                 writer.WriteNumber("limit", aFNORSearchFlowContent.LimitOption.Value!.Value);
+
+            if (aFNORSearchFlowContent.NextCursorOption.IsSet)
+                writer.WriteString("nextCursor", aFNORSearchFlowContent.NextCursor);
 
             if (aFNORSearchFlowContent.FiltersOption.IsSet)
             {

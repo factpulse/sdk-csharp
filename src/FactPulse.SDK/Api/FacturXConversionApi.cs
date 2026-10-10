@@ -51,7 +51,7 @@ namespace FactPulse.SDK.Api
         /// <param name="webhookMode">Content delivery mode: &#39;inline&#39; (base64 in webhook) or &#39;download_url&#39; (temporary URL, 1h TTL) (optional, default to &quot;inline&quot;)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IConvertDocumentAsyncApiV1ConvertAsyncPostApiResponse"/>&gt;</returns>
-        Task<IConvertDocumentAsyncApiV1ConvertAsyncPostApiResponse> ConvertDocumentAsyncApiV1ConvertAsyncPostAsync(System.IO.Stream file, Option<string> output = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IConvertDocumentAsyncApiV1ConvertAsyncPostApiResponse> ConvertDocumentAsyncApiV1ConvertAsyncPostAsync(FactPulse.SDK.Client.FileParameter file, Option<string> output = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Convert a document to Factur-X (async mode)
@@ -65,7 +65,7 @@ namespace FactPulse.SDK.Api
         /// <param name="webhookMode">Content delivery mode: &#39;inline&#39; (base64 in webhook) or &#39;download_url&#39; (temporary URL, 1h TTL) (optional, default to &quot;inline&quot;)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IConvertDocumentAsyncApiV1ConvertAsyncPostApiResponse"/>?&gt;</returns>
-        Task<IConvertDocumentAsyncApiV1ConvertAsyncPostApiResponse?> ConvertDocumentAsyncApiV1ConvertAsyncPostOrDefaultAsync(System.IO.Stream file, Option<string> output = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IConvertDocumentAsyncApiV1ConvertAsyncPostApiResponse?> ConvertDocumentAsyncApiV1ConvertAsyncPostOrDefaultAsync(FactPulse.SDK.Client.FileParameter file, Option<string> output = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Download a generated file
@@ -549,7 +549,7 @@ namespace FactPulse.SDK.Api
             BearerTokenProvider = bearerTokenProvider;
         }
 
-        partial void FormatConvertDocumentAsyncApiV1ConvertAsyncPost(ref System.IO.Stream file, ref Option<string> output, ref Option<string?> callbackUrl, ref Option<string> webhookMode);
+        partial void FormatConvertDocumentAsyncApiV1ConvertAsyncPost(ref FactPulse.SDK.Client.FileParameter file, ref Option<string> output, ref Option<string?> callbackUrl, ref Option<string> webhookMode);
 
         /// <summary>
         /// Validates the request parameters
@@ -558,7 +558,7 @@ namespace FactPulse.SDK.Api
         /// <param name="output"></param>
         /// <param name="webhookMode"></param>
         /// <returns></returns>
-        private void ValidateConvertDocumentAsyncApiV1ConvertAsyncPost(System.IO.Stream file, Option<string> output, Option<string> webhookMode)
+        private void ValidateConvertDocumentAsyncApiV1ConvertAsyncPost(FactPulse.SDK.Client.FileParameter file, Option<string> output, Option<string> webhookMode)
         {
             if (file == null)
                 throw new ArgumentNullException(nameof(file));
@@ -578,7 +578,7 @@ namespace FactPulse.SDK.Api
         /// <param name="output"></param>
         /// <param name="callbackUrl"></param>
         /// <param name="webhookMode"></param>
-        private void AfterConvertDocumentAsyncApiV1ConvertAsyncPostDefaultImplementation(IConvertDocumentAsyncApiV1ConvertAsyncPostApiResponse apiResponseLocalVar, System.IO.Stream file, Option<string> output, Option<string?> callbackUrl, Option<string> webhookMode)
+        private void AfterConvertDocumentAsyncApiV1ConvertAsyncPostDefaultImplementation(IConvertDocumentAsyncApiV1ConvertAsyncPostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter file, Option<string> output, Option<string?> callbackUrl, Option<string> webhookMode)
         {
             bool suppressDefaultLog = false;
             AfterConvertDocumentAsyncApiV1ConvertAsyncPost(ref suppressDefaultLog, apiResponseLocalVar, file, output, callbackUrl, webhookMode);
@@ -595,7 +595,7 @@ namespace FactPulse.SDK.Api
         /// <param name="output"></param>
         /// <param name="callbackUrl"></param>
         /// <param name="webhookMode"></param>
-        partial void AfterConvertDocumentAsyncApiV1ConvertAsyncPost(ref bool suppressDefaultLog, IConvertDocumentAsyncApiV1ConvertAsyncPostApiResponse apiResponseLocalVar, System.IO.Stream file, Option<string> output, Option<string?> callbackUrl, Option<string> webhookMode);
+        partial void AfterConvertDocumentAsyncApiV1ConvertAsyncPost(ref bool suppressDefaultLog, IConvertDocumentAsyncApiV1ConvertAsyncPostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter file, Option<string> output, Option<string?> callbackUrl, Option<string> webhookMode);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -607,7 +607,7 @@ namespace FactPulse.SDK.Api
         /// <param name="output"></param>
         /// <param name="callbackUrl"></param>
         /// <param name="webhookMode"></param>
-        private void OnErrorConvertDocumentAsyncApiV1ConvertAsyncPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream file, Option<string> output, Option<string?> callbackUrl, Option<string> webhookMode)
+        private void OnErrorConvertDocumentAsyncApiV1ConvertAsyncPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter file, Option<string> output, Option<string?> callbackUrl, Option<string> webhookMode)
         {
             bool suppressDefaultLogLocalVar = false;
             OnErrorConvertDocumentAsyncApiV1ConvertAsyncPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, file, output, callbackUrl, webhookMode);
@@ -626,7 +626,7 @@ namespace FactPulse.SDK.Api
         /// <param name="output"></param>
         /// <param name="callbackUrl"></param>
         /// <param name="webhookMode"></param>
-        partial void OnErrorConvertDocumentAsyncApiV1ConvertAsyncPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream file, Option<string> output, Option<string?> callbackUrl, Option<string> webhookMode);
+        partial void OnErrorConvertDocumentAsyncApiV1ConvertAsyncPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter file, Option<string> output, Option<string?> callbackUrl, Option<string> webhookMode);
 
         /// <summary>
         /// Convert a document to Factur-X (async mode) Launch an asynchronous conversion via Celery.  ## Workflow  1. **Upload**: Document is sent as multipart/form-data 2. **Celery Task**: Task is queued for processing 3. **Callback**: Webhook notification on completion  ## Possible responses  - **202**: Task accepted, processing - **400**: Invalid file
@@ -637,7 +637,7 @@ namespace FactPulse.SDK.Api
         /// <param name="webhookMode">Content delivery mode: &#39;inline&#39; (base64 in webhook) or &#39;download_url&#39; (temporary URL, 1h TTL) (optional, default to &quot;inline&quot;)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IConvertDocumentAsyncApiV1ConvertAsyncPostApiResponse"/>&gt;</returns>
-        public async Task<IConvertDocumentAsyncApiV1ConvertAsyncPostApiResponse?> ConvertDocumentAsyncApiV1ConvertAsyncPostOrDefaultAsync(System.IO.Stream file, Option<string> output = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IConvertDocumentAsyncApiV1ConvertAsyncPostApiResponse?> ConvertDocumentAsyncApiV1ConvertAsyncPostOrDefaultAsync(FactPulse.SDK.Client.FileParameter file, Option<string> output = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -659,7 +659,7 @@ namespace FactPulse.SDK.Api
         /// <param name="webhookMode">Content delivery mode: &#39;inline&#39; (base64 in webhook) or &#39;download_url&#39; (temporary URL, 1h TTL) (optional, default to &quot;inline&quot;)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IConvertDocumentAsyncApiV1ConvertAsyncPostApiResponse"/>&gt;</returns>
-        public async Task<IConvertDocumentAsyncApiV1ConvertAsyncPostApiResponse> ConvertDocumentAsyncApiV1ConvertAsyncPostAsync(System.IO.Stream file, Option<string> output = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IConvertDocumentAsyncApiV1ConvertAsyncPostApiResponse> ConvertDocumentAsyncApiV1ConvertAsyncPostAsync(FactPulse.SDK.Client.FileParameter file, Option<string> output = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -678,22 +678,29 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/convert/async"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/convert/async");
 
-                    MultipartContent multipartContentLocalVar = new MultipartContent();
+                    MultipartFormDataContent multipartContentLocalVar = new MultipartFormDataContent();
 
                     httpRequestMessageLocalVar.Content = multipartContentLocalVar;
 
-                    List<KeyValuePair<string?, string?>> formParameterLocalVars = new List<KeyValuePair<string?, string?>>();
+                    List<KeyValuePair<string, string?>> formParameterLocalVars = new List<KeyValuePair<string, string?>>();
 
-                    multipartContentLocalVar.Add(new FormUrlEncodedContent(formParameterLocalVars));                    multipartContentLocalVar.Add(new StreamContent(file));
+                    {
+                        var streamContentLocalVar = new StreamContent(file.Content);
+                        streamContentLocalVar.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
+                        multipartContentLocalVar.Add(streamContentLocalVar, "file", file.FileName ?? "file");
+                    }
 
                     if (output.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("output", ClientUtils.ParameterToString(output.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("output", ClientUtils.ParameterToString(output.Value)));
 
                     if (callbackUrl.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("callback_url", ClientUtils.ParameterToString(callbackUrl.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("callback_url", ClientUtils.ParameterToString(callbackUrl.Value)));
 
                     if (webhookMode.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("webhook_mode", ClientUtils.ParameterToString(webhookMode.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("webhook_mode", ClientUtils.ParameterToString(webhookMode.Value)));
+
+                    foreach (var formParamLocalVar in formParameterLocalVars)
+                        multipartContentLocalVar.Add(new StringContent(formParamLocalVar.Value ?? string.Empty), formParamLocalVar.Key);
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
@@ -711,11 +718,6 @@ namespace FactPulse.SDK.Api
                     string[] contentTypes = new string[] {
                         "multipart/form-data"
                     };
-
-                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
-
-                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
-                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"

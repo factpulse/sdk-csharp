@@ -27,7 +27,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Simplified invoice data (minimal format for auto-enrichment).
+    /// Simplified invoice data (minimal format for auto-enrichment).  Any field of the complete &#x60;FacturXInvoice&#x60; model may be added on top of the fields declared below (&#x60;deliveryDate&#x60; BT-72, &#x60;deliveryParty&#x60; BG-15, &#x60;paymentReference&#x60; BT-83, &#x60;payee&#x60; BG-10, ...): extra keys are kept and merged by &#x60;FacturXInvoice.create_from_simplified_dict&#x60;. Whatever the simplified format computes itself (totals, lines, addresses) always wins.
     /// </summary>
     public partial class SimplifiedInvoiceData : IValidatableObject
     {
@@ -35,8 +35,8 @@ namespace FactPulse.SDK.Model
         /// Initializes a new instance of the <see cref="SimplifiedInvoiceData" /> class.
         /// </summary>
         /// <param name="number">Unique invoice number</param>
-        /// <param name="supplier">Supplier information (siret, iban, ...)</param>
-        /// <param name="recipient">Recipient information (siret, ...)</param>
+        /// <param name="supplier">Supplier information (siret, iban, bic, routingAddress, ...). For a seller without an intra-community VAT number (VAT franchise, article 293 B of the CGI), provide &#x60;taxRegistrationId&#x60; (BT-32, usually the SIREN): it satisfies BR-E-02 and prevents BT-31 from being auto-calculated.</param>
+        /// <param name="recipient">Recipient information (siret, vatNumber for BT-48, ...)</param>
         /// <param name="lines">Invoice lines</param>
         /// <param name="date">date</param>
         /// <param name="dueDays">Due date in days (default: 30) (default to 30)</param>
@@ -48,7 +48,7 @@ namespace FactPulse.SDK.Model
         /// <param name="operationNature">operationNature</param>
         /// <param name="invoicingFramework">invoicingFramework</param>
         [JsonConstructor]
-        public SimplifiedInvoiceData(string number, Dictionary<string, Object> supplier, Dictionary<string, Object> recipient, List<Dictionary<string, Object>> lines, Option<string?> date = default, Option<int?> dueDays = default, Option<string?> comment = default, Option<string?> purchaseOrderReference = default, Option<string?> contractReference = default, Option<InvoiceTypeCode?> invoiceType = default, Option<string?> precedingInvoiceReference = default, Option<OperationNature?> operationNature = default, Option<InvoicingFrameworkCode?> invoicingFramework = default)
+        public SimplifiedInvoiceData(string number, Dictionary<string, Object> supplier, Dictionary<string, Object> recipient, List<Dictionary<string, Object>> lines, Option<string?> date = default, Option<int?> dueDays = default, Option<string?> comment = default, Option<string?> purchaseOrderReference = default, Option<string?> contractReference = default, Option<FactureElectroniqueModelsInvoiceTypeCode?> invoiceType = default, Option<string?> precedingInvoiceReference = default, Option<OperationNature?> operationNature = default, Option<InvoicingFrameworkCode?> invoicingFramework = default)
         {
             Number = number;
             Supplier = supplier;
@@ -73,14 +73,14 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<InvoiceTypeCode?> InvoiceTypeOption { get; private set; }
+        public Option<FactureElectroniqueModelsInvoiceTypeCode?> InvoiceTypeOption { get; private set; }
 
         /// <summary>
         /// Document type (UNTDID 1001). Default: 380 (Invoice).
         /// </summary>
         /// <value>Document type (UNTDID 1001). Default: 380 (Invoice).</value>
         [JsonPropertyName("invoiceType")]
-        public InvoiceTypeCode? InvoiceType { get { return this.InvoiceTypeOption; } set { this.InvoiceTypeOption = new(value); } }
+        public FactureElectroniqueModelsInvoiceTypeCode? InvoiceType { get { return this.InvoiceTypeOption.Value; } set { this.InvoiceTypeOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of OperationNature
@@ -93,7 +93,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets OperationNature
         /// </summary>
         [JsonPropertyName("operationNature")]
-        public OperationNature? OperationNature { get { return this.OperationNatureOption; } set { this.OperationNatureOption = new(value); } }
+        public OperationNature? OperationNature { get { return this.OperationNatureOption.Value; } set { this.OperationNatureOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of InvoicingFramework
@@ -106,7 +106,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets InvoicingFramework
         /// </summary>
         [JsonPropertyName("invoicingFramework")]
-        public InvoicingFrameworkCode? InvoicingFramework { get { return this.InvoicingFrameworkOption; } set { this.InvoicingFrameworkOption = new(value); } }
+        public InvoicingFrameworkCode? InvoicingFramework { get { return this.InvoicingFrameworkOption.Value; } set { this.InvoicingFrameworkOption = new(value); } }
 
         /// <summary>
         /// Unique invoice number
@@ -116,16 +116,16 @@ namespace FactPulse.SDK.Model
         public string Number { get; set; }
 
         /// <summary>
-        /// Supplier information (siret, iban, ...)
+        /// Supplier information (siret, iban, bic, routingAddress, ...). For a seller without an intra-community VAT number (VAT franchise, article 293 B of the CGI), provide &#x60;taxRegistrationId&#x60; (BT-32, usually the SIREN): it satisfies BR-E-02 and prevents BT-31 from being auto-calculated.
         /// </summary>
-        /// <value>Supplier information (siret, iban, ...)</value>
+        /// <value>Supplier information (siret, iban, bic, routingAddress, ...). For a seller without an intra-community VAT number (VAT franchise, article 293 B of the CGI), provide &#x60;taxRegistrationId&#x60; (BT-32, usually the SIREN): it satisfies BR-E-02 and prevents BT-31 from being auto-calculated.</value>
         [JsonPropertyName("supplier")]
         public Dictionary<string, Object> Supplier { get; set; }
 
         /// <summary>
-        /// Recipient information (siret, ...)
+        /// Recipient information (siret, vatNumber for BT-48, ...)
         /// </summary>
-        /// <value>Recipient information (siret, ...)</value>
+        /// <value>Recipient information (siret, vatNumber for BT-48, ...)</value>
         [JsonPropertyName("recipient")]
         public Dictionary<string, Object> Recipient { get; set; }
 
@@ -216,6 +216,12 @@ namespace FactPulse.SDK.Model
         public string? PrecedingInvoiceReference { get { return this.PrecedingInvoiceReferenceOption; } set { this.PrecedingInvoiceReferenceOption = new(value); } }
 
         /// <summary>
+        /// Gets or Sets additional properties
+        /// </summary>
+        [JsonExtensionData]
+        public Dictionary<string, JsonElement> AdditionalProperties { get; } = new Dictionary<string, JsonElement>();
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -236,6 +242,7 @@ namespace FactPulse.SDK.Model
             sb.Append("  PrecedingInvoiceReference: ").Append(PrecedingInvoiceReference).Append("\n");
             sb.Append("  OperationNature: ").Append(OperationNature).Append("\n");
             sb.Append("  InvoicingFramework: ").Append(InvoicingFramework).Append("\n");
+            sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -294,7 +301,7 @@ namespace FactPulse.SDK.Model
             Option<string?> comment = default;
             Option<string?> purchaseOrderReference = default;
             Option<string?> contractReference = default;
-            Option<InvoiceTypeCode?> invoiceType = default;
+            Option<FactureElectroniqueModelsInvoiceTypeCode?> invoiceType = default;
             Option<string?> precedingInvoiceReference = default;
             Option<OperationNature?> operationNature = default;
             Option<InvoicingFrameworkCode?> invoicingFramework = default;
@@ -344,7 +351,7 @@ namespace FactPulse.SDK.Model
                         case "invoiceType":
                             string? invoiceTypeRawValue = utf8JsonReader.GetString();
                             if (invoiceTypeRawValue != null)
-                                invoiceType = new Option<InvoiceTypeCode?>(InvoiceTypeCodeValueConverter.FromStringOrDefault(invoiceTypeRawValue));
+                                invoiceType = new Option<FactureElectroniqueModelsInvoiceTypeCode?>(FactureElectroniqueModelsInvoiceTypeCodeValueConverter.FromStringOrDefault(invoiceTypeRawValue));
                             break;
                         case "precedingInvoiceReference":
                             precedingInvoiceReference = new Option<string?>(utf8JsonReader.GetString());
@@ -471,7 +478,7 @@ namespace FactPulse.SDK.Model
 
             if (simplifiedInvoiceData.InvoiceTypeOption.IsSet)
             {
-                var invoiceTypeRawValue = InvoiceTypeCodeValueConverter.ToJsonValue(simplifiedInvoiceData.InvoiceType!.Value);
+                var invoiceTypeRawValue = FactureElectroniqueModelsInvoiceTypeCodeValueConverter.ToJsonValue(simplifiedInvoiceData.InvoiceType!.Value);
                 writer.WriteString("invoiceType", invoiceTypeRawValue);
             }
             if (simplifiedInvoiceData.PrecedingInvoiceReferenceOption.IsSet)

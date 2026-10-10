@@ -100,6 +100,15 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'VatRate'
+        /// </summary>
+        [Fact]
+        public void VatRateTest()
+        {
+            // TODO unit test for the property 'VatRate'
+        }
+
+        /// <summary>
         /// Test the property 'Currency'
         /// </summary>
         [Fact]

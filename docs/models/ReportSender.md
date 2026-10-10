@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Siren** | **string** | SIREN or SIRET number of the sender (PA or company) | 
 **Name** | **string** | Company name | 
+**SchemeId** | **string** |  | [optional] 
 **VatId** | **string** |  | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)

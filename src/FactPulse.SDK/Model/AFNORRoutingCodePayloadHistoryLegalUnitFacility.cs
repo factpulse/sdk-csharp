@@ -71,7 +71,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets AdministrativeStatus
         /// </summary>
         [JsonPropertyName("administrativeStatus")]
-        public AFNORRoutingCodeAdministrativeStatus? AdministrativeStatus { get { return this.AdministrativeStatusOption; } set { this.AdministrativeStatusOption = new(value); } }
+        public AFNORRoutingCodeAdministrativeStatus? AdministrativeStatus { get { return this.AdministrativeStatusOption.Value; } set { this.AdministrativeStatusOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of RoutingIdentifier

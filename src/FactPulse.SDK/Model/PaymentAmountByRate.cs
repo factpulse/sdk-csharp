@@ -36,11 +36,13 @@ namespace FactPulse.SDK.Model
         /// </summary>
         /// <param name="rate">rate</param>
         /// <param name="amount">amount</param>
+        /// <param name="amountEur">amountEur</param>
         [JsonConstructor]
-        public PaymentAmountByRate(Rate rate, Amount1 amount)
+        public PaymentAmountByRate(Rate rate, Amount2 amount, Option<Amounteur?> amountEur = default)
         {
             Rate = rate;
             Amount = amount;
+            AmountEurOption = amountEur;
             OnCreated();
         }
 
@@ -56,7 +58,20 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets Amount
         /// </summary>
         [JsonPropertyName("amount")]
-        public Amount1 Amount { get; set; }
+        public Amount2 Amount { get; set; }
+
+        /// <summary>
+        /// Used to track the state of AmountEur
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<Amounteur?> AmountEurOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets AmountEur
+        /// </summary>
+        [JsonPropertyName("amountEur")]
+        public Amounteur? AmountEur { get { return this.AmountEurOption; } set { this.AmountEurOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -68,6 +83,7 @@ namespace FactPulse.SDK.Model
             sb.Append("class PaymentAmountByRate {\n");
             sb.Append("  Rate: ").Append(Rate).Append("\n");
             sb.Append("  Amount: ").Append(Amount).Append("\n");
+            sb.Append("  AmountEur: ").Append(AmountEur).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -106,7 +122,8 @@ namespace FactPulse.SDK.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<Rate?> rate = default;
-            Option<Amount1?> amount = default;
+            Option<Amount2?> amount = default;
+            Option<Amounteur?> amountEur = default;
 
             while (utf8JsonReader.Read())
             {
@@ -127,7 +144,10 @@ namespace FactPulse.SDK.Model
                             rate = new Option<Rate?>(JsonSerializer.Deserialize<Rate>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "amount":
-                            amount = new Option<Amount1?>(JsonSerializer.Deserialize<Amount1>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            amount = new Option<Amount2?>(JsonSerializer.Deserialize<Amount2>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
+                        case "amountEur":
+                            amountEur = new Option<Amounteur?>(JsonSerializer.Deserialize<Amounteur>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;
@@ -147,7 +167,7 @@ namespace FactPulse.SDK.Model
             if (amount.IsSet && amount.Value == null)
                 throw new ArgumentNullException(nameof(amount), "Property is not nullable for class PaymentAmountByRate.");
 
-            return new PaymentAmountByRate(rate.Value!, amount.Value!);
+            return new PaymentAmountByRate(rate.Value!, amount.Value!, amountEur);
         }
 
         /// <summary>
@@ -184,6 +204,14 @@ namespace FactPulse.SDK.Model
             JsonSerializer.Serialize(writer, paymentAmountByRate.Rate, jsonSerializerOptions);
             writer.WritePropertyName("amount");
             JsonSerializer.Serialize(writer, paymentAmountByRate.Amount, jsonSerializerOptions);
+            if (paymentAmountByRate.AmountEurOption.IsSet)
+                if (paymentAmountByRate.AmountEurOption.Value != null)
+                {
+                    writer.WritePropertyName("amountEur");
+                    JsonSerializer.Serialize(writer, paymentAmountByRate.AmountEur, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("amountEur");
         }
     }
 }

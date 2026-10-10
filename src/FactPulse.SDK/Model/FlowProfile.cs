@@ -45,7 +45,12 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Enum ExtendedCTCFR for value: Extended-CTC-FR
         /// </summary>
-        ExtendedCTCFR = 3
+        ExtendedCTCFR = 3,
+
+        /// <summary>
+        /// Enum Undefined for value: Undefined
+        /// </summary>
+        Undefined = 4
     }
 
     /// <summary>
@@ -69,6 +74,9 @@ namespace FactPulse.SDK.Model
             if (value.Equals("Extended-CTC-FR"))
                 return FlowProfile.ExtendedCTCFR;
 
+            if (value.Equals("Undefined"))
+                return FlowProfile.Undefined;
+
             throw new NotImplementedException($"Could not convert value to type FlowProfile: '{value}'");
         }
 
@@ -87,6 +95,9 @@ namespace FactPulse.SDK.Model
 
             if (value.Equals("Extended-CTC-FR"))
                 return FlowProfile.ExtendedCTCFR;
+
+            if (value.Equals("Undefined"))
+                return FlowProfile.Undefined;
 
             return null;
         }
@@ -107,6 +118,9 @@ namespace FactPulse.SDK.Model
 
             if (value == FlowProfile.ExtendedCTCFR)
                 return "Extended-CTC-FR";
+
+            if (value == FlowProfile.Undefined)
+                return "Undefined";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }

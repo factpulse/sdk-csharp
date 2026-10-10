@@ -71,7 +71,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets AcknowledgmentStatus
         /// </summary>
         [JsonPropertyName("acknowledgmentStatus")]
-        public AcknowledgmentStatus? AcknowledgmentStatus { get { return this.AcknowledgmentStatusOption; } set { this.AcknowledgmentStatusOption = new(value); } }
+        public AcknowledgmentStatus? AcknowledgmentStatus { get { return this.AcknowledgmentStatusOption.Value; } set { this.AcknowledgmentStatusOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of UpdatedAfter

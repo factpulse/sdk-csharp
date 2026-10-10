@@ -56,11 +56,11 @@ Generates an electronic invoice compliant with European standards.  Supports **t
 
 <a id="submitcompleteinvoiceapiv1processinginvoicessubmitcompletepost"></a>
 # **SubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePost**
-> SubmitCompleteInvoiceResponse SubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePost (SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest)
+> SubmitCompleteInvoiceResponse SubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePost (SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, string organizationId = null)
 
 Submit a complete invoice (generation + signature + submission)
 
-Unified endpoint to submit a complete invoice to different destinations.     **Facture prête pour Flux 2** - Génère une facture Factur-X complète avec signature optionnelle et soumission vers Chorus Pro ou PDP AFNOR.      **Automated workflow:**     1. **Auto-enrichment** (optional): retrieves data via public APIs and Chorus Pro/AFNOR     2. **Factur-X PDF generation**: creates a PDF/A-3 with embedded XML     3. **Electronic signature** (optional): signs the PDF with a certificate     4. **Submission**: sends to the chosen destination (Chorus Pro or AFNOR PDP)      **Supported destinations:**     - **Chorus Pro**: French B2G platform (invoices to public sector)     - **AFNOR PDP**: Partner Dematerialization Platforms      **Destination credentials - 2 modes available:**      **Mode 1 - Retrieval via JWT (recommended):**     - Credentials are retrieved automatically via the JWT `client_uid`     - Do not provide the `credentials` field in `destination`     - Zero-trust architecture: no secrets in the payload     - Example: `\"destination\": {\"type\": \"chorus_pro\"}`      **Mode 2 - Credentials in the payload:**     - Provide credentials directly in the payload     - Useful for tests or third-party integrations     - Example: `\"destination\": {\"type\": \"chorus_pro\", \"credentials\": {...}}`       **Electronic signature (optional) - 2 modes available:**      **Mode 1 - Stored certificate (recommended):**     - Certificate is retrieved automatically via the JWT `client_uid`     - No key to provide in the payload     - PAdES-B-LT signature with timestamp (eIDAS compliant)     - Example: `\"signature\": {\"reason\": \"Factur-X compliance\"}`      **Mode 2 - Keys in the payload (for tests):**     - Provide `key_pem` and `cert_pem` directly     - PEM format accepted: raw or base64     - Useful for tests or special cases without stored certificate     - Example: `\"signature\": {\"key_pem\": \"- -- --BEGIN...\", \"cert_pem\": \"- -- --BEGIN...\"}`      If `key_pem` and `cert_pem` are provided → Mode 2     Otherwise → Mode 1 (certificate retrieved via `client_uid`)
+Unified endpoint to submit a complete invoice to different destinations.     **Facture prête pour Flux 2** - Génère une facture Factur-X complète avec signature optionnelle et soumission vers Chorus Pro ou PDP AFNOR.      **Automated workflow:**     1. **Auto-enrichment** (optional): retrieves data via public APIs and Chorus Pro/AFNOR     2. **Factur-X PDF generation**: creates a PDF/A-3 with embedded XML     3. **Electronic signature** (optional): signs the PDF with a certificate     4. **Submission**: sends to the chosen destination (Chorus Pro or AFNOR PDP)      **Two accepted `invoiceData` formats, detected automatically** (same rule as     `/generate-invoice`):     - **Simplified format** (`number` + `lines`): totals, VAT and dates are computed.       Any field of the complete model may be added on top (`deliveryDate` BT-72,       `deliveryParty` BG-15, `paymentReference` BT-83, `supplier.bic` BT-86, ...).     - **Complete format** (`invoiceLines` present): full `FacturXInvoice` structure,       used as provided.      A non-compliant invoice is **not submitted**: the Schematron errors are returned     as a 400 `SCHEMATRON_VALIDATION_FAILED`, rather than a 200 followed by an     asynchronous rejection by the PA. This includes the empty-element rule     (PEPPOL-EN16931-R008), which the PAs apply as blocking.      **Supported destinations:**     - **Chorus Pro**: French B2G platform (invoices to public sector)     - **AFNOR PDP**: Partner Dematerialization Platforms      **Destination credentials - 2 modes available:**      **Mode 1 - Retrieval via JWT (recommended):**     - Credentials are retrieved automatically via the JWT `client_uid`     - Do not provide the `credentials` field in `destination`     - Zero-trust architecture: no secrets in the payload     - Example: `\"destination\": {\"type\": \"chorus_pro\"}`      **Mode 2 - Credentials in the payload:**     - Provide credentials directly in the payload     - Useful for tests or third-party integrations     - Example: `\"destination\": {\"type\": \"chorus_pro\", \"credentials\": {...}}`       **Electronic signature (optional) - 2 modes available:**      **Mode 1 - Stored certificate (recommended):**     - Certificate is retrieved automatically via the JWT `client_uid`     - No key to provide in the payload     - PAdES-B-LT signature with timestamp (eIDAS compliant)     - Example: `\"signature\": {\"reason\": \"Factur-X compliance\"}`      **Mode 2 - Keys in the payload (for tests):**     - Provide `key_pem` and `cert_pem` directly     - PEM format accepted: raw or base64     - Useful for tests or special cases without stored certificate     - Example: `\"signature\": {\"key_pem\": \"- -- --BEGIN...\", \"cert_pem\": \"- -- --BEGIN...\"}`      If `key_pem` and `cert_pem` are provided → Mode 2     Otherwise → Mode 1 (certificate retrieved via `client_uid`)
 
 
 ### Parameters
@@ -68,6 +68,7 @@ Unified endpoint to submit a complete invoice to different destinations.     **F
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **submitCompleteInvoiceRequest** | [**SubmitCompleteInvoiceRequest**](SubmitCompleteInvoiceRequest.md) |  |  |
+| **organizationId** | **string** | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. | [optional]  |
 
 ### Return type
 
@@ -94,7 +95,7 @@ Unified endpoint to submit a complete invoice to different destinations.     **F
 
 <a id="submitcompleteinvoiceasyncapiv1processinginvoicessubmitcompleteasyncpost"></a>
 # **SubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPost**
-> TaskResponse SubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPost (SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, string callbackUrl = null, string webhookMode = null)
+> TaskResponse SubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPost (SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest, string callbackUrl = null, string webhookMode = null, string organizationId = null)
 
 Submit a complete invoice (asynchronous with Celery)
 
@@ -108,6 +109,7 @@ Asynchronous version of the `/invoices/submit-complete` endpoint using Celery fo
 | **submitCompleteInvoiceRequest** | [**SubmitCompleteInvoiceRequest**](SubmitCompleteInvoiceRequest.md) |  |  |
 | **callbackUrl** | **string** | Webhook URL for async notification when submission completes. | [optional]  |
 | **webhookMode** | **string** | Webhook content delivery: &#39;inline&#39; (base64 in payload) or &#39;download_url&#39; (temporary URL, 1h TTL) | [optional] [default to &quot;inline&quot;] |
+| **organizationId** | **string** | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. | [optional]  |
 
 ### Return type
 

@@ -43,7 +43,7 @@ namespace FactPulse.SDK.Model
         /// <param name="vatCategory">vatCategory</param>
         /// <param name="vatRate">vatRate</param>
         [JsonConstructor]
-        public AllowanceCharge(bool isCharge, Amount2 amount, Option<BaseAmount?> baseAmount = default, Option<Percentage?> percentage = default, Option<string?> reason = default, Option<AllowanceChargeReasonCode?> reasonCode = default, Option<VATCategory?> vatCategory = default, Option<VatRate?> vatRate = default)
+        public AllowanceCharge(bool isCharge, Amount amount, Option<BaseAmount?> baseAmount = default, Option<Percentage?> percentage = default, Option<string?> reason = default, Option<AllowanceChargeReasonCode?> reasonCode = default, Option<VATCategory?> vatCategory = default, Option<VatRate?> vatRate = default)
         {
             IsCharge = isCharge;
             Amount = amount;
@@ -69,7 +69,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets ReasonCode
         /// </summary>
         [JsonPropertyName("reason_code")]
-        public AllowanceChargeReasonCode? ReasonCode { get { return this.ReasonCodeOption; } set { this.ReasonCodeOption = new(value); } }
+        public AllowanceChargeReasonCode? ReasonCode { get { return this.ReasonCodeOption.Value; } set { this.ReasonCodeOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of VatCategory
@@ -82,7 +82,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets VatCategory
         /// </summary>
         [JsonPropertyName("vat_category")]
-        public VATCategory? VatCategory { get { return this.VatCategoryOption; } set { this.VatCategoryOption = new(value); } }
+        public VATCategory? VatCategory { get { return this.VatCategoryOption.Value; } set { this.VatCategoryOption = new(value); } }
 
         /// <summary>
         /// True for charge, False for allowance (ChargeIndicator).
@@ -95,7 +95,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets Amount
         /// </summary>
         [JsonPropertyName("amount")]
-        public Amount2 Amount { get; set; }
+        public Amount Amount { get; set; }
 
         /// <summary>
         /// Used to track the state of BaseAmount
@@ -203,7 +203,7 @@ namespace FactPulse.SDK.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<bool?> isCharge = default;
-            Option<Amount2?> amount = default;
+            Option<Amount?> amount = default;
             Option<BaseAmount?> baseAmount = default;
             Option<Percentage?> percentage = default;
             Option<string?> reason = default;
@@ -230,7 +230,7 @@ namespace FactPulse.SDK.Model
                             isCharge = new Option<bool?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (bool?)null : utf8JsonReader.GetBoolean());
                             break;
                         case "amount":
-                            amount = new Option<Amount2?>(JsonSerializer.Deserialize<Amount2>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            amount = new Option<Amount?>(JsonSerializer.Deserialize<Amount>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "base_amount":
                             baseAmount = new Option<BaseAmount?>(JsonSerializer.Deserialize<BaseAmount>(ref utf8JsonReader, jsonSerializerOptions));

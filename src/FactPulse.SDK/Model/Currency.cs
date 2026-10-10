@@ -55,7 +55,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets CurrencyCode
         /// </summary>
-        public CurrencyCode? CurrencyCode { get { return this.CurrencyCodeOption; } set { this.CurrencyCodeOption = new(value); } }
+        public CurrencyCode? CurrencyCode { get { return this.CurrencyCodeOption.Value; } set { this.CurrencyCodeOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of String
@@ -67,7 +67,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets String
         /// </summary>
-        public string? String { get { return this.StringOption; } set { this.StringOption = new(value); } }
+        public string? String { get { return this.StringOption.Value; } set { this.StringOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object

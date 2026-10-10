@@ -73,6 +73,15 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'DirectoryLineStatus'
+        /// </summary>
+        [Fact]
+        public void DirectoryLineStatusTest()
+        {
+            // TODO unit test for the property 'DirectoryLineStatus'
+        }
+
+        /// <summary>
         /// Test the property 'Siren'
         /// </summary>
         [Fact]
@@ -88,6 +97,15 @@ namespace FactPulse.SDK.Test.Model
         public void SiretTest()
         {
             // TODO unit test for the property 'Siret'
+        }
+
+        /// <summary>
+        /// Test the property 'RoutingIdentifier'
+        /// </summary>
+        [Fact]
+        public void RoutingIdentifierTest()
+        {
+            // TODO unit test for the property 'RoutingIdentifier'
         }
 
         /// <summary>

@@ -57,7 +57,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets Field
         /// </summary>
         [JsonPropertyName("field")]
-        public AFNORRoutingCodeField? Field { get { return this.FieldOption; } set { this.FieldOption = new(value); } }
+        public AFNORRoutingCodeField? Field { get { return this.FieldOption.Value; } set { this.FieldOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Order
@@ -70,7 +70,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets Order
         /// </summary>
         [JsonPropertyName("order")]
-        public AFNORSortingOrder? Order { get { return this.OrderOption; } set { this.OrderOption = new(value); } }
+        public AFNORSortingOrder? Order { get { return this.OrderOption.Value; } set { this.OrderOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object

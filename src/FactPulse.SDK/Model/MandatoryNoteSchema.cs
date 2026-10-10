@@ -68,7 +68,7 @@ namespace FactPulse.SDK.Model
         /// </summary>
         /// <value>Compliance status (COMPLIANT if XML found in PDF)</value>
         [JsonPropertyName("status")]
-        public FieldStatus? Status { get { return this.StatusOption; } set { this.StatusOption = new(value); } }
+        public FieldStatus? Status { get { return this.StatusOption.Value; } set { this.StatusOption = new(value); } }
 
         /// <summary>
         /// Subject code (PMT, PMD, AAB)

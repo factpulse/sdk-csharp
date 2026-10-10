@@ -49,7 +49,7 @@ namespace FactPulse.SDK.Api
         /// <param name="callbackUrl"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostApiResponse"/>&gt;</returns>
-        Task<IParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostApiResponse> ParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostAsync(System.IO.Stream file, Option<string?> callbackUrl = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostApiResponse> ParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostAsync(FactPulse.SDK.Client.FileParameter file, Option<string?> callbackUrl = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Parse Factur-X XML or PDF (async)
@@ -61,7 +61,7 @@ namespace FactPulse.SDK.Api
         /// <param name="callbackUrl"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostApiResponse"/>?&gt;</returns>
-        Task<IParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostApiResponse?> ParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostOrDefaultAsync(System.IO.Stream file, Option<string?> callbackUrl = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostApiResponse?> ParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostOrDefaultAsync(FactPulse.SDK.Client.FileParameter file, Option<string?> callbackUrl = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Parse CII, UBL or Factur-X PDF (sync)
@@ -73,7 +73,7 @@ namespace FactPulse.SDK.Api
         /// <param name="file">Factur-X PDF or XML file to parse</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IParseFacturxSyncApiV1ProcessingParseFacturxPostApiResponse"/>&gt;</returns>
-        Task<IParseFacturxSyncApiV1ProcessingParseFacturxPostApiResponse> ParseFacturxSyncApiV1ProcessingParseFacturxPostAsync(System.IO.Stream file, System.Threading.CancellationToken cancellationToken = default);
+        Task<IParseFacturxSyncApiV1ProcessingParseFacturxPostApiResponse> ParseFacturxSyncApiV1ProcessingParseFacturxPostAsync(FactPulse.SDK.Client.FileParameter file, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Parse CII, UBL or Factur-X PDF (sync)
@@ -84,7 +84,7 @@ namespace FactPulse.SDK.Api
         /// <param name="file">Factur-X PDF or XML file to parse</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IParseFacturxSyncApiV1ProcessingParseFacturxPostApiResponse"/>?&gt;</returns>
-        Task<IParseFacturxSyncApiV1ProcessingParseFacturxPostApiResponse?> ParseFacturxSyncApiV1ProcessingParseFacturxPostOrDefaultAsync(System.IO.Stream file, System.Threading.CancellationToken cancellationToken = default);
+        Task<IParseFacturxSyncApiV1ProcessingParseFacturxPostApiResponse?> ParseFacturxSyncApiV1ProcessingParseFacturxPostOrDefaultAsync(FactPulse.SDK.Client.FileParameter file, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -241,14 +241,14 @@ namespace FactPulse.SDK.Api
             BearerTokenProvider = bearerTokenProvider;
         }
 
-        partial void FormatParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPost(ref System.IO.Stream file, ref Option<string?> callbackUrl);
+        partial void FormatParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPost(ref FactPulse.SDK.Client.FileParameter file, ref Option<string?> callbackUrl);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
-        private void ValidateParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPost(System.IO.Stream file)
+        private void ValidateParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPost(FactPulse.SDK.Client.FileParameter file)
         {
             if (file == null)
                 throw new ArgumentNullException(nameof(file));
@@ -260,7 +260,7 @@ namespace FactPulse.SDK.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="file"></param>
         /// <param name="callbackUrl"></param>
-        private void AfterParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostDefaultImplementation(IParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostApiResponse apiResponseLocalVar, System.IO.Stream file, Option<string?> callbackUrl)
+        private void AfterParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostDefaultImplementation(IParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter file, Option<string?> callbackUrl)
         {
             bool suppressDefaultLog = false;
             AfterParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPost(ref suppressDefaultLog, apiResponseLocalVar, file, callbackUrl);
@@ -275,7 +275,7 @@ namespace FactPulse.SDK.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="file"></param>
         /// <param name="callbackUrl"></param>
-        partial void AfterParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPost(ref bool suppressDefaultLog, IParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostApiResponse apiResponseLocalVar, System.IO.Stream file, Option<string?> callbackUrl);
+        partial void AfterParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPost(ref bool suppressDefaultLog, IParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter file, Option<string?> callbackUrl);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -285,7 +285,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pathLocalVar"></param>
         /// <param name="file"></param>
         /// <param name="callbackUrl"></param>
-        private void OnErrorParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream file, Option<string?> callbackUrl)
+        private void OnErrorParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter file, Option<string?> callbackUrl)
         {
             bool suppressDefaultLogLocalVar = false;
             OnErrorParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, file, callbackUrl);
@@ -302,7 +302,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pathLocalVar"></param>
         /// <param name="file"></param>
         /// <param name="callbackUrl"></param>
-        partial void OnErrorParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream file, Option<string?> callbackUrl);
+        partial void OnErrorParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter file, Option<string?> callbackUrl);
 
         /// <summary>
         /// Parse Factur-X XML or PDF (async) Parse a Factur-X file asynchronously using a Celery task.  **Use case:** For large files or when you want non-blocking processing.  **Workflow:** 1. Submit file with this endpoint -&gt; receive &#x60;task_id&#x60; 2. Poll &#x60;/tasks/{task_id}/status&#x60; for result 3. Result contains &#x60;invoice&#x60; and &#x60;detected_profile&#x60;  **Optional:** Provide &#x60;callback_url&#x60; to receive a webhook when parsing completes.
@@ -311,7 +311,7 @@ namespace FactPulse.SDK.Api
         /// <param name="callbackUrl"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostApiResponse"/>&gt;</returns>
-        public async Task<IParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostApiResponse?> ParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostOrDefaultAsync(System.IO.Stream file, Option<string?> callbackUrl = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostApiResponse?> ParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostOrDefaultAsync(FactPulse.SDK.Client.FileParameter file, Option<string?> callbackUrl = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -331,7 +331,7 @@ namespace FactPulse.SDK.Api
         /// <param name="callbackUrl"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostApiResponse"/>&gt;</returns>
-        public async Task<IParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostApiResponse> ParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostAsync(System.IO.Stream file, Option<string?> callbackUrl = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostApiResponse> ParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostAsync(FactPulse.SDK.Client.FileParameter file, Option<string?> callbackUrl = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -350,16 +350,23 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/processing/parse-facturx/async"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/processing/parse-facturx/async");
 
-                    MultipartContent multipartContentLocalVar = new MultipartContent();
+                    MultipartFormDataContent multipartContentLocalVar = new MultipartFormDataContent();
 
                     httpRequestMessageLocalVar.Content = multipartContentLocalVar;
 
-                    List<KeyValuePair<string?, string?>> formParameterLocalVars = new List<KeyValuePair<string?, string?>>();
+                    List<KeyValuePair<string, string?>> formParameterLocalVars = new List<KeyValuePair<string, string?>>();
 
-                    multipartContentLocalVar.Add(new FormUrlEncodedContent(formParameterLocalVars));                    multipartContentLocalVar.Add(new StreamContent(file));
+                    {
+                        var streamContentLocalVar = new StreamContent(file.Content);
+                        streamContentLocalVar.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
+                        multipartContentLocalVar.Add(streamContentLocalVar, "file", file.FileName ?? "file");
+                    }
 
                     if (callbackUrl.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("callbackUrl", ClientUtils.ParameterToString(callbackUrl.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("callbackUrl", ClientUtils.ParameterToString(callbackUrl.Value)));
+
+                    foreach (var formParamLocalVar in formParameterLocalVars)
+                        multipartContentLocalVar.Add(new StringContent(formParamLocalVar.Value ?? string.Empty), formParamLocalVar.Key);
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
@@ -377,11 +384,6 @@ namespace FactPulse.SDK.Api
                     string[] contentTypes = new string[] {
                         "multipart/form-data"
                     };
-
-                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
-
-                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
-                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -599,14 +601,14 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatParseFacturxSyncApiV1ProcessingParseFacturxPost(ref System.IO.Stream file);
+        partial void FormatParseFacturxSyncApiV1ProcessingParseFacturxPost(ref FactPulse.SDK.Client.FileParameter file);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
         /// <param name="file"></param>
         /// <returns></returns>
-        private void ValidateParseFacturxSyncApiV1ProcessingParseFacturxPost(System.IO.Stream file)
+        private void ValidateParseFacturxSyncApiV1ProcessingParseFacturxPost(FactPulse.SDK.Client.FileParameter file)
         {
             if (file == null)
                 throw new ArgumentNullException(nameof(file));
@@ -617,7 +619,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="file"></param>
-        private void AfterParseFacturxSyncApiV1ProcessingParseFacturxPostDefaultImplementation(IParseFacturxSyncApiV1ProcessingParseFacturxPostApiResponse apiResponseLocalVar, System.IO.Stream file)
+        private void AfterParseFacturxSyncApiV1ProcessingParseFacturxPostDefaultImplementation(IParseFacturxSyncApiV1ProcessingParseFacturxPostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter file)
         {
             bool suppressDefaultLog = false;
             AfterParseFacturxSyncApiV1ProcessingParseFacturxPost(ref suppressDefaultLog, apiResponseLocalVar, file);
@@ -631,7 +633,7 @@ namespace FactPulse.SDK.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="file"></param>
-        partial void AfterParseFacturxSyncApiV1ProcessingParseFacturxPost(ref bool suppressDefaultLog, IParseFacturxSyncApiV1ProcessingParseFacturxPostApiResponse apiResponseLocalVar, System.IO.Stream file);
+        partial void AfterParseFacturxSyncApiV1ProcessingParseFacturxPost(ref bool suppressDefaultLog, IParseFacturxSyncApiV1ProcessingParseFacturxPostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter file);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -640,7 +642,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="file"></param>
-        private void OnErrorParseFacturxSyncApiV1ProcessingParseFacturxPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream file)
+        private void OnErrorParseFacturxSyncApiV1ProcessingParseFacturxPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter file)
         {
             bool suppressDefaultLogLocalVar = false;
             OnErrorParseFacturxSyncApiV1ProcessingParseFacturxPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, file);
@@ -656,7 +658,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="file"></param>
-        partial void OnErrorParseFacturxSyncApiV1ProcessingParseFacturxPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream file);
+        partial void OnErrorParseFacturxSyncApiV1ProcessingParseFacturxPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter file);
 
         /// <summary>
         /// Parse CII, UBL or Factur-X PDF (sync) Parse a CII XML, UBL XML, or Factur-X PDF and extract the invoice data as a FacturXInvoice model.  **Use cases:** - Extract invoice data from received invoices (any format) - Round-trip: parse an existing invoice, modify it, and regenerate in another format - Convert between CII and UBL via the FacturXInvoice pivot model  **Supported formats:** - Factur-X PDF (PDF/A-3 with embedded CII XML) - CII XML (UN/CEFACT Cross-Industry Invoice) - UBL 2.1 XML (OASIS Invoice or CreditNote)  **Returns:** - &#x60;invoice&#x60;: Complete FacturXInvoice data (can be used with /generate-invoice) - &#x60;detected_profile&#x60;: Factur-X profile (MINIMUM, BASIC, EN16931, EXTENDED)
@@ -664,7 +666,7 @@ namespace FactPulse.SDK.Api
         /// <param name="file">Factur-X PDF or XML file to parse</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IParseFacturxSyncApiV1ProcessingParseFacturxPostApiResponse"/>&gt;</returns>
-        public async Task<IParseFacturxSyncApiV1ProcessingParseFacturxPostApiResponse?> ParseFacturxSyncApiV1ProcessingParseFacturxPostOrDefaultAsync(System.IO.Stream file, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IParseFacturxSyncApiV1ProcessingParseFacturxPostApiResponse?> ParseFacturxSyncApiV1ProcessingParseFacturxPostOrDefaultAsync(FactPulse.SDK.Client.FileParameter file, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -683,7 +685,7 @@ namespace FactPulse.SDK.Api
         /// <param name="file">Factur-X PDF or XML file to parse</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IParseFacturxSyncApiV1ProcessingParseFacturxPostApiResponse"/>&gt;</returns>
-        public async Task<IParseFacturxSyncApiV1ProcessingParseFacturxPostApiResponse> ParseFacturxSyncApiV1ProcessingParseFacturxPostAsync(System.IO.Stream file, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IParseFacturxSyncApiV1ProcessingParseFacturxPostApiResponse> ParseFacturxSyncApiV1ProcessingParseFacturxPostAsync(FactPulse.SDK.Client.FileParameter file, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -702,13 +704,20 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/processing/parse-facturx"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/processing/parse-facturx");
 
-                    MultipartContent multipartContentLocalVar = new MultipartContent();
+                    MultipartFormDataContent multipartContentLocalVar = new MultipartFormDataContent();
 
                     httpRequestMessageLocalVar.Content = multipartContentLocalVar;
 
-                    List<KeyValuePair<string?, string?>> formParameterLocalVars = new List<KeyValuePair<string?, string?>>();
+                    List<KeyValuePair<string, string?>> formParameterLocalVars = new List<KeyValuePair<string, string?>>();
 
-                    multipartContentLocalVar.Add(new FormUrlEncodedContent(formParameterLocalVars));                    multipartContentLocalVar.Add(new StreamContent(file));
+                    {
+                        var streamContentLocalVar = new StreamContent(file.Content);
+                        streamContentLocalVar.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
+                        multipartContentLocalVar.Add(streamContentLocalVar, "file", file.FileName ?? "file");
+                    }
+
+                    foreach (var formParamLocalVar in formParameterLocalVars)
+                        multipartContentLocalVar.Add(new StringContent(formParamLocalVar.Value ?? string.Empty), formParamLocalVar.Key);
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
@@ -726,11 +735,6 @@ namespace FactPulse.SDK.Api
                     string[] contentTypes = new string[] {
                         "multipart/form-data"
                     };
-
-                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
-
-                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
-                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"

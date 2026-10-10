@@ -42,7 +42,7 @@ namespace FactPulse.SDK.Api
         /// Create a webhook
         /// </summary>
         /// <remarks>
-        /// Register a new webhook subscription (AFNOR XP Z12-013 v1.2.0)
+        /// Register a new webhook subscription (AFNOR XP Z12-013 v1.3.0)
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -53,7 +53,7 @@ namespace FactPulse.SDK.Api
         /// Create a webhook
         /// </summary>
         /// <remarks>
-        /// Register a new webhook subscription (AFNOR XP Z12-013 v1.2.0)
+        /// Register a new webhook subscription (AFNOR XP Z12-013 v1.3.0)
         /// </remarks>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateWebhookProxyApiV1AfnorFlowV1WebhooksPostApiResponse"/>?&gt;</returns>
@@ -63,7 +63,7 @@ namespace FactPulse.SDK.Api
         /// Delete a webhook
         /// </summary>
         /// <remarks>
-        /// Delete a webhook subscription (AFNOR XP Z12-013 v1.2.0)
+        /// Delete a webhook subscription (AFNOR XP Z12-013 v1.3.0)
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="webhookUid">Webhook unique identifier (UUID)</param>
@@ -75,7 +75,7 @@ namespace FactPulse.SDK.Api
         /// Delete a webhook
         /// </summary>
         /// <remarks>
-        /// Delete a webhook subscription (AFNOR XP Z12-013 v1.2.0)
+        /// Delete a webhook subscription (AFNOR XP Z12-013 v1.3.0)
         /// </remarks>
         /// <param name="webhookUid">Webhook unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -129,33 +129,10 @@ namespace FactPulse.SDK.Api
         Task<IFlowHealthcheckProxyApiV1AfnorFlowV1HealthcheckGetApiResponse?> FlowHealthcheckProxyApiV1AfnorFlowV1HealthcheckGetOrDefaultAsync(System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Get a webhook
-        /// </summary>
-        /// <remarks>
-        /// Get details of a specific webhook (AFNOR XP Z12-013 v1.2.0)
-        /// </remarks>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="webhookUid">Webhook unique identifier (UUID)</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetApiResponse"/>&gt;</returns>
-        Task<IGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetApiResponse> GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetAsync(string webhookUid, System.Threading.CancellationToken cancellationToken = default);
-
-        /// <summary>
-        /// Get a webhook
-        /// </summary>
-        /// <remarks>
-        /// Get details of a specific webhook (AFNOR XP Z12-013 v1.2.0)
-        /// </remarks>
-        /// <param name="webhookUid">Webhook unique identifier (UUID)</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetApiResponse"/>?&gt;</returns>
-        Task<IGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetApiResponse?> GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetOrDefaultAsync(string webhookUid, System.Threading.CancellationToken cancellationToken = default);
-
-        /// <summary>
         /// List webhooks
         /// </summary>
         /// <remarks>
-        /// List all registered webhooks (AFNOR XP Z12-013 v1.2.0)
+        /// List all registered webhooks (AFNOR XP Z12-013 v1.3.0)
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -166,7 +143,7 @@ namespace FactPulse.SDK.Api
         /// List webhooks
         /// </summary>
         /// <remarks>
-        /// List all registered webhooks (AFNOR XP Z12-013 v1.2.0)
+        /// List all registered webhooks (AFNOR XP Z12-013 v1.3.0)
         /// </remarks>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IListWebhooksProxyApiV1AfnorFlowV1WebhooksGetApiResponse"/>?&gt;</returns>
@@ -206,7 +183,7 @@ namespace FactPulse.SDK.Api
         /// <param name="file">Flow file (PDF/A-3 with embedded XML or XML)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitFlowProxyApiV1AfnorFlowV1FlowsPostApiResponse"/>&gt;</returns>
-        Task<ISubmitFlowProxyApiV1AfnorFlowV1FlowsPostApiResponse> SubmitFlowProxyApiV1AfnorFlowV1FlowsPostAsync(AFNORFlowInfo flowInfo, System.IO.Stream file, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISubmitFlowProxyApiV1AfnorFlowV1FlowsPostApiResponse> SubmitFlowProxyApiV1AfnorFlowV1FlowsPostAsync(AFNORFlowInfo flowInfo, FactPulse.SDK.Client.FileParameter file, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Submit an invoicing flow
@@ -218,30 +195,7 @@ namespace FactPulse.SDK.Api
         /// <param name="file">Flow file (PDF/A-3 with embedded XML or XML)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitFlowProxyApiV1AfnorFlowV1FlowsPostApiResponse"/>?&gt;</returns>
-        Task<ISubmitFlowProxyApiV1AfnorFlowV1FlowsPostApiResponse?> SubmitFlowProxyApiV1AfnorFlowV1FlowsPostOrDefaultAsync(AFNORFlowInfo flowInfo, System.IO.Stream file, System.Threading.CancellationToken cancellationToken = default);
-
-        /// <summary>
-        /// Update a webhook
-        /// </summary>
-        /// <remarks>
-        /// Partially update a webhook subscription (AFNOR XP Z12-013 v1.2.0)
-        /// </remarks>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="webhookUid">Webhook unique identifier (UUID)</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchApiResponse"/>&gt;</returns>
-        Task<IUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchApiResponse> UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchAsync(string webhookUid, System.Threading.CancellationToken cancellationToken = default);
-
-        /// <summary>
-        /// Update a webhook
-        /// </summary>
-        /// <remarks>
-        /// Partially update a webhook subscription (AFNOR XP Z12-013 v1.2.0)
-        /// </remarks>
-        /// <param name="webhookUid">Webhook unique identifier (UUID)</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchApiResponse"/>?&gt;</returns>
-        Task<IUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchApiResponse?> UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchOrDefaultAsync(string webhookUid, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISubmitFlowProxyApiV1AfnorFlowV1FlowsPostApiResponse?> SubmitFlowProxyApiV1AfnorFlowV1FlowsPostOrDefaultAsync(AFNORFlowInfo flowInfo, FactPulse.SDK.Client.FileParameter file, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -449,60 +403,6 @@ namespace FactPulse.SDK.Api
     }
 
     /// <summary>
-    /// The <see cref="IGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetApiResponse"/>
-    /// </summary>
-    public interface IGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.AFNORWebhook?>, IUnauthorized<FactPulse.SDK.Model.AFNORError?>, IForbidden<FactPulse.SDK.Model.AFNORError?>, INotFound<FactPulse.SDK.Model.AFNORError?>, ITooManyRequests<FactPulse.SDK.Model.AFNORError?>, IInternalServerError<FactPulse.SDK.Model.AFNORError?>, IServiceUnavailable<FactPulse.SDK.Model.AFNORError?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>
-    {
-        /// <summary>
-        /// Returns true if the response is 200 Ok
-        /// </summary>
-        /// <returns></returns>
-        bool IsOk { get; }
-
-        /// <summary>
-        /// Returns true if the response is 401 Unauthorized
-        /// </summary>
-        /// <returns></returns>
-        bool IsUnauthorized { get; }
-
-        /// <summary>
-        /// Returns true if the response is 403 Forbidden
-        /// </summary>
-        /// <returns></returns>
-        bool IsForbidden { get; }
-
-        /// <summary>
-        /// Returns true if the response is 404 NotFound
-        /// </summary>
-        /// <returns></returns>
-        bool IsNotFound { get; }
-
-        /// <summary>
-        /// Returns true if the response is 429 TooManyRequests
-        /// </summary>
-        /// <returns></returns>
-        bool IsTooManyRequests { get; }
-
-        /// <summary>
-        /// Returns true if the response is 500 InternalServerError
-        /// </summary>
-        /// <returns></returns>
-        bool IsInternalServerError { get; }
-
-        /// <summary>
-        /// Returns true if the response is 503 ServiceUnavailable
-        /// </summary>
-        /// <returns></returns>
-        bool IsServiceUnavailable { get; }
-
-        /// <summary>
-        /// Returns true if the response is 422 UnprocessableContent
-        /// </summary>
-        /// <returns></returns>
-        bool IsUnprocessableContent { get; }
-    }
-
-    /// <summary>
     /// The <see cref="IListWebhooksProxyApiV1AfnorFlowV1WebhooksGetApiResponse"/>
     /// </summary>
     public interface IListWebhooksProxyApiV1AfnorFlowV1WebhooksGetApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<List<AFNORWebhook>?>, IUnauthorized<FactPulse.SDK.Model.AFNORError?>, IForbidden<FactPulse.SDK.Model.AFNORError?>, ITooManyRequests<FactPulse.SDK.Model.AFNORError?>, IInternalServerError<FactPulse.SDK.Model.AFNORError?>, IServiceUnavailable<FactPulse.SDK.Model.AFNORError?>
@@ -665,66 +565,6 @@ namespace FactPulse.SDK.Api
     }
 
     /// <summary>
-    /// The <see cref="IUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchApiResponse"/>
-    /// </summary>
-    public interface IUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.AFNORWebhook?>, IBadRequest<FactPulse.SDK.Model.AFNORError?>, IUnauthorized<FactPulse.SDK.Model.AFNORError?>, IForbidden<FactPulse.SDK.Model.AFNORError?>, INotFound<FactPulse.SDK.Model.AFNORError?>, IUnprocessableContent<FactPulse.SDK.Model.AFNORError?>, ITooManyRequests<FactPulse.SDK.Model.AFNORError?>, IInternalServerError<FactPulse.SDK.Model.AFNORError?>, IServiceUnavailable<FactPulse.SDK.Model.AFNORError?>
-    {
-        /// <summary>
-        /// Returns true if the response is 200 Ok
-        /// </summary>
-        /// <returns></returns>
-        bool IsOk { get; }
-
-        /// <summary>
-        /// Returns true if the response is 400 BadRequest
-        /// </summary>
-        /// <returns></returns>
-        bool IsBadRequest { get; }
-
-        /// <summary>
-        /// Returns true if the response is 401 Unauthorized
-        /// </summary>
-        /// <returns></returns>
-        bool IsUnauthorized { get; }
-
-        /// <summary>
-        /// Returns true if the response is 403 Forbidden
-        /// </summary>
-        /// <returns></returns>
-        bool IsForbidden { get; }
-
-        /// <summary>
-        /// Returns true if the response is 404 NotFound
-        /// </summary>
-        /// <returns></returns>
-        bool IsNotFound { get; }
-
-        /// <summary>
-        /// Returns true if the response is 422 UnprocessableContent
-        /// </summary>
-        /// <returns></returns>
-        bool IsUnprocessableContent { get; }
-
-        /// <summary>
-        /// Returns true if the response is 429 TooManyRequests
-        /// </summary>
-        /// <returns></returns>
-        bool IsTooManyRequests { get; }
-
-        /// <summary>
-        /// Returns true if the response is 500 InternalServerError
-        /// </summary>
-        /// <returns></returns>
-        bool IsInternalServerError { get; }
-
-        /// <summary>
-        /// Returns true if the response is 503 ServiceUnavailable
-        /// </summary>
-        /// <returns></returns>
-        bool IsServiceUnavailable { get; }
-    }
-
-    /// <summary>
     /// Represents a collection of functions to interact with the API endpoints
     /// </summary>
     public class AFNORPDPPAFlowServiceApiEvents
@@ -812,26 +652,6 @@ namespace FactPulse.SDK.Api
         /// <summary>
         /// The event raised after the server response
         /// </summary>
-        public event EventHandler<ApiResponseEventArgs>? OnGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGet;
-
-        /// <summary>
-        /// The event raised after an error querying the server
-        /// </summary>
-        public event EventHandler<ExceptionEventArgs>? OnErrorGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGet;
-
-        internal void ExecuteOnGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGet(AFNORPDPPAFlowServiceApi.GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetApiResponse apiResponse)
-        {
-            OnGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGet?.Invoke(this, new ApiResponseEventArgs(apiResponse));
-        }
-
-        internal void ExecuteOnErrorGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGet(Exception exception)
-        {
-            OnErrorGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGet?.Invoke(this, new ExceptionEventArgs(exception));
-        }
-
-        /// <summary>
-        /// The event raised after the server response
-        /// </summary>
         public event EventHandler<ApiResponseEventArgs>? OnListWebhooksProxyApiV1AfnorFlowV1WebhooksGet;
 
         /// <summary>
@@ -887,26 +707,6 @@ namespace FactPulse.SDK.Api
         internal void ExecuteOnErrorSubmitFlowProxyApiV1AfnorFlowV1FlowsPost(Exception exception)
         {
             OnErrorSubmitFlowProxyApiV1AfnorFlowV1FlowsPost?.Invoke(this, new ExceptionEventArgs(exception));
-        }
-
-        /// <summary>
-        /// The event raised after the server response
-        /// </summary>
-        public event EventHandler<ApiResponseEventArgs>? OnUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatch;
-
-        /// <summary>
-        /// The event raised after an error querying the server
-        /// </summary>
-        public event EventHandler<ExceptionEventArgs>? OnErrorUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatch;
-
-        internal void ExecuteOnUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatch(AFNORPDPPAFlowServiceApi.UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchApiResponse apiResponse)
-        {
-            OnUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatch?.Invoke(this, new ApiResponseEventArgs(apiResponse));
-        }
-
-        internal void ExecuteOnErrorUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatch(Exception exception)
-        {
-            OnErrorUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatch?.Invoke(this, new ExceptionEventArgs(exception));
         }
     }
 
@@ -1007,7 +807,7 @@ namespace FactPulse.SDK.Api
         partial void OnErrorCreateWebhookProxyApiV1AfnorFlowV1WebhooksPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar);
 
         /// <summary>
-        /// Create a webhook Register a new webhook subscription (AFNOR XP Z12-013 v1.2.0)
+        /// Create a webhook Register a new webhook subscription (AFNOR XP Z12-013 v1.3.0)
         /// </summary>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ICreateWebhookProxyApiV1AfnorFlowV1WebhooksPostApiResponse"/>&gt;</returns>
@@ -1024,7 +824,7 @@ namespace FactPulse.SDK.Api
         }
 
         /// <summary>
-        /// Create a webhook Register a new webhook subscription (AFNOR XP Z12-013 v1.2.0)
+        /// Create a webhook Register a new webhook subscription (AFNOR XP Z12-013 v1.3.0)
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1546,7 +1346,7 @@ namespace FactPulse.SDK.Api
         partial void OnErrorDeleteWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidDelete(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string webhookUid);
 
         /// <summary>
-        /// Delete a webhook Delete a webhook subscription (AFNOR XP Z12-013 v1.2.0)
+        /// Delete a webhook Delete a webhook subscription (AFNOR XP Z12-013 v1.3.0)
         /// </summary>
         /// <param name="webhookUid">Webhook unique identifier (UUID)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -1564,7 +1364,7 @@ namespace FactPulse.SDK.Api
         }
 
         /// <summary>
-        /// Delete a webhook Delete a webhook subscription (AFNOR XP Z12-013 v1.2.0)
+        /// Delete a webhook Delete a webhook subscription (AFNOR XP Z12-013 v1.3.0)
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="webhookUid">Webhook unique identifier (UUID)</param>
@@ -2855,514 +2655,6 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGet(ref string webhookUid);
-
-        /// <summary>
-        /// Validates the request parameters
-        /// </summary>
-        /// <param name="webhookUid"></param>
-        /// <returns></returns>
-        private void ValidateGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGet(string webhookUid)
-        {
-            if (webhookUid == null)
-                throw new ArgumentNullException(nameof(webhookUid));
-        }
-
-        /// <summary>
-        /// Processes the server response
-        /// </summary>
-        /// <param name="apiResponseLocalVar"></param>
-        /// <param name="webhookUid"></param>
-        private void AfterGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetDefaultImplementation(IGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetApiResponse apiResponseLocalVar, string webhookUid)
-        {
-            bool suppressDefaultLog = false;
-            AfterGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGet(ref suppressDefaultLog, apiResponseLocalVar, webhookUid);
-            if (!suppressDefaultLog)
-                Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
-        }
-
-        /// <summary>
-        /// Processes the server response
-        /// </summary>
-        /// <param name="suppressDefaultLog"></param>
-        /// <param name="apiResponseLocalVar"></param>
-        /// <param name="webhookUid"></param>
-        partial void AfterGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGet(ref bool suppressDefaultLog, IGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetApiResponse apiResponseLocalVar, string webhookUid);
-
-        /// <summary>
-        /// Logs exceptions that occur while retrieving the server response
-        /// </summary>
-        /// <param name="exceptionLocalVar"></param>
-        /// <param name="pathFormatLocalVar"></param>
-        /// <param name="pathLocalVar"></param>
-        /// <param name="webhookUid"></param>
-        private void OnErrorGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string webhookUid)
-        {
-            bool suppressDefaultLogLocalVar = false;
-            OnErrorGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, webhookUid);
-            if (!suppressDefaultLogLocalVar)
-                Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
-        }
-
-        /// <summary>
-        /// A partial method that gives developers a way to provide customized exception handling
-        /// </summary>
-        /// <param name="suppressDefaultLogLocalVar"></param>
-        /// <param name="exceptionLocalVar"></param>
-        /// <param name="pathFormatLocalVar"></param>
-        /// <param name="pathLocalVar"></param>
-        /// <param name="webhookUid"></param>
-        partial void OnErrorGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string webhookUid);
-
-        /// <summary>
-        /// Get a webhook Get details of a specific webhook (AFNOR XP Z12-013 v1.2.0)
-        /// </summary>
-        /// <param name="webhookUid">Webhook unique identifier (UUID)</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetApiResponse"/>&gt;</returns>
-        public async Task<IGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetApiResponse?> GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetOrDefaultAsync(string webhookUid, System.Threading.CancellationToken cancellationToken = default)
-        {
-            try
-            {
-                return await GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetAsync(webhookUid, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Get a webhook Get details of a specific webhook (AFNOR XP Z12-013 v1.2.0)
-        /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="webhookUid">Webhook unique identifier (UUID)</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetApiResponse"/>&gt;</returns>
-        public async Task<IGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetApiResponse> GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetAsync(string webhookUid, System.Threading.CancellationToken cancellationToken = default)
-        {
-            UriBuilder uriBuilderLocalVar = new UriBuilder();
-
-            try
-            {
-                ValidateGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGet(webhookUid);
-
-                FormatGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGet(ref webhookUid);
-
-                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
-                {
-                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
-                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
-                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
-                    uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
-                        ? "/api/v1/afnor/flow/v1/webhooks/{webhookUid}"
-                        : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/flow/v1/webhooks/{webhookUid}");
-                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BwebhookUid%7D", Uri.EscapeDataString(webhookUid.ToString()));
-
-                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
-
-                    string[] acceptLocalVars = new string[] {
-                        "application/json"
-                    };
-
-                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
-
-                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
-
-                    httpRequestMessageLocalVar.Method = HttpMethod.Get;
-
-                    DateTime requestedAtLocalVar = DateTime.UtcNow;
-
-                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
-                    {
-                        ILogger<GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetApiResponse>();
-                        GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetApiResponse apiResponseLocalVar;
-
-                        switch ((int)httpResponseMessageLocalVar.StatusCode) {
-                            default: {
-                                string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
-                                apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/api/v1/afnor/flow/v1/webhooks/{webhookUid}", requestedAtLocalVar, _jsonSerializerOptions);
-
-                                break;
-                            }
-                        }
-
-                        AfterGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetDefaultImplementation(apiResponseLocalVar, webhookUid);
-
-                        Events.ExecuteOnGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGet(apiResponseLocalVar);
-
-                        return apiResponseLocalVar;
-                    }
-                }
-            }
-            catch(Exception e)
-            {
-                OnErrorGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetDefaultImplementation(e, "/api/v1/afnor/flow/v1/webhooks/{webhookUid}", uriBuilderLocalVar.Path, webhookUid);
-                Events.ExecuteOnErrorGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGet(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// The <see cref="GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetApiResponse"/>
-        /// </summary>
-        public partial class GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetApiResponse : FactPulse.SDK.Client.ApiResponse, IGetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetApiResponse
-        {
-            /// <summary>
-            /// The logger
-            /// </summary>
-            public ILogger<GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetApiResponse> Logger { get; }
-
-            /// <summary>
-            /// The <see cref="GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetApiResponse"/>
-            /// </summary>
-            /// <param name="logger"></param>
-            /// <param name="httpRequestMessage"></param>
-            /// <param name="httpResponseMessage"></param>
-            /// <param name="rawContent"></param>
-            /// <param name="path"></param>
-            /// <param name="requestedAt"></param>
-            /// <param name="jsonSerializerOptions"></param>
-            public GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetApiResponse(ILogger<GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
-            {
-                Logger = logger;
-                OnCreated(httpRequestMessage, httpResponseMessage);
-            }
-
-            /// <summary>
-            /// The <see cref="GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetApiResponse"/>
-            /// </summary>
-            /// <param name="logger"></param>
-            /// <param name="httpRequestMessage"></param>
-            /// <param name="httpResponseMessage"></param>
-            /// <param name="contentStream"></param>
-            /// <param name="path"></param>
-            /// <param name="requestedAt"></param>
-            /// <param name="jsonSerializerOptions"></param>
-            public GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetApiResponse(ILogger<GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
-            {
-                Logger = logger;
-                OnCreated(httpRequestMessage, httpResponseMessage);
-            }
-
-            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
-
-            /// <summary>
-            /// Returns true if the response is 200 Ok
-            /// </summary>
-            /// <returns></returns>
-            public bool IsOk => 200 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 200 Ok
-            /// </summary>
-            /// <returns></returns>
-            public FactPulse.SDK.Model.AFNORWebhook? Ok()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.AFNORWebhook>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 200 Ok and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out FactPulse.SDK.Model.AFNORWebhook? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = Ok();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
-                }
-
-                return result != null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 401 Unauthorized
-            /// </summary>
-            /// <returns></returns>
-            public bool IsUnauthorized => 401 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 401 Unauthorized
-            /// </summary>
-            /// <returns></returns>
-            public FactPulse.SDK.Model.AFNORError? Unauthorized()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsUnauthorized
-                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.AFNORError>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 401 Unauthorized and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryUnauthorized([NotNullWhen(true)]out FactPulse.SDK.Model.AFNORError? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = Unauthorized();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)401);
-                }
-
-                return result != null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 403 Forbidden
-            /// </summary>
-            /// <returns></returns>
-            public bool IsForbidden => 403 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 403 Forbidden
-            /// </summary>
-            /// <returns></returns>
-            public FactPulse.SDK.Model.AFNORError? Forbidden()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsForbidden
-                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.AFNORError>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 403 Forbidden and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryForbidden([NotNullWhen(true)]out FactPulse.SDK.Model.AFNORError? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = Forbidden();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)403);
-                }
-
-                return result != null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 404 NotFound
-            /// </summary>
-            /// <returns></returns>
-            public bool IsNotFound => 404 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 404 NotFound
-            /// </summary>
-            /// <returns></returns>
-            public FactPulse.SDK.Model.AFNORError? NotFound()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsNotFound
-                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.AFNORError>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 404 NotFound and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryNotFound([NotNullWhen(true)]out FactPulse.SDK.Model.AFNORError? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = NotFound();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)404);
-                }
-
-                return result != null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 429 TooManyRequests
-            /// </summary>
-            /// <returns></returns>
-            public bool IsTooManyRequests => 429 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 429 TooManyRequests
-            /// </summary>
-            /// <returns></returns>
-            public FactPulse.SDK.Model.AFNORError? TooManyRequests()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsTooManyRequests
-                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.AFNORError>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 429 TooManyRequests and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryTooManyRequests([NotNullWhen(true)]out FactPulse.SDK.Model.AFNORError? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = TooManyRequests();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)429);
-                }
-
-                return result != null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 500 InternalServerError
-            /// </summary>
-            /// <returns></returns>
-            public bool IsInternalServerError => 500 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 500 InternalServerError
-            /// </summary>
-            /// <returns></returns>
-            public FactPulse.SDK.Model.AFNORError? InternalServerError()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsInternalServerError
-                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.AFNORError>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 500 InternalServerError and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryInternalServerError([NotNullWhen(true)]out FactPulse.SDK.Model.AFNORError? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = InternalServerError();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)500);
-                }
-
-                return result != null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 503 ServiceUnavailable
-            /// </summary>
-            /// <returns></returns>
-            public bool IsServiceUnavailable => 503 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 503 ServiceUnavailable
-            /// </summary>
-            /// <returns></returns>
-            public FactPulse.SDK.Model.AFNORError? ServiceUnavailable()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsServiceUnavailable
-                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.AFNORError>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 503 ServiceUnavailable and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryServiceUnavailable([NotNullWhen(true)]out FactPulse.SDK.Model.AFNORError? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = ServiceUnavailable();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)503);
-                }
-
-                return result != null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 422 UnprocessableContent
-            /// </summary>
-            /// <returns></returns>
-            public bool IsUnprocessableContent => 422 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 422 UnprocessableContent
-            /// </summary>
-            /// <returns></returns>
-            public FactPulse.SDK.Model.HTTPValidationError? UnprocessableContent()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsUnprocessableContent
-                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.HTTPValidationError>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 422 UnprocessableContent and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryUnprocessableContent([NotNullWhen(true)]out FactPulse.SDK.Model.HTTPValidationError? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = UnprocessableContent();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)422);
-                }
-
-                return result != null;
-            }
-
-            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
-            {
-                bool suppressDefaultLog = false;
-                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
-                if (!suppressDefaultLog)
-                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
-            }
-
-            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
-        }
-
         /// <summary>
         /// Processes the server response
         /// </summary>
@@ -3406,7 +2698,7 @@ namespace FactPulse.SDK.Api
         partial void OnErrorListWebhooksProxyApiV1AfnorFlowV1WebhooksGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar);
 
         /// <summary>
-        /// List webhooks List all registered webhooks (AFNOR XP Z12-013 v1.2.0)
+        /// List webhooks List all registered webhooks (AFNOR XP Z12-013 v1.3.0)
         /// </summary>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IListWebhooksProxyApiV1AfnorFlowV1WebhooksGetApiResponse"/>&gt;</returns>
@@ -3423,7 +2715,7 @@ namespace FactPulse.SDK.Api
         }
 
         /// <summary>
-        /// List webhooks List all registered webhooks (AFNOR XP Z12-013 v1.2.0)
+        /// List webhooks List all registered webhooks (AFNOR XP Z12-013 v1.3.0)
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
@@ -4253,7 +3545,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatSubmitFlowProxyApiV1AfnorFlowV1FlowsPost(AFNORFlowInfo flowInfo, ref System.IO.Stream file);
+        partial void FormatSubmitFlowProxyApiV1AfnorFlowV1FlowsPost(AFNORFlowInfo flowInfo, ref FactPulse.SDK.Client.FileParameter file);
 
         /// <summary>
         /// Validates the request parameters
@@ -4261,7 +3553,7 @@ namespace FactPulse.SDK.Api
         /// <param name="flowInfo"></param>
         /// <param name="file"></param>
         /// <returns></returns>
-        private void ValidateSubmitFlowProxyApiV1AfnorFlowV1FlowsPost(AFNORFlowInfo flowInfo, System.IO.Stream file)
+        private void ValidateSubmitFlowProxyApiV1AfnorFlowV1FlowsPost(AFNORFlowInfo flowInfo, FactPulse.SDK.Client.FileParameter file)
         {
             if (flowInfo == null)
                 throw new ArgumentNullException(nameof(flowInfo));
@@ -4276,7 +3568,7 @@ namespace FactPulse.SDK.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="flowInfo"></param>
         /// <param name="file"></param>
-        private void AfterSubmitFlowProxyApiV1AfnorFlowV1FlowsPostDefaultImplementation(ISubmitFlowProxyApiV1AfnorFlowV1FlowsPostApiResponse apiResponseLocalVar, AFNORFlowInfo flowInfo, System.IO.Stream file)
+        private void AfterSubmitFlowProxyApiV1AfnorFlowV1FlowsPostDefaultImplementation(ISubmitFlowProxyApiV1AfnorFlowV1FlowsPostApiResponse apiResponseLocalVar, AFNORFlowInfo flowInfo, FactPulse.SDK.Client.FileParameter file)
         {
             bool suppressDefaultLog = false;
             AfterSubmitFlowProxyApiV1AfnorFlowV1FlowsPost(ref suppressDefaultLog, apiResponseLocalVar, flowInfo, file);
@@ -4291,7 +3583,7 @@ namespace FactPulse.SDK.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="flowInfo"></param>
         /// <param name="file"></param>
-        partial void AfterSubmitFlowProxyApiV1AfnorFlowV1FlowsPost(ref bool suppressDefaultLog, ISubmitFlowProxyApiV1AfnorFlowV1FlowsPostApiResponse apiResponseLocalVar, AFNORFlowInfo flowInfo, System.IO.Stream file);
+        partial void AfterSubmitFlowProxyApiV1AfnorFlowV1FlowsPost(ref bool suppressDefaultLog, ISubmitFlowProxyApiV1AfnorFlowV1FlowsPostApiResponse apiResponseLocalVar, AFNORFlowInfo flowInfo, FactPulse.SDK.Client.FileParameter file);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -4301,7 +3593,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pathLocalVar"></param>
         /// <param name="flowInfo"></param>
         /// <param name="file"></param>
-        private void OnErrorSubmitFlowProxyApiV1AfnorFlowV1FlowsPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, AFNORFlowInfo flowInfo, System.IO.Stream file)
+        private void OnErrorSubmitFlowProxyApiV1AfnorFlowV1FlowsPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, AFNORFlowInfo flowInfo, FactPulse.SDK.Client.FileParameter file)
         {
             bool suppressDefaultLogLocalVar = false;
             OnErrorSubmitFlowProxyApiV1AfnorFlowV1FlowsPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, flowInfo, file);
@@ -4318,7 +3610,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pathLocalVar"></param>
         /// <param name="flowInfo"></param>
         /// <param name="file"></param>
-        partial void OnErrorSubmitFlowProxyApiV1AfnorFlowV1FlowsPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, AFNORFlowInfo flowInfo, System.IO.Stream file);
+        partial void OnErrorSubmitFlowProxyApiV1AfnorFlowV1FlowsPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, AFNORFlowInfo flowInfo, FactPulse.SDK.Client.FileParameter file);
 
         /// <summary>
         /// Submit an invoicing flow Submits an electronic invoice to a Partner Dematerialization Platform (PDP) in compliance with the AFNOR XP Z12-013 standard
@@ -4327,7 +3619,7 @@ namespace FactPulse.SDK.Api
         /// <param name="file">Flow file (PDF/A-3 with embedded XML or XML)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitFlowProxyApiV1AfnorFlowV1FlowsPostApiResponse"/>&gt;</returns>
-        public async Task<ISubmitFlowProxyApiV1AfnorFlowV1FlowsPostApiResponse?> SubmitFlowProxyApiV1AfnorFlowV1FlowsPostOrDefaultAsync(AFNORFlowInfo flowInfo, System.IO.Stream file, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISubmitFlowProxyApiV1AfnorFlowV1FlowsPostApiResponse?> SubmitFlowProxyApiV1AfnorFlowV1FlowsPostOrDefaultAsync(AFNORFlowInfo flowInfo, FactPulse.SDK.Client.FileParameter file, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -4347,7 +3639,7 @@ namespace FactPulse.SDK.Api
         /// <param name="file">Flow file (PDF/A-3 with embedded XML or XML)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitFlowProxyApiV1AfnorFlowV1FlowsPostApiResponse"/>&gt;</returns>
-        public async Task<ISubmitFlowProxyApiV1AfnorFlowV1FlowsPostApiResponse> SubmitFlowProxyApiV1AfnorFlowV1FlowsPostAsync(AFNORFlowInfo flowInfo, System.IO.Stream file, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISubmitFlowProxyApiV1AfnorFlowV1FlowsPostApiResponse> SubmitFlowProxyApiV1AfnorFlowV1FlowsPostAsync(AFNORFlowInfo flowInfo, FactPulse.SDK.Client.FileParameter file, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -4366,28 +3658,28 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/afnor/flow/v1/flows"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/flow/v1/flows");
 
-                    MultipartContent multipartContentLocalVar = new MultipartContent();
+                    MultipartFormDataContent multipartContentLocalVar = new MultipartFormDataContent();
 
                     httpRequestMessageLocalVar.Content = multipartContentLocalVar;
 
-                    List<KeyValuePair<string?, string?>> formParameterLocalVars = new List<KeyValuePair<string?, string?>>();
+                    List<KeyValuePair<string, string?>> formParameterLocalVars = new List<KeyValuePair<string, string?>>();
 
-                    multipartContentLocalVar.Add(new FormUrlEncodedContent(formParameterLocalVars));
+                    formParameterLocalVars.Add(new KeyValuePair<string, string?>("flowInfo", ClientUtils.ParameterToString(flowInfo)));
 
-                    formParameterLocalVars.Add(new KeyValuePair<string?, string?>("flowInfo", ClientUtils.ParameterToString(flowInfo)));
+                    {
+                        var streamContentLocalVar = new StreamContent(file.Content);
+                        streamContentLocalVar.Headers.ContentType = new MediaTypeHeaderValue(file.ContentType);
+                        multipartContentLocalVar.Add(streamContentLocalVar, "file", file.FileName ?? "file");
+                    }
 
-                    multipartContentLocalVar.Add(new StreamContent(file));
+                    foreach (var formParamLocalVar in formParameterLocalVars)
+                        multipartContentLocalVar.Add(new StringContent(formParamLocalVar.Value ?? string.Empty), formParamLocalVar.Key);
 
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
 
                     string[] contentTypes = new string[] {
                         "multipart/form-data"
                     };
-
-                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
-
-                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
-                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -4737,552 +4029,6 @@ namespace FactPulse.SDK.Api
                 } catch (Exception e)
                 {
                     OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)413);
-                }
-
-                return result != null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 422 UnprocessableContent
-            /// </summary>
-            /// <returns></returns>
-            public bool IsUnprocessableContent => 422 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 422 UnprocessableContent
-            /// </summary>
-            /// <returns></returns>
-            public FactPulse.SDK.Model.AFNORError? UnprocessableContent()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsUnprocessableContent
-                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.AFNORError>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 422 UnprocessableContent and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryUnprocessableContent([NotNullWhen(true)]out FactPulse.SDK.Model.AFNORError? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = UnprocessableContent();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)422);
-                }
-
-                return result != null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 429 TooManyRequests
-            /// </summary>
-            /// <returns></returns>
-            public bool IsTooManyRequests => 429 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 429 TooManyRequests
-            /// </summary>
-            /// <returns></returns>
-            public FactPulse.SDK.Model.AFNORError? TooManyRequests()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsTooManyRequests
-                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.AFNORError>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 429 TooManyRequests and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryTooManyRequests([NotNullWhen(true)]out FactPulse.SDK.Model.AFNORError? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = TooManyRequests();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)429);
-                }
-
-                return result != null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 500 InternalServerError
-            /// </summary>
-            /// <returns></returns>
-            public bool IsInternalServerError => 500 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 500 InternalServerError
-            /// </summary>
-            /// <returns></returns>
-            public FactPulse.SDK.Model.AFNORError? InternalServerError()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsInternalServerError
-                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.AFNORError>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 500 InternalServerError and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryInternalServerError([NotNullWhen(true)]out FactPulse.SDK.Model.AFNORError? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = InternalServerError();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)500);
-                }
-
-                return result != null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 503 ServiceUnavailable
-            /// </summary>
-            /// <returns></returns>
-            public bool IsServiceUnavailable => 503 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 503 ServiceUnavailable
-            /// </summary>
-            /// <returns></returns>
-            public FactPulse.SDK.Model.AFNORError? ServiceUnavailable()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsServiceUnavailable
-                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.AFNORError>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 503 ServiceUnavailable and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryServiceUnavailable([NotNullWhen(true)]out FactPulse.SDK.Model.AFNORError? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = ServiceUnavailable();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)503);
-                }
-
-                return result != null;
-            }
-
-            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
-            {
-                bool suppressDefaultLog = false;
-                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
-                if (!suppressDefaultLog)
-                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
-            }
-
-            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
-        }
-
-        partial void FormatUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatch(ref string webhookUid);
-
-        /// <summary>
-        /// Validates the request parameters
-        /// </summary>
-        /// <param name="webhookUid"></param>
-        /// <returns></returns>
-        private void ValidateUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatch(string webhookUid)
-        {
-            if (webhookUid == null)
-                throw new ArgumentNullException(nameof(webhookUid));
-        }
-
-        /// <summary>
-        /// Processes the server response
-        /// </summary>
-        /// <param name="apiResponseLocalVar"></param>
-        /// <param name="webhookUid"></param>
-        private void AfterUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchDefaultImplementation(IUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchApiResponse apiResponseLocalVar, string webhookUid)
-        {
-            bool suppressDefaultLog = false;
-            AfterUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatch(ref suppressDefaultLog, apiResponseLocalVar, webhookUid);
-            if (!suppressDefaultLog)
-                Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
-        }
-
-        /// <summary>
-        /// Processes the server response
-        /// </summary>
-        /// <param name="suppressDefaultLog"></param>
-        /// <param name="apiResponseLocalVar"></param>
-        /// <param name="webhookUid"></param>
-        partial void AfterUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatch(ref bool suppressDefaultLog, IUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchApiResponse apiResponseLocalVar, string webhookUid);
-
-        /// <summary>
-        /// Logs exceptions that occur while retrieving the server response
-        /// </summary>
-        /// <param name="exceptionLocalVar"></param>
-        /// <param name="pathFormatLocalVar"></param>
-        /// <param name="pathLocalVar"></param>
-        /// <param name="webhookUid"></param>
-        private void OnErrorUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string webhookUid)
-        {
-            bool suppressDefaultLogLocalVar = false;
-            OnErrorUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatch(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, webhookUid);
-            if (!suppressDefaultLogLocalVar)
-                Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
-        }
-
-        /// <summary>
-        /// A partial method that gives developers a way to provide customized exception handling
-        /// </summary>
-        /// <param name="suppressDefaultLogLocalVar"></param>
-        /// <param name="exceptionLocalVar"></param>
-        /// <param name="pathFormatLocalVar"></param>
-        /// <param name="pathLocalVar"></param>
-        /// <param name="webhookUid"></param>
-        partial void OnErrorUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatch(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, string webhookUid);
-
-        /// <summary>
-        /// Update a webhook Partially update a webhook subscription (AFNOR XP Z12-013 v1.2.0)
-        /// </summary>
-        /// <param name="webhookUid">Webhook unique identifier (UUID)</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchApiResponse"/>&gt;</returns>
-        public async Task<IUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchApiResponse?> UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchOrDefaultAsync(string webhookUid, System.Threading.CancellationToken cancellationToken = default)
-        {
-            try
-            {
-                return await UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchAsync(webhookUid, cancellationToken).ConfigureAwait(false);
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// Update a webhook Partially update a webhook subscription (AFNOR XP Z12-013 v1.2.0)
-        /// </summary>
-        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
-        /// <param name="webhookUid">Webhook unique identifier (UUID)</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns><see cref="Task"/>&lt;<see cref="IUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchApiResponse"/>&gt;</returns>
-        public async Task<IUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchApiResponse> UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchAsync(string webhookUid, System.Threading.CancellationToken cancellationToken = default)
-        {
-            UriBuilder uriBuilderLocalVar = new UriBuilder();
-
-            try
-            {
-                ValidateUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatch(webhookUid);
-
-                FormatUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatch(ref webhookUid);
-
-                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
-                {
-                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
-                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
-                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
-                    uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
-                        ? "/api/v1/afnor/flow/v1/webhooks/{webhookUid}"
-                        : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/afnor/flow/v1/webhooks/{webhookUid}");
-                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7BwebhookUid%7D", Uri.EscapeDataString(webhookUid.ToString()));
-
-                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
-
-                    string[] acceptLocalVars = new string[] {
-                        "application/json"
-                    };
-
-                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
-
-                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
-                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
-
-                    httpRequestMessageLocalVar.Method = HttpMethod.Patch;
-
-                    DateTime requestedAtLocalVar = DateTime.UtcNow;
-
-                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
-                    {
-                        ILogger<UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchApiResponse>();
-                        UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchApiResponse apiResponseLocalVar;
-
-                        switch ((int)httpResponseMessageLocalVar.StatusCode) {
-                            default: {
-                                string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
-                                apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/api/v1/afnor/flow/v1/webhooks/{webhookUid}", requestedAtLocalVar, _jsonSerializerOptions);
-
-                                break;
-                            }
-                        }
-
-                        AfterUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchDefaultImplementation(apiResponseLocalVar, webhookUid);
-
-                        Events.ExecuteOnUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatch(apiResponseLocalVar);
-
-                        return apiResponseLocalVar;
-                    }
-                }
-            }
-            catch(Exception e)
-            {
-                OnErrorUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchDefaultImplementation(e, "/api/v1/afnor/flow/v1/webhooks/{webhookUid}", uriBuilderLocalVar.Path, webhookUid);
-                Events.ExecuteOnErrorUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatch(e);
-                throw;
-            }
-        }
-
-        /// <summary>
-        /// The <see cref="UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchApiResponse"/>
-        /// </summary>
-        public partial class UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchApiResponse : FactPulse.SDK.Client.ApiResponse, IUpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchApiResponse
-        {
-            /// <summary>
-            /// The logger
-            /// </summary>
-            public ILogger<UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchApiResponse> Logger { get; }
-
-            /// <summary>
-            /// The <see cref="UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchApiResponse"/>
-            /// </summary>
-            /// <param name="logger"></param>
-            /// <param name="httpRequestMessage"></param>
-            /// <param name="httpResponseMessage"></param>
-            /// <param name="rawContent"></param>
-            /// <param name="path"></param>
-            /// <param name="requestedAt"></param>
-            /// <param name="jsonSerializerOptions"></param>
-            public UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchApiResponse(ILogger<UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
-            {
-                Logger = logger;
-                OnCreated(httpRequestMessage, httpResponseMessage);
-            }
-
-            /// <summary>
-            /// The <see cref="UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchApiResponse"/>
-            /// </summary>
-            /// <param name="logger"></param>
-            /// <param name="httpRequestMessage"></param>
-            /// <param name="httpResponseMessage"></param>
-            /// <param name="contentStream"></param>
-            /// <param name="path"></param>
-            /// <param name="requestedAt"></param>
-            /// <param name="jsonSerializerOptions"></param>
-            public UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchApiResponse(ILogger<UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
-            {
-                Logger = logger;
-                OnCreated(httpRequestMessage, httpResponseMessage);
-            }
-
-            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
-
-            /// <summary>
-            /// Returns true if the response is 200 Ok
-            /// </summary>
-            /// <returns></returns>
-            public bool IsOk => 200 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 200 Ok
-            /// </summary>
-            /// <returns></returns>
-            public FactPulse.SDK.Model.AFNORWebhook? Ok()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsOk
-                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.AFNORWebhook>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 200 Ok and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryOk([NotNullWhen(true)]out FactPulse.SDK.Model.AFNORWebhook? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = Ok();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
-                }
-
-                return result != null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 400 BadRequest
-            /// </summary>
-            /// <returns></returns>
-            public bool IsBadRequest => 400 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 400 BadRequest
-            /// </summary>
-            /// <returns></returns>
-            public FactPulse.SDK.Model.AFNORError? BadRequest()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsBadRequest
-                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.AFNORError>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 400 BadRequest and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryBadRequest([NotNullWhen(true)]out FactPulse.SDK.Model.AFNORError? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = BadRequest();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)400);
-                }
-
-                return result != null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 401 Unauthorized
-            /// </summary>
-            /// <returns></returns>
-            public bool IsUnauthorized => 401 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 401 Unauthorized
-            /// </summary>
-            /// <returns></returns>
-            public FactPulse.SDK.Model.AFNORError? Unauthorized()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsUnauthorized
-                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.AFNORError>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 401 Unauthorized and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryUnauthorized([NotNullWhen(true)]out FactPulse.SDK.Model.AFNORError? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = Unauthorized();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)401);
-                }
-
-                return result != null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 403 Forbidden
-            /// </summary>
-            /// <returns></returns>
-            public bool IsForbidden => 403 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 403 Forbidden
-            /// </summary>
-            /// <returns></returns>
-            public FactPulse.SDK.Model.AFNORError? Forbidden()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsForbidden
-                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.AFNORError>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 403 Forbidden and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryForbidden([NotNullWhen(true)]out FactPulse.SDK.Model.AFNORError? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = Forbidden();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)403);
-                }
-
-                return result != null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 404 NotFound
-            /// </summary>
-            /// <returns></returns>
-            public bool IsNotFound => 404 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 404 NotFound
-            /// </summary>
-            /// <returns></returns>
-            public FactPulse.SDK.Model.AFNORError? NotFound()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsNotFound
-                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.AFNORError>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 404 NotFound and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryNotFound([NotNullWhen(true)]out FactPulse.SDK.Model.AFNORError? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = NotFound();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)404);
                 }
 
                 return result != null;

@@ -38,17 +38,19 @@ namespace FactPulse.SDK.Model
         /// <param name="siren">siren</param>
         /// <param name="siret">siret</param>
         /// <param name="vatNumber">vatNumber</param>
+        /// <param name="taxRegistrationId">taxRegistrationId</param>
         /// <param name="postalAddress">postalAddress</param>
         /// <param name="electronicAddress">electronicAddress</param>
         /// <param name="email">email</param>
         /// <param name="phone">phone</param>
         [JsonConstructor]
-        public IncomingSupplier(string name, Option<string?> siren = default, Option<string?> siret = default, Option<string?> vatNumber = default, Option<PostalAddress?> postalAddress = default, Option<ElectronicAddress?> electronicAddress = default, Option<string?> email = default, Option<string?> phone = default)
+        public IncomingSupplier(string name, Option<string?> siren = default, Option<string?> siret = default, Option<string?> vatNumber = default, Option<string?> taxRegistrationId = default, Option<PostalAddressOutput?> postalAddress = default, Option<ElectronicAddressOutput?> electronicAddress = default, Option<string?> email = default, Option<string?> phone = default)
         {
             Name = name;
             SirenOption = siren;
             SiretOption = siret;
             VatNumberOption = vatNumber;
+            TaxRegistrationIdOption = taxRegistrationId;
             PostalAddressOption = postalAddress;
             ElectronicAddressOption = electronicAddress;
             EmailOption = email;
@@ -105,30 +107,43 @@ namespace FactPulse.SDK.Model
         public string? VatNumber { get { return this.VatNumberOption; } set { this.VatNumberOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of TaxRegistrationId
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> TaxRegistrationIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets TaxRegistrationId
+        /// </summary>
+        [JsonPropertyName("taxRegistrationId")]
+        public string? TaxRegistrationId { get { return this.TaxRegistrationIdOption; } set { this.TaxRegistrationIdOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of PostalAddress
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<PostalAddress?> PostalAddressOption { get; private set; }
+        public Option<PostalAddressOutput?> PostalAddressOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets PostalAddress
         /// </summary>
         [JsonPropertyName("postalAddress")]
-        public PostalAddress? PostalAddress { get { return this.PostalAddressOption; } set { this.PostalAddressOption = new(value); } }
+        public PostalAddressOutput? PostalAddress { get { return this.PostalAddressOption; } set { this.PostalAddressOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of ElectronicAddress
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<ElectronicAddress?> ElectronicAddressOption { get; private set; }
+        public Option<ElectronicAddressOutput?> ElectronicAddressOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets ElectronicAddress
         /// </summary>
         [JsonPropertyName("electronicAddress")]
-        public ElectronicAddress? ElectronicAddress { get { return this.ElectronicAddressOption; } set { this.ElectronicAddressOption = new(value); } }
+        public ElectronicAddressOutput? ElectronicAddress { get { return this.ElectronicAddressOption; } set { this.ElectronicAddressOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Email
@@ -168,6 +183,7 @@ namespace FactPulse.SDK.Model
             sb.Append("  Siren: ").Append(Siren).Append("\n");
             sb.Append("  Siret: ").Append(Siret).Append("\n");
             sb.Append("  VatNumber: ").Append(VatNumber).Append("\n");
+            sb.Append("  TaxRegistrationId: ").Append(TaxRegistrationId).Append("\n");
             sb.Append("  PostalAddress: ").Append(PostalAddress).Append("\n");
             sb.Append("  ElectronicAddress: ").Append(ElectronicAddress).Append("\n");
             sb.Append("  Email: ").Append(Email).Append("\n");
@@ -213,8 +229,9 @@ namespace FactPulse.SDK.Model
             Option<string?> siren = default;
             Option<string?> siret = default;
             Option<string?> vatNumber = default;
-            Option<PostalAddress?> postalAddress = default;
-            Option<ElectronicAddress?> electronicAddress = default;
+            Option<string?> taxRegistrationId = default;
+            Option<PostalAddressOutput?> postalAddress = default;
+            Option<ElectronicAddressOutput?> electronicAddress = default;
             Option<string?> email = default;
             Option<string?> phone = default;
 
@@ -245,11 +262,14 @@ namespace FactPulse.SDK.Model
                         case "vatNumber":
                             vatNumber = new Option<string?>(utf8JsonReader.GetString());
                             break;
+                        case "taxRegistrationId":
+                            taxRegistrationId = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         case "postalAddress":
-                            postalAddress = new Option<PostalAddress?>(JsonSerializer.Deserialize<PostalAddress>(ref utf8JsonReader, jsonSerializerOptions));
+                            postalAddress = new Option<PostalAddressOutput?>(JsonSerializer.Deserialize<PostalAddressOutput>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "electronicAddress":
-                            electronicAddress = new Option<ElectronicAddress?>(JsonSerializer.Deserialize<ElectronicAddress>(ref utf8JsonReader, jsonSerializerOptions));
+                            electronicAddress = new Option<ElectronicAddressOutput?>(JsonSerializer.Deserialize<ElectronicAddressOutput>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "email":
                             email = new Option<string?>(utf8JsonReader.GetString());
@@ -269,7 +289,7 @@ namespace FactPulse.SDK.Model
             if (name.IsSet && name.Value == null)
                 throw new ArgumentNullException(nameof(name), "Property is not nullable for class IncomingSupplier.");
 
-            return new IncomingSupplier(name.Value!, siren, siret, vatNumber, postalAddress, electronicAddress, email, phone);
+            return new IncomingSupplier(name.Value!, siren, siret, vatNumber, taxRegistrationId, postalAddress, electronicAddress, email, phone);
         }
 
         /// <summary>
@@ -318,6 +338,12 @@ namespace FactPulse.SDK.Model
                     writer.WriteString("vatNumber", incomingSupplier.VatNumber);
                 else
                     writer.WriteNull("vatNumber");
+
+            if (incomingSupplier.TaxRegistrationIdOption.IsSet)
+                if (incomingSupplier.TaxRegistrationIdOption.Value != null)
+                    writer.WriteString("taxRegistrationId", incomingSupplier.TaxRegistrationId);
+                else
+                    writer.WriteNull("taxRegistrationId");
 
             if (incomingSupplier.PostalAddressOption.IsSet)
                 if (incomingSupplier.PostalAddressOption.Value != null)

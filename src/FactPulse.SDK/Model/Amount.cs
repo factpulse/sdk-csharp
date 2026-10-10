@@ -27,7 +27,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Montant encaissé en EUR (obligatoire, BR-FR-CDV-14)
+    /// Allowance/charge amount (BT-92/99/136/141).
     /// </summary>
     public partial class Amount : IValidatableObject
     {
@@ -55,7 +55,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets Decimal
         /// </summary>
-        public decimal? Decimal { get { return this.DecimalOption; } set { this.DecimalOption = new(value); } }
+        public decimal? Decimal { get { return this.DecimalOption.Value; } set { this.DecimalOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of String
@@ -67,7 +67,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets String
         /// </summary>
-        public string? String { get { return this.StringOption; } set { this.StringOption = new(value); } }
+        public string? String { get { return this.StringOption.Value; } set { this.StringOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -179,7 +179,7 @@ namespace FactPulse.SDK.Model
             writer.WriteStartObject();
 
             if (amount.DecimalOption.IsSet && amount.DecimalOption.Value != null)
-                writer.WriteNumber("UnitNetPrice", amount.DecimalOption.Value.Value);
+                writer.WriteNumber("Rate", amount.DecimalOption.Value.Value);
 
             if (amount.StringOption.IsSet && amount.StringOption.Value != null)
                 writer.WriteString("Rate", amount.StringOption.Value);

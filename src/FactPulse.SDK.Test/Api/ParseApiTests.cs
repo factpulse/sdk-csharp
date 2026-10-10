@@ -57,7 +57,7 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task ParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostAsyncTest()
         {
-            System.IO.Stream file = default!;
+            FactPulse.SDK.Client.FileParameter file = default!;
             Client.Option<string?> callbackUrl = default!;
             var response = await _instance.ParseFacturxAsyncApiV1ProcessingParseFacturxAsyncPostAsync(file, callbackUrl);
             var model = response.Accepted();
@@ -70,7 +70,7 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task ParseFacturxSyncApiV1ProcessingParseFacturxPostAsyncTest()
         {
-            System.IO.Stream file = default!;
+            FactPulse.SDK.Client.FileParameter file = default!;
             var response = await _instance.ParseFacturxSyncApiV1ProcessingParseFacturxPostAsync(file);
             var model = response.Ok();
             Assert.IsType<ParseFacturXResponse>(model);

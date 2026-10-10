@@ -66,7 +66,7 @@ namespace FactPulse.SDK.Model
         /// </summary>
         /// <value>Flow syntax (CII for Factur-X)</value>
         [JsonPropertyName("flowSyntax")]
-        public FlowSyntax? FlowSyntax { get { return this.FlowSyntaxOption; } set { this.FlowSyntaxOption = new(value); } }
+        public FlowSyntax? FlowSyntax { get { return this.FlowSyntaxOption.Value; } set { this.FlowSyntaxOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of FlowProfile
@@ -79,7 +79,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets FlowProfile
         /// </summary>
         [JsonPropertyName("flowProfile")]
-        public FlowProfile? FlowProfile { get { return this.FlowProfileOption; } set { this.FlowProfileOption = new(value); } }
+        public FlowProfile? FlowProfile { get { return this.FlowProfileOption.Value; } set { this.FlowProfileOption = new(value); } }
 
         /// <summary>
         /// Flow name (e.g., &#39;Invoice 2025-001&#39;)

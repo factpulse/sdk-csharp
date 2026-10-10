@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Filters** | [**AFNORSearchDirectoryLineFilters**](AFNORSearchDirectoryLineFilters.md) |  | [optional] 
 **Sorting** | [**List&lt;AFNORSearchDirectoryLineSortingInner&gt;**](AFNORSearchDirectoryLineSortingInner.md) | Sorting criteria on a field and an order (ascending or descending). | [optional] 
 **Fields** | [**List&lt;AFNORDirectoryLineField&gt;**](AFNORDirectoryLineField.md) | Allows you to filter the desired fields in the response. | [optional] 
+**Include** | **List&lt;AFNORSearchDirectoryLine.IncludeEnum&gt;** |  | [optional] 
 **Limit** | **int** | Maximum number of results | [optional] 
 **Ignore** | **int** | Number of results to skip | [optional] 
 

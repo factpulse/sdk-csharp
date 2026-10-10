@@ -61,7 +61,7 @@ namespace FactPulse.SDK.Test.Api
             Client.Option<APIProfile> profile = default!;
             Client.Option<OutputFormat> outputFormat = default!;
             Client.Option<bool> autoEnrich = default!;
-            Client.Option<System.IO.Stream?> sourcePdf = default!;
+            Client.Option<FactPulse.SDK.Client.FileParameter?> sourcePdf = default!;
             Client.Option<string?> callbackUrl = default!;
             Client.Option<string> webhookMode = default!;
             Client.Option<bool?> skipBrFr = default!;
@@ -77,7 +77,8 @@ namespace FactPulse.SDK.Test.Api
         public async Task SubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostAsyncTest()
         {
             SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest = default!;
-            var response = await _instance.SubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostAsync(submitCompleteInvoiceRequest);
+            Client.Option<string?> organizationId = default!;
+            var response = await _instance.SubmitCompleteInvoiceApiV1ProcessingInvoicesSubmitCompletePostAsync(submitCompleteInvoiceRequest, organizationId);
             var model = response.Ok();
             Assert.IsType<SubmitCompleteInvoiceResponse>(model);
         }
@@ -91,7 +92,8 @@ namespace FactPulse.SDK.Test.Api
             SubmitCompleteInvoiceRequest submitCompleteInvoiceRequest = default!;
             Client.Option<string?> callbackUrl = default!;
             Client.Option<string> webhookMode = default!;
-            var response = await _instance.SubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostAsync(submitCompleteInvoiceRequest, callbackUrl, webhookMode);
+            Client.Option<string?> organizationId = default!;
+            var response = await _instance.SubmitCompleteInvoiceAsyncApiV1ProcessingInvoicesSubmitCompleteAsyncPostAsync(submitCompleteInvoiceRequest, callbackUrl, webhookMode, organizationId);
             var model = response.Accepted();
             Assert.IsType<TaskResponse>(model);
         }

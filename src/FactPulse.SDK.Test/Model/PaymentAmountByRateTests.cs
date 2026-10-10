@@ -71,5 +71,14 @@ namespace FactPulse.SDK.Test.Model
         {
             // TODO unit test for the property 'Amount'
         }
+
+        /// <summary>
+        /// Test the property 'AmountEur'
+        /// </summary>
+        [Fact]
+        public void AmountEurTest()
+        {
+            // TODO unit test for the property 'AmountEur'
+        }
     }
 }

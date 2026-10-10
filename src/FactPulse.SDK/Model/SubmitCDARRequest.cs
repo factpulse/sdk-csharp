@@ -52,13 +52,14 @@ namespace FactPulse.SDK.Model
         /// <param name="reasonText">reasonText</param>
         /// <param name="actionCode">actionCode</param>
         /// <param name="encaisseAmount">encaisseAmount</param>
+        /// <param name="encaisseVatRate">Taux de TVA du montant encaissé en % (MDT-224, requis par BR-FR-CDV-14 pour le statut 212 ; défaut 20) (default to 20M)</param>
         /// <param name="flowType">Type de flux AFNOR (CustomerInvoiceLC, SupplierInvoiceLC, etc.) (default to &quot;CustomerInvoiceLC&quot;)</param>
         /// <param name="pdpFlowServiceUrl">pdpFlowServiceUrl</param>
         /// <param name="pdpTokenUrl">pdpTokenUrl</param>
         /// <param name="pdpClientId">pdpClientId</param>
         /// <param name="pdpClientSecret">pdpClientSecret</param>
         [JsonConstructor]
-        public SubmitCDARRequest(string documentId, string senderSiren, string invoiceId, DateOnly invoiceIssueDate, string status, Option<string?> businessProcess = default, Option<string?> typeCode = default, Option<string?> senderRole = default, Option<string?> senderName = default, Option<string?> senderEmail = default, Option<List<RecipientInput>?> recipients = default, Option<string?> invoiceTypeCode = default, Option<string?> invoiceSellerSiren = default, Option<string?> invoiceBuyerSiren = default, Option<string?> reasonCode = default, Option<string?> reasonText = default, Option<string?> actionCode = default, Option<Encaisseamount?> encaisseAmount = default, Option<string?> flowType = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default)
+        public SubmitCDARRequest(string documentId, string senderSiren, string invoiceId, DateOnly invoiceIssueDate, string status, Option<string?> businessProcess = default, Option<string?> typeCode = default, Option<string?> senderRole = default, Option<string?> senderName = default, Option<string?> senderEmail = default, Option<List<RecipientInput>?> recipients = default, Option<string?> invoiceTypeCode = default, Option<string?> invoiceSellerSiren = default, Option<string?> invoiceBuyerSiren = default, Option<string?> reasonCode = default, Option<string?> reasonText = default, Option<string?> actionCode = default, Option<Encaisseamount?> encaisseAmount = default, Option<decimal?> encaisseVatRate = default, Option<string?> flowType = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default)
         {
             DocumentId = documentId;
             SenderSiren = senderSiren;
@@ -78,6 +79,7 @@ namespace FactPulse.SDK.Model
             ReasonTextOption = reasonText;
             ActionCodeOption = actionCode;
             EncaisseAmountOption = encaisseAmount;
+            EncaisseVatRateOption = encaisseVatRate;
             FlowTypeOption = flowType;
             PdpFlowServiceUrlOption = pdpFlowServiceUrl;
             PdpTokenUrlOption = pdpTokenUrl;
@@ -298,6 +300,20 @@ namespace FactPulse.SDK.Model
         public Encaisseamount? EncaisseAmount { get { return this.EncaisseAmountOption; } set { this.EncaisseAmountOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of EncaisseVatRate
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> EncaisseVatRateOption { get; private set; }
+
+        /// <summary>
+        /// Taux de TVA du montant encaissé en % (MDT-224, requis par BR-FR-CDV-14 pour le statut 212 ; défaut 20)
+        /// </summary>
+        /// <value>Taux de TVA du montant encaissé en % (MDT-224, requis par BR-FR-CDV-14 pour le statut 212 ; défaut 20)</value>
+        [JsonPropertyName("encaisseVatRate")]
+        public decimal? EncaisseVatRate { get { return this.EncaisseVatRateOption; } set { this.EncaisseVatRateOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of FlowType
         /// </summary>
         [JsonIgnore]
@@ -389,6 +405,7 @@ namespace FactPulse.SDK.Model
             sb.Append("  ReasonText: ").Append(ReasonText).Append("\n");
             sb.Append("  ActionCode: ").Append(ActionCode).Append("\n");
             sb.Append("  EncaisseAmount: ").Append(EncaisseAmount).Append("\n");
+            sb.Append("  EncaisseVatRate: ").Append(EncaisseVatRate).Append("\n");
             sb.Append("  FlowType: ").Append(FlowType).Append("\n");
             sb.Append("  PdpFlowServiceUrl: ").Append(PdpFlowServiceUrl).Append("\n");
             sb.Append("  PdpTokenUrl: ").Append(PdpTokenUrl).Append("\n");
@@ -454,6 +471,7 @@ namespace FactPulse.SDK.Model
             Option<string?> reasonText = default;
             Option<string?> actionCode = default;
             Option<Encaisseamount?> encaisseAmount = default;
+            Option<decimal?> encaisseVatRate = default;
             Option<string?> flowType = default;
             Option<string?> pdpFlowServiceUrl = default;
             Option<string?> pdpTokenUrl = default;
@@ -529,6 +547,9 @@ namespace FactPulse.SDK.Model
                         case "encaisseAmount":
                             encaisseAmount = new Option<Encaisseamount?>(JsonSerializer.Deserialize<Encaisseamount>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
+                        case "encaisseVatRate":
+                            encaisseVatRate = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
+                            break;
                         case "flowType":
                             flowType = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
@@ -595,10 +616,13 @@ namespace FactPulse.SDK.Model
             if (invoiceTypeCode.IsSet && invoiceTypeCode.Value == null)
                 throw new ArgumentNullException(nameof(invoiceTypeCode), "Property is not nullable for class SubmitCDARRequest.");
 
+            if (encaisseVatRate.IsSet && encaisseVatRate.Value == null)
+                throw new ArgumentNullException(nameof(encaisseVatRate), "Property is not nullable for class SubmitCDARRequest.");
+
             if (flowType.IsSet && flowType.Value == null)
                 throw new ArgumentNullException(nameof(flowType), "Property is not nullable for class SubmitCDARRequest.");
 
-            return new SubmitCDARRequest(documentId.Value!, senderSiren.Value!, invoiceId.Value!, invoiceIssueDate.Value!.Value!, status.Value!, businessProcess, typeCode, senderRole, senderName, senderEmail, recipients, invoiceTypeCode, invoiceSellerSiren, invoiceBuyerSiren, reasonCode, reasonText, actionCode, encaisseAmount, flowType, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
+            return new SubmitCDARRequest(documentId.Value!, senderSiren.Value!, invoiceId.Value!, invoiceIssueDate.Value!.Value!, status.Value!, businessProcess, typeCode, senderRole, senderName, senderEmail, recipients, invoiceTypeCode, invoiceSellerSiren, invoiceBuyerSiren, reasonCode, reasonText, actionCode, encaisseAmount, encaisseVatRate, flowType, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
         }
 
         /// <summary>
@@ -732,6 +756,9 @@ namespace FactPulse.SDK.Model
                 }
                 else
                     writer.WriteNull("encaisseAmount");
+            if (submitCDARRequest.EncaisseVatRateOption.IsSet)
+                writer.WriteNumber("encaisseVatRate", submitCDARRequest.EncaisseVatRateOption.Value!.Value);
+
             if (submitCDARRequest.FlowTypeOption.IsSet)
                 writer.WriteString("flowType", submitCDARRequest.FlowType);
 

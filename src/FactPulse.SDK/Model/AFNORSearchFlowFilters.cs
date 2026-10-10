@@ -67,7 +67,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets AckStatus
         /// </summary>
         [JsonPropertyName("ackStatus")]
-        public AFNORFlowAckStatus? AckStatus { get { return this.AckStatusOption; } set { this.AckStatusOption = new(value); } }
+        public AFNORFlowAckStatus? AckStatus { get { return this.AckStatusOption.Value; } set { this.AckStatusOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of UpdatedAfter
@@ -176,9 +176,9 @@ namespace FactPulse.SDK.Model
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             // TrackingId (string) maxLength
-            if (this.TrackingId != null && this.TrackingId.Length > 36)
+            if (this.TrackingId != null && this.TrackingId.Length > 64)
             {
-                yield return new ValidationResult("Invalid value for TrackingId, length must be less than 36.", new [] { "TrackingId" });
+                yield return new ValidationResult("Invalid value for TrackingId, length must be less than 64.", new [] { "TrackingId" });
             }
 
             yield break;

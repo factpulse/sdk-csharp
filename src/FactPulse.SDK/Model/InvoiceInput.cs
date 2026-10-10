@@ -49,10 +49,12 @@ namespace FactPulse.SDK.Model
         /// <param name="sellerCountry">sellerCountry</param>
         /// <param name="buyerId">buyerId</param>
         /// <param name="buyerVatId">buyerVatId</param>
+        /// <param name="taxAmountEur">taxAmountEur</param>
+        /// <param name="businessProcessId">businessProcessId</param>
         /// <param name="referencedInvoiceId">referencedInvoiceId</param>
         /// <param name="referencedInvoiceDate">referencedInvoiceDate</param>
         [JsonConstructor]
-        public InvoiceInput(string invoiceId, DateOnly issueDate, Buyercountry buyerCountry, Taxexclusiveamount1 taxExclusiveAmount, Taxamount1 taxAmount, List<TaxBreakdownInput> taxBreakdown, Option<FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode?> typeCode = default, Option<Currency?> currency = default, Option<DateOnly?> dueDate = default, Option<string?> sellerId = default, Option<string?> sellerSiren = default, Option<string?> sellerVatId = default, Option<Sellercountry?> sellerCountry = default, Option<string?> buyerId = default, Option<string?> buyerVatId = default, Option<string?> referencedInvoiceId = default, Option<DateOnly?> referencedInvoiceDate = default)
+        public InvoiceInput(string invoiceId, DateOnly issueDate, Buyercountry buyerCountry, Taxexclusiveamount1 taxExclusiveAmount, Taxamount1 taxAmount, List<TaxBreakdownInput> taxBreakdown, Option<InvoiceTypeCode?> typeCode = default, Option<Currency?> currency = default, Option<DateOnly?> dueDate = default, Option<string?> sellerId = default, Option<string?> sellerSiren = default, Option<string?> sellerVatId = default, Option<Sellercountry?> sellerCountry = default, Option<string?> buyerId = default, Option<string?> buyerVatId = default, Option<Taxamounteur?> taxAmountEur = default, Option<string?> businessProcessId = default, Option<string?> referencedInvoiceId = default, Option<DateOnly?> referencedInvoiceDate = default)
         {
             InvoiceId = invoiceId;
             IssueDate = issueDate;
@@ -69,6 +71,8 @@ namespace FactPulse.SDK.Model
             SellerCountryOption = sellerCountry;
             BuyerIdOption = buyerId;
             BuyerVatIdOption = buyerVatId;
+            TaxAmountEurOption = taxAmountEur;
+            BusinessProcessIdOption = businessProcessId;
             ReferencedInvoiceIdOption = referencedInvoiceId;
             ReferencedInvoiceDateOption = referencedInvoiceDate;
             OnCreated();
@@ -81,14 +85,14 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode?> TypeCodeOption { get; private set; }
+        public Option<InvoiceTypeCode?> TypeCodeOption { get; private set; }
 
         /// <summary>
         /// Invoice type code
         /// </summary>
         /// <value>Invoice type code</value>
         [JsonPropertyName("typeCode")]
-        public FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode? TypeCode { get { return this.TypeCodeOption; } set { this.TypeCodeOption = new(value); } }
+        public InvoiceTypeCode? TypeCode { get { return this.TypeCodeOption.Value; } set { this.TypeCodeOption = new(value); } }
 
         /// <summary>
         /// Invoice identifier
@@ -236,6 +240,32 @@ namespace FactPulse.SDK.Model
         public string? BuyerVatId { get { return this.BuyerVatIdOption; } set { this.BuyerVatIdOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of TaxAmountEur
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<Taxamounteur?> TaxAmountEurOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets TaxAmountEur
+        /// </summary>
+        [JsonPropertyName("taxAmountEur")]
+        public Taxamounteur? TaxAmountEur { get { return this.TaxAmountEurOption; } set { this.TaxAmountEurOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of BusinessProcessId
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> BusinessProcessIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets BusinessProcessId
+        /// </summary>
+        [JsonPropertyName("businessProcessId")]
+        public string? BusinessProcessId { get { return this.BusinessProcessIdOption; } set { this.BusinessProcessIdOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of ReferencedInvoiceId
         /// </summary>
         [JsonIgnore]
@@ -284,6 +314,8 @@ namespace FactPulse.SDK.Model
             sb.Append("  SellerCountry: ").Append(SellerCountry).Append("\n");
             sb.Append("  BuyerId: ").Append(BuyerId).Append("\n");
             sb.Append("  BuyerVatId: ").Append(BuyerVatId).Append("\n");
+            sb.Append("  TaxAmountEur: ").Append(TaxAmountEur).Append("\n");
+            sb.Append("  BusinessProcessId: ").Append(BusinessProcessId).Append("\n");
             sb.Append("  ReferencedInvoiceId: ").Append(ReferencedInvoiceId).Append("\n");
             sb.Append("  ReferencedInvoiceDate: ").Append(ReferencedInvoiceDate).Append("\n");
             sb.Append("}\n");
@@ -344,7 +376,7 @@ namespace FactPulse.SDK.Model
             Option<Taxexclusiveamount1?> taxExclusiveAmount = default;
             Option<Taxamount1?> taxAmount = default;
             Option<List<TaxBreakdownInput>?> taxBreakdown = default;
-            Option<FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode?> typeCode = default;
+            Option<InvoiceTypeCode?> typeCode = default;
             Option<Currency?> currency = default;
             Option<DateOnly?> dueDate = default;
             Option<string?> sellerId = default;
@@ -353,6 +385,8 @@ namespace FactPulse.SDK.Model
             Option<Sellercountry?> sellerCountry = default;
             Option<string?> buyerId = default;
             Option<string?> buyerVatId = default;
+            Option<Taxamounteur?> taxAmountEur = default;
+            Option<string?> businessProcessId = default;
             Option<string?> referencedInvoiceId = default;
             Option<DateOnly?> referencedInvoiceDate = default;
 
@@ -392,7 +426,7 @@ namespace FactPulse.SDK.Model
                         case "typeCode":
                             string? typeCodeRawValue = utf8JsonReader.GetString();
                             if (typeCodeRawValue != null)
-                                typeCode = new Option<FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode?>(FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeValueConverter.FromStringOrDefault(typeCodeRawValue));
+                                typeCode = new Option<InvoiceTypeCode?>(InvoiceTypeCodeValueConverter.FromStringOrDefault(typeCodeRawValue));
                             break;
                         case "currency":
                             currency = new Option<Currency?>(JsonSerializer.Deserialize<Currency>(ref utf8JsonReader, jsonSerializerOptions)!);
@@ -417,6 +451,12 @@ namespace FactPulse.SDK.Model
                             break;
                         case "buyerVatId":
                             buyerVatId = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "taxAmountEur":
+                            taxAmountEur = new Option<Taxamounteur?>(JsonSerializer.Deserialize<Taxamounteur>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "businessProcessId":
+                            businessProcessId = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "referencedInvoiceId":
                             referencedInvoiceId = new Option<string?>(utf8JsonReader.GetString());
@@ -475,7 +515,7 @@ namespace FactPulse.SDK.Model
             if (sellerCountry.IsSet && sellerCountry.Value == null)
                 throw new ArgumentNullException(nameof(sellerCountry), "Property is not nullable for class InvoiceInput.");
 
-            return new InvoiceInput(invoiceId.Value!, issueDate.Value!.Value!, buyerCountry.Value!, taxExclusiveAmount.Value!, taxAmount.Value!, taxBreakdown.Value!, typeCode, currency, dueDate, sellerId, sellerSiren, sellerVatId, sellerCountry, buyerId, buyerVatId, referencedInvoiceId, referencedInvoiceDate);
+            return new InvoiceInput(invoiceId.Value!, issueDate.Value!.Value!, buyerCountry.Value!, taxExclusiveAmount.Value!, taxAmount.Value!, taxBreakdown.Value!, typeCode, currency, dueDate, sellerId, sellerSiren, sellerVatId, sellerCountry, buyerId, buyerVatId, taxAmountEur, businessProcessId, referencedInvoiceId, referencedInvoiceDate);
         }
 
         /// <summary>
@@ -537,7 +577,7 @@ namespace FactPulse.SDK.Model
             JsonSerializer.Serialize(writer, invoiceInput.TaxBreakdown, jsonSerializerOptions);
             if (invoiceInput.TypeCodeOption.IsSet)
             {
-                var typeCodeRawValue = FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeValueConverter.ToJsonValue(invoiceInput.TypeCode!.Value);
+                var typeCodeRawValue = InvoiceTypeCodeValueConverter.ToJsonValue(invoiceInput.TypeCode!.Value);
                 writer.WriteString("typeCode", typeCodeRawValue);
             }
             if (invoiceInput.CurrencyOption.IsSet)
@@ -585,6 +625,20 @@ namespace FactPulse.SDK.Model
                     writer.WriteString("buyerVatId", invoiceInput.BuyerVatId);
                 else
                     writer.WriteNull("buyerVatId");
+
+            if (invoiceInput.TaxAmountEurOption.IsSet)
+                if (invoiceInput.TaxAmountEurOption.Value != null)
+                {
+                    writer.WritePropertyName("taxAmountEur");
+                    JsonSerializer.Serialize(writer, invoiceInput.TaxAmountEur, jsonSerializerOptions);
+                }
+                else
+                    writer.WriteNull("taxAmountEur");
+            if (invoiceInput.BusinessProcessIdOption.IsSet)
+                if (invoiceInput.BusinessProcessIdOption.Value != null)
+                    writer.WriteString("businessProcessId", invoiceInput.BusinessProcessId);
+                else
+                    writer.WriteNull("businessProcessId");
 
             if (invoiceInput.ReferencedInvoiceIdOption.IsSet)
                 if (invoiceInput.ReferencedInvoiceIdOption.Value != null)

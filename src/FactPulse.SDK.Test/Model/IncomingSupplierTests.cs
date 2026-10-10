@@ -91,6 +91,15 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'TaxRegistrationId'
+        /// </summary>
+        [Fact]
+        public void TaxRegistrationIdTest()
+        {
+            // TODO unit test for the property 'TaxRegistrationId'
+        }
+
+        /// <summary>
         /// Test the property 'PostalAddress'
         /// </summary>
         [Fact]

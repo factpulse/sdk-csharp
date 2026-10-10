@@ -1,5 +1,5 @@
 # FactPulse.SDK.Model.FlowType
-AFNOR XP Z12-013 FlowType enum.  Values from swagger specification v1.2.0: - Invoice flows (factures) - Lifecycle flows (cycle de vie) - E-reporting flows (transactions/paiements)
+AFNOR XP Z12-013 FlowType enum.  Values from swagger specification v1.3.0: - Invoice flows (factures) - Lifecycle flows (cycle de vie) - E-reporting flows (transactions/paiements) - \"State*\" flows sent to DFH and Undefined (added in v1.3.0)
 
 ## Properties
 

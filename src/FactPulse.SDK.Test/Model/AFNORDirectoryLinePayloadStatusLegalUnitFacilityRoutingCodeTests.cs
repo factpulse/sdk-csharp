@@ -100,6 +100,15 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'RoutingIdentifier'
+        /// </summary>
+        [Fact]
+        public void RoutingIdentifierTest()
+        {
+            // TODO unit test for the property 'RoutingIdentifier'
+        }
+
+        /// <summary>
         /// Test the property 'AddressingSuffix'
         /// </summary>
         [Fact]

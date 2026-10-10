@@ -34,13 +34,13 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="SubmitCompleteInvoiceRequest" /> class.
         /// </summary>
-        /// <param name="invoiceData">Invoice data in simplified format (see examples)</param>
+        /// <param name="invoiceData">invoiceData</param>
         /// <param name="sourcePdf">Base64-encoded source PDF (will be transformed to Factur-X)</param>
         /// <param name="destination">destination</param>
         /// <param name="signature">signature</param>
         /// <param name="options">Processing options</param>
         [JsonConstructor]
-        public SubmitCompleteInvoiceRequest(SimplifiedInvoiceData invoiceData, string sourcePdf, Destination destination, Option<SignatureParameters?> signature = default, Option<ProcessingOptions?> options = default)
+        public SubmitCompleteInvoiceRequest(Invoicedata invoiceData, string sourcePdf, Destination destination, Option<SignatureParameters?> signature = default, Option<ProcessingOptions?> options = default)
         {
             InvoiceData = invoiceData;
             SourcePdf = sourcePdf;
@@ -53,11 +53,10 @@ namespace FactPulse.SDK.Model
         partial void OnCreated();
 
         /// <summary>
-        /// Invoice data in simplified format (see examples)
+        /// Gets or Sets InvoiceData
         /// </summary>
-        /// <value>Invoice data in simplified format (see examples)</value>
         [JsonPropertyName("invoiceData")]
-        public SimplifiedInvoiceData InvoiceData { get; set; }
+        public Invoicedata InvoiceData { get; set; }
 
         /// <summary>
         /// Base64-encoded source PDF (will be transformed to Factur-X)
@@ -149,7 +148,7 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<SimplifiedInvoiceData?> invoiceData = default;
+            Option<Invoicedata?> invoiceData = default;
             Option<string?> sourcePdf = default;
             Option<Destination?> destination = default;
             Option<SignatureParameters?> signature = default;
@@ -171,7 +170,7 @@ namespace FactPulse.SDK.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "invoiceData":
-                            invoiceData = new Option<SimplifiedInvoiceData?>(JsonSerializer.Deserialize<SimplifiedInvoiceData>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            invoiceData = new Option<Invoicedata?>(JsonSerializer.Deserialize<Invoicedata>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "sourcePdf":
                             sourcePdf = new Option<string?>(utf8JsonReader.GetString()!);

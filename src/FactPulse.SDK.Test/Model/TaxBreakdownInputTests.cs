@@ -80,5 +80,32 @@ namespace FactPulse.SDK.Test.Model
         {
             // TODO unit test for the property 'TaxAmount'
         }
+
+        /// <summary>
+        /// Test the property 'TaxCategoryCode'
+        /// </summary>
+        [Fact]
+        public void TaxCategoryCodeTest()
+        {
+            // TODO unit test for the property 'TaxCategoryCode'
+        }
+
+        /// <summary>
+        /// Test the property 'ExemptionReasonCode'
+        /// </summary>
+        [Fact]
+        public void ExemptionReasonCodeTest()
+        {
+            // TODO unit test for the property 'ExemptionReasonCode'
+        }
+
+        /// <summary>
+        /// Test the property 'ExemptionReason'
+        /// </summary>
+        [Fact]
+        public void ExemptionReasonTest()
+        {
+            // TODO unit test for the property 'ExemptionReason'
+        }
     }
 }

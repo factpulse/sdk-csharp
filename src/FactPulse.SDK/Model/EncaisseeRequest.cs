@@ -39,6 +39,7 @@ namespace FactPulse.SDK.Model
         /// <param name="invoiceBuyerSiren">SIREN de l&#39;acheteur (destinataire du statut)</param>
         /// <param name="invoiceBuyerElectronicAddress">Adresse électronique de l&#39;acheteur (MDT-73)</param>
         /// <param name="amount">amount</param>
+        /// <param name="vatRate">Taux de TVA du montant encaissé en % (MDT-224, requis par BR-FR-CDV-14 ; défaut 20) (default to 20M)</param>
         /// <param name="currency">Code devise ISO 4217 (default to &quot;EUR&quot;)</param>
         /// <param name="senderSiren">senderSiren</param>
         /// <param name="flowType">Type de flux (CustomerInvoiceLC pour facture émise) (default to &quot;CustomerInvoiceLC&quot;)</param>
@@ -47,13 +48,14 @@ namespace FactPulse.SDK.Model
         /// <param name="pdpClientId">pdpClientId</param>
         /// <param name="pdpClientSecret">pdpClientSecret</param>
         [JsonConstructor]
-        public EncaisseeRequest(string invoiceId, DateOnly invoiceIssueDate, string invoiceBuyerSiren, string invoiceBuyerElectronicAddress, Amount amount, Option<string?> currency = default, Option<string?> senderSiren = default, Option<string?> flowType = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default)
+        public EncaisseeRequest(string invoiceId, DateOnly invoiceIssueDate, string invoiceBuyerSiren, string invoiceBuyerElectronicAddress, Amount1 amount, Option<decimal?> vatRate = default, Option<string?> currency = default, Option<string?> senderSiren = default, Option<string?> flowType = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default)
         {
             InvoiceId = invoiceId;
             InvoiceIssueDate = invoiceIssueDate;
             InvoiceBuyerSiren = invoiceBuyerSiren;
             InvoiceBuyerElectronicAddress = invoiceBuyerElectronicAddress;
             Amount = amount;
+            VatRateOption = vatRate;
             CurrencyOption = currency;
             SenderSirenOption = senderSiren;
             FlowTypeOption = flowType;
@@ -98,7 +100,21 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets Amount
         /// </summary>
         [JsonPropertyName("amount")]
-        public Amount Amount { get; set; }
+        public Amount1 Amount { get; set; }
+
+        /// <summary>
+        /// Used to track the state of VatRate
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> VatRateOption { get; private set; }
+
+        /// <summary>
+        /// Taux de TVA du montant encaissé en % (MDT-224, requis par BR-FR-CDV-14 ; défaut 20)
+        /// </summary>
+        /// <value>Taux de TVA du montant encaissé en % (MDT-224, requis par BR-FR-CDV-14 ; défaut 20)</value>
+        [JsonPropertyName("vatRate")]
+        public decimal? VatRate { get { return this.VatRateOption; } set { this.VatRateOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Currency
@@ -206,6 +222,7 @@ namespace FactPulse.SDK.Model
             sb.Append("  InvoiceBuyerSiren: ").Append(InvoiceBuyerSiren).Append("\n");
             sb.Append("  InvoiceBuyerElectronicAddress: ").Append(InvoiceBuyerElectronicAddress).Append("\n");
             sb.Append("  Amount: ").Append(Amount).Append("\n");
+            sb.Append("  VatRate: ").Append(VatRate).Append("\n");
             sb.Append("  Currency: ").Append(Currency).Append("\n");
             sb.Append("  SenderSiren: ").Append(SenderSiren).Append("\n");
             sb.Append("  FlowType: ").Append(FlowType).Append("\n");
@@ -259,7 +276,8 @@ namespace FactPulse.SDK.Model
             Option<DateOnly?> invoiceIssueDate = default;
             Option<string?> invoiceBuyerSiren = default;
             Option<string?> invoiceBuyerElectronicAddress = default;
-            Option<Amount?> amount = default;
+            Option<Amount1?> amount = default;
+            Option<decimal?> vatRate = default;
             Option<string?> currency = default;
             Option<string?> senderSiren = default;
             Option<string?> flowType = default;
@@ -296,7 +314,10 @@ namespace FactPulse.SDK.Model
                             invoiceBuyerElectronicAddress = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "amount":
-                            amount = new Option<Amount?>(JsonSerializer.Deserialize<Amount>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            amount = new Option<Amount1?>(JsonSerializer.Deserialize<Amount1>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
+                        case "vatRate":
+                            vatRate = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
                             break;
                         case "currency":
                             currency = new Option<string?>(utf8JsonReader.GetString()!);
@@ -355,13 +376,16 @@ namespace FactPulse.SDK.Model
             if (amount.IsSet && amount.Value == null)
                 throw new ArgumentNullException(nameof(amount), "Property is not nullable for class EncaisseeRequest.");
 
+            if (vatRate.IsSet && vatRate.Value == null)
+                throw new ArgumentNullException(nameof(vatRate), "Property is not nullable for class EncaisseeRequest.");
+
             if (currency.IsSet && currency.Value == null)
                 throw new ArgumentNullException(nameof(currency), "Property is not nullable for class EncaisseeRequest.");
 
             if (flowType.IsSet && flowType.Value == null)
                 throw new ArgumentNullException(nameof(flowType), "Property is not nullable for class EncaisseeRequest.");
 
-            return new EncaisseeRequest(invoiceId.Value!, invoiceIssueDate.Value!.Value!, invoiceBuyerSiren.Value!, invoiceBuyerElectronicAddress.Value!, amount.Value!, currency, senderSiren, flowType, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
+            return new EncaisseeRequest(invoiceId.Value!, invoiceIssueDate.Value!.Value!, invoiceBuyerSiren.Value!, invoiceBuyerElectronicAddress.Value!, amount.Value!, vatRate, currency, senderSiren, flowType, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
         }
 
         /// <summary>
@@ -416,6 +440,9 @@ namespace FactPulse.SDK.Model
 
             writer.WritePropertyName("amount");
             JsonSerializer.Serialize(writer, encaisseeRequest.Amount, jsonSerializerOptions);
+            if (encaisseeRequest.VatRateOption.IsSet)
+                writer.WriteNumber("vatRate", encaisseeRequest.VatRateOption.Value!.Value);
+
             if (encaisseeRequest.CurrencyOption.IsSet)
                 writer.WriteString("currency", encaisseeRequest.Currency);
 

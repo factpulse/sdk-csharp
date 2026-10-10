@@ -131,6 +131,29 @@ namespace FactPulse.SDK.Api
         Task<IDeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteApiResponse?> DeleteWebhookSecretApiV1ClientsUidWebhookSecretDeleteOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
+        /// Disconnect SuperPDP
+        /// </summary>
+        /// <remarks>
+        /// Disconnect SuperPDP for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  Revokes the stored refresh token with SuperPDP (RFC 7009) and deletes the stored tokens. The client can reconnect later via the connect-url endpoint.
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="uid">Client unique identifier (UUID)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IDisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteApiResponse"/>&gt;</returns>
+        Task<IDisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteApiResponse> DisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Disconnect SuperPDP
+        /// </summary>
+        /// <remarks>
+        /// Disconnect SuperPDP for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  Revokes the stored refresh token with SuperPDP (RFC 7009) and deletes the stored tokens. The client can reconnect later via the connect-url endpoint.
+        /// </remarks>
+        /// <param name="uid">Client unique identifier (UUID)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IDisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteApiResponse"/>?&gt;</returns>
+        Task<IDisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteApiResponse?> DisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
         /// Generate webhook secret
         /// </summary>
         /// <remarks>
@@ -198,6 +221,56 @@ namespace FactPulse.SDK.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetPdpConfigApiV1ClientsUidPdpConfigGetApiResponse"/>?&gt;</returns>
         Task<IGetPdpConfigApiV1ClientsUidPdpConfigGetApiResponse?> GetPdpConfigApiV1ClientsUidPdpConfigGetOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get SuperPDP connection URL
+        /// </summary>
+        /// <remarks>
+        /// Generate the SuperPDP OAuth2 authorization URL for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  Redirect the end user to the returned &#x60;authorizeUrl&#x60; so they can connect their own SuperPDP account to FactPulse (OAuth2 Authorization Code).  **Query parameters**: - &#x60;modeSandbox&#x60; (default &#x60;true&#x60;): connect via the SuperPDP sandbox app   (fictitious data) or the production app. - &#x60;returnUrl&#x60; (optional): absolute http(s) URL of your own portal. Once the   SuperPDP authorization flow is over, the end user is redirected there with   &#x60;superpdp_connected&#x3D;true|false&#x60; (and &#x60;superpdp_error&#x3D;&lt;code&gt;&#x60; on failure)   appended to the query string. Without it, FactPulse displays its own   confirmation page. Returns &#x60;400 invalid_return_url&#x60; if the URL is not an   absolute http(s) URL.
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="uid">Client unique identifier (UUID)</param>
+        /// <param name="modeSandbox">True for the SuperPDP sandbox app (default), False for production (optional, default to true)</param>
+        /// <param name="returnUrl">Absolute http(s) URL to redirect the end user to once the SuperPDP connection is done. Defaults to the FactPulse confirmation page. (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostApiResponse"/>&gt;</returns>
+        Task<IGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostApiResponse> GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostAsync(Guid uid, Option<bool> modeSandbox = default, Option<string?> returnUrl = default, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get SuperPDP connection URL
+        /// </summary>
+        /// <remarks>
+        /// Generate the SuperPDP OAuth2 authorization URL for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  Redirect the end user to the returned &#x60;authorizeUrl&#x60; so they can connect their own SuperPDP account to FactPulse (OAuth2 Authorization Code).  **Query parameters**: - &#x60;modeSandbox&#x60; (default &#x60;true&#x60;): connect via the SuperPDP sandbox app   (fictitious data) or the production app. - &#x60;returnUrl&#x60; (optional): absolute http(s) URL of your own portal. Once the   SuperPDP authorization flow is over, the end user is redirected there with   &#x60;superpdp_connected&#x3D;true|false&#x60; (and &#x60;superpdp_error&#x3D;&lt;code&gt;&#x60; on failure)   appended to the query string. Without it, FactPulse displays its own   confirmation page. Returns &#x60;400 invalid_return_url&#x60; if the URL is not an   absolute http(s) URL.
+        /// </remarks>
+        /// <param name="uid">Client unique identifier (UUID)</param>
+        /// <param name="modeSandbox">True for the SuperPDP sandbox app (default), False for production (optional, default to true)</param>
+        /// <param name="returnUrl">Absolute http(s) URL to redirect the end user to once the SuperPDP connection is done. Defaults to the FactPulse confirmation page. (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostApiResponse"/>?&gt;</returns>
+        Task<IGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostApiResponse?> GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostOrDefaultAsync(Guid uid, Option<bool> modeSandbox = default, Option<string?> returnUrl = default, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get SuperPDP connection status
+        /// </summary>
+        /// <remarks>
+        /// Check whether a client has connected its SuperPDP account.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Response**: - &#x60;connected&#x60;: Whether the client has an active SuperPDP connection - &#x60;connectedAt&#x60;: When the connection was established (if any) - &#x60;expiresAt&#x60;: When the current access token expires (if any) - &#x60;modeSandbox&#x60;: True if connected via the sandbox app, False for production, null if not connected - &#x60;lastError&#x60;: Last token refresh error, if any
+        /// </remarks>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="uid">Client unique identifier (UUID)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetApiResponse"/>&gt;</returns>
+        Task<IGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetApiResponse> GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
+
+        /// <summary>
+        /// Get SuperPDP connection status
+        /// </summary>
+        /// <remarks>
+        /// Check whether a client has connected its SuperPDP account.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Response**: - &#x60;connected&#x60;: Whether the client has an active SuperPDP connection - &#x60;connectedAt&#x60;: When the connection was established (if any) - &#x60;expiresAt&#x60;: When the current access token expires (if any) - &#x60;modeSandbox&#x60;: True if connected via the sandbox app, False for production, null if not connected - &#x60;lastError&#x60;: Last token refresh error, if any
+        /// </remarks>
+        /// <param name="uid">Client unique identifier (UUID)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetApiResponse"/>?&gt;</returns>
+        Task<IGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetApiResponse?> GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Get webhook secret status
@@ -518,6 +591,54 @@ namespace FactPulse.SDK.Api
     }
 
     /// <summary>
+    /// The <see cref="IDisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteApiResponse"/>
+    /// </summary>
+    public interface IDisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.SuperPDPDisconnectResponse?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 400 BadRequest
+        /// </summary>
+        /// <returns></returns>
+        bool IsBadRequest { get; }
+
+        /// <summary>
+        /// Returns true if the response is 401 Unauthorized
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnauthorized { get; }
+
+        /// <summary>
+        /// Returns true if the response is 403 Forbidden
+        /// </summary>
+        /// <returns></returns>
+        bool IsForbidden { get; }
+
+        /// <summary>
+        /// Returns true if the response is 404 NotFound
+        /// </summary>
+        /// <returns></returns>
+        bool IsNotFound { get; }
+
+        /// <summary>
+        /// Returns true if the response is 500 InternalServerError
+        /// </summary>
+        /// <returns></returns>
+        bool IsInternalServerError { get; }
+
+        /// <summary>
+        /// Returns true if the response is 422 UnprocessableContent
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnprocessableContent { get; }
+    }
+
+    /// <summary>
     /// The <see cref="IGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse"/>
     /// </summary>
     public interface IGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePostApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.WebhookSecretGenerateResponse?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>
@@ -617,6 +738,102 @@ namespace FactPulse.SDK.Api
     /// The <see cref="IGetPdpConfigApiV1ClientsUidPdpConfigGetApiResponse"/>
     /// </summary>
     public interface IGetPdpConfigApiV1ClientsUidPdpConfigGetApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.PDPConfigResponse?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 400 BadRequest
+        /// </summary>
+        /// <returns></returns>
+        bool IsBadRequest { get; }
+
+        /// <summary>
+        /// Returns true if the response is 401 Unauthorized
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnauthorized { get; }
+
+        /// <summary>
+        /// Returns true if the response is 403 Forbidden
+        /// </summary>
+        /// <returns></returns>
+        bool IsForbidden { get; }
+
+        /// <summary>
+        /// Returns true if the response is 404 NotFound
+        /// </summary>
+        /// <returns></returns>
+        bool IsNotFound { get; }
+
+        /// <summary>
+        /// Returns true if the response is 500 InternalServerError
+        /// </summary>
+        /// <returns></returns>
+        bool IsInternalServerError { get; }
+
+        /// <summary>
+        /// Returns true if the response is 422 UnprocessableContent
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnprocessableContent { get; }
+    }
+
+    /// <summary>
+    /// The <see cref="IGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostApiResponse"/>
+    /// </summary>
+    public interface IGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.SuperPDPConnectURLResponse?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>
+    {
+        /// <summary>
+        /// Returns true if the response is 200 Ok
+        /// </summary>
+        /// <returns></returns>
+        bool IsOk { get; }
+
+        /// <summary>
+        /// Returns true if the response is 400 BadRequest
+        /// </summary>
+        /// <returns></returns>
+        bool IsBadRequest { get; }
+
+        /// <summary>
+        /// Returns true if the response is 401 Unauthorized
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnauthorized { get; }
+
+        /// <summary>
+        /// Returns true if the response is 403 Forbidden
+        /// </summary>
+        /// <returns></returns>
+        bool IsForbidden { get; }
+
+        /// <summary>
+        /// Returns true if the response is 404 NotFound
+        /// </summary>
+        /// <returns></returns>
+        bool IsNotFound { get; }
+
+        /// <summary>
+        /// Returns true if the response is 500 InternalServerError
+        /// </summary>
+        /// <returns></returns>
+        bool IsInternalServerError { get; }
+
+        /// <summary>
+        /// Returns true if the response is 422 UnprocessableContent
+        /// </summary>
+        /// <returns></returns>
+        bool IsUnprocessableContent { get; }
+    }
+
+    /// <summary>
+    /// The <see cref="IGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetApiResponse"/>
+    /// </summary>
+    public interface IGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.SuperPDPStatusResponse?>, IUnprocessableContent<FactPulse.SDK.Model.HTTPValidationError?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
@@ -989,6 +1206,26 @@ namespace FactPulse.SDK.Api
         /// <summary>
         /// The event raised after the server response
         /// </summary>
+        public event EventHandler<ApiResponseEventArgs>? OnDisconnectSuperpdpApiV1ClientsUidSuperpdpDelete;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs>? OnErrorDisconnectSuperpdpApiV1ClientsUidSuperpdpDelete;
+
+        internal void ExecuteOnDisconnectSuperpdpApiV1ClientsUidSuperpdpDelete(ClientManagementApi.DisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteApiResponse apiResponse)
+        {
+            OnDisconnectSuperpdpApiV1ClientsUidSuperpdpDelete?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorDisconnectSuperpdpApiV1ClientsUidSuperpdpDelete(Exception exception)
+        {
+            OnErrorDisconnectSuperpdpApiV1ClientsUidSuperpdpDelete?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
         public event EventHandler<ApiResponseEventArgs>? OnGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost;
 
         /// <summary>
@@ -1044,6 +1281,46 @@ namespace FactPulse.SDK.Api
         internal void ExecuteOnErrorGetPdpConfigApiV1ClientsUidPdpConfigGet(Exception exception)
         {
             OnErrorGetPdpConfigApiV1ClientsUidPdpConfigGet?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
+        public event EventHandler<ApiResponseEventArgs>? OnGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs>? OnErrorGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost;
+
+        internal void ExecuteOnGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost(ClientManagementApi.GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostApiResponse apiResponse)
+        {
+            OnGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost(Exception exception)
+        {
+            OnErrorGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost?.Invoke(this, new ExceptionEventArgs(exception));
+        }
+
+        /// <summary>
+        /// The event raised after the server response
+        /// </summary>
+        public event EventHandler<ApiResponseEventArgs>? OnGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet;
+
+        /// <summary>
+        /// The event raised after an error querying the server
+        /// </summary>
+        public event EventHandler<ExceptionEventArgs>? OnErrorGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet;
+
+        internal void ExecuteOnGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet(ClientManagementApi.GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetApiResponse apiResponse)
+        {
+            OnGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet?.Invoke(this, new ApiResponseEventArgs(apiResponse));
+        }
+
+        internal void ExecuteOnErrorGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet(Exception exception)
+        {
+            OnErrorGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet?.Invoke(this, new ExceptionEventArgs(exception));
         }
 
         /// <summary>
@@ -2474,6 +2751,318 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
+        partial void FormatDisconnectSuperpdpApiV1ClientsUidSuperpdpDelete(ref Guid uid);
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="uid"></param>
+        private void AfterDisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteDefaultImplementation(IDisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteApiResponse apiResponseLocalVar, Guid uid)
+        {
+            bool suppressDefaultLog = false;
+            AfterDisconnectSuperpdpApiV1ClientsUidSuperpdpDelete(ref suppressDefaultLog, apiResponseLocalVar, uid);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="uid"></param>
+        partial void AfterDisconnectSuperpdpApiV1ClientsUidSuperpdpDelete(ref bool suppressDefaultLog, IDisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteApiResponse apiResponseLocalVar, Guid uid);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="uid"></param>
+        private void OnErrorDisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Guid uid)
+        {
+            bool suppressDefaultLogLocalVar = false;
+            OnErrorDisconnectSuperpdpApiV1ClientsUidSuperpdpDelete(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, uid);
+            if (!suppressDefaultLogLocalVar)
+                Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLogLocalVar"></param>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="uid"></param>
+        partial void OnErrorDisconnectSuperpdpApiV1ClientsUidSuperpdpDelete(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Guid uid);
+
+        /// <summary>
+        /// Disconnect SuperPDP Disconnect SuperPDP for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  Revokes the stored refresh token with SuperPDP (RFC 7009) and deletes the stored tokens. The client can reconnect later via the connect-url endpoint.
+        /// </summary>
+        /// <param name="uid">Client unique identifier (UUID)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IDisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteApiResponse"/>&gt;</returns>
+        public async Task<IDisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteApiResponse?> DisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await DisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteAsync(uid, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Disconnect SuperPDP Disconnect SuperPDP for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  Revokes the stored refresh token with SuperPDP (RFC 7009) and deletes the stored tokens. The client can reconnect later via the connect-url endpoint.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="uid">Client unique identifier (UUID)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IDisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteApiResponse"/>&gt;</returns>
+        public async Task<IDisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteApiResponse> DisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                FormatDisconnectSuperpdpApiV1ClientsUidSuperpdpDelete(ref uid);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
+                        ? "/api/v1/clients/{uid}/superpdp"
+                        : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/clients/{uid}/superpdp");
+                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Buid%7D", Uri.EscapeDataString(uid.ToString()));
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar2 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar2);
+
+                    bearerTokenLocalVar2.UseInHeader(httpRequestMessageLocalVar, "");
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
+
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Delete;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        ILogger<DisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<DisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteApiResponse>();
+                        DisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteApiResponse apiResponseLocalVar;
+
+                        switch ((int)httpResponseMessageLocalVar.StatusCode) {
+                            default: {
+                                string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+                                apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/api/v1/clients/{uid}/superpdp", requestedAtLocalVar, _jsonSerializerOptions);
+
+                                break;
+                            }
+                        }
+
+                        AfterDisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteDefaultImplementation(apiResponseLocalVar, uid);
+
+                        Events.ExecuteOnDisconnectSuperpdpApiV1ClientsUidSuperpdpDelete(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorDisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteDefaultImplementation(e, "/api/v1/clients/{uid}/superpdp", uriBuilderLocalVar.Path, uid);
+                Events.ExecuteOnErrorDisconnectSuperpdpApiV1ClientsUidSuperpdpDelete(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="DisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteApiResponse"/>
+        /// </summary>
+        public partial class DisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteApiResponse : FactPulse.SDK.Client.ApiResponse, IDisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<DisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="DisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public DisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteApiResponse(ILogger<DisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            /// <summary>
+            /// The <see cref="DisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="contentStream"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public DisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteApiResponse(ILogger<DisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.SuperPDPDisconnectResponse? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.SuperPDPDisconnectResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out FactPulse.SDK.Model.SuperPDPDisconnectResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 400 BadRequest
+            /// </summary>
+            /// <returns></returns>
+            public bool IsBadRequest => 400 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 401 Unauthorized
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnauthorized => 401 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 403 Forbidden
+            /// </summary>
+            /// <returns></returns>
+            public bool IsForbidden => 403 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 404 NotFound
+            /// </summary>
+            /// <returns></returns>
+            public bool IsNotFound => 404 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 500 InternalServerError
+            /// </summary>
+            /// <returns></returns>
+            public bool IsInternalServerError => 500 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnprocessableContent => 422 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.HTTPValidationError? UnprocessableContent()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsUnprocessableContent
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.HTTPValidationError>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryUnprocessableContent([NotNullWhen(true)]out FactPulse.SDK.Model.HTTPValidationError? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = UnprocessableContent();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)422);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
         partial void FormatGenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost(ref Guid uid);
 
         /// <summary>
@@ -3317,6 +3906,652 @@ namespace FactPulse.SDK.Api
             /// <param name="result"></param>
             /// <returns></returns>
             public bool TryOk([NotNullWhen(true)]out FactPulse.SDK.Model.PDPConfigResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 400 BadRequest
+            /// </summary>
+            /// <returns></returns>
+            public bool IsBadRequest => 400 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 401 Unauthorized
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnauthorized => 401 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 403 Forbidden
+            /// </summary>
+            /// <returns></returns>
+            public bool IsForbidden => 403 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 404 NotFound
+            /// </summary>
+            /// <returns></returns>
+            public bool IsNotFound => 404 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 500 InternalServerError
+            /// </summary>
+            /// <returns></returns>
+            public bool IsInternalServerError => 500 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnprocessableContent => 422 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.HTTPValidationError? UnprocessableContent()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsUnprocessableContent
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.HTTPValidationError>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryUnprocessableContent([NotNullWhen(true)]out FactPulse.SDK.Model.HTTPValidationError? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = UnprocessableContent();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)422);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
+        partial void FormatGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost(ref Guid uid, ref Option<bool> modeSandbox, ref Option<string?> returnUrl);
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="uid"></param>
+        /// <param name="modeSandbox"></param>
+        /// <param name="returnUrl"></param>
+        private void AfterGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostDefaultImplementation(IGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostApiResponse apiResponseLocalVar, Guid uid, Option<bool> modeSandbox, Option<string?> returnUrl)
+        {
+            bool suppressDefaultLog = false;
+            AfterGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost(ref suppressDefaultLog, apiResponseLocalVar, uid, modeSandbox, returnUrl);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="uid"></param>
+        /// <param name="modeSandbox"></param>
+        /// <param name="returnUrl"></param>
+        partial void AfterGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost(ref bool suppressDefaultLog, IGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostApiResponse apiResponseLocalVar, Guid uid, Option<bool> modeSandbox, Option<string?> returnUrl);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="uid"></param>
+        /// <param name="modeSandbox"></param>
+        /// <param name="returnUrl"></param>
+        private void OnErrorGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Guid uid, Option<bool> modeSandbox, Option<string?> returnUrl)
+        {
+            bool suppressDefaultLogLocalVar = false;
+            OnErrorGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, uid, modeSandbox, returnUrl);
+            if (!suppressDefaultLogLocalVar)
+                Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLogLocalVar"></param>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="uid"></param>
+        /// <param name="modeSandbox"></param>
+        /// <param name="returnUrl"></param>
+        partial void OnErrorGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Guid uid, Option<bool> modeSandbox, Option<string?> returnUrl);
+
+        /// <summary>
+        /// Get SuperPDP connection URL Generate the SuperPDP OAuth2 authorization URL for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  Redirect the end user to the returned &#x60;authorizeUrl&#x60; so they can connect their own SuperPDP account to FactPulse (OAuth2 Authorization Code).  **Query parameters**: - &#x60;modeSandbox&#x60; (default &#x60;true&#x60;): connect via the SuperPDP sandbox app   (fictitious data) or the production app. - &#x60;returnUrl&#x60; (optional): absolute http(s) URL of your own portal. Once the   SuperPDP authorization flow is over, the end user is redirected there with   &#x60;superpdp_connected&#x3D;true|false&#x60; (and &#x60;superpdp_error&#x3D;&lt;code&gt;&#x60; on failure)   appended to the query string. Without it, FactPulse displays its own   confirmation page. Returns &#x60;400 invalid_return_url&#x60; if the URL is not an   absolute http(s) URL.
+        /// </summary>
+        /// <param name="uid">Client unique identifier (UUID)</param>
+        /// <param name="modeSandbox">True for the SuperPDP sandbox app (default), False for production (optional, default to true)</param>
+        /// <param name="returnUrl">Absolute http(s) URL to redirect the end user to once the SuperPDP connection is done. Defaults to the FactPulse confirmation page. (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostApiResponse"/>&gt;</returns>
+        public async Task<IGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostApiResponse?> GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostOrDefaultAsync(Guid uid, Option<bool> modeSandbox = default, Option<string?> returnUrl = default, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostAsync(uid, modeSandbox, returnUrl, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Get SuperPDP connection URL Generate the SuperPDP OAuth2 authorization URL for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  Redirect the end user to the returned &#x60;authorizeUrl&#x60; so they can connect their own SuperPDP account to FactPulse (OAuth2 Authorization Code).  **Query parameters**: - &#x60;modeSandbox&#x60; (default &#x60;true&#x60;): connect via the SuperPDP sandbox app   (fictitious data) or the production app. - &#x60;returnUrl&#x60; (optional): absolute http(s) URL of your own portal. Once the   SuperPDP authorization flow is over, the end user is redirected there with   &#x60;superpdp_connected&#x3D;true|false&#x60; (and &#x60;superpdp_error&#x3D;&lt;code&gt;&#x60; on failure)   appended to the query string. Without it, FactPulse displays its own   confirmation page. Returns &#x60;400 invalid_return_url&#x60; if the URL is not an   absolute http(s) URL.
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="uid">Client unique identifier (UUID)</param>
+        /// <param name="modeSandbox">True for the SuperPDP sandbox app (default), False for production (optional, default to true)</param>
+        /// <param name="returnUrl">Absolute http(s) URL to redirect the end user to once the SuperPDP connection is done. Defaults to the FactPulse confirmation page. (optional)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostApiResponse"/>&gt;</returns>
+        public async Task<IGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostApiResponse> GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostAsync(Guid uid, Option<bool> modeSandbox = default, Option<string?> returnUrl = default, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                FormatGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost(ref uid, ref modeSandbox, ref returnUrl);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
+                        ? "/api/v1/clients/{uid}/superpdp/connect-url"
+                        : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/clients/{uid}/superpdp/connect-url");
+                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Buid%7D", Uri.EscapeDataString(uid.ToString()));
+
+                    System.Collections.Specialized.NameValueCollection parseQueryStringLocalVar = System.Web.HttpUtility.ParseQueryString(string.Empty);
+
+                    if (modeSandbox.IsSet)
+                        parseQueryStringLocalVar["modeSandbox"] = ClientUtils.ParameterToString(modeSandbox.Value);
+
+                    if (returnUrl.IsSet)
+                        parseQueryStringLocalVar["returnUrl"] = ClientUtils.ParameterToString(returnUrl.Value);
+
+                    uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar2 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar2);
+
+                    bearerTokenLocalVar2.UseInHeader(httpRequestMessageLocalVar, "");
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
+
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Post;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        ILogger<GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostApiResponse>();
+                        GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostApiResponse apiResponseLocalVar;
+
+                        switch ((int)httpResponseMessageLocalVar.StatusCode) {
+                            default: {
+                                string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+                                apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/api/v1/clients/{uid}/superpdp/connect-url", requestedAtLocalVar, _jsonSerializerOptions);
+
+                                break;
+                            }
+                        }
+
+                        AfterGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostDefaultImplementation(apiResponseLocalVar, uid, modeSandbox, returnUrl);
+
+                        Events.ExecuteOnGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostDefaultImplementation(e, "/api/v1/clients/{uid}/superpdp/connect-url", uriBuilderLocalVar.Path, uid, modeSandbox, returnUrl);
+                Events.ExecuteOnErrorGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostApiResponse"/>
+        /// </summary>
+        public partial class GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostApiResponse : FactPulse.SDK.Client.ApiResponse, IGetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostApiResponse(ILogger<GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            /// <summary>
+            /// The <see cref="GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="contentStream"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostApiResponse(ILogger<GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.SuperPDPConnectURLResponse? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.SuperPDPConnectURLResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out FactPulse.SDK.Model.SuperPDPConnectURLResponse? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = Ok();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)200);
+                }
+
+                return result != null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 400 BadRequest
+            /// </summary>
+            /// <returns></returns>
+            public bool IsBadRequest => 400 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 401 Unauthorized
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnauthorized => 401 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 403 Forbidden
+            /// </summary>
+            /// <returns></returns>
+            public bool IsForbidden => 403 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 404 NotFound
+            /// </summary>
+            /// <returns></returns>
+            public bool IsNotFound => 404 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 500 InternalServerError
+            /// </summary>
+            /// <returns></returns>
+            public bool IsInternalServerError => 500 == (int)StatusCode;
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public bool IsUnprocessableContent => 422 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 422 UnprocessableContent
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.HTTPValidationError? UnprocessableContent()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsUnprocessableContent
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.HTTPValidationError>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 422 UnprocessableContent and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryUnprocessableContent([NotNullWhen(true)]out FactPulse.SDK.Model.HTTPValidationError? result)
+            {
+                result = null;
+
+                try
+                {
+                    result = UnprocessableContent();
+                } catch (Exception e)
+                {
+                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)422);
+                }
+
+                return result != null;
+            }
+
+            private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
+            {
+                bool suppressDefaultLog = false;
+                OnDeserializationError(ref suppressDefaultLog, exception, httpStatusCode);
+                if (!suppressDefaultLog)
+                    Logger.LogError(exception, "An error occurred while deserializing the {code} response.", httpStatusCode);
+            }
+
+            partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
+        }
+
+        partial void FormatGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet(ref Guid uid);
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="uid"></param>
+        private void AfterGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetDefaultImplementation(IGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetApiResponse apiResponseLocalVar, Guid uid)
+        {
+            bool suppressDefaultLog = false;
+            AfterGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet(ref suppressDefaultLog, apiResponseLocalVar, uid);
+            if (!suppressDefaultLog)
+                Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
+        }
+
+        /// <summary>
+        /// Processes the server response
+        /// </summary>
+        /// <param name="suppressDefaultLog"></param>
+        /// <param name="apiResponseLocalVar"></param>
+        /// <param name="uid"></param>
+        partial void AfterGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet(ref bool suppressDefaultLog, IGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetApiResponse apiResponseLocalVar, Guid uid);
+
+        /// <summary>
+        /// Logs exceptions that occur while retrieving the server response
+        /// </summary>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="uid"></param>
+        private void OnErrorGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Guid uid)
+        {
+            bool suppressDefaultLogLocalVar = false;
+            OnErrorGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, uid);
+            if (!suppressDefaultLogLocalVar)
+                Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
+        }
+
+        /// <summary>
+        /// A partial method that gives developers a way to provide customized exception handling
+        /// </summary>
+        /// <param name="suppressDefaultLogLocalVar"></param>
+        /// <param name="exceptionLocalVar"></param>
+        /// <param name="pathFormatLocalVar"></param>
+        /// <param name="pathLocalVar"></param>
+        /// <param name="uid"></param>
+        partial void OnErrorGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Guid uid);
+
+        /// <summary>
+        /// Get SuperPDP connection status Check whether a client has connected its SuperPDP account.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Response**: - &#x60;connected&#x60;: Whether the client has an active SuperPDP connection - &#x60;connectedAt&#x60;: When the connection was established (if any) - &#x60;expiresAt&#x60;: When the current access token expires (if any) - &#x60;modeSandbox&#x60;: True if connected via the sandbox app, False for production, null if not connected - &#x60;lastError&#x60;: Last token refresh error, if any
+        /// </summary>
+        /// <param name="uid">Client unique identifier (UUID)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetApiResponse"/>&gt;</returns>
+        public async Task<IGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetApiResponse?> GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetOrDefaultAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default)
+        {
+            try
+            {
+                return await GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetAsync(uid, cancellationToken).ConfigureAwait(false);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Get SuperPDP connection status Check whether a client has connected its SuperPDP account.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Response**: - &#x60;connected&#x60;: Whether the client has an active SuperPDP connection - &#x60;connectedAt&#x60;: When the connection was established (if any) - &#x60;expiresAt&#x60;: When the current access token expires (if any) - &#x60;modeSandbox&#x60;: True if connected via the sandbox app, False for production, null if not connected - &#x60;lastError&#x60;: Last token refresh error, if any
+        /// </summary>
+        /// <exception cref="ApiException">Thrown when fails to make API call</exception>
+        /// <param name="uid">Client unique identifier (UUID)</param>
+        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
+        /// <returns><see cref="Task"/>&lt;<see cref="IGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetApiResponse"/>&gt;</returns>
+        public async Task<IGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetApiResponse> GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetAsync(Guid uid, System.Threading.CancellationToken cancellationToken = default)
+        {
+            UriBuilder uriBuilderLocalVar = new UriBuilder();
+
+            try
+            {
+                FormatGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet(ref uid);
+
+                using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
+                {
+                    uriBuilderLocalVar.Host = HttpClient.BaseAddress!.Host;
+                    uriBuilderLocalVar.Port = HttpClient.BaseAddress.Port;
+                    uriBuilderLocalVar.Scheme = HttpClient.BaseAddress.Scheme;
+                    uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
+                        ? "/api/v1/clients/{uid}/superpdp/status"
+                        : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/clients/{uid}/superpdp/status");
+                    uriBuilderLocalVar.Path = uriBuilderLocalVar.Path.Replace("%7Buid%7D", Uri.EscapeDataString(uid.ToString()));
+
+                    List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
+                    ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
+                    tokenBaseLocalVars.Add(apiKeyTokenLocalVar1);
+                    apiKeyTokenLocalVar1.UseInHeader(httpRequestMessageLocalVar);
+
+                    httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
+
+                    BearerToken bearerTokenLocalVar2 = (BearerToken) await BearerTokenProvider.GetAsync(cancellation: cancellationToken).ConfigureAwait(false);
+
+                    tokenBaseLocalVars.Add(bearerTokenLocalVar2);
+
+                    bearerTokenLocalVar2.UseInHeader(httpRequestMessageLocalVar, "");
+
+                    string[] acceptLocalVars = new string[] {
+                        "application/json"
+                    };
+
+                    IEnumerable<MediaTypeWithQualityHeaderValue> acceptHeaderValuesLocalVar = ClientUtils.SelectHeaderAcceptArray(acceptLocalVars);
+
+                    foreach (var acceptLocalVar in acceptHeaderValuesLocalVar)
+                        httpRequestMessageLocalVar.Headers.Accept.Add(acceptLocalVar);
+
+                    httpRequestMessageLocalVar.Method = HttpMethod.Get;
+
+                    DateTime requestedAtLocalVar = DateTime.UtcNow;
+
+                    using (HttpResponseMessage httpResponseMessageLocalVar = await HttpClient.SendAsync(httpRequestMessageLocalVar, cancellationToken).ConfigureAwait(false))
+                    {
+                        ILogger<GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetApiResponse> apiResponseLoggerLocalVar = LoggerFactory.CreateLogger<GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetApiResponse>();
+                        GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetApiResponse apiResponseLocalVar;
+
+                        switch ((int)httpResponseMessageLocalVar.StatusCode) {
+                            default: {
+                                string responseContentLocalVar = await httpResponseMessageLocalVar.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+                                apiResponseLocalVar = new(apiResponseLoggerLocalVar, httpRequestMessageLocalVar, httpResponseMessageLocalVar, responseContentLocalVar, "/api/v1/clients/{uid}/superpdp/status", requestedAtLocalVar, _jsonSerializerOptions);
+
+                                break;
+                            }
+                        }
+
+                        AfterGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetDefaultImplementation(apiResponseLocalVar, uid);
+
+                        Events.ExecuteOnGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet(apiResponseLocalVar);
+
+                        if (apiResponseLocalVar.StatusCode == (HttpStatusCode) 429)
+                            foreach(TokenBase tokenBaseLocalVar in tokenBaseLocalVars)
+                                tokenBaseLocalVar.BeginRateLimit();
+
+                        return apiResponseLocalVar;
+                    }
+                }
+            }
+            catch(Exception e)
+            {
+                OnErrorGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetDefaultImplementation(e, "/api/v1/clients/{uid}/superpdp/status", uriBuilderLocalVar.Path, uid);
+                Events.ExecuteOnErrorGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// The <see cref="GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetApiResponse"/>
+        /// </summary>
+        public partial class GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetApiResponse : FactPulse.SDK.Client.ApiResponse, IGetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetApiResponse
+        {
+            /// <summary>
+            /// The logger
+            /// </summary>
+            public ILogger<GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetApiResponse> Logger { get; }
+
+            /// <summary>
+            /// The <see cref="GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="rawContent"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetApiResponse(ILogger<GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, string rawContent, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, rawContent, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            /// <summary>
+            /// The <see cref="GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetApiResponse"/>
+            /// </summary>
+            /// <param name="logger"></param>
+            /// <param name="httpRequestMessage"></param>
+            /// <param name="httpResponseMessage"></param>
+            /// <param name="contentStream"></param>
+            /// <param name="path"></param>
+            /// <param name="requestedAt"></param>
+            /// <param name="jsonSerializerOptions"></param>
+            public GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetApiResponse(ILogger<GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetApiResponse> logger, System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage, System.IO.Stream contentStream, string path, DateTime requestedAt, System.Text.Json.JsonSerializerOptions jsonSerializerOptions) : base(httpRequestMessage, httpResponseMessage, contentStream, path, requestedAt, jsonSerializerOptions)
+            {
+                Logger = logger;
+                OnCreated(httpRequestMessage, httpResponseMessage);
+            }
+
+            partial void OnCreated(global::System.Net.Http.HttpRequestMessage httpRequestMessage, System.Net.Http.HttpResponseMessage httpResponseMessage);
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public bool IsOk => 200 == (int)StatusCode;
+
+            /// <summary>
+            /// Deserializes the response if the response is 200 Ok
+            /// </summary>
+            /// <returns></returns>
+            public FactPulse.SDK.Model.SuperPDPStatusResponse? Ok()
+            {
+                // This logic may be modified with the AsModel.mustache template
+                return IsOk
+                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.SuperPDPStatusResponse>(RawContent, _jsonSerializerOptions)
+                    : null;
+            }
+
+            /// <summary>
+            /// Returns true if the response is 200 Ok and the deserialized response is not null
+            /// </summary>
+            /// <param name="result"></param>
+            /// <returns></returns>
+            public bool TryOk([NotNullWhen(true)]out FactPulse.SDK.Model.SuperPDPStatusResponse? result)
             {
                 result = null;
 

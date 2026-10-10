@@ -99,7 +99,7 @@ namespace FactPulse.SDK.Model
         /// </summary>
         /// <value>Document type (BT-3)</value>
         [JsonPropertyName("documentType")]
-        public InvoiceTypeCodeOutput? DocumentType { get { return this.DocumentTypeOption; } set { this.DocumentTypeOption = new(value); } }
+        public InvoiceTypeCodeOutput? DocumentType { get { return this.DocumentTypeOption.Value; } set { this.DocumentTypeOption = new(value); } }
 
         /// <summary>
         /// Invoice number issued by the supplier (BT-1)

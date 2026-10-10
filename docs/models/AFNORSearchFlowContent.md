@@ -5,7 +5,8 @@ A set of flows matching criterias, provided into the request
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Limit** | **int** |  | [optional] 
+**Limit** | **int** | Pagination, Maximum number of results that may be returned | [optional] [default to 25]
+**NextCursor** | **string** | Pagination management: - If present, says where to start for next page, set nextCursor as the cursor in the next request - If omitted, says that pagination is finished  | [optional] 
 **Filters** | [**AFNORSearchFlowFilters**](AFNORSearchFlowFilters.md) |  | [optional] 
 **Results** | [**List&lt;AFNORFlow&gt;**](AFNORFlow.md) |  | [optional] 
 

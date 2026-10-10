@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Op** | **AFNORContainsOrStrictOperator** |  | [optional] 
+**Op** | **AFNORContainsOrStrictOrStartWithOperator** |  | [optional] 
 **Value** | **string** | Municipality of the recipient structure having defined the directory line(s). | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)

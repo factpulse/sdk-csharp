@@ -9,10 +9,10 @@ Name | Type | Description | Notes
 **PayeeId** | **string** |  | [optional] 
 **Siret** | **string** |  | [optional] 
 **Siren** | **string** |  | [optional] 
-**ElectronicAddress** | [**ElectronicAddress**](ElectronicAddress.md) |  | [optional] 
+**ElectronicAddress** | [**ElectronicAddressInput**](ElectronicAddressInput.md) |  | [optional] 
 **Iban** | **string** |  | [optional] 
 **Bic** | **string** |  | [optional] 
-**GlobalIds** | [**List&lt;ElectronicAddress&gt;**](ElectronicAddress.md) |  | [optional] 
+**GlobalIds** | [**List&lt;ElectronicAddressInput&gt;**](ElectronicAddressInput.md) |  | [optional] 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

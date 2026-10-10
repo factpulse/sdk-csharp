@@ -209,7 +209,7 @@ No authorization required
 
 <a id="submitaggregatedereportingapiv1ereportingsubmitaggregatedpost"></a>
 # **SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost**
-> SubmitEReportingResponse SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost (SubmitAggregatedReportRequest submitAggregatedReportRequest)
+> SubmitEReportingResponse SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost (SubmitAggregatedReportRequest submitAggregatedReportRequest, string organizationId = null)
 
 Submit aggregated e-reporting to PA/PDP
 
@@ -221,6 +221,7 @@ Generate and submit a PPF-compliant aggregated e-reporting to a PA/PDP.  Combine
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **submitAggregatedReportRequest** | [**SubmitAggregatedReportRequest**](SubmitAggregatedReportRequest.md) |  |  |
+| **organizationId** | **string** | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. | [optional]  |
 
 ### Return type
 
@@ -249,7 +250,7 @@ Generate and submit a PPF-compliant aggregated e-reporting to a PA/PDP.  Combine
 
 <a id="submitereportingapiv1ereportingsubmitpost"></a>
 # **SubmitEreportingApiV1EreportingSubmitPost**
-> SubmitEReportingResponse SubmitEreportingApiV1EreportingSubmitPost (SubmitEReportingRequest submitEReportingRequest)
+> SubmitEReportingResponse SubmitEreportingApiV1EreportingSubmitPost (SubmitEReportingRequest submitEReportingRequest, string organizationId = null)
 
 Submit e-reporting to PA/PDP
 
@@ -261,6 +262,7 @@ Generate and submit e-reporting to a PA (Plateforme Agréée).  Authentication s
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **submitEReportingRequest** | [**SubmitEReportingRequest**](SubmitEReportingRequest.md) |  |  |
+| **organizationId** | **string** | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. | [optional]  |
 
 ### Return type
 
@@ -289,7 +291,7 @@ Generate and submit e-reporting to a PA (Plateforme Agréée).  Authentication s
 
 <a id="submitxmlereportingapiv1ereportingsubmitxmlpost"></a>
 # **SubmitXmlEreportingApiV1EreportingSubmitXmlPost**
-> SubmitEReportingResponse SubmitXmlEreportingApiV1EreportingSubmitXmlPost (System.IO.Stream xmlFile, string trackingId = null, bool skipValidation = null, string pdpFlowServiceUrl = null, string pdpTokenUrl = null, string pdpClientId = null, string pdpClientSecret = null)
+> SubmitEReportingResponse SubmitXmlEreportingApiV1EreportingSubmitXmlPost (System.IO.Stream xmlFile, string organizationId = null, string trackingId = null, bool skipValidation = null, string pdpFlowServiceUrl = null, string pdpTokenUrl = null, string pdpClientId = null, string pdpClientSecret = null)
 
 Submit pre-generated e-reporting XML
 
@@ -301,6 +303,7 @@ Submit a pre-generated e-reporting XML file directly to a PA/PDP.  This endpoint
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **xmlFile** | **System.IO.Stream****System.IO.Stream** | E-reporting XML file |  |
+| **organizationId** | **string** | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. | [optional]  |
 | **trackingId** | **string** |  | [optional]  |
 | **skipValidation** | **bool** | Skip XSD validation | [optional] [default to false] |
 | **pdpFlowServiceUrl** | **string** |  | [optional]  |

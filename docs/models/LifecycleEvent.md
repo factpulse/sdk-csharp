@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **StatusCode** | **string** | Code statut (200-601) | 
 **StatusDescription** | **string** |  | [optional] 
 **AckStatus** | **string** |  | [optional] 
+**FlowDirection** | **string** |  | [optional] 
 **At** | **string** |  | [optional] 
 **DocumentId** | **string** |  | [optional] 
 **Amount** | **string** |  | [optional] 

@@ -35,12 +35,12 @@ namespace FactPulse.SDK.Model
         /// Initializes a new instance of the <see cref="AFNORSearchDirectoryLineSortingInner" /> class.
         /// </summary>
         /// <param name="field">field</param>
-        /// <param name="sortingOrder">sortingOrder</param>
+        /// <param name="order">order</param>
         [JsonConstructor]
-        public AFNORSearchDirectoryLineSortingInner(Option<AFNORDirectoryLineField?> field = default, Option<AFNORSortingOrder?> sortingOrder = default)
+        public AFNORSearchDirectoryLineSortingInner(Option<AFNORDirectoryLineField?> field = default, Option<AFNORSortingOrder?> order = default)
         {
             FieldOption = field;
-            SortingOrderOption = sortingOrder;
+            OrderOption = order;
             OnCreated();
         }
 
@@ -57,20 +57,20 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets Field
         /// </summary>
         [JsonPropertyName("field")]
-        public AFNORDirectoryLineField? Field { get { return this.FieldOption; } set { this.FieldOption = new(value); } }
+        public AFNORDirectoryLineField? Field { get { return this.FieldOption.Value; } set { this.FieldOption = new(value); } }
 
         /// <summary>
-        /// Used to track the state of SortingOrder
+        /// Used to track the state of Order
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<AFNORSortingOrder?> SortingOrderOption { get; private set; }
+        public Option<AFNORSortingOrder?> OrderOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets SortingOrder
+        /// Gets or Sets Order
         /// </summary>
-        [JsonPropertyName("sortingOrder")]
-        public AFNORSortingOrder? SortingOrder { get { return this.SortingOrderOption; } set { this.SortingOrderOption = new(value); } }
+        [JsonPropertyName("order")]
+        public AFNORSortingOrder? Order { get { return this.OrderOption.Value; } set { this.OrderOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -81,7 +81,7 @@ namespace FactPulse.SDK.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class AFNORSearchDirectoryLineSortingInner {\n");
             sb.Append("  Field: ").Append(Field).Append("\n");
-            sb.Append("  SortingOrder: ").Append(SortingOrder).Append("\n");
+            sb.Append("  Order: ").Append(Order).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -120,7 +120,7 @@ namespace FactPulse.SDK.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<AFNORDirectoryLineField?> field = default;
-            Option<AFNORSortingOrder?> sortingOrder = default;
+            Option<AFNORSortingOrder?> order = default;
 
             while (utf8JsonReader.Read())
             {
@@ -142,10 +142,10 @@ namespace FactPulse.SDK.Model
                             if (fieldRawValue != null)
                                 field = new Option<AFNORDirectoryLineField?>(AFNORDirectoryLineFieldValueConverter.FromStringOrDefault(fieldRawValue));
                             break;
-                        case "sortingOrder":
-                            string? sortingOrderRawValue = utf8JsonReader.GetString();
-                            if (sortingOrderRawValue != null)
-                                sortingOrder = new Option<AFNORSortingOrder?>(AFNORSortingOrderValueConverter.FromStringOrDefault(sortingOrderRawValue));
+                        case "order":
+                            string? orderRawValue = utf8JsonReader.GetString();
+                            if (orderRawValue != null)
+                                order = new Option<AFNORSortingOrder?>(AFNORSortingOrderValueConverter.FromStringOrDefault(orderRawValue));
                             break;
                         default:
                             break;
@@ -156,10 +156,10 @@ namespace FactPulse.SDK.Model
             if (field.IsSet && field.Value == null)
                 throw new ArgumentNullException(nameof(field), "Property is not nullable for class AFNORSearchDirectoryLineSortingInner.");
 
-            if (sortingOrder.IsSet && sortingOrder.Value == null)
-                throw new ArgumentNullException(nameof(sortingOrder), "Property is not nullable for class AFNORSearchDirectoryLineSortingInner.");
+            if (order.IsSet && order.Value == null)
+                throw new ArgumentNullException(nameof(order), "Property is not nullable for class AFNORSearchDirectoryLineSortingInner.");
 
-            return new AFNORSearchDirectoryLineSortingInner(field, sortingOrder);
+            return new AFNORSearchDirectoryLineSortingInner(field, order);
         }
 
         /// <summary>
@@ -191,10 +191,10 @@ namespace FactPulse.SDK.Model
                 var fieldRawValue = AFNORDirectoryLineFieldValueConverter.ToJsonValue(aFNORSearchDirectoryLineSortingInner.Field!.Value);
                 writer.WriteString("field", fieldRawValue);
             }
-            if (aFNORSearchDirectoryLineSortingInner.SortingOrderOption.IsSet)
+            if (aFNORSearchDirectoryLineSortingInner.OrderOption.IsSet)
             {
-                var sortingOrderRawValue = AFNORSortingOrderValueConverter.ToJsonValue(aFNORSearchDirectoryLineSortingInner.SortingOrder!.Value);
-                writer.WriteString("sortingOrder", sortingOrderRawValue);
+                var orderRawValue = AFNORSortingOrderValueConverter.ToJsonValue(aFNORSearchDirectoryLineSortingInner.Order!.Value);
+                writer.WriteString("order", orderRawValue);
             }
         }
     }

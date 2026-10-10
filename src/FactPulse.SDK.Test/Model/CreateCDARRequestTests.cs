@@ -215,5 +215,14 @@ namespace FactPulse.SDK.Test.Model
         {
             // TODO unit test for the property 'EncaisseAmount'
         }
+
+        /// <summary>
+        /// Test the property 'EncaisseVatRate'
+        /// </summary>
+        [Fact]
+        public void EncaisseVatRateTest()
+        {
+            // TODO unit test for the property 'EncaisseVatRate'
+        }
     }
 }

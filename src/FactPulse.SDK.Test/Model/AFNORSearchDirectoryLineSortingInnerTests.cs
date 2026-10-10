@@ -64,12 +64,12 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
-        /// Test the property 'SortingOrder'
+        /// Test the property 'Order'
         /// </summary>
         [Fact]
-        public void SortingOrderTest()
+        public void OrderTest()
         {
-            // TODO unit test for the property 'SortingOrder'
+            // TODO unit test for the property 'Order'
         }
     }
 }

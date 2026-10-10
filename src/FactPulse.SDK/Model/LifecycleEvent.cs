@@ -38,6 +38,7 @@ namespace FactPulse.SDK.Model
         /// <param name="statusCode">Code statut (200-601)</param>
         /// <param name="statusDescription">statusDescription</param>
         /// <param name="ackStatus">ackStatus</param>
+        /// <param name="flowDirection">flowDirection</param>
         /// <param name="at">at</param>
         /// <param name="documentId">documentId</param>
         /// <param name="amount">amount</param>
@@ -46,12 +47,13 @@ namespace FactPulse.SDK.Model
         /// <param name="issuerRole">issuerRole</param>
         /// <param name="reasonCode">reasonCode</param>
         [JsonConstructor]
-        public LifecycleEvent(string flowId, string statusCode, Option<string?> statusDescription = default, Option<string?> ackStatus = default, Option<string?> at = default, Option<string?> documentId = default, Option<string?> amount = default, Option<string?> currency = default, Option<string?> issuerSiren = default, Option<string?> issuerRole = default, Option<string?> reasonCode = default)
+        public LifecycleEvent(string flowId, string statusCode, Option<string?> statusDescription = default, Option<string?> ackStatus = default, Option<string?> flowDirection = default, Option<string?> at = default, Option<string?> documentId = default, Option<string?> amount = default, Option<string?> currency = default, Option<string?> issuerSiren = default, Option<string?> issuerRole = default, Option<string?> reasonCode = default)
         {
             FlowId = flowId;
             StatusCode = statusCode;
             StatusDescriptionOption = statusDescription;
             AckStatusOption = ackStatus;
+            FlowDirectionOption = flowDirection;
             AtOption = at;
             DocumentIdOption = documentId;
             AmountOption = amount;
@@ -103,6 +105,19 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonPropertyName("ackStatus")]
         public string? AckStatus { get { return this.AckStatusOption; } set { this.AckStatusOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of FlowDirection
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> FlowDirectionOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets FlowDirection
+        /// </summary>
+        [JsonPropertyName("flowDirection")]
+        public string? FlowDirection { get { return this.FlowDirectionOption; } set { this.FlowDirectionOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of At
@@ -207,6 +222,7 @@ namespace FactPulse.SDK.Model
             sb.Append("  StatusCode: ").Append(StatusCode).Append("\n");
             sb.Append("  StatusDescription: ").Append(StatusDescription).Append("\n");
             sb.Append("  AckStatus: ").Append(AckStatus).Append("\n");
+            sb.Append("  FlowDirection: ").Append(FlowDirection).Append("\n");
             sb.Append("  At: ").Append(At).Append("\n");
             sb.Append("  DocumentId: ").Append(DocumentId).Append("\n");
             sb.Append("  Amount: ").Append(Amount).Append("\n");
@@ -265,6 +281,7 @@ namespace FactPulse.SDK.Model
             Option<string?> statusCode = default;
             Option<string?> statusDescription = default;
             Option<string?> ackStatus = default;
+            Option<string?> flowDirection = default;
             Option<string?> at = default;
             Option<string?> documentId = default;
             Option<string?> amount = default;
@@ -299,6 +316,9 @@ namespace FactPulse.SDK.Model
                             break;
                         case "ackStatus":
                             ackStatus = new Option<string?>(utf8JsonReader.GetString());
+                            break;
+                        case "flowDirection":
+                            flowDirection = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "at":
                             at = new Option<string?>(utf8JsonReader.GetString());
@@ -339,7 +359,7 @@ namespace FactPulse.SDK.Model
             if (statusCode.IsSet && statusCode.Value == null)
                 throw new ArgumentNullException(nameof(statusCode), "Property is not nullable for class LifecycleEvent.");
 
-            return new LifecycleEvent(flowId.Value!, statusCode.Value!, statusDescription, ackStatus, at, documentId, amount, currency, issuerSiren, issuerRole, reasonCode);
+            return new LifecycleEvent(flowId.Value!, statusCode.Value!, statusDescription, ackStatus, flowDirection, at, documentId, amount, currency, issuerSiren, issuerRole, reasonCode);
         }
 
         /// <summary>
@@ -387,6 +407,12 @@ namespace FactPulse.SDK.Model
                     writer.WriteString("ackStatus", lifecycleEvent.AckStatus);
                 else
                     writer.WriteNull("ackStatus");
+
+            if (lifecycleEvent.FlowDirectionOption.IsSet)
+                if (lifecycleEvent.FlowDirectionOption.Value != null)
+                    writer.WriteString("flowDirection", lifecycleEvent.FlowDirection);
+                else
+                    writer.WriteNull("flowDirection");
 
             if (lifecycleEvent.AtOption.IsSet)
                 if (lifecycleEvent.AtOption.Value != null)

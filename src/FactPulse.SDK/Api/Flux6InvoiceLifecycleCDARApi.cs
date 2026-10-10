@@ -86,34 +86,38 @@ namespace FactPulse.SDK.Api
         /// [Simplified] Get lifecycle events for invoices
         /// </summary>
         /// <remarks>
-        /// Returns lifecycle events (CDAR) grouped by invoice reference.  **How it works (AFNOR XP Z12-013 compliant):** 1. Searches lifecycle flows on the PDP by flowType + flowDirection + date range 2. Downloads and parses each CDAR XML to extract the invoice reference 3. Groups events by invoice, sorted chronologically  **Parameters:** - &#x60;days&#x60;: Number of days to look back (default: 7) - &#x60;invoiceId&#x60;: Optional filter on a specific invoice reference  **Authentication:** JWT Bearer (recommended) or PDP credentials as query parameters.
+        /// Returns lifecycle events (CDAR) grouped by invoice reference.  **How it works (AFNOR XP Z12-013 compliant):** 1. Searches lifecycle flows on the PDP by flowType + flowDirection + date range 2. Downloads and parses each CDAR XML to extract the invoice reference 3. Groups events by invoice, sorted chronologically  **Parameters:** - &#x60;days&#x60;: Number of days to look back (default: 7) - &#x60;invoiceId&#x60;: Optional filter on a specific invoice reference - &#x60;flowDirection&#x60;: &#x60;All&#x60; (default), &#x60;In&#x60; (statuses received from the counterparty)   or &#x60;Out&#x60; (statuses issued by you or your PA, e.g. 202/203)  **Authentication:** JWT Bearer (recommended) or PDP credentials as query parameters.
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="days">Number of days to look back (optional, default to 7)</param>
         /// <param name="invoiceId">Filter by invoice reference (optional)</param>
+        /// <param name="flowDirection">All (default), In (received statuses) or Out (issued statuses) (optional, default to All)</param>
         /// <param name="pdpFlowServiceUrl">PDP Flow Service URL (optional)</param>
         /// <param name="pdpTokenUrl">PDP OAuth token URL (optional)</param>
         /// <param name="pdpClientId">PDP Client ID (optional)</param>
         /// <param name="pdpClientSecret">PDP Client Secret (optional)</param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetLifecycleApiV1CdarLifecycleGetApiResponse"/>&gt;</returns>
-        Task<IGetLifecycleApiV1CdarLifecycleGetApiResponse> GetLifecycleApiV1CdarLifecycleGetAsync(Option<int> days = default, Option<string?> invoiceId = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetLifecycleApiV1CdarLifecycleGetApiResponse> GetLifecycleApiV1CdarLifecycleGetAsync(Option<int> days = default, Option<string?> invoiceId = default, Option<string> flowDirection = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// [Simplified] Get lifecycle events for invoices
         /// </summary>
         /// <remarks>
-        /// Returns lifecycle events (CDAR) grouped by invoice reference.  **How it works (AFNOR XP Z12-013 compliant):** 1. Searches lifecycle flows on the PDP by flowType + flowDirection + date range 2. Downloads and parses each CDAR XML to extract the invoice reference 3. Groups events by invoice, sorted chronologically  **Parameters:** - &#x60;days&#x60;: Number of days to look back (default: 7) - &#x60;invoiceId&#x60;: Optional filter on a specific invoice reference  **Authentication:** JWT Bearer (recommended) or PDP credentials as query parameters.
+        /// Returns lifecycle events (CDAR) grouped by invoice reference.  **How it works (AFNOR XP Z12-013 compliant):** 1. Searches lifecycle flows on the PDP by flowType + flowDirection + date range 2. Downloads and parses each CDAR XML to extract the invoice reference 3. Groups events by invoice, sorted chronologically  **Parameters:** - &#x60;days&#x60;: Number of days to look back (default: 7) - &#x60;invoiceId&#x60;: Optional filter on a specific invoice reference - &#x60;flowDirection&#x60;: &#x60;All&#x60; (default), &#x60;In&#x60; (statuses received from the counterparty)   or &#x60;Out&#x60; (statuses issued by you or your PA, e.g. 202/203)  **Authentication:** JWT Bearer (recommended) or PDP credentials as query parameters.
         /// </remarks>
         /// <param name="days">Number of days to look back (optional, default to 7)</param>
         /// <param name="invoiceId">Filter by invoice reference (optional)</param>
+        /// <param name="flowDirection">All (default), In (received statuses) or Out (issued statuses) (optional, default to All)</param>
         /// <param name="pdpFlowServiceUrl">PDP Flow Service URL (optional)</param>
         /// <param name="pdpTokenUrl">PDP OAuth token URL (optional)</param>
         /// <param name="pdpClientId">PDP Client ID (optional)</param>
         /// <param name="pdpClientSecret">PDP Client Secret (optional)</param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetLifecycleApiV1CdarLifecycleGetApiResponse"/>?&gt;</returns>
-        Task<IGetLifecycleApiV1CdarLifecycleGetApiResponse?> GetLifecycleApiV1CdarLifecycleGetOrDefaultAsync(Option<int> days = default, Option<string?> invoiceId = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IGetLifecycleApiV1CdarLifecycleGetApiResponse?> GetLifecycleApiV1CdarLifecycleGetOrDefaultAsync(Option<int> days = default, Option<string?> invoiceId = default, Option<string> flowDirection = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// List of CDAR reason codes
@@ -165,9 +169,10 @@ namespace FactPulse.SDK.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="submitCDARRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitCdarApiV1CdarSubmitPostApiResponse"/>&gt;</returns>
-        Task<ISubmitCdarApiV1CdarSubmitPostApiResponse> SubmitCdarApiV1CdarSubmitPostAsync(SubmitCDARRequest submitCDARRequest, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISubmitCdarApiV1CdarSubmitPostApiResponse> SubmitCdarApiV1CdarSubmitPostAsync(SubmitCDARRequest submitCDARRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Generate and submit a CDAR message
@@ -176,9 +181,10 @@ namespace FactPulse.SDK.Api
         /// Generate a CDAR message and submit it to the PA/PDP platform.  **Authentication strategies:** 1. **JWT with client_uid** (recommended): PDP credentials retrieved from backend 2. **Zero-storage**: Provide pdpFlowServiceUrl, pdpClientId, pdpClientSecret in the request  **Flow types (flowType):** - &#x60;CustomerInvoiceLC&#x60;: Client-side lifecycle (buyer) - &#x60;SupplierInvoiceLC&#x60;: Supplier-side lifecycle (seller)
         /// </remarks>
         /// <param name="submitCDARRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitCdarApiV1CdarSubmitPostApiResponse"/>?&gt;</returns>
-        Task<ISubmitCdarApiV1CdarSubmitPostApiResponse?> SubmitCdarApiV1CdarSubmitPostOrDefaultAsync(SubmitCDARRequest submitCDARRequest, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISubmitCdarApiV1CdarSubmitPostApiResponse?> SubmitCdarApiV1CdarSubmitPostOrDefaultAsync(SubmitCDARRequest submitCDARRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Submit a pre-generated CDAR XML
@@ -188,9 +194,10 @@ namespace FactPulse.SDK.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="submitCDARXMLRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse"/>&gt;</returns>
-        Task<ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse> SubmitCdarXmlApiV1CdarSubmitXmlPostAsync(SubmitCDARXMLRequest submitCDARXMLRequest, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse> SubmitCdarXmlApiV1CdarSubmitXmlPostAsync(SubmitCDARXMLRequest submitCDARXMLRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Submit a pre-generated CDAR XML
@@ -199,9 +206,10 @@ namespace FactPulse.SDK.Api
         /// Submit a pre-generated CDAR XML message to the PA/PDP platform.  Useful for submitting XML generated by other systems.  **Validation:** The XML is validated against XSD and Schematron BR-FR-CDV rules BEFORE submission. Invalid XML will be rejected with detailed error messages.  **Authentication strategies:** 1. **JWT with client_uid** (recommended): PDP credentials retrieved from backend 2. **Zero-storage**: Provide pdpFlowServiceUrl, pdpClientId, pdpClientSecret in the request
         /// </remarks>
         /// <param name="submitCDARXMLRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse"/>?&gt;</returns>
-        Task<ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse?> SubmitCdarXmlApiV1CdarSubmitXmlPostOrDefaultAsync(SubmitCDARXMLRequest submitCDARXMLRequest, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse?> SubmitCdarXmlApiV1CdarSubmitXmlPostOrDefaultAsync(SubmitCDARXMLRequest submitCDARXMLRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// [Simplified] Submit PAID status (212) - Issued invoice
@@ -211,9 +219,10 @@ namespace FactPulse.SDK.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="encaisseeRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse"/>&gt;</returns>
-        Task<ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse> SubmitEncaisseeApiV1CdarEncaisseePostAsync(EncaisseeRequest encaisseeRequest, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse> SubmitEncaisseeApiV1CdarEncaisseePostAsync(EncaisseeRequest encaisseeRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// [Simplified] Submit PAID status (212) - Issued invoice
@@ -222,9 +231,10 @@ namespace FactPulse.SDK.Api
         /// **Simplified endpoint for OD** - Submit a PAID status (212) for an **ISSUED** invoice.  This status is **mandatory for PPF** (BR-FR-CDV-14 requires the paid amount).  **Use case:** The **seller** confirms payment receipt for an invoice they issued.  **Who issues this status?** - **Issuer (IssuerTradeParty):** The seller (SE &#x3D; Seller) who received payment - **Recipient (RecipientTradeParty):** The buyer (BY &#x3D; Buyer) who paid  **Reference:** XP Z12-014 Annex B, example UC1_F202500003_07-CDV-212_Encaissee.xml  **Authentication:** JWT Bearer (recommended) or PDP credentials in request.
         /// </remarks>
         /// <param name="encaisseeRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse"/>?&gt;</returns>
-        Task<ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse?> SubmitEncaisseeApiV1CdarEncaisseePostOrDefaultAsync(EncaisseeRequest encaisseeRequest, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse?> SubmitEncaisseeApiV1CdarEncaisseePostOrDefaultAsync(EncaisseeRequest encaisseeRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// [Simplified] Submit REFUSED status (210) - Received invoice
@@ -234,9 +244,10 @@ namespace FactPulse.SDK.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="refuseeRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitRefuseeApiV1CdarRefuseePostApiResponse"/>&gt;</returns>
-        Task<ISubmitRefuseeApiV1CdarRefuseePostApiResponse> SubmitRefuseeApiV1CdarRefuseePostAsync(RefuseeRequest refuseeRequest, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISubmitRefuseeApiV1CdarRefuseePostApiResponse> SubmitRefuseeApiV1CdarRefuseePostAsync(RefuseeRequest refuseeRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// [Simplified] Submit REFUSED status (210) - Received invoice
@@ -245,9 +256,10 @@ namespace FactPulse.SDK.Api
         /// **Simplified endpoint for OD** - Submit a REFUSED status (210) for a **RECEIVED** invoice.  This status is **mandatory for PPF** (BR-FR-CDV-15 requires a reason code).  **Use case:** The **buyer** refuses an invoice they received.  **Who issues this status?** - **Issuer (IssuerTradeParty):** The buyer (BY &#x3D; Buyer) refusing the invoice - **Recipient (RecipientTradeParty):** The seller (SE &#x3D; Seller) who issued the invoice  **Reference:** XP Z12-014 Annex B, example UC3_F202500005_04-CDV-210_Refusee.xml  **Allowed reason codes (BR-FR-CDV-CL-09):** - &#x60;TX_TVA_ERR&#x60;: Incorrect VAT rate - &#x60;MONTANTTOTAL_ERR&#x60;: Incorrect total amount - &#x60;CALCUL_ERR&#x60;: Calculation error - &#x60;NON_CONFORME&#x60;: Non-compliant - &#x60;DOUBLON&#x60;: Duplicate - &#x60;DEST_ERR&#x60;: Wrong recipient - &#x60;TRANSAC_INC&#x60;: Incomplete transaction - &#x60;EMMET_INC&#x60;: Unknown issuer - &#x60;CONTRAT_TERM&#x60;: Contract terminated - &#x60;DOUBLE_FACT&#x60;: Double billing - &#x60;CMD_ERR&#x60;: Order error - &#x60;ADR_ERR&#x60;: Address error - &#x60;REF_CT_ABSENT&#x60;: Missing contract reference  **Authentication:** JWT Bearer (recommended) or PDP credentials in request.
         /// </remarks>
         /// <param name="refuseeRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitRefuseeApiV1CdarRefuseePostApiResponse"/>?&gt;</returns>
-        Task<ISubmitRefuseeApiV1CdarRefuseePostApiResponse?> SubmitRefuseeApiV1CdarRefuseePostOrDefaultAsync(RefuseeRequest refuseeRequest, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISubmitRefuseeApiV1CdarRefuseePostApiResponse?> SubmitRefuseeApiV1CdarRefuseePostOrDefaultAsync(RefuseeRequest refuseeRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Validate CDAR structured data
@@ -282,7 +294,7 @@ namespace FactPulse.SDK.Api
         /// <param name="xmlFile">CDAR XML file to validate</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse"/>&gt;</returns>
-        Task<IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse> ValidateXmlCdarApiV1CdarValidateXmlPostAsync(System.IO.Stream xmlFile, System.Threading.CancellationToken cancellationToken = default);
+        Task<IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse> ValidateXmlCdarApiV1CdarValidateXmlPostAsync(FactPulse.SDK.Client.FileParameter xmlFile, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Validate CDAR XML against XSD and Schematron BR-FR-CDV
@@ -293,7 +305,7 @@ namespace FactPulse.SDK.Api
         /// <param name="xmlFile">CDAR XML file to validate</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse"/>?&gt;</returns>
-        Task<IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse?> ValidateXmlCdarApiV1CdarValidateXmlPostOrDefaultAsync(System.IO.Stream xmlFile, System.Threading.CancellationToken cancellationToken = default);
+        Task<IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse?> ValidateXmlCdarApiV1CdarValidateXmlPostOrDefaultAsync(FactPulse.SDK.Client.FileParameter xmlFile, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -1515,7 +1527,18 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatGetLifecycleApiV1CdarLifecycleGet(ref Option<int> days, ref Option<string?> invoiceId, ref Option<string?> pdpFlowServiceUrl, ref Option<string?> pdpTokenUrl, ref Option<string?> pdpClientId, ref Option<string?> pdpClientSecret);
+        partial void FormatGetLifecycleApiV1CdarLifecycleGet(ref Option<int> days, ref Option<string?> invoiceId, ref Option<string> flowDirection, ref Option<string?> pdpFlowServiceUrl, ref Option<string?> pdpTokenUrl, ref Option<string?> pdpClientId, ref Option<string?> pdpClientSecret, ref Option<string?> organizationId);
+
+        /// <summary>
+        /// Validates the request parameters
+        /// </summary>
+        /// <param name="flowDirection"></param>
+        /// <returns></returns>
+        private void ValidateGetLifecycleApiV1CdarLifecycleGet(Option<string> flowDirection)
+        {
+            if (flowDirection.IsSet && flowDirection.Value == null)
+                throw new ArgumentNullException(nameof(flowDirection));
+        }
 
         /// <summary>
         /// Processes the server response
@@ -1523,14 +1546,16 @@ namespace FactPulse.SDK.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="days"></param>
         /// <param name="invoiceId"></param>
+        /// <param name="flowDirection"></param>
         /// <param name="pdpFlowServiceUrl"></param>
         /// <param name="pdpTokenUrl"></param>
         /// <param name="pdpClientId"></param>
         /// <param name="pdpClientSecret"></param>
-        private void AfterGetLifecycleApiV1CdarLifecycleGetDefaultImplementation(IGetLifecycleApiV1CdarLifecycleGetApiResponse apiResponseLocalVar, Option<int> days, Option<string?> invoiceId, Option<string?> pdpFlowServiceUrl, Option<string?> pdpTokenUrl, Option<string?> pdpClientId, Option<string?> pdpClientSecret)
+        /// <param name="organizationId"></param>
+        private void AfterGetLifecycleApiV1CdarLifecycleGetDefaultImplementation(IGetLifecycleApiV1CdarLifecycleGetApiResponse apiResponseLocalVar, Option<int> days, Option<string?> invoiceId, Option<string> flowDirection, Option<string?> pdpFlowServiceUrl, Option<string?> pdpTokenUrl, Option<string?> pdpClientId, Option<string?> pdpClientSecret, Option<string?> organizationId)
         {
             bool suppressDefaultLog = false;
-            AfterGetLifecycleApiV1CdarLifecycleGet(ref suppressDefaultLog, apiResponseLocalVar, days, invoiceId, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
+            AfterGetLifecycleApiV1CdarLifecycleGet(ref suppressDefaultLog, apiResponseLocalVar, days, invoiceId, flowDirection, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret, organizationId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -1542,11 +1567,13 @@ namespace FactPulse.SDK.Api
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="days"></param>
         /// <param name="invoiceId"></param>
+        /// <param name="flowDirection"></param>
         /// <param name="pdpFlowServiceUrl"></param>
         /// <param name="pdpTokenUrl"></param>
         /// <param name="pdpClientId"></param>
         /// <param name="pdpClientSecret"></param>
-        partial void AfterGetLifecycleApiV1CdarLifecycleGet(ref bool suppressDefaultLog, IGetLifecycleApiV1CdarLifecycleGetApiResponse apiResponseLocalVar, Option<int> days, Option<string?> invoiceId, Option<string?> pdpFlowServiceUrl, Option<string?> pdpTokenUrl, Option<string?> pdpClientId, Option<string?> pdpClientSecret);
+        /// <param name="organizationId"></param>
+        partial void AfterGetLifecycleApiV1CdarLifecycleGet(ref bool suppressDefaultLog, IGetLifecycleApiV1CdarLifecycleGetApiResponse apiResponseLocalVar, Option<int> days, Option<string?> invoiceId, Option<string> flowDirection, Option<string?> pdpFlowServiceUrl, Option<string?> pdpTokenUrl, Option<string?> pdpClientId, Option<string?> pdpClientSecret, Option<string?> organizationId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1556,14 +1583,16 @@ namespace FactPulse.SDK.Api
         /// <param name="pathLocalVar"></param>
         /// <param name="days"></param>
         /// <param name="invoiceId"></param>
+        /// <param name="flowDirection"></param>
         /// <param name="pdpFlowServiceUrl"></param>
         /// <param name="pdpTokenUrl"></param>
         /// <param name="pdpClientId"></param>
         /// <param name="pdpClientSecret"></param>
-        private void OnErrorGetLifecycleApiV1CdarLifecycleGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<int> days, Option<string?> invoiceId, Option<string?> pdpFlowServiceUrl, Option<string?> pdpTokenUrl, Option<string?> pdpClientId, Option<string?> pdpClientSecret)
+        /// <param name="organizationId"></param>
+        private void OnErrorGetLifecycleApiV1CdarLifecycleGetDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<int> days, Option<string?> invoiceId, Option<string> flowDirection, Option<string?> pdpFlowServiceUrl, Option<string?> pdpTokenUrl, Option<string?> pdpClientId, Option<string?> pdpClientSecret, Option<string?> organizationId)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorGetLifecycleApiV1CdarLifecycleGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, days, invoiceId, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
+            OnErrorGetLifecycleApiV1CdarLifecycleGet(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, days, invoiceId, flowDirection, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret, organizationId);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -1577,28 +1606,32 @@ namespace FactPulse.SDK.Api
         /// <param name="pathLocalVar"></param>
         /// <param name="days"></param>
         /// <param name="invoiceId"></param>
+        /// <param name="flowDirection"></param>
         /// <param name="pdpFlowServiceUrl"></param>
         /// <param name="pdpTokenUrl"></param>
         /// <param name="pdpClientId"></param>
         /// <param name="pdpClientSecret"></param>
-        partial void OnErrorGetLifecycleApiV1CdarLifecycleGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<int> days, Option<string?> invoiceId, Option<string?> pdpFlowServiceUrl, Option<string?> pdpTokenUrl, Option<string?> pdpClientId, Option<string?> pdpClientSecret);
+        /// <param name="organizationId"></param>
+        partial void OnErrorGetLifecycleApiV1CdarLifecycleGet(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, Option<int> days, Option<string?> invoiceId, Option<string> flowDirection, Option<string?> pdpFlowServiceUrl, Option<string?> pdpTokenUrl, Option<string?> pdpClientId, Option<string?> pdpClientSecret, Option<string?> organizationId);
 
         /// <summary>
-        /// [Simplified] Get lifecycle events for invoices Returns lifecycle events (CDAR) grouped by invoice reference.  **How it works (AFNOR XP Z12-013 compliant):** 1. Searches lifecycle flows on the PDP by flowType + flowDirection + date range 2. Downloads and parses each CDAR XML to extract the invoice reference 3. Groups events by invoice, sorted chronologically  **Parameters:** - &#x60;days&#x60;: Number of days to look back (default: 7) - &#x60;invoiceId&#x60;: Optional filter on a specific invoice reference  **Authentication:** JWT Bearer (recommended) or PDP credentials as query parameters.
+        /// [Simplified] Get lifecycle events for invoices Returns lifecycle events (CDAR) grouped by invoice reference.  **How it works (AFNOR XP Z12-013 compliant):** 1. Searches lifecycle flows on the PDP by flowType + flowDirection + date range 2. Downloads and parses each CDAR XML to extract the invoice reference 3. Groups events by invoice, sorted chronologically  **Parameters:** - &#x60;days&#x60;: Number of days to look back (default: 7) - &#x60;invoiceId&#x60;: Optional filter on a specific invoice reference - &#x60;flowDirection&#x60;: &#x60;All&#x60; (default), &#x60;In&#x60; (statuses received from the counterparty)   or &#x60;Out&#x60; (statuses issued by you or your PA, e.g. 202/203)  **Authentication:** JWT Bearer (recommended) or PDP credentials as query parameters.
         /// </summary>
         /// <param name="days">Number of days to look back (optional, default to 7)</param>
         /// <param name="invoiceId">Filter by invoice reference (optional)</param>
+        /// <param name="flowDirection">All (default), In (received statuses) or Out (issued statuses) (optional, default to All)</param>
         /// <param name="pdpFlowServiceUrl">PDP Flow Service URL (optional)</param>
         /// <param name="pdpTokenUrl">PDP OAuth token URL (optional)</param>
         /// <param name="pdpClientId">PDP Client ID (optional)</param>
         /// <param name="pdpClientSecret">PDP Client Secret (optional)</param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetLifecycleApiV1CdarLifecycleGetApiResponse"/>&gt;</returns>
-        public async Task<IGetLifecycleApiV1CdarLifecycleGetApiResponse?> GetLifecycleApiV1CdarLifecycleGetOrDefaultAsync(Option<int> days = default, Option<string?> invoiceId = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetLifecycleApiV1CdarLifecycleGetApiResponse?> GetLifecycleApiV1CdarLifecycleGetOrDefaultAsync(Option<int> days = default, Option<string?> invoiceId = default, Option<string> flowDirection = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await GetLifecycleApiV1CdarLifecycleGetAsync(days, invoiceId, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret, cancellationToken).ConfigureAwait(false);
+                return await GetLifecycleApiV1CdarLifecycleGetAsync(days, invoiceId, flowDirection, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret, organizationId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -1607,24 +1640,28 @@ namespace FactPulse.SDK.Api
         }
 
         /// <summary>
-        /// [Simplified] Get lifecycle events for invoices Returns lifecycle events (CDAR) grouped by invoice reference.  **How it works (AFNOR XP Z12-013 compliant):** 1. Searches lifecycle flows on the PDP by flowType + flowDirection + date range 2. Downloads and parses each CDAR XML to extract the invoice reference 3. Groups events by invoice, sorted chronologically  **Parameters:** - &#x60;days&#x60;: Number of days to look back (default: 7) - &#x60;invoiceId&#x60;: Optional filter on a specific invoice reference  **Authentication:** JWT Bearer (recommended) or PDP credentials as query parameters.
+        /// [Simplified] Get lifecycle events for invoices Returns lifecycle events (CDAR) grouped by invoice reference.  **How it works (AFNOR XP Z12-013 compliant):** 1. Searches lifecycle flows on the PDP by flowType + flowDirection + date range 2. Downloads and parses each CDAR XML to extract the invoice reference 3. Groups events by invoice, sorted chronologically  **Parameters:** - &#x60;days&#x60;: Number of days to look back (default: 7) - &#x60;invoiceId&#x60;: Optional filter on a specific invoice reference - &#x60;flowDirection&#x60;: &#x60;All&#x60; (default), &#x60;In&#x60; (statuses received from the counterparty)   or &#x60;Out&#x60; (statuses issued by you or your PA, e.g. 202/203)  **Authentication:** JWT Bearer (recommended) or PDP credentials as query parameters.
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="days">Number of days to look back (optional, default to 7)</param>
         /// <param name="invoiceId">Filter by invoice reference (optional)</param>
+        /// <param name="flowDirection">All (default), In (received statuses) or Out (issued statuses) (optional, default to All)</param>
         /// <param name="pdpFlowServiceUrl">PDP Flow Service URL (optional)</param>
         /// <param name="pdpTokenUrl">PDP OAuth token URL (optional)</param>
         /// <param name="pdpClientId">PDP Client ID (optional)</param>
         /// <param name="pdpClientSecret">PDP Client Secret (optional)</param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IGetLifecycleApiV1CdarLifecycleGetApiResponse"/>&gt;</returns>
-        public async Task<IGetLifecycleApiV1CdarLifecycleGetApiResponse> GetLifecycleApiV1CdarLifecycleGetAsync(Option<int> days = default, Option<string?> invoiceId = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IGetLifecycleApiV1CdarLifecycleGetApiResponse> GetLifecycleApiV1CdarLifecycleGetAsync(Option<int> days = default, Option<string?> invoiceId = default, Option<string> flowDirection = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
             try
             {
-                FormatGetLifecycleApiV1CdarLifecycleGet(ref days, ref invoiceId, ref pdpFlowServiceUrl, ref pdpTokenUrl, ref pdpClientId, ref pdpClientSecret);
+                ValidateGetLifecycleApiV1CdarLifecycleGet(flowDirection);
+
+                FormatGetLifecycleApiV1CdarLifecycleGet(ref days, ref invoiceId, ref flowDirection, ref pdpFlowServiceUrl, ref pdpTokenUrl, ref pdpClientId, ref pdpClientSecret, ref organizationId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -1643,6 +1680,9 @@ namespace FactPulse.SDK.Api
                     if (invoiceId.IsSet)
                         parseQueryStringLocalVar["invoiceId"] = ClientUtils.ParameterToString(invoiceId.Value);
 
+                    if (flowDirection.IsSet)
+                        parseQueryStringLocalVar["flowDirection"] = ClientUtils.ParameterToString(flowDirection.Value);
+
                     if (pdpFlowServiceUrl.IsSet)
                         parseQueryStringLocalVar["pdpFlowServiceUrl"] = ClientUtils.ParameterToString(pdpFlowServiceUrl.Value);
 
@@ -1656,6 +1696,9 @@ namespace FactPulse.SDK.Api
                         parseQueryStringLocalVar["pdpClientSecret"] = ClientUtils.ParameterToString(pdpClientSecret.Value);
 
                     uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
+
+                    if (organizationId.IsSet)
+                        httpRequestMessageLocalVar.Headers.Add("Organization-Id", ClientUtils.ParameterToString(organizationId.Value));
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
@@ -1693,7 +1736,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterGetLifecycleApiV1CdarLifecycleGetDefaultImplementation(apiResponseLocalVar, days, invoiceId, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
+                        AfterGetLifecycleApiV1CdarLifecycleGetDefaultImplementation(apiResponseLocalVar, days, invoiceId, flowDirection, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret, organizationId);
 
                         Events.ExecuteOnGetLifecycleApiV1CdarLifecycleGet(apiResponseLocalVar);
 
@@ -1707,7 +1750,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorGetLifecycleApiV1CdarLifecycleGetDefaultImplementation(e, "/api/v1/cdar/lifecycle", uriBuilderLocalVar.Path, days, invoiceId, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
+                OnErrorGetLifecycleApiV1CdarLifecycleGetDefaultImplementation(e, "/api/v1/cdar/lifecycle", uriBuilderLocalVar.Path, days, invoiceId, flowDirection, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret, organizationId);
                 Events.ExecuteOnErrorGetLifecycleApiV1CdarLifecycleGet(e);
                 throw;
             }
@@ -2334,7 +2377,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatSubmitCdarApiV1CdarSubmitPost(SubmitCDARRequest submitCDARRequest);
+        partial void FormatSubmitCdarApiV1CdarSubmitPost(SubmitCDARRequest submitCDARRequest, ref Option<string?> organizationId);
 
         /// <summary>
         /// Validates the request parameters
@@ -2352,10 +2395,11 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="submitCDARRequest"></param>
-        private void AfterSubmitCdarApiV1CdarSubmitPostDefaultImplementation(ISubmitCdarApiV1CdarSubmitPostApiResponse apiResponseLocalVar, SubmitCDARRequest submitCDARRequest)
+        /// <param name="organizationId"></param>
+        private void AfterSubmitCdarApiV1CdarSubmitPostDefaultImplementation(ISubmitCdarApiV1CdarSubmitPostApiResponse apiResponseLocalVar, SubmitCDARRequest submitCDARRequest, Option<string?> organizationId)
         {
             bool suppressDefaultLog = false;
-            AfterSubmitCdarApiV1CdarSubmitPost(ref suppressDefaultLog, apiResponseLocalVar, submitCDARRequest);
+            AfterSubmitCdarApiV1CdarSubmitPost(ref suppressDefaultLog, apiResponseLocalVar, submitCDARRequest, organizationId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -2366,7 +2410,8 @@ namespace FactPulse.SDK.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="submitCDARRequest"></param>
-        partial void AfterSubmitCdarApiV1CdarSubmitPost(ref bool suppressDefaultLog, ISubmitCdarApiV1CdarSubmitPostApiResponse apiResponseLocalVar, SubmitCDARRequest submitCDARRequest);
+        /// <param name="organizationId"></param>
+        partial void AfterSubmitCdarApiV1CdarSubmitPost(ref bool suppressDefaultLog, ISubmitCdarApiV1CdarSubmitPostApiResponse apiResponseLocalVar, SubmitCDARRequest submitCDARRequest, Option<string?> organizationId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -2375,10 +2420,11 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="submitCDARRequest"></param>
-        private void OnErrorSubmitCdarApiV1CdarSubmitPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitCDARRequest submitCDARRequest)
+        /// <param name="organizationId"></param>
+        private void OnErrorSubmitCdarApiV1CdarSubmitPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitCDARRequest submitCDARRequest, Option<string?> organizationId)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorSubmitCdarApiV1CdarSubmitPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, submitCDARRequest);
+            OnErrorSubmitCdarApiV1CdarSubmitPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, submitCDARRequest, organizationId);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -2391,19 +2437,21 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="submitCDARRequest"></param>
-        partial void OnErrorSubmitCdarApiV1CdarSubmitPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitCDARRequest submitCDARRequest);
+        /// <param name="organizationId"></param>
+        partial void OnErrorSubmitCdarApiV1CdarSubmitPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitCDARRequest submitCDARRequest, Option<string?> organizationId);
 
         /// <summary>
         /// Generate and submit a CDAR message Generate a CDAR message and submit it to the PA/PDP platform.  **Authentication strategies:** 1. **JWT with client_uid** (recommended): PDP credentials retrieved from backend 2. **Zero-storage**: Provide pdpFlowServiceUrl, pdpClientId, pdpClientSecret in the request  **Flow types (flowType):** - &#x60;CustomerInvoiceLC&#x60;: Client-side lifecycle (buyer) - &#x60;SupplierInvoiceLC&#x60;: Supplier-side lifecycle (seller)
         /// </summary>
         /// <param name="submitCDARRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitCdarApiV1CdarSubmitPostApiResponse"/>&gt;</returns>
-        public async Task<ISubmitCdarApiV1CdarSubmitPostApiResponse?> SubmitCdarApiV1CdarSubmitPostOrDefaultAsync(SubmitCDARRequest submitCDARRequest, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISubmitCdarApiV1CdarSubmitPostApiResponse?> SubmitCdarApiV1CdarSubmitPostOrDefaultAsync(SubmitCDARRequest submitCDARRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await SubmitCdarApiV1CdarSubmitPostAsync(submitCDARRequest, cancellationToken).ConfigureAwait(false);
+                return await SubmitCdarApiV1CdarSubmitPostAsync(submitCDARRequest, organizationId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -2416,9 +2464,10 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="submitCDARRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitCdarApiV1CdarSubmitPostApiResponse"/>&gt;</returns>
-        public async Task<ISubmitCdarApiV1CdarSubmitPostApiResponse> SubmitCdarApiV1CdarSubmitPostAsync(SubmitCDARRequest submitCDARRequest, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISubmitCdarApiV1CdarSubmitPostApiResponse> SubmitCdarApiV1CdarSubmitPostAsync(SubmitCDARRequest submitCDARRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -2426,7 +2475,7 @@ namespace FactPulse.SDK.Api
             {
                 ValidateSubmitCdarApiV1CdarSubmitPost(submitCDARRequest);
 
-                FormatSubmitCdarApiV1CdarSubmitPost(submitCDARRequest);
+                FormatSubmitCdarApiV1CdarSubmitPost(submitCDARRequest, ref organizationId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -2436,6 +2485,9 @@ namespace FactPulse.SDK.Api
                     uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
                         ? "/api/v1/cdar/submit"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/cdar/submit");
+
+                    if (organizationId.IsSet)
+                        httpRequestMessageLocalVar.Headers.Add("Organization-Id", ClientUtils.ParameterToString(organizationId.Value));
 
                     httpRequestMessageLocalVar.Content = (submitCDARRequest as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
@@ -2486,7 +2538,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterSubmitCdarApiV1CdarSubmitPostDefaultImplementation(apiResponseLocalVar, submitCDARRequest);
+                        AfterSubmitCdarApiV1CdarSubmitPostDefaultImplementation(apiResponseLocalVar, submitCDARRequest, organizationId);
 
                         Events.ExecuteOnSubmitCdarApiV1CdarSubmitPost(apiResponseLocalVar);
 
@@ -2500,7 +2552,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorSubmitCdarApiV1CdarSubmitPostDefaultImplementation(e, "/api/v1/cdar/submit", uriBuilderLocalVar.Path, submitCDARRequest);
+                OnErrorSubmitCdarApiV1CdarSubmitPostDefaultImplementation(e, "/api/v1/cdar/submit", uriBuilderLocalVar.Path, submitCDARRequest, organizationId);
                 Events.ExecuteOnErrorSubmitCdarApiV1CdarSubmitPost(e);
                 throw;
             }
@@ -2655,7 +2707,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatSubmitCdarXmlApiV1CdarSubmitXmlPost(SubmitCDARXMLRequest submitCDARXMLRequest);
+        partial void FormatSubmitCdarXmlApiV1CdarSubmitXmlPost(SubmitCDARXMLRequest submitCDARXMLRequest, ref Option<string?> organizationId);
 
         /// <summary>
         /// Validates the request parameters
@@ -2673,10 +2725,11 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="submitCDARXMLRequest"></param>
-        private void AfterSubmitCdarXmlApiV1CdarSubmitXmlPostDefaultImplementation(ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse apiResponseLocalVar, SubmitCDARXMLRequest submitCDARXMLRequest)
+        /// <param name="organizationId"></param>
+        private void AfterSubmitCdarXmlApiV1CdarSubmitXmlPostDefaultImplementation(ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse apiResponseLocalVar, SubmitCDARXMLRequest submitCDARXMLRequest, Option<string?> organizationId)
         {
             bool suppressDefaultLog = false;
-            AfterSubmitCdarXmlApiV1CdarSubmitXmlPost(ref suppressDefaultLog, apiResponseLocalVar, submitCDARXMLRequest);
+            AfterSubmitCdarXmlApiV1CdarSubmitXmlPost(ref suppressDefaultLog, apiResponseLocalVar, submitCDARXMLRequest, organizationId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -2687,7 +2740,8 @@ namespace FactPulse.SDK.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="submitCDARXMLRequest"></param>
-        partial void AfterSubmitCdarXmlApiV1CdarSubmitXmlPost(ref bool suppressDefaultLog, ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse apiResponseLocalVar, SubmitCDARXMLRequest submitCDARXMLRequest);
+        /// <param name="organizationId"></param>
+        partial void AfterSubmitCdarXmlApiV1CdarSubmitXmlPost(ref bool suppressDefaultLog, ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse apiResponseLocalVar, SubmitCDARXMLRequest submitCDARXMLRequest, Option<string?> organizationId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -2696,10 +2750,11 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="submitCDARXMLRequest"></param>
-        private void OnErrorSubmitCdarXmlApiV1CdarSubmitXmlPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitCDARXMLRequest submitCDARXMLRequest)
+        /// <param name="organizationId"></param>
+        private void OnErrorSubmitCdarXmlApiV1CdarSubmitXmlPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitCDARXMLRequest submitCDARXMLRequest, Option<string?> organizationId)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorSubmitCdarXmlApiV1CdarSubmitXmlPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, submitCDARXMLRequest);
+            OnErrorSubmitCdarXmlApiV1CdarSubmitXmlPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, submitCDARXMLRequest, organizationId);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -2712,19 +2767,21 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="submitCDARXMLRequest"></param>
-        partial void OnErrorSubmitCdarXmlApiV1CdarSubmitXmlPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitCDARXMLRequest submitCDARXMLRequest);
+        /// <param name="organizationId"></param>
+        partial void OnErrorSubmitCdarXmlApiV1CdarSubmitXmlPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitCDARXMLRequest submitCDARXMLRequest, Option<string?> organizationId);
 
         /// <summary>
         /// Submit a pre-generated CDAR XML Submit a pre-generated CDAR XML message to the PA/PDP platform.  Useful for submitting XML generated by other systems.  **Validation:** The XML is validated against XSD and Schematron BR-FR-CDV rules BEFORE submission. Invalid XML will be rejected with detailed error messages.  **Authentication strategies:** 1. **JWT with client_uid** (recommended): PDP credentials retrieved from backend 2. **Zero-storage**: Provide pdpFlowServiceUrl, pdpClientId, pdpClientSecret in the request
         /// </summary>
         /// <param name="submitCDARXMLRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse"/>&gt;</returns>
-        public async Task<ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse?> SubmitCdarXmlApiV1CdarSubmitXmlPostOrDefaultAsync(SubmitCDARXMLRequest submitCDARXMLRequest, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse?> SubmitCdarXmlApiV1CdarSubmitXmlPostOrDefaultAsync(SubmitCDARXMLRequest submitCDARXMLRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await SubmitCdarXmlApiV1CdarSubmitXmlPostAsync(submitCDARXMLRequest, cancellationToken).ConfigureAwait(false);
+                return await SubmitCdarXmlApiV1CdarSubmitXmlPostAsync(submitCDARXMLRequest, organizationId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -2737,9 +2794,10 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="submitCDARXMLRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse"/>&gt;</returns>
-        public async Task<ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse> SubmitCdarXmlApiV1CdarSubmitXmlPostAsync(SubmitCDARXMLRequest submitCDARXMLRequest, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISubmitCdarXmlApiV1CdarSubmitXmlPostApiResponse> SubmitCdarXmlApiV1CdarSubmitXmlPostAsync(SubmitCDARXMLRequest submitCDARXMLRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -2747,7 +2805,7 @@ namespace FactPulse.SDK.Api
             {
                 ValidateSubmitCdarXmlApiV1CdarSubmitXmlPost(submitCDARXMLRequest);
 
-                FormatSubmitCdarXmlApiV1CdarSubmitXmlPost(submitCDARXMLRequest);
+                FormatSubmitCdarXmlApiV1CdarSubmitXmlPost(submitCDARXMLRequest, ref organizationId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -2757,6 +2815,9 @@ namespace FactPulse.SDK.Api
                     uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
                         ? "/api/v1/cdar/submit-xml"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/cdar/submit-xml");
+
+                    if (organizationId.IsSet)
+                        httpRequestMessageLocalVar.Headers.Add("Organization-Id", ClientUtils.ParameterToString(organizationId.Value));
 
                     httpRequestMessageLocalVar.Content = (submitCDARXMLRequest as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
@@ -2807,7 +2868,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterSubmitCdarXmlApiV1CdarSubmitXmlPostDefaultImplementation(apiResponseLocalVar, submitCDARXMLRequest);
+                        AfterSubmitCdarXmlApiV1CdarSubmitXmlPostDefaultImplementation(apiResponseLocalVar, submitCDARXMLRequest, organizationId);
 
                         Events.ExecuteOnSubmitCdarXmlApiV1CdarSubmitXmlPost(apiResponseLocalVar);
 
@@ -2821,7 +2882,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorSubmitCdarXmlApiV1CdarSubmitXmlPostDefaultImplementation(e, "/api/v1/cdar/submit-xml", uriBuilderLocalVar.Path, submitCDARXMLRequest);
+                OnErrorSubmitCdarXmlApiV1CdarSubmitXmlPostDefaultImplementation(e, "/api/v1/cdar/submit-xml", uriBuilderLocalVar.Path, submitCDARXMLRequest, organizationId);
                 Events.ExecuteOnErrorSubmitCdarXmlApiV1CdarSubmitXmlPost(e);
                 throw;
             }
@@ -2976,7 +3037,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatSubmitEncaisseeApiV1CdarEncaisseePost(EncaisseeRequest encaisseeRequest);
+        partial void FormatSubmitEncaisseeApiV1CdarEncaisseePost(EncaisseeRequest encaisseeRequest, ref Option<string?> organizationId);
 
         /// <summary>
         /// Validates the request parameters
@@ -2994,10 +3055,11 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="encaisseeRequest"></param>
-        private void AfterSubmitEncaisseeApiV1CdarEncaisseePostDefaultImplementation(ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse apiResponseLocalVar, EncaisseeRequest encaisseeRequest)
+        /// <param name="organizationId"></param>
+        private void AfterSubmitEncaisseeApiV1CdarEncaisseePostDefaultImplementation(ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse apiResponseLocalVar, EncaisseeRequest encaisseeRequest, Option<string?> organizationId)
         {
             bool suppressDefaultLog = false;
-            AfterSubmitEncaisseeApiV1CdarEncaisseePost(ref suppressDefaultLog, apiResponseLocalVar, encaisseeRequest);
+            AfterSubmitEncaisseeApiV1CdarEncaisseePost(ref suppressDefaultLog, apiResponseLocalVar, encaisseeRequest, organizationId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -3008,7 +3070,8 @@ namespace FactPulse.SDK.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="encaisseeRequest"></param>
-        partial void AfterSubmitEncaisseeApiV1CdarEncaisseePost(ref bool suppressDefaultLog, ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse apiResponseLocalVar, EncaisseeRequest encaisseeRequest);
+        /// <param name="organizationId"></param>
+        partial void AfterSubmitEncaisseeApiV1CdarEncaisseePost(ref bool suppressDefaultLog, ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse apiResponseLocalVar, EncaisseeRequest encaisseeRequest, Option<string?> organizationId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -3017,10 +3080,11 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="encaisseeRequest"></param>
-        private void OnErrorSubmitEncaisseeApiV1CdarEncaisseePostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, EncaisseeRequest encaisseeRequest)
+        /// <param name="organizationId"></param>
+        private void OnErrorSubmitEncaisseeApiV1CdarEncaisseePostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, EncaisseeRequest encaisseeRequest, Option<string?> organizationId)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorSubmitEncaisseeApiV1CdarEncaisseePost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, encaisseeRequest);
+            OnErrorSubmitEncaisseeApiV1CdarEncaisseePost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, encaisseeRequest, organizationId);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -3033,19 +3097,21 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="encaisseeRequest"></param>
-        partial void OnErrorSubmitEncaisseeApiV1CdarEncaisseePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, EncaisseeRequest encaisseeRequest);
+        /// <param name="organizationId"></param>
+        partial void OnErrorSubmitEncaisseeApiV1CdarEncaisseePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, EncaisseeRequest encaisseeRequest, Option<string?> organizationId);
 
         /// <summary>
         /// [Simplified] Submit PAID status (212) - Issued invoice **Simplified endpoint for OD** - Submit a PAID status (212) for an **ISSUED** invoice.  This status is **mandatory for PPF** (BR-FR-CDV-14 requires the paid amount).  **Use case:** The **seller** confirms payment receipt for an invoice they issued.  **Who issues this status?** - **Issuer (IssuerTradeParty):** The seller (SE &#x3D; Seller) who received payment - **Recipient (RecipientTradeParty):** The buyer (BY &#x3D; Buyer) who paid  **Reference:** XP Z12-014 Annex B, example UC1_F202500003_07-CDV-212_Encaissee.xml  **Authentication:** JWT Bearer (recommended) or PDP credentials in request.
         /// </summary>
         /// <param name="encaisseeRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse"/>&gt;</returns>
-        public async Task<ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse?> SubmitEncaisseeApiV1CdarEncaisseePostOrDefaultAsync(EncaisseeRequest encaisseeRequest, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse?> SubmitEncaisseeApiV1CdarEncaisseePostOrDefaultAsync(EncaisseeRequest encaisseeRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await SubmitEncaisseeApiV1CdarEncaisseePostAsync(encaisseeRequest, cancellationToken).ConfigureAwait(false);
+                return await SubmitEncaisseeApiV1CdarEncaisseePostAsync(encaisseeRequest, organizationId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -3058,9 +3124,10 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="encaisseeRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse"/>&gt;</returns>
-        public async Task<ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse> SubmitEncaisseeApiV1CdarEncaisseePostAsync(EncaisseeRequest encaisseeRequest, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISubmitEncaisseeApiV1CdarEncaisseePostApiResponse> SubmitEncaisseeApiV1CdarEncaisseePostAsync(EncaisseeRequest encaisseeRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -3068,7 +3135,7 @@ namespace FactPulse.SDK.Api
             {
                 ValidateSubmitEncaisseeApiV1CdarEncaisseePost(encaisseeRequest);
 
-                FormatSubmitEncaisseeApiV1CdarEncaisseePost(encaisseeRequest);
+                FormatSubmitEncaisseeApiV1CdarEncaisseePost(encaisseeRequest, ref organizationId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -3078,6 +3145,9 @@ namespace FactPulse.SDK.Api
                     uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
                         ? "/api/v1/cdar/encaissee"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/cdar/encaissee");
+
+                    if (organizationId.IsSet)
+                        httpRequestMessageLocalVar.Headers.Add("Organization-Id", ClientUtils.ParameterToString(organizationId.Value));
 
                     httpRequestMessageLocalVar.Content = (encaisseeRequest as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
@@ -3128,7 +3198,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterSubmitEncaisseeApiV1CdarEncaisseePostDefaultImplementation(apiResponseLocalVar, encaisseeRequest);
+                        AfterSubmitEncaisseeApiV1CdarEncaisseePostDefaultImplementation(apiResponseLocalVar, encaisseeRequest, organizationId);
 
                         Events.ExecuteOnSubmitEncaisseeApiV1CdarEncaisseePost(apiResponseLocalVar);
 
@@ -3142,7 +3212,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorSubmitEncaisseeApiV1CdarEncaisseePostDefaultImplementation(e, "/api/v1/cdar/encaissee", uriBuilderLocalVar.Path, encaisseeRequest);
+                OnErrorSubmitEncaisseeApiV1CdarEncaisseePostDefaultImplementation(e, "/api/v1/cdar/encaissee", uriBuilderLocalVar.Path, encaisseeRequest, organizationId);
                 Events.ExecuteOnErrorSubmitEncaisseeApiV1CdarEncaisseePost(e);
                 throw;
             }
@@ -3297,7 +3367,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatSubmitRefuseeApiV1CdarRefuseePost(RefuseeRequest refuseeRequest);
+        partial void FormatSubmitRefuseeApiV1CdarRefuseePost(RefuseeRequest refuseeRequest, ref Option<string?> organizationId);
 
         /// <summary>
         /// Validates the request parameters
@@ -3315,10 +3385,11 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="refuseeRequest"></param>
-        private void AfterSubmitRefuseeApiV1CdarRefuseePostDefaultImplementation(ISubmitRefuseeApiV1CdarRefuseePostApiResponse apiResponseLocalVar, RefuseeRequest refuseeRequest)
+        /// <param name="organizationId"></param>
+        private void AfterSubmitRefuseeApiV1CdarRefuseePostDefaultImplementation(ISubmitRefuseeApiV1CdarRefuseePostApiResponse apiResponseLocalVar, RefuseeRequest refuseeRequest, Option<string?> organizationId)
         {
             bool suppressDefaultLog = false;
-            AfterSubmitRefuseeApiV1CdarRefuseePost(ref suppressDefaultLog, apiResponseLocalVar, refuseeRequest);
+            AfterSubmitRefuseeApiV1CdarRefuseePost(ref suppressDefaultLog, apiResponseLocalVar, refuseeRequest, organizationId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -3329,7 +3400,8 @@ namespace FactPulse.SDK.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="refuseeRequest"></param>
-        partial void AfterSubmitRefuseeApiV1CdarRefuseePost(ref bool suppressDefaultLog, ISubmitRefuseeApiV1CdarRefuseePostApiResponse apiResponseLocalVar, RefuseeRequest refuseeRequest);
+        /// <param name="organizationId"></param>
+        partial void AfterSubmitRefuseeApiV1CdarRefuseePost(ref bool suppressDefaultLog, ISubmitRefuseeApiV1CdarRefuseePostApiResponse apiResponseLocalVar, RefuseeRequest refuseeRequest, Option<string?> organizationId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -3338,10 +3410,11 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="refuseeRequest"></param>
-        private void OnErrorSubmitRefuseeApiV1CdarRefuseePostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, RefuseeRequest refuseeRequest)
+        /// <param name="organizationId"></param>
+        private void OnErrorSubmitRefuseeApiV1CdarRefuseePostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, RefuseeRequest refuseeRequest, Option<string?> organizationId)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorSubmitRefuseeApiV1CdarRefuseePost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, refuseeRequest);
+            OnErrorSubmitRefuseeApiV1CdarRefuseePost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, refuseeRequest, organizationId);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -3354,19 +3427,21 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="refuseeRequest"></param>
-        partial void OnErrorSubmitRefuseeApiV1CdarRefuseePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, RefuseeRequest refuseeRequest);
+        /// <param name="organizationId"></param>
+        partial void OnErrorSubmitRefuseeApiV1CdarRefuseePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, RefuseeRequest refuseeRequest, Option<string?> organizationId);
 
         /// <summary>
         /// [Simplified] Submit REFUSED status (210) - Received invoice **Simplified endpoint for OD** - Submit a REFUSED status (210) for a **RECEIVED** invoice.  This status is **mandatory for PPF** (BR-FR-CDV-15 requires a reason code).  **Use case:** The **buyer** refuses an invoice they received.  **Who issues this status?** - **Issuer (IssuerTradeParty):** The buyer (BY &#x3D; Buyer) refusing the invoice - **Recipient (RecipientTradeParty):** The seller (SE &#x3D; Seller) who issued the invoice  **Reference:** XP Z12-014 Annex B, example UC3_F202500005_04-CDV-210_Refusee.xml  **Allowed reason codes (BR-FR-CDV-CL-09):** - &#x60;TX_TVA_ERR&#x60;: Incorrect VAT rate - &#x60;MONTANTTOTAL_ERR&#x60;: Incorrect total amount - &#x60;CALCUL_ERR&#x60;: Calculation error - &#x60;NON_CONFORME&#x60;: Non-compliant - &#x60;DOUBLON&#x60;: Duplicate - &#x60;DEST_ERR&#x60;: Wrong recipient - &#x60;TRANSAC_INC&#x60;: Incomplete transaction - &#x60;EMMET_INC&#x60;: Unknown issuer - &#x60;CONTRAT_TERM&#x60;: Contract terminated - &#x60;DOUBLE_FACT&#x60;: Double billing - &#x60;CMD_ERR&#x60;: Order error - &#x60;ADR_ERR&#x60;: Address error - &#x60;REF_CT_ABSENT&#x60;: Missing contract reference  **Authentication:** JWT Bearer (recommended) or PDP credentials in request.
         /// </summary>
         /// <param name="refuseeRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitRefuseeApiV1CdarRefuseePostApiResponse"/>&gt;</returns>
-        public async Task<ISubmitRefuseeApiV1CdarRefuseePostApiResponse?> SubmitRefuseeApiV1CdarRefuseePostOrDefaultAsync(RefuseeRequest refuseeRequest, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISubmitRefuseeApiV1CdarRefuseePostApiResponse?> SubmitRefuseeApiV1CdarRefuseePostOrDefaultAsync(RefuseeRequest refuseeRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await SubmitRefuseeApiV1CdarRefuseePostAsync(refuseeRequest, cancellationToken).ConfigureAwait(false);
+                return await SubmitRefuseeApiV1CdarRefuseePostAsync(refuseeRequest, organizationId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -3379,9 +3454,10 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="refuseeRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitRefuseeApiV1CdarRefuseePostApiResponse"/>&gt;</returns>
-        public async Task<ISubmitRefuseeApiV1CdarRefuseePostApiResponse> SubmitRefuseeApiV1CdarRefuseePostAsync(RefuseeRequest refuseeRequest, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISubmitRefuseeApiV1CdarRefuseePostApiResponse> SubmitRefuseeApiV1CdarRefuseePostAsync(RefuseeRequest refuseeRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -3389,7 +3465,7 @@ namespace FactPulse.SDK.Api
             {
                 ValidateSubmitRefuseeApiV1CdarRefuseePost(refuseeRequest);
 
-                FormatSubmitRefuseeApiV1CdarRefuseePost(refuseeRequest);
+                FormatSubmitRefuseeApiV1CdarRefuseePost(refuseeRequest, ref organizationId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -3399,6 +3475,9 @@ namespace FactPulse.SDK.Api
                     uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
                         ? "/api/v1/cdar/refusee"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/cdar/refusee");
+
+                    if (organizationId.IsSet)
+                        httpRequestMessageLocalVar.Headers.Add("Organization-Id", ClientUtils.ParameterToString(organizationId.Value));
 
                     httpRequestMessageLocalVar.Content = (refuseeRequest as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
@@ -3449,7 +3528,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterSubmitRefuseeApiV1CdarRefuseePostDefaultImplementation(apiResponseLocalVar, refuseeRequest);
+                        AfterSubmitRefuseeApiV1CdarRefuseePostDefaultImplementation(apiResponseLocalVar, refuseeRequest, organizationId);
 
                         Events.ExecuteOnSubmitRefuseeApiV1CdarRefuseePost(apiResponseLocalVar);
 
@@ -3463,7 +3542,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorSubmitRefuseeApiV1CdarRefuseePostDefaultImplementation(e, "/api/v1/cdar/refusee", uriBuilderLocalVar.Path, refuseeRequest);
+                OnErrorSubmitRefuseeApiV1CdarRefuseePostDefaultImplementation(e, "/api/v1/cdar/refusee", uriBuilderLocalVar.Path, refuseeRequest, organizationId);
                 Events.ExecuteOnErrorSubmitRefuseeApiV1CdarRefuseePost(e);
                 throw;
             }
@@ -3943,14 +4022,14 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatValidateXmlCdarApiV1CdarValidateXmlPost(ref System.IO.Stream xmlFile);
+        partial void FormatValidateXmlCdarApiV1CdarValidateXmlPost(ref FactPulse.SDK.Client.FileParameter xmlFile);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
         /// <param name="xmlFile"></param>
         /// <returns></returns>
-        private void ValidateValidateXmlCdarApiV1CdarValidateXmlPost(System.IO.Stream xmlFile)
+        private void ValidateValidateXmlCdarApiV1CdarValidateXmlPost(FactPulse.SDK.Client.FileParameter xmlFile)
         {
             if (xmlFile == null)
                 throw new ArgumentNullException(nameof(xmlFile));
@@ -3961,7 +4040,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="xmlFile"></param>
-        private void AfterValidateXmlCdarApiV1CdarValidateXmlPostDefaultImplementation(IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse apiResponseLocalVar, System.IO.Stream xmlFile)
+        private void AfterValidateXmlCdarApiV1CdarValidateXmlPostDefaultImplementation(IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter xmlFile)
         {
             bool suppressDefaultLog = false;
             AfterValidateXmlCdarApiV1CdarValidateXmlPost(ref suppressDefaultLog, apiResponseLocalVar, xmlFile);
@@ -3975,7 +4054,7 @@ namespace FactPulse.SDK.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="xmlFile"></param>
-        partial void AfterValidateXmlCdarApiV1CdarValidateXmlPost(ref bool suppressDefaultLog, IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse apiResponseLocalVar, System.IO.Stream xmlFile);
+        partial void AfterValidateXmlCdarApiV1CdarValidateXmlPost(ref bool suppressDefaultLog, IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter xmlFile);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -3984,7 +4063,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="xmlFile"></param>
-        private void OnErrorValidateXmlCdarApiV1CdarValidateXmlPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream xmlFile)
+        private void OnErrorValidateXmlCdarApiV1CdarValidateXmlPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter xmlFile)
         {
             bool suppressDefaultLogLocalVar = false;
             OnErrorValidateXmlCdarApiV1CdarValidateXmlPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, xmlFile);
@@ -4000,7 +4079,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="xmlFile"></param>
-        partial void OnErrorValidateXmlCdarApiV1CdarValidateXmlPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream xmlFile);
+        partial void OnErrorValidateXmlCdarApiV1CdarValidateXmlPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter xmlFile);
 
         /// <summary>
         /// Validate CDAR XML against XSD and Schematron BR-FR-CDV Validates a CDAR XML file against:  1. **XSD schema**: UN/CEFACT D22B CrossDomainAcknowledgementAndResponse 2. **Schematron BR-FR-CDV**: French business rules for invoice lifecycle  Returns validation status and detailed error messages if invalid.  **Note:** Use &#x60;/validate&#x60; to validate structured data fields (JSON).
@@ -4008,7 +4087,7 @@ namespace FactPulse.SDK.Api
         /// <param name="xmlFile">CDAR XML file to validate</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse"/>&gt;</returns>
-        public async Task<IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse?> ValidateXmlCdarApiV1CdarValidateXmlPostOrDefaultAsync(System.IO.Stream xmlFile, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse?> ValidateXmlCdarApiV1CdarValidateXmlPostOrDefaultAsync(FactPulse.SDK.Client.FileParameter xmlFile, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -4027,7 +4106,7 @@ namespace FactPulse.SDK.Api
         /// <param name="xmlFile">CDAR XML file to validate</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse"/>&gt;</returns>
-        public async Task<IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse> ValidateXmlCdarApiV1CdarValidateXmlPostAsync(System.IO.Stream xmlFile, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IValidateXmlCdarApiV1CdarValidateXmlPostApiResponse> ValidateXmlCdarApiV1CdarValidateXmlPostAsync(FactPulse.SDK.Client.FileParameter xmlFile, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -4046,13 +4125,20 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/cdar/validate-xml"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/cdar/validate-xml");
 
-                    MultipartContent multipartContentLocalVar = new MultipartContent();
+                    MultipartFormDataContent multipartContentLocalVar = new MultipartFormDataContent();
 
                     httpRequestMessageLocalVar.Content = multipartContentLocalVar;
 
-                    List<KeyValuePair<string?, string?>> formParameterLocalVars = new List<KeyValuePair<string?, string?>>();
+                    List<KeyValuePair<string, string?>> formParameterLocalVars = new List<KeyValuePair<string, string?>>();
 
-                    multipartContentLocalVar.Add(new FormUrlEncodedContent(formParameterLocalVars));                    multipartContentLocalVar.Add(new StreamContent(xmlFile));
+                    {
+                        var streamContentLocalVar = new StreamContent(xmlFile.Content);
+                        streamContentLocalVar.Headers.ContentType = new MediaTypeHeaderValue(xmlFile.ContentType);
+                        multipartContentLocalVar.Add(streamContentLocalVar, "xml_file", xmlFile.FileName ?? "xml_file");
+                    }
+
+                    foreach (var formParamLocalVar in formParameterLocalVars)
+                        multipartContentLocalVar.Add(new StringContent(formParamLocalVar.Value ?? string.Empty), formParamLocalVar.Key);
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
@@ -4070,11 +4156,6 @@ namespace FactPulse.SDK.Api
                     string[] contentTypes = new string[] {
                         "multipart/form-data"
                     };
-
-                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
-
-                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
-                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"

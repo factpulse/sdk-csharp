@@ -115,7 +115,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets Type
         /// </summary>
         [JsonPropertyName("type")]
-        public TypeEnum? Type { get { return this.TypeOption; } set { this.TypeOption = new(value); } }
+        public TypeEnum? Type { get { return this.TypeOption.Value; } set { this.TypeOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of FlowSyntax
@@ -129,7 +129,7 @@ namespace FactPulse.SDK.Model
         /// </summary>
         /// <value>Flow syntax (AFNOR XP Z12-013)</value>
         [JsonPropertyName("flowSyntax")]
-        public FlowSyntax? FlowSyntax { get { return this.FlowSyntaxOption; } set { this.FlowSyntaxOption = new(value); } }
+        public FlowSyntax? FlowSyntax { get { return this.FlowSyntaxOption.Value; } set { this.FlowSyntaxOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of ProcessingRule
@@ -142,7 +142,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets ProcessingRule
         /// </summary>
         [JsonPropertyName("processingRule")]
-        public ProcessingRule? ProcessingRule { get { return this.ProcessingRuleOption; } set { this.ProcessingRuleOption = new(value); } }
+        public ProcessingRule? ProcessingRule { get { return this.ProcessingRuleOption.Value; } set { this.ProcessingRuleOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Credentials

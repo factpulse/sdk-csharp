@@ -76,7 +76,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets TaxDueType
         /// </summary>
         [JsonPropertyName("taxDueType")]
-        public TaxDueDateType? TaxDueType { get { return this.TaxDueTypeOption; } set { this.TaxDueTypeOption = new(value); } }
+        public TaxDueDateType? TaxDueType { get { return this.TaxDueTypeOption.Value; } set { this.TaxDueTypeOption = new(value); } }
 
         /// <summary>
         /// Transaction date (TT-77)

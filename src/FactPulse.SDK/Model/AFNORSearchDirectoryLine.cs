@@ -37,20 +37,102 @@ namespace FactPulse.SDK.Model
         /// <param name="filters">filters</param>
         /// <param name="sorting">Sorting criteria on a field and an order (ascending or descending).</param>
         /// <param name="fields">Allows you to filter the desired fields in the response.</param>
+        /// <param name="include">include</param>
         /// <param name="limit">Maximum number of results</param>
         /// <param name="ignore">Number of results to skip</param>
         [JsonConstructor]
-        public AFNORSearchDirectoryLine(Option<AFNORSearchDirectoryLineFilters?> filters = default, Option<List<AFNORSearchDirectoryLineSortingInner>?> sorting = default, Option<List<AFNORDirectoryLineField>?> fields = default, Option<int?> limit = default, Option<int?> ignore = default)
+        public AFNORSearchDirectoryLine(Option<AFNORSearchDirectoryLineFilters?> filters = default, Option<List<AFNORSearchDirectoryLineSortingInner>?> sorting = default, Option<List<AFNORDirectoryLineField>?> fields = default, Option<List<AFNORSearchDirectoryLine.IncludeEnum>?> include = default, Option<int?> limit = default, Option<int?> ignore = default)
         {
             FiltersOption = filters;
             SortingOption = sorting;
             FieldsOption = fields;
+            IncludeOption = include;
             LimitOption = limit;
             IgnoreOption = ignore;
             OnCreated();
         }
 
         partial void OnCreated();
+
+        /// <summary>
+        /// Defines Include
+        /// </summary>
+        public enum IncludeEnum
+        {
+            /// <summary>
+            /// Enum Siren for value: siren
+            /// </summary>
+            Siren = 1,
+
+            /// <summary>
+            /// Enum Siret for value: siret
+            /// </summary>
+            Siret = 2,
+
+            /// <summary>
+            /// Enum RoutingCode for value: routingCode
+            /// </summary>
+            RoutingCode = 3
+        }
+
+        /// <summary>
+        /// Returns a <see cref="IncludeEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static IncludeEnum IncludeEnumFromString(string value)
+        {
+            if (value.Equals("siren"))
+                return IncludeEnum.Siren;
+
+            if (value.Equals("siret"))
+                return IncludeEnum.Siret;
+
+            if (value.Equals("routingCode"))
+                return IncludeEnum.RoutingCode;
+
+            throw new NotImplementedException($"Could not convert value to type IncludeEnum: '{value}'");
+        }
+
+        /// <summary>
+        /// Returns a <see cref="IncludeEnum"/>
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static IncludeEnum? IncludeEnumFromStringOrDefault(string value)
+        {
+            if (value.Equals("siren"))
+                return IncludeEnum.Siren;
+
+            if (value.Equals("siret"))
+                return IncludeEnum.Siret;
+
+            if (value.Equals("routingCode"))
+                return IncludeEnum.RoutingCode;
+
+            return null;
+        }
+
+        /// <summary>
+        /// Converts the <see cref="IncludeEnum"/> to the json value
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public static string IncludeEnumToJsonValue(IncludeEnum? value)
+        {
+            if (value == IncludeEnum.Siren)
+                return "siren";
+
+            if (value == IncludeEnum.Siret)
+                return "siret";
+
+            if (value == IncludeEnum.RoutingCode)
+                return "routingCode";
+
+            throw new NotImplementedException($"Value could not be handled: '{value}'");
+        }
 
         /// <summary>
         /// Used to track the state of Filters
@@ -91,9 +173,23 @@ namespace FactPulse.SDK.Model
         /// Allows you to filter the desired fields in the response.
         /// </summary>
         /// <value>Allows you to filter the desired fields in the response.</value>
-        /* <example>[addressingIdentifier, siren, siret, addressingSuffix]</example> */
+        /* <example>[addressingIdentifier, siren, siret, addressingSuffix, routingIdentifier]</example> */
         [JsonPropertyName("fields")]
         public List<AFNORDirectoryLineField>? Fields { get { return this.FieldsOption; } set { this.FieldsOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of Include
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<AFNORSearchDirectoryLine.IncludeEnum>?> IncludeOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Include
+        /// </summary>
+        /* <example>[siren, siret, routingCode]</example> */
+        [JsonPropertyName("include")]
+        public List<AFNORSearchDirectoryLine.IncludeEnum>? Include { get { return this.IncludeOption; } set { this.IncludeOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Limit
@@ -121,7 +217,7 @@ namespace FactPulse.SDK.Model
         /// Number of results to skip
         /// </summary>
         /// <value>Number of results to skip</value>
-        /* <example>20</example> */
+        /* <example>0</example> */
         [JsonPropertyName("ignore")]
         public int? Ignore { get { return this.IgnoreOption; } set { this.IgnoreOption = new(value); } }
 
@@ -136,6 +232,7 @@ namespace FactPulse.SDK.Model
             sb.Append("  Filters: ").Append(Filters).Append("\n");
             sb.Append("  Sorting: ").Append(Sorting).Append("\n");
             sb.Append("  Fields: ").Append(Fields).Append("\n");
+            sb.Append("  Include: ").Append(Include).Append("\n");
             sb.Append("  Limit: ").Append(Limit).Append("\n");
             sb.Append("  Ignore: ").Append(Ignore).Append("\n");
             sb.Append("}\n");
@@ -178,6 +275,7 @@ namespace FactPulse.SDK.Model
             Option<AFNORSearchDirectoryLineFilters?> filters = default;
             Option<List<AFNORSearchDirectoryLineSortingInner>?> sorting = default;
             Option<List<AFNORDirectoryLineField>?> fields = default;
+            Option<List<AFNORSearchDirectoryLine.IncludeEnum>?> include = default;
             Option<int?> limit = default;
             Option<int?> ignore = default;
 
@@ -205,6 +303,9 @@ namespace FactPulse.SDK.Model
                         case "fields":
                             fields = new Option<List<AFNORDirectoryLineField>?>(JsonSerializer.Deserialize<List<AFNORDirectoryLineField>>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
+                        case "include":
+                            include = new Option<List<AFNORSearchDirectoryLine.IncludeEnum>?>(JsonSerializer.Deserialize<List<AFNORSearchDirectoryLine.IncludeEnum>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
                         case "limit":
                             limit = new Option<int?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (int?)null : utf8JsonReader.GetInt32());
                             break;
@@ -226,13 +327,16 @@ namespace FactPulse.SDK.Model
             if (fields.IsSet && fields.Value == null)
                 throw new ArgumentNullException(nameof(fields), "Property is not nullable for class AFNORSearchDirectoryLine.");
 
+            if (include.IsSet && include.Value == null)
+                throw new ArgumentNullException(nameof(include), "Property is not nullable for class AFNORSearchDirectoryLine.");
+
             if (limit.IsSet && limit.Value == null)
                 throw new ArgumentNullException(nameof(limit), "Property is not nullable for class AFNORSearchDirectoryLine.");
 
             if (ignore.IsSet && ignore.Value == null)
                 throw new ArgumentNullException(nameof(ignore), "Property is not nullable for class AFNORSearchDirectoryLine.");
 
-            return new AFNORSearchDirectoryLine(filters, sorting, fields, limit, ignore);
+            return new AFNORSearchDirectoryLine(filters, sorting, fields, include, limit, ignore);
         }
 
         /// <summary>
@@ -268,6 +372,9 @@ namespace FactPulse.SDK.Model
             if (aFNORSearchDirectoryLine.FieldsOption.IsSet && aFNORSearchDirectoryLine.Fields == null)
                 throw new ArgumentNullException(nameof(aFNORSearchDirectoryLine.Fields), "Property is required for class AFNORSearchDirectoryLine.");
 
+            if (aFNORSearchDirectoryLine.IncludeOption.IsSet && aFNORSearchDirectoryLine.Include == null)
+                throw new ArgumentNullException(nameof(aFNORSearchDirectoryLine.Include), "Property is required for class AFNORSearchDirectoryLine.");
+
             if (aFNORSearchDirectoryLine.FiltersOption.IsSet)
             {
                 writer.WritePropertyName("filters");
@@ -282,6 +389,11 @@ namespace FactPulse.SDK.Model
             {
                 writer.WritePropertyName("fields");
                 JsonSerializer.Serialize(writer, aFNORSearchDirectoryLine.Fields, jsonSerializerOptions);
+            }
+            if (aFNORSearchDirectoryLine.IncludeOption.IsSet)
+            {
+                writer.WritePropertyName("include");
+                JsonSerializer.Serialize(writer, aFNORSearchDirectoryLine.Include, jsonSerializerOptions);
             }
             if (aFNORSearchDirectoryLine.LimitOption.IsSet)
                 writer.WriteNumber("limit", aFNORSearchDirectoryLine.LimitOption.Value!.Value);

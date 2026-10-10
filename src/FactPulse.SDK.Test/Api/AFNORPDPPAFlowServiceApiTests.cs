@@ -99,18 +99,6 @@ namespace FactPulse.SDK.Test.Api
         }
 
         /// <summary>
-        /// Test GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGet
-        /// </summary>
-        [Fact (Skip = "not implemented")]
-        public async Task GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetAsyncTest()
-        {
-            string webhookUid = default!;
-            var response = await _instance.GetWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidGetAsync(webhookUid);
-            var model = response.Ok();
-            Assert.IsType<AFNORWebhook>(model);
-        }
-
-        /// <summary>
         /// Test ListWebhooksProxyApiV1AfnorFlowV1WebhooksGet
         /// </summary>
         [Fact (Skip = "not implemented")]
@@ -140,22 +128,10 @@ namespace FactPulse.SDK.Test.Api
         public async Task SubmitFlowProxyApiV1AfnorFlowV1FlowsPostAsyncTest()
         {
             AFNORFlowInfo flowInfo = default!;
-            System.IO.Stream file = default!;
+            FactPulse.SDK.Client.FileParameter file = default!;
             var response = await _instance.SubmitFlowProxyApiV1AfnorFlowV1FlowsPostAsync(flowInfo, file);
             var model = response.Ok();
             Assert.IsType<Object>(model);
-        }
-
-        /// <summary>
-        /// Test UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatch
-        /// </summary>
-        [Fact (Skip = "not implemented")]
-        public async Task UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchAsyncTest()
-        {
-            string webhookUid = default!;
-            var response = await _instance.UpdateWebhookProxyApiV1AfnorFlowV1WebhooksWebhookUidPatchAsync(webhookUid);
-            var model = response.Ok();
-            Assert.IsType<AFNORWebhook>(model);
         }
     }
 }

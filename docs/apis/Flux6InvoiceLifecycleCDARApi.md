@@ -93,11 +93,11 @@ No authorization required
 
 <a id="getlifecycleapiv1cdarlifecycleget"></a>
 # **GetLifecycleApiV1CdarLifecycleGet**
-> LifecycleResponse GetLifecycleApiV1CdarLifecycleGet (int days = null, string invoiceId = null, string pdpFlowServiceUrl = null, string pdpTokenUrl = null, string pdpClientId = null, string pdpClientSecret = null)
+> LifecycleResponse GetLifecycleApiV1CdarLifecycleGet (int days = null, string invoiceId = null, string flowDirection = null, string pdpFlowServiceUrl = null, string pdpTokenUrl = null, string pdpClientId = null, string pdpClientSecret = null, string organizationId = null)
 
 [Simplified] Get lifecycle events for invoices
 
-Returns lifecycle events (CDAR) grouped by invoice reference.  **How it works (AFNOR XP Z12-013 compliant):** 1. Searches lifecycle flows on the PDP by flowType + flowDirection + date range 2. Downloads and parses each CDAR XML to extract the invoice reference 3. Groups events by invoice, sorted chronologically  **Parameters:** - `days`: Number of days to look back (default: 7) - `invoiceId`: Optional filter on a specific invoice reference  **Authentication:** JWT Bearer (recommended) or PDP credentials as query parameters.
+Returns lifecycle events (CDAR) grouped by invoice reference.  **How it works (AFNOR XP Z12-013 compliant):** 1. Searches lifecycle flows on the PDP by flowType + flowDirection + date range 2. Downloads and parses each CDAR XML to extract the invoice reference 3. Groups events by invoice, sorted chronologically  **Parameters:** - `days`: Number of days to look back (default: 7) - `invoiceId`: Optional filter on a specific invoice reference - `flowDirection`: `All` (default), `In` (statuses received from the counterparty)   or `Out` (statuses issued by you or your PA, e.g. 202/203)  **Authentication:** JWT Bearer (recommended) or PDP credentials as query parameters.
 
 
 ### Parameters
@@ -106,10 +106,12 @@ Returns lifecycle events (CDAR) grouped by invoice reference.  **How it works (A
 |------|------|-------------|-------|
 | **days** | **int** | Number of days to look back | [optional] [default to 7] |
 | **invoiceId** | **string** | Filter by invoice reference | [optional]  |
+| **flowDirection** | **string** | All (default), In (received statuses) or Out (issued statuses) | [optional] [default to All] |
 | **pdpFlowServiceUrl** | **string** | PDP Flow Service URL | [optional]  |
 | **pdpTokenUrl** | **string** | PDP OAuth token URL | [optional]  |
 | **pdpClientId** | **string** | PDP Client ID | [optional]  |
 | **pdpClientSecret** | **string** | PDP Client Secret | [optional]  |
+| **organizationId** | **string** | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. | [optional]  |
 
 ### Return type
 
@@ -208,7 +210,7 @@ No authorization required
 
 <a id="submitcdarapiv1cdarsubmitpost"></a>
 # **SubmitCdarApiV1CdarSubmitPost**
-> SubmitCDARResponse SubmitCdarApiV1CdarSubmitPost (SubmitCDARRequest submitCDARRequest)
+> SubmitCDARResponse SubmitCdarApiV1CdarSubmitPost (SubmitCDARRequest submitCDARRequest, string organizationId = null)
 
 Generate and submit a CDAR message
 
@@ -220,6 +222,7 @@ Generate a CDAR message and submit it to the PA/PDP platform.  **Authentication 
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **submitCDARRequest** | [**SubmitCDARRequest**](SubmitCDARRequest.md) |  |  |
+| **organizationId** | **string** | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. | [optional]  |
 
 ### Return type
 
@@ -248,7 +251,7 @@ Generate a CDAR message and submit it to the PA/PDP platform.  **Authentication 
 
 <a id="submitcdarxmlapiv1cdarsubmitxmlpost"></a>
 # **SubmitCdarXmlApiV1CdarSubmitXmlPost**
-> SubmitCDARResponse SubmitCdarXmlApiV1CdarSubmitXmlPost (SubmitCDARXMLRequest submitCDARXMLRequest)
+> SubmitCDARResponse SubmitCdarXmlApiV1CdarSubmitXmlPost (SubmitCDARXMLRequest submitCDARXMLRequest, string organizationId = null)
 
 Submit a pre-generated CDAR XML
 
@@ -260,6 +263,7 @@ Submit a pre-generated CDAR XML message to the PA/PDP platform.  Useful for subm
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **submitCDARXMLRequest** | [**SubmitCDARXMLRequest**](SubmitCDARXMLRequest.md) |  |  |
+| **organizationId** | **string** | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. | [optional]  |
 
 ### Return type
 
@@ -288,7 +292,7 @@ Submit a pre-generated CDAR XML message to the PA/PDP platform.  Useful for subm
 
 <a id="submitencaisseeapiv1cdarencaisseepost"></a>
 # **SubmitEncaisseeApiV1CdarEncaisseePost**
-> SimplifiedCDARResponse SubmitEncaisseeApiV1CdarEncaisseePost (EncaisseeRequest encaisseeRequest)
+> SimplifiedCDARResponse SubmitEncaisseeApiV1CdarEncaisseePost (EncaisseeRequest encaisseeRequest, string organizationId = null)
 
 [Simplified] Submit PAID status (212) - Issued invoice
 
@@ -300,6 +304,7 @@ Submit a pre-generated CDAR XML message to the PA/PDP platform.  Useful for subm
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **encaisseeRequest** | [**EncaisseeRequest**](EncaisseeRequest.md) |  |  |
+| **organizationId** | **string** | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. | [optional]  |
 
 ### Return type
 
@@ -328,7 +333,7 @@ Submit a pre-generated CDAR XML message to the PA/PDP platform.  Useful for subm
 
 <a id="submitrefuseeapiv1cdarrefuseepost"></a>
 # **SubmitRefuseeApiV1CdarRefuseePost**
-> SimplifiedCDARResponse SubmitRefuseeApiV1CdarRefuseePost (RefuseeRequest refuseeRequest)
+> SimplifiedCDARResponse SubmitRefuseeApiV1CdarRefuseePost (RefuseeRequest refuseeRequest, string organizationId = null)
 
 [Simplified] Submit REFUSED status (210) - Received invoice
 
@@ -340,6 +345,7 @@ Submit a pre-generated CDAR XML message to the PA/PDP platform.  Useful for subm
 | Name | Type | Description | Notes |
 |------|------|-------------|-------|
 | **refuseeRequest** | [**RefuseeRequest**](RefuseeRequest.md) |  |  |
+| **organizationId** | **string** | Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. | [optional]  |
 
 ### Return type
 

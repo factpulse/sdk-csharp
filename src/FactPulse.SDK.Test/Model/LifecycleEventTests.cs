@@ -91,6 +91,15 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'FlowDirection'
+        /// </summary>
+        [Fact]
+        public void FlowDirectionTest()
+        {
+            // TODO unit test for the property 'FlowDirection'
+        }
+
+        /// <summary>
         /// Test the property 'At'
         /// </summary>
         [Fact]

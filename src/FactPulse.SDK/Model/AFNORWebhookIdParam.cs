@@ -35,10 +35,14 @@ namespace FactPulse.SDK.Model
         /// Initializes a new instance of the <see cref="AFNORWebhookIdParam" /> class.
         /// </summary>
         /// <param name="webhookId">webhookId</param>
+        /// <param name="signingKey">signingKey</param>
+        /// <param name="createdAt">createdAt</param>
         [JsonConstructor]
-        public AFNORWebhookIdParam(Option<Guid?> webhookId = default)
+        public AFNORWebhookIdParam(Option<Guid?> webhookId = default, Option<byte[]?> signingKey = default, Option<DateTime?> createdAt = default)
         {
             WebhookIdOption = webhookId;
+            SigningKeyOption = signingKey;
+            CreatedAtOption = createdAt;
             OnCreated();
         }
 
@@ -58,6 +62,32 @@ namespace FactPulse.SDK.Model
         public Guid? WebhookId { get { return this.WebhookIdOption; } set { this.WebhookIdOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of SigningKey
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<byte[]?> SigningKeyOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets SigningKey
+        /// </summary>
+        [JsonPropertyName("signingKey")]
+        public byte[]? SigningKey { get { return this.SigningKeyOption; } set { this.SigningKeyOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of CreatedAt
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<DateTime?> CreatedAtOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets CreatedAt
+        /// </summary>
+        [JsonPropertyName("createdAt")]
+        public DateTime? CreatedAt { get { return this.CreatedAtOption; } set { this.CreatedAtOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -66,6 +96,8 @@ namespace FactPulse.SDK.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class AFNORWebhookIdParam {\n");
             sb.Append("  WebhookId: ").Append(WebhookId).Append("\n");
+            sb.Append("  SigningKey: ").Append(SigningKey).Append("\n");
+            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -87,6 +119,11 @@ namespace FactPulse.SDK.Model
     public class AFNORWebhookIdParamJsonConverter : JsonConverter<AFNORWebhookIdParam>
     {
         /// <summary>
+        /// The format to use to serialize CreatedAt
+        /// </summary>
+        public static string CreatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
         /// Deserializes json to <see cref="AFNORWebhookIdParam" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
@@ -104,6 +141,8 @@ namespace FactPulse.SDK.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<Guid?> webhookId = default;
+            Option<byte[]?> signingKey = default;
+            Option<DateTime?> createdAt = default;
 
             while (utf8JsonReader.Read())
             {
@@ -123,6 +162,12 @@ namespace FactPulse.SDK.Model
                         case "webhookId":
                             webhookId = new Option<Guid?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (Guid?)null : utf8JsonReader.GetGuid());
                             break;
+                        case "signingKey":
+                            signingKey = new Option<byte[]?>(JsonSerializer.Deserialize<byte[]>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
+                        case "createdAt":
+                            createdAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
                         default:
                             break;
                     }
@@ -132,7 +177,13 @@ namespace FactPulse.SDK.Model
             if (webhookId.IsSet && webhookId.Value == null)
                 throw new ArgumentNullException(nameof(webhookId), "Property is not nullable for class AFNORWebhookIdParam.");
 
-            return new AFNORWebhookIdParam(webhookId);
+            if (signingKey.IsSet && signingKey.Value == null)
+                throw new ArgumentNullException(nameof(signingKey), "Property is not nullable for class AFNORWebhookIdParam.");
+
+            if (createdAt.IsSet && createdAt.Value == null)
+                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class AFNORWebhookIdParam.");
+
+            return new AFNORWebhookIdParam(webhookId, signingKey, createdAt);
         }
 
         /// <summary>
@@ -159,8 +210,19 @@ namespace FactPulse.SDK.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, AFNORWebhookIdParam aFNORWebhookIdParam, JsonSerializerOptions jsonSerializerOptions)
         {
+            if (aFNORWebhookIdParam.SigningKeyOption.IsSet && aFNORWebhookIdParam.SigningKey == null)
+                throw new ArgumentNullException(nameof(aFNORWebhookIdParam.SigningKey), "Property is required for class AFNORWebhookIdParam.");
+
             if (aFNORWebhookIdParam.WebhookIdOption.IsSet)
                 writer.WriteString("webhookId", aFNORWebhookIdParam.WebhookIdOption.Value!.Value);
+
+            if (aFNORWebhookIdParam.SigningKeyOption.IsSet)
+            {
+                writer.WritePropertyName("signingKey");
+                JsonSerializer.Serialize(writer, aFNORWebhookIdParam.SigningKey, jsonSerializerOptions);
+            }
+            if (aFNORWebhookIdParam.CreatedAtOption.IsSet)
+                writer.WriteString("createdAt", aFNORWebhookIdParam.CreatedAtOption.Value!.Value.ToString(CreatedAtFormat));
         }
     }
 }

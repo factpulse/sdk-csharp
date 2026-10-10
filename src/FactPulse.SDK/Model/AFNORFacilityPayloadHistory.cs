@@ -71,7 +71,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets FacilityType
         /// </summary>
         [JsonPropertyName("facilityType")]
-        public AFNORFacilityType? FacilityType { get { return this.FacilityTypeOption; } set { this.FacilityTypeOption = new(value); } }
+        public AFNORFacilityType? FacilityType { get { return this.FacilityTypeOption.Value; } set { this.FacilityTypeOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of AdministrativeStatus
@@ -84,7 +84,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets AdministrativeStatus
         /// </summary>
         [JsonPropertyName("administrativeStatus")]
-        public AFNORFacilityAdministrativeStatus? AdministrativeStatus { get { return this.AdministrativeStatusOption; } set { this.AdministrativeStatusOption = new(value); } }
+        public AFNORFacilityAdministrativeStatus? AdministrativeStatus { get { return this.AdministrativeStatusOption.Value; } set { this.AdministrativeStatusOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Siret

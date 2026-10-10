@@ -57,8 +57,8 @@ namespace FactPulse.SDK.Model
         /// Identification scheme (EAS code)
         /// </summary>
         /// <value>Identification scheme (EAS code)</value>
-        [JsonPropertyName("schemeId")]
-        public SchemeID? SchemeId { get { return this.SchemeIdOption; } set { this.SchemeIdOption = new(value); } }
+        [JsonPropertyName("scheme_id")]
+        public SchemeID? SchemeId { get { return this.SchemeIdOption.Value; } set { this.SchemeIdOption = new(value); } }
 
         /// <summary>
         /// Electronic address identifier (e.g., SIREN, SIRET, routing code)
@@ -135,7 +135,7 @@ namespace FactPulse.SDK.Model
                         case "identifier":
                             identifier = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "schemeId":
+                        case "scheme_id":
                             string? schemeIdRawValue = utf8JsonReader.GetString();
                             if (schemeIdRawValue != null)
                                 schemeId = new Option<SchemeID?>(SchemeIDValueConverter.FromStringOrDefault(schemeIdRawValue));
@@ -190,7 +190,7 @@ namespace FactPulse.SDK.Model
             if (electronicAddress.SchemeIdOption.IsSet)
             {
                 var schemeIdRawValue = SchemeIDValueConverter.ToJsonValue(electronicAddress.SchemeId!.Value);
-                writer.WriteString("schemeId", schemeIdRawValue);
+                writer.WriteString("scheme_id", schemeIdRawValue);
             }
         }
     }

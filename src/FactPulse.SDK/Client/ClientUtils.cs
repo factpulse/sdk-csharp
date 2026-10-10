@@ -141,14 +141,12 @@ namespace FactPulse.SDK.Client
                     : "false";
             if (obj is AFNORAcknowledgementDetail.LevelEnum aFNORAcknowledgementDetailLevelEnum)
                 return AFNORAcknowledgementDetail.LevelEnumToJsonValue(aFNORAcknowledgementDetailLevelEnum);
-            if (obj is AFNORAlgorithm aFNORAlgorithm)
-                return AFNORAlgorithmValueConverter.ToJsonValue(aFNORAlgorithm);
-            if (obj is AFNORCallbackAuthentication.AuthTypeEnum aFNORCallbackAuthenticationAuthTypeEnum)
-                return AFNORCallbackAuthentication.AuthTypeEnumToJsonValue(aFNORCallbackAuthenticationAuthTypeEnum);
-            if (obj is AFNORContainsOperator aFNORContainsOperator)
-                return AFNORContainsOperatorValueConverter.ToJsonValue(aFNORContainsOperator);
+            if (obj is AFNORContainsOrStartWithOperator aFNORContainsOrStartWithOperator)
+                return AFNORContainsOrStartWithOperatorValueConverter.ToJsonValue(aFNORContainsOrStartWithOperator);
             if (obj is AFNORContainsOrStrictOperator aFNORContainsOrStrictOperator)
                 return AFNORContainsOrStrictOperatorValueConverter.ToJsonValue(aFNORContainsOrStrictOperator);
+            if (obj is AFNORContainsOrStrictOrStartWithOperator aFNORContainsOrStrictOrStartWithOperator)
+                return AFNORContainsOrStrictOrStartWithOperatorValueConverter.ToJsonValue(aFNORContainsOrStrictOrStartWithOperator);
             if (obj is AFNORDestination.TypeEnum aFNORDestinationTypeEnum)
                 return AFNORDestination.TypeEnumToJsonValue(aFNORDestinationTypeEnum);
             if (obj is AFNORDirectoryLineField aFNORDirectoryLineField)
@@ -189,6 +187,8 @@ namespace FactPulse.SDK.Client
                 return AFNORRoutingCodeFieldValueConverter.ToJsonValue(aFNORRoutingCodeField);
             if (obj is AFNORRoutingCodeSearch.IncludeEnum aFNORRoutingCodeSearchIncludeEnum)
                 return AFNORRoutingCodeSearch.IncludeEnumToJsonValue(aFNORRoutingCodeSearchIncludeEnum);
+            if (obj is AFNORSearchDirectoryLine.IncludeEnum aFNORSearchDirectoryLineIncludeEnum)
+                return AFNORSearchDirectoryLine.IncludeEnumToJsonValue(aFNORSearchDirectoryLineIncludeEnum);
             if (obj is AFNORSearchSiret.IncludeEnum aFNORSearchSiretIncludeEnum)
                 return AFNORSearchSiret.IncludeEnumToJsonValue(aFNORSearchSiretIncludeEnum);
             if (obj is AFNORSirenField aFNORSirenField)
@@ -201,6 +201,8 @@ namespace FactPulse.SDK.Client
                 return AFNORStrictOperatorValueConverter.ToJsonValue(aFNORStrictOperator);
             if (obj is AFNORStrictOrStartWithOperator aFNORStrictOrStartWithOperator)
                 return AFNORStrictOrStartWithOperatorValueConverter.ToJsonValue(aFNORStrictOrStartWithOperator);
+            if (obj is AFNORUniqueDirectoryLineStatus aFNORUniqueDirectoryLineStatus)
+                return AFNORUniqueDirectoryLineStatusValueConverter.ToJsonValue(aFNORUniqueDirectoryLineStatus);
             if (obj is APIProfile aPIProfile)
                 return APIProfileValueConverter.ToJsonValue(aPIProfile);
             if (obj is AcknowledgmentStatus acknowledgmentStatus)
@@ -237,8 +239,8 @@ namespace FactPulse.SDK.Client
                 return ErrorLevelValueConverter.ToJsonValue(errorLevel);
             if (obj is ErrorSource errorSource)
                 return ErrorSourceValueConverter.ToJsonValue(errorSource);
-            if (obj is FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode factureElectroniqueRestApiSchemasEreportingInvoiceTypeCode)
-                return FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeValueConverter.ToJsonValue(factureElectroniqueRestApiSchemasEreportingInvoiceTypeCode);
+            if (obj is FactureElectroniqueModelsInvoiceTypeCode factureElectroniqueModelsInvoiceTypeCode)
+                return FactureElectroniqueModelsInvoiceTypeCodeValueConverter.ToJsonValue(factureElectroniqueModelsInvoiceTypeCode);
             if (obj is FieldStatus fieldStatus)
                 return FieldStatusValueConverter.ToJsonValue(fieldStatus);
             if (obj is FlowDirection flowDirection)

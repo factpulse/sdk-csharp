@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **TaxExclusiveAmount** | [**Taxexclusiveamount1**](Taxexclusiveamount1.md) |  | 
 **TaxAmount** | [**Taxamount1**](Taxamount1.md) |  | 
 **TaxBreakdown** | [**List&lt;TaxBreakdownInput&gt;**](TaxBreakdownInput.md) | VAT breakdown | 
-**TypeCode** | **FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode** | Invoice type code | [optional] 
+**TypeCode** | **InvoiceTypeCode** | Invoice type code | [optional] 
 **Currency** | [**Currency**](Currency.md) |  | [optional] 
 **DueDate** | **DateOnly** |  | [optional] 
 **SellerId** | **string** |  | [optional] 
@@ -20,6 +20,8 @@ Name | Type | Description | Notes
 **SellerCountry** | [**Sellercountry**](Sellercountry.md) |  | [optional] 
 **BuyerId** | **string** |  | [optional] 
 **BuyerVatId** | **string** |  | [optional] 
+**TaxAmountEur** | [**Taxamounteur**](Taxamounteur.md) |  | [optional] 
+**BusinessProcessId** | **string** |  | [optional] 
 **ReferencedInvoiceId** | **string** |  | [optional] 
 **ReferencedInvoiceDate** | **DateOnly** |  | [optional] 
 

@@ -82,11 +82,13 @@ namespace FactPulse.SDK.Test.Api
         {
             Client.Option<int> days = default!;
             Client.Option<string?> invoiceId = default!;
+            Client.Option<string> flowDirection = default!;
             Client.Option<string?> pdpFlowServiceUrl = default!;
             Client.Option<string?> pdpTokenUrl = default!;
             Client.Option<string?> pdpClientId = default!;
             Client.Option<string?> pdpClientSecret = default!;
-            var response = await _instance.GetLifecycleApiV1CdarLifecycleGetAsync(days, invoiceId, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
+            Client.Option<string?> organizationId = default!;
+            var response = await _instance.GetLifecycleApiV1CdarLifecycleGetAsync(days, invoiceId, flowDirection, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret, organizationId);
             var model = response.Ok();
             Assert.IsType<LifecycleResponse>(model);
         }
@@ -120,7 +122,8 @@ namespace FactPulse.SDK.Test.Api
         public async Task SubmitCdarApiV1CdarSubmitPostAsyncTest()
         {
             SubmitCDARRequest submitCDARRequest = default!;
-            var response = await _instance.SubmitCdarApiV1CdarSubmitPostAsync(submitCDARRequest);
+            Client.Option<string?> organizationId = default!;
+            var response = await _instance.SubmitCdarApiV1CdarSubmitPostAsync(submitCDARRequest, organizationId);
             var model = response.Ok();
             Assert.IsType<SubmitCDARResponse>(model);
         }
@@ -132,7 +135,8 @@ namespace FactPulse.SDK.Test.Api
         public async Task SubmitCdarXmlApiV1CdarSubmitXmlPostAsyncTest()
         {
             SubmitCDARXMLRequest submitCDARXMLRequest = default!;
-            var response = await _instance.SubmitCdarXmlApiV1CdarSubmitXmlPostAsync(submitCDARXMLRequest);
+            Client.Option<string?> organizationId = default!;
+            var response = await _instance.SubmitCdarXmlApiV1CdarSubmitXmlPostAsync(submitCDARXMLRequest, organizationId);
             var model = response.Ok();
             Assert.IsType<SubmitCDARResponse>(model);
         }
@@ -144,7 +148,8 @@ namespace FactPulse.SDK.Test.Api
         public async Task SubmitEncaisseeApiV1CdarEncaisseePostAsyncTest()
         {
             EncaisseeRequest encaisseeRequest = default!;
-            var response = await _instance.SubmitEncaisseeApiV1CdarEncaisseePostAsync(encaisseeRequest);
+            Client.Option<string?> organizationId = default!;
+            var response = await _instance.SubmitEncaisseeApiV1CdarEncaisseePostAsync(encaisseeRequest, organizationId);
             var model = response.Ok();
             Assert.IsType<SimplifiedCDARResponse>(model);
         }
@@ -156,7 +161,8 @@ namespace FactPulse.SDK.Test.Api
         public async Task SubmitRefuseeApiV1CdarRefuseePostAsyncTest()
         {
             RefuseeRequest refuseeRequest = default!;
-            var response = await _instance.SubmitRefuseeApiV1CdarRefuseePostAsync(refuseeRequest);
+            Client.Option<string?> organizationId = default!;
+            var response = await _instance.SubmitRefuseeApiV1CdarRefuseePostAsync(refuseeRequest, organizationId);
             var model = response.Ok();
             Assert.IsType<SimplifiedCDARResponse>(model);
         }
@@ -179,7 +185,7 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task ValidateXmlCdarApiV1CdarValidateXmlPostAsyncTest()
         {
-            System.IO.Stream xmlFile = default!;
+            FactPulse.SDK.Client.FileParameter xmlFile = default!;
             var response = await _instance.ValidateXmlCdarApiV1CdarValidateXmlPostAsync(xmlFile);
             var model = response.Ok();
             Assert.IsType<Dictionary<string, Object>>(model);

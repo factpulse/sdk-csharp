@@ -39,7 +39,7 @@ namespace FactPulse.SDK.Model
         /// <param name="name">name</param>
         /// <param name="postalAddress">postalAddress</param>
         [JsonConstructor]
-        public DeliveryParty(Option<string?> id = default, Option<ElectronicAddress?> globalId = default, Option<string?> name = default, Option<PostalAddress?> postalAddress = default)
+        public DeliveryParty(Option<string?> id = default, Option<ElectronicAddressInput?> globalId = default, Option<string?> name = default, Option<PostalAddressInput?> postalAddress = default)
         {
             IdOption = id;
             GlobalIdOption = globalId;
@@ -68,13 +68,13 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<ElectronicAddress?> GlobalIdOption { get; private set; }
+        public Option<ElectronicAddressInput?> GlobalIdOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets GlobalId
         /// </summary>
         [JsonPropertyName("global_id")]
-        public ElectronicAddress? GlobalId { get { return this.GlobalIdOption; } set { this.GlobalIdOption = new(value); } }
+        public ElectronicAddressInput? GlobalId { get { return this.GlobalIdOption; } set { this.GlobalIdOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Name
@@ -94,13 +94,13 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<PostalAddress?> PostalAddressOption { get; private set; }
+        public Option<PostalAddressInput?> PostalAddressOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets PostalAddress
         /// </summary>
         [JsonPropertyName("postal_address")]
-        public PostalAddress? PostalAddress { get { return this.PostalAddressOption; } set { this.PostalAddressOption = new(value); } }
+        public PostalAddressInput? PostalAddress { get { return this.PostalAddressOption; } set { this.PostalAddressOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -152,9 +152,9 @@ namespace FactPulse.SDK.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<string?> id = default;
-            Option<ElectronicAddress?> globalId = default;
+            Option<ElectronicAddressInput?> globalId = default;
             Option<string?> name = default;
-            Option<PostalAddress?> postalAddress = default;
+            Option<PostalAddressInput?> postalAddress = default;
 
             while (utf8JsonReader.Read())
             {
@@ -175,13 +175,13 @@ namespace FactPulse.SDK.Model
                             id = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "global_id":
-                            globalId = new Option<ElectronicAddress?>(JsonSerializer.Deserialize<ElectronicAddress>(ref utf8JsonReader, jsonSerializerOptions));
+                            globalId = new Option<ElectronicAddressInput?>(JsonSerializer.Deserialize<ElectronicAddressInput>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "name":
                             name = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "postal_address":
-                            postalAddress = new Option<PostalAddress?>(JsonSerializer.Deserialize<PostalAddress>(ref utf8JsonReader, jsonSerializerOptions));
+                            postalAddress = new Option<PostalAddressInput?>(JsonSerializer.Deserialize<PostalAddressInput>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;

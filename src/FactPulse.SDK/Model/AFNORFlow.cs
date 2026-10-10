@@ -35,7 +35,9 @@ namespace FactPulse.SDK.Model
         /// Initializes a new instance of the <see cref="AFNORFlow" /> class.
         /// </summary>
         /// <param name="name">Name of the file</param>
+        /// <param name="processingRule">processingRule</param>
         /// <param name="flowSyntax">flowSyntax</param>
+        /// <param name="flowProfile">flowProfile</param>
         /// <param name="flowId">Unique identifier supporting UUID but not only, for flexibility purpose</param>
         /// <param name="submittedAt">The flow submission date and time (the date and time when the flow was created on the system) This property should be used by the API consumer as a time reference to avoid clock synchronization issues </param>
         /// <param name="updatedAt">The last update date and time of the flow. When the flow is submitted updatedAt is equal to submittedAt. When the flow acknowledgment status is changed updatedAt date and time is updated. </param>
@@ -44,13 +46,13 @@ namespace FactPulse.SDK.Model
         /// <param name="flowDirection">flowDirection</param>
         /// <param name="acknowledgement">acknowledgement</param>
         /// <param name="trackingId">The tracking id is an external identifier and is used to track the flow by the sender</param>
-        /// <param name="processingRule">processingRule</param>
-        /// <param name="flowProfile">flowProfile</param>
         [JsonConstructor]
-        public AFNORFlow(string name, AFNORFlowSyntax flowSyntax, string flowId, DateTime submittedAt, DateTime updatedAt, AFNORFlowType flowType, ProcessingRuleSourceEnum processingRuleSource, AFNORFlowDirection flowDirection, AFNORAcknowledgement acknowledgement, Option<string?> trackingId = default, Option<AFNORProcessingRule?> processingRule = default, Option<AFNORFlowProfile?> flowProfile = default)
+        public AFNORFlow(string name, AFNORProcessingRule processingRule, AFNORFlowSyntax flowSyntax, AFNORFlowProfile flowProfile, string flowId, DateTime submittedAt, DateTime updatedAt, AFNORFlowType flowType, ProcessingRuleSourceEnum processingRuleSource, AFNORFlowDirection flowDirection, AFNORAcknowledgement acknowledgement, Option<string?> trackingId = default)
         {
             Name = name;
+            ProcessingRule = processingRule;
             FlowSyntax = flowSyntax;
+            FlowProfile = flowProfile;
             FlowId = flowId;
             SubmittedAt = submittedAt;
             UpdatedAt = updatedAt;
@@ -59,18 +61,28 @@ namespace FactPulse.SDK.Model
             FlowDirection = flowDirection;
             Acknowledgement = acknowledgement;
             TrackingIdOption = trackingId;
-            ProcessingRuleOption = processingRule;
-            FlowProfileOption = flowProfile;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
+        /// Gets or Sets ProcessingRule
+        /// </summary>
+        [JsonPropertyName("processingRule")]
+        public AFNORProcessingRule ProcessingRule { get; set; }
+
+        /// <summary>
         /// Gets or Sets FlowSyntax
         /// </summary>
         [JsonPropertyName("flowSyntax")]
         public AFNORFlowSyntax FlowSyntax { get; set; }
+
+        /// <summary>
+        /// Gets or Sets FlowProfile
+        /// </summary>
+        [JsonPropertyName("flowProfile")]
+        public AFNORFlowProfile FlowProfile { get; set; }
 
         /// <summary>
         /// Gets or Sets FlowType
@@ -159,32 +171,6 @@ namespace FactPulse.SDK.Model
         public AFNORFlowDirection FlowDirection { get; set; }
 
         /// <summary>
-        /// Used to track the state of ProcessingRule
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<AFNORProcessingRule?> ProcessingRuleOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets ProcessingRule
-        /// </summary>
-        [JsonPropertyName("processingRule")]
-        public AFNORProcessingRule? ProcessingRule { get { return this.ProcessingRuleOption; } set { this.ProcessingRuleOption = new(value); } }
-
-        /// <summary>
-        /// Used to track the state of FlowProfile
-        /// </summary>
-        [JsonIgnore]
-        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<AFNORFlowProfile?> FlowProfileOption { get; private set; }
-
-        /// <summary>
-        /// Gets or Sets FlowProfile
-        /// </summary>
-        [JsonPropertyName("flowProfile")]
-        public AFNORFlowProfile? FlowProfile { get { return this.FlowProfileOption; } set { this.FlowProfileOption = new(value); } }
-
-        /// <summary>
         /// Name of the file
         /// </summary>
         /// <value>Name of the file</value>
@@ -241,7 +227,9 @@ namespace FactPulse.SDK.Model
             StringBuilder sb = new StringBuilder();
             sb.Append("class AFNORFlow {\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  ProcessingRule: ").Append(ProcessingRule).Append("\n");
             sb.Append("  FlowSyntax: ").Append(FlowSyntax).Append("\n");
+            sb.Append("  FlowProfile: ").Append(FlowProfile).Append("\n");
             sb.Append("  FlowId: ").Append(FlowId).Append("\n");
             sb.Append("  SubmittedAt: ").Append(SubmittedAt).Append("\n");
             sb.Append("  UpdatedAt: ").Append(UpdatedAt).Append("\n");
@@ -250,8 +238,6 @@ namespace FactPulse.SDK.Model
             sb.Append("  FlowDirection: ").Append(FlowDirection).Append("\n");
             sb.Append("  Acknowledgement: ").Append(Acknowledgement).Append("\n");
             sb.Append("  TrackingId: ").Append(TrackingId).Append("\n");
-            sb.Append("  ProcessingRule: ").Append(ProcessingRule).Append("\n");
-            sb.Append("  FlowProfile: ").Append(FlowProfile).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -270,15 +256,15 @@ namespace FactPulse.SDK.Model
             }
 
             // FlowId (string) maxLength
-            if (this.FlowId != null && this.FlowId.Length > 36)
+            if (this.FlowId != null && this.FlowId.Length > 64)
             {
-                yield return new ValidationResult("Invalid value for FlowId, length must be less than 36.", new [] { "FlowId" });
+                yield return new ValidationResult("Invalid value for FlowId, length must be less than 64.", new [] { "FlowId" });
             }
 
             // TrackingId (string) maxLength
-            if (this.TrackingId != null && this.TrackingId.Length > 36)
+            if (this.TrackingId != null && this.TrackingId.Length > 64)
             {
-                yield return new ValidationResult("Invalid value for TrackingId, length must be less than 36.", new [] { "TrackingId" });
+                yield return new ValidationResult("Invalid value for TrackingId, length must be less than 64.", new [] { "TrackingId" });
             }
 
             yield break;
@@ -318,7 +304,9 @@ namespace FactPulse.SDK.Model
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
             Option<string?> name = default;
+            Option<AFNORProcessingRule?> processingRule = default;
             Option<AFNORFlowSyntax?> flowSyntax = default;
+            Option<AFNORFlowProfile?> flowProfile = default;
             Option<string?> flowId = default;
             Option<DateTime?> submittedAt = default;
             Option<DateTime?> updatedAt = default;
@@ -327,8 +315,6 @@ namespace FactPulse.SDK.Model
             Option<AFNORFlowDirection?> flowDirection = default;
             Option<AFNORAcknowledgement?> acknowledgement = default;
             Option<string?> trackingId = default;
-            Option<AFNORProcessingRule?> processingRule = default;
-            Option<AFNORFlowProfile?> flowProfile = default;
 
             while (utf8JsonReader.Read())
             {
@@ -348,10 +334,20 @@ namespace FactPulse.SDK.Model
                         case "name":
                             name = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
+                        case "processingRule":
+                            string? processingRuleRawValue = utf8JsonReader.GetString();
+                            if (processingRuleRawValue != null)
+                                processingRule = new Option<AFNORProcessingRule?>(AFNORProcessingRuleValueConverter.FromStringOrDefault(processingRuleRawValue));
+                            break;
                         case "flowSyntax":
                             string? flowSyntaxRawValue = utf8JsonReader.GetString();
                             if (flowSyntaxRawValue != null)
                                 flowSyntax = new Option<AFNORFlowSyntax?>(AFNORFlowSyntaxValueConverter.FromStringOrDefault(flowSyntaxRawValue));
+                            break;
+                        case "flowProfile":
+                            string? flowProfileRawValue = utf8JsonReader.GetString();
+                            if (flowProfileRawValue != null)
+                                flowProfile = new Option<AFNORFlowProfile?>(AFNORFlowProfileValueConverter.FromStringOrDefault(flowProfileRawValue));
                             break;
                         case "flowId":
                             flowId = new Option<string?>(utf8JsonReader.GetString()!);
@@ -383,16 +379,6 @@ namespace FactPulse.SDK.Model
                         case "trackingId":
                             trackingId = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "processingRule":
-                            string? processingRuleRawValue = utf8JsonReader.GetString();
-                            if (processingRuleRawValue != null)
-                                processingRule = new Option<AFNORProcessingRule?>(AFNORProcessingRuleValueConverter.FromStringOrDefault(processingRuleRawValue));
-                            break;
-                        case "flowProfile":
-                            string? flowProfileRawValue = utf8JsonReader.GetString();
-                            if (flowProfileRawValue != null)
-                                flowProfile = new Option<AFNORFlowProfile?>(AFNORFlowProfileValueConverter.FromStringOrDefault(flowProfileRawValue));
-                            break;
                         default:
                             break;
                     }
@@ -402,8 +388,14 @@ namespace FactPulse.SDK.Model
             if (!name.IsSet)
                 throw new ArgumentException("Property is required for class AFNORFlow.", nameof(name));
 
+            if (!processingRule.IsSet)
+                throw new ArgumentException("Property is required for class AFNORFlow.", nameof(processingRule));
+
             if (!flowSyntax.IsSet)
                 throw new ArgumentException("Property is required for class AFNORFlow.", nameof(flowSyntax));
+
+            if (!flowProfile.IsSet)
+                throw new ArgumentException("Property is required for class AFNORFlow.", nameof(flowProfile));
 
             if (!flowId.IsSet)
                 throw new ArgumentException("Property is required for class AFNORFlow.", nameof(flowId));
@@ -429,8 +421,14 @@ namespace FactPulse.SDK.Model
             if (name.IsSet && name.Value == null)
                 throw new ArgumentNullException(nameof(name), "Property is not nullable for class AFNORFlow.");
 
+            if (processingRule.IsSet && processingRule.Value == null)
+                throw new ArgumentNullException(nameof(processingRule), "Property is not nullable for class AFNORFlow.");
+
             if (flowSyntax.IsSet && flowSyntax.Value == null)
                 throw new ArgumentNullException(nameof(flowSyntax), "Property is not nullable for class AFNORFlow.");
+
+            if (flowProfile.IsSet && flowProfile.Value == null)
+                throw new ArgumentNullException(nameof(flowProfile), "Property is not nullable for class AFNORFlow.");
 
             if (flowId.IsSet && flowId.Value == null)
                 throw new ArgumentNullException(nameof(flowId), "Property is not nullable for class AFNORFlow.");
@@ -456,13 +454,7 @@ namespace FactPulse.SDK.Model
             if (trackingId.IsSet && trackingId.Value == null)
                 throw new ArgumentNullException(nameof(trackingId), "Property is not nullable for class AFNORFlow.");
 
-            if (processingRule.IsSet && processingRule.Value == null)
-                throw new ArgumentNullException(nameof(processingRule), "Property is not nullable for class AFNORFlow.");
-
-            if (flowProfile.IsSet && flowProfile.Value == null)
-                throw new ArgumentNullException(nameof(flowProfile), "Property is not nullable for class AFNORFlow.");
-
-            return new AFNORFlow(name.Value!, flowSyntax.Value!.Value!, flowId.Value!, submittedAt.Value!.Value!, updatedAt.Value!.Value!, flowType.Value!.Value!, processingRuleSource.Value!.Value!, flowDirection.Value!.Value!, acknowledgement.Value!, trackingId, processingRule, flowProfile);
+            return new AFNORFlow(name.Value!, processingRule.Value!.Value!, flowSyntax.Value!.Value!, flowProfile.Value!.Value!, flowId.Value!, submittedAt.Value!.Value!, updatedAt.Value!.Value!, flowType.Value!.Value!, processingRuleSource.Value!.Value!, flowDirection.Value!.Value!, acknowledgement.Value!, trackingId);
         }
 
         /// <summary>
@@ -503,8 +495,14 @@ namespace FactPulse.SDK.Model
 
             writer.WriteString("name", aFNORFlow.Name);
 
+            var processingRuleRawValue = AFNORProcessingRuleValueConverter.ToJsonValue(aFNORFlow.ProcessingRule);
+            writer.WriteString("processingRule", processingRuleRawValue);
+
             var flowSyntaxRawValue = AFNORFlowSyntaxValueConverter.ToJsonValue(aFNORFlow.FlowSyntax);
             writer.WriteString("flowSyntax", flowSyntaxRawValue);
+
+            var flowProfileRawValue = AFNORFlowProfileValueConverter.ToJsonValue(aFNORFlow.FlowProfile);
+            writer.WriteString("flowProfile", flowProfileRawValue);
 
             writer.WriteString("flowId", aFNORFlow.FlowId);
 
@@ -524,17 +522,6 @@ namespace FactPulse.SDK.Model
             JsonSerializer.Serialize(writer, aFNORFlow.Acknowledgement, jsonSerializerOptions);
             if (aFNORFlow.TrackingIdOption.IsSet)
                 writer.WriteString("trackingId", aFNORFlow.TrackingId);
-
-            if (aFNORFlow.ProcessingRuleOption.IsSet)
-            {
-                var processingRuleRawValue = AFNORProcessingRuleValueConverter.ToJsonValue(aFNORFlow.ProcessingRule!.Value);
-                writer.WriteString("processingRule", processingRuleRawValue);
-            }
-            if (aFNORFlow.FlowProfileOption.IsSet)
-            {
-                var flowProfileRawValue = AFNORFlowProfileValueConverter.ToJsonValue(aFNORFlow.FlowProfile!.Value);
-                writer.WriteString("flowProfile", flowProfileRawValue);
-            }
         }
     }
 }

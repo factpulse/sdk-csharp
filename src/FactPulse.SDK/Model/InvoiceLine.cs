@@ -128,7 +128,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets LineSubType
         /// </summary>
         [JsonPropertyName("line_sub_type")]
-        public LineSubType? LineSubType { get { return this.LineSubTypeOption; } set { this.LineSubTypeOption = new(value); } }
+        public LineSubType? LineSubType { get { return this.LineSubTypeOption.Value; } set { this.LineSubTypeOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of AllowanceReasonCode
@@ -141,7 +141,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets AllowanceReasonCode
         /// </summary>
         [JsonPropertyName("allowanceReasonCode")]
-        public AllowanceReasonCode? AllowanceReasonCode { get { return this.AllowanceReasonCodeOption; } set { this.AllowanceReasonCodeOption = new(value); } }
+        public AllowanceReasonCode? AllowanceReasonCode { get { return this.AllowanceReasonCodeOption.Value; } set { this.AllowanceReasonCodeOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of VatCategory
@@ -154,7 +154,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets VatCategory
         /// </summary>
         [JsonPropertyName("vat_category")]
-        public VATCategory? VatCategory { get { return this.VatCategoryOption; } set { this.VatCategoryOption = new(value); } }
+        public VATCategory? VatCategory { get { return this.VatCategoryOption.Value; } set { this.VatCategoryOption = new(value); } }
 
         /// <summary>
         /// Invoice line identifier (BT-126).

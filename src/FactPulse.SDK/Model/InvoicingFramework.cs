@@ -61,7 +61,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets InvoicingFrameworkCode
         /// </summary>
         [JsonPropertyName("invoicing_framework_code")]
-        public InvoicingFrameworkCode? InvoicingFrameworkCode { get { return this.InvoicingFrameworkCodeOption; } set { this.InvoicingFrameworkCodeOption = new(value); } }
+        public InvoicingFrameworkCode? InvoicingFrameworkCode { get { return this.InvoicingFrameworkCodeOption.Value; } set { this.InvoicingFrameworkCodeOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of OperationNature
@@ -74,7 +74,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets OperationNature
         /// </summary>
         [JsonPropertyName("operation_nature")]
-        public OperationNature? OperationNature { get { return this.OperationNatureOption; } set { this.OperationNatureOption = new(value); } }
+        public OperationNature? OperationNature { get { return this.OperationNatureOption.Value; } set { this.OperationNatureOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of ApproverServiceCode

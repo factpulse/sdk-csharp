@@ -262,7 +262,6 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | returns the directory line(s) matching the search criteria. |  -  |
-| **206** | Request processed without error, but the volume of information returned has been reduced. |  -  |
 | **400** | Bad request. The request is invalid or cannot be completed. |  -  |
 | **401** | Unauthorized. The request requires user authentication. |  -  |
 | **403** | Forbidden. The server understood the request but denied access or access is not authorized. |  -  |
@@ -273,7 +272,6 @@ No authorization required
 | **500** | Internal Server Error. |  -  |
 | **501** | Not implemented. |  -  |
 | **503** | Service unavailable. |  -  |
-| **204** | No content |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
@@ -306,7 +304,6 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Returns the routing code(s) matching the search criteria. |  -  |
-| **206** | Request processed without error, but the volume of information returned has been reduced. |  -  |
 | **400** | Bad request. The request is invalid or cannot be completed. |  -  |
 | **401** | Unauthorized. The request requires user authentication. |  -  |
 | **403** | Forbidden. The server understood the request but denied access or access is not authorized. |  -  |
@@ -317,7 +314,6 @@ No authorization required
 | **500** | Internal Server Error. |  -  |
 | **501** | Not implemented. |  -  |
 | **503** | Service unavailable. |  -  |
-| **204** | No content |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
@@ -350,7 +346,6 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Returns one or more companies. |  -  |
-| **206** | Request processed without error, but the volume of information returned has been reduced. |  -  |
 | **400** | Bad request. The request is invalid or cannot be completed. |  -  |
 | **401** | Unauthorized. The request requires user authentication. |  -  |
 | **403** | Forbidden. The server understood the request but denied access or access is not authorized. |  -  |
@@ -361,7 +356,6 @@ No authorization required
 | **500** | Internal Server Error. |  -  |
 | **501** | Not implemented. |  -  |
 | **503** | Service unavailable. |  -  |
-| **204** | No content |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
@@ -394,7 +388,6 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Returns an establishment as defined on a given observation date or as defined on the current date if the observation date is not specified. |  -  |
-| **206** | Request processed without error, but the volume of information returned has been reduced. |  -  |
 | **400** | Bad request. The request is invalid or cannot be completed. |  -  |
 | **401** | Unauthorized. The request requires user authentication. |  -  |
 | **403** | Forbidden. The server understood the request but denied access or access is not authorized. |  -  |
@@ -405,7 +398,6 @@ No authorization required
 | **500** | Internal Server Error. |  -  |
 | **501** | Not implemented. |  -  |
 | **503** | Service unavailable. |  -  |
-| **204** | No content |  -  |
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 

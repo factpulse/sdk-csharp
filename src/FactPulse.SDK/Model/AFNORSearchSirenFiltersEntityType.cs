@@ -57,7 +57,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets Op
         /// </summary>
         [JsonPropertyName("op")]
-        public AFNORStrictOperator? Op { get { return this.OpOption; } set { this.OpOption = new(value); } }
+        public AFNORStrictOperator? Op { get { return this.OpOption.Value; } set { this.OpOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Value
@@ -70,7 +70,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets Value
         /// </summary>
         [JsonPropertyName("value")]
-        public AFNOREntityType? Value { get { return this.ValueOption; } set { this.ValueOption = new(value); } }
+        public AFNOREntityType? Value { get { return this.ValueOption.Value; } set { this.ValueOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object

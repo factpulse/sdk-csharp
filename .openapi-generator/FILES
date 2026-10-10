@@ -25,14 +25,9 @@ docs/apis/ValidationApi.md
 docs/models/AFNORAcknowledgement.md
 docs/models/AFNORAcknowledgementDetail.md
 docs/models/AFNORAddressRead.md
-docs/models/AFNORAlgorithm.md
-docs/models/AFNORBasicAuthentication.md
-docs/models/AFNORCallbackAuthentication.md
-docs/models/AFNORCallbackHeader.md
-docs/models/AFNORCallbackParameters.md
-docs/models/AFNORCallbackSignature.md
-docs/models/AFNORContainsOperator.md
+docs/models/AFNORContainsOrStartWithOperator.md
 docs/models/AFNORContainsOrStrictOperator.md
+docs/models/AFNORContainsOrStrictOrStartWithOperator.md
 docs/models/AFNORCoreFlowInfo.md
 docs/models/AFNORCredentials.md
 docs/models/AFNORDestination.md
@@ -65,7 +60,6 @@ docs/models/AFNORHealthCheckResponse.md
 docs/models/AFNORLegalUnitAdministrativeStatus.md
 docs/models/AFNORLegalUnitPayloadHistory.md
 docs/models/AFNORLegalUnitPayloadIncluded.md
-docs/models/AFNOROAuth2Authentication.md
 docs/models/AFNORProcessingRule.md
 docs/models/AFNORReasonCode.md
 docs/models/AFNORReasonCodeEnum.md
@@ -116,11 +110,10 @@ docs/models/AFNORSiretSearchPost200Response.md
 docs/models/AFNORSortingOrder.md
 docs/models/AFNORStrictOperator.md
 docs/models/AFNORStrictOrStartWithOperator.md
+docs/models/AFNORUniqueDirectoryLineStatus.md
 docs/models/AFNORWebhook.md
 docs/models/AFNORWebhookIdParam.md
-docs/models/AFNORWebhookMetadata.md
 docs/models/AFNORWebhookParams.md
-docs/models/AFNORWebhookPatchPayload.md
 docs/models/APIError.md
 docs/models/APIProfile.md
 docs/models/AcknowledgmentStatus.md
@@ -137,6 +130,7 @@ docs/models/Amount.md
 docs/models/Amount1.md
 docs/models/Amount2.md
 docs/models/AmountDue.md
+docs/models/Amounteur.md
 docs/models/AsyncTaskStatus.md
 docs/models/BaseAmount.md
 docs/models/BoundingBoxSchema.md
@@ -177,6 +171,8 @@ docs/models/DocumentTypeInfo.md
 docs/models/EReportingFlowType.md
 docs/models/EReportingValidationError.md
 docs/models/ElectronicAddress.md
+docs/models/ElectronicAddressInput.md
+docs/models/ElectronicAddressOutput.md
 docs/models/Encaisseamount.md
 docs/models/Encaisseamount1.md
 docs/models/EncaisseeRequest.md
@@ -186,9 +182,9 @@ docs/models/ErrorSource.md
 docs/models/ExtractionInfo.md
 docs/models/FacturXInvoice.md
 docs/models/FacturXPDFInfo.md
+docs/models/FactureElectroniqueModelsInvoiceTypeCode.md
 docs/models/FactureElectroniqueRestApiSchemasCdarValidationErrorResponse.md
-docs/models/FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode.md
-docs/models/FactureElectroniqueRestApiSchemasProcessingChorusProCredentials.md
+docs/models/FactureElectroniqueRestApiSchemasChorusProChorusProCredentials.md
 docs/models/FieldStatus.md
 docs/models/FileInfo.md
 docs/models/FilesInfo.md
@@ -229,6 +225,7 @@ docs/models/InvoiceTotals.md
 docs/models/InvoiceTotalsPrepayment.md
 docs/models/InvoiceTypeCode.md
 docs/models/InvoiceTypeCodeOutput.md
+docs/models/Invoicedata.md
 docs/models/InvoicingFramework.md
 docs/models/InvoicingFrameworkCode.md
 docs/models/IssuerRoleCode.md
@@ -258,6 +255,8 @@ docs/models/PaymentCard.md
 docs/models/PaymentMeans.md
 docs/models/Percentage.md
 docs/models/PostalAddress.md
+docs/models/PostalAddressInput.md
+docs/models/PostalAddressOutput.md
 docs/models/PriceAllowanceAmount.md
 docs/models/PriceBasisQuantity.md
 docs/models/ProcessingOptions.md
@@ -314,6 +313,9 @@ docs/models/SubmitInvoiceRequest.md
 docs/models/SubmitInvoiceResponse.md
 docs/models/SubmitNetAmount.md
 docs/models/SubmitVatAmount.md
+docs/models/SuperPDPConnectURLResponse.md
+docs/models/SuperPDPDisconnectResponse.md
+docs/models/SuperPDPStatusResponse.md
 docs/models/SupplementaryAttachment.md
 docs/models/Supplier.md
 docs/models/TaskErrorResult.md
@@ -326,6 +328,7 @@ docs/models/Taxableamount.md
 docs/models/Taxamount.md
 docs/models/Taxamount1.md
 docs/models/Taxamount2.md
+docs/models/Taxamounteur.md
 docs/models/Taxexclusiveamount.md
 docs/models/Taxexclusiveamount1.md
 docs/models/TotalGrossAmount.md
@@ -389,14 +392,9 @@ src/FactPulse.SDK.Test/FactPulse.SDK.Test.csproj
 src/FactPulse.SDK.Test/Model/AFNORAcknowledgementDetailTests.cs
 src/FactPulse.SDK.Test/Model/AFNORAcknowledgementTests.cs
 src/FactPulse.SDK.Test/Model/AFNORAddressReadTests.cs
-src/FactPulse.SDK.Test/Model/AFNORAlgorithmTests.cs
-src/FactPulse.SDK.Test/Model/AFNORBasicAuthenticationTests.cs
-src/FactPulse.SDK.Test/Model/AFNORCallbackAuthenticationTests.cs
-src/FactPulse.SDK.Test/Model/AFNORCallbackHeaderTests.cs
-src/FactPulse.SDK.Test/Model/AFNORCallbackParametersTests.cs
-src/FactPulse.SDK.Test/Model/AFNORCallbackSignatureTests.cs
-src/FactPulse.SDK.Test/Model/AFNORContainsOperatorTests.cs
+src/FactPulse.SDK.Test/Model/AFNORContainsOrStartWithOperatorTests.cs
 src/FactPulse.SDK.Test/Model/AFNORContainsOrStrictOperatorTests.cs
+src/FactPulse.SDK.Test/Model/AFNORContainsOrStrictOrStartWithOperatorTests.cs
 src/FactPulse.SDK.Test/Model/AFNORCoreFlowInfoTests.cs
 src/FactPulse.SDK.Test/Model/AFNORCredentialsTests.cs
 src/FactPulse.SDK.Test/Model/AFNORDestinationTests.cs
@@ -429,7 +427,6 @@ src/FactPulse.SDK.Test/Model/AFNORHealthCheckResponseTests.cs
 src/FactPulse.SDK.Test/Model/AFNORLegalUnitAdministrativeStatusTests.cs
 src/FactPulse.SDK.Test/Model/AFNORLegalUnitPayloadHistoryTests.cs
 src/FactPulse.SDK.Test/Model/AFNORLegalUnitPayloadIncludedTests.cs
-src/FactPulse.SDK.Test/Model/AFNOROAuth2AuthenticationTests.cs
 src/FactPulse.SDK.Test/Model/AFNORProcessingRuleTests.cs
 src/FactPulse.SDK.Test/Model/AFNORReasonCodeEnumTests.cs
 src/FactPulse.SDK.Test/Model/AFNORReasonCodeTests.cs
@@ -480,10 +477,9 @@ src/FactPulse.SDK.Test/Model/AFNORSiretSearchPost200ResponseTests.cs
 src/FactPulse.SDK.Test/Model/AFNORSortingOrderTests.cs
 src/FactPulse.SDK.Test/Model/AFNORStrictOperatorTests.cs
 src/FactPulse.SDK.Test/Model/AFNORStrictOrStartWithOperatorTests.cs
+src/FactPulse.SDK.Test/Model/AFNORUniqueDirectoryLineStatusTests.cs
 src/FactPulse.SDK.Test/Model/AFNORWebhookIdParamTests.cs
-src/FactPulse.SDK.Test/Model/AFNORWebhookMetadataTests.cs
 src/FactPulse.SDK.Test/Model/AFNORWebhookParamsTests.cs
-src/FactPulse.SDK.Test/Model/AFNORWebhookPatchPayloadTests.cs
 src/FactPulse.SDK.Test/Model/AFNORWebhookTests.cs
 src/FactPulse.SDK.Test/Model/APIErrorTests.cs
 src/FactPulse.SDK.Test/Model/APIProfileTests.cs
@@ -501,6 +497,7 @@ src/FactPulse.SDK.Test/Model/Amount1Tests.cs
 src/FactPulse.SDK.Test/Model/Amount2Tests.cs
 src/FactPulse.SDK.Test/Model/AmountDueTests.cs
 src/FactPulse.SDK.Test/Model/AmountTests.cs
+src/FactPulse.SDK.Test/Model/AmounteurTests.cs
 src/FactPulse.SDK.Test/Model/AsyncTaskStatusTests.cs
 src/FactPulse.SDK.Test/Model/BaseAmountTests.cs
 src/FactPulse.SDK.Test/Model/BoundingBoxSchemaTests.cs
@@ -540,6 +537,8 @@ src/FactPulse.SDK.Test/Model/DocTypeTests.cs
 src/FactPulse.SDK.Test/Model/DocumentTypeInfoTests.cs
 src/FactPulse.SDK.Test/Model/EReportingFlowTypeTests.cs
 src/FactPulse.SDK.Test/Model/EReportingValidationErrorTests.cs
+src/FactPulse.SDK.Test/Model/ElectronicAddressInputTests.cs
+src/FactPulse.SDK.Test/Model/ElectronicAddressOutputTests.cs
 src/FactPulse.SDK.Test/Model/ElectronicAddressTests.cs
 src/FactPulse.SDK.Test/Model/Encaisseamount1Tests.cs
 src/FactPulse.SDK.Test/Model/EncaisseamountTests.cs
@@ -550,9 +549,9 @@ src/FactPulse.SDK.Test/Model/ErrorSourceTests.cs
 src/FactPulse.SDK.Test/Model/ExtractionInfoTests.cs
 src/FactPulse.SDK.Test/Model/FacturXInvoiceTests.cs
 src/FactPulse.SDK.Test/Model/FacturXPDFInfoTests.cs
+src/FactPulse.SDK.Test/Model/FactureElectroniqueModelsInvoiceTypeCodeTests.cs
 src/FactPulse.SDK.Test/Model/FactureElectroniqueRestApiSchemasCdarValidationErrorResponseTests.cs
-src/FactPulse.SDK.Test/Model/FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCodeTests.cs
-src/FactPulse.SDK.Test/Model/FactureElectroniqueRestApiSchemasProcessingChorusProCredentialsTests.cs
+src/FactPulse.SDK.Test/Model/FactureElectroniqueRestApiSchemasChorusProChorusProCredentialsTests.cs
 src/FactPulse.SDK.Test/Model/FieldStatusTests.cs
 src/FactPulse.SDK.Test/Model/FileInfoTests.cs
 src/FactPulse.SDK.Test/Model/FilesInfoTests.cs
@@ -593,6 +592,7 @@ src/FactPulse.SDK.Test/Model/InvoiceTotalsPrepaymentTests.cs
 src/FactPulse.SDK.Test/Model/InvoiceTotalsTests.cs
 src/FactPulse.SDK.Test/Model/InvoiceTypeCodeOutputTests.cs
 src/FactPulse.SDK.Test/Model/InvoiceTypeCodeTests.cs
+src/FactPulse.SDK.Test/Model/InvoicedataTests.cs
 src/FactPulse.SDK.Test/Model/InvoicingFrameworkCodeTests.cs
 src/FactPulse.SDK.Test/Model/InvoicingFrameworkTests.cs
 src/FactPulse.SDK.Test/Model/IssuerRoleCodeTests.cs
@@ -621,6 +621,8 @@ src/FactPulse.SDK.Test/Model/PaymentAmountByRateTests.cs
 src/FactPulse.SDK.Test/Model/PaymentCardTests.cs
 src/FactPulse.SDK.Test/Model/PaymentMeansTests.cs
 src/FactPulse.SDK.Test/Model/PercentageTests.cs
+src/FactPulse.SDK.Test/Model/PostalAddressInputTests.cs
+src/FactPulse.SDK.Test/Model/PostalAddressOutputTests.cs
 src/FactPulse.SDK.Test/Model/PostalAddressTests.cs
 src/FactPulse.SDK.Test/Model/PriceAllowanceAmountTests.cs
 src/FactPulse.SDK.Test/Model/PriceBasisQuantityTests.cs
@@ -678,6 +680,9 @@ src/FactPulse.SDK.Test/Model/SubmitInvoiceRequestTests.cs
 src/FactPulse.SDK.Test/Model/SubmitInvoiceResponseTests.cs
 src/FactPulse.SDK.Test/Model/SubmitNetAmountTests.cs
 src/FactPulse.SDK.Test/Model/SubmitVatAmountTests.cs
+src/FactPulse.SDK.Test/Model/SuperPDPConnectURLResponseTests.cs
+src/FactPulse.SDK.Test/Model/SuperPDPDisconnectResponseTests.cs
+src/FactPulse.SDK.Test/Model/SuperPDPStatusResponseTests.cs
 src/FactPulse.SDK.Test/Model/SupplementaryAttachmentTests.cs
 src/FactPulse.SDK.Test/Model/SupplierTests.cs
 src/FactPulse.SDK.Test/Model/TaskErrorResultTests.cs
@@ -690,6 +695,7 @@ src/FactPulse.SDK.Test/Model/TaxableamountTests.cs
 src/FactPulse.SDK.Test/Model/Taxamount1Tests.cs
 src/FactPulse.SDK.Test/Model/Taxamount2Tests.cs
 src/FactPulse.SDK.Test/Model/TaxamountTests.cs
+src/FactPulse.SDK.Test/Model/TaxamounteurTests.cs
 src/FactPulse.SDK.Test/Model/Taxexclusiveamount1Tests.cs
 src/FactPulse.SDK.Test/Model/TaxexclusiveamountTests.cs
 src/FactPulse.SDK.Test/Model/TotalGrossAmountTests.cs
@@ -760,6 +766,7 @@ src/FactPulse.SDK/Client/DateOnlyNullableJsonConverter.cs
 src/FactPulse.SDK/Client/DateTimeJsonConverter.cs
 src/FactPulse.SDK/Client/DateTimeNullableJsonConverter.cs
 src/FactPulse.SDK/Client/ExceptionEventArgs.cs
+src/FactPulse.SDK/Client/FileParameter.cs
 src/FactPulse.SDK/Client/HostConfiguration.cs
 src/FactPulse.SDK/Client/JsonSerializerOptionsProvider.cs
 src/FactPulse.SDK/Client/Option.cs
@@ -774,14 +781,9 @@ src/FactPulse.SDK/FactPulse.SDK.csproj
 src/FactPulse.SDK/Model/AFNORAcknowledgement.cs
 src/FactPulse.SDK/Model/AFNORAcknowledgementDetail.cs
 src/FactPulse.SDK/Model/AFNORAddressRead.cs
-src/FactPulse.SDK/Model/AFNORAlgorithm.cs
-src/FactPulse.SDK/Model/AFNORBasicAuthentication.cs
-src/FactPulse.SDK/Model/AFNORCallbackAuthentication.cs
-src/FactPulse.SDK/Model/AFNORCallbackHeader.cs
-src/FactPulse.SDK/Model/AFNORCallbackParameters.cs
-src/FactPulse.SDK/Model/AFNORCallbackSignature.cs
-src/FactPulse.SDK/Model/AFNORContainsOperator.cs
+src/FactPulse.SDK/Model/AFNORContainsOrStartWithOperator.cs
 src/FactPulse.SDK/Model/AFNORContainsOrStrictOperator.cs
+src/FactPulse.SDK/Model/AFNORContainsOrStrictOrStartWithOperator.cs
 src/FactPulse.SDK/Model/AFNORCoreFlowInfo.cs
 src/FactPulse.SDK/Model/AFNORCredentials.cs
 src/FactPulse.SDK/Model/AFNORDestination.cs
@@ -814,7 +816,6 @@ src/FactPulse.SDK/Model/AFNORHealthCheckResponse.cs
 src/FactPulse.SDK/Model/AFNORLegalUnitAdministrativeStatus.cs
 src/FactPulse.SDK/Model/AFNORLegalUnitPayloadHistory.cs
 src/FactPulse.SDK/Model/AFNORLegalUnitPayloadIncluded.cs
-src/FactPulse.SDK/Model/AFNOROAuth2Authentication.cs
 src/FactPulse.SDK/Model/AFNORProcessingRule.cs
 src/FactPulse.SDK/Model/AFNORReasonCode.cs
 src/FactPulse.SDK/Model/AFNORReasonCodeEnum.cs
@@ -865,11 +866,10 @@ src/FactPulse.SDK/Model/AFNORSiretSearchPost200Response.cs
 src/FactPulse.SDK/Model/AFNORSortingOrder.cs
 src/FactPulse.SDK/Model/AFNORStrictOperator.cs
 src/FactPulse.SDK/Model/AFNORStrictOrStartWithOperator.cs
+src/FactPulse.SDK/Model/AFNORUniqueDirectoryLineStatus.cs
 src/FactPulse.SDK/Model/AFNORWebhook.cs
 src/FactPulse.SDK/Model/AFNORWebhookIdParam.cs
-src/FactPulse.SDK/Model/AFNORWebhookMetadata.cs
 src/FactPulse.SDK/Model/AFNORWebhookParams.cs
-src/FactPulse.SDK/Model/AFNORWebhookPatchPayload.cs
 src/FactPulse.SDK/Model/APIError.cs
 src/FactPulse.SDK/Model/APIProfile.cs
 src/FactPulse.SDK/Model/AcknowledgmentStatus.cs
@@ -886,6 +886,7 @@ src/FactPulse.SDK/Model/Amount.cs
 src/FactPulse.SDK/Model/Amount1.cs
 src/FactPulse.SDK/Model/Amount2.cs
 src/FactPulse.SDK/Model/AmountDue.cs
+src/FactPulse.SDK/Model/Amounteur.cs
 src/FactPulse.SDK/Model/AsyncTaskStatus.cs
 src/FactPulse.SDK/Model/BaseAmount.cs
 src/FactPulse.SDK/Model/BoundingBoxSchema.cs
@@ -926,6 +927,8 @@ src/FactPulse.SDK/Model/DocumentTypeInfo.cs
 src/FactPulse.SDK/Model/EReportingFlowType.cs
 src/FactPulse.SDK/Model/EReportingValidationError.cs
 src/FactPulse.SDK/Model/ElectronicAddress.cs
+src/FactPulse.SDK/Model/ElectronicAddressInput.cs
+src/FactPulse.SDK/Model/ElectronicAddressOutput.cs
 src/FactPulse.SDK/Model/Encaisseamount.cs
 src/FactPulse.SDK/Model/Encaisseamount1.cs
 src/FactPulse.SDK/Model/EncaisseeRequest.cs
@@ -935,9 +938,9 @@ src/FactPulse.SDK/Model/ErrorSource.cs
 src/FactPulse.SDK/Model/ExtractionInfo.cs
 src/FactPulse.SDK/Model/FacturXInvoice.cs
 src/FactPulse.SDK/Model/FacturXPDFInfo.cs
+src/FactPulse.SDK/Model/FactureElectroniqueModelsInvoiceTypeCode.cs
 src/FactPulse.SDK/Model/FactureElectroniqueRestApiSchemasCdarValidationErrorResponse.cs
-src/FactPulse.SDK/Model/FactureElectroniqueRestApiSchemasEreportingInvoiceTypeCode.cs
-src/FactPulse.SDK/Model/FactureElectroniqueRestApiSchemasProcessingChorusProCredentials.cs
+src/FactPulse.SDK/Model/FactureElectroniqueRestApiSchemasChorusProChorusProCredentials.cs
 src/FactPulse.SDK/Model/FieldStatus.cs
 src/FactPulse.SDK/Model/FileInfo.cs
 src/FactPulse.SDK/Model/FilesInfo.cs
@@ -978,6 +981,7 @@ src/FactPulse.SDK/Model/InvoiceTotals.cs
 src/FactPulse.SDK/Model/InvoiceTotalsPrepayment.cs
 src/FactPulse.SDK/Model/InvoiceTypeCode.cs
 src/FactPulse.SDK/Model/InvoiceTypeCodeOutput.cs
+src/FactPulse.SDK/Model/Invoicedata.cs
 src/FactPulse.SDK/Model/InvoicingFramework.cs
 src/FactPulse.SDK/Model/InvoicingFrameworkCode.cs
 src/FactPulse.SDK/Model/IssuerRoleCode.cs
@@ -1007,6 +1011,8 @@ src/FactPulse.SDK/Model/PaymentCard.cs
 src/FactPulse.SDK/Model/PaymentMeans.cs
 src/FactPulse.SDK/Model/Percentage.cs
 src/FactPulse.SDK/Model/PostalAddress.cs
+src/FactPulse.SDK/Model/PostalAddressInput.cs
+src/FactPulse.SDK/Model/PostalAddressOutput.cs
 src/FactPulse.SDK/Model/PriceAllowanceAmount.cs
 src/FactPulse.SDK/Model/PriceBasisQuantity.cs
 src/FactPulse.SDK/Model/ProcessingOptions.cs
@@ -1063,6 +1069,9 @@ src/FactPulse.SDK/Model/SubmitInvoiceRequest.cs
 src/FactPulse.SDK/Model/SubmitInvoiceResponse.cs
 src/FactPulse.SDK/Model/SubmitNetAmount.cs
 src/FactPulse.SDK/Model/SubmitVatAmount.cs
+src/FactPulse.SDK/Model/SuperPDPConnectURLResponse.cs
+src/FactPulse.SDK/Model/SuperPDPDisconnectResponse.cs
+src/FactPulse.SDK/Model/SuperPDPStatusResponse.cs
 src/FactPulse.SDK/Model/SupplementaryAttachment.cs
 src/FactPulse.SDK/Model/Supplier.cs
 src/FactPulse.SDK/Model/TaskErrorResult.cs
@@ -1075,6 +1084,7 @@ src/FactPulse.SDK/Model/Taxableamount0.cs
 src/FactPulse.SDK/Model/Taxamount.cs
 src/FactPulse.SDK/Model/Taxamount1.cs
 src/FactPulse.SDK/Model/Taxamount2.cs
+src/FactPulse.SDK/Model/Taxamounteur.cs
 src/FactPulse.SDK/Model/Taxexclusiveamount.cs
 src/FactPulse.SDK/Model/Taxexclusiveamount1.cs
 src/FactPulse.SDK/Model/TotalGrossAmount.cs

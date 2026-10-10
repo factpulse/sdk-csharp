@@ -36,12 +36,14 @@ namespace FactPulse.SDK.Model
         /// </summary>
         /// <param name="siren">SIREN or SIRET number of the sender (PA or company)</param>
         /// <param name="name">Company name</param>
+        /// <param name="schemeId">schemeId</param>
         /// <param name="vatId">vatId</param>
         [JsonConstructor]
-        public ReportSender(string siren, string name, Option<string?> vatId = default)
+        public ReportSender(string siren, string name, Option<string?> schemeId = default, Option<string?> vatId = default)
         {
             Siren = siren;
             Name = name;
+            SchemeIdOption = schemeId;
             VatIdOption = vatId;
             OnCreated();
         }
@@ -63,6 +65,19 @@ namespace FactPulse.SDK.Model
         /* <example>Ma Société SARL</example> */
         [JsonPropertyName("name")]
         public string Name { get; set; }
+
+        /// <summary>
+        /// Used to track the state of SchemeId
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> SchemeIdOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets SchemeId
+        /// </summary>
+        [JsonPropertyName("schemeId")]
+        public string? SchemeId { get { return this.SchemeIdOption; } set { this.SchemeIdOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of VatId
@@ -87,6 +102,7 @@ namespace FactPulse.SDK.Model
             sb.Append("class ReportSender {\n");
             sb.Append("  Siren: ").Append(Siren).Append("\n");
             sb.Append("  Name: ").Append(Name).Append("\n");
+            sb.Append("  SchemeId: ").Append(SchemeId).Append("\n");
             sb.Append("  VatId: ").Append(VatId).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -139,6 +155,7 @@ namespace FactPulse.SDK.Model
 
             Option<string?> siren = default;
             Option<string?> name = default;
+            Option<string?> schemeId = default;
             Option<string?> vatId = default;
 
             while (utf8JsonReader.Read())
@@ -162,6 +179,9 @@ namespace FactPulse.SDK.Model
                         case "name":
                             name = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
+                        case "schemeId":
+                            schemeId = new Option<string?>(utf8JsonReader.GetString());
+                            break;
                         case "vatId":
                             vatId = new Option<string?>(utf8JsonReader.GetString());
                             break;
@@ -183,7 +203,7 @@ namespace FactPulse.SDK.Model
             if (name.IsSet && name.Value == null)
                 throw new ArgumentNullException(nameof(name), "Property is not nullable for class ReportSender.");
 
-            return new ReportSender(siren.Value!, name.Value!, vatId);
+            return new ReportSender(siren.Value!, name.Value!, schemeId, vatId);
         }
 
         /// <summary>
@@ -219,6 +239,12 @@ namespace FactPulse.SDK.Model
             writer.WriteString("siren", reportSender.Siren);
 
             writer.WriteString("name", reportSender.Name);
+
+            if (reportSender.SchemeIdOption.IsSet)
+                if (reportSender.SchemeIdOption.Value != null)
+                    writer.WriteString("schemeId", reportSender.SchemeId);
+                else
+                    writer.WriteNull("schemeId");
 
             if (reportSender.VatIdOption.IsSet)
                 if (reportSender.VatIdOption.Value != null)

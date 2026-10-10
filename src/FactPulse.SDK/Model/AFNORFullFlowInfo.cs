@@ -75,7 +75,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets ProcessingRule
         /// </summary>
         [JsonPropertyName("processingRule")]
-        public AFNORProcessingRule? ProcessingRule { get { return this.ProcessingRuleOption; } set { this.ProcessingRuleOption = new(value); } }
+        public AFNORProcessingRule? ProcessingRule { get { return this.ProcessingRuleOption.Value; } set { this.ProcessingRuleOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of FlowProfile
@@ -88,7 +88,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets FlowProfile
         /// </summary>
         [JsonPropertyName("flowProfile")]
-        public AFNORFlowProfile? FlowProfile { get { return this.FlowProfileOption; } set { this.FlowProfileOption = new(value); } }
+        public AFNORFlowProfile? FlowProfile { get { return this.FlowProfileOption.Value; } set { this.FlowProfileOption = new(value); } }
 
         /// <summary>
         /// Unique identifier supporting UUID but not only, for flexibility purpose
@@ -167,9 +167,9 @@ namespace FactPulse.SDK.Model
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             // FlowId (string) maxLength
-            if (this.FlowId != null && this.FlowId.Length > 36)
+            if (this.FlowId != null && this.FlowId.Length > 64)
             {
-                yield return new ValidationResult("Invalid value for FlowId, length must be less than 36.", new [] { "FlowId" });
+                yield return new ValidationResult("Invalid value for FlowId, length must be less than 64.", new [] { "FlowId" });
             }
 
             // Name (string) maxLength
@@ -179,9 +179,9 @@ namespace FactPulse.SDK.Model
             }
 
             // TrackingId (string) maxLength
-            if (this.TrackingId != null && this.TrackingId.Length > 36)
+            if (this.TrackingId != null && this.TrackingId.Length > 64)
             {
-                yield return new ValidationResult("Invalid value for TrackingId, length must be less than 36.", new [] { "TrackingId" });
+                yield return new ValidationResult("Invalid value for TrackingId, length must be less than 64.", new [] { "TrackingId" });
             }
 
             yield break;

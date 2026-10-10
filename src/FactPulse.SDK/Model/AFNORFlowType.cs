@@ -27,9 +27,9 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// - &#x60;CustomerInvoice&#x60;: a non-self-billed outgoing invoice or a self-billed incoming invoice - &#x60;SupplierInvoice&#x60;: a non-self-billed incoming invoice or self-billed outgoing invoice - &#x60;StateInvoice&#x60;: an invoice Flow sent to DFH - &#x60;CustomerInvoiceLC&#x60;: a lifecycle (CDAR) related to a customer invoice - &#x60;SupplierInvoiceLC&#x60;: a lifecycle (CDAR) related to supplier invoice - &#x60;StateCustomerInvoiceLC&#x60;: a customer invoice LC sent to DFH - &#x60;StateSupplierInvoiceLC&#x60;: a supplier invoice LC sent to DFH - &#x60;AggregatedCustomerTransactionReport&#x60; : a transaction E-Reporting flow containing aggregated B2C sales (FRR 10.3) - &#x60;IndividualCustomerTransactionReport&#x60;: a transaction E-Reporting flow containing international B2B sales or a B2C transaction flow reported individually (FRR 10.1) - &#x60;AggregatedCustomerPaymentReport&#x60; : a E-Reporting of collections flow containing collections linked to B2C sales (FRR 10.4) - &#x60;UnitaryCustomerPaymentReport&#x60; : an E-Reporting of collections flow containing collections linked to unit international B2B sales or B2C sales (FRR 10.2) - &#x60;UnitarySupplierTransactionReport&#x60;: a transaction E-Reporting flow containing international B2B purchases (FRR 10.1) - &#x60;MultiFlowReport&#x60;: an E-Reporting flow which contains at least 2 different flow types (FRR 10) 
+    /// - &#x60;CustomerInvoice&#x60;: a non-self-billed outgoing invoice or a self-billed incoming invoice - &#x60;SupplierInvoice&#x60;: a non-self-billed incoming invoice or self-billed outgoing invoice - &#x60;CustomerInvoiceLC&#x60;: a lifecycle (CDAR) related to a customer invoice - &#x60;SupplierInvoiceLC&#x60;: a lifecycle (CDAR) related to supplier invoice - &#x60;StateCustomerInvoiceLC&#x60;: a customer invoice LC sent to DFH - &#x60;StateSupplierInvoiceLC&#x60;: a supplier invoice LC sent to DFH - &#x60;AggregatedCustomerTransactionReport&#x60; : a transaction e-reporting flow containing aggregated B2C sales (FRR 10.3) - &#x60;UnitaryCustomerTransactionReport&#x60;: a transaction e-reporting flow containing international B2B sales or a B2C transaction flow reported individually (FRR 10.1) - &#x60;AggregatedCustomerPaymentReport&#x60; : an e-reporting of collections flow containing collections linked to B2C sales (FRR 10.4) - &#x60;UnitaryCustomerPaymentReport&#x60; : an e-reporting of collections flow containing collections linked to unit international B2B sales or B2C sales (FRR 10.2) - &#x60;UnitarySupplierTransactionReport&#x60;: a transaction e-reporting flow containing international B2B purchases (FRR 10.1) - &#x60;MultiFlowReport&#x60;: an e-reporting flow which contains at least 2 different flow types (FRR 10) - &#x60;StateCustomerInvoice&#x60; : a reporting flow 1 sent to DFH related to an invoice of type ‘CustomerInvoice’ - &#x60;StateSupplierInvoice&#x60; : a reporting flow 1 sent to DFH related to an invoice of type ‘SupplierInvoice’ for self-billing - &#x60;StateTransactionReport&#x60; : a transaction e-reporting flow 10.1 or 10.3 sent to the DFH - &#x60;StateTransactionReportLC&#x60; : a lifecycle for a StateTransactionReport flow - &#x60;StatePaymentReport&#x60; : a payment e-reporting flow 10.2 or 10.4 sent to DFH - &#x60;StatePaymentReportLC&#x60; : a lifecycle for a StatePaymentReport flow - &#x60;Undefined&#x60;            : Not yet defined when in Pending state or unable to define when in Error state 
     /// </summary>
-    /// <value>- &#x60;CustomerInvoice&#x60;: a non-self-billed outgoing invoice or a self-billed incoming invoice - &#x60;SupplierInvoice&#x60;: a non-self-billed incoming invoice or self-billed outgoing invoice - &#x60;StateInvoice&#x60;: an invoice Flow sent to DFH - &#x60;CustomerInvoiceLC&#x60;: a lifecycle (CDAR) related to a customer invoice - &#x60;SupplierInvoiceLC&#x60;: a lifecycle (CDAR) related to supplier invoice - &#x60;StateCustomerInvoiceLC&#x60;: a customer invoice LC sent to DFH - &#x60;StateSupplierInvoiceLC&#x60;: a supplier invoice LC sent to DFH - &#x60;AggregatedCustomerTransactionReport&#x60; : a transaction E-Reporting flow containing aggregated B2C sales (FRR 10.3) - &#x60;IndividualCustomerTransactionReport&#x60;: a transaction E-Reporting flow containing international B2B sales or a B2C transaction flow reported individually (FRR 10.1) - &#x60;AggregatedCustomerPaymentReport&#x60; : a E-Reporting of collections flow containing collections linked to B2C sales (FRR 10.4) - &#x60;UnitaryCustomerPaymentReport&#x60; : an E-Reporting of collections flow containing collections linked to unit international B2B sales or B2C sales (FRR 10.2) - &#x60;UnitarySupplierTransactionReport&#x60;: a transaction E-Reporting flow containing international B2B purchases (FRR 10.1) - &#x60;MultiFlowReport&#x60;: an E-Reporting flow which contains at least 2 different flow types (FRR 10) </value>
+    /// <value>- &#x60;CustomerInvoice&#x60;: a non-self-billed outgoing invoice or a self-billed incoming invoice - &#x60;SupplierInvoice&#x60;: a non-self-billed incoming invoice or self-billed outgoing invoice - &#x60;CustomerInvoiceLC&#x60;: a lifecycle (CDAR) related to a customer invoice - &#x60;SupplierInvoiceLC&#x60;: a lifecycle (CDAR) related to supplier invoice - &#x60;StateCustomerInvoiceLC&#x60;: a customer invoice LC sent to DFH - &#x60;StateSupplierInvoiceLC&#x60;: a supplier invoice LC sent to DFH - &#x60;AggregatedCustomerTransactionReport&#x60; : a transaction e-reporting flow containing aggregated B2C sales (FRR 10.3) - &#x60;UnitaryCustomerTransactionReport&#x60;: a transaction e-reporting flow containing international B2B sales or a B2C transaction flow reported individually (FRR 10.1) - &#x60;AggregatedCustomerPaymentReport&#x60; : an e-reporting of collections flow containing collections linked to B2C sales (FRR 10.4) - &#x60;UnitaryCustomerPaymentReport&#x60; : an e-reporting of collections flow containing collections linked to unit international B2B sales or B2C sales (FRR 10.2) - &#x60;UnitarySupplierTransactionReport&#x60;: a transaction e-reporting flow containing international B2B purchases (FRR 10.1) - &#x60;MultiFlowReport&#x60;: an e-reporting flow which contains at least 2 different flow types (FRR 10) - &#x60;StateCustomerInvoice&#x60; : a reporting flow 1 sent to DFH related to an invoice of type ‘CustomerInvoice’ - &#x60;StateSupplierInvoice&#x60; : a reporting flow 1 sent to DFH related to an invoice of type ‘SupplierInvoice’ for self-billing - &#x60;StateTransactionReport&#x60; : a transaction e-reporting flow 10.1 or 10.3 sent to the DFH - &#x60;StateTransactionReportLC&#x60; : a lifecycle for a StateTransactionReport flow - &#x60;StatePaymentReport&#x60; : a payment e-reporting flow 10.2 or 10.4 sent to DFH - &#x60;StatePaymentReportLC&#x60; : a lifecycle for a StatePaymentReport flow - &#x60;Undefined&#x60;            : Not yet defined when in Pending state or unable to define when in Error state </value>
     public enum AFNORFlowType
     {
         /// <summary>
@@ -43,59 +43,89 @@ namespace FactPulse.SDK.Model
         SupplierInvoice = 2,
 
         /// <summary>
-        /// Enum StateInvoice for value: StateInvoice
-        /// </summary>
-        StateInvoice = 3,
-
-        /// <summary>
         /// Enum CustomerInvoiceLC for value: CustomerInvoiceLC
         /// </summary>
-        CustomerInvoiceLC = 4,
+        CustomerInvoiceLC = 3,
 
         /// <summary>
         /// Enum SupplierInvoiceLC for value: SupplierInvoiceLC
         /// </summary>
-        SupplierInvoiceLC = 5,
+        SupplierInvoiceLC = 4,
 
         /// <summary>
         /// Enum StateCustomerInvoiceLC for value: StateCustomerInvoiceLC
         /// </summary>
-        StateCustomerInvoiceLC = 6,
+        StateCustomerInvoiceLC = 5,
 
         /// <summary>
         /// Enum StateSupplierInvoiceLC for value: StateSupplierInvoiceLC
         /// </summary>
-        StateSupplierInvoiceLC = 7,
+        StateSupplierInvoiceLC = 6,
 
         /// <summary>
         /// Enum AggregatedCustomerTransactionReport for value: AggregatedCustomerTransactionReport
         /// </summary>
-        AggregatedCustomerTransactionReport = 8,
+        AggregatedCustomerTransactionReport = 7,
 
         /// <summary>
         /// Enum UnitaryCustomerTransactionReport for value: UnitaryCustomerTransactionReport
         /// </summary>
-        UnitaryCustomerTransactionReport = 9,
+        UnitaryCustomerTransactionReport = 8,
 
         /// <summary>
         /// Enum AggregatedCustomerPaymentReport for value: AggregatedCustomerPaymentReport
         /// </summary>
-        AggregatedCustomerPaymentReport = 10,
+        AggregatedCustomerPaymentReport = 9,
 
         /// <summary>
         /// Enum UnitaryCustomerPaymentReport for value: UnitaryCustomerPaymentReport
         /// </summary>
-        UnitaryCustomerPaymentReport = 11,
+        UnitaryCustomerPaymentReport = 10,
 
         /// <summary>
         /// Enum UnitarySupplierTransactionReport for value: UnitarySupplierTransactionReport
         /// </summary>
-        UnitarySupplierTransactionReport = 12,
+        UnitarySupplierTransactionReport = 11,
 
         /// <summary>
         /// Enum MultiFlowReport for value: MultiFlowReport
         /// </summary>
-        MultiFlowReport = 13
+        MultiFlowReport = 12,
+
+        /// <summary>
+        /// Enum StateCustomerInvoice for value: StateCustomerInvoice
+        /// </summary>
+        StateCustomerInvoice = 13,
+
+        /// <summary>
+        /// Enum StateSupplierInvoice for value: StateSupplierInvoice
+        /// </summary>
+        StateSupplierInvoice = 14,
+
+        /// <summary>
+        /// Enum StateTransactionReport for value: StateTransactionReport
+        /// </summary>
+        StateTransactionReport = 15,
+
+        /// <summary>
+        /// Enum StateTransactionReportLC for value: StateTransactionReportLC
+        /// </summary>
+        StateTransactionReportLC = 16,
+
+        /// <summary>
+        /// Enum StatePaymentReport for value: StatePaymentReport
+        /// </summary>
+        StatePaymentReport = 17,
+
+        /// <summary>
+        /// Enum StatePaymentReportLC for value: StatePaymentReportLC
+        /// </summary>
+        StatePaymentReportLC = 18,
+
+        /// <summary>
+        /// Enum Undefined for value: Undefined
+        /// </summary>
+        Undefined = 19
     }
 
     /// <summary>
@@ -116,9 +146,6 @@ namespace FactPulse.SDK.Model
             if (value.Equals("SupplierInvoice"))
                 return AFNORFlowType.SupplierInvoice;
 
-            if (value.Equals("StateInvoice"))
-                return AFNORFlowType.StateInvoice;
-
             if (value.Equals("CustomerInvoiceLC"))
                 return AFNORFlowType.CustomerInvoiceLC;
 
@@ -148,6 +175,27 @@ namespace FactPulse.SDK.Model
 
             if (value.Equals("MultiFlowReport"))
                 return AFNORFlowType.MultiFlowReport;
+
+            if (value.Equals("StateCustomerInvoice"))
+                return AFNORFlowType.StateCustomerInvoice;
+
+            if (value.Equals("StateSupplierInvoice"))
+                return AFNORFlowType.StateSupplierInvoice;
+
+            if (value.Equals("StateTransactionReport"))
+                return AFNORFlowType.StateTransactionReport;
+
+            if (value.Equals("StateTransactionReportLC"))
+                return AFNORFlowType.StateTransactionReportLC;
+
+            if (value.Equals("StatePaymentReport"))
+                return AFNORFlowType.StatePaymentReport;
+
+            if (value.Equals("StatePaymentReportLC"))
+                return AFNORFlowType.StatePaymentReportLC;
+
+            if (value.Equals("Undefined"))
+                return AFNORFlowType.Undefined;
 
             throw new NotImplementedException($"Could not convert value to type AFNORFlowType: '{value}'");
         }
@@ -165,9 +213,6 @@ namespace FactPulse.SDK.Model
             if (value.Equals("SupplierInvoice"))
                 return AFNORFlowType.SupplierInvoice;
 
-            if (value.Equals("StateInvoice"))
-                return AFNORFlowType.StateInvoice;
-
             if (value.Equals("CustomerInvoiceLC"))
                 return AFNORFlowType.CustomerInvoiceLC;
 
@@ -198,6 +243,27 @@ namespace FactPulse.SDK.Model
             if (value.Equals("MultiFlowReport"))
                 return AFNORFlowType.MultiFlowReport;
 
+            if (value.Equals("StateCustomerInvoice"))
+                return AFNORFlowType.StateCustomerInvoice;
+
+            if (value.Equals("StateSupplierInvoice"))
+                return AFNORFlowType.StateSupplierInvoice;
+
+            if (value.Equals("StateTransactionReport"))
+                return AFNORFlowType.StateTransactionReport;
+
+            if (value.Equals("StateTransactionReportLC"))
+                return AFNORFlowType.StateTransactionReportLC;
+
+            if (value.Equals("StatePaymentReport"))
+                return AFNORFlowType.StatePaymentReport;
+
+            if (value.Equals("StatePaymentReportLC"))
+                return AFNORFlowType.StatePaymentReportLC;
+
+            if (value.Equals("Undefined"))
+                return AFNORFlowType.Undefined;
+
             return null;
         }
 
@@ -214,9 +280,6 @@ namespace FactPulse.SDK.Model
 
             if (value == AFNORFlowType.SupplierInvoice)
                 return "SupplierInvoice";
-
-            if (value == AFNORFlowType.StateInvoice)
-                return "StateInvoice";
 
             if (value == AFNORFlowType.CustomerInvoiceLC)
                 return "CustomerInvoiceLC";
@@ -247,6 +310,27 @@ namespace FactPulse.SDK.Model
 
             if (value == AFNORFlowType.MultiFlowReport)
                 return "MultiFlowReport";
+
+            if (value == AFNORFlowType.StateCustomerInvoice)
+                return "StateCustomerInvoice";
+
+            if (value == AFNORFlowType.StateSupplierInvoice)
+                return "StateSupplierInvoice";
+
+            if (value == AFNORFlowType.StateTransactionReport)
+                return "StateTransactionReport";
+
+            if (value == AFNORFlowType.StateTransactionReportLC)
+                return "StateTransactionReportLC";
+
+            if (value == AFNORFlowType.StatePaymentReport)
+                return "StatePaymentReport";
+
+            if (value == AFNORFlowType.StatePaymentReportLC)
+                return "StatePaymentReportLC";
+
+            if (value == AFNORFlowType.Undefined)
+                return "Undefined";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }

@@ -27,9 +27,9 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// - B2B                 : e-invoicing - B2BInt              : International B2B e-reporting - B2C                 : B2C e-reporting - B2G                 : e-invoicing for B2G sales - B2GInt - OutOfScope          : Out of scope (not regulated flow) - B2GOutOfScope - ArchiveOnly         : Archive only, no transmission - NotApplicable       : Not Applicable 
+    /// - B2B                 : e-invoicing - B2BInt              : International B2B e-reporting - B2C                 : B2C e-reporting - B2G                 : e-invoicing for B2G sales - B2GInt - OutOfScope          : Out of scope (not regulated flow) - B2GOutOfScope - ArchiveOnly         : Archive only, no transmission - NotApplicable       : Not Applicable - Undefined           : Not yet defined when in Pending state or unable to define when in Error state 
     /// </summary>
-    /// <value>- B2B                 : e-invoicing - B2BInt              : International B2B e-reporting - B2C                 : B2C e-reporting - B2G                 : e-invoicing for B2G sales - B2GInt - OutOfScope          : Out of scope (not regulated flow) - B2GOutOfScope - ArchiveOnly         : Archive only, no transmission - NotApplicable       : Not Applicable </value>
+    /// <value>- B2B                 : e-invoicing - B2BInt              : International B2B e-reporting - B2C                 : B2C e-reporting - B2G                 : e-invoicing for B2G sales - B2GInt - OutOfScope          : Out of scope (not regulated flow) - B2GOutOfScope - ArchiveOnly         : Archive only, no transmission - NotApplicable       : Not Applicable - Undefined           : Not yet defined when in Pending state or unable to define when in Error state </value>
     public enum AFNORProcessingRule
     {
         /// <summary>
@@ -75,7 +75,12 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Enum NotApplicable for value: NotApplicable
         /// </summary>
-        NotApplicable = 9
+        NotApplicable = 9,
+
+        /// <summary>
+        /// Enum Undefined for value: Undefined
+        /// </summary>
+        Undefined = 10
     }
 
     /// <summary>
@@ -117,6 +122,9 @@ namespace FactPulse.SDK.Model
             if (value.Equals("NotApplicable"))
                 return AFNORProcessingRule.NotApplicable;
 
+            if (value.Equals("Undefined"))
+                return AFNORProcessingRule.Undefined;
+
             throw new NotImplementedException($"Could not convert value to type AFNORProcessingRule: '{value}'");
         }
 
@@ -153,6 +161,9 @@ namespace FactPulse.SDK.Model
 
             if (value.Equals("NotApplicable"))
                 return AFNORProcessingRule.NotApplicable;
+
+            if (value.Equals("Undefined"))
+                return AFNORProcessingRule.Undefined;
 
             return null;
         }
@@ -191,6 +202,9 @@ namespace FactPulse.SDK.Model
 
             if (value == AFNORProcessingRule.NotApplicable)
                 return "NotApplicable";
+
+            if (value == AFNORProcessingRule.Undefined)
+                return "Undefined";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }

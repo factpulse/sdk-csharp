@@ -39,16 +39,18 @@ namespace FactPulse.SDK.Model
         /// <param name="name">business name</param>
         /// <param name="facilityType">facilityType</param>
         /// <param name="administrativeStatus">administrativeStatus</param>
+        /// <param name="instructions">instructions</param>
         /// <param name="address">address</param>
         /// <param name="b2gAdditionalData">b2gAdditionalData</param>
         [JsonConstructor]
-        public AFNORFacilityPayloadIncluded(Option<string?> siret = default, Option<string?> siren = default, Option<string?> name = default, Option<AFNORFacilityType?> facilityType = default, Option<AFNORFacilityAdministrativeStatus?> administrativeStatus = default, Option<AFNORAddressRead?> address = default, Option<AFNORFacilityPayloadHistoryUleB2gAdditionalData?> b2gAdditionalData = default)
+        public AFNORFacilityPayloadIncluded(Option<string?> siret = default, Option<string?> siren = default, Option<string?> name = default, Option<AFNORFacilityType?> facilityType = default, Option<AFNORFacilityAdministrativeStatus?> administrativeStatus = default, Option<AFNORSiretInstructions?> instructions = default, Option<AFNORAddressRead?> address = default, Option<AFNORFacilityPayloadHistoryUleB2gAdditionalData?> b2gAdditionalData = default)
         {
             SiretOption = siret;
             SirenOption = siren;
             NameOption = name;
             FacilityTypeOption = facilityType;
             AdministrativeStatusOption = administrativeStatus;
+            InstructionsOption = instructions;
             AddressOption = address;
             B2gAdditionalDataOption = b2gAdditionalData;
             OnCreated();
@@ -67,7 +69,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets FacilityType
         /// </summary>
         [JsonPropertyName("facilityType")]
-        public AFNORFacilityType? FacilityType { get { return this.FacilityTypeOption; } set { this.FacilityTypeOption = new(value); } }
+        public AFNORFacilityType? FacilityType { get { return this.FacilityTypeOption.Value; } set { this.FacilityTypeOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of AdministrativeStatus
@@ -80,7 +82,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets AdministrativeStatus
         /// </summary>
         [JsonPropertyName("administrativeStatus")]
-        public AFNORFacilityAdministrativeStatus? AdministrativeStatus { get { return this.AdministrativeStatusOption; } set { this.AdministrativeStatusOption = new(value); } }
+        public AFNORFacilityAdministrativeStatus? AdministrativeStatus { get { return this.AdministrativeStatusOption.Value; } set { this.AdministrativeStatusOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Siret
@@ -128,6 +130,19 @@ namespace FactPulse.SDK.Model
         public string? Name { get { return this.NameOption; } set { this.NameOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of Instructions
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<AFNORSiretInstructions?> InstructionsOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets Instructions
+        /// </summary>
+        [JsonPropertyName("instructions")]
+        public AFNORSiretInstructions? Instructions { get { return this.InstructionsOption; } set { this.InstructionsOption = new(value); } }
+
+        /// <summary>
         /// Used to track the state of Address
         /// </summary>
         [JsonIgnore]
@@ -166,6 +181,7 @@ namespace FactPulse.SDK.Model
             sb.Append("  Name: ").Append(Name).Append("\n");
             sb.Append("  FacilityType: ").Append(FacilityType).Append("\n");
             sb.Append("  AdministrativeStatus: ").Append(AdministrativeStatus).Append("\n");
+            sb.Append("  Instructions: ").Append(Instructions).Append("\n");
             sb.Append("  Address: ").Append(Address).Append("\n");
             sb.Append("  B2gAdditionalData: ").Append(B2gAdditionalData).Append("\n");
             sb.Append("}\n");
@@ -248,6 +264,7 @@ namespace FactPulse.SDK.Model
             Option<string?> name = default;
             Option<AFNORFacilityType?> facilityType = default;
             Option<AFNORFacilityAdministrativeStatus?> administrativeStatus = default;
+            Option<AFNORSiretInstructions?> instructions = default;
             Option<AFNORAddressRead?> address = default;
             Option<AFNORFacilityPayloadHistoryUleB2gAdditionalData?> b2gAdditionalData = default;
 
@@ -285,6 +302,9 @@ namespace FactPulse.SDK.Model
                             if (administrativeStatusRawValue != null)
                                 administrativeStatus = new Option<AFNORFacilityAdministrativeStatus?>(AFNORFacilityAdministrativeStatusValueConverter.FromStringOrDefault(administrativeStatusRawValue));
                             break;
+                        case "instructions":
+                            instructions = new Option<AFNORSiretInstructions?>(JsonSerializer.Deserialize<AFNORSiretInstructions>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
                         case "address":
                             address = new Option<AFNORAddressRead?>(JsonSerializer.Deserialize<AFNORAddressRead>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
@@ -312,13 +332,16 @@ namespace FactPulse.SDK.Model
             if (administrativeStatus.IsSet && administrativeStatus.Value == null)
                 throw new ArgumentNullException(nameof(administrativeStatus), "Property is not nullable for class AFNORFacilityPayloadIncluded.");
 
+            if (instructions.IsSet && instructions.Value == null)
+                throw new ArgumentNullException(nameof(instructions), "Property is not nullable for class AFNORFacilityPayloadIncluded.");
+
             if (address.IsSet && address.Value == null)
                 throw new ArgumentNullException(nameof(address), "Property is not nullable for class AFNORFacilityPayloadIncluded.");
 
             if (b2gAdditionalData.IsSet && b2gAdditionalData.Value == null)
                 throw new ArgumentNullException(nameof(b2gAdditionalData), "Property is not nullable for class AFNORFacilityPayloadIncluded.");
 
-            return new AFNORFacilityPayloadIncluded(siret, siren, name, facilityType, administrativeStatus, address, b2gAdditionalData);
+            return new AFNORFacilityPayloadIncluded(siret, siren, name, facilityType, administrativeStatus, instructions, address, b2gAdditionalData);
         }
 
         /// <summary>
@@ -354,6 +377,9 @@ namespace FactPulse.SDK.Model
             if (aFNORFacilityPayloadIncluded.NameOption.IsSet && aFNORFacilityPayloadIncluded.Name == null)
                 throw new ArgumentNullException(nameof(aFNORFacilityPayloadIncluded.Name), "Property is required for class AFNORFacilityPayloadIncluded.");
 
+            if (aFNORFacilityPayloadIncluded.InstructionsOption.IsSet && aFNORFacilityPayloadIncluded.Instructions == null)
+                throw new ArgumentNullException(nameof(aFNORFacilityPayloadIncluded.Instructions), "Property is required for class AFNORFacilityPayloadIncluded.");
+
             if (aFNORFacilityPayloadIncluded.AddressOption.IsSet && aFNORFacilityPayloadIncluded.Address == null)
                 throw new ArgumentNullException(nameof(aFNORFacilityPayloadIncluded.Address), "Property is required for class AFNORFacilityPayloadIncluded.");
 
@@ -378,6 +404,11 @@ namespace FactPulse.SDK.Model
             {
                 var administrativeStatusRawValue = AFNORFacilityAdministrativeStatusValueConverter.ToJsonValue(aFNORFacilityPayloadIncluded.AdministrativeStatus!.Value);
                 writer.WriteString("administrativeStatus", administrativeStatusRawValue);
+            }
+            if (aFNORFacilityPayloadIncluded.InstructionsOption.IsSet)
+            {
+                writer.WritePropertyName("instructions");
+                JsonSerializer.Serialize(writer, aFNORFacilityPayloadIncluded.Instructions, jsonSerializerOptions);
             }
             if (aFNORFacilityPayloadIncluded.AddressOption.IsSet)
             {

@@ -5,7 +5,7 @@ Request to submit a complete invoice (generation + submission).  Workflow: 1. Au
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**InvoiceData** | [**SimplifiedInvoiceData**](SimplifiedInvoiceData.md) | Invoice data in simplified format (see examples) | 
+**InvoiceData** | [**Invoicedata**](Invoicedata.md) |  | 
 **SourcePdf** | **string** | Base64-encoded source PDF (will be transformed to Factur-X) | 
 **Destination** | [**Destination**](Destination.md) |  | 
 **Signature** | [**SignatureParameters**](SignatureParameters.md) |  | [optional] 

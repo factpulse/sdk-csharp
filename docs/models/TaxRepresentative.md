@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | **string** | Tax representative name (BT-62). | 
 **VatNumber** | **string** | Tax representative VAT identifier (BT-63). | 
-**PostalAddress** | [**PostalAddress**](PostalAddress.md) | Tax representative postal address (BG-12). | 
+**PostalAddress** | [**PostalAddressInput**](PostalAddressInput.md) | Tax representative postal address (BG-12). | 
 
 [[Back to Model list]](../../README.md#documentation-for-models) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to README]](../../README.md)
 

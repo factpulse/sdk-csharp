@@ -77,7 +77,7 @@ namespace FactPulse.SDK.Api
         /// <param name="useTimestamp">Enable RFC 3161 timestamping with FreeTSA (PAdES-B-T) (optional, default to true)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISignPdfApiV1ProcessingSignPdfPostApiResponse"/>&gt;</returns>
-        Task<ISignPdfApiV1ProcessingSignPdfPostApiResponse> SignPdfApiV1ProcessingSignPdfPostAsync(System.IO.Stream pdfFile, Option<string?> reason = default, Option<string?> location = default, Option<string?> contact = default, Option<string> fieldName = default, Option<bool> usePadesLt = default, Option<bool> useTimestamp = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISignPdfApiV1ProcessingSignPdfPostApiResponse> SignPdfApiV1ProcessingSignPdfPostAsync(FactPulse.SDK.Client.FileParameter pdfFile, Option<string?> reason = default, Option<string?> location = default, Option<string?> contact = default, Option<string> fieldName = default, Option<bool> usePadesLt = default, Option<bool> useTimestamp = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Sign a PDF with client&#39;s certificate (PAdES-B-LT)
@@ -94,7 +94,7 @@ namespace FactPulse.SDK.Api
         /// <param name="useTimestamp">Enable RFC 3161 timestamping with FreeTSA (PAdES-B-T) (optional, default to true)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISignPdfApiV1ProcessingSignPdfPostApiResponse"/>?&gt;</returns>
-        Task<ISignPdfApiV1ProcessingSignPdfPostApiResponse?> SignPdfApiV1ProcessingSignPdfPostOrDefaultAsync(System.IO.Stream pdfFile, Option<string?> reason = default, Option<string?> location = default, Option<string?> contact = default, Option<string> fieldName = default, Option<bool> usePadesLt = default, Option<bool> useTimestamp = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISignPdfApiV1ProcessingSignPdfPostApiResponse?> SignPdfApiV1ProcessingSignPdfPostOrDefaultAsync(FactPulse.SDK.Client.FileParameter pdfFile, Option<string?> reason = default, Option<string?> location = default, Option<string?> contact = default, Option<string> fieldName = default, Option<bool> usePadesLt = default, Option<bool> useTimestamp = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Sign a PDF asynchronously (Celery)
@@ -114,7 +114,7 @@ namespace FactPulse.SDK.Api
         /// <param name="useTimestamp">Enable RFC 3161 timestamping with FreeTSA (PAdES-B-T) (optional, default to true)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISignPdfAsyncApiV1ProcessingSignPdfAsyncPostApiResponse"/>&gt;</returns>
-        Task<ISignPdfAsyncApiV1ProcessingSignPdfAsyncPostApiResponse> SignPdfAsyncApiV1ProcessingSignPdfAsyncPostAsync(System.IO.Stream pdfFile, Option<string?> callbackUrl = default, Option<string> webhookMode = default, Option<string?> reason = default, Option<string?> location = default, Option<string?> contact = default, Option<string> fieldName = default, Option<bool> usePadesLt = default, Option<bool> useTimestamp = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISignPdfAsyncApiV1ProcessingSignPdfAsyncPostApiResponse> SignPdfAsyncApiV1ProcessingSignPdfAsyncPostAsync(FactPulse.SDK.Client.FileParameter pdfFile, Option<string?> callbackUrl = default, Option<string> webhookMode = default, Option<string?> reason = default, Option<string?> location = default, Option<string?> contact = default, Option<string> fieldName = default, Option<bool> usePadesLt = default, Option<bool> useTimestamp = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Sign a PDF asynchronously (Celery)
@@ -133,7 +133,7 @@ namespace FactPulse.SDK.Api
         /// <param name="useTimestamp">Enable RFC 3161 timestamping with FreeTSA (PAdES-B-T) (optional, default to true)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISignPdfAsyncApiV1ProcessingSignPdfAsyncPostApiResponse"/>?&gt;</returns>
-        Task<ISignPdfAsyncApiV1ProcessingSignPdfAsyncPostApiResponse?> SignPdfAsyncApiV1ProcessingSignPdfAsyncPostOrDefaultAsync(System.IO.Stream pdfFile, Option<string?> callbackUrl = default, Option<string> webhookMode = default, Option<string?> reason = default, Option<string?> location = default, Option<string?> contact = default, Option<string> fieldName = default, Option<bool> usePadesLt = default, Option<bool> useTimestamp = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISignPdfAsyncApiV1ProcessingSignPdfAsyncPostApiResponse?> SignPdfAsyncApiV1ProcessingSignPdfAsyncPostOrDefaultAsync(FactPulse.SDK.Client.FileParameter pdfFile, Option<string?> callbackUrl = default, Option<string> webhookMode = default, Option<string?> reason = default, Option<string?> location = default, Option<string?> contact = default, Option<string> fieldName = default, Option<bool> usePadesLt = default, Option<bool> useTimestamp = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Validate electronic signatures of a PDF
@@ -145,7 +145,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pdfFile">PDF file to validate (will be analyzed to detect and validate signatures)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostApiResponse"/>&gt;</returns>
-        Task<IValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostApiResponse> ValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostAsync(System.IO.Stream pdfFile, System.Threading.CancellationToken cancellationToken = default);
+        Task<IValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostApiResponse> ValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostAsync(FactPulse.SDK.Client.FileParameter pdfFile, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Validate electronic signatures of a PDF
@@ -156,7 +156,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pdfFile">PDF file to validate (will be analyzed to detect and validate signatures)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostApiResponse"/>?&gt;</returns>
-        Task<IValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostApiResponse?> ValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostOrDefaultAsync(System.IO.Stream pdfFile, System.Threading.CancellationToken cancellationToken = default);
+        Task<IValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostApiResponse?> ValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostOrDefaultAsync(FactPulse.SDK.Client.FileParameter pdfFile, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -800,7 +800,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatSignPdfApiV1ProcessingSignPdfPost(ref System.IO.Stream pdfFile, ref Option<string?> reason, ref Option<string?> location, ref Option<string?> contact, ref Option<string> fieldName, ref Option<bool> usePadesLt, ref Option<bool> useTimestamp);
+        partial void FormatSignPdfApiV1ProcessingSignPdfPost(ref FactPulse.SDK.Client.FileParameter pdfFile, ref Option<string?> reason, ref Option<string?> location, ref Option<string?> contact, ref Option<string> fieldName, ref Option<bool> usePadesLt, ref Option<bool> useTimestamp);
 
         /// <summary>
         /// Validates the request parameters
@@ -808,7 +808,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pdfFile"></param>
         /// <param name="fieldName"></param>
         /// <returns></returns>
-        private void ValidateSignPdfApiV1ProcessingSignPdfPost(System.IO.Stream pdfFile, Option<string> fieldName)
+        private void ValidateSignPdfApiV1ProcessingSignPdfPost(FactPulse.SDK.Client.FileParameter pdfFile, Option<string> fieldName)
         {
             if (pdfFile == null)
                 throw new ArgumentNullException(nameof(pdfFile));
@@ -828,7 +828,7 @@ namespace FactPulse.SDK.Api
         /// <param name="fieldName"></param>
         /// <param name="usePadesLt"></param>
         /// <param name="useTimestamp"></param>
-        private void AfterSignPdfApiV1ProcessingSignPdfPostDefaultImplementation(ISignPdfApiV1ProcessingSignPdfPostApiResponse apiResponseLocalVar, System.IO.Stream pdfFile, Option<string?> reason, Option<string?> location, Option<string?> contact, Option<string> fieldName, Option<bool> usePadesLt, Option<bool> useTimestamp)
+        private void AfterSignPdfApiV1ProcessingSignPdfPostDefaultImplementation(ISignPdfApiV1ProcessingSignPdfPostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter pdfFile, Option<string?> reason, Option<string?> location, Option<string?> contact, Option<string> fieldName, Option<bool> usePadesLt, Option<bool> useTimestamp)
         {
             bool suppressDefaultLog = false;
             AfterSignPdfApiV1ProcessingSignPdfPost(ref suppressDefaultLog, apiResponseLocalVar, pdfFile, reason, location, contact, fieldName, usePadesLt, useTimestamp);
@@ -848,7 +848,7 @@ namespace FactPulse.SDK.Api
         /// <param name="fieldName"></param>
         /// <param name="usePadesLt"></param>
         /// <param name="useTimestamp"></param>
-        partial void AfterSignPdfApiV1ProcessingSignPdfPost(ref bool suppressDefaultLog, ISignPdfApiV1ProcessingSignPdfPostApiResponse apiResponseLocalVar, System.IO.Stream pdfFile, Option<string?> reason, Option<string?> location, Option<string?> contact, Option<string> fieldName, Option<bool> usePadesLt, Option<bool> useTimestamp);
+        partial void AfterSignPdfApiV1ProcessingSignPdfPost(ref bool suppressDefaultLog, ISignPdfApiV1ProcessingSignPdfPostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter pdfFile, Option<string?> reason, Option<string?> location, Option<string?> contact, Option<string> fieldName, Option<bool> usePadesLt, Option<bool> useTimestamp);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -863,7 +863,7 @@ namespace FactPulse.SDK.Api
         /// <param name="fieldName"></param>
         /// <param name="usePadesLt"></param>
         /// <param name="useTimestamp"></param>
-        private void OnErrorSignPdfApiV1ProcessingSignPdfPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream pdfFile, Option<string?> reason, Option<string?> location, Option<string?> contact, Option<string> fieldName, Option<bool> usePadesLt, Option<bool> useTimestamp)
+        private void OnErrorSignPdfApiV1ProcessingSignPdfPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter pdfFile, Option<string?> reason, Option<string?> location, Option<string?> contact, Option<string> fieldName, Option<bool> usePadesLt, Option<bool> useTimestamp)
         {
             bool suppressDefaultLogLocalVar = false;
             OnErrorSignPdfApiV1ProcessingSignPdfPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, pdfFile, reason, location, contact, fieldName, usePadesLt, useTimestamp);
@@ -885,7 +885,7 @@ namespace FactPulse.SDK.Api
         /// <param name="fieldName"></param>
         /// <param name="usePadesLt"></param>
         /// <param name="useTimestamp"></param>
-        partial void OnErrorSignPdfApiV1ProcessingSignPdfPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream pdfFile, Option<string?> reason, Option<string?> location, Option<string?> contact, Option<string> fieldName, Option<bool> usePadesLt, Option<bool> useTimestamp);
+        partial void OnErrorSignPdfApiV1ProcessingSignPdfPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter pdfFile, Option<string?> reason, Option<string?> location, Option<string?> contact, Option<string> fieldName, Option<bool> usePadesLt, Option<bool> useTimestamp);
 
         /// <summary>
         /// Sign a PDF with client&#39;s certificate (PAdES-B-LT) Signs an uploaded PDF with the electronic certificate configured for the client (via client_uid from JWT).      **Supported standards**: PAdES-B-B, PAdES-B-T (timestamping), PAdES-B-LT (long-term archiving).      **eIDAS levels**: SES (self-signed), AdES (commercial CA), QES (PSCO - out of scope).      **Security**: Double authentication X-Internal-Secret + JWT Bearer to retrieve the certificate.      **⚠️ Legal disclaimer**: Generated signatures are electronic seals as defined by     the eIDAS regulation. The level of legal validity depends on the certificate used (SES/AdES/QES).     FactPulse does not provide QES qualified certificates - you must obtain a certificate from     a PSCO (qualified Trust Service Provider) for maximum legal validity.
@@ -899,7 +899,7 @@ namespace FactPulse.SDK.Api
         /// <param name="useTimestamp">Enable RFC 3161 timestamping with FreeTSA (PAdES-B-T) (optional, default to true)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISignPdfApiV1ProcessingSignPdfPostApiResponse"/>&gt;</returns>
-        public async Task<ISignPdfApiV1ProcessingSignPdfPostApiResponse?> SignPdfApiV1ProcessingSignPdfPostOrDefaultAsync(System.IO.Stream pdfFile, Option<string?> reason = default, Option<string?> location = default, Option<string?> contact = default, Option<string> fieldName = default, Option<bool> usePadesLt = default, Option<bool> useTimestamp = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISignPdfApiV1ProcessingSignPdfPostApiResponse?> SignPdfApiV1ProcessingSignPdfPostOrDefaultAsync(FactPulse.SDK.Client.FileParameter pdfFile, Option<string?> reason = default, Option<string?> location = default, Option<string?> contact = default, Option<string> fieldName = default, Option<bool> usePadesLt = default, Option<bool> useTimestamp = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -924,7 +924,7 @@ namespace FactPulse.SDK.Api
         /// <param name="useTimestamp">Enable RFC 3161 timestamping with FreeTSA (PAdES-B-T) (optional, default to true)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISignPdfApiV1ProcessingSignPdfPostApiResponse"/>&gt;</returns>
-        public async Task<ISignPdfApiV1ProcessingSignPdfPostApiResponse> SignPdfApiV1ProcessingSignPdfPostAsync(System.IO.Stream pdfFile, Option<string?> reason = default, Option<string?> location = default, Option<string?> contact = default, Option<string> fieldName = default, Option<bool> usePadesLt = default, Option<bool> useTimestamp = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISignPdfApiV1ProcessingSignPdfPostApiResponse> SignPdfApiV1ProcessingSignPdfPostAsync(FactPulse.SDK.Client.FileParameter pdfFile, Option<string?> reason = default, Option<string?> location = default, Option<string?> contact = default, Option<string> fieldName = default, Option<bool> usePadesLt = default, Option<bool> useTimestamp = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -943,31 +943,38 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/processing/sign-pdf"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/processing/sign-pdf");
 
-                    MultipartContent multipartContentLocalVar = new MultipartContent();
+                    MultipartFormDataContent multipartContentLocalVar = new MultipartFormDataContent();
 
                     httpRequestMessageLocalVar.Content = multipartContentLocalVar;
 
-                    List<KeyValuePair<string?, string?>> formParameterLocalVars = new List<KeyValuePair<string?, string?>>();
+                    List<KeyValuePair<string, string?>> formParameterLocalVars = new List<KeyValuePair<string, string?>>();
 
-                    multipartContentLocalVar.Add(new FormUrlEncodedContent(formParameterLocalVars));                    multipartContentLocalVar.Add(new StreamContent(pdfFile));
+                    {
+                        var streamContentLocalVar = new StreamContent(pdfFile.Content);
+                        streamContentLocalVar.Headers.ContentType = new MediaTypeHeaderValue(pdfFile.ContentType);
+                        multipartContentLocalVar.Add(streamContentLocalVar, "pdf_file", pdfFile.FileName ?? "pdf_file");
+                    }
 
                     if (reason.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("reason", ClientUtils.ParameterToString(reason.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("reason", ClientUtils.ParameterToString(reason.Value)));
 
                     if (location.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("location", ClientUtils.ParameterToString(location.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("location", ClientUtils.ParameterToString(location.Value)));
 
                     if (contact.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("contact", ClientUtils.ParameterToString(contact.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("contact", ClientUtils.ParameterToString(contact.Value)));
 
                     if (fieldName.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("field_name", ClientUtils.ParameterToString(fieldName.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("field_name", ClientUtils.ParameterToString(fieldName.Value)));
 
                     if (usePadesLt.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("use_pades_lt", ClientUtils.ParameterToString(usePadesLt.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("use_pades_lt", ClientUtils.ParameterToString(usePadesLt.Value)));
 
                     if (useTimestamp.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("use_timestamp", ClientUtils.ParameterToString(useTimestamp.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("use_timestamp", ClientUtils.ParameterToString(useTimestamp.Value)));
+
+                    foreach (var formParamLocalVar in formParameterLocalVars)
+                        multipartContentLocalVar.Add(new StringContent(formParamLocalVar.Value ?? string.Empty), formParamLocalVar.Key);
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
@@ -985,11 +992,6 @@ namespace FactPulse.SDK.Api
                     string[] contentTypes = new string[] {
                         "multipart/form-data"
                     };
-
-                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
-
-                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
-                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -1193,7 +1195,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatSignPdfAsyncApiV1ProcessingSignPdfAsyncPost(ref System.IO.Stream pdfFile, ref Option<string?> callbackUrl, ref Option<string> webhookMode, ref Option<string?> reason, ref Option<string?> location, ref Option<string?> contact, ref Option<string> fieldName, ref Option<bool> usePadesLt, ref Option<bool> useTimestamp);
+        partial void FormatSignPdfAsyncApiV1ProcessingSignPdfAsyncPost(ref FactPulse.SDK.Client.FileParameter pdfFile, ref Option<string?> callbackUrl, ref Option<string> webhookMode, ref Option<string?> reason, ref Option<string?> location, ref Option<string?> contact, ref Option<string> fieldName, ref Option<bool> usePadesLt, ref Option<bool> useTimestamp);
 
         /// <summary>
         /// Validates the request parameters
@@ -1202,7 +1204,7 @@ namespace FactPulse.SDK.Api
         /// <param name="webhookMode"></param>
         /// <param name="fieldName"></param>
         /// <returns></returns>
-        private void ValidateSignPdfAsyncApiV1ProcessingSignPdfAsyncPost(System.IO.Stream pdfFile, Option<string> webhookMode, Option<string> fieldName)
+        private void ValidateSignPdfAsyncApiV1ProcessingSignPdfAsyncPost(FactPulse.SDK.Client.FileParameter pdfFile, Option<string> webhookMode, Option<string> fieldName)
         {
             if (pdfFile == null)
                 throw new ArgumentNullException(nameof(pdfFile));
@@ -1227,7 +1229,7 @@ namespace FactPulse.SDK.Api
         /// <param name="fieldName"></param>
         /// <param name="usePadesLt"></param>
         /// <param name="useTimestamp"></param>
-        private void AfterSignPdfAsyncApiV1ProcessingSignPdfAsyncPostDefaultImplementation(ISignPdfAsyncApiV1ProcessingSignPdfAsyncPostApiResponse apiResponseLocalVar, System.IO.Stream pdfFile, Option<string?> callbackUrl, Option<string> webhookMode, Option<string?> reason, Option<string?> location, Option<string?> contact, Option<string> fieldName, Option<bool> usePadesLt, Option<bool> useTimestamp)
+        private void AfterSignPdfAsyncApiV1ProcessingSignPdfAsyncPostDefaultImplementation(ISignPdfAsyncApiV1ProcessingSignPdfAsyncPostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter pdfFile, Option<string?> callbackUrl, Option<string> webhookMode, Option<string?> reason, Option<string?> location, Option<string?> contact, Option<string> fieldName, Option<bool> usePadesLt, Option<bool> useTimestamp)
         {
             bool suppressDefaultLog = false;
             AfterSignPdfAsyncApiV1ProcessingSignPdfAsyncPost(ref suppressDefaultLog, apiResponseLocalVar, pdfFile, callbackUrl, webhookMode, reason, location, contact, fieldName, usePadesLt, useTimestamp);
@@ -1249,7 +1251,7 @@ namespace FactPulse.SDK.Api
         /// <param name="fieldName"></param>
         /// <param name="usePadesLt"></param>
         /// <param name="useTimestamp"></param>
-        partial void AfterSignPdfAsyncApiV1ProcessingSignPdfAsyncPost(ref bool suppressDefaultLog, ISignPdfAsyncApiV1ProcessingSignPdfAsyncPostApiResponse apiResponseLocalVar, System.IO.Stream pdfFile, Option<string?> callbackUrl, Option<string> webhookMode, Option<string?> reason, Option<string?> location, Option<string?> contact, Option<string> fieldName, Option<bool> usePadesLt, Option<bool> useTimestamp);
+        partial void AfterSignPdfAsyncApiV1ProcessingSignPdfAsyncPost(ref bool suppressDefaultLog, ISignPdfAsyncApiV1ProcessingSignPdfAsyncPostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter pdfFile, Option<string?> callbackUrl, Option<string> webhookMode, Option<string?> reason, Option<string?> location, Option<string?> contact, Option<string> fieldName, Option<bool> usePadesLt, Option<bool> useTimestamp);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1266,7 +1268,7 @@ namespace FactPulse.SDK.Api
         /// <param name="fieldName"></param>
         /// <param name="usePadesLt"></param>
         /// <param name="useTimestamp"></param>
-        private void OnErrorSignPdfAsyncApiV1ProcessingSignPdfAsyncPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream pdfFile, Option<string?> callbackUrl, Option<string> webhookMode, Option<string?> reason, Option<string?> location, Option<string?> contact, Option<string> fieldName, Option<bool> usePadesLt, Option<bool> useTimestamp)
+        private void OnErrorSignPdfAsyncApiV1ProcessingSignPdfAsyncPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter pdfFile, Option<string?> callbackUrl, Option<string> webhookMode, Option<string?> reason, Option<string?> location, Option<string?> contact, Option<string> fieldName, Option<bool> usePadesLt, Option<bool> useTimestamp)
         {
             bool suppressDefaultLogLocalVar = false;
             OnErrorSignPdfAsyncApiV1ProcessingSignPdfAsyncPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, pdfFile, callbackUrl, webhookMode, reason, location, contact, fieldName, usePadesLt, useTimestamp);
@@ -1290,7 +1292,7 @@ namespace FactPulse.SDK.Api
         /// <param name="fieldName"></param>
         /// <param name="usePadesLt"></param>
         /// <param name="useTimestamp"></param>
-        partial void OnErrorSignPdfAsyncApiV1ProcessingSignPdfAsyncPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream pdfFile, Option<string?> callbackUrl, Option<string> webhookMode, Option<string?> reason, Option<string?> location, Option<string?> contact, Option<string> fieldName, Option<bool> usePadesLt, Option<bool> useTimestamp);
+        partial void OnErrorSignPdfAsyncApiV1ProcessingSignPdfAsyncPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter pdfFile, Option<string?> callbackUrl, Option<string> webhookMode, Option<string?> reason, Option<string?> location, Option<string?> contact, Option<string> fieldName, Option<bool> usePadesLt, Option<bool> useTimestamp);
 
         /// <summary>
         /// Sign a PDF asynchronously (Celery) Signs an uploaded PDF asynchronously via a Celery task.      **Difference with /sign-pdf**:     - &#x60;/sign-pdf&#x60;: Synchronous signature (blocking until completion)     - &#x60;/sign-pdf-async&#x60;: Asynchronous signature (returns immediately with task_id)      **Async advantages**:     - No timeout for large files     - No blocking of FastAPI worker     - Progress tracking via task_id     - Ideal for batch processing      **Supported standards**: PAdES-B-B, PAdES-B-T (timestamping), PAdES-B-LT (long-term archiving).      **⚠️ Legal disclaimer**: Same as /sign-pdf (see that endpoint&#39;s documentation).
@@ -1306,7 +1308,7 @@ namespace FactPulse.SDK.Api
         /// <param name="useTimestamp">Enable RFC 3161 timestamping with FreeTSA (PAdES-B-T) (optional, default to true)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISignPdfAsyncApiV1ProcessingSignPdfAsyncPostApiResponse"/>&gt;</returns>
-        public async Task<ISignPdfAsyncApiV1ProcessingSignPdfAsyncPostApiResponse?> SignPdfAsyncApiV1ProcessingSignPdfAsyncPostOrDefaultAsync(System.IO.Stream pdfFile, Option<string?> callbackUrl = default, Option<string> webhookMode = default, Option<string?> reason = default, Option<string?> location = default, Option<string?> contact = default, Option<string> fieldName = default, Option<bool> usePadesLt = default, Option<bool> useTimestamp = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISignPdfAsyncApiV1ProcessingSignPdfAsyncPostApiResponse?> SignPdfAsyncApiV1ProcessingSignPdfAsyncPostOrDefaultAsync(FactPulse.SDK.Client.FileParameter pdfFile, Option<string?> callbackUrl = default, Option<string> webhookMode = default, Option<string?> reason = default, Option<string?> location = default, Option<string?> contact = default, Option<string> fieldName = default, Option<bool> usePadesLt = default, Option<bool> useTimestamp = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -1333,7 +1335,7 @@ namespace FactPulse.SDK.Api
         /// <param name="useTimestamp">Enable RFC 3161 timestamping with FreeTSA (PAdES-B-T) (optional, default to true)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISignPdfAsyncApiV1ProcessingSignPdfAsyncPostApiResponse"/>&gt;</returns>
-        public async Task<ISignPdfAsyncApiV1ProcessingSignPdfAsyncPostApiResponse> SignPdfAsyncApiV1ProcessingSignPdfAsyncPostAsync(System.IO.Stream pdfFile, Option<string?> callbackUrl = default, Option<string> webhookMode = default, Option<string?> reason = default, Option<string?> location = default, Option<string?> contact = default, Option<string> fieldName = default, Option<bool> usePadesLt = default, Option<bool> useTimestamp = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISignPdfAsyncApiV1ProcessingSignPdfAsyncPostApiResponse> SignPdfAsyncApiV1ProcessingSignPdfAsyncPostAsync(FactPulse.SDK.Client.FileParameter pdfFile, Option<string?> callbackUrl = default, Option<string> webhookMode = default, Option<string?> reason = default, Option<string?> location = default, Option<string?> contact = default, Option<string> fieldName = default, Option<bool> usePadesLt = default, Option<bool> useTimestamp = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -1352,37 +1354,44 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/processing/sign-pdf-async"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/processing/sign-pdf-async");
 
-                    MultipartContent multipartContentLocalVar = new MultipartContent();
+                    MultipartFormDataContent multipartContentLocalVar = new MultipartFormDataContent();
 
                     httpRequestMessageLocalVar.Content = multipartContentLocalVar;
 
-                    List<KeyValuePair<string?, string?>> formParameterLocalVars = new List<KeyValuePair<string?, string?>>();
+                    List<KeyValuePair<string, string?>> formParameterLocalVars = new List<KeyValuePair<string, string?>>();
 
-                    multipartContentLocalVar.Add(new FormUrlEncodedContent(formParameterLocalVars));                    multipartContentLocalVar.Add(new StreamContent(pdfFile));
+                    {
+                        var streamContentLocalVar = new StreamContent(pdfFile.Content);
+                        streamContentLocalVar.Headers.ContentType = new MediaTypeHeaderValue(pdfFile.ContentType);
+                        multipartContentLocalVar.Add(streamContentLocalVar, "pdf_file", pdfFile.FileName ?? "pdf_file");
+                    }
 
                     if (callbackUrl.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("callback_url", ClientUtils.ParameterToString(callbackUrl.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("callback_url", ClientUtils.ParameterToString(callbackUrl.Value)));
 
                     if (webhookMode.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("webhook_mode", ClientUtils.ParameterToString(webhookMode.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("webhook_mode", ClientUtils.ParameterToString(webhookMode.Value)));
 
                     if (reason.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("reason", ClientUtils.ParameterToString(reason.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("reason", ClientUtils.ParameterToString(reason.Value)));
 
                     if (location.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("location", ClientUtils.ParameterToString(location.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("location", ClientUtils.ParameterToString(location.Value)));
 
                     if (contact.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("contact", ClientUtils.ParameterToString(contact.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("contact", ClientUtils.ParameterToString(contact.Value)));
 
                     if (fieldName.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("field_name", ClientUtils.ParameterToString(fieldName.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("field_name", ClientUtils.ParameterToString(fieldName.Value)));
 
                     if (usePadesLt.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("use_pades_lt", ClientUtils.ParameterToString(usePadesLt.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("use_pades_lt", ClientUtils.ParameterToString(usePadesLt.Value)));
 
                     if (useTimestamp.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("use_timestamp", ClientUtils.ParameterToString(useTimestamp.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("use_timestamp", ClientUtils.ParameterToString(useTimestamp.Value)));
+
+                    foreach (var formParamLocalVar in formParameterLocalVars)
+                        multipartContentLocalVar.Add(new StringContent(formParamLocalVar.Value ?? string.Empty), formParamLocalVar.Key);
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
@@ -1400,11 +1409,6 @@ namespace FactPulse.SDK.Api
                     string[] contentTypes = new string[] {
                         "multipart/form-data"
                     };
-
-                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
-
-                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
-                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -1602,14 +1606,14 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePost(ref System.IO.Stream pdfFile);
+        partial void FormatValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePost(ref FactPulse.SDK.Client.FileParameter pdfFile);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
         /// <param name="pdfFile"></param>
         /// <returns></returns>
-        private void ValidateValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePost(System.IO.Stream pdfFile)
+        private void ValidateValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePost(FactPulse.SDK.Client.FileParameter pdfFile)
         {
             if (pdfFile == null)
                 throw new ArgumentNullException(nameof(pdfFile));
@@ -1620,7 +1624,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="pdfFile"></param>
-        private void AfterValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostDefaultImplementation(IValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostApiResponse apiResponseLocalVar, System.IO.Stream pdfFile)
+        private void AfterValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostDefaultImplementation(IValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter pdfFile)
         {
             bool suppressDefaultLog = false;
             AfterValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePost(ref suppressDefaultLog, apiResponseLocalVar, pdfFile);
@@ -1634,7 +1638,7 @@ namespace FactPulse.SDK.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="pdfFile"></param>
-        partial void AfterValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePost(ref bool suppressDefaultLog, IValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostApiResponse apiResponseLocalVar, System.IO.Stream pdfFile);
+        partial void AfterValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePost(ref bool suppressDefaultLog, IValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter pdfFile);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -1643,7 +1647,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="pdfFile"></param>
-        private void OnErrorValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream pdfFile)
+        private void OnErrorValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter pdfFile)
         {
             bool suppressDefaultLogLocalVar = false;
             OnErrorValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, pdfFile);
@@ -1659,7 +1663,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="pdfFile"></param>
-        partial void OnErrorValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream pdfFile);
+        partial void OnErrorValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter pdfFile);
 
         /// <summary>
         /// Validate electronic signatures of a PDF Validates electronic signatures present in an uploaded PDF.      **Verifications performed**:     - Presence of signatures     - Document integrity (not modified since signing)     - Certificate validity     - Chain of trust (if available)     - Presence of timestamp (PAdES-B-T)     - Validation data (PAdES-B-LT)      **Supported standards**: PAdES-B-B, PAdES-B-T, PAdES-B-LT, ISO 32000-2.      **⚠️ Note**: This validation is technical (cryptographic integrity). Legal validity     depends on the eIDAS level of the certificate (SES/AdES/QES) and the context of use.
@@ -1667,7 +1671,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pdfFile">PDF file to validate (will be analyzed to detect and validate signatures)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostApiResponse"/>&gt;</returns>
-        public async Task<IValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostApiResponse?> ValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostOrDefaultAsync(System.IO.Stream pdfFile, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostApiResponse?> ValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostOrDefaultAsync(FactPulse.SDK.Client.FileParameter pdfFile, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -1686,7 +1690,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pdfFile">PDF file to validate (will be analyzed to detect and validate signatures)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostApiResponse"/>&gt;</returns>
-        public async Task<IValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostApiResponse> ValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostAsync(System.IO.Stream pdfFile, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostApiResponse> ValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostAsync(FactPulse.SDK.Client.FileParameter pdfFile, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -1705,13 +1709,20 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/processing/validate-pdf-signature"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/processing/validate-pdf-signature");
 
-                    MultipartContent multipartContentLocalVar = new MultipartContent();
+                    MultipartFormDataContent multipartContentLocalVar = new MultipartFormDataContent();
 
                     httpRequestMessageLocalVar.Content = multipartContentLocalVar;
 
-                    List<KeyValuePair<string?, string?>> formParameterLocalVars = new List<KeyValuePair<string?, string?>>();
+                    List<KeyValuePair<string, string?>> formParameterLocalVars = new List<KeyValuePair<string, string?>>();
 
-                    multipartContentLocalVar.Add(new FormUrlEncodedContent(formParameterLocalVars));                    multipartContentLocalVar.Add(new StreamContent(pdfFile));
+                    {
+                        var streamContentLocalVar = new StreamContent(pdfFile.Content);
+                        streamContentLocalVar.Headers.ContentType = new MediaTypeHeaderValue(pdfFile.ContentType);
+                        multipartContentLocalVar.Add(streamContentLocalVar, "pdf_file", pdfFile.FileName ?? "pdf_file");
+                    }
+
+                    foreach (var formParamLocalVar in formParameterLocalVars)
+                        multipartContentLocalVar.Add(new StringContent(formParamLocalVar.Value ?? string.Empty), formParamLocalVar.Key);
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
@@ -1729,11 +1740,6 @@ namespace FactPulse.SDK.Api
                     string[] contentTypes = new string[] {
                         "multipart/form-data"
                     };
-
-                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
-
-                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
-                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"

@@ -27,9 +27,9 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// AFNOR XP Z12-013 FlowType enum.  Values from swagger specification v1.2.0: - Invoice flows (factures) - Lifecycle flows (cycle de vie) - E-reporting flows (transactions/paiements)
+    /// AFNOR XP Z12-013 FlowType enum.  Values from swagger specification v1.3.0: - Invoice flows (factures) - Lifecycle flows (cycle de vie) - E-reporting flows (transactions/paiements) - \&quot;State*\&quot; flows sent to DFH and Undefined (added in v1.3.0)
     /// </summary>
-    /// <value>AFNOR XP Z12-013 FlowType enum.  Values from swagger specification v1.2.0: - Invoice flows (factures) - Lifecycle flows (cycle de vie) - E-reporting flows (transactions/paiements)</value>
+    /// <value>AFNOR XP Z12-013 FlowType enum.  Values from swagger specification v1.3.0: - Invoice flows (factures) - Lifecycle flows (cycle de vie) - E-reporting flows (transactions/paiements) - \&quot;State*\&quot; flows sent to DFH and Undefined (added in v1.3.0)</value>
     public enum FlowType
     {
         /// <summary>
@@ -43,59 +43,89 @@ namespace FactPulse.SDK.Model
         SupplierInvoice = 2,
 
         /// <summary>
-        /// Enum StateInvoice for value: StateInvoice
+        /// Enum StateCustomerInvoice for value: StateCustomerInvoice
         /// </summary>
-        StateInvoice = 3,
+        StateCustomerInvoice = 3,
+
+        /// <summary>
+        /// Enum StateSupplierInvoice for value: StateSupplierInvoice
+        /// </summary>
+        StateSupplierInvoice = 4,
 
         /// <summary>
         /// Enum CustomerInvoiceLC for value: CustomerInvoiceLC
         /// </summary>
-        CustomerInvoiceLC = 4,
+        CustomerInvoiceLC = 5,
 
         /// <summary>
         /// Enum SupplierInvoiceLC for value: SupplierInvoiceLC
         /// </summary>
-        SupplierInvoiceLC = 5,
+        SupplierInvoiceLC = 6,
 
         /// <summary>
         /// Enum StateCustomerInvoiceLC for value: StateCustomerInvoiceLC
         /// </summary>
-        StateCustomerInvoiceLC = 6,
+        StateCustomerInvoiceLC = 7,
 
         /// <summary>
         /// Enum StateSupplierInvoiceLC for value: StateSupplierInvoiceLC
         /// </summary>
-        StateSupplierInvoiceLC = 7,
+        StateSupplierInvoiceLC = 8,
 
         /// <summary>
         /// Enum UnitaryCustomerTransactionReport for value: UnitaryCustomerTransactionReport
         /// </summary>
-        UnitaryCustomerTransactionReport = 8,
+        UnitaryCustomerTransactionReport = 9,
 
         /// <summary>
         /// Enum AggregatedCustomerTransactionReport for value: AggregatedCustomerTransactionReport
         /// </summary>
-        AggregatedCustomerTransactionReport = 9,
+        AggregatedCustomerTransactionReport = 10,
 
         /// <summary>
         /// Enum UnitarySupplierTransactionReport for value: UnitarySupplierTransactionReport
         /// </summary>
-        UnitarySupplierTransactionReport = 10,
+        UnitarySupplierTransactionReport = 11,
 
         /// <summary>
         /// Enum UnitaryCustomerPaymentReport for value: UnitaryCustomerPaymentReport
         /// </summary>
-        UnitaryCustomerPaymentReport = 11,
+        UnitaryCustomerPaymentReport = 12,
 
         /// <summary>
         /// Enum AggregatedCustomerPaymentReport for value: AggregatedCustomerPaymentReport
         /// </summary>
-        AggregatedCustomerPaymentReport = 12,
+        AggregatedCustomerPaymentReport = 13,
+
+        /// <summary>
+        /// Enum StateTransactionReport for value: StateTransactionReport
+        /// </summary>
+        StateTransactionReport = 14,
+
+        /// <summary>
+        /// Enum StateTransactionReportLC for value: StateTransactionReportLC
+        /// </summary>
+        StateTransactionReportLC = 15,
+
+        /// <summary>
+        /// Enum StatePaymentReport for value: StatePaymentReport
+        /// </summary>
+        StatePaymentReport = 16,
+
+        /// <summary>
+        /// Enum StatePaymentReportLC for value: StatePaymentReportLC
+        /// </summary>
+        StatePaymentReportLC = 17,
 
         /// <summary>
         /// Enum MultiFlowReport for value: MultiFlowReport
         /// </summary>
-        MultiFlowReport = 13
+        MultiFlowReport = 18,
+
+        /// <summary>
+        /// Enum Undefined for value: Undefined
+        /// </summary>
+        Undefined = 19
     }
 
     /// <summary>
@@ -116,8 +146,11 @@ namespace FactPulse.SDK.Model
             if (value.Equals("SupplierInvoice"))
                 return FlowType.SupplierInvoice;
 
-            if (value.Equals("StateInvoice"))
-                return FlowType.StateInvoice;
+            if (value.Equals("StateCustomerInvoice"))
+                return FlowType.StateCustomerInvoice;
+
+            if (value.Equals("StateSupplierInvoice"))
+                return FlowType.StateSupplierInvoice;
 
             if (value.Equals("CustomerInvoiceLC"))
                 return FlowType.CustomerInvoiceLC;
@@ -146,8 +179,23 @@ namespace FactPulse.SDK.Model
             if (value.Equals("AggregatedCustomerPaymentReport"))
                 return FlowType.AggregatedCustomerPaymentReport;
 
+            if (value.Equals("StateTransactionReport"))
+                return FlowType.StateTransactionReport;
+
+            if (value.Equals("StateTransactionReportLC"))
+                return FlowType.StateTransactionReportLC;
+
+            if (value.Equals("StatePaymentReport"))
+                return FlowType.StatePaymentReport;
+
+            if (value.Equals("StatePaymentReportLC"))
+                return FlowType.StatePaymentReportLC;
+
             if (value.Equals("MultiFlowReport"))
                 return FlowType.MultiFlowReport;
+
+            if (value.Equals("Undefined"))
+                return FlowType.Undefined;
 
             throw new NotImplementedException($"Could not convert value to type FlowType: '{value}'");
         }
@@ -165,8 +213,11 @@ namespace FactPulse.SDK.Model
             if (value.Equals("SupplierInvoice"))
                 return FlowType.SupplierInvoice;
 
-            if (value.Equals("StateInvoice"))
-                return FlowType.StateInvoice;
+            if (value.Equals("StateCustomerInvoice"))
+                return FlowType.StateCustomerInvoice;
+
+            if (value.Equals("StateSupplierInvoice"))
+                return FlowType.StateSupplierInvoice;
 
             if (value.Equals("CustomerInvoiceLC"))
                 return FlowType.CustomerInvoiceLC;
@@ -195,8 +246,23 @@ namespace FactPulse.SDK.Model
             if (value.Equals("AggregatedCustomerPaymentReport"))
                 return FlowType.AggregatedCustomerPaymentReport;
 
+            if (value.Equals("StateTransactionReport"))
+                return FlowType.StateTransactionReport;
+
+            if (value.Equals("StateTransactionReportLC"))
+                return FlowType.StateTransactionReportLC;
+
+            if (value.Equals("StatePaymentReport"))
+                return FlowType.StatePaymentReport;
+
+            if (value.Equals("StatePaymentReportLC"))
+                return FlowType.StatePaymentReportLC;
+
             if (value.Equals("MultiFlowReport"))
                 return FlowType.MultiFlowReport;
+
+            if (value.Equals("Undefined"))
+                return FlowType.Undefined;
 
             return null;
         }
@@ -215,8 +281,11 @@ namespace FactPulse.SDK.Model
             if (value == FlowType.SupplierInvoice)
                 return "SupplierInvoice";
 
-            if (value == FlowType.StateInvoice)
-                return "StateInvoice";
+            if (value == FlowType.StateCustomerInvoice)
+                return "StateCustomerInvoice";
+
+            if (value == FlowType.StateSupplierInvoice)
+                return "StateSupplierInvoice";
 
             if (value == FlowType.CustomerInvoiceLC)
                 return "CustomerInvoiceLC";
@@ -245,8 +314,23 @@ namespace FactPulse.SDK.Model
             if (value == FlowType.AggregatedCustomerPaymentReport)
                 return "AggregatedCustomerPaymentReport";
 
+            if (value == FlowType.StateTransactionReport)
+                return "StateTransactionReport";
+
+            if (value == FlowType.StateTransactionReportLC)
+                return "StateTransactionReportLC";
+
+            if (value == FlowType.StatePaymentReport)
+                return "StatePaymentReport";
+
+            if (value == FlowType.StatePaymentReportLC)
+                return "StatePaymentReportLC";
+
             if (value == FlowType.MultiFlowReport)
                 return "MultiFlowReport";
+
+            if (value == FlowType.Undefined)
+                return "Undefined";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }

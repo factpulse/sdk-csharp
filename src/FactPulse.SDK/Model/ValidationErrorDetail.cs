@@ -64,7 +64,7 @@ namespace FactPulse.SDK.Model
         /// </summary>
         /// <value>Severity level: &#39;Error&#39; or &#39;Warning&#39;</value>
         [JsonPropertyName("level")]
-        public ErrorLevel? Level { get { return this.LevelOption; } set { this.LevelOption = new(value); } }
+        public ErrorLevel? Level { get { return this.LevelOption.Value; } set { this.LevelOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Source
@@ -77,7 +77,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets Source
         /// </summary>
         [JsonPropertyName("source")]
-        public ErrorSource? Source { get { return this.SourceOption; } set { this.SourceOption = new(value); } }
+        public ErrorSource? Source { get { return this.SourceOption.Value; } set { this.SourceOption = new(value); } }
 
         /// <summary>
         /// Identifier of the concerned element (XPath, field, BR-FR rule, etc.)

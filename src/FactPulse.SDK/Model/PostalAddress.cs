@@ -66,7 +66,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets PostalCode
         /// </summary>
-        [JsonPropertyName("postalCode")]
+        [JsonPropertyName("postal_code")]
         public string? PostalCode { get { return this.PostalCodeOption; } set { this.PostalCodeOption = new(value); } }
 
         /// <summary>
@@ -79,7 +79,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets LineOne
         /// </summary>
-        [JsonPropertyName("lineOne")]
+        [JsonPropertyName("line_one")]
         public string? LineOne { get { return this.LineOneOption; } set { this.LineOneOption = new(value); } }
 
         /// <summary>
@@ -92,7 +92,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets LineTwo
         /// </summary>
-        [JsonPropertyName("lineTwo")]
+        [JsonPropertyName("line_two")]
         public string? LineTwo { get { return this.LineTwoOption; } set { this.LineTwoOption = new(value); } }
 
         /// <summary>
@@ -105,7 +105,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets LineThree
         /// </summary>
-        [JsonPropertyName("lineThree")]
+        [JsonPropertyName("line_three")]
         public string? LineThree { get { return this.LineThreeOption; } set { this.LineThreeOption = new(value); } }
 
         /// <summary>
@@ -131,7 +131,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets CountryCode
         /// </summary>
-        [JsonPropertyName("countryCode")]
+        [JsonPropertyName("country_code")]
         public string? CountryCode { get { return this.CountryCodeOption; } set { this.CountryCodeOption = new(value); } }
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Gets or Sets CountrySubdivision
         /// </summary>
-        [JsonPropertyName("countrySubdivision")]
+        [JsonPropertyName("country_subdivision")]
         public string? CountrySubdivision { get { return this.CountrySubdivisionOption; } set { this.CountrySubdivisionOption = new(value); } }
 
         /// <summary>
@@ -222,25 +222,25 @@ namespace FactPulse.SDK.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "postalCode":
+                        case "postal_code":
                             postalCode = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "lineOne":
+                        case "line_one":
                             lineOne = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "lineTwo":
+                        case "line_two":
                             lineTwo = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "lineThree":
+                        case "line_three":
                             lineThree = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "city":
                             city = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "countryCode":
+                        case "country_code":
                             countryCode = new Option<string?>(utf8JsonReader.GetString());
                             break;
-                        case "countrySubdivision":
+                        case "country_subdivision":
                             countrySubdivision = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         default:
@@ -278,27 +278,27 @@ namespace FactPulse.SDK.Model
         {
             if (postalAddress.PostalCodeOption.IsSet)
                 if (postalAddress.PostalCodeOption.Value != null)
-                    writer.WriteString("postalCode", postalAddress.PostalCode);
+                    writer.WriteString("postal_code", postalAddress.PostalCode);
                 else
-                    writer.WriteNull("postalCode");
+                    writer.WriteNull("postal_code");
 
             if (postalAddress.LineOneOption.IsSet)
                 if (postalAddress.LineOneOption.Value != null)
-                    writer.WriteString("lineOne", postalAddress.LineOne);
+                    writer.WriteString("line_one", postalAddress.LineOne);
                 else
-                    writer.WriteNull("lineOne");
+                    writer.WriteNull("line_one");
 
             if (postalAddress.LineTwoOption.IsSet)
                 if (postalAddress.LineTwoOption.Value != null)
-                    writer.WriteString("lineTwo", postalAddress.LineTwo);
+                    writer.WriteString("line_two", postalAddress.LineTwo);
                 else
-                    writer.WriteNull("lineTwo");
+                    writer.WriteNull("line_two");
 
             if (postalAddress.LineThreeOption.IsSet)
                 if (postalAddress.LineThreeOption.Value != null)
-                    writer.WriteString("lineThree", postalAddress.LineThree);
+                    writer.WriteString("line_three", postalAddress.LineThree);
                 else
-                    writer.WriteNull("lineThree");
+                    writer.WriteNull("line_three");
 
             if (postalAddress.CityOption.IsSet)
                 if (postalAddress.CityOption.Value != null)
@@ -308,15 +308,15 @@ namespace FactPulse.SDK.Model
 
             if (postalAddress.CountryCodeOption.IsSet)
                 if (postalAddress.CountryCodeOption.Value != null)
-                    writer.WriteString("countryCode", postalAddress.CountryCode);
+                    writer.WriteString("country_code", postalAddress.CountryCode);
                 else
-                    writer.WriteNull("countryCode");
+                    writer.WriteNull("country_code");
 
             if (postalAddress.CountrySubdivisionOption.IsSet)
                 if (postalAddress.CountrySubdivisionOption.Value != null)
-                    writer.WriteString("countrySubdivision", postalAddress.CountrySubdivision);
+                    writer.WriteString("country_subdivision", postalAddress.CountrySubdivision);
                 else
-                    writer.WriteNull("countrySubdivision");
+                    writer.WriteNull("country_subdivision");
         }
     }
 }

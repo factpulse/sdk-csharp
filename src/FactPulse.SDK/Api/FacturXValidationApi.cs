@@ -51,7 +51,7 @@ namespace FactPulse.SDK.Api
         /// <param name="skipBrFr"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse"/>&gt;</returns>
-        Task<IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse> ValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostAsync(System.IO.Stream pdfFile, Option<APIProfile?> profile = default, Option<bool> useVerapdf = default, Option<bool?> skipBrFr = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse> ValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostAsync(FactPulse.SDK.Client.FileParameter pdfFile, Option<APIProfile?> profile = default, Option<bool> useVerapdf = default, Option<bool?> skipBrFr = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Validate a complete Factur-X PDF
@@ -65,7 +65,7 @@ namespace FactPulse.SDK.Api
         /// <param name="skipBrFr"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse"/>?&gt;</returns>
-        Task<IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse?> ValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostOrDefaultAsync(System.IO.Stream pdfFile, Option<APIProfile?> profile = default, Option<bool> useVerapdf = default, Option<bool?> skipBrFr = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse?> ValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostOrDefaultAsync(FactPulse.SDK.Client.FileParameter pdfFile, Option<APIProfile?> profile = default, Option<bool> useVerapdf = default, Option<bool?> skipBrFr = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Validate a Factur-X PDF (asynchronous with polling)
@@ -81,7 +81,7 @@ namespace FactPulse.SDK.Api
         /// <param name="webhookMode">Webhook content delivery: &#39;inline&#39; (base64 in payload) or &#39;download_url&#39; (temporary URL, 1h TTL) (optional, default to &quot;inline&quot;)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse"/>&gt;</returns>
-        Task<IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse> ValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostAsync(System.IO.Stream pdfFile, Option<APIProfile?> profile = default, Option<bool> useVerapdf = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse> ValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostAsync(FactPulse.SDK.Client.FileParameter pdfFile, Option<APIProfile?> profile = default, Option<bool> useVerapdf = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Validate a Factur-X PDF (asynchronous with polling)
@@ -96,7 +96,7 @@ namespace FactPulse.SDK.Api
         /// <param name="webhookMode">Webhook content delivery: &#39;inline&#39; (base64 in payload) or &#39;download_url&#39; (temporary URL, 1h TTL) (optional, default to &quot;inline&quot;)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse"/>?&gt;</returns>
-        Task<IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse?> ValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostOrDefaultAsync(System.IO.Stream pdfFile, Option<APIProfile?> profile = default, Option<bool> useVerapdf = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse?> ValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostOrDefaultAsync(FactPulse.SDK.Client.FileParameter pdfFile, Option<APIProfile?> profile = default, Option<bool> useVerapdf = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -259,14 +259,14 @@ namespace FactPulse.SDK.Api
             BearerTokenProvider = bearerTokenProvider;
         }
 
-        partial void FormatValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPost(ref System.IO.Stream pdfFile, ref Option<APIProfile?> profile, ref Option<bool> useVerapdf, ref Option<bool?> skipBrFr);
+        partial void FormatValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPost(ref FactPulse.SDK.Client.FileParameter pdfFile, ref Option<APIProfile?> profile, ref Option<bool> useVerapdf, ref Option<bool?> skipBrFr);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
         /// <param name="pdfFile"></param>
         /// <returns></returns>
-        private void ValidateValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPost(System.IO.Stream pdfFile)
+        private void ValidateValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPost(FactPulse.SDK.Client.FileParameter pdfFile)
         {
             if (pdfFile == null)
                 throw new ArgumentNullException(nameof(pdfFile));
@@ -280,7 +280,7 @@ namespace FactPulse.SDK.Api
         /// <param name="profile"></param>
         /// <param name="useVerapdf"></param>
         /// <param name="skipBrFr"></param>
-        private void AfterValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostDefaultImplementation(IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse apiResponseLocalVar, System.IO.Stream pdfFile, Option<APIProfile?> profile, Option<bool> useVerapdf, Option<bool?> skipBrFr)
+        private void AfterValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostDefaultImplementation(IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter pdfFile, Option<APIProfile?> profile, Option<bool> useVerapdf, Option<bool?> skipBrFr)
         {
             bool suppressDefaultLog = false;
             AfterValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPost(ref suppressDefaultLog, apiResponseLocalVar, pdfFile, profile, useVerapdf, skipBrFr);
@@ -297,7 +297,7 @@ namespace FactPulse.SDK.Api
         /// <param name="profile"></param>
         /// <param name="useVerapdf"></param>
         /// <param name="skipBrFr"></param>
-        partial void AfterValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPost(ref bool suppressDefaultLog, IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse apiResponseLocalVar, System.IO.Stream pdfFile, Option<APIProfile?> profile, Option<bool> useVerapdf, Option<bool?> skipBrFr);
+        partial void AfterValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPost(ref bool suppressDefaultLog, IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter pdfFile, Option<APIProfile?> profile, Option<bool> useVerapdf, Option<bool?> skipBrFr);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -309,7 +309,7 @@ namespace FactPulse.SDK.Api
         /// <param name="profile"></param>
         /// <param name="useVerapdf"></param>
         /// <param name="skipBrFr"></param>
-        private void OnErrorValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream pdfFile, Option<APIProfile?> profile, Option<bool> useVerapdf, Option<bool?> skipBrFr)
+        private void OnErrorValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter pdfFile, Option<APIProfile?> profile, Option<bool> useVerapdf, Option<bool?> skipBrFr)
         {
             bool suppressDefaultLogLocalVar = false;
             OnErrorValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, pdfFile, profile, useVerapdf, skipBrFr);
@@ -328,7 +328,7 @@ namespace FactPulse.SDK.Api
         /// <param name="profile"></param>
         /// <param name="useVerapdf"></param>
         /// <param name="skipBrFr"></param>
-        partial void OnErrorValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream pdfFile, Option<APIProfile?> profile, Option<bool> useVerapdf, Option<bool?> skipBrFr);
+        partial void OnErrorValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter pdfFile, Option<APIProfile?> profile, Option<bool> useVerapdf, Option<bool?> skipBrFr);
 
         /// <summary>
         /// Validate a complete Factur-X PDF Validates a complete Factur-X PDF according to European and French standards.  ## Applied validation standards  - **EN 16931**: European semantic standard (directive 2014/55/EU) - **ISO 19005-3** (PDF/A-3): Long-term electronic archiving - **Factur-X / ZUGFeRD**: Franco-German specification - **Schematron**: XML business rules validation - **eIDAS**: European regulation on electronic identification (signatures)  ## Checks performed  ### 1. Factur-X XML extraction and validation **Checks performed:** - Presence of embedded XML file (&#x60;factur-x.xml&#x60; or &#x60;zugferd-invoice.xml&#x60;) - Automatic profile detection (MINIMUM, BASIC, EN16931, EXTENDED) - XML parsing with UTF-8 validation - GuidelineSpecifiedDocumentContextParameter/ID extraction  **Schematron validation:** - Business rules for detected profile (MINIMUM: 45 rules, EN16931: 178 rules) - Cardinality of required elements - Calculation consistency (net, VAT, gross amounts, discounts) - Identifier formats (SIRET, intra-EU VAT, IBAN) - Standardized codes (ISO country codes, UN/ECE units, VAT codes)  **What is verified:** - ✅ XML structure conforming to Cross Industry Invoice XSD - ✅ Correct UN/CEFACT namespace - ✅ European business rules (BR-xx) - ✅ French-specific rules (FR-xx)  ### 2. PDF/A-3 compliance **Basic validation (metadata):** - Presence of &#x60;/Type&#x60; field set to &#x60;Catalog&#x60; - Metadata &#x60;pdfaid:part&#x60; &#x3D; 3 (PDF/A-3) - Metadata &#x60;pdfaid:conformance&#x60; &#x3D; B or U - PDF version &gt;&#x3D; 1.4  **Strict VeraPDF validation (if use_verapdf&#x3D;True):** - 146+ ISO 19005-3 rules (PDF/A-3B) - Absence of forbidden content (JavaScript, multimedia, dynamic forms) - Correctly embedded fonts and subsets - Compliant color spaces (sRGB, DeviceGray) - Valid file structure (cross-reference table) - XMP metadata conforming to ISO 16684-1  **What is verified:** - ✅ Long-term archivable file (20+ years) - ✅ Guaranteed readability (embedded fonts) - ✅ Legal compliance (France, Germany, EU)  ### 3. XMP metadata (eXtensible Metadata Platform) **Checks performed:** - Presence of &#x60;&lt;?xpacket&gt;&#x60; block with XMP metadata - &#x60;fx:&#x60; namespace for Factur-X: &#x60;urn:factur-x:pdfa:CrossIndustryDocument:invoice:1p0#&#x60; - Required Factur-X fields:   - &#x60;fx:ConformanceLevel&#x60;: Profile (MINIMUM, BASIC, EN16931, EXTENDED)   - &#x60;fx:DocumentFileName&#x60;: Embedded XML name   - &#x60;fx:DocumentType&#x60;: \&quot;INVOICE\&quot;   - &#x60;fx:Version&#x60;: Factur-X version (1.0.07)  **What is verified:** - ✅ Metadata conforming to ISO 16684-1 - ✅ Correct declared Factur-X profile - ✅ Supported Factur-X version  ### 4. Electronic signatures **Detection and analysis:** - Presence of &#x60;/Sig&#x60; dictionaries in PDF - Signature type: PAdES (PDF Advanced Electronic Signature) - Information extraction:   - Signer name (&#x60;/Name&#x60;)   - Signing date (&#x60;/M&#x60;)   - Signature reason (&#x60;/Reason&#x60;)   - Signature location (&#x60;/Location&#x60;)   - Signature type (approval, certification)  **What is verified:** - ✅ Presence of signatures or seals - ✅ Number of signatures (single or multi-signature) - ℹ️ No cryptographic verification (requires certificates)  ## Parameters  - **pdf_file** (required): The Factur-X PDF file to validate - **profile** (optional): Expected profile. If absent, auto-detected from XML - **use_verapdf** (optional, default&#x3D;false): Enable strict PDF/A validation with VeraPDF   - &#x60;false&#x60;: Fast metadata validation (2-3 seconds)   - &#x60;true&#x60;: Complete ISO 19005-3 validation (15-30 seconds, **recommended for production**)  ## Detailed response  &#x60;&#x60;&#x60;json {   \&quot;isCompliant\&quot;: true,   \&quot;xml\&quot;: {     \&quot;present\&quot;: true,     \&quot;compliant\&quot;: true,     \&quot;profile\&quot;: \&quot;EN16931\&quot;,     \&quot;errors\&quot;: []   },   \&quot;pdfa\&quot;: {     \&quot;compliant\&quot;: true,     \&quot;version\&quot;: \&quot;PDF/A-3B\&quot;,     \&quot;method\&quot;: \&quot;verapdf\&quot;,     \&quot;errors\&quot;: []   },   \&quot;xmp\&quot;: {     \&quot;present\&quot;: true,     \&quot;compliant\&quot;: true,     \&quot;metadata\&quot;: {...}   },   \&quot;signatures\&quot;: {     \&quot;present\&quot;: true,     \&quot;count\&quot;: 1,     \&quot;details\&quot;: [...]   } } &#x60;&#x60;&#x60;  ## Use cases  - **Before sending**: Validate generated invoice before transmission to client - **On reception**: Verify compliance of invoice received from supplier - **Audit**: Check quality of invoice batches - **Legal compliance**: Ensure B2B/B2G obligations are met in France - **Debugging**: Identify issues in generation process - **Archiving**: Guarantee long-term validity (PDF/A-3)  ## Processing time  - Basic validation: 2-3 seconds - VeraPDF validation: 15-30 seconds (depends on PDF size)
@@ -339,7 +339,7 @@ namespace FactPulse.SDK.Api
         /// <param name="skipBrFr"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse"/>&gt;</returns>
-        public async Task<IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse?> ValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostOrDefaultAsync(System.IO.Stream pdfFile, Option<APIProfile?> profile = default, Option<bool> useVerapdf = default, Option<bool?> skipBrFr = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse?> ValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostOrDefaultAsync(FactPulse.SDK.Client.FileParameter pdfFile, Option<APIProfile?> profile = default, Option<bool> useVerapdf = default, Option<bool?> skipBrFr = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -361,7 +361,7 @@ namespace FactPulse.SDK.Api
         /// <param name="skipBrFr"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse"/>&gt;</returns>
-        public async Task<IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse> ValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostAsync(System.IO.Stream pdfFile, Option<APIProfile?> profile = default, Option<bool> useVerapdf = default, Option<bool?> skipBrFr = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostApiResponse> ValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostAsync(FactPulse.SDK.Client.FileParameter pdfFile, Option<APIProfile?> profile = default, Option<bool> useVerapdf = default, Option<bool?> skipBrFr = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -380,22 +380,29 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/processing/validate-facturx-pdf"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/processing/validate-facturx-pdf");
 
-                    MultipartContent multipartContentLocalVar = new MultipartContent();
+                    MultipartFormDataContent multipartContentLocalVar = new MultipartFormDataContent();
 
                     httpRequestMessageLocalVar.Content = multipartContentLocalVar;
 
-                    List<KeyValuePair<string?, string?>> formParameterLocalVars = new List<KeyValuePair<string?, string?>>();
+                    List<KeyValuePair<string, string?>> formParameterLocalVars = new List<KeyValuePair<string, string?>>();
 
-                    multipartContentLocalVar.Add(new FormUrlEncodedContent(formParameterLocalVars));                    multipartContentLocalVar.Add(new StreamContent(pdfFile));
+                    {
+                        var streamContentLocalVar = new StreamContent(pdfFile.Content);
+                        streamContentLocalVar.Headers.ContentType = new MediaTypeHeaderValue(pdfFile.ContentType);
+                        multipartContentLocalVar.Add(streamContentLocalVar, "pdf_file", pdfFile.FileName ?? "pdf_file");
+                    }
 
                     if (profile.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("profile", ClientUtils.ParameterToString(profile.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("profile", ClientUtils.ParameterToString(profile.Value)));
 
                     if (useVerapdf.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("use_verapdf", ClientUtils.ParameterToString(useVerapdf.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("use_verapdf", ClientUtils.ParameterToString(useVerapdf.Value)));
 
                     if (skipBrFr.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("skip_br_fr", ClientUtils.ParameterToString(skipBrFr.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("skip_br_fr", ClientUtils.ParameterToString(skipBrFr.Value)));
+
+                    foreach (var formParamLocalVar in formParameterLocalVars)
+                        multipartContentLocalVar.Add(new StringContent(formParamLocalVar.Value ?? string.Empty), formParamLocalVar.Key);
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
@@ -413,11 +420,6 @@ namespace FactPulse.SDK.Api
                     string[] contentTypes = new string[] {
                         "multipart/form-data"
                     };
-
-                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
-
-                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
-                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -641,7 +643,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPost(ref System.IO.Stream pdfFile, ref Option<APIProfile?> profile, ref Option<bool> useVerapdf, ref Option<string?> callbackUrl, ref Option<string> webhookMode);
+        partial void FormatValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPost(ref FactPulse.SDK.Client.FileParameter pdfFile, ref Option<APIProfile?> profile, ref Option<bool> useVerapdf, ref Option<string?> callbackUrl, ref Option<string> webhookMode);
 
         /// <summary>
         /// Validates the request parameters
@@ -649,7 +651,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pdfFile"></param>
         /// <param name="webhookMode"></param>
         /// <returns></returns>
-        private void ValidateValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPost(System.IO.Stream pdfFile, Option<string> webhookMode)
+        private void ValidateValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPost(FactPulse.SDK.Client.FileParameter pdfFile, Option<string> webhookMode)
         {
             if (pdfFile == null)
                 throw new ArgumentNullException(nameof(pdfFile));
@@ -667,7 +669,7 @@ namespace FactPulse.SDK.Api
         /// <param name="useVerapdf"></param>
         /// <param name="callbackUrl"></param>
         /// <param name="webhookMode"></param>
-        private void AfterValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostDefaultImplementation(IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse apiResponseLocalVar, System.IO.Stream pdfFile, Option<APIProfile?> profile, Option<bool> useVerapdf, Option<string?> callbackUrl, Option<string> webhookMode)
+        private void AfterValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostDefaultImplementation(IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter pdfFile, Option<APIProfile?> profile, Option<bool> useVerapdf, Option<string?> callbackUrl, Option<string> webhookMode)
         {
             bool suppressDefaultLog = false;
             AfterValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPost(ref suppressDefaultLog, apiResponseLocalVar, pdfFile, profile, useVerapdf, callbackUrl, webhookMode);
@@ -685,7 +687,7 @@ namespace FactPulse.SDK.Api
         /// <param name="useVerapdf"></param>
         /// <param name="callbackUrl"></param>
         /// <param name="webhookMode"></param>
-        partial void AfterValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPost(ref bool suppressDefaultLog, IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse apiResponseLocalVar, System.IO.Stream pdfFile, Option<APIProfile?> profile, Option<bool> useVerapdf, Option<string?> callbackUrl, Option<string> webhookMode);
+        partial void AfterValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPost(ref bool suppressDefaultLog, IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter pdfFile, Option<APIProfile?> profile, Option<bool> useVerapdf, Option<string?> callbackUrl, Option<string> webhookMode);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -698,7 +700,7 @@ namespace FactPulse.SDK.Api
         /// <param name="useVerapdf"></param>
         /// <param name="callbackUrl"></param>
         /// <param name="webhookMode"></param>
-        private void OnErrorValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream pdfFile, Option<APIProfile?> profile, Option<bool> useVerapdf, Option<string?> callbackUrl, Option<string> webhookMode)
+        private void OnErrorValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter pdfFile, Option<APIProfile?> profile, Option<bool> useVerapdf, Option<string?> callbackUrl, Option<string> webhookMode)
         {
             bool suppressDefaultLogLocalVar = false;
             OnErrorValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, pdfFile, profile, useVerapdf, callbackUrl, webhookMode);
@@ -718,7 +720,7 @@ namespace FactPulse.SDK.Api
         /// <param name="useVerapdf"></param>
         /// <param name="callbackUrl"></param>
         /// <param name="webhookMode"></param>
-        partial void OnErrorValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream pdfFile, Option<APIProfile?> profile, Option<bool> useVerapdf, Option<string?> callbackUrl, Option<string> webhookMode);
+        partial void OnErrorValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter pdfFile, Option<APIProfile?> profile, Option<bool> useVerapdf, Option<string?> callbackUrl, Option<string> webhookMode);
 
         /// <summary>
         /// Validate a Factur-X PDF (asynchronous with polling) Validates a Factur-X PDF asynchronously with polling system.  ## How it works  1. **Submission**: PDF is queued for asynchronous validation 2. **Immediate return**: You receive a &#x60;task_id&#x60; (HTTP 202) 3. **Tracking**: Use the &#x60;/tasks/{task_id}/status&#x60; endpoint to track progress  ## Advantages of asynchronous mode  - **No timeout**: Ideal for large PDFs or VeraPDF validation (which can take several seconds) - **Scalability**: Validations are processed by dedicated Celery workers - **Status tracking**: Allows you to monitor validation progress - **Non-blocking**: Your client doesn&#39;t wait during validation  ## Webhook notification (recommended)  Instead of polling, you can receive a webhook notification when validation completes:  &#x60;&#x60;&#x60; callback_url&#x3D;https://your-server.com/webhook webhook_mode&#x3D;download_url  # Optional: get download URL instead of base64 &#x60;&#x60;&#x60;  The webhook will POST a JSON payload with: - &#x60;event_type&#x60;: &#x60;validation.completed&#x60; or &#x60;validation.failed&#x60; - &#x60;data.is_compliant&#x60;: Whether the PDF is Factur-X compliant - &#x60;data.detected_profile&#x60;: The detected Factur-X profile - &#x60;X-Webhook-Signature&#x60; header for HMAC verification  ## When to use this mode?  - **VeraPDF validation enabled** (&#x60;use_verapdf&#x3D;True&#x60;): Strict validation can take 2-10 seconds - **Large PDF files**: PDFs &gt; 1 MB - **Batch processing**: Validating multiple invoices in parallel - **Asynchronous integration**: Your system supports polling  ## Checks performed  ### 1. Factur-X XML extraction and validation - Verifies presence of Factur-X compliant embedded XML file - Automatically detects profile used (MINIMUM, BASIC, EN16931, EXTENDED) - Validates XML against detected profile&#39;s Schematron rules  ### 2. PDF/A compliance - **Without VeraPDF**: Basic metadata validation (fast, ~100ms) - **With VeraPDF**: Strict ISO 19005 validation (146+ rules, 2-10s)   - Detects PDF/A version (PDF/A-1, PDF/A-3, etc.)   - Detailed non-compliance reports  ### 3. XMP metadata - Verifies presence of XMP metadata in PDF - Validates Factur-X metadata compliance (profile, version) - Extracts all available XMP metadata  ### 4. Electronic signatures - Detects presence of electronic signatures or seals - Extracts information about each signature (signer, date, reason) - Counts number of signatures present  ## Parameters  - **pdf_file**: The Factur-X PDF file to validate - **profile**: Expected Factur-X profile (optional). If not specified, profile   will be auto-detected from embedded XML file. - **use_verapdf**: Enable strict PDF/A validation with VeraPDF.   ⚠️ **Warning**: VeraPDF can take 2-10 seconds depending on PDF size.   Recommended only in asynchronous mode to avoid timeouts.  ## Retrieving results  After submission, use &#x60;GET /tasks/{task_id}/status&#x60; endpoint to retrieve the result.  **Polling example**: &#x60;&#x60;&#x60;python import requests import time  # 1. Submit task response &#x3D; requests.post(\&quot;/validate-facturx-async\&quot;, files&#x3D;{\&quot;pdf_file\&quot;: pdf_file}) task_id &#x3D; response.json()[\&quot;taskId\&quot;]  # 2. Poll every 2 seconds while True:     status_response &#x3D; requests.get(f\&quot;/tasks/{task_id}/status\&quot;)     status &#x3D; status_response.json()      if status[\&quot;status\&quot;] &#x3D;&#x3D; \&quot;SUCCESS\&quot;:         result &#x3D; status[\&quot;result\&quot;][\&quot;validation_result\&quot;]         print(f\&quot;Compliant: {result[&#39;is_compliant&#39;]}\&quot;)         break     elif status[\&quot;status\&quot;] &#x3D;&#x3D; \&quot;FAILURE\&quot;:         print(f\&quot;Error: {status[&#39;result&#39;][&#39;errorMessage&#39;]}\&quot;)         break      time.sleep(2)  # Wait 2 seconds before next check &#x60;&#x60;&#x60;  ## Use cases  - Validate invoices before sending with VeraPDF (strict validation) - Process invoice batches in parallel - Integrate validation into an asynchronous pipeline - Validate large PDFs without timeout risk
@@ -730,7 +732,7 @@ namespace FactPulse.SDK.Api
         /// <param name="webhookMode">Webhook content delivery: &#39;inline&#39; (base64 in payload) or &#39;download_url&#39; (temporary URL, 1h TTL) (optional, default to &quot;inline&quot;)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse"/>&gt;</returns>
-        public async Task<IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse?> ValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostOrDefaultAsync(System.IO.Stream pdfFile, Option<APIProfile?> profile = default, Option<bool> useVerapdf = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse?> ValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostOrDefaultAsync(FactPulse.SDK.Client.FileParameter pdfFile, Option<APIProfile?> profile = default, Option<bool> useVerapdf = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -753,7 +755,7 @@ namespace FactPulse.SDK.Api
         /// <param name="webhookMode">Webhook content delivery: &#39;inline&#39; (base64 in payload) or &#39;download_url&#39; (temporary URL, 1h TTL) (optional, default to &quot;inline&quot;)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse"/>&gt;</returns>
-        public async Task<IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse> ValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostAsync(System.IO.Stream pdfFile, Option<APIProfile?> profile = default, Option<bool> useVerapdf = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostApiResponse> ValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostAsync(FactPulse.SDK.Client.FileParameter pdfFile, Option<APIProfile?> profile = default, Option<bool> useVerapdf = default, Option<string?> callbackUrl = default, Option<string> webhookMode = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -772,25 +774,32 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/processing/validate-facturx-async"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/processing/validate-facturx-async");
 
-                    MultipartContent multipartContentLocalVar = new MultipartContent();
+                    MultipartFormDataContent multipartContentLocalVar = new MultipartFormDataContent();
 
                     httpRequestMessageLocalVar.Content = multipartContentLocalVar;
 
-                    List<KeyValuePair<string?, string?>> formParameterLocalVars = new List<KeyValuePair<string?, string?>>();
+                    List<KeyValuePair<string, string?>> formParameterLocalVars = new List<KeyValuePair<string, string?>>();
 
-                    multipartContentLocalVar.Add(new FormUrlEncodedContent(formParameterLocalVars));                    multipartContentLocalVar.Add(new StreamContent(pdfFile));
+                    {
+                        var streamContentLocalVar = new StreamContent(pdfFile.Content);
+                        streamContentLocalVar.Headers.ContentType = new MediaTypeHeaderValue(pdfFile.ContentType);
+                        multipartContentLocalVar.Add(streamContentLocalVar, "pdf_file", pdfFile.FileName ?? "pdf_file");
+                    }
 
                     if (profile.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("profile", ClientUtils.ParameterToString(profile.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("profile", ClientUtils.ParameterToString(profile.Value)));
 
                     if (useVerapdf.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("use_verapdf", ClientUtils.ParameterToString(useVerapdf.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("use_verapdf", ClientUtils.ParameterToString(useVerapdf.Value)));
 
                     if (callbackUrl.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("callback_url", ClientUtils.ParameterToString(callbackUrl.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("callback_url", ClientUtils.ParameterToString(callbackUrl.Value)));
 
                     if (webhookMode.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("webhook_mode", ClientUtils.ParameterToString(webhookMode.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("webhook_mode", ClientUtils.ParameterToString(webhookMode.Value)));
+
+                    foreach (var formParamLocalVar in formParameterLocalVars)
+                        multipartContentLocalVar.Add(new StringContent(formParamLocalVar.Value ?? string.Empty), formParamLocalVar.Key);
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
@@ -808,11 +817,6 @@ namespace FactPulse.SDK.Api
                     string[] contentTypes = new string[] {
                         "multipart/form-data"
                     };
-
-                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
-
-                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
-                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"

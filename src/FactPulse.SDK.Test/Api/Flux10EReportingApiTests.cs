@@ -115,7 +115,8 @@ namespace FactPulse.SDK.Test.Api
         public async Task SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostAsyncTest()
         {
             SubmitAggregatedReportRequest submitAggregatedReportRequest = default!;
-            var response = await _instance.SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostAsync(submitAggregatedReportRequest);
+            Client.Option<string?> organizationId = default!;
+            var response = await _instance.SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostAsync(submitAggregatedReportRequest, organizationId);
             var model = response.Ok();
             Assert.IsType<SubmitEReportingResponse>(model);
         }
@@ -127,7 +128,8 @@ namespace FactPulse.SDK.Test.Api
         public async Task SubmitEreportingApiV1EreportingSubmitPostAsyncTest()
         {
             SubmitEReportingRequest submitEReportingRequest = default!;
-            var response = await _instance.SubmitEreportingApiV1EreportingSubmitPostAsync(submitEReportingRequest);
+            Client.Option<string?> organizationId = default!;
+            var response = await _instance.SubmitEreportingApiV1EreportingSubmitPostAsync(submitEReportingRequest, organizationId);
             var model = response.Ok();
             Assert.IsType<SubmitEReportingResponse>(model);
         }
@@ -138,14 +140,15 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task SubmitXmlEreportingApiV1EreportingSubmitXmlPostAsyncTest()
         {
-            System.IO.Stream xmlFile = default!;
+            FactPulse.SDK.Client.FileParameter xmlFile = default!;
+            Client.Option<string?> organizationId = default!;
             Client.Option<string?> trackingId = default!;
             Client.Option<bool> skipValidation = default!;
             Client.Option<string?> pdpFlowServiceUrl = default!;
             Client.Option<string?> pdpTokenUrl = default!;
             Client.Option<string?> pdpClientId = default!;
             Client.Option<string?> pdpClientSecret = default!;
-            var response = await _instance.SubmitXmlEreportingApiV1EreportingSubmitXmlPostAsync(xmlFile, trackingId, skipValidation, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
+            var response = await _instance.SubmitXmlEreportingApiV1EreportingSubmitXmlPostAsync(xmlFile, organizationId, trackingId, skipValidation, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
             var model = response.Ok();
             Assert.IsType<SubmitEReportingResponse>(model);
         }
@@ -180,7 +183,7 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task ValidateXmlEreportingApiV1EreportingValidateXmlPostAsyncTest()
         {
-            System.IO.Stream xmlFile = default!;
+            FactPulse.SDK.Client.FileParameter xmlFile = default!;
             Client.Option<bool> validateCoherence = default!;
             Client.Option<bool> validatePeriod = default!;
             var response = await _instance.ValidateXmlEreportingApiV1EreportingValidateXmlPostAsync(xmlFile, validateCoherence, validatePeriod);

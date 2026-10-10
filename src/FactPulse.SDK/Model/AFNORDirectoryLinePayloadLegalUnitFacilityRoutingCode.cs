@@ -36,19 +36,23 @@ namespace FactPulse.SDK.Model
         /// </summary>
         /// <param name="addressingIdentifier">Addressing identifier of the directory line.</param>
         /// <param name="platformType">platformType</param>
+        /// <param name="directoryLineStatus">directoryLineStatus</param>
         /// <param name="siren">SIREN number</param>
         /// <param name="siret">SIRET Number</param>
+        /// <param name="routingIdentifier">Routing identifier od a routing code.</param>
         /// <param name="addressingSuffix">suffix of the directory line which defines an address mesh not attached to a facility</param>
         /// <param name="routingCode">routingCode</param>
         /// <param name="legalUnit">legalUnit</param>
         /// <param name="facility">facility</param>
         [JsonConstructor]
-        public AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode(Option<string?> addressingIdentifier = default, Option<AFNORRecipientPlatformType?> platformType = default, Option<string?> siren = default, Option<string?> siret = default, Option<string?> addressingSuffix = default, Option<AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCodeRoutingCode?> routingCode = default, Option<AFNORLegalUnitPayloadIncluded?> legalUnit = default, Option<AFNORFacilityPayloadIncluded?> facility = default)
+        public AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode(Option<string?> addressingIdentifier = default, Option<AFNORRecipientPlatformType?> platformType = default, Option<AFNORUniqueDirectoryLineStatus?> directoryLineStatus = default, Option<string?> siren = default, Option<string?> siret = default, Option<string?> routingIdentifier = default, Option<string?> addressingSuffix = default, Option<AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCodeRoutingCode?> routingCode = default, Option<AFNORLegalUnitPayloadIncluded?> legalUnit = default, Option<AFNORFacilityPayloadIncluded?> facility = default)
         {
             AddressingIdentifierOption = addressingIdentifier;
             PlatformTypeOption = platformType;
+            DirectoryLineStatusOption = directoryLineStatus;
             SirenOption = siren;
             SiretOption = siret;
+            RoutingIdentifierOption = routingIdentifier;
             AddressingSuffixOption = addressingSuffix;
             RoutingCodeOption = routingCode;
             LegalUnitOption = legalUnit;
@@ -69,7 +73,20 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets PlatformType
         /// </summary>
         [JsonPropertyName("platformType")]
-        public AFNORRecipientPlatformType? PlatformType { get { return this.PlatformTypeOption; } set { this.PlatformTypeOption = new(value); } }
+        public AFNORRecipientPlatformType? PlatformType { get { return this.PlatformTypeOption.Value; } set { this.PlatformTypeOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of DirectoryLineStatus
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<AFNORUniqueDirectoryLineStatus?> DirectoryLineStatusOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets DirectoryLineStatus
+        /// </summary>
+        [JsonPropertyName("directoryLineStatus")]
+        public AFNORUniqueDirectoryLineStatus? DirectoryLineStatus { get { return this.DirectoryLineStatusOption.Value; } set { this.DirectoryLineStatusOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of AddressingIdentifier
@@ -115,6 +132,21 @@ namespace FactPulse.SDK.Model
         /* <example>70204275500240</example> */
         [JsonPropertyName("siret")]
         public string? Siret { get { return this.SiretOption; } set { this.SiretOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of RoutingIdentifier
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<string?> RoutingIdentifierOption { get; private set; }
+
+        /// <summary>
+        /// Routing identifier od a routing code.
+        /// </summary>
+        /// <value>Routing identifier od a routing code.</value>
+        /* <example>dcsc456sdcsdcs556</example> */
+        [JsonPropertyName("routingIdentifier")]
+        public string? RoutingIdentifier { get { return this.RoutingIdentifierOption; } set { this.RoutingIdentifierOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of AddressingSuffix
@@ -180,8 +212,10 @@ namespace FactPulse.SDK.Model
             sb.Append("class AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode {\n");
             sb.Append("  AddressingIdentifier: ").Append(AddressingIdentifier).Append("\n");
             sb.Append("  PlatformType: ").Append(PlatformType).Append("\n");
+            sb.Append("  DirectoryLineStatus: ").Append(DirectoryLineStatus).Append("\n");
             sb.Append("  Siren: ").Append(Siren).Append("\n");
             sb.Append("  Siret: ").Append(Siret).Append("\n");
+            sb.Append("  RoutingIdentifier: ").Append(RoutingIdentifier).Append("\n");
             sb.Append("  AddressingSuffix: ").Append(AddressingSuffix).Append("\n");
             sb.Append("  RoutingCode: ").Append(RoutingCode).Append("\n");
             sb.Append("  LegalUnit: ").Append(LegalUnit).Append("\n");
@@ -235,6 +269,22 @@ namespace FactPulse.SDK.Model
                 }
             }
 
+            // RoutingIdentifier (string) maxLength
+            if (this.RoutingIdentifier != null && this.RoutingIdentifier.Length > 100)
+            {
+                yield return new ValidationResult("Invalid value for RoutingIdentifier, length must be less than 100.", new [] { "RoutingIdentifier" });
+            }
+
+            if (this.RoutingIdentifierOption.Value != null) {
+                // RoutingIdentifier (string) pattern
+                Regex regexRoutingIdentifier = new Regex(@"^(?!\s+$)[\-_/a-zA-Z0-9]{1,100}$", RegexOptions.CultureInvariant);
+
+                if (this.RoutingIdentifierOption.Value != null &&!regexRoutingIdentifier.Match(this.RoutingIdentifierOption.Value).Success)
+                {
+                    yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for RoutingIdentifier, must match a pattern of " + regexRoutingIdentifier, new [] { "RoutingIdentifier" });
+                }
+            }
+
             // AddressingSuffix (string) maxLength
             if (this.AddressingSuffix != null && this.AddressingSuffix.Length > 100)
             {
@@ -269,8 +319,10 @@ namespace FactPulse.SDK.Model
 
             Option<string?> addressingIdentifier = default;
             Option<AFNORRecipientPlatformType?> platformType = default;
+            Option<AFNORUniqueDirectoryLineStatus?> directoryLineStatus = default;
             Option<string?> siren = default;
             Option<string?> siret = default;
+            Option<string?> routingIdentifier = default;
             Option<string?> addressingSuffix = default;
             Option<AFNORDirectoryLinePayloadHistoryLegalUnitFacilityRoutingCodeRoutingCode?> routingCode = default;
             Option<AFNORLegalUnitPayloadIncluded?> legalUnit = default;
@@ -299,11 +351,19 @@ namespace FactPulse.SDK.Model
                             if (platformTypeRawValue != null)
                                 platformType = new Option<AFNORRecipientPlatformType?>(AFNORRecipientPlatformTypeValueConverter.FromStringOrDefault(platformTypeRawValue));
                             break;
+                        case "directoryLineStatus":
+                            string? directoryLineStatusRawValue = utf8JsonReader.GetString();
+                            if (directoryLineStatusRawValue != null)
+                                directoryLineStatus = new Option<AFNORUniqueDirectoryLineStatus?>(AFNORUniqueDirectoryLineStatusValueConverter.FromStringOrDefault(directoryLineStatusRawValue));
+                            break;
                         case "siren":
                             siren = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "siret":
                             siret = new Option<string?>(utf8JsonReader.GetString()!);
+                            break;
+                        case "routingIdentifier":
+                            routingIdentifier = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "addressingSuffix":
                             addressingSuffix = new Option<string?>(utf8JsonReader.GetString()!);
@@ -329,11 +389,17 @@ namespace FactPulse.SDK.Model
             if (platformType.IsSet && platformType.Value == null)
                 throw new ArgumentNullException(nameof(platformType), "Property is not nullable for class AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.");
 
+            if (directoryLineStatus.IsSet && directoryLineStatus.Value == null)
+                throw new ArgumentNullException(nameof(directoryLineStatus), "Property is not nullable for class AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.");
+
             if (siren.IsSet && siren.Value == null)
                 throw new ArgumentNullException(nameof(siren), "Property is not nullable for class AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.");
 
             if (siret.IsSet && siret.Value == null)
                 throw new ArgumentNullException(nameof(siret), "Property is not nullable for class AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.");
+
+            if (routingIdentifier.IsSet && routingIdentifier.Value == null)
+                throw new ArgumentNullException(nameof(routingIdentifier), "Property is not nullable for class AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.");
 
             if (addressingSuffix.IsSet && addressingSuffix.Value == null)
                 throw new ArgumentNullException(nameof(addressingSuffix), "Property is not nullable for class AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.");
@@ -347,7 +413,7 @@ namespace FactPulse.SDK.Model
             if (facility.IsSet && facility.Value == null)
                 throw new ArgumentNullException(nameof(facility), "Property is not nullable for class AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.");
 
-            return new AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode(addressingIdentifier, platformType, siren, siret, addressingSuffix, routingCode, legalUnit, facility);
+            return new AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode(addressingIdentifier, platformType, directoryLineStatus, siren, siret, routingIdentifier, addressingSuffix, routingCode, legalUnit, facility);
         }
 
         /// <summary>
@@ -383,6 +449,9 @@ namespace FactPulse.SDK.Model
             if (aFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.SiretOption.IsSet && aFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.Siret == null)
                 throw new ArgumentNullException(nameof(aFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.Siret), "Property is required for class AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.");
 
+            if (aFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.RoutingIdentifierOption.IsSet && aFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.RoutingIdentifier == null)
+                throw new ArgumentNullException(nameof(aFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.RoutingIdentifier), "Property is required for class AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.");
+
             if (aFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.AddressingSuffixOption.IsSet && aFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.AddressingSuffix == null)
                 throw new ArgumentNullException(nameof(aFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.AddressingSuffix), "Property is required for class AFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.");
 
@@ -403,11 +472,19 @@ namespace FactPulse.SDK.Model
                 var platformTypeRawValue = AFNORRecipientPlatformTypeValueConverter.ToJsonValue(aFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.PlatformType!.Value);
                 writer.WriteString("platformType", platformTypeRawValue);
             }
+            if (aFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.DirectoryLineStatusOption.IsSet)
+            {
+                var directoryLineStatusRawValue = AFNORUniqueDirectoryLineStatusValueConverter.ToJsonValue(aFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.DirectoryLineStatus!.Value);
+                writer.WriteString("directoryLineStatus", directoryLineStatusRawValue);
+            }
             if (aFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.SirenOption.IsSet)
                 writer.WriteString("siren", aFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.Siren);
 
             if (aFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.SiretOption.IsSet)
                 writer.WriteString("siret", aFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.Siret);
+
+            if (aFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.RoutingIdentifierOption.IsSet)
+                writer.WriteString("routingIdentifier", aFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.RoutingIdentifier);
 
             if (aFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.AddressingSuffixOption.IsSet)
                 writer.WriteString("addressingSuffix", aFNORDirectoryLinePayloadLegalUnitFacilityRoutingCode.AddressingSuffix);

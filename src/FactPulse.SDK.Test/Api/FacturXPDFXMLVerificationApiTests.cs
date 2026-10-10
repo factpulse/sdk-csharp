@@ -81,7 +81,7 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task VerifyPdfAsyncApiV1VerificationVerifyAsyncPostAsyncTest()
         {
-            System.IO.Stream pdfFile = default!;
+            FactPulse.SDK.Client.FileParameter pdfFile = default!;
             Client.Option<bool> forceOcr = default!;
             Client.Option<string?> callbackUrl = default!;
             Client.Option<string> webhookMode = default!;
@@ -96,7 +96,7 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task VerifyPdfSyncApiV1VerificationVerifyPostAsyncTest()
         {
-            System.IO.Stream pdfFile = default!;
+            FactPulse.SDK.Client.FileParameter pdfFile = default!;
             var response = await _instance.VerifyPdfSyncApiV1VerificationVerifyPostAsync(pdfFile);
             var model = response.Ok();
             Assert.IsType<VerificationSuccessResponse>(model);

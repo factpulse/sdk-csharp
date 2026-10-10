@@ -27,7 +27,7 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// Extension schema to build FFullFlowInfo, Flow schemas
+    /// Extension schema to build FullFlowInfo, Flow schemas
     /// </summary>
     public partial class AFNORFullFlowInfoExtension : IValidatableObject
     {
@@ -82,9 +82,9 @@ namespace FactPulse.SDK.Model
         IEnumerable<ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             // FlowId (string) maxLength
-            if (this.FlowId != null && this.FlowId.Length > 36)
+            if (this.FlowId != null && this.FlowId.Length > 64)
             {
-                yield return new ValidationResult("Invalid value for FlowId, length must be less than 36.", new [] { "FlowId" });
+                yield return new ValidationResult("Invalid value for FlowId, length must be less than 64.", new [] { "FlowId" });
             }
 
             yield break;

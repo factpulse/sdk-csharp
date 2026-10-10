@@ -125,7 +125,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets Status
         /// </summary>
         [JsonPropertyName("status")]
-        public StatusEnum? Status { get { return this.StatusOption; } set { this.StatusOption = new(value); } }
+        public StatusEnum? Status { get { return this.StatusOption.Value; } set { this.StatusOption = new(value); } }
 
         /// <summary>
         /// Gets or Sets ConversionId

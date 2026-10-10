@@ -43,7 +43,7 @@ namespace FactPulse.SDK.Model
         /// <param name="bic">bic</param>
         /// <param name="globalIds">globalIds</param>
         [JsonConstructor]
-        public Payee(string nom, Option<string?> payeeId = default, Option<string?> siret = default, Option<string?> siren = default, Option<ElectronicAddress?> electronicAddress = default, Option<string?> iban = default, Option<string?> bic = default, Option<List<ElectronicAddress>?> globalIds = default)
+        public Payee(string nom, Option<string?> payeeId = default, Option<string?> siret = default, Option<string?> siren = default, Option<ElectronicAddressInput?> electronicAddress = default, Option<string?> iban = default, Option<string?> bic = default, Option<List<ElectronicAddressInput>?> globalIds = default)
         {
             Nom = nom;
             PayeeIdOption = payeeId;
@@ -109,13 +109,13 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<ElectronicAddress?> ElectronicAddressOption { get; private set; }
+        public Option<ElectronicAddressInput?> ElectronicAddressOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets ElectronicAddress
         /// </summary>
         [JsonPropertyName("electronicAddress")]
-        public ElectronicAddress? ElectronicAddress { get { return this.ElectronicAddressOption; } set { this.ElectronicAddressOption = new(value); } }
+        public ElectronicAddressInput? ElectronicAddress { get { return this.ElectronicAddressOption; } set { this.ElectronicAddressOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Iban
@@ -148,13 +148,13 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<ElectronicAddress>?> GlobalIdsOption { get; private set; }
+        public Option<List<ElectronicAddressInput>?> GlobalIdsOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets GlobalIds
         /// </summary>
         [JsonPropertyName("global_ids")]
-        public List<ElectronicAddress>? GlobalIds { get { return this.GlobalIdsOption; } set { this.GlobalIdsOption = new(value); } }
+        public List<ElectronicAddressInput>? GlobalIds { get { return this.GlobalIdsOption; } set { this.GlobalIdsOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -239,10 +239,10 @@ namespace FactPulse.SDK.Model
             Option<string?> payeeId = default;
             Option<string?> siret = default;
             Option<string?> siren = default;
-            Option<ElectronicAddress?> electronicAddress = default;
+            Option<ElectronicAddressInput?> electronicAddress = default;
             Option<string?> iban = default;
             Option<string?> bic = default;
-            Option<List<ElectronicAddress>?> globalIds = default;
+            Option<List<ElectronicAddressInput>?> globalIds = default;
 
             while (utf8JsonReader.Read())
             {
@@ -272,7 +272,7 @@ namespace FactPulse.SDK.Model
                             siren = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "electronicAddress":
-                            electronicAddress = new Option<ElectronicAddress?>(JsonSerializer.Deserialize<ElectronicAddress>(ref utf8JsonReader, jsonSerializerOptions));
+                            electronicAddress = new Option<ElectronicAddressInput?>(JsonSerializer.Deserialize<ElectronicAddressInput>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "iban":
                             iban = new Option<string?>(utf8JsonReader.GetString());
@@ -281,7 +281,7 @@ namespace FactPulse.SDK.Model
                             bic = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "global_ids":
-                            globalIds = new Option<List<ElectronicAddress>?>(JsonSerializer.Deserialize<List<ElectronicAddress>>(ref utf8JsonReader, jsonSerializerOptions));
+                            globalIds = new Option<List<ElectronicAddressInput>?>(JsonSerializer.Deserialize<List<ElectronicAddressInput>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;

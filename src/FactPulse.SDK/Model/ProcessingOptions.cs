@@ -35,7 +35,7 @@ namespace FactPulse.SDK.Model
         /// Initializes a new instance of the <see cref="ProcessingOptions" /> class.
         /// </summary>
         /// <param name="facturxProfile">Factur-X profile to use</param>
-        /// <param name="autoEnrich">Auto-enrich data (Company APIs, Chorus Pro, etc.) (default to true)</param>
+        /// <param name="autoEnrich">Auto-enrich data (Company APIs, Chorus Pro, etc.). Applies to the **simplified format** only: a complete &#x60;FacturXInvoice&#x60; payload is used exactly as provided. (default to true)</param>
         /// <param name="validateXml">Validate Factur-X XML with Schematron (default to true)</param>
         /// <param name="verifyDestinationParameters">Verify required parameters for destination (e.g., service_code for Chorus) (default to true)</param>
         [JsonConstructor]
@@ -62,7 +62,7 @@ namespace FactPulse.SDK.Model
         /// </summary>
         /// <value>Factur-X profile to use</value>
         [JsonPropertyName("facturxProfile")]
-        public APIProfile? FacturxProfile { get { return this.FacturxProfileOption; } set { this.FacturxProfileOption = new(value); } }
+        public APIProfile? FacturxProfile { get { return this.FacturxProfileOption.Value; } set { this.FacturxProfileOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of AutoEnrich
@@ -72,9 +72,9 @@ namespace FactPulse.SDK.Model
         public Option<bool?> AutoEnrichOption { get; private set; }
 
         /// <summary>
-        /// Auto-enrich data (Company APIs, Chorus Pro, etc.)
+        /// Auto-enrich data (Company APIs, Chorus Pro, etc.). Applies to the **simplified format** only: a complete &#x60;FacturXInvoice&#x60; payload is used exactly as provided.
         /// </summary>
-        /// <value>Auto-enrich data (Company APIs, Chorus Pro, etc.)</value>
+        /// <value>Auto-enrich data (Company APIs, Chorus Pro, etc.). Applies to the **simplified format** only: a complete &#x60;FacturXInvoice&#x60; payload is used exactly as provided.</value>
         [JsonPropertyName("autoEnrich")]
         public bool? AutoEnrich { get { return this.AutoEnrichOption; } set { this.AutoEnrichOption = new(value); } }
 

@@ -64,12 +64,30 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'ProcessingRule'
+        /// </summary>
+        [Fact]
+        public void ProcessingRuleTest()
+        {
+            // TODO unit test for the property 'ProcessingRule'
+        }
+
+        /// <summary>
         /// Test the property 'FlowSyntax'
         /// </summary>
         [Fact]
         public void FlowSyntaxTest()
         {
             // TODO unit test for the property 'FlowSyntax'
+        }
+
+        /// <summary>
+        /// Test the property 'FlowProfile'
+        /// </summary>
+        [Fact]
+        public void FlowProfileTest()
+        {
+            // TODO unit test for the property 'FlowProfile'
         }
 
         /// <summary>
@@ -142,24 +160,6 @@ namespace FactPulse.SDK.Test.Model
         public void TrackingIdTest()
         {
             // TODO unit test for the property 'TrackingId'
-        }
-
-        /// <summary>
-        /// Test the property 'ProcessingRule'
-        /// </summary>
-        [Fact]
-        public void ProcessingRuleTest()
-        {
-            // TODO unit test for the property 'ProcessingRule'
-        }
-
-        /// <summary>
-        /// Test the property 'FlowProfile'
-        /// </summary>
-        [Fact]
-        public void FlowProfileTest()
-        {
-            // TODO unit test for the property 'FlowProfile'
         }
     }
 }

@@ -27,9 +27,9 @@ using FactPulse.SDK.Client;
 namespace FactPulse.SDK.Model
 {
     /// <summary>
-    /// AFNOR XP Z12-013 ProcessingRule (Annexe A v1.2.0).  Valeurs EXACTES de la spec (case-sensitive).
+    /// AFNOR XP Z12-013 ProcessingRule (Annexe A v1.3.0).  Valeurs EXACTES de la spec (case-sensitive).
     /// </summary>
-    /// <value>AFNOR XP Z12-013 ProcessingRule (Annexe A v1.2.0).  Valeurs EXACTES de la spec (case-sensitive).</value>
+    /// <value>AFNOR XP Z12-013 ProcessingRule (Annexe A v1.3.0).  Valeurs EXACTES de la spec (case-sensitive).</value>
     public enum ProcessingRule
     {
         /// <summary>
@@ -75,7 +75,12 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Enum NotApplicable for value: NotApplicable
         /// </summary>
-        NotApplicable = 9
+        NotApplicable = 9,
+
+        /// <summary>
+        /// Enum Undefined for value: Undefined
+        /// </summary>
+        Undefined = 10
     }
 
     /// <summary>
@@ -117,6 +122,9 @@ namespace FactPulse.SDK.Model
             if (value.Equals("NotApplicable"))
                 return ProcessingRule.NotApplicable;
 
+            if (value.Equals("Undefined"))
+                return ProcessingRule.Undefined;
+
             throw new NotImplementedException($"Could not convert value to type ProcessingRule: '{value}'");
         }
 
@@ -153,6 +161,9 @@ namespace FactPulse.SDK.Model
 
             if (value.Equals("NotApplicable"))
                 return ProcessingRule.NotApplicable;
+
+            if (value.Equals("Undefined"))
+                return ProcessingRule.Undefined;
 
             return null;
         }
@@ -191,6 +202,9 @@ namespace FactPulse.SDK.Model
 
             if (value == ProcessingRule.NotApplicable)
                 return "NotApplicable";
+
+            if (value == ProcessingRule.Undefined)
+                return "Undefined";
 
             throw new NotImplementedException($"Value could not be handled: '{value}'");
         }

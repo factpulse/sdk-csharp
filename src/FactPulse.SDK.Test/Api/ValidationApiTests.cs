@@ -57,7 +57,7 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task ValidateXmlApiV1ProcessingValidateXmlPostAsyncTest()
         {
-            System.IO.Stream xmlFile = default!;
+            FactPulse.SDK.Client.FileParameter xmlFile = default!;
             Client.Option<APIProfile> profile = default!;
             Client.Option<bool?> skipBrFr = default!;
             var response = await _instance.ValidateXmlApiV1ProcessingValidateXmlPostAsync(xmlFile, profile, skipBrFr);

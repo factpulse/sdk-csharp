@@ -69,7 +69,7 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task SignPdfApiV1ProcessingSignPdfPostAsyncTest()
         {
-            System.IO.Stream pdfFile = default!;
+            FactPulse.SDK.Client.FileParameter pdfFile = default!;
             Client.Option<string?> reason = default!;
             Client.Option<string?> location = default!;
             Client.Option<string?> contact = default!;
@@ -87,7 +87,7 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task SignPdfAsyncApiV1ProcessingSignPdfAsyncPostAsyncTest()
         {
-            System.IO.Stream pdfFile = default!;
+            FactPulse.SDK.Client.FileParameter pdfFile = default!;
             Client.Option<string?> callbackUrl = default!;
             Client.Option<string> webhookMode = default!;
             Client.Option<string?> reason = default!;
@@ -107,7 +107,7 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task ValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostAsyncTest()
         {
-            System.IO.Stream pdfFile = default!;
+            FactPulse.SDK.Client.FileParameter pdfFile = default!;
             var response = await _instance.ValidatePdfSignatureEndpointApiV1ProcessingValidatePdfSignaturePostAsync(pdfFile);
             var model = response.Ok();
             Assert.IsType<Object>(model);

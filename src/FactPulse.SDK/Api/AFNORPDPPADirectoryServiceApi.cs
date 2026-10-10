@@ -553,19 +553,13 @@ namespace FactPulse.SDK.Api
     /// <summary>
     /// The <see cref="ISearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostApiResponse"/>
     /// </summary>
-    public interface ISearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.AFNORDirectoryLineSearchPost200Response?>, IPartialContent<FactPulse.SDK.Model.AFNORDirectoryLineSearchPost200Response?>
+    public interface ISearchDirectoryLineProxyApiV1AfnorDirectoryV1DirectoryLineSearchPostApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.AFNORDirectoryLineSearchPost200Response?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
         bool IsOk { get; }
-
-        /// <summary>
-        /// Returns true if the response is 206 PartialContent
-        /// </summary>
-        /// <returns></returns>
-        bool IsPartialContent { get; }
 
         /// <summary>
         /// Returns true if the response is 400 BadRequest
@@ -626,30 +620,18 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <returns></returns>
         bool IsServiceUnavailable { get; }
-
-        /// <summary>
-        /// Returns true if the response is 204 NoContent
-        /// </summary>
-        /// <returns></returns>
-        bool IsNoContent { get; }
     }
 
     /// <summary>
     /// The <see cref="ISearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostApiResponse"/>
     /// </summary>
-    public interface ISearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.AFNORRoutingCodeSearchPost200Response?>, IPartialContent<FactPulse.SDK.Model.AFNORRoutingCodeSearchPost200Response?>
+    public interface ISearchRoutingCodeProxyApiV1AfnorDirectoryV1RoutingCodeSearchPostApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.AFNORRoutingCodeSearchPost200Response?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
         bool IsOk { get; }
-
-        /// <summary>
-        /// Returns true if the response is 206 PartialContent
-        /// </summary>
-        /// <returns></returns>
-        bool IsPartialContent { get; }
 
         /// <summary>
         /// Returns true if the response is 400 BadRequest
@@ -710,30 +692,18 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <returns></returns>
         bool IsServiceUnavailable { get; }
-
-        /// <summary>
-        /// Returns true if the response is 204 NoContent
-        /// </summary>
-        /// <returns></returns>
-        bool IsNoContent { get; }
     }
 
     /// <summary>
     /// The <see cref="ISearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostApiResponse"/>
     /// </summary>
-    public interface ISearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.AFNORSirenSearchPost200Response?>, IPartialContent<FactPulse.SDK.Model.AFNORSirenSearchPost200Response?>
+    public interface ISearchSirenProxyApiV1AfnorDirectoryV1SirenSearchPostApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.AFNORSirenSearchPost200Response?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
         bool IsOk { get; }
-
-        /// <summary>
-        /// Returns true if the response is 206 PartialContent
-        /// </summary>
-        /// <returns></returns>
-        bool IsPartialContent { get; }
 
         /// <summary>
         /// Returns true if the response is 400 BadRequest
@@ -794,30 +764,18 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <returns></returns>
         bool IsServiceUnavailable { get; }
-
-        /// <summary>
-        /// Returns true if the response is 204 NoContent
-        /// </summary>
-        /// <returns></returns>
-        bool IsNoContent { get; }
     }
 
     /// <summary>
     /// The <see cref="ISearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostApiResponse"/>
     /// </summary>
-    public interface ISearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.AFNORSiretSearchPost200Response?>, IPartialContent<FactPulse.SDK.Model.AFNORSiretSearchPost200Response?>
+    public interface ISearchSiretProxyApiV1AfnorDirectoryV1SiretSearchPostApiResponse : FactPulse.SDK.Client.IApiResponse, IOk<FactPulse.SDK.Model.AFNORSiretSearchPost200Response?>
     {
         /// <summary>
         /// Returns true if the response is 200 Ok
         /// </summary>
         /// <returns></returns>
         bool IsOk { get; }
-
-        /// <summary>
-        /// Returns true if the response is 206 PartialContent
-        /// </summary>
-        /// <returns></returns>
-        bool IsPartialContent { get; }
 
         /// <summary>
         /// Returns true if the response is 400 BadRequest
@@ -878,12 +836,6 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <returns></returns>
         bool IsServiceUnavailable { get; }
-
-        /// <summary>
-        /// Returns true if the response is 204 NoContent
-        /// </summary>
-        /// <returns></returns>
-        bool IsNoContent { get; }
     }
 
     /// <summary>
@@ -2783,44 +2735,6 @@ namespace FactPulse.SDK.Api
             }
 
             /// <summary>
-            /// Returns true if the response is 206 PartialContent
-            /// </summary>
-            /// <returns></returns>
-            public bool IsPartialContent => 206 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 206 PartialContent
-            /// </summary>
-            /// <returns></returns>
-            public FactPulse.SDK.Model.AFNORDirectoryLineSearchPost200Response? PartialContent()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsPartialContent
-                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.AFNORDirectoryLineSearchPost200Response>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 206 PartialContent and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryPartialContent([NotNullWhen(true)]out FactPulse.SDK.Model.AFNORDirectoryLineSearchPost200Response? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = PartialContent();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)206);
-                }
-
-                return result != null;
-            }
-
-            /// <summary>
             /// Returns true if the response is 400 BadRequest
             /// </summary>
             /// <returns></returns>
@@ -2879,12 +2793,6 @@ namespace FactPulse.SDK.Api
             /// </summary>
             /// <returns></returns>
             public bool IsServiceUnavailable => 503 == (int)StatusCode;
-
-            /// <summary>
-            /// Returns true if the response is 204 NoContent
-            /// </summary>
-            /// <returns></returns>
-            public bool IsNoContent => 204 == (int)StatusCode;
 
             private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
             {
@@ -3105,44 +3013,6 @@ namespace FactPulse.SDK.Api
             }
 
             /// <summary>
-            /// Returns true if the response is 206 PartialContent
-            /// </summary>
-            /// <returns></returns>
-            public bool IsPartialContent => 206 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 206 PartialContent
-            /// </summary>
-            /// <returns></returns>
-            public FactPulse.SDK.Model.AFNORRoutingCodeSearchPost200Response? PartialContent()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsPartialContent
-                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.AFNORRoutingCodeSearchPost200Response>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 206 PartialContent and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryPartialContent([NotNullWhen(true)]out FactPulse.SDK.Model.AFNORRoutingCodeSearchPost200Response? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = PartialContent();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)206);
-                }
-
-                return result != null;
-            }
-
-            /// <summary>
             /// Returns true if the response is 400 BadRequest
             /// </summary>
             /// <returns></returns>
@@ -3201,12 +3071,6 @@ namespace FactPulse.SDK.Api
             /// </summary>
             /// <returns></returns>
             public bool IsServiceUnavailable => 503 == (int)StatusCode;
-
-            /// <summary>
-            /// Returns true if the response is 204 NoContent
-            /// </summary>
-            /// <returns></returns>
-            public bool IsNoContent => 204 == (int)StatusCode;
 
             private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
             {
@@ -3427,44 +3291,6 @@ namespace FactPulse.SDK.Api
             }
 
             /// <summary>
-            /// Returns true if the response is 206 PartialContent
-            /// </summary>
-            /// <returns></returns>
-            public bool IsPartialContent => 206 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 206 PartialContent
-            /// </summary>
-            /// <returns></returns>
-            public FactPulse.SDK.Model.AFNORSirenSearchPost200Response? PartialContent()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsPartialContent
-                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.AFNORSirenSearchPost200Response>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 206 PartialContent and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryPartialContent([NotNullWhen(true)]out FactPulse.SDK.Model.AFNORSirenSearchPost200Response? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = PartialContent();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)206);
-                }
-
-                return result != null;
-            }
-
-            /// <summary>
             /// Returns true if the response is 400 BadRequest
             /// </summary>
             /// <returns></returns>
@@ -3523,12 +3349,6 @@ namespace FactPulse.SDK.Api
             /// </summary>
             /// <returns></returns>
             public bool IsServiceUnavailable => 503 == (int)StatusCode;
-
-            /// <summary>
-            /// Returns true if the response is 204 NoContent
-            /// </summary>
-            /// <returns></returns>
-            public bool IsNoContent => 204 == (int)StatusCode;
 
             private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
             {
@@ -3749,44 +3569,6 @@ namespace FactPulse.SDK.Api
             }
 
             /// <summary>
-            /// Returns true if the response is 206 PartialContent
-            /// </summary>
-            /// <returns></returns>
-            public bool IsPartialContent => 206 == (int)StatusCode;
-
-            /// <summary>
-            /// Deserializes the response if the response is 206 PartialContent
-            /// </summary>
-            /// <returns></returns>
-            public FactPulse.SDK.Model.AFNORSiretSearchPost200Response? PartialContent()
-            {
-                // This logic may be modified with the AsModel.mustache template
-                return IsPartialContent
-                    ? System.Text.Json.JsonSerializer.Deserialize<FactPulse.SDK.Model.AFNORSiretSearchPost200Response>(RawContent, _jsonSerializerOptions)
-                    : null;
-            }
-
-            /// <summary>
-            /// Returns true if the response is 206 PartialContent and the deserialized response is not null
-            /// </summary>
-            /// <param name="result"></param>
-            /// <returns></returns>
-            public bool TryPartialContent([NotNullWhen(true)]out FactPulse.SDK.Model.AFNORSiretSearchPost200Response? result)
-            {
-                result = null;
-
-                try
-                {
-                    result = PartialContent();
-                } catch (Exception e)
-                {
-                    OnDeserializationErrorDefaultImplementation(e, (HttpStatusCode)206);
-                }
-
-                return result != null;
-            }
-
-            /// <summary>
             /// Returns true if the response is 400 BadRequest
             /// </summary>
             /// <returns></returns>
@@ -3845,12 +3627,6 @@ namespace FactPulse.SDK.Api
             /// </summary>
             /// <returns></returns>
             public bool IsServiceUnavailable => 503 == (int)StatusCode;
-
-            /// <summary>
-            /// Returns true if the response is 204 NoContent
-            /// </summary>
-            /// <returns></returns>
-            public bool IsNoContent => 204 == (int)StatusCode;
 
             private void OnDeserializationErrorDefaultImplementation(Exception exception, HttpStatusCode httpStatusCode)
             {

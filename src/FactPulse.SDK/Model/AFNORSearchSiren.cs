@@ -121,7 +121,7 @@ namespace FactPulse.SDK.Model
         /// Number of results to skip
         /// </summary>
         /// <value>Number of results to skip</value>
-        /* <example>20</example> */
+        /* <example>0</example> */
         [JsonPropertyName("ignore")]
         public int? Ignore { get { return this.IgnoreOption; } set { this.IgnoreOption = new(value); } }
 

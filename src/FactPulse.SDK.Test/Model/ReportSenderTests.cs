@@ -73,6 +73,15 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'SchemeId'
+        /// </summary>
+        [Fact]
+        public void SchemeIdTest()
+        {
+            // TODO unit test for the property 'SchemeId'
+        }
+
+        /// <summary>
         /// Test the property 'VatId'
         /// </summary>
         [Fact]

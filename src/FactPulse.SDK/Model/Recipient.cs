@@ -44,7 +44,7 @@ namespace FactPulse.SDK.Model
         /// <param name="contact">contact</param>
         /// <param name="globalIds">globalIds</param>
         [JsonConstructor]
-        public Recipient(Option<ElectronicAddress?> electronicAddress = default, Option<string?> executingServiceCode = default, Option<string?> name = default, Option<string?> siren = default, Option<string?> siret = default, Option<string?> vatNumber = default, Option<PostalAddress?> postalAddress = default, Option<Contact?> contact = default, Option<List<ElectronicAddress>?> globalIds = default)
+        public Recipient(Option<ElectronicAddressInput?> electronicAddress = default, Option<string?> executingServiceCode = default, Option<string?> name = default, Option<string?> siren = default, Option<string?> siret = default, Option<string?> vatNumber = default, Option<PostalAddressInput?> postalAddress = default, Option<Contact?> contact = default, Option<List<ElectronicAddressInput>?> globalIds = default)
         {
             ElectronicAddressOption = electronicAddress;
             ExecutingServiceCodeOption = executingServiceCode;
@@ -65,13 +65,13 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<ElectronicAddress?> ElectronicAddressOption { get; private set; }
+        public Option<ElectronicAddressInput?> ElectronicAddressOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets ElectronicAddress
         /// </summary>
         [JsonPropertyName("electronic_address")]
-        public ElectronicAddress? ElectronicAddress { get { return this.ElectronicAddressOption; } set { this.ElectronicAddressOption = new(value); } }
+        public ElectronicAddressInput? ElectronicAddress { get { return this.ElectronicAddressOption; } set { this.ElectronicAddressOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of ExecutingServiceCode
@@ -143,13 +143,13 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<PostalAddress?> PostalAddressOption { get; private set; }
+        public Option<PostalAddressInput?> PostalAddressOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets PostalAddress
         /// </summary>
         [JsonPropertyName("postal_address")]
-        public PostalAddress? PostalAddress { get { return this.PostalAddressOption; } set { this.PostalAddressOption = new(value); } }
+        public PostalAddressInput? PostalAddress { get { return this.PostalAddressOption; } set { this.PostalAddressOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of Contact
@@ -169,13 +169,13 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<List<ElectronicAddress>?> GlobalIdsOption { get; private set; }
+        public Option<List<ElectronicAddressInput>?> GlobalIdsOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets GlobalIds
         /// </summary>
         [JsonPropertyName("global_ids")]
-        public List<ElectronicAddress>? GlobalIds { get { return this.GlobalIdsOption; } set { this.GlobalIdsOption = new(value); } }
+        public List<ElectronicAddressInput>? GlobalIds { get { return this.GlobalIdsOption; } set { this.GlobalIdsOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -231,15 +231,15 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<ElectronicAddress?> electronicAddress = default;
+            Option<ElectronicAddressInput?> electronicAddress = default;
             Option<string?> executingServiceCode = default;
             Option<string?> name = default;
             Option<string?> siren = default;
             Option<string?> siret = default;
             Option<string?> vatNumber = default;
-            Option<PostalAddress?> postalAddress = default;
+            Option<PostalAddressInput?> postalAddress = default;
             Option<Contact?> contact = default;
-            Option<List<ElectronicAddress>?> globalIds = default;
+            Option<List<ElectronicAddressInput>?> globalIds = default;
 
             while (utf8JsonReader.Read())
             {
@@ -257,7 +257,7 @@ namespace FactPulse.SDK.Model
                     switch (localVarJsonPropertyName)
                     {
                         case "electronic_address":
-                            electronicAddress = new Option<ElectronicAddress?>(JsonSerializer.Deserialize<ElectronicAddress>(ref utf8JsonReader, jsonSerializerOptions));
+                            electronicAddress = new Option<ElectronicAddressInput?>(JsonSerializer.Deserialize<ElectronicAddressInput>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "executing_service_code":
                             executingServiceCode = new Option<string?>(utf8JsonReader.GetString());
@@ -275,13 +275,13 @@ namespace FactPulse.SDK.Model
                             vatNumber = new Option<string?>(utf8JsonReader.GetString());
                             break;
                         case "postal_address":
-                            postalAddress = new Option<PostalAddress?>(JsonSerializer.Deserialize<PostalAddress>(ref utf8JsonReader, jsonSerializerOptions));
+                            postalAddress = new Option<PostalAddressInput?>(JsonSerializer.Deserialize<PostalAddressInput>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "contact":
                             contact = new Option<Contact?>(JsonSerializer.Deserialize<Contact>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "global_ids":
-                            globalIds = new Option<List<ElectronicAddress>?>(JsonSerializer.Deserialize<List<ElectronicAddress>>(ref utf8JsonReader, jsonSerializerOptions));
+                            globalIds = new Option<List<ElectronicAddressInput>?>(JsonSerializer.Deserialize<List<ElectronicAddressInput>>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         default:
                             break;

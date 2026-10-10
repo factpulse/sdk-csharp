@@ -159,9 +159,10 @@ namespace FactPulse.SDK.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="submitAggregatedReportRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostApiResponse"/>&gt;</returns>
-        Task<ISubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostApiResponse> SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostAsync(SubmitAggregatedReportRequest submitAggregatedReportRequest, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostApiResponse> SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostAsync(SubmitAggregatedReportRequest submitAggregatedReportRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Submit aggregated e-reporting to PA/PDP
@@ -170,9 +171,10 @@ namespace FactPulse.SDK.Api
         /// Generate and submit a PPF-compliant aggregated e-reporting to a PA/PDP.  Combines generation and submission in a single call. Automatically determines the AFNOR FlowType based on content.
         /// </remarks>
         /// <param name="submitAggregatedReportRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostApiResponse"/>?&gt;</returns>
-        Task<ISubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostApiResponse?> SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostOrDefaultAsync(SubmitAggregatedReportRequest submitAggregatedReportRequest, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostApiResponse?> SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostOrDefaultAsync(SubmitAggregatedReportRequest submitAggregatedReportRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Submit e-reporting to PA/PDP
@@ -182,9 +184,10 @@ namespace FactPulse.SDK.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="submitEReportingRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitEreportingApiV1EreportingSubmitPostApiResponse"/>&gt;</returns>
-        Task<ISubmitEreportingApiV1EreportingSubmitPostApiResponse> SubmitEreportingApiV1EreportingSubmitPostAsync(SubmitEReportingRequest submitEReportingRequest, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISubmitEreportingApiV1EreportingSubmitPostApiResponse> SubmitEreportingApiV1EreportingSubmitPostAsync(SubmitEReportingRequest submitEReportingRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Submit e-reporting to PA/PDP
@@ -193,9 +196,10 @@ namespace FactPulse.SDK.Api
         /// Generate and submit e-reporting to a PA (Plateforme Agréée).  Authentication strategies (same as invoices): 1. **JWT with client_uid** (recommended): PDP credentials fetched from backend 2. **Zero-storage**: Provide pdpFlowServiceUrl, pdpClientId, pdpClientSecret in request  The e-reporting is submitted using the AFNOR Flow Service API with syntax&#x3D;FRR (FRench Reporting).
         /// </remarks>
         /// <param name="submitEReportingRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitEreportingApiV1EreportingSubmitPostApiResponse"/>?&gt;</returns>
-        Task<ISubmitEreportingApiV1EreportingSubmitPostApiResponse?> SubmitEreportingApiV1EreportingSubmitPostOrDefaultAsync(SubmitEReportingRequest submitEReportingRequest, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISubmitEreportingApiV1EreportingSubmitPostApiResponse?> SubmitEreportingApiV1EreportingSubmitPostOrDefaultAsync(SubmitEReportingRequest submitEReportingRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Submit pre-generated e-reporting XML
@@ -205,6 +209,7 @@ namespace FactPulse.SDK.Api
         /// </remarks>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="xmlFile">E-reporting XML file</param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="trackingId"> (optional)</param>
         /// <param name="skipValidation">Skip XSD validation (optional, default to false)</param>
         /// <param name="pdpFlowServiceUrl"> (optional)</param>
@@ -213,7 +218,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pdpClientSecret"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitXmlEreportingApiV1EreportingSubmitXmlPostApiResponse"/>&gt;</returns>
-        Task<ISubmitXmlEreportingApiV1EreportingSubmitXmlPostApiResponse> SubmitXmlEreportingApiV1EreportingSubmitXmlPostAsync(System.IO.Stream xmlFile, Option<string?> trackingId = default, Option<bool> skipValidation = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISubmitXmlEreportingApiV1EreportingSubmitXmlPostApiResponse> SubmitXmlEreportingApiV1EreportingSubmitXmlPostAsync(FactPulse.SDK.Client.FileParameter xmlFile, Option<string?> organizationId = default, Option<string?> trackingId = default, Option<bool> skipValidation = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Submit pre-generated e-reporting XML
@@ -222,6 +227,7 @@ namespace FactPulse.SDK.Api
         /// Submit a pre-generated e-reporting XML file directly to a PA/PDP.  This endpoint is designed for clients who generate their own PPF-compliant XML and only need FactPulse for the PDP submission.  **Process:** 1. Validates the XML against PPF XSD schemas 2. Determines the appropriate AFNOR FlowType 3. Submits to the configured PDP/PA 4. Returns the flowId for tracking  **Authentication:** Same strategies as /submit endpoint (JWT or zero-storage credentials).
         /// </remarks>
         /// <param name="xmlFile">E-reporting XML file</param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="trackingId"> (optional)</param>
         /// <param name="skipValidation">Skip XSD validation (optional, default to false)</param>
         /// <param name="pdpFlowServiceUrl"> (optional)</param>
@@ -230,7 +236,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pdpClientSecret"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitXmlEreportingApiV1EreportingSubmitXmlPostApiResponse"/>?&gt;</returns>
-        Task<ISubmitXmlEreportingApiV1EreportingSubmitXmlPostApiResponse?> SubmitXmlEreportingApiV1EreportingSubmitXmlPostOrDefaultAsync(System.IO.Stream xmlFile, Option<string?> trackingId = default, Option<bool> skipValidation = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<ISubmitXmlEreportingApiV1EreportingSubmitXmlPostApiResponse?> SubmitXmlEreportingApiV1EreportingSubmitXmlPostOrDefaultAsync(FactPulse.SDK.Client.FileParameter xmlFile, Option<string?> organizationId = default, Option<string?> trackingId = default, Option<bool> skipValidation = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Validate aggregated e-reporting data
@@ -290,7 +296,7 @@ namespace FactPulse.SDK.Api
         /// <param name="validatePeriod">Validate period coherence (REJ_PER) (optional, default to true)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse"/>&gt;</returns>
-        Task<IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse> ValidateXmlEreportingApiV1EreportingValidateXmlPostAsync(System.IO.Stream xmlFile, Option<bool> validateCoherence = default, Option<bool> validatePeriod = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse> ValidateXmlEreportingApiV1EreportingValidateXmlPostAsync(FactPulse.SDK.Client.FileParameter xmlFile, Option<bool> validateCoherence = default, Option<bool> validatePeriod = default, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Validate e-reporting XML (PPF Annexe 6 v1.9 compliant)
@@ -303,7 +309,7 @@ namespace FactPulse.SDK.Api
         /// <param name="validatePeriod">Validate period coherence (REJ_PER) (optional, default to true)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse"/>?&gt;</returns>
-        Task<IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse?> ValidateXmlEreportingApiV1EreportingValidateXmlPostOrDefaultAsync(System.IO.Stream xmlFile, Option<bool> validateCoherence = default, Option<bool> validatePeriod = default, System.Threading.CancellationToken cancellationToken = default);
+        Task<IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse?> ValidateXmlEreportingApiV1EreportingValidateXmlPostOrDefaultAsync(FactPulse.SDK.Client.FileParameter xmlFile, Option<bool> validateCoherence = default, Option<bool> validatePeriod = default, System.Threading.CancellationToken cancellationToken = default);
     }
 
     /// <summary>
@@ -2398,7 +2404,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost(SubmitAggregatedReportRequest submitAggregatedReportRequest);
+        partial void FormatSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost(SubmitAggregatedReportRequest submitAggregatedReportRequest, ref Option<string?> organizationId);
 
         /// <summary>
         /// Validates the request parameters
@@ -2416,10 +2422,11 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="submitAggregatedReportRequest"></param>
-        private void AfterSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostDefaultImplementation(ISubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostApiResponse apiResponseLocalVar, SubmitAggregatedReportRequest submitAggregatedReportRequest)
+        /// <param name="organizationId"></param>
+        private void AfterSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostDefaultImplementation(ISubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostApiResponse apiResponseLocalVar, SubmitAggregatedReportRequest submitAggregatedReportRequest, Option<string?> organizationId)
         {
             bool suppressDefaultLog = false;
-            AfterSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost(ref suppressDefaultLog, apiResponseLocalVar, submitAggregatedReportRequest);
+            AfterSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost(ref suppressDefaultLog, apiResponseLocalVar, submitAggregatedReportRequest, organizationId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -2430,7 +2437,8 @@ namespace FactPulse.SDK.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="submitAggregatedReportRequest"></param>
-        partial void AfterSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost(ref bool suppressDefaultLog, ISubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostApiResponse apiResponseLocalVar, SubmitAggregatedReportRequest submitAggregatedReportRequest);
+        /// <param name="organizationId"></param>
+        partial void AfterSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost(ref bool suppressDefaultLog, ISubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostApiResponse apiResponseLocalVar, SubmitAggregatedReportRequest submitAggregatedReportRequest, Option<string?> organizationId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -2439,10 +2447,11 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="submitAggregatedReportRequest"></param>
-        private void OnErrorSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitAggregatedReportRequest submitAggregatedReportRequest)
+        /// <param name="organizationId"></param>
+        private void OnErrorSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitAggregatedReportRequest submitAggregatedReportRequest, Option<string?> organizationId)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, submitAggregatedReportRequest);
+            OnErrorSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, submitAggregatedReportRequest, organizationId);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -2455,19 +2464,21 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="submitAggregatedReportRequest"></param>
-        partial void OnErrorSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitAggregatedReportRequest submitAggregatedReportRequest);
+        /// <param name="organizationId"></param>
+        partial void OnErrorSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitAggregatedReportRequest submitAggregatedReportRequest, Option<string?> organizationId);
 
         /// <summary>
         /// Submit aggregated e-reporting to PA/PDP Generate and submit a PPF-compliant aggregated e-reporting to a PA/PDP.  Combines generation and submission in a single call. Automatically determines the AFNOR FlowType based on content.
         /// </summary>
         /// <param name="submitAggregatedReportRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostApiResponse"/>&gt;</returns>
-        public async Task<ISubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostApiResponse?> SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostOrDefaultAsync(SubmitAggregatedReportRequest submitAggregatedReportRequest, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostApiResponse?> SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostOrDefaultAsync(SubmitAggregatedReportRequest submitAggregatedReportRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostAsync(submitAggregatedReportRequest, cancellationToken).ConfigureAwait(false);
+                return await SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostAsync(submitAggregatedReportRequest, organizationId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -2480,9 +2491,10 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="submitAggregatedReportRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostApiResponse"/>&gt;</returns>
-        public async Task<ISubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostApiResponse> SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostAsync(SubmitAggregatedReportRequest submitAggregatedReportRequest, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostApiResponse> SubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostAsync(SubmitAggregatedReportRequest submitAggregatedReportRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -2490,7 +2502,7 @@ namespace FactPulse.SDK.Api
             {
                 ValidateSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost(submitAggregatedReportRequest);
 
-                FormatSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost(submitAggregatedReportRequest);
+                FormatSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost(submitAggregatedReportRequest, ref organizationId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -2500,6 +2512,9 @@ namespace FactPulse.SDK.Api
                     uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
                         ? "/api/v1/ereporting/submit-aggregated"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/ereporting/submit-aggregated");
+
+                    if (organizationId.IsSet)
+                        httpRequestMessageLocalVar.Headers.Add("Organization-Id", ClientUtils.ParameterToString(organizationId.Value));
 
                     httpRequestMessageLocalVar.Content = (submitAggregatedReportRequest as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
@@ -2550,7 +2565,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostDefaultImplementation(apiResponseLocalVar, submitAggregatedReportRequest);
+                        AfterSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostDefaultImplementation(apiResponseLocalVar, submitAggregatedReportRequest, organizationId);
 
                         Events.ExecuteOnSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost(apiResponseLocalVar);
 
@@ -2564,7 +2579,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostDefaultImplementation(e, "/api/v1/ereporting/submit-aggregated", uriBuilderLocalVar.Path, submitAggregatedReportRequest);
+                OnErrorSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPostDefaultImplementation(e, "/api/v1/ereporting/submit-aggregated", uriBuilderLocalVar.Path, submitAggregatedReportRequest, organizationId);
                 Events.ExecuteOnErrorSubmitAggregatedEreportingApiV1EreportingSubmitAggregatedPost(e);
                 throw;
             }
@@ -2719,7 +2734,7 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatSubmitEreportingApiV1EreportingSubmitPost(SubmitEReportingRequest submitEReportingRequest);
+        partial void FormatSubmitEreportingApiV1EreportingSubmitPost(SubmitEReportingRequest submitEReportingRequest, ref Option<string?> organizationId);
 
         /// <summary>
         /// Validates the request parameters
@@ -2737,10 +2752,11 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="submitEReportingRequest"></param>
-        private void AfterSubmitEreportingApiV1EreportingSubmitPostDefaultImplementation(ISubmitEreportingApiV1EreportingSubmitPostApiResponse apiResponseLocalVar, SubmitEReportingRequest submitEReportingRequest)
+        /// <param name="organizationId"></param>
+        private void AfterSubmitEreportingApiV1EreportingSubmitPostDefaultImplementation(ISubmitEreportingApiV1EreportingSubmitPostApiResponse apiResponseLocalVar, SubmitEReportingRequest submitEReportingRequest, Option<string?> organizationId)
         {
             bool suppressDefaultLog = false;
-            AfterSubmitEreportingApiV1EreportingSubmitPost(ref suppressDefaultLog, apiResponseLocalVar, submitEReportingRequest);
+            AfterSubmitEreportingApiV1EreportingSubmitPost(ref suppressDefaultLog, apiResponseLocalVar, submitEReportingRequest, organizationId);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -2751,7 +2767,8 @@ namespace FactPulse.SDK.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="submitEReportingRequest"></param>
-        partial void AfterSubmitEreportingApiV1EreportingSubmitPost(ref bool suppressDefaultLog, ISubmitEreportingApiV1EreportingSubmitPostApiResponse apiResponseLocalVar, SubmitEReportingRequest submitEReportingRequest);
+        /// <param name="organizationId"></param>
+        partial void AfterSubmitEreportingApiV1EreportingSubmitPost(ref bool suppressDefaultLog, ISubmitEreportingApiV1EreportingSubmitPostApiResponse apiResponseLocalVar, SubmitEReportingRequest submitEReportingRequest, Option<string?> organizationId);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -2760,10 +2777,11 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="submitEReportingRequest"></param>
-        private void OnErrorSubmitEreportingApiV1EreportingSubmitPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitEReportingRequest submitEReportingRequest)
+        /// <param name="organizationId"></param>
+        private void OnErrorSubmitEreportingApiV1EreportingSubmitPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitEReportingRequest submitEReportingRequest, Option<string?> organizationId)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorSubmitEreportingApiV1EreportingSubmitPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, submitEReportingRequest);
+            OnErrorSubmitEreportingApiV1EreportingSubmitPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, submitEReportingRequest, organizationId);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -2776,19 +2794,21 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="submitEReportingRequest"></param>
-        partial void OnErrorSubmitEreportingApiV1EreportingSubmitPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitEReportingRequest submitEReportingRequest);
+        /// <param name="organizationId"></param>
+        partial void OnErrorSubmitEreportingApiV1EreportingSubmitPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, SubmitEReportingRequest submitEReportingRequest, Option<string?> organizationId);
 
         /// <summary>
         /// Submit e-reporting to PA/PDP Generate and submit e-reporting to a PA (Plateforme Agréée).  Authentication strategies (same as invoices): 1. **JWT with client_uid** (recommended): PDP credentials fetched from backend 2. **Zero-storage**: Provide pdpFlowServiceUrl, pdpClientId, pdpClientSecret in request  The e-reporting is submitted using the AFNOR Flow Service API with syntax&#x3D;FRR (FRench Reporting).
         /// </summary>
         /// <param name="submitEReportingRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitEreportingApiV1EreportingSubmitPostApiResponse"/>&gt;</returns>
-        public async Task<ISubmitEreportingApiV1EreportingSubmitPostApiResponse?> SubmitEreportingApiV1EreportingSubmitPostOrDefaultAsync(SubmitEReportingRequest submitEReportingRequest, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISubmitEreportingApiV1EreportingSubmitPostApiResponse?> SubmitEreportingApiV1EreportingSubmitPostOrDefaultAsync(SubmitEReportingRequest submitEReportingRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await SubmitEreportingApiV1EreportingSubmitPostAsync(submitEReportingRequest, cancellationToken).ConfigureAwait(false);
+                return await SubmitEreportingApiV1EreportingSubmitPostAsync(submitEReportingRequest, organizationId, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -2801,9 +2821,10 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="submitEReportingRequest"></param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitEreportingApiV1EreportingSubmitPostApiResponse"/>&gt;</returns>
-        public async Task<ISubmitEreportingApiV1EreportingSubmitPostApiResponse> SubmitEreportingApiV1EreportingSubmitPostAsync(SubmitEReportingRequest submitEReportingRequest, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISubmitEreportingApiV1EreportingSubmitPostApiResponse> SubmitEreportingApiV1EreportingSubmitPostAsync(SubmitEReportingRequest submitEReportingRequest, Option<string?> organizationId = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -2811,7 +2832,7 @@ namespace FactPulse.SDK.Api
             {
                 ValidateSubmitEreportingApiV1EreportingSubmitPost(submitEReportingRequest);
 
-                FormatSubmitEreportingApiV1EreportingSubmitPost(submitEReportingRequest);
+                FormatSubmitEreportingApiV1EreportingSubmitPost(submitEReportingRequest, ref organizationId);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -2821,6 +2842,9 @@ namespace FactPulse.SDK.Api
                     uriBuilderLocalVar.Path = HttpClient.BaseAddress.AbsolutePath == "/"
                         ? "/api/v1/ereporting/submit"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/ereporting/submit");
+
+                    if (organizationId.IsSet)
+                        httpRequestMessageLocalVar.Headers.Add("Organization-Id", ClientUtils.ParameterToString(organizationId.Value));
 
                     httpRequestMessageLocalVar.Content = (submitEReportingRequest as object) is System.IO.Stream stream
                         ? httpRequestMessageLocalVar.Content = new StreamContent(stream)
@@ -2871,7 +2895,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterSubmitEreportingApiV1EreportingSubmitPostDefaultImplementation(apiResponseLocalVar, submitEReportingRequest);
+                        AfterSubmitEreportingApiV1EreportingSubmitPostDefaultImplementation(apiResponseLocalVar, submitEReportingRequest, organizationId);
 
                         Events.ExecuteOnSubmitEreportingApiV1EreportingSubmitPost(apiResponseLocalVar);
 
@@ -2885,7 +2909,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorSubmitEreportingApiV1EreportingSubmitPostDefaultImplementation(e, "/api/v1/ereporting/submit", uriBuilderLocalVar.Path, submitEReportingRequest);
+                OnErrorSubmitEreportingApiV1EreportingSubmitPostDefaultImplementation(e, "/api/v1/ereporting/submit", uriBuilderLocalVar.Path, submitEReportingRequest, organizationId);
                 Events.ExecuteOnErrorSubmitEreportingApiV1EreportingSubmitPost(e);
                 throw;
             }
@@ -3040,14 +3064,14 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatSubmitXmlEreportingApiV1EreportingSubmitXmlPost(ref System.IO.Stream xmlFile, ref Option<string?> trackingId, ref Option<bool> skipValidation, ref Option<string?> pdpFlowServiceUrl, ref Option<string?> pdpTokenUrl, ref Option<string?> pdpClientId, ref Option<string?> pdpClientSecret);
+        partial void FormatSubmitXmlEreportingApiV1EreportingSubmitXmlPost(ref FactPulse.SDK.Client.FileParameter xmlFile, ref Option<string?> organizationId, ref Option<string?> trackingId, ref Option<bool> skipValidation, ref Option<string?> pdpFlowServiceUrl, ref Option<string?> pdpTokenUrl, ref Option<string?> pdpClientId, ref Option<string?> pdpClientSecret);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
         /// <param name="xmlFile"></param>
         /// <returns></returns>
-        private void ValidateSubmitXmlEreportingApiV1EreportingSubmitXmlPost(System.IO.Stream xmlFile)
+        private void ValidateSubmitXmlEreportingApiV1EreportingSubmitXmlPost(FactPulse.SDK.Client.FileParameter xmlFile)
         {
             if (xmlFile == null)
                 throw new ArgumentNullException(nameof(xmlFile));
@@ -3058,16 +3082,17 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="xmlFile"></param>
+        /// <param name="organizationId"></param>
         /// <param name="trackingId"></param>
         /// <param name="skipValidation"></param>
         /// <param name="pdpFlowServiceUrl"></param>
         /// <param name="pdpTokenUrl"></param>
         /// <param name="pdpClientId"></param>
         /// <param name="pdpClientSecret"></param>
-        private void AfterSubmitXmlEreportingApiV1EreportingSubmitXmlPostDefaultImplementation(ISubmitXmlEreportingApiV1EreportingSubmitXmlPostApiResponse apiResponseLocalVar, System.IO.Stream xmlFile, Option<string?> trackingId, Option<bool> skipValidation, Option<string?> pdpFlowServiceUrl, Option<string?> pdpTokenUrl, Option<string?> pdpClientId, Option<string?> pdpClientSecret)
+        private void AfterSubmitXmlEreportingApiV1EreportingSubmitXmlPostDefaultImplementation(ISubmitXmlEreportingApiV1EreportingSubmitXmlPostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter xmlFile, Option<string?> organizationId, Option<string?> trackingId, Option<bool> skipValidation, Option<string?> pdpFlowServiceUrl, Option<string?> pdpTokenUrl, Option<string?> pdpClientId, Option<string?> pdpClientSecret)
         {
             bool suppressDefaultLog = false;
-            AfterSubmitXmlEreportingApiV1EreportingSubmitXmlPost(ref suppressDefaultLog, apiResponseLocalVar, xmlFile, trackingId, skipValidation, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
+            AfterSubmitXmlEreportingApiV1EreportingSubmitXmlPost(ref suppressDefaultLog, apiResponseLocalVar, xmlFile, organizationId, trackingId, skipValidation, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
             if (!suppressDefaultLog)
                 Logger.LogInformation("{0,-9} | {1} | {2}", (apiResponseLocalVar.DownloadedAt - apiResponseLocalVar.RequestedAt).TotalSeconds, apiResponseLocalVar.StatusCode, apiResponseLocalVar.Path);
         }
@@ -3078,13 +3103,14 @@ namespace FactPulse.SDK.Api
         /// <param name="suppressDefaultLog"></param>
         /// <param name="apiResponseLocalVar"></param>
         /// <param name="xmlFile"></param>
+        /// <param name="organizationId"></param>
         /// <param name="trackingId"></param>
         /// <param name="skipValidation"></param>
         /// <param name="pdpFlowServiceUrl"></param>
         /// <param name="pdpTokenUrl"></param>
         /// <param name="pdpClientId"></param>
         /// <param name="pdpClientSecret"></param>
-        partial void AfterSubmitXmlEreportingApiV1EreportingSubmitXmlPost(ref bool suppressDefaultLog, ISubmitXmlEreportingApiV1EreportingSubmitXmlPostApiResponse apiResponseLocalVar, System.IO.Stream xmlFile, Option<string?> trackingId, Option<bool> skipValidation, Option<string?> pdpFlowServiceUrl, Option<string?> pdpTokenUrl, Option<string?> pdpClientId, Option<string?> pdpClientSecret);
+        partial void AfterSubmitXmlEreportingApiV1EreportingSubmitXmlPost(ref bool suppressDefaultLog, ISubmitXmlEreportingApiV1EreportingSubmitXmlPostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter xmlFile, Option<string?> organizationId, Option<string?> trackingId, Option<bool> skipValidation, Option<string?> pdpFlowServiceUrl, Option<string?> pdpTokenUrl, Option<string?> pdpClientId, Option<string?> pdpClientSecret);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -3093,16 +3119,17 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="xmlFile"></param>
+        /// <param name="organizationId"></param>
         /// <param name="trackingId"></param>
         /// <param name="skipValidation"></param>
         /// <param name="pdpFlowServiceUrl"></param>
         /// <param name="pdpTokenUrl"></param>
         /// <param name="pdpClientId"></param>
         /// <param name="pdpClientSecret"></param>
-        private void OnErrorSubmitXmlEreportingApiV1EreportingSubmitXmlPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream xmlFile, Option<string?> trackingId, Option<bool> skipValidation, Option<string?> pdpFlowServiceUrl, Option<string?> pdpTokenUrl, Option<string?> pdpClientId, Option<string?> pdpClientSecret)
+        private void OnErrorSubmitXmlEreportingApiV1EreportingSubmitXmlPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter xmlFile, Option<string?> organizationId, Option<string?> trackingId, Option<bool> skipValidation, Option<string?> pdpFlowServiceUrl, Option<string?> pdpTokenUrl, Option<string?> pdpClientId, Option<string?> pdpClientSecret)
         {
             bool suppressDefaultLogLocalVar = false;
-            OnErrorSubmitXmlEreportingApiV1EreportingSubmitXmlPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, xmlFile, trackingId, skipValidation, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
+            OnErrorSubmitXmlEreportingApiV1EreportingSubmitXmlPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, xmlFile, organizationId, trackingId, skipValidation, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
             if (!suppressDefaultLogLocalVar)
                 Logger.LogError(exceptionLocalVar, "An error occurred while sending the request to the server.");
         }
@@ -3115,18 +3142,20 @@ namespace FactPulse.SDK.Api
         /// <param name="pathFormatLocalVar"></param>
         /// <param name="pathLocalVar"></param>
         /// <param name="xmlFile"></param>
+        /// <param name="organizationId"></param>
         /// <param name="trackingId"></param>
         /// <param name="skipValidation"></param>
         /// <param name="pdpFlowServiceUrl"></param>
         /// <param name="pdpTokenUrl"></param>
         /// <param name="pdpClientId"></param>
         /// <param name="pdpClientSecret"></param>
-        partial void OnErrorSubmitXmlEreportingApiV1EreportingSubmitXmlPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream xmlFile, Option<string?> trackingId, Option<bool> skipValidation, Option<string?> pdpFlowServiceUrl, Option<string?> pdpTokenUrl, Option<string?> pdpClientId, Option<string?> pdpClientSecret);
+        partial void OnErrorSubmitXmlEreportingApiV1EreportingSubmitXmlPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter xmlFile, Option<string?> organizationId, Option<string?> trackingId, Option<bool> skipValidation, Option<string?> pdpFlowServiceUrl, Option<string?> pdpTokenUrl, Option<string?> pdpClientId, Option<string?> pdpClientSecret);
 
         /// <summary>
         /// Submit pre-generated e-reporting XML Submit a pre-generated e-reporting XML file directly to a PA/PDP.  This endpoint is designed for clients who generate their own PPF-compliant XML and only need FactPulse for the PDP submission.  **Process:** 1. Validates the XML against PPF XSD schemas 2. Determines the appropriate AFNOR FlowType 3. Submits to the configured PDP/PA 4. Returns the flowId for tracking  **Authentication:** Same strategies as /submit endpoint (JWT or zero-storage credentials).
         /// </summary>
         /// <param name="xmlFile">E-reporting XML file</param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="trackingId"> (optional)</param>
         /// <param name="skipValidation">Skip XSD validation (optional, default to false)</param>
         /// <param name="pdpFlowServiceUrl"> (optional)</param>
@@ -3135,11 +3164,11 @@ namespace FactPulse.SDK.Api
         /// <param name="pdpClientSecret"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitXmlEreportingApiV1EreportingSubmitXmlPostApiResponse"/>&gt;</returns>
-        public async Task<ISubmitXmlEreportingApiV1EreportingSubmitXmlPostApiResponse?> SubmitXmlEreportingApiV1EreportingSubmitXmlPostOrDefaultAsync(System.IO.Stream xmlFile, Option<string?> trackingId = default, Option<bool> skipValidation = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISubmitXmlEreportingApiV1EreportingSubmitXmlPostApiResponse?> SubmitXmlEreportingApiV1EreportingSubmitXmlPostOrDefaultAsync(FactPulse.SDK.Client.FileParameter xmlFile, Option<string?> organizationId = default, Option<string?> trackingId = default, Option<bool> skipValidation = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
-                return await SubmitXmlEreportingApiV1EreportingSubmitXmlPostAsync(xmlFile, trackingId, skipValidation, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret, cancellationToken).ConfigureAwait(false);
+                return await SubmitXmlEreportingApiV1EreportingSubmitXmlPostAsync(xmlFile, organizationId, trackingId, skipValidation, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -3152,6 +3181,7 @@ namespace FactPulse.SDK.Api
         /// </summary>
         /// <exception cref="ApiException">Thrown when fails to make API call</exception>
         /// <param name="xmlFile">E-reporting XML file</param>
+        /// <param name="organizationId">Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation / multi-tenancy). Required by some PDPs to select the client space. (optional)</param>
         /// <param name="trackingId"> (optional)</param>
         /// <param name="skipValidation">Skip XSD validation (optional, default to false)</param>
         /// <param name="pdpFlowServiceUrl"> (optional)</param>
@@ -3160,7 +3190,7 @@ namespace FactPulse.SDK.Api
         /// <param name="pdpClientSecret"> (optional)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="ISubmitXmlEreportingApiV1EreportingSubmitXmlPostApiResponse"/>&gt;</returns>
-        public async Task<ISubmitXmlEreportingApiV1EreportingSubmitXmlPostApiResponse> SubmitXmlEreportingApiV1EreportingSubmitXmlPostAsync(System.IO.Stream xmlFile, Option<string?> trackingId = default, Option<bool> skipValidation = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<ISubmitXmlEreportingApiV1EreportingSubmitXmlPostApiResponse> SubmitXmlEreportingApiV1EreportingSubmitXmlPostAsync(FactPulse.SDK.Client.FileParameter xmlFile, Option<string?> organizationId = default, Option<string?> trackingId = default, Option<bool> skipValidation = default, Option<string?> pdpFlowServiceUrl = default, Option<string?> pdpTokenUrl = default, Option<string?> pdpClientId = default, Option<string?> pdpClientSecret = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -3168,7 +3198,7 @@ namespace FactPulse.SDK.Api
             {
                 ValidateSubmitXmlEreportingApiV1EreportingSubmitXmlPost(xmlFile);
 
-                FormatSubmitXmlEreportingApiV1EreportingSubmitXmlPost(ref xmlFile, ref trackingId, ref skipValidation, ref pdpFlowServiceUrl, ref pdpTokenUrl, ref pdpClientId, ref pdpClientSecret);
+                FormatSubmitXmlEreportingApiV1EreportingSubmitXmlPost(ref xmlFile, ref organizationId, ref trackingId, ref skipValidation, ref pdpFlowServiceUrl, ref pdpTokenUrl, ref pdpClientId, ref pdpClientSecret);
 
                 using (HttpRequestMessage httpRequestMessageLocalVar = new HttpRequestMessage())
                 {
@@ -3179,31 +3209,41 @@ namespace FactPulse.SDK.Api
                         ? "/api/v1/ereporting/submit-xml"
                         : string.Concat(HttpClient.BaseAddress.AbsolutePath, "/api/v1/ereporting/submit-xml");
 
-                    MultipartContent multipartContentLocalVar = new MultipartContent();
+                    if (organizationId.IsSet)
+                        httpRequestMessageLocalVar.Headers.Add("Organization-Id", ClientUtils.ParameterToString(organizationId.Value));
+
+                    MultipartFormDataContent multipartContentLocalVar = new MultipartFormDataContent();
 
                     httpRequestMessageLocalVar.Content = multipartContentLocalVar;
 
-                    List<KeyValuePair<string?, string?>> formParameterLocalVars = new List<KeyValuePair<string?, string?>>();
+                    List<KeyValuePair<string, string?>> formParameterLocalVars = new List<KeyValuePair<string, string?>>();
 
-                    multipartContentLocalVar.Add(new FormUrlEncodedContent(formParameterLocalVars));                    multipartContentLocalVar.Add(new StreamContent(xmlFile));
+                    {
+                        var streamContentLocalVar = new StreamContent(xmlFile.Content);
+                        streamContentLocalVar.Headers.ContentType = new MediaTypeHeaderValue(xmlFile.ContentType);
+                        multipartContentLocalVar.Add(streamContentLocalVar, "xml_file", xmlFile.FileName ?? "xml_file");
+                    }
 
                     if (trackingId.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("tracking_id", ClientUtils.ParameterToString(trackingId.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("tracking_id", ClientUtils.ParameterToString(trackingId.Value)));
 
                     if (skipValidation.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("skip_validation", ClientUtils.ParameterToString(skipValidation.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("skip_validation", ClientUtils.ParameterToString(skipValidation.Value)));
 
                     if (pdpFlowServiceUrl.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("pdp_flow_service_url", ClientUtils.ParameterToString(pdpFlowServiceUrl.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("pdp_flow_service_url", ClientUtils.ParameterToString(pdpFlowServiceUrl.Value)));
 
                     if (pdpTokenUrl.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("pdp_token_url", ClientUtils.ParameterToString(pdpTokenUrl.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("pdp_token_url", ClientUtils.ParameterToString(pdpTokenUrl.Value)));
 
                     if (pdpClientId.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("pdp_client_id", ClientUtils.ParameterToString(pdpClientId.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("pdp_client_id", ClientUtils.ParameterToString(pdpClientId.Value)));
 
                     if (pdpClientSecret.IsSet)
-                        formParameterLocalVars.Add(new KeyValuePair<string?, string?>("pdp_client_secret", ClientUtils.ParameterToString(pdpClientSecret.Value)));
+                        formParameterLocalVars.Add(new KeyValuePair<string, string?>("pdp_client_secret", ClientUtils.ParameterToString(pdpClientSecret.Value)));
+
+                    foreach (var formParamLocalVar in formParameterLocalVars)
+                        multipartContentLocalVar.Add(new StringContent(formParamLocalVar.Value ?? string.Empty), formParamLocalVar.Key);
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     httpRequestMessageLocalVar.RequestUri = uriBuilderLocalVar.Uri;
@@ -3217,11 +3257,6 @@ namespace FactPulse.SDK.Api
                     string[] contentTypes = new string[] {
                         "multipart/form-data"
                     };
-
-                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
-
-                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
-                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"
@@ -3250,7 +3285,7 @@ namespace FactPulse.SDK.Api
                             }
                         }
 
-                        AfterSubmitXmlEreportingApiV1EreportingSubmitXmlPostDefaultImplementation(apiResponseLocalVar, xmlFile, trackingId, skipValidation, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
+                        AfterSubmitXmlEreportingApiV1EreportingSubmitXmlPostDefaultImplementation(apiResponseLocalVar, xmlFile, organizationId, trackingId, skipValidation, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
 
                         Events.ExecuteOnSubmitXmlEreportingApiV1EreportingSubmitXmlPost(apiResponseLocalVar);
 
@@ -3264,7 +3299,7 @@ namespace FactPulse.SDK.Api
             }
             catch(Exception e)
             {
-                OnErrorSubmitXmlEreportingApiV1EreportingSubmitXmlPostDefaultImplementation(e, "/api/v1/ereporting/submit-xml", uriBuilderLocalVar.Path, xmlFile, trackingId, skipValidation, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
+                OnErrorSubmitXmlEreportingApiV1EreportingSubmitXmlPostDefaultImplementation(e, "/api/v1/ereporting/submit-xml", uriBuilderLocalVar.Path, xmlFile, organizationId, trackingId, skipValidation, pdpFlowServiceUrl, pdpTokenUrl, pdpClientId, pdpClientSecret);
                 Events.ExecuteOnErrorSubmitXmlEreportingApiV1EreportingSubmitXmlPost(e);
                 throw;
             }
@@ -4069,14 +4104,14 @@ namespace FactPulse.SDK.Api
             partial void OnDeserializationError(ref bool suppressDefaultLog, Exception exception, HttpStatusCode httpStatusCode);
         }
 
-        partial void FormatValidateXmlEreportingApiV1EreportingValidateXmlPost(ref System.IO.Stream xmlFile, ref Option<bool> validateCoherence, ref Option<bool> validatePeriod);
+        partial void FormatValidateXmlEreportingApiV1EreportingValidateXmlPost(ref FactPulse.SDK.Client.FileParameter xmlFile, ref Option<bool> validateCoherence, ref Option<bool> validatePeriod);
 
         /// <summary>
         /// Validates the request parameters
         /// </summary>
         /// <param name="xmlFile"></param>
         /// <returns></returns>
-        private void ValidateValidateXmlEreportingApiV1EreportingValidateXmlPost(System.IO.Stream xmlFile)
+        private void ValidateValidateXmlEreportingApiV1EreportingValidateXmlPost(FactPulse.SDK.Client.FileParameter xmlFile)
         {
             if (xmlFile == null)
                 throw new ArgumentNullException(nameof(xmlFile));
@@ -4089,7 +4124,7 @@ namespace FactPulse.SDK.Api
         /// <param name="xmlFile"></param>
         /// <param name="validateCoherence"></param>
         /// <param name="validatePeriod"></param>
-        private void AfterValidateXmlEreportingApiV1EreportingValidateXmlPostDefaultImplementation(IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse apiResponseLocalVar, System.IO.Stream xmlFile, Option<bool> validateCoherence, Option<bool> validatePeriod)
+        private void AfterValidateXmlEreportingApiV1EreportingValidateXmlPostDefaultImplementation(IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter xmlFile, Option<bool> validateCoherence, Option<bool> validatePeriod)
         {
             bool suppressDefaultLog = false;
             AfterValidateXmlEreportingApiV1EreportingValidateXmlPost(ref suppressDefaultLog, apiResponseLocalVar, xmlFile, validateCoherence, validatePeriod);
@@ -4105,7 +4140,7 @@ namespace FactPulse.SDK.Api
         /// <param name="xmlFile"></param>
         /// <param name="validateCoherence"></param>
         /// <param name="validatePeriod"></param>
-        partial void AfterValidateXmlEreportingApiV1EreportingValidateXmlPost(ref bool suppressDefaultLog, IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse apiResponseLocalVar, System.IO.Stream xmlFile, Option<bool> validateCoherence, Option<bool> validatePeriod);
+        partial void AfterValidateXmlEreportingApiV1EreportingValidateXmlPost(ref bool suppressDefaultLog, IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse apiResponseLocalVar, FactPulse.SDK.Client.FileParameter xmlFile, Option<bool> validateCoherence, Option<bool> validatePeriod);
 
         /// <summary>
         /// Logs exceptions that occur while retrieving the server response
@@ -4116,7 +4151,7 @@ namespace FactPulse.SDK.Api
         /// <param name="xmlFile"></param>
         /// <param name="validateCoherence"></param>
         /// <param name="validatePeriod"></param>
-        private void OnErrorValidateXmlEreportingApiV1EreportingValidateXmlPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream xmlFile, Option<bool> validateCoherence, Option<bool> validatePeriod)
+        private void OnErrorValidateXmlEreportingApiV1EreportingValidateXmlPostDefaultImplementation(Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter xmlFile, Option<bool> validateCoherence, Option<bool> validatePeriod)
         {
             bool suppressDefaultLogLocalVar = false;
             OnErrorValidateXmlEreportingApiV1EreportingValidateXmlPost(ref suppressDefaultLogLocalVar, exceptionLocalVar, pathFormatLocalVar, pathLocalVar, xmlFile, validateCoherence, validatePeriod);
@@ -4134,7 +4169,7 @@ namespace FactPulse.SDK.Api
         /// <param name="xmlFile"></param>
         /// <param name="validateCoherence"></param>
         /// <param name="validatePeriod"></param>
-        partial void OnErrorValidateXmlEreportingApiV1EreportingValidateXmlPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, System.IO.Stream xmlFile, Option<bool> validateCoherence, Option<bool> validatePeriod);
+        partial void OnErrorValidateXmlEreportingApiV1EreportingValidateXmlPost(ref bool suppressDefaultLogLocalVar, Exception exceptionLocalVar, string pathFormatLocalVar, string pathLocalVar, FactPulse.SDK.Client.FileParameter xmlFile, Option<bool> validateCoherence, Option<bool> validatePeriod);
 
         /// <summary>
         /// Validate e-reporting XML (PPF Annexe 6 v1.9 compliant) Validates an e-reporting XML file against PPF specifications (Annexe 6 v1.9):  **Validation levels:** 1. **XSD (REJ_SEMAN)**: Structure, types, cardinality 2. **Semantic (REJ_SEMAN)**: Authorized values from codelists 3. **Coherence (REJ_COH)**: Data consistency (totals &#x3D; sum of breakdowns) 4. **Period (REJ_PER)**: Transaction dates within declared period  **Validated codes:** - SchemeID (ISO 6523): 0002&#x3D;SIREN, 0009&#x3D;SIRET, 0224&#x3D;RoutingCode, etc. - RoleCode (UNCL 3035): SE&#x3D;Seller, BY&#x3D;Buyer, WK&#x3D;Working party - CategoryCode (TT-81): TLB1, TPS1, TNT1, TMA1 - TaxCategoryCode (UNTDID 5305): S, Z, E, AE, K, G, O - Currency (ISO 4217), Country (ISO 3166-1)  Returns structured validation errors with PPF rejection codes.
@@ -4144,7 +4179,7 @@ namespace FactPulse.SDK.Api
         /// <param name="validatePeriod">Validate period coherence (REJ_PER) (optional, default to true)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse"/>&gt;</returns>
-        public async Task<IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse?> ValidateXmlEreportingApiV1EreportingValidateXmlPostOrDefaultAsync(System.IO.Stream xmlFile, Option<bool> validateCoherence = default, Option<bool> validatePeriod = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse?> ValidateXmlEreportingApiV1EreportingValidateXmlPostOrDefaultAsync(FactPulse.SDK.Client.FileParameter xmlFile, Option<bool> validateCoherence = default, Option<bool> validatePeriod = default, System.Threading.CancellationToken cancellationToken = default)
         {
             try
             {
@@ -4165,7 +4200,7 @@ namespace FactPulse.SDK.Api
         /// <param name="validatePeriod">Validate period coherence (REJ_PER) (optional, default to true)</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns><see cref="Task"/>&lt;<see cref="IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse"/>&gt;</returns>
-        public async Task<IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse> ValidateXmlEreportingApiV1EreportingValidateXmlPostAsync(System.IO.Stream xmlFile, Option<bool> validateCoherence = default, Option<bool> validatePeriod = default, System.Threading.CancellationToken cancellationToken = default)
+        public async Task<IValidateXmlEreportingApiV1EreportingValidateXmlPostApiResponse> ValidateXmlEreportingApiV1EreportingValidateXmlPostAsync(FactPulse.SDK.Client.FileParameter xmlFile, Option<bool> validateCoherence = default, Option<bool> validatePeriod = default, System.Threading.CancellationToken cancellationToken = default)
         {
             UriBuilder uriBuilderLocalVar = new UriBuilder();
 
@@ -4194,13 +4229,20 @@ namespace FactPulse.SDK.Api
 
                     uriBuilderLocalVar.Query = parseQueryStringLocalVar.ToString();
 
-                    MultipartContent multipartContentLocalVar = new MultipartContent();
+                    MultipartFormDataContent multipartContentLocalVar = new MultipartFormDataContent();
 
                     httpRequestMessageLocalVar.Content = multipartContentLocalVar;
 
-                    List<KeyValuePair<string?, string?>> formParameterLocalVars = new List<KeyValuePair<string?, string?>>();
+                    List<KeyValuePair<string, string?>> formParameterLocalVars = new List<KeyValuePair<string, string?>>();
 
-                    multipartContentLocalVar.Add(new FormUrlEncodedContent(formParameterLocalVars));                    multipartContentLocalVar.Add(new StreamContent(xmlFile));
+                    {
+                        var streamContentLocalVar = new StreamContent(xmlFile.Content);
+                        streamContentLocalVar.Headers.ContentType = new MediaTypeHeaderValue(xmlFile.ContentType);
+                        multipartContentLocalVar.Add(streamContentLocalVar, "xml_file", xmlFile.FileName ?? "xml_file");
+                    }
+
+                    foreach (var formParamLocalVar in formParameterLocalVars)
+                        multipartContentLocalVar.Add(new StringContent(formParamLocalVar.Value ?? string.Empty), formParamLocalVar.Key);
 
                     List<TokenBase> tokenBaseLocalVars = new List<TokenBase>();
                     ApiKeyToken apiKeyTokenLocalVar1 = (ApiKeyToken) await ApiKeyProvider.GetAsync("X-API-Key", cancellationToken).ConfigureAwait(false);
@@ -4218,11 +4260,6 @@ namespace FactPulse.SDK.Api
                     string[] contentTypes = new string[] {
                         "multipart/form-data"
                     };
-
-                    string? contentTypeLocalVar = ClientUtils.SelectHeaderContentType(contentTypes);
-
-                    if (contentTypeLocalVar != null && httpRequestMessageLocalVar.Content != null)
-                        httpRequestMessageLocalVar.Content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeLocalVar);
 
                     string[] acceptLocalVars = new string[] {
                         "application/json"

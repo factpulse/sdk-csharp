@@ -62,7 +62,7 @@ namespace FactPulse.SDK.Model
         /// </summary>
         /// <value>Role of the declarant (TT-15). SE&#x3D;Seller (B2Bi: French seller to foreign buyer). BY&#x3D;Buyer (Bi2B: French buyer from foreign seller).</value>
         [JsonPropertyName("roleCode")]
-        public IssuerRoleCode? RoleCode { get { return this.RoleCodeOption; } set { this.RoleCodeOption = new(value); } }
+        public IssuerRoleCode? RoleCode { get { return this.RoleCodeOption.Value; } set { this.RoleCodeOption = new(value); } }
 
         /// <summary>
         /// SIREN or SIRET of the declarant (French company)

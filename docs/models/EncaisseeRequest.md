@@ -9,7 +9,8 @@ Name | Type | Description | Notes
 **InvoiceIssueDate** | **DateOnly** | Date d&#39;émission de la facture (YYYY-MM-DD) | 
 **InvoiceBuyerSiren** | **string** | SIREN de l&#39;acheteur (destinataire du statut) | 
 **InvoiceBuyerElectronicAddress** | **string** | Adresse électronique de l&#39;acheteur (MDT-73) | 
-**Amount** | [**Amount**](Amount.md) |  | 
+**Amount** | [**Amount1**](Amount1.md) |  | 
+**VatRate** | **decimal** | Taux de TVA du montant encaissé en % (MDT-224, requis par BR-FR-CDV-14 ; défaut 20) | [optional] [default to 20M]
 **Currency** | **string** | Code devise ISO 4217 | [optional] [default to "EUR"]
 **SenderSiren** | **string** |  | [optional] 
 **FlowType** | **string** | Type de flux (CustomerInvoiceLC pour facture émise) | [optional] [default to "CustomerInvoiceLC"]

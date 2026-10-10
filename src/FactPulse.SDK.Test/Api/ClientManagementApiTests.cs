@@ -100,6 +100,18 @@ namespace FactPulse.SDK.Test.Api
         }
 
         /// <summary>
+        /// Test DisconnectSuperpdpApiV1ClientsUidSuperpdpDelete
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task DisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteAsyncTest()
+        {
+            Guid uid = default!;
+            var response = await _instance.DisconnectSuperpdpApiV1ClientsUidSuperpdpDeleteAsync(uid);
+            var model = response.Ok();
+            Assert.IsType<SuperPDPDisconnectResponse>(model);
+        }
+
+        /// <summary>
         /// Test GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost
         /// </summary>
         [Fact (Skip = "not implemented")]
@@ -133,6 +145,32 @@ namespace FactPulse.SDK.Test.Api
             var response = await _instance.GetPdpConfigApiV1ClientsUidPdpConfigGetAsync(uid);
             var model = response.Ok();
             Assert.IsType<PDPConfigResponse>(model);
+        }
+
+        /// <summary>
+        /// Test GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostAsyncTest()
+        {
+            Guid uid = default!;
+            Client.Option<bool> modeSandbox = default!;
+            Client.Option<string?> returnUrl = default!;
+            var response = await _instance.GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPostAsync(uid, modeSandbox, returnUrl);
+            var model = response.Ok();
+            Assert.IsType<SuperPDPConnectURLResponse>(model);
+        }
+
+        /// <summary>
+        /// Test GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet
+        /// </summary>
+        [Fact (Skip = "not implemented")]
+        public async Task GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetAsyncTest()
+        {
+            Guid uid = default!;
+            var response = await _instance.GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGetAsync(uid);
+            var model = response.Ok();
+            Assert.IsType<SuperPDPStatusResponse>(model);
         }
 
         /// <summary>

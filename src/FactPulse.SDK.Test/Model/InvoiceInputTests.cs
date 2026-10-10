@@ -190,6 +190,24 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'TaxAmountEur'
+        /// </summary>
+        [Fact]
+        public void TaxAmountEurTest()
+        {
+            // TODO unit test for the property 'TaxAmountEur'
+        }
+
+        /// <summary>
+        /// Test the property 'BusinessProcessId'
+        /// </summary>
+        [Fact]
+        public void BusinessProcessIdTest()
+        {
+            // TODO unit test for the property 'BusinessProcessId'
+        }
+
+        /// <summary>
         /// Test the property 'ReferencedInvoiceId'
         /// </summary>
         [Fact]

@@ -57,7 +57,7 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task ConvertDocumentAsyncApiV1ConvertAsyncPostAsyncTest()
         {
-            System.IO.Stream file = default!;
+            FactPulse.SDK.Client.FileParameter file = default!;
             Client.Option<string> output = default!;
             Client.Option<string?> callbackUrl = default!;
             Client.Option<string> webhookMode = default!;

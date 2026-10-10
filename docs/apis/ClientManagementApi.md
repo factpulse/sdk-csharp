@@ -8,9 +8,12 @@ All URIs are relative to *https://factpulse.fr*
 | [**CreateClientApiV1ClientsPost**](ClientManagementApi.md#createclientapiv1clientspost) | **POST** /api/v1/clients | Create a client |
 | [**DeactivateClientApiV1ClientsUidDesactiverPost**](ClientManagementApi.md#deactivateclientapiv1clientsuiddesactiverpost) | **POST** /api/v1/clients/{uid}/desactiver | Deactivate a client |
 | [**DeleteWebhookSecretApiV1ClientsUidWebhookSecretDelete**](ClientManagementApi.md#deletewebhooksecretapiv1clientsuidwebhooksecretdelete) | **DELETE** /api/v1/clients/{uid}/webhook-secret | Delete webhook secret |
+| [**DisconnectSuperpdpApiV1ClientsUidSuperpdpDelete**](ClientManagementApi.md#disconnectsuperpdpapiv1clientsuidsuperpdpdelete) | **DELETE** /api/v1/clients/{uid}/superpdp | Disconnect SuperPDP |
 | [**GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost**](ClientManagementApi.md#generatewebhooksecretapiv1clientsuidwebhooksecretgeneratepost) | **POST** /api/v1/clients/{uid}/webhook-secret/generate | Generate webhook secret |
 | [**GetClientApiV1ClientsUidGet**](ClientManagementApi.md#getclientapiv1clientsuidget) | **GET** /api/v1/clients/{uid} | Get client details |
 | [**GetPdpConfigApiV1ClientsUidPdpConfigGet**](ClientManagementApi.md#getpdpconfigapiv1clientsuidpdpconfigget) | **GET** /api/v1/clients/{uid}/pdp-config | Get client PDP configuration |
+| [**GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost**](ClientManagementApi.md#getsuperpdpconnecturlapiv1clientsuidsuperpdpconnecturlpost) | **POST** /api/v1/clients/{uid}/superpdp/connect-url | Get SuperPDP connection URL |
+| [**GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet**](ClientManagementApi.md#getsuperpdpstatusapiv1clientsuidsuperpdpstatusget) | **GET** /api/v1/clients/{uid}/superpdp/status | Get SuperPDP connection status |
 | [**GetWebhookSecretStatusApiV1ClientsUidWebhookSecretStatusGet**](ClientManagementApi.md#getwebhooksecretstatusapiv1clientsuidwebhooksecretstatusget) | **GET** /api/v1/clients/{uid}/webhook-secret/status | Get webhook secret status |
 | [**ListClientsApiV1ClientsGet**](ClientManagementApi.md#listclientsapiv1clientsget) | **GET** /api/v1/clients | List clients |
 | [**RotateEncryptionKeyApiV1ClientsUidRotateEncryptionKeyPost**](ClientManagementApi.md#rotateencryptionkeyapiv1clientsuidrotateencryptionkeypost) | **POST** /api/v1/clients/{uid}/rotate-encryption-key | Rotate client encryption key |
@@ -185,6 +188,48 @@ Delete the webhook secret for a client.  **Scope**: Client level (JWT with clien
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a id="disconnectsuperpdpapiv1clientsuidsuperpdpdelete"></a>
+# **DisconnectSuperpdpApiV1ClientsUidSuperpdpDelete**
+> SuperPDPDisconnectResponse DisconnectSuperpdpApiV1ClientsUidSuperpdpDelete (Guid uid)
+
+Disconnect SuperPDP
+
+Disconnect SuperPDP for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  Revokes the stored refresh token with SuperPDP (RFC 7009) and deletes the stored tokens. The client can reconnect later via the connect-url endpoint.
+
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **uid** | **Guid** | Client unique identifier (UUID) |  |
+
+### Return type
+
+[**SuperPDPDisconnectResponse**](SuperPDPDisconnectResponse.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **400** | Invalid request |  -  |
+| **401** | Missing or invalid JWT token |  -  |
+| **403** | Access denied |  -  |
+| **404** | Client not found |  -  |
+| **500** | Server error |  -  |
+| **422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
 <a id="generatewebhooksecretapiv1clientsuidwebhooksecretgeneratepost"></a>
 # **GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost**
 > WebhookSecretGenerateResponse GenerateWebhookSecretApiV1ClientsUidWebhookSecretGeneratePost (Guid uid)
@@ -287,6 +332,92 @@ Get the PDP (PA/PDP) configuration for a client.  **Scope**: Client level (JWT w
 ### Return type
 
 [**PDPConfigResponse**](PDPConfigResponse.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **400** | Invalid request |  -  |
+| **401** | Missing or invalid JWT token |  -  |
+| **403** | Access denied |  -  |
+| **404** | Client not found |  -  |
+| **500** | Server error |  -  |
+| **422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a id="getsuperpdpconnecturlapiv1clientsuidsuperpdpconnecturlpost"></a>
+# **GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost**
+> SuperPDPConnectURLResponse GetSuperpdpConnectUrlApiV1ClientsUidSuperpdpConnectUrlPost (Guid uid, bool modeSandbox = null, string returnUrl = null)
+
+Get SuperPDP connection URL
+
+Generate the SuperPDP OAuth2 authorization URL for a client.  **Scope**: Client level (JWT with client_uid that must match {uid})  Redirect the end user to the returned `authorizeUrl` so they can connect their own SuperPDP account to FactPulse (OAuth2 Authorization Code).  **Query parameters**: - `modeSandbox` (default `true`): connect via the SuperPDP sandbox app   (fictitious data) or the production app. - `returnUrl` (optional): absolute http(s) URL of your own portal. Once the   SuperPDP authorization flow is over, the end user is redirected there with   `superpdp_connected=true|false` (and `superpdp_error=<code>` on failure)   appended to the query string. Without it, FactPulse displays its own   confirmation page. Returns `400 invalid_return_url` if the URL is not an   absolute http(s) URL.
+
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **uid** | **Guid** | Client unique identifier (UUID) |  |
+| **modeSandbox** | **bool** | True for the SuperPDP sandbox app (default), False for production | [optional] [default to true] |
+| **returnUrl** | **string** | Absolute http(s) URL to redirect the end user to once the SuperPDP connection is done. Defaults to the FactPulse confirmation page. | [optional]  |
+
+### Return type
+
+[**SuperPDPConnectURLResponse**](SuperPDPConnectURLResponse.md)
+
+### Authorization
+
+[APIKeyHeader](../README.md#APIKeyHeader), [HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Successful Response |  -  |
+| **400** | Invalid request |  -  |
+| **401** | Missing or invalid JWT token |  -  |
+| **403** | Access denied |  -  |
+| **404** | Client not found |  -  |
+| **500** | Server error |  -  |
+| **422** | Validation Error |  -  |
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a id="getsuperpdpstatusapiv1clientsuidsuperpdpstatusget"></a>
+# **GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet**
+> SuperPDPStatusResponse GetSuperpdpStatusApiV1ClientsUidSuperpdpStatusGet (Guid uid)
+
+Get SuperPDP connection status
+
+Check whether a client has connected its SuperPDP account.  **Scope**: Client level (JWT with client_uid that must match {uid})  **Response**: - `connected`: Whether the client has an active SuperPDP connection - `connectedAt`: When the connection was established (if any) - `expiresAt`: When the current access token expires (if any) - `modeSandbox`: True if connected via the sandbox app, False for production, null if not connected - `lastError`: Last token refresh error, if any
+
+
+### Parameters
+
+| Name | Type | Description | Notes |
+|------|------|-------------|-------|
+| **uid** | **Guid** | Client unique identifier (UUID) |  |
+
+### Return type
+
+[**SuperPDPStatusResponse**](SuperPDPStatusResponse.md)
 
 ### Authorization
 

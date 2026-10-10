@@ -34,29 +34,66 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AFNORWebhookParams" /> class.
         /// </summary>
-        /// <param name="callback">callback</param>
-        /// <param name="metadata">metadata</param>
+        /// <param name="callbackUrl">callbackUrl</param>
+        /// <param name="flowTypes">flowTypes</param>
+        /// <param name="flowDirection">flowDirection</param>
+        /// <param name="ackStatus">ackStatus</param>
         [JsonConstructor]
-        public AFNORWebhookParams(AFNORCallbackParameters callback, AFNORWebhookMetadata metadata)
+        public AFNORWebhookParams(string callbackUrl, Option<List<AFNORFlowType>?> flowTypes = default, Option<AFNORFlowDirection?> flowDirection = default, Option<AFNORFlowAckStatus?> ackStatus = default)
         {
-            Callback = callback;
-            Metadata = metadata;
+            CallbackUrl = callbackUrl;
+            FlowTypesOption = flowTypes;
+            FlowDirectionOption = flowDirection;
+            AckStatusOption = ackStatus;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Callback
+        /// Used to track the state of FlowDirection
         /// </summary>
-        [JsonPropertyName("callback")]
-        public AFNORCallbackParameters Callback { get; set; }
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<AFNORFlowDirection?> FlowDirectionOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Metadata
+        /// Gets or Sets FlowDirection
         /// </summary>
-        [JsonPropertyName("metadata")]
-        public AFNORWebhookMetadata Metadata { get; set; }
+        [JsonPropertyName("flowDirection")]
+        public AFNORFlowDirection? FlowDirection { get { return this.FlowDirectionOption.Value; } set { this.FlowDirectionOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of AckStatus
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<AFNORFlowAckStatus?> AckStatusOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets AckStatus
+        /// </summary>
+        [JsonPropertyName("ackStatus")]
+        public AFNORFlowAckStatus? AckStatus { get { return this.AckStatusOption.Value; } set { this.AckStatusOption = new(value); } }
+
+        /// <summary>
+        /// Gets or Sets CallbackUrl
+        /// </summary>
+        [JsonPropertyName("callbackUrl")]
+        public string CallbackUrl { get; set; }
+
+        /// <summary>
+        /// Used to track the state of FlowTypes
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<AFNORFlowType>?> FlowTypesOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets FlowTypes
+        /// </summary>
+        [JsonPropertyName("flowTypes")]
+        public List<AFNORFlowType>? FlowTypes { get { return this.FlowTypesOption; } set { this.FlowTypesOption = new(value); } }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -66,8 +103,10 @@ namespace FactPulse.SDK.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class AFNORWebhookParams {\n");
-            sb.Append("  Callback: ").Append(Callback).Append("\n");
-            sb.Append("  Metadata: ").Append(Metadata).Append("\n");
+            sb.Append("  CallbackUrl: ").Append(CallbackUrl).Append("\n");
+            sb.Append("  FlowTypes: ").Append(FlowTypes).Append("\n");
+            sb.Append("  FlowDirection: ").Append(FlowDirection).Append("\n");
+            sb.Append("  AckStatus: ").Append(AckStatus).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -105,8 +144,10 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<AFNORCallbackParameters?> callback = default;
-            Option<AFNORWebhookMetadata?> metadata = default;
+            Option<string?> callbackUrl = default;
+            Option<List<AFNORFlowType>?> flowTypes = default;
+            Option<AFNORFlowDirection?> flowDirection = default;
+            Option<AFNORFlowAckStatus?> ackStatus = default;
 
             while (utf8JsonReader.Read())
             {
@@ -123,11 +164,21 @@ namespace FactPulse.SDK.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "callback":
-                            callback = new Option<AFNORCallbackParameters?>(JsonSerializer.Deserialize<AFNORCallbackParameters>(ref utf8JsonReader, jsonSerializerOptions)!);
+                        case "callbackUrl":
+                            callbackUrl = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
-                        case "metadata":
-                            metadata = new Option<AFNORWebhookMetadata?>(JsonSerializer.Deserialize<AFNORWebhookMetadata>(ref utf8JsonReader, jsonSerializerOptions)!);
+                        case "flowTypes":
+                            flowTypes = new Option<List<AFNORFlowType>?>(JsonSerializer.Deserialize<List<AFNORFlowType>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
+                        case "flowDirection":
+                            string? flowDirectionRawValue = utf8JsonReader.GetString();
+                            if (flowDirectionRawValue != null)
+                                flowDirection = new Option<AFNORFlowDirection?>(AFNORFlowDirectionValueConverter.FromStringOrDefault(flowDirectionRawValue));
+                            break;
+                        case "ackStatus":
+                            string? ackStatusRawValue = utf8JsonReader.GetString();
+                            if (ackStatusRawValue != null)
+                                ackStatus = new Option<AFNORFlowAckStatus?>(AFNORFlowAckStatusValueConverter.FromStringOrDefault(ackStatusRawValue));
                             break;
                         default:
                             break;
@@ -135,19 +186,22 @@ namespace FactPulse.SDK.Model
                 }
             }
 
-            if (!callback.IsSet)
-                throw new ArgumentException("Property is required for class AFNORWebhookParams.", nameof(callback));
+            if (!callbackUrl.IsSet)
+                throw new ArgumentException("Property is required for class AFNORWebhookParams.", nameof(callbackUrl));
 
-            if (!metadata.IsSet)
-                throw new ArgumentException("Property is required for class AFNORWebhookParams.", nameof(metadata));
+            if (callbackUrl.IsSet && callbackUrl.Value == null)
+                throw new ArgumentNullException(nameof(callbackUrl), "Property is not nullable for class AFNORWebhookParams.");
 
-            if (callback.IsSet && callback.Value == null)
-                throw new ArgumentNullException(nameof(callback), "Property is not nullable for class AFNORWebhookParams.");
+            if (flowTypes.IsSet && flowTypes.Value == null)
+                throw new ArgumentNullException(nameof(flowTypes), "Property is not nullable for class AFNORWebhookParams.");
 
-            if (metadata.IsSet && metadata.Value == null)
-                throw new ArgumentNullException(nameof(metadata), "Property is not nullable for class AFNORWebhookParams.");
+            if (flowDirection.IsSet && flowDirection.Value == null)
+                throw new ArgumentNullException(nameof(flowDirection), "Property is not nullable for class AFNORWebhookParams.");
 
-            return new AFNORWebhookParams(callback.Value!, metadata.Value!);
+            if (ackStatus.IsSet && ackStatus.Value == null)
+                throw new ArgumentNullException(nameof(ackStatus), "Property is not nullable for class AFNORWebhookParams.");
+
+            return new AFNORWebhookParams(callbackUrl.Value!, flowTypes, flowDirection, ackStatus);
         }
 
         /// <summary>
@@ -174,16 +228,29 @@ namespace FactPulse.SDK.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, AFNORWebhookParams aFNORWebhookParams, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (aFNORWebhookParams.Callback == null)
-                throw new ArgumentNullException(nameof(aFNORWebhookParams.Callback), "Property is required for class AFNORWebhookParams.");
+            if (aFNORWebhookParams.CallbackUrl == null)
+                throw new ArgumentNullException(nameof(aFNORWebhookParams.CallbackUrl), "Property is required for class AFNORWebhookParams.");
 
-            if (aFNORWebhookParams.Metadata == null)
-                throw new ArgumentNullException(nameof(aFNORWebhookParams.Metadata), "Property is required for class AFNORWebhookParams.");
+            if (aFNORWebhookParams.FlowTypesOption.IsSet && aFNORWebhookParams.FlowTypes == null)
+                throw new ArgumentNullException(nameof(aFNORWebhookParams.FlowTypes), "Property is required for class AFNORWebhookParams.");
 
-            writer.WritePropertyName("callback");
-            JsonSerializer.Serialize(writer, aFNORWebhookParams.Callback, jsonSerializerOptions);
-            writer.WritePropertyName("metadata");
-            JsonSerializer.Serialize(writer, aFNORWebhookParams.Metadata, jsonSerializerOptions);
+            writer.WriteString("callbackUrl", aFNORWebhookParams.CallbackUrl);
+
+            if (aFNORWebhookParams.FlowTypesOption.IsSet)
+            {
+                writer.WritePropertyName("flowTypes");
+                JsonSerializer.Serialize(writer, aFNORWebhookParams.FlowTypes, jsonSerializerOptions);
+            }
+            if (aFNORWebhookParams.FlowDirectionOption.IsSet)
+            {
+                var flowDirectionRawValue = AFNORFlowDirectionValueConverter.ToJsonValue(aFNORWebhookParams.FlowDirection!.Value);
+                writer.WriteString("flowDirection", flowDirectionRawValue);
+            }
+            if (aFNORWebhookParams.AckStatusOption.IsSet)
+            {
+                var ackStatusRawValue = AFNORFlowAckStatusValueConverter.ToJsonValue(aFNORWebhookParams.AckStatus!.Value);
+                writer.WriteString("ackStatus", ackStatusRawValue);
+            }
         }
     }
 }

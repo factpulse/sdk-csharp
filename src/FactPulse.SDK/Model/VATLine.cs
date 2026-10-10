@@ -69,7 +69,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets Category
         /// </summary>
         [JsonPropertyName("category")]
-        public VATCategory? Category { get { return this.CategoryOption; } set { this.CategoryOption = new(value); } }
+        public VATCategory? Category { get { return this.CategoryOption.Value; } set { this.CategoryOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of DueDateTypeCode
@@ -82,7 +82,7 @@ namespace FactPulse.SDK.Model
         /// Gets or Sets DueDateTypeCode
         /// </summary>
         [JsonPropertyName("due_date_type_code")]
-        public VATPointDateCode? DueDateTypeCode { get { return this.DueDateTypeCodeOption; } set { this.DueDateTypeCodeOption = new(value); } }
+        public VATPointDateCode? DueDateTypeCode { get { return this.DueDateTypeCodeOption.Value; } set { this.DueDateTypeCodeOption = new(value); } }
 
         /// <summary>
         /// Gets or Sets TaxableAmount

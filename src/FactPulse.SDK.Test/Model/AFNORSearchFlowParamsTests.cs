@@ -71,5 +71,14 @@ namespace FactPulse.SDK.Test.Model
         {
             // TODO unit test for the property 'Limit'
         }
+
+        /// <summary>
+        /// Test the property 'Cursor'
+        /// </summary>
+        [Fact]
+        public void CursorTest()
+        {
+            // TODO unit test for the property 'Cursor'
+        }
     }
 }

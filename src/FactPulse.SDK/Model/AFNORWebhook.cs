@@ -34,31 +34,59 @@ namespace FactPulse.SDK.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="AFNORWebhook" /> class.
         /// </summary>
-        /// <param name="callback">callback</param>
-        /// <param name="metadata">metadata</param>
+        /// <param name="callbackUrl">callbackUrl</param>
         /// <param name="webhookId">webhookId</param>
+        /// <param name="signingKey">signingKey</param>
+        /// <param name="createdAt">createdAt</param>
+        /// <param name="flowTypes">flowTypes</param>
+        /// <param name="flowDirection">flowDirection</param>
+        /// <param name="ackStatus">ackStatus</param>
         [JsonConstructor]
-        public AFNORWebhook(AFNORCallbackParameters callback, AFNORWebhookMetadata metadata, Option<Guid?> webhookId = default)
+        public AFNORWebhook(string callbackUrl, Option<Guid?> webhookId = default, Option<byte[]?> signingKey = default, Option<DateTime?> createdAt = default, Option<List<AFNORFlowType>?> flowTypes = default, Option<AFNORFlowDirection?> flowDirection = default, Option<AFNORFlowAckStatus?> ackStatus = default)
         {
-            Callback = callback;
-            Metadata = metadata;
+            CallbackUrl = callbackUrl;
             WebhookIdOption = webhookId;
+            SigningKeyOption = signingKey;
+            CreatedAtOption = createdAt;
+            FlowTypesOption = flowTypes;
+            FlowDirectionOption = flowDirection;
+            AckStatusOption = ackStatus;
             OnCreated();
         }
 
         partial void OnCreated();
 
         /// <summary>
-        /// Gets or Sets Callback
+        /// Used to track the state of FlowDirection
         /// </summary>
-        [JsonPropertyName("callback")]
-        public AFNORCallbackParameters Callback { get; set; }
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<AFNORFlowDirection?> FlowDirectionOption { get; private set; }
 
         /// <summary>
-        /// Gets or Sets Metadata
+        /// Gets or Sets FlowDirection
         /// </summary>
-        [JsonPropertyName("metadata")]
-        public AFNORWebhookMetadata Metadata { get; set; }
+        [JsonPropertyName("flowDirection")]
+        public AFNORFlowDirection? FlowDirection { get { return this.FlowDirectionOption.Value; } set { this.FlowDirectionOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of AckStatus
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<AFNORFlowAckStatus?> AckStatusOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets AckStatus
+        /// </summary>
+        [JsonPropertyName("ackStatus")]
+        public AFNORFlowAckStatus? AckStatus { get { return this.AckStatusOption.Value; } set { this.AckStatusOption = new(value); } }
+
+        /// <summary>
+        /// Gets or Sets CallbackUrl
+        /// </summary>
+        [JsonPropertyName("callbackUrl")]
+        public string CallbackUrl { get; set; }
 
         /// <summary>
         /// Used to track the state of WebhookId
@@ -74,6 +102,45 @@ namespace FactPulse.SDK.Model
         public Guid? WebhookId { get { return this.WebhookIdOption; } set { this.WebhookIdOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of SigningKey
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<byte[]?> SigningKeyOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets SigningKey
+        /// </summary>
+        [JsonPropertyName("signingKey")]
+        public byte[]? SigningKey { get { return this.SigningKeyOption; } set { this.SigningKeyOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of CreatedAt
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<DateTime?> CreatedAtOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets CreatedAt
+        /// </summary>
+        [JsonPropertyName("createdAt")]
+        public DateTime? CreatedAt { get { return this.CreatedAtOption; } set { this.CreatedAtOption = new(value); } }
+
+        /// <summary>
+        /// Used to track the state of FlowTypes
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<List<AFNORFlowType>?> FlowTypesOption { get; private set; }
+
+        /// <summary>
+        /// Gets or Sets FlowTypes
+        /// </summary>
+        [JsonPropertyName("flowTypes")]
+        public List<AFNORFlowType>? FlowTypes { get { return this.FlowTypesOption; } set { this.FlowTypesOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -81,9 +148,13 @@ namespace FactPulse.SDK.Model
         {
             StringBuilder sb = new StringBuilder();
             sb.Append("class AFNORWebhook {\n");
-            sb.Append("  Callback: ").Append(Callback).Append("\n");
-            sb.Append("  Metadata: ").Append(Metadata).Append("\n");
+            sb.Append("  CallbackUrl: ").Append(CallbackUrl).Append("\n");
             sb.Append("  WebhookId: ").Append(WebhookId).Append("\n");
+            sb.Append("  SigningKey: ").Append(SigningKey).Append("\n");
+            sb.Append("  CreatedAt: ").Append(CreatedAt).Append("\n");
+            sb.Append("  FlowTypes: ").Append(FlowTypes).Append("\n");
+            sb.Append("  FlowDirection: ").Append(FlowDirection).Append("\n");
+            sb.Append("  AckStatus: ").Append(AckStatus).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -105,6 +176,11 @@ namespace FactPulse.SDK.Model
     public class AFNORWebhookJsonConverter : JsonConverter<AFNORWebhook>
     {
         /// <summary>
+        /// The format to use to serialize CreatedAt
+        /// </summary>
+        public static string CreatedAtFormat { get; set; } = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK";
+
+        /// <summary>
         /// Deserializes json to <see cref="AFNORWebhook" />
         /// </summary>
         /// <param name="utf8JsonReader"></param>
@@ -121,9 +197,13 @@ namespace FactPulse.SDK.Model
 
             JsonTokenType startingTokenType = utf8JsonReader.TokenType;
 
-            Option<AFNORCallbackParameters?> callback = default;
-            Option<AFNORWebhookMetadata?> metadata = default;
+            Option<string?> callbackUrl = default;
             Option<Guid?> webhookId = default;
+            Option<byte[]?> signingKey = default;
+            Option<DateTime?> createdAt = default;
+            Option<List<AFNORFlowType>?> flowTypes = default;
+            Option<AFNORFlowDirection?> flowDirection = default;
+            Option<AFNORFlowAckStatus?> ackStatus = default;
 
             while (utf8JsonReader.Read())
             {
@@ -140,14 +220,30 @@ namespace FactPulse.SDK.Model
 
                     switch (localVarJsonPropertyName)
                     {
-                        case "callback":
-                            callback = new Option<AFNORCallbackParameters?>(JsonSerializer.Deserialize<AFNORCallbackParameters>(ref utf8JsonReader, jsonSerializerOptions)!);
-                            break;
-                        case "metadata":
-                            metadata = new Option<AFNORWebhookMetadata?>(JsonSerializer.Deserialize<AFNORWebhookMetadata>(ref utf8JsonReader, jsonSerializerOptions)!);
+                        case "callbackUrl":
+                            callbackUrl = new Option<string?>(utf8JsonReader.GetString()!);
                             break;
                         case "webhookId":
                             webhookId = new Option<Guid?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (Guid?)null : utf8JsonReader.GetGuid());
+                            break;
+                        case "signingKey":
+                            signingKey = new Option<byte[]?>(JsonSerializer.Deserialize<byte[]>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
+                        case "createdAt":
+                            createdAt = new Option<DateTime?>(JsonSerializer.Deserialize<DateTime>(ref utf8JsonReader, jsonSerializerOptions));
+                            break;
+                        case "flowTypes":
+                            flowTypes = new Option<List<AFNORFlowType>?>(JsonSerializer.Deserialize<List<AFNORFlowType>>(ref utf8JsonReader, jsonSerializerOptions)!);
+                            break;
+                        case "flowDirection":
+                            string? flowDirectionRawValue = utf8JsonReader.GetString();
+                            if (flowDirectionRawValue != null)
+                                flowDirection = new Option<AFNORFlowDirection?>(AFNORFlowDirectionValueConverter.FromStringOrDefault(flowDirectionRawValue));
+                            break;
+                        case "ackStatus":
+                            string? ackStatusRawValue = utf8JsonReader.GetString();
+                            if (ackStatusRawValue != null)
+                                ackStatus = new Option<AFNORFlowAckStatus?>(AFNORFlowAckStatusValueConverter.FromStringOrDefault(ackStatusRawValue));
                             break;
                         default:
                             break;
@@ -155,22 +251,31 @@ namespace FactPulse.SDK.Model
                 }
             }
 
-            if (!callback.IsSet)
-                throw new ArgumentException("Property is required for class AFNORWebhook.", nameof(callback));
+            if (!callbackUrl.IsSet)
+                throw new ArgumentException("Property is required for class AFNORWebhook.", nameof(callbackUrl));
 
-            if (!metadata.IsSet)
-                throw new ArgumentException("Property is required for class AFNORWebhook.", nameof(metadata));
-
-            if (callback.IsSet && callback.Value == null)
-                throw new ArgumentNullException(nameof(callback), "Property is not nullable for class AFNORWebhook.");
-
-            if (metadata.IsSet && metadata.Value == null)
-                throw new ArgumentNullException(nameof(metadata), "Property is not nullable for class AFNORWebhook.");
+            if (callbackUrl.IsSet && callbackUrl.Value == null)
+                throw new ArgumentNullException(nameof(callbackUrl), "Property is not nullable for class AFNORWebhook.");
 
             if (webhookId.IsSet && webhookId.Value == null)
                 throw new ArgumentNullException(nameof(webhookId), "Property is not nullable for class AFNORWebhook.");
 
-            return new AFNORWebhook(callback.Value!, metadata.Value!, webhookId);
+            if (signingKey.IsSet && signingKey.Value == null)
+                throw new ArgumentNullException(nameof(signingKey), "Property is not nullable for class AFNORWebhook.");
+
+            if (createdAt.IsSet && createdAt.Value == null)
+                throw new ArgumentNullException(nameof(createdAt), "Property is not nullable for class AFNORWebhook.");
+
+            if (flowTypes.IsSet && flowTypes.Value == null)
+                throw new ArgumentNullException(nameof(flowTypes), "Property is not nullable for class AFNORWebhook.");
+
+            if (flowDirection.IsSet && flowDirection.Value == null)
+                throw new ArgumentNullException(nameof(flowDirection), "Property is not nullable for class AFNORWebhook.");
+
+            if (ackStatus.IsSet && ackStatus.Value == null)
+                throw new ArgumentNullException(nameof(ackStatus), "Property is not nullable for class AFNORWebhook.");
+
+            return new AFNORWebhook(callbackUrl.Value!, webhookId, signingKey, createdAt, flowTypes, flowDirection, ackStatus);
         }
 
         /// <summary>
@@ -197,18 +302,43 @@ namespace FactPulse.SDK.Model
         /// <exception cref="NotImplementedException"></exception>
         public void WriteProperties(Utf8JsonWriter writer, AFNORWebhook aFNORWebhook, JsonSerializerOptions jsonSerializerOptions)
         {
-            if (aFNORWebhook.Callback == null)
-                throw new ArgumentNullException(nameof(aFNORWebhook.Callback), "Property is required for class AFNORWebhook.");
+            if (aFNORWebhook.CallbackUrl == null)
+                throw new ArgumentNullException(nameof(aFNORWebhook.CallbackUrl), "Property is required for class AFNORWebhook.");
 
-            if (aFNORWebhook.Metadata == null)
-                throw new ArgumentNullException(nameof(aFNORWebhook.Metadata), "Property is required for class AFNORWebhook.");
+            if (aFNORWebhook.SigningKeyOption.IsSet && aFNORWebhook.SigningKey == null)
+                throw new ArgumentNullException(nameof(aFNORWebhook.SigningKey), "Property is required for class AFNORWebhook.");
 
-            writer.WritePropertyName("callback");
-            JsonSerializer.Serialize(writer, aFNORWebhook.Callback, jsonSerializerOptions);
-            writer.WritePropertyName("metadata");
-            JsonSerializer.Serialize(writer, aFNORWebhook.Metadata, jsonSerializerOptions);
+            if (aFNORWebhook.FlowTypesOption.IsSet && aFNORWebhook.FlowTypes == null)
+                throw new ArgumentNullException(nameof(aFNORWebhook.FlowTypes), "Property is required for class AFNORWebhook.");
+
+            writer.WriteString("callbackUrl", aFNORWebhook.CallbackUrl);
+
             if (aFNORWebhook.WebhookIdOption.IsSet)
                 writer.WriteString("webhookId", aFNORWebhook.WebhookIdOption.Value!.Value);
+
+            if (aFNORWebhook.SigningKeyOption.IsSet)
+            {
+                writer.WritePropertyName("signingKey");
+                JsonSerializer.Serialize(writer, aFNORWebhook.SigningKey, jsonSerializerOptions);
+            }
+            if (aFNORWebhook.CreatedAtOption.IsSet)
+                writer.WriteString("createdAt", aFNORWebhook.CreatedAtOption.Value!.Value.ToString(CreatedAtFormat));
+
+            if (aFNORWebhook.FlowTypesOption.IsSet)
+            {
+                writer.WritePropertyName("flowTypes");
+                JsonSerializer.Serialize(writer, aFNORWebhook.FlowTypes, jsonSerializerOptions);
+            }
+            if (aFNORWebhook.FlowDirectionOption.IsSet)
+            {
+                var flowDirectionRawValue = AFNORFlowDirectionValueConverter.ToJsonValue(aFNORWebhook.FlowDirection!.Value);
+                writer.WriteString("flowDirection", flowDirectionRawValue);
+            }
+            if (aFNORWebhook.AckStatusOption.IsSet)
+            {
+                var ackStatusRawValue = AFNORFlowAckStatusValueConverter.ToJsonValue(aFNORWebhook.AckStatus!.Value);
+                writer.WriteString("ackStatus", ackStatusRawValue);
+            }
         }
     }
 }

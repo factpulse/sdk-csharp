@@ -57,7 +57,7 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task ValidateFacturxPdfApiV1ProcessingValidateFacturxPdfPostAsyncTest()
         {
-            System.IO.Stream pdfFile = default!;
+            FactPulse.SDK.Client.FileParameter pdfFile = default!;
             Client.Option<APIProfile?> profile = default!;
             Client.Option<bool> useVerapdf = default!;
             Client.Option<bool?> skipBrFr = default!;
@@ -72,7 +72,7 @@ namespace FactPulse.SDK.Test.Api
         [Fact (Skip = "not implemented")]
         public async Task ValidateFacturxPdfAsyncApiV1ProcessingValidateFacturxAsyncPostAsyncTest()
         {
-            System.IO.Stream pdfFile = default!;
+            FactPulse.SDK.Client.FileParameter pdfFile = default!;
             Client.Option<APIProfile?> profile = default!;
             Client.Option<bool> useVerapdf = default!;
             Client.Option<string?> callbackUrl = default!;

@@ -50,7 +50,7 @@ namespace FactPulse.SDK.Model
         /// <param name="purchaseOrderReference">purchaseOrderReference</param>
         /// <param name="contractReference">contractReference</param>
         [JsonConstructor]
-        public SubmitInvoiceRequest(string invoiceNumber, string invoiceDate, int structureId, SubmitNetAmount totalNetAmount, SubmitVatAmount vatAmount, SubmitGrossAmount totalGrossAmount, Option<ChorusProCredentials?> credentials = default, Option<string?> paymentDueDate = default, Option<string?> serviceCode = default, Option<string?> engagementNumber = default, Option<int?> mainAttachmentId = default, Option<string?> mainAttachmentLabel = default, Option<string?> comment = default, Option<string?> purchaseOrderReference = default, Option<string?> contractReference = default)
+        public SubmitInvoiceRequest(string invoiceNumber, string invoiceDate, int structureId, SubmitNetAmount totalNetAmount, SubmitVatAmount vatAmount, SubmitGrossAmount totalGrossAmount, Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?> credentials = default, Option<string?> paymentDueDate = default, Option<string?> serviceCode = default, Option<string?> engagementNumber = default, Option<int?> mainAttachmentId = default, Option<string?> mainAttachmentLabel = default, Option<string?> comment = default, Option<string?> purchaseOrderReference = default, Option<string?> contractReference = default)
         {
             InvoiceNumber = invoiceNumber;
             InvoiceDate = invoiceDate;
@@ -116,13 +116,13 @@ namespace FactPulse.SDK.Model
         /// </summary>
         [JsonIgnore]
         [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
-        public Option<ChorusProCredentials?> CredentialsOption { get; private set; }
+        public Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?> CredentialsOption { get; private set; }
 
         /// <summary>
         /// Gets or Sets Credentials
         /// </summary>
         [JsonPropertyName("credentials")]
-        public ChorusProCredentials? Credentials { get { return this.CredentialsOption; } set { this.CredentialsOption = new(value); } }
+        public FactureElectroniqueRestApiSchemasChorusProChorusProCredentials? Credentials { get { return this.CredentialsOption; } set { this.CredentialsOption = new(value); } }
 
         /// <summary>
         /// Used to track the state of PaymentDueDate
@@ -294,7 +294,7 @@ namespace FactPulse.SDK.Model
             Option<SubmitNetAmount?> totalNetAmount = default;
             Option<SubmitVatAmount?> vatAmount = default;
             Option<SubmitGrossAmount?> totalGrossAmount = default;
-            Option<ChorusProCredentials?> credentials = default;
+            Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?> credentials = default;
             Option<string?> paymentDueDate = default;
             Option<string?> serviceCode = default;
             Option<string?> engagementNumber = default;
@@ -338,7 +338,7 @@ namespace FactPulse.SDK.Model
                             totalGrossAmount = new Option<SubmitGrossAmount?>(JsonSerializer.Deserialize<SubmitGrossAmount>(ref utf8JsonReader, jsonSerializerOptions)!);
                             break;
                         case "credentials":
-                            credentials = new Option<ChorusProCredentials?>(JsonSerializer.Deserialize<ChorusProCredentials>(ref utf8JsonReader, jsonSerializerOptions));
+                            credentials = new Option<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials?>(JsonSerializer.Deserialize<FactureElectroniqueRestApiSchemasChorusProChorusProCredentials>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
                         case "paymentDueDate":
                             paymentDueDate = new Option<string?>(utf8JsonReader.GetString());

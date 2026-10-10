@@ -1547,6 +1547,19 @@ paths:
             3. **Electronic signature** (optional): signs the PDF with a certificate
             4. **Submission**: sends to the chosen destination (Chorus Pro or AFNOR PDP)
 
+            **Two accepted `invoiceData` formats, detected automatically** (same rule as
+            `/generate-invoice`):
+            - **Simplified format** (`number` + `lines`): totals, VAT and dates are computed.
+              Any field of the complete model may be added on top (`deliveryDate` BT-72,
+              `deliveryParty` BG-15, `paymentReference` BT-83, `supplier.bic` BT-86, ...).
+            - **Complete format** (`invoiceLines` present): full `FacturXInvoice` structure,
+              used as provided.
+
+            A non-compliant invoice is **not submitted**: the Schematron errors are returned
+            as a 400 `SCHEMATRON_VALIDATION_FAILED`, rather than a 200 followed by an
+            asynchronous rejection by the PA. This includes the empty-element rule
+            (PEPPOL-EN16931-R008), which the PAs apply as blocking.
+
             **Supported destinations:**
             - **Chorus Pro**: French B2G platform (invoices to public sector)
             - **AFNOR PDP**: Partner Dematerialization Platforms
@@ -1582,6 +1595,17 @@ paths:
             If `key_pem` and `cert_pem` are provided → Mode 2
             Otherwise → Mode 1 (certificate retrieved via `client_uid`)
       operationId: submit_complete_invoice_api_v1_processing_invoices_submit_complete_post
+      parameters:
+      - description: Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation
+          / multi-tenancy). Required by some PDPs to select the client space.
+        explode: false
+        in: header
+        name: Organization-Id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -1676,6 +1700,16 @@ paths:
           title: Webhook Mode
           type: string
         style: form
+      - description: Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation
+          / multi-tenancy). Required by some PDPs to select the client space.
+        explode: false
+        in: header
+        name: Organization-Id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -2197,7 +2231,7 @@ paths:
       - AFNOR PDP/PA - Flow Service
   /api/v1/afnor/flow/v1/webhooks:
     get:
-      description: List all registered webhooks (AFNOR XP Z12-013 v1.2.0)
+      description: List all registered webhooks (AFNOR XP Z12-013 v1.3.0)
       operationId: list_webhooks_proxy_api_v1_afnor_flow_v1_webhooks_get
       responses:
         "200":
@@ -2242,7 +2276,7 @@ paths:
       tags:
       - AFNOR PDP/PA - Flow Service
     post:
-      description: Register a new webhook subscription (AFNOR XP Z12-013 v1.2.0)
+      description: Register a new webhook subscription (AFNOR XP Z12-013 v1.3.0)
       operationId: create_webhook_proxy_api_v1_afnor_flow_v1_webhooks_post
       responses:
         "200":
@@ -2303,7 +2337,7 @@ paths:
       - AFNOR PDP/PA - Flow Service
   /api/v1/afnor/flow/v1/webhooks/{webhookUid}:
     delete:
-      description: Delete a webhook subscription (AFNOR XP Z12-013 v1.2.0)
+      description: Delete a webhook subscription (AFNOR XP Z12-013 v1.3.0)
       operationId: delete_webhook_proxy_api_v1_afnor_flow_v1_webhooks__webhookUid__delete
       parameters:
       - description: Webhook unique identifier (UUID)
@@ -2369,144 +2403,6 @@ paths:
       summary: Delete a webhook
       tags:
       - AFNOR PDP/PA - Flow Service
-    get:
-      description: Get details of a specific webhook (AFNOR XP Z12-013 v1.2.0)
-      operationId: get_webhook_proxy_api_v1_afnor_flow_v1_webhooks__webhookUid__get
-      parameters:
-      - description: Webhook unique identifier (UUID)
-        explode: false
-        in: path
-        name: webhookUid
-        required: true
-        schema:
-          description: Webhook unique identifier (UUID)
-          title: Webhookuid
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AFNOR_Webhook"
-          description: OK - Webhook details returned
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AFNOR_Error"
-          description: Authentication error - Missing or invalid token
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AFNOR_Error"
-          description: Forbidden - Insufficient permissions
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AFNOR_Error"
-          description: Resource not found
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AFNOR_Error"
-          description: Too many requests - Rate limit exceeded
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AFNOR_Error"
-          description: Internal server error
-        "503":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AFNOR_Error"
-          description: Service unavailable - PDP temporarily unavailable
-        "422":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/HTTPValidationError"
-          description: Validation Error
-      summary: Get a webhook
-      tags:
-      - AFNOR PDP/PA - Flow Service
-    patch:
-      description: Partially update a webhook subscription (AFNOR XP Z12-013 v1.2.0)
-      operationId: update_webhook_proxy_api_v1_afnor_flow_v1_webhooks__webhookUid__patch
-      parameters:
-      - description: Webhook unique identifier (UUID)
-        explode: false
-        in: path
-        name: webhookUid
-        required: true
-        schema:
-          description: Webhook unique identifier (UUID)
-          title: Webhookuid
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AFNOR_Webhook"
-          description: OK - Webhook updated successfully
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AFNOR_Error"
-          description: Bad request - Invalid input parameters
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AFNOR_Error"
-          description: Authentication error - Missing or invalid token
-        "403":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AFNOR_Error"
-          description: Forbidden - Insufficient permissions
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AFNOR_Error"
-          description: Resource not found
-        "422":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AFNOR_Error"
-          description: Unprocessable entity - Business rule validation failed
-        "429":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AFNOR_Error"
-          description: Too many requests - Rate limit exceeded
-        "500":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AFNOR_Error"
-          description: Internal server error
-        "503":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AFNOR_Error"
-          description: Service unavailable - PDP temporarily unavailable
-      summary: Update a webhook
-      tags:
-      - AFNOR PDP/PA - Flow Service
   /api/v1/afnor/directory/v1/healthcheck:
     get:
       description: Check Directory Service availability (AFNOR XP Z12-013 compliant)
@@ -2536,13 +2432,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/AFNOR_sirenSearchPost200Response"
           description: Returns one or more companies.
-        "206":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AFNOR_sirenSearchPost200Response"
-          description: "Request processed without error, but the volume of information\
-            \ returned has been reduced."
         "400":
           description: Bad request. The request is invalid or cannot be completed.
         "401":
@@ -2564,8 +2453,6 @@ paths:
           description: Not implemented.
         "503":
           description: Service unavailable.
-        "204":
-          description: No content
       summary: SIREN search (or legal unit)
       tags:
       - AFNOR PDP/PA - Directory Service
@@ -2629,13 +2516,6 @@ paths:
           description: Returns an establishment as defined on a given observation
             date or as defined on the current date if the observation date is not
             specified.
-        "206":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AFNOR_siretSearchPost200Response"
-          description: "Request processed without error, but the volume of information\
-            \ returned has been reduced."
         "400":
           description: Bad request. The request is invalid or cannot be completed.
         "401":
@@ -2657,8 +2537,6 @@ paths:
           description: Not implemented.
         "503":
           description: Service unavailable.
-        "204":
-          description: No content
       summary: Search for a SIRET (facility)
       tags:
       - AFNOR PDP/PA - Directory Service
@@ -2720,13 +2598,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/AFNOR_routingCodeSearchPost200Response"
           description: Returns the routing code(s) matching the search criteria.
-        "206":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AFNOR_routingCodeSearchPost200Response"
-          description: "Request processed without error, but the volume of information\
-            \ returned has been reduced."
         "400":
           description: Bad request. The request is invalid or cannot be completed.
         "401":
@@ -2748,8 +2619,6 @@ paths:
           description: Not implemented.
         "503":
           description: Service unavailable.
-        "204":
-          description: No content
       summary: Search for a routing code
       tags:
       - AFNOR PDP/PA - Directory Service
@@ -2822,13 +2691,6 @@ paths:
               schema:
                 $ref: "#/components/schemas/AFNOR_directoryLineSearchPost200Response"
           description: returns the directory line(s) matching the search criteria.
-        "206":
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/AFNOR_directoryLineSearchPost200Response"
-          description: "Request processed without error, but the volume of information\
-            \ returned has been reduced."
         "400":
           description: Bad request. The request is invalid or cannot be completed.
         "401":
@@ -2850,8 +2712,6 @@ paths:
           description: Not implemented.
         "503":
           description: Service unavailable.
-        "204":
-          description: No content
       summary: Search for a directory line
       tags:
       - AFNOR PDP/PA - Directory Service
@@ -4516,6 +4376,17 @@ paths:
         The e-reporting is submitted using the AFNOR Flow Service API
         with syntax=FRR (FRench Reporting).
       operationId: submit_ereporting_api_v1_ereporting_submit_post
+      parameters:
+      - description: Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation
+          / multi-tenancy). Required by some PDPs to select the client space.
+        explode: false
+        in: header
+        name: Organization-Id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -4611,6 +4482,17 @@ paths:
 
         **Authentication:** Same strategies as /submit endpoint (JWT or zero-storage credentials).
       operationId: submit_xml_ereporting_api_v1_ereporting_submit_xml_post
+      parameters:
+      - description: Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation
+          / multi-tenancy). Required by some PDPs to select the client space.
+        explode: false
+        in: header
+        name: Organization-Id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: simple
       requestBody:
         content:
           multipart/form-data:
@@ -4824,6 +4706,17 @@ paths:
         Combines generation and submission in a single call.
         Automatically determines the AFNOR FlowType based on content.
       operationId: submit_aggregated_ereporting_api_v1_ereporting_submit_aggregated_post
+      parameters:
+      - description: Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation
+          / multi-tenancy). Required by some PDPs to select the client space.
+        explode: false
+        in: header
+        name: Organization-Id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -5012,6 +4905,17 @@ paths:
         - `CustomerInvoiceLC`: Client-side lifecycle (buyer)
         - `SupplierInvoiceLC`: Supplier-side lifecycle (seller)
       operationId: submit_cdar_api_v1_cdar_submit_post
+      parameters:
+      - description: Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation
+          / multi-tenancy). Required by some PDPs to select the client space.
+        explode: false
+        in: header
+        name: Organization-Id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -5060,6 +4964,17 @@ paths:
         1. **JWT with client_uid** (recommended): PDP credentials retrieved from backend
         2. **Zero-storage**: Provide pdpFlowServiceUrl, pdpClientId, pdpClientSecret in the request
       operationId: submit_cdar_xml_api_v1_cdar_submit_xml_post
+      parameters:
+      - description: Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation
+          / multi-tenancy). Required by some PDPs to select the client space.
+        explode: false
+        in: header
+        name: Organization-Id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -5175,6 +5090,8 @@ paths:
         **Parameters:**
         - `days`: Number of days to look back (default: 7)
         - `invoiceId`: Optional filter on a specific invoice reference
+        - `flowDirection`: `All` (default), `In` (statuses received from the counterparty)
+          or `Out` (statuses issued by you or your PA, e.g. 202/203)
 
         **Authentication:** JWT Bearer (recommended) or PDP credentials as query parameters.
       operationId: get_lifecycle_api_v1_cdar_lifecycle_get
@@ -5199,6 +5116,21 @@ paths:
         required: false
         schema:
           nullable: true
+          type: string
+        style: form
+      - description: "All (default), In (received statuses) or Out (issued statuses)"
+        explode: true
+        in: query
+        name: flowDirection
+        required: false
+        schema:
+          default: All
+          description: "All (default), In (received statuses) or Out (issued statuses)"
+          enum:
+          - In
+          - Out
+          - All
+          title: Flowdirection
           type: string
         style: form
       - description: PDP Flow Service URL
@@ -5237,6 +5169,16 @@ paths:
           nullable: true
           type: string
         style: form
+      - description: Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation
+          / multi-tenancy). Required by some PDPs to select the client space.
+        explode: false
+        in: header
+        name: Organization-Id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: simple
       responses:
         "200":
           content:
@@ -5296,6 +5238,17 @@ paths:
 
         **Authentication:** JWT Bearer (recommended) or PDP credentials in request.
       operationId: submit_refusee_api_v1_cdar_refusee_post
+      parameters:
+      - description: Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation
+          / multi-tenancy). Required by some PDPs to select the client space.
+        explode: false
+        in: header
+        name: Organization-Id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -5346,6 +5299,17 @@ paths:
 
         **Authentication:** JWT Bearer (recommended) or PDP credentials in request.
       operationId: submit_encaissee_api_v1_cdar_encaissee_post
+      parameters:
+      - description: Organization ID relayed to the PDP (AFNOR XP Z12-013 delegation
+          / multi-tenancy). Required by some PDPs to select the client space.
+        explode: false
+        in: header
+        name: Organization-Id
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -6228,6 +6192,194 @@ paths:
       summary: Delete webhook secret
       tags:
       - Client Management
+  /api/v1/clients/{uid}/superpdp/connect-url:
+    post:
+      description: |-
+        Generate the SuperPDP OAuth2 authorization URL for a client.
+
+        **Scope**: Client level (JWT with client_uid that must match {uid})
+
+        Redirect the end user to the returned `authorizeUrl` so they can connect
+        their own SuperPDP account to FactPulse (OAuth2 Authorization Code).
+
+        **Query parameters**:
+        - `modeSandbox` (default `true`): connect via the SuperPDP sandbox app
+          (fictitious data) or the production app.
+        - `returnUrl` (optional): absolute http(s) URL of your own portal. Once the
+          SuperPDP authorization flow is over, the end user is redirected there with
+          `superpdp_connected=true|false` (and `superpdp_error=<code>` on failure)
+          appended to the query string. Without it, FactPulse displays its own
+          confirmation page. Returns `400 invalid_return_url` if the URL is not an
+          absolute http(s) URL.
+      operationId: get_superpdp_connect_url_api_v1_clients__uid__superpdp_connect_url_post
+      parameters:
+      - description: Client unique identifier (UUID)
+        explode: false
+        in: path
+        name: uid
+        required: true
+        schema:
+          description: Client unique identifier (UUID)
+          format: uuid
+          title: Uid
+          type: string
+        style: simple
+      - description: "True for the SuperPDP sandbox app (default), False for production"
+        explode: true
+        in: query
+        name: modeSandbox
+        required: false
+        schema:
+          default: true
+          description: "True for the SuperPDP sandbox app (default), False for production"
+          title: Modesandbox
+          type: boolean
+        style: form
+      - description: Absolute http(s) URL to redirect the end user to once the SuperPDP
+          connection is done. Defaults to the FactPulse confirmation page.
+        explode: true
+        in: query
+        name: returnUrl
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuperPDPConnectURLResponse"
+          description: Successful Response
+        "400":
+          description: Invalid request
+        "401":
+          description: Missing or invalid JWT token
+        "403":
+          description: Access denied
+        "404":
+          description: Client not found
+        "500":
+          description: Server error
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      security:
+      - HTTPBearer: []
+      - APIKeyHeader: []
+      summary: Get SuperPDP connection URL
+      tags:
+      - Client Management
+  /api/v1/clients/{uid}/superpdp/status:
+    get:
+      description: |-
+        Check whether a client has connected its SuperPDP account.
+
+        **Scope**: Client level (JWT with client_uid that must match {uid})
+
+        **Response**:
+        - `connected`: Whether the client has an active SuperPDP connection
+        - `connectedAt`: When the connection was established (if any)
+        - `expiresAt`: When the current access token expires (if any)
+        - `modeSandbox`: True if connected via the sandbox app, False for production, null if not connected
+        - `lastError`: Last token refresh error, if any
+      operationId: get_superpdp_status_api_v1_clients__uid__superpdp_status_get
+      parameters:
+      - description: Client unique identifier (UUID)
+        explode: false
+        in: path
+        name: uid
+        required: true
+        schema:
+          description: Client unique identifier (UUID)
+          format: uuid
+          title: Uid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuperPDPStatusResponse"
+          description: Successful Response
+        "400":
+          description: Invalid request
+        "401":
+          description: Missing or invalid JWT token
+        "403":
+          description: Access denied
+        "404":
+          description: Client not found
+        "500":
+          description: Server error
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      security:
+      - HTTPBearer: []
+      - APIKeyHeader: []
+      summary: Get SuperPDP connection status
+      tags:
+      - Client Management
+  /api/v1/clients/{uid}/superpdp:
+    delete:
+      description: |-
+        Disconnect SuperPDP for a client.
+
+        **Scope**: Client level (JWT with client_uid that must match {uid})
+
+        Revokes the stored refresh token with SuperPDP (RFC 7009) and deletes the
+        stored tokens. The client can reconnect later via the connect-url endpoint.
+      operationId: disconnect_superpdp_api_v1_clients__uid__superpdp_delete
+      parameters:
+      - description: Client unique identifier (UUID)
+        explode: false
+        in: path
+        name: uid
+        required: true
+        schema:
+          description: Client unique identifier (UUID)
+          format: uuid
+          title: Uid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SuperPDPDisconnectResponse"
+          description: Successful Response
+        "400":
+          description: Invalid request
+        "401":
+          description: Missing or invalid JWT token
+        "403":
+          description: Access denied
+        "404":
+          description: Client not found
+        "500":
+          description: Server error
+        "422":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HTTPValidationError"
+          description: Validation Error
+      security:
+      - HTTPBearer: []
+      - APIKeyHeader: []
+      summary: Disconnect SuperPDP
+      tags:
+      - Client Management
   /api/v1/me:
     get:
       description: |-
@@ -6473,6 +6625,31 @@ components:
       - codes
       - count
       title: ActionCodesResponse
+    AdditionalDocument:
+      description: |-
+        Additional supporting document (BG-24).
+
+        References to external documents or embedded attachments.
+      properties:
+        id:
+          description: Document reference identifier (BT-122).
+          title: Id
+          type: string
+        type_code:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+        uri:
+          nullable: true
+          type: string
+        reference_type_code:
+          nullable: true
+          type: string
+      required:
+      - id
+      title: AdditionalDocument
     AggregatedPaymentInput:
       description: |-
         Aggregated payment for B2C (flux 10.4).
@@ -6547,6 +6724,108 @@ components:
       - taxBreakdown
       - taxExclusiveAmount
       title: AggregatedTransactionInput
+    AllowanceCharge:
+      description: |-
+        Document-level or line-level allowance/charge.
+
+        Represents BG-20 (Document level allowances), BG-21 (Document level charges),
+        BG-27 (Invoice line allowances), or BG-28 (Invoice line charges).
+      properties:
+        is_charge:
+          description: "True for charge, False for allowance (ChargeIndicator)."
+          title: Is Charge
+          type: boolean
+        amount:
+          $ref: "#/components/schemas/Amount"
+        base_amount:
+          $ref: "#/components/schemas/Base_Amount"
+        percentage:
+          $ref: "#/components/schemas/Percentage"
+        reason:
+          nullable: true
+          type: string
+        reason_code:
+          allOf:
+          - $ref: "#/components/schemas/AllowanceChargeReasonCode"
+          nullable: true
+        vat_category:
+          allOf:
+          - $ref: "#/components/schemas/VATCategory"
+          nullable: true
+        vat_rate:
+          $ref: "#/components/schemas/Vat_Rate"
+      required:
+      - amount
+      - is_charge
+      title: AllowanceCharge
+    AllowanceChargeReasonCode:
+      description: |-
+        Standardized reason codes for document-level allowances and charges.
+
+        Codes from UNTDID 5189 (allowances) and UNTDID 7161 (charges).
+      enum:
+      - "41"
+      - "42"
+      - "60"
+      - "62"
+      - "63"
+      - "64"
+      - "65"
+      - "66"
+      - "67"
+      - "68"
+      - "70"
+      - "71"
+      - "88"
+      - "95"
+      - "100"
+      - "102"
+      - "103"
+      - "104"
+      - "105"
+      - AA
+      - AAA
+      - AAC
+      - AAD
+      - AAE
+      - AAH
+      - AAI
+      - AAS
+      - ABK
+      - ABL
+      - ABN
+      - ABR
+      - ADR
+      - ADL
+      - ADT
+      - FC
+      - FI
+      - LA
+      - PC
+      title: AllowanceChargeReasonCode
+      type: string
+    AllowanceReasonCode:
+      description: |-
+        Standardized codes for allowance or charge reasons (EN 16931 standard).
+
+        **Possible values:**
+        - `AA`: ADVERTISING_ALLOWANCE - Advertising discount or rebate
+        - `ABL`: PACKAGING_SURCHARGE - Packaging surcharge
+        - `ADR`: OTHER_SERVICES - Other services
+        - `ADT`: PICKUP_COST - Pickup cost
+        - `FC`: FREIGHT_CHARGES - Freight/transport costs
+        - `FI`: FINANCING_CHARGES - Financing charges
+        - `LA`: LABELING - Labeling
+      enum:
+      - AA
+      - ABL
+      - ADR
+      - ADT
+      - FC
+      - FI
+      - LA
+      title: AllowanceReasonCode
+      type: string
     AsyncTaskStatus:
       description: |-
         Complete description of an async task status.
@@ -7065,53 +7344,39 @@ components:
       title: CertificateInfoResponse
     ChorusProCredentials:
       description: |-
-        Chorus Pro credentials for Zero-Trust mode.
+        Optional Chorus Pro credentials.
 
-        **Zero-Trust Mode**: Credentials are passed in each request and are NEVER stored.
+        **MODE 1 - JWT retrieval (recommended):**
+        Do not provide this `credentials` field in the payload.
+        Credentials will be automatically retrieved via client_uid from JWT (0-trust).
 
-        **Security**:
-        - Credentials are never persisted in the database
-        - They are used only for the duration of the request
-        - Secure transmission via HTTPS
-
-        **Use cases**:
-        - High-security environments (banks, administrations)
-        - Strict GDPR compliance
-        - Tests with temporary credentials
-        - Users who don't want to store their credentials
+        **MODE 2 - Credentials in payload:**
+        Provide all required fields below.
+        Useful for tests or third-party integrations.
       example:
-        chorusProLogin: my_login@company.fr
-        chorusProPassword: MyPassword123!
-        pisteClientId: my_client_id
-        pisteClientSecret: my_secret
-        sandbox: true
+        chorusLogin: my_login@company.fr
+        chorusPassword: MyPassword123!
+        pisteClientId: my_piste_client_id
+        pisteClientSecret: my_piste_secret
+        sandboxMode: true
       properties:
         pisteClientId:
-          description: PISTE Client ID (government API portal)
-          title: Pisteclientid
+          nullable: true
           type: string
         pisteClientSecret:
-          description: PISTE Client Secret
-          title: Pisteclientsecret
+          nullable: true
           type: string
-        chorusProLogin:
-          description: Chorus Pro login
-          title: Chorusprologin
+        chorusLogin:
+          nullable: true
           type: string
-        chorusProPassword:
-          description: Chorus Pro password
-          title: Choruspropassword
+        chorusPassword:
+          nullable: true
           type: string
-        sandbox:
+        sandboxMode:
           default: true
-          description: Use sandbox environment (true) or production (false)
-          title: Sandbox
+          description: "[MODE 2] Use sandbox mode (default: True)"
+          title: Sandboxmode
           type: boolean
-      required:
-      - chorusProLogin
-      - chorusProPassword
-      - pisteClientId
-      - pisteClientSecret
       title: ChorusProCredentials
     ChorusProDestination:
       description: Specific configuration for Chorus Pro destination.
@@ -7124,7 +7389,7 @@ components:
           type: string
         credentials:
           allOf:
-          - $ref: "#/components/schemas/facture_electronique__rest_api__schemas__processing__ChorusProCredentials"
+          - $ref: "#/components/schemas/ChorusProCredentials"
           nullable: true
       title: ChorusProDestination
     ChorusProResult:
@@ -7401,6 +7666,25 @@ components:
           pattern: "^\\d{14}$"
           type: string
       title: ClientUpdateRequest
+    Contact:
+      description: |-
+        Contact information (BG-6 Seller Contact, BG-9 Buyer Contact).
+
+        Used for seller and buyer contact details.
+      properties:
+        name:
+          nullable: true
+          type: string
+        department_name:
+          nullable: true
+          type: string
+        phone:
+          nullable: true
+          type: string
+        email:
+          nullable: true
+          type: string
+      title: Contact
     ConversionErrorResult:
       description: Error result specific to conversion tasks.
       properties:
@@ -8149,6 +8433,7 @@ components:
           email: email
         senderEmail: senderEmail
         invoiceTypeCode: "380"
+        encaisseVatRate: 6.027456183070403
         documentId: documentId
         invoiceId: invoiceId
         actionCode: actionCode
@@ -8227,6 +8512,12 @@ components:
           type: string
         encaisseAmount:
           $ref: "#/components/schemas/Encaisseamount"
+        encaisseVatRate:
+          default: 20
+          description: "Taux de TVA du montant encaissé en % (MDT-224, requis par\
+            \ BR-FR-CDV-14 pour le statut 212 ; défaut 20)"
+          title: Encaissevatrate
+          type: number
       required:
       - documentId
       - invoiceId
@@ -8383,6 +8674,27 @@ components:
       - XDR
       title: CurrencyCode
       type: string
+    DeliveryParty:
+      description: |-
+        Delivery location information (BG-15 Deliver to).
+
+        Represents the party or location where goods/services are delivered.
+      properties:
+        id:
+          nullable: true
+          type: string
+        global_id:
+          allOf:
+          - $ref: "#/components/schemas/ElectronicAddress-Input"
+          nullable: true
+        name:
+          nullable: true
+          type: string
+        postal_address:
+          allOf:
+          - $ref: "#/components/schemas/PostalAddress-Input"
+          nullable: true
+      title: DeliveryParty
     DocType:
       description: "AFNOR docType parameter for GET /flows/{flowId}."
       enum:
@@ -8447,7 +8759,26 @@ components:
       - field
       - message
       title: EReportingValidationError
-    ElectronicAddress:
+    ElectronicAddress-Input:
+      description: |-
+        Represents an electronic invoicing address, composed of an identifier
+        and its scheme (SchemeID) in accordance with EN16931.
+        Example: { "identifier": "123456789", "scheme_id": "0225" }
+      properties:
+        identifier:
+          description: "Electronic address identifier (e.g., SIREN, SIRET, routing\
+            \ code)"
+          title: Identifier
+          type: string
+        scheme_id:
+          allOf:
+          - $ref: "#/components/schemas/SchemeID"
+          default: "0225"
+          description: Identification scheme (EAS code)
+      required:
+      - identifier
+      title: ElectronicAddress
+    ElectronicAddress-Output:
       description: |-
         Represents an electronic invoicing address, composed of an identifier
         and its scheme (SchemeID) in accordance with EN16931.
@@ -8478,14 +8809,15 @@ components:
         amount: 0.08008281904610115
         senderSiren: senderSiren
         invoiceIssueDate: 2000-01-23
-        pdpClientSecret: pdpClientSecret
-        invoiceBuyerElectronicAddress: invoiceBuyerElectronicAddress
+        vatRate: 6.027456183070403
         invoiceBuyerSiren: invoiceBuyerSiren
-        invoiceId: invoiceId
-        currency: EUR
         pdpFlowServiceUrl: pdpFlowServiceUrl
         pdpTokenUrl: pdpTokenUrl
         pdpClientId: pdpClientId
+        pdpClientSecret: pdpClientSecret
+        invoiceBuyerElectronicAddress: invoiceBuyerElectronicAddress
+        invoiceId: invoiceId
+        currency: EUR
         flowType: CustomerInvoiceLC
       properties:
         invoiceId:
@@ -8506,7 +8838,13 @@ components:
           title: Invoicebuyerelectronicaddress
           type: string
         amount:
-          $ref: "#/components/schemas/Amount"
+          $ref: "#/components/schemas/Amount_1"
+        vatRate:
+          default: 20
+          description: "Taux de TVA du montant encaissé en % (MDT-224, requis par\
+            \ BR-FR-CDV-14 ; défaut 20)"
+          title: Vatrate
+          type: number
         currency:
           default: EUR
           description: Code devise ISO 4217
@@ -8630,6 +8968,190 @@ components:
       - confidence_score
       - fields_extracted
       title: ExtractionInfo
+    FacturXInvoice:
+      description: Data model for an invoice to be converted to Factur-X.
+      example:
+        invoiceNumber: FACT-2025-001
+        invoiceDate: 2025-10-27
+        paymentDueDate: 2025-11-27
+        submissionMode: DEPOT_PDF_API
+        recipient:
+          name: Client Test SAS
+          electronicAddress:
+            identifier: "12345678901234"
+            schemeId: "0225"
+          postalAddress:
+            lineOne: 456 Avenue des Champs
+            postalCode: "69001"
+            city: Lyon
+            countryCode: FR
+          executingServiceCode: SERVICE01
+        supplier:
+          name: Ma Société SAS
+          supplierId: 12345
+          siret: "12345678900001"
+          vatNumber: FR12345678900
+          iban: FR7630006000011234567890189
+          electronicAddress:
+            identifier: "12345678900001"
+            schemeId: "0225"
+          postalAddress:
+            lineOne: 123 Rue de la République
+            lineTwo: Bâtiment A
+            postalCode: "75001"
+            city: Paris
+            countryCode: FR
+        invoicingFramework:
+          invoicingFrameworkCode: A1_FACTURE_FOURNISSEUR
+        references:
+          invoiceType: FACTURE
+          vatAccountingCode: TVA_SUR_DEBIT
+          paymentMeans: VIREMENT
+          invoiceCurrency: EUR
+          purchaseOrderReference: CMD-2025-042
+        invoiceLines:
+        - lineNumber: 1
+          itemName: Prestation de conseil
+          quantity: "5.00"
+          unit: HEURE
+          unitNetPrice: "200.00"
+          lineNetAmount: "1000.00"
+          manualVatRate: "20.00"
+          vatCategory: S
+          reference: REF-CONSEIL-001
+        - lineNumber: 2
+          itemName: Formation développeurs
+          quantity: "3.00"
+          unit: JOUR
+          unitNetPrice: "500.00"
+          lineNetAmount: "1500.00"
+          vatCategory: S
+          manualVatRate: "20.00"
+          reference: REF-FORM-002
+        vatLines:
+        - taxableAmount: "2500.00"
+          vatAmount: "500.00"
+          manualRate: "20.00"
+          category: S
+        totals:
+          totalNetAmount: "2500.00"
+          vatAmount: "500.00"
+          totalGrossAmount: "3000.00"
+          amountDue: "3000.00"
+        comment: Invoice for October 2025 services
+      properties:
+        invoice_number:
+          title: Invoice Number
+          type: string
+        payment_due_date:
+          title: Payment Due Date
+          type: string
+        invoice_date:
+          title: Invoice Date
+          type: string
+        submission_mode:
+          allOf:
+          - $ref: "#/components/schemas/SubmissionMode"
+          default: DEPOT_PDF_API
+        recipient:
+          $ref: "#/components/schemas/Recipient"
+        supplier:
+          $ref: "#/components/schemas/Supplier"
+        invoicing_framework:
+          allOf:
+          - $ref: "#/components/schemas/InvoicingFramework"
+          nullable: true
+        references:
+          $ref: "#/components/schemas/InvoiceReferences"
+        totals:
+          $ref: "#/components/schemas/InvoiceTotals"
+        invoice_lines:
+          items:
+            $ref: "#/components/schemas/InvoiceLine"
+          title: Invoice Lines
+          type: array
+        vat_lines:
+          items:
+            $ref: "#/components/schemas/VATLine"
+          title: Vat Lines
+          type: array
+        notes:
+          items:
+            $ref: "#/components/schemas/InvoiceNote"
+          title: Notes
+          type: array
+        comment:
+          nullable: true
+          type: string
+        current_user_id:
+          nullable: true
+          type: integer
+        supplementary_attachments:
+          items:
+            $ref: "#/components/schemas/SupplementaryAttachment"
+          nullable: true
+          type: array
+        payee:
+          allOf:
+          - $ref: "#/components/schemas/Payee"
+          nullable: true
+        delivery_party:
+          allOf:
+          - $ref: "#/components/schemas/DeliveryParty"
+          nullable: true
+        tax_representative:
+          allOf:
+          - $ref: "#/components/schemas/TaxRepresentative"
+          nullable: true
+        delivery_date:
+          nullable: true
+          type: string
+        billing_period_start:
+          nullable: true
+          type: string
+        billing_period_end:
+          nullable: true
+          type: string
+        payment_reference:
+          nullable: true
+          type: string
+        creditor_reference_id:
+          nullable: true
+          type: string
+        direct_debit_mandate_id:
+          nullable: true
+          type: string
+        debtor_iban:
+          nullable: true
+          type: string
+        payment_terms:
+          nullable: true
+          type: string
+        allowances_charges:
+          items:
+            $ref: "#/components/schemas/AllowanceCharge"
+          nullable: true
+          type: array
+        additional_documents:
+          items:
+            $ref: "#/components/schemas/AdditionalDocument"
+          nullable: true
+          type: array
+        buyer_accounting_reference:
+          nullable: true
+          type: string
+        payment_card:
+          allOf:
+          - $ref: "#/components/schemas/PaymentCard"
+          nullable: true
+      required:
+      - invoice_number
+      - payment_due_date
+      - recipient
+      - references
+      - supplier
+      - totals
+      title: FacturXInvoice
     FacturXPDFInfo:
       description: Information about the generated Factur-X PDF.
       properties:
@@ -9031,7 +9553,7 @@ components:
       properties:
         credentials:
           allOf:
-          - $ref: "#/components/schemas/ChorusProCredentials"
+          - $ref: "#/components/schemas/facture_electronique__rest_api__schemas__chorus_pro__ChorusProCredentials"
           nullable: true
         siret:
           description: Structure SIRET (14 digits)
@@ -9081,7 +9603,7 @@ components:
       properties:
         credentials:
           allOf:
-          - $ref: "#/components/schemas/ChorusProCredentials"
+          - $ref: "#/components/schemas/facture_electronique__rest_api__schemas__chorus_pro__ChorusProCredentials"
           nullable: true
         chorusInvoiceId:
           description: Chorus Pro invoice ID
@@ -9146,7 +9668,7 @@ components:
       properties:
         credentials:
           allOf:
-          - $ref: "#/components/schemas/ChorusProCredentials"
+          - $ref: "#/components/schemas/facture_electronique__rest_api__schemas__chorus_pro__ChorusProCredentials"
           nullable: true
         structureId:
           description: Chorus Pro structure ID
@@ -9357,13 +9879,16 @@ components:
         vatNumber:
           nullable: true
           type: string
+        taxRegistrationId:
+          nullable: true
+          type: string
         postalAddress:
           allOf:
-          - $ref: "#/components/schemas/PostalAddress"
+          - $ref: "#/components/schemas/PostalAddress-Output"
           nullable: true
         electronicAddress:
           allOf:
-          - $ref: "#/components/schemas/ElectronicAddress"
+          - $ref: "#/components/schemas/ElectronicAddress-Output"
           nullable: true
         email:
           nullable: true
@@ -9407,7 +9932,7 @@ components:
           type: string
         typeCode:
           allOf:
-          - $ref: "#/components/schemas/facture_electronique__rest_api__schemas__ereporting__InvoiceTypeCode"
+          - $ref: "#/components/schemas/InvoiceTypeCode"
           default: "380"
           description: Invoice type code
         currency:
@@ -9446,6 +9971,11 @@ components:
           minItems: 1
           title: Taxbreakdown
           type: array
+        taxAmountEur:
+          $ref: "#/components/schemas/Taxamounteur"
+        businessProcessId:
+          nullable: true
+          type: string
         referencedInvoiceId:
           nullable: true
           type: string
@@ -9472,6 +10002,7 @@ components:
           amount: amount
           at: at
           ackStatus: ackStatus
+          flowDirection: flowDirection
           documentId: documentId
           currency: currency
           issuerRole: issuerRole
@@ -9483,6 +10014,7 @@ components:
           amount: amount
           at: at
           ackStatus: ackStatus
+          flowDirection: flowDirection
           documentId: documentId
           currency: currency
           issuerRole: issuerRole
@@ -9512,6 +10044,145 @@ components:
       - invoiceId
       - totalEvents
       title: InvoiceLifecycle
+    InvoiceLine:
+      description: Represents an invoice line item (BG-25).
+      properties:
+        line_number:
+          description: Invoice line identifier (BT-126).
+          title: Line Number
+          type: integer
+        line_note:
+          nullable: true
+          type: string
+        parent_line_id:
+          nullable: true
+          type: string
+        line_sub_type:
+          allOf:
+          - $ref: "#/components/schemas/LineSubType"
+          nullable: true
+        reference:
+          nullable: true
+          type: string
+        buyer_assigned_id:
+          nullable: true
+          type: string
+        product_global_id:
+          nullable: true
+          type: string
+        product_global_id_scheme:
+          nullable: true
+          type: string
+        item_name:
+          description: Item name (BT-153).
+          title: Item Name
+          type: string
+        item_description:
+          nullable: true
+          type: string
+        origin_country:
+          nullable: true
+          type: string
+        characteristics:
+          items:
+            $ref: "#/components/schemas/ProductCharacteristic"
+          nullable: true
+          type: array
+        classifications:
+          items:
+            $ref: "#/components/schemas/ProductClassification"
+          nullable: true
+          type: array
+        quantity:
+          $ref: "#/components/schemas/Quantity"
+        unit:
+          allOf:
+          - $ref: "#/components/schemas/UnitOfMeasure"
+          description: Invoiced quantity unit of measure code (BT-130).
+        gross_unit_price:
+          $ref: "#/components/schemas/Gross_Unit_Price"
+        unit_net_price:
+          $ref: "#/components/schemas/UnitNetPrice"
+        price_basis_quantity:
+          $ref: "#/components/schemas/Price_Basis_Quantity"
+        price_basis_unit:
+          nullable: true
+          type: string
+        price_allowance_amount:
+          $ref: "#/components/schemas/Price_Allowance_Amount"
+        lineNetAmount:
+          $ref: "#/components/schemas/LineNetAmount"
+        allowanceAmount:
+          $ref: "#/components/schemas/InvoiceLine_allowanceAmount"
+        allowanceReasonCode:
+          allOf:
+          - $ref: "#/components/schemas/AllowanceReasonCode"
+          nullable: true
+        allowanceReason:
+          nullable: true
+          type: string
+        allowances_charges:
+          items:
+            $ref: "#/components/schemas/AllowanceCharge"
+          nullable: true
+          type: array
+        vat_rate:
+          nullable: true
+          type: string
+        manual_vat_rate:
+          $ref: "#/components/schemas/Manual_Vat_Rate"
+        vat_category:
+          allOf:
+          - $ref: "#/components/schemas/VATCategory"
+          nullable: true
+        period_start_date:
+          nullable: true
+          type: string
+        period_end_date:
+          nullable: true
+          type: string
+        purchase_order_line_ref:
+          nullable: true
+          type: string
+        accounting_account:
+          nullable: true
+          type: string
+        additional_documents:
+          items:
+            $ref: "#/components/schemas/AdditionalDocument"
+          nullable: true
+          type: array
+        line_notes:
+          items:
+            $ref: "#/components/schemas/InvoiceNote"
+          nullable: true
+          type: array
+      required:
+      - item_name
+      - line_number
+      - quantity
+      - unit
+      - unit_net_price
+      title: InvoiceLine
+    InvoiceNote:
+      description: |-
+        Invoice note (IncludedNote in Factur-X).
+
+        Mandatory notes for BR-FR-05 are:
+        - PMT: Fixed recovery fee
+        - PMD: Late payment penalties
+        - AAB: Early payment discount
+      properties:
+        subject_code:
+          nullable: true
+          type: string
+        content:
+          description: Note content
+          title: Content
+          type: string
+      required:
+      - content
+      title: InvoiceNote
     InvoicePaymentInput:
       description: |-
         Payment linked to a specific invoice (flux 10.2).
@@ -9550,6 +10221,71 @@ components:
       - invoiceId
       - paymentDate
       title: InvoicePaymentInput
+    InvoiceReferences:
+      description: "Contains various invoice references (currency, type, etc.)."
+      properties:
+        business_process_id:
+          nullable: true
+          type: string
+        invoice_currency:
+          default: EUR
+          description: Invoice currency code (BT-5). ISO 4217.
+          title: Invoice Currency
+          type: string
+        payment_means:
+          allOf:
+          - $ref: "#/components/schemas/PaymentMeans"
+          description: Payment means type code (BT-81).
+        payment_means_text:
+          nullable: true
+          type: string
+        invoice_type:
+          $ref: "#/components/schemas/InvoiceTypeCode"
+        vat_accounting_code:
+          allOf:
+          - $ref: "#/components/schemas/VATAccountingCode"
+          description: VAT accounting code.
+        buyer_reference:
+          nullable: true
+          type: string
+        contract_reference:
+          nullable: true
+          type: string
+        purchase_order_reference:
+          nullable: true
+          type: string
+        seller_order_reference:
+          nullable: true
+          type: string
+        receiving_advice_reference:
+          nullable: true
+          type: string
+        despatch_advice_reference:
+          nullable: true
+          type: string
+        tender_reference:
+          nullable: true
+          type: string
+        preceding_invoice_reference:
+          nullable: true
+          type: string
+        preceding_invoice_date:
+          nullable: true
+          type: string
+        project_reference:
+          nullable: true
+          type: string
+        project_name:
+          nullable: true
+          type: string
+        vat_exemption_reason:
+          nullable: true
+          type: string
+      required:
+      - invoice_type
+      - payment_means
+      - vat_accounting_code
+      title: InvoiceReferences
     InvoiceStatus:
       description: Chorus Pro invoice status.
       properties:
@@ -9569,81 +10305,48 @@ components:
       - code
       - label
       title: InvoiceStatus
+    InvoiceTotals:
+      description: Contains all invoice total amounts (BG-22).
+      properties:
+        line_total_amount:
+          $ref: "#/components/schemas/Line_Total_Amount"
+        allowance_total_amount:
+          $ref: "#/components/schemas/Allowance_Total_Amount"
+        charge_total_amount:
+          $ref: "#/components/schemas/Charge_Total_Amount"
+        total_net_amount:
+          $ref: "#/components/schemas/TotalNetAmount"
+        vat_amount:
+          $ref: "#/components/schemas/TotalVATAmount"
+        total_gross_amount:
+          $ref: "#/components/schemas/TotalGrossAmount"
+        prepayment:
+          $ref: "#/components/schemas/InvoiceTotals_prepayment"
+        rounding_amount:
+          $ref: "#/components/schemas/Rounding_Amount"
+        amount_due:
+          $ref: "#/components/schemas/AmountDue"
+        globalAllowanceAmount:
+          $ref: "#/components/schemas/GlobalAllowanceAmount"
+        globalAllowanceReason:
+          nullable: true
+          type: string
+      required:
+      - amount_due
+      - total_gross_amount
+      - total_net_amount
+      - vat_amount
+      title: InvoiceTotals
     InvoiceTypeCode:
-      description: |-
-        Document type according to BR-FR-04 (UNTDID 1001 codes).
-
-        | Code | Name | Description |
-        |------|------|-------------|
-        | 380 | INVOICE | Commercial invoice |
-        | 389 | SELF_BILLED_INVOICE | Self-billed invoice |
-        | 393 | FACTORED_INVOICE | Factored invoice |
-        | 501 | SELF_BILLED_FACTORED_INVOICE | Self-billed factored invoice |
-        | 386 | PREPAYMENT_INVOICE | Prepayment invoice |
-        | 500 | SELF_BILLED_PREPAYMENT_INVOICE | Self-billed prepayment invoice |
-        | 384 | CORRECTIVE_INVOICE | Corrective invoice |
-        | 471 | SELF_BILLED_CORRECTIVE_INVOICE | Self-billed corrective invoice |
-        | 472 | FACTORED_CORRECTIVE_INVOICE | Factored corrective invoice |
-        | 473 | SELF_BILLED_FACTORED_CORRECTIVE_INVOICE | Self-billed factored corrective invoice |
-        | 381 | CREDIT_NOTE | Credit note |
-        | 261 | SELF_BILLED_CREDIT_NOTE | Self-billed credit note |
-        | 262 | GLOBAL_ALLOWANCE_CREDIT_NOTE | Credit note for global allowance |
-        | 396 | FACTORED_CREDIT_NOTE | Factored credit note |
-        | 502 | SELF_BILLED_FACTORED_CREDIT_NOTE | Self-billed factored credit note |
-        | 503 | PREPAYMENT_CREDIT_NOTE | Credit note for prepayment invoice |
+      description: Invoice type codes (UNTDID 1001).
       enum:
       - "380"
-      - "389"
-      - "393"
-      - "501"
-      - "386"
-      - "500"
-      - "384"
-      - "471"
-      - "472"
-      - "473"
       - "381"
-      - "261"
-      - "262"
-      - "396"
-      - "502"
-      - "503"
+      - "384"
+      - "389"
+      - "386"
       title: InvoiceTypeCode
       type: string
-      x-enum-descriptions:
-      - Commercial Invoice
-      - Self-billed Invoice
-      - Factored Invoice
-      - Self-billed Factored Invoice
-      - Prepayment Invoice
-      - Self-billed Prepayment Invoice
-      - Corrective Invoice
-      - Self-billed Corrective Invoice
-      - Factored Corrective Invoice
-      - Self-billed Factored Corrective Invoice
-      - Credit Note
-      - Self-billed Credit Note
-      - Global Allowance Credit Note
-      - Factored Credit Note
-      - Self-billed Factored Credit Note
-      - Prepayment Credit Note
-      x-enum-varnames:
-      - INVOICE
-      - SELF_BILLED_INVOICE
-      - FACTORED_INVOICE
-      - SELF_BILLED_FACTORED_INVOICE
-      - PREPAYMENT_INVOICE
-      - SELF_BILLED_PREPAYMENT_INVOICE
-      - CORRECTIVE_INVOICE
-      - SELF_BILLED_CORRECTIVE_INVOICE
-      - FACTORED_CORRECTIVE_INVOICE
-      - SELF_BILLED_FACTORED_CORRECTIVE_INVOICE
-      - CREDIT_NOTE
-      - SELF_BILLED_CREDIT_NOTE
-      - GLOBAL_ALLOWANCE_CREDIT_NOTE
-      - FACTORED_CREDIT_NOTE
-      - SELF_BILLED_FACTORED_CREDIT_NOTE
-      - PREPAYMENT_CREDIT_NOTE
     InvoiceTypeCode-Output:
       description: |-
         Document type according to BR-FR-04 (UNTDID 1001 codes).
@@ -9719,6 +10422,37 @@ components:
       - FACTORED_CREDIT_NOTE
       - SELF_BILLED_FACTORED_CREDIT_NOTE
       - PREPAYMENT_CREDIT_NOTE
+    InvoicingFramework:
+      description: |-
+        Defines the invoicing framework.
+
+        - invoicing_framework_code: Chorus Pro code (A1, A2, A9, A12) - used for B2G
+        - operation_nature: Operation nature (B1, S1, M1, etc.) - priority for Factur-X
+
+        If operation_nature is provided, it will be used directly in Factur-X XML (BT-23).
+        Otherwise, the code will be derived from invoicing_framework_code via automatic mapping.
+
+        Example:
+            >>> framework = InvoicingFramework(
+            ...     invoicing_framework_code=InvoicingFrameworkCode.A1_SUPPLIER_INVOICE,
+            ...     operation_nature=OperationNature.GOODS  # Forces B1 instead of S1
+            ... )
+      properties:
+        invoicing_framework_code:
+          allOf:
+          - $ref: "#/components/schemas/InvoicingFrameworkCode"
+          nullable: true
+        operation_nature:
+          allOf:
+          - $ref: "#/components/schemas/OperationNature"
+          nullable: true
+        approver_service_code:
+          nullable: true
+          type: string
+        approver_structure_code:
+          nullable: true
+          type: string
+      title: InvoicingFramework
     InvoicingFrameworkCode:
       description: Chorus Pro codes for invoicing framework (B2G usage).
       enum:
@@ -9810,6 +10544,7 @@ components:
         amount: amount
         at: at
         ackStatus: ackStatus
+        flowDirection: flowDirection
         documentId: documentId
         currency: currency
         issuerRole: issuerRole
@@ -9830,6 +10565,9 @@ components:
           nullable: true
           type: string
         ackStatus:
+          nullable: true
+          type: string
+        flowDirection:
           nullable: true
           type: string
         at:
@@ -9871,6 +10609,7 @@ components:
             amount: amount
             at: at
             ackStatus: ackStatus
+            flowDirection: flowDirection
             documentId: documentId
             currency: currency
             issuerRole: issuerRole
@@ -9882,6 +10621,7 @@ components:
             amount: amount
             at: at
             ackStatus: ackStatus
+            flowDirection: flowDirection
             documentId: documentId
             currency: currency
             issuerRole: issuerRole
@@ -9897,6 +10637,7 @@ components:
             amount: amount
             at: at
             ackStatus: ackStatus
+            flowDirection: flowDirection
             documentId: documentId
             currency: currency
             issuerRole: issuerRole
@@ -9908,6 +10649,7 @@ components:
             amount: amount
             at: at
             ackStatus: ackStatus
+            flowDirection: flowDirection
             documentId: documentId
             currency: currency
             issuerRole: issuerRole
@@ -9935,6 +10677,20 @@ components:
       - cutoffDays
       - totalInvoices
       title: LifecycleResponse
+    LineSubType:
+      description: |-
+        Sub-line type for EXTENDED profile (BT-X-8 / EXT-FR-FE-163).
+
+        Defines the role of an invoice line in a hierarchical structure:
+        - DETAIL: Standard billing line, included in VAT calculations
+        - INFORMATION: Additional information line, not included in VAT calculations
+        - GROUP: Grouping/subtotal line, not included in VAT calculations
+      enum:
+      - DETAIL
+      - INFORMATION
+      - GROUP
+      title: LineSubType
+      type: string
     MandatoryNoteSchema:
       description: Mandatory note detected with location and XML/PDF comparison.
       example:
@@ -10435,18 +11191,134 @@ components:
       - invoice
       - status
       title: ParseFacturXResponse
+    Payee:
+      description: |-
+        Information about the payment beneficiary (BG-10 / PayeeTradeParty).
+
+        The payee is the party receiving payment. This block is used
+        only if the payee is different from the seller (supplier).
+
+        **Main use case**: Factoring
+        When an invoice is factored, the factor (factoring company) becomes
+        the payment beneficiary instead of the supplier.
+
+        **Business Terms (EN16931)**:
+        - BT-59: Payee name (mandatory)
+        - BT-60: Payee identifier (SIRET with schemeID 0009)
+        - BT-61: Payee legal identifier (SIREN with schemeID 0002)
+
+        **Reference**: docs/guide_affacturage.md
+      properties:
+        nom:
+          description: Payee name (BT-59). Mandatory.
+          minLength: 1
+          title: Nom
+          type: string
+        payeeId:
+          nullable: true
+          type: string
+        siret:
+          nullable: true
+          pattern: "^\\d{14}$"
+          type: string
+        siren:
+          nullable: true
+          pattern: "^\\d{9}$"
+          type: string
+        electronicAddress:
+          allOf:
+          - $ref: "#/components/schemas/ElectronicAddress-Input"
+          nullable: true
+        iban:
+          nullable: true
+          type: string
+        bic:
+          nullable: true
+          type: string
+        global_ids:
+          items:
+            $ref: "#/components/schemas/ElectronicAddress-Input"
+          nullable: true
+          type: array
+      required:
+      - nom
+      title: Payee
     PaymentAmountByRate:
       description: Payment amount for a specific VAT rate.
       properties:
         rate:
           $ref: "#/components/schemas/Rate"
         amount:
-          $ref: "#/components/schemas/Amount_1"
+          $ref: "#/components/schemas/Amount_2"
+        amountEur:
+          $ref: "#/components/schemas/Amounteur"
       required:
       - amount
       - rate
       title: PaymentAmountByRate
-    PostalAddress:
+    PaymentCard:
+      description: |-
+        Payment card information (BG-18).
+
+        Used when payment is made by payment card.
+      properties:
+        card_id:
+          nullable: true
+          type: string
+        cardholder_name:
+          nullable: true
+          type: string
+      title: PaymentCard
+    PaymentMeans:
+      description: |-
+        Payment methods - Chorus Pro API codes (modePaiement).
+
+        Values are official Chorus Pro enum values, automatically mapped
+        to UNTDID 4461 codes for Factur-X/UBL XML generation.
+
+        | Chorus Pro code | Name | UNTDID 4461 |
+        |-----------------|------|-------------|
+        | CHEQUE | CHECK | 20 |
+        | PRELEVEMENT | DIRECT_DEBIT | 49 |
+        | VIREMENT | CREDIT_TRANSFER | 30 |
+        | ESPECE | CASH | 10 |
+        | AUTRE | OTHER | 57 |
+        | REPORT | CLEARING | 97 |
+      enum:
+      - CHEQUE
+      - PRELEVEMENT
+      - VIREMENT
+      - ESPECE
+      - AUTRE
+      - REPORT
+      title: PaymentMeans
+      type: string
+    PostalAddress-Input:
+      description: "Represents a postal address (BG-5, BG-8, BG-12, BG-15)."
+      properties:
+        postal_code:
+          nullable: true
+          type: string
+        line_one:
+          nullable: true
+          type: string
+        line_two:
+          nullable: true
+          type: string
+        line_three:
+          nullable: true
+          type: string
+        city:
+          nullable: true
+          type: string
+        country_code:
+          nullable: true
+          type: string
+        country_subdivision:
+          nullable: true
+          type: string
+      title: PostalAddress
+    PostalAddress-Output:
       description: "Represents a postal address (BG-5, BG-8, BG-12, BG-15)."
       properties:
         postalCode:
@@ -10486,7 +11358,9 @@ components:
           description: Factur-X profile to use
         autoEnrich:
           default: true
-          description: "Auto-enrich data (Company APIs, Chorus Pro, etc.)"
+          description: "Auto-enrich data (Company APIs, Chorus Pro, etc.). Applies\
+            \ to the **simplified format** only: a complete `FacturXInvoice` payload\
+            \ is used exactly as provided."
           title: Autoenrich
           type: boolean
         validateXml:
@@ -10503,7 +11377,7 @@ components:
       title: ProcessingOptions
     ProcessingRule:
       description: |-
-        AFNOR XP Z12-013 ProcessingRule (Annexe A v1.2.0).
+        AFNOR XP Z12-013 ProcessingRule (Annexe A v1.3.0).
 
         Valeurs EXACTES de la spec (case-sensitive).
       enum:
@@ -10516,8 +11390,46 @@ components:
       - B2GOutOfScope
       - ArchiveOnly
       - NotApplicable
+      - Undefined
       title: ProcessingRule
       type: string
+    ProductCharacteristic:
+      description: |-
+        Item attribute (BG-32).
+
+        Additional product characteristics as key-value pairs.
+      properties:
+        name:
+          description: Attribute name (BT-160).
+          title: Name
+          type: string
+        value:
+          description: Attribute value (BT-161).
+          title: Value
+          type: string
+      required:
+      - name
+      - value
+      title: ProductCharacteristic
+    ProductClassification:
+      description: |-
+        Item classification identifier (BG-31).
+
+        Product classification according to a classification scheme.
+      properties:
+        class_code:
+          description: Classification code (BT-158).
+          title: Class Code
+          type: string
+        list_id:
+          nullable: true
+          type: string
+        list_version_id:
+          nullable: true
+          type: string
+      required:
+      - class_code
+      title: ProductClassification
     ReasonCodeInfo:
       description: Information sur un code motif.
       example:
@@ -10574,6 +11486,42 @@ components:
       - codes
       - count
       title: ReasonCodesResponse
+    Recipient:
+      description: Information about the invoice recipient / buyer (BG-7).
+      properties:
+        electronic_address:
+          allOf:
+          - $ref: "#/components/schemas/ElectronicAddress-Input"
+          nullable: true
+        executing_service_code:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+        siren:
+          nullable: true
+          type: string
+        siret:
+          nullable: true
+          type: string
+        vat_number:
+          nullable: true
+          type: string
+        postal_address:
+          allOf:
+          - $ref: "#/components/schemas/PostalAddress-Input"
+          nullable: true
+        contact:
+          allOf:
+          - $ref: "#/components/schemas/Contact"
+          nullable: true
+        global_ids:
+          items:
+            $ref: "#/components/schemas/ElectronicAddress-Input"
+          nullable: true
+          type: array
+      title: Recipient
     RecipientInput:
       description: Destinataire du message CDAR.
       example:
@@ -10752,6 +11700,9 @@ components:
           description: Company name
           example: Ma Société SARL
           title: Name
+          type: string
+        schemeId:
+          nullable: true
           type: string
         vatId:
           nullable: true
@@ -10934,7 +11885,7 @@ components:
       properties:
         credentials:
           allOf:
-          - $ref: "#/components/schemas/ChorusProCredentials"
+          - $ref: "#/components/schemas/facture_electronique__rest_api__schemas__chorus_pro__ChorusProCredentials"
           nullable: true
         structureIdentifier:
           nullable: true
@@ -11232,7 +12183,15 @@ components:
       - status
       title: SimplifiedCDARResponse
     SimplifiedInvoiceData:
-      description: Simplified invoice data (minimal format for auto-enrichment).
+      additionalProperties: {}
+      description: |-
+        Simplified invoice data (minimal format for auto-enrichment).
+
+        Any field of the complete `FacturXInvoice` model may be added on top of the
+        fields declared below (`deliveryDate` BT-72, `deliveryParty` BG-15,
+        `paymentReference` BT-83, `payee` BG-10, ...): extra keys are kept and merged
+        by `FacturXInvoice.create_from_simplified_dict`. Whatever the simplified
+        format computes itself (totals, lines, addresses) always wins.
       properties:
         number:
           description: Unique invoice number
@@ -11240,12 +12199,15 @@ components:
           type: string
         supplier:
           additionalProperties: true
-          description: "Supplier information (siret, iban, ...)"
+          description: "Supplier information (siret, iban, bic, routingAddress, ...).\
+            \ For a seller without an intra-community VAT number (VAT franchise, article\
+            \ 293 B of the CGI), provide `taxRegistrationId` (BT-32, usually the SIREN):\
+            \ it satisfies BR-E-02 and prevents BT-31 from being auto-calculated."
           title: Supplier
           type: object
         recipient:
           additionalProperties: true
-          description: "Recipient information (siret, ...)"
+          description: "Recipient information (siret, vatNumber for BT-48, ...)"
           title: Recipient
           type: object
         lines:
@@ -11277,7 +12239,7 @@ components:
           type: string
         invoiceType:
           allOf:
-          - $ref: "#/components/schemas/InvoiceTypeCode"
+          - $ref: "#/components/schemas/facture_electronique__models__InvoiceTypeCode"
           default: "380"
           description: "Document type (UNTDID 1001). Default: 380 (Invoice)."
         precedingInvoiceReference:
@@ -11438,6 +12400,14 @@ components:
       - serviceId
       - serviceLabel
       title: StructureService
+    SubmissionMode:
+      description: Invoice submission mode on Chorus Pro.
+      enum:
+      - SAISIE_API
+      - DEPOT_PDF_API
+      - DEPOT_PDF_SIGNE_API
+      title: SubmissionMode
+      type: string
     SubmitAggregatedReportRequest:
       description: Request to submit an aggregated e-reporting to a PA/PDP.
       example:
@@ -11498,6 +12468,7 @@ components:
         pdpClientSecret: pdpClientSecret
         senderEmail: senderEmail
         invoiceTypeCode: "380"
+        encaisseVatRate: 6.027456183070403
         documentId: documentId
         invoiceId: invoiceId
         actionCode: actionCode
@@ -11577,6 +12548,12 @@ components:
           type: string
         encaisseAmount:
           $ref: "#/components/schemas/Encaisseamount"
+        encaisseVatRate:
+          default: 20
+          description: "Taux de TVA du montant encaissé en % (MDT-224, requis par\
+            \ BR-FR-CDV-14 pour le statut 212 ; défaut 20)"
+          title: Encaissevatrate
+          type: number
         flowType:
           default: CustomerInvoiceLC
           description: "Type de flux AFNOR (CustomerInvoiceLC, SupplierInvoiceLC,\
@@ -11702,9 +12679,7 @@ components:
         sourcePdf: JVBERi0xLjQKJeLjz9MKMSAwIG9iaiA8PC...
       properties:
         invoiceData:
-          allOf:
-          - $ref: "#/components/schemas/SimplifiedInvoiceData"
-          description: Invoice data in simplified format (see examples)
+          $ref: "#/components/schemas/Invoicedata"
         sourcePdf:
           description: Base64-encoded source PDF (will be transformed to Factur-X)
           title: Sourcepdf
@@ -11912,7 +12887,7 @@ components:
       properties:
         credentials:
           allOf:
-          - $ref: "#/components/schemas/ChorusProCredentials"
+          - $ref: "#/components/schemas/facture_electronique__rest_api__schemas__chorus_pro__ChorusProCredentials"
           nullable: true
         invoiceNumber:
           description: Invoice number
@@ -11990,6 +12965,168 @@ components:
       - message
       - returnCode
       title: SubmitInvoiceResponse
+    SuperPDPConnectURLResponse:
+      description: SuperPDP OAuth authorization URL for a client.
+      example:
+        authorizeUrl: authorizeUrl
+      properties:
+        authorizeUrl:
+          description: URL to redirect the end user to in order to connect their SuperPDP
+            account
+          title: Authorizeurl
+          type: string
+      required:
+      - authorizeUrl
+      title: SuperPDPConnectURLResponse
+    SuperPDPDisconnectResponse:
+      description: Response after disconnecting SuperPDP for a client.
+      example:
+        deleted: true
+        success: true
+      properties:
+        success:
+          description: Whether the disconnection completed successfully
+          title: Success
+          type: boolean
+        deleted:
+          description: Whether a SuperPDP connection existed and was removed
+          title: Deleted
+          type: boolean
+      required:
+      - deleted
+      - success
+      title: SuperPDPDisconnectResponse
+    SuperPDPStatusResponse:
+      description: SuperPDP connection status for a client.
+      example:
+        connected: true
+        lastError: ""
+        connectedAt: 2000-01-23T04:56:07.000+00:00
+        modeSandbox: true
+        expiresAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        connected:
+          description: Whether this client has connected its SuperPDP account
+          title: Connected
+          type: boolean
+        connectedAt:
+          format: date-time
+          nullable: true
+          type: string
+        expiresAt:
+          format: date-time
+          nullable: true
+          type: string
+        modeSandbox:
+          nullable: true
+          type: boolean
+        lastError:
+          default: ""
+          description: "Last token refresh error, if any"
+          title: Lasterror
+          type: string
+      required:
+      - connected
+      title: SuperPDPStatusResponse
+    SupplementaryAttachment:
+      description: Represents a supplementary attachment.
+      properties:
+        description:
+          description: Attachment description
+          title: Description
+          type: string
+        id:
+          description: Attachment ID
+          title: Id
+          type: integer
+        linkId:
+          description: Link ID
+          title: Linkid
+          type: integer
+        invoiceLineNumber:
+          description: Invoice line number
+          title: Invoicelinenumber
+          type: integer
+        type:
+          description: Attachment type
+          title: Type
+          type: string
+      required:
+      - description
+      - id
+      - invoiceLineNumber
+      - linkId
+      - type
+      title: SupplementaryAttachment
+    Supplier:
+      description: Information about the supplier / seller (BG-4).
+      properties:
+        electronic_address:
+          allOf:
+          - $ref: "#/components/schemas/ElectronicAddress-Input"
+          nullable: true
+        supplier_id:
+          default: 0
+          description: Chorus Pro supplier structure ID (idFournisseur). Only required
+            for B2G.
+          title: Supplier Id
+          type: integer
+        private_id:
+          nullable: true
+          type: string
+        supplier_bank_account_code:
+          nullable: true
+          type: integer
+        supplier_service_id:
+          nullable: true
+          type: integer
+        name:
+          nullable: true
+          type: string
+        trading_business_name:
+          nullable: true
+          type: string
+        legal_description:
+          nullable: true
+          type: string
+        siren:
+          nullable: true
+          type: string
+        siret:
+          nullable: true
+          type: string
+        vat_number:
+          nullable: true
+          type: string
+        tax_registration_id:
+          nullable: true
+          type: string
+        iban:
+          nullable: true
+          type: string
+        bic:
+          nullable: true
+          type: string
+        bank_account_name:
+          nullable: true
+          type: string
+        proprietaryId:
+          nullable: true
+          type: string
+        postal_address:
+          allOf:
+          - $ref: "#/components/schemas/PostalAddress-Input"
+          nullable: true
+        contact:
+          allOf:
+          - $ref: "#/components/schemas/Contact"
+          nullable: true
+        global_ids:
+          items:
+            $ref: "#/components/schemas/ElectronicAddress-Input"
+          nullable: true
+          type: array
+      title: Supplier
     TaskErrorResult:
       description: Common error result returned by all task domains.
       properties:
@@ -12038,6 +13175,15 @@ components:
           $ref: "#/components/schemas/Taxableamount"
         taxAmount:
           $ref: "#/components/schemas/Taxamount_2"
+        taxCategoryCode:
+          nullable: true
+          type: string
+        exemptionReasonCode:
+          nullable: true
+          type: string
+        exemptionReason:
+          nullable: true
+          type: string
       required:
       - rate
       - taxAmount
@@ -12063,6 +13209,30 @@ components:
       - "432"
       title: TaxDueDateType
       type: string
+    TaxRepresentative:
+      description: |-
+        Seller tax representative (BG-11).
+
+        The tax representative is required when the seller is not established
+        in the country where VAT is due.
+      properties:
+        name:
+          description: Tax representative name (BT-62).
+          title: Name
+          type: string
+        vat_number:
+          description: Tax representative VAT identifier (BT-63).
+          title: Vat Number
+          type: string
+        postal_address:
+          allOf:
+          - $ref: "#/components/schemas/PostalAddress-Input"
+          description: Tax representative postal address (BG-12).
+      required:
+      - name
+      - postal_address
+      - vat_number
+      title: TaxRepresentative
     TransactionCategory:
       description: |-
         Transaction category codes (TT-81 CategoryCode).
@@ -12097,6 +13267,98 @@ components:
       - IN
       - RE
       title: TransmissionTypeCode
+      type: string
+    UnitOfMeasure:
+      description: |-
+        Units of measure for invoice lines (BT-130).
+
+        Accepts both legacy French labels and UN/ECE Recommendation 20 codes.
+        UN/ECE codes are preferred for new integrations.
+
+        | UN/ECE code | Legacy alias | Description |
+        |-------------|--------------|-------------|
+        | C62 | PIECE | Unit / piece |
+        | H87 | - | Piece (ISO synonym) |
+        | HUR | HEURE | Hour |
+        | DAY | JOUR | Day |
+        | MON | - | Month |
+        | MIN | - | Minute |
+        | KGM | KILOGRAMME | Kilogram |
+        | LTR | LITRE | Litre |
+        | MTR | - | Metre |
+        | MTK | - | Square metre |
+        | TNE | - | Metric ton |
+        | KWH | - | Kilowatt-hour |
+        | SET | - | Set |
+        | LS | FORFAIT | Lump sum |
+      enum:
+      - PIECE
+      - HEURE
+      - JOUR
+      - KILOGRAMME
+      - LITRE
+      - FORFAIT
+      - C62
+      - H87
+      - HUR
+      - DAY
+      - MON
+      - MIN
+      - KGM
+      - LTR
+      - MTR
+      - MTK
+      - TNE
+      - KWH
+      - SET
+      - LS
+      title: UnitOfMeasure
+      type: string
+    VATAccountingCode:
+      description: |-
+        VAT accounting regime - Chorus Pro API codes (typeTva).
+
+        Values are official Chorus Pro enum values, automatically mapped
+        to UNTDID 2005 codes for Factur-X XML generation (BT-8 DueDateTypeCode).
+
+        | Chorus Pro code | Name | UNTDID 2005 |
+        |-----------------|------|-------------|
+        | TVA_SUR_DEBIT | ON_INVOICE | 5 (due on invoice date) |
+        | TVA_SUR_ENCAISSEMENT | ON_PAYMENT | 72 (due on payment date) |
+        | EXONERATION | EXEMPTION | - |
+        | SANS_TVA | NO_VAT | - |
+      enum:
+      - TVA_SUR_DEBIT
+      - TVA_SUR_ENCAISSEMENT
+      - EXONERATION
+      - SANS_TVA
+      title: VATAccountingCode
+      type: string
+    VATCategory:
+      description: |-
+        Standardized VAT categories for Factur-X (EN 16931 standard).
+
+        **Possible values:**
+        - `S`: STANDARD - Standard VAT rate
+        - `Z`: ZERO - Zero VAT rate
+        - `E`: EXEMPT - VAT exemption
+        - `AE`: REVERSE_CHARGE - Reverse charge (auto-liquidation)
+        - `K`: INTRA_COMMUNITY - Intra-community supply
+        - `G`: EXPORT - Export outside EU
+        - `O`: OUT_OF_SCOPE - Outside VAT scope
+        - `L`: CANARY_ISLANDS - Canary Islands VAT
+        - `M`: CEUTA_MELILLA - Ceuta/Melilla VAT
+      enum:
+      - S
+      - Z
+      - E
+      - AE
+      - K
+      - G
+      - O
+      - L
+      - M
+      title: VATCategory
       type: string
     VATEXCodeInfo:
       description: Single VATEX code entry.
@@ -12159,6 +13421,51 @@ components:
       - codes
       - count
       title: VATEXCodesResponse
+    VATLine:
+      description: |-
+        Represents a VAT breakdown line by rate (BG-23).
+
+        For exemptions (categories E, AE, K, G, O), the fields
+        `exemption_reason` and `vatex_code` are required per EN16931.
+      properties:
+        taxable_amount:
+          $ref: "#/components/schemas/TaxableAmount"
+        vat_amount:
+          $ref: "#/components/schemas/VATAmount"
+        rate:
+          nullable: true
+          type: string
+        manual_rate:
+          $ref: "#/components/schemas/Manual_Rate"
+        category:
+          allOf:
+          - $ref: "#/components/schemas/VATCategory"
+          nullable: true
+        due_date_type_code:
+          allOf:
+          - $ref: "#/components/schemas/VATPointDateCode"
+          nullable: true
+        exemption_reason:
+          nullable: true
+          type: string
+        vatex_code:
+          nullable: true
+          type: string
+      required:
+      - taxable_amount
+      - vat_amount
+      title: VATLine
+    VATPointDateCode:
+      description: |-
+        VAT point date code (BT-8) - When VAT becomes due.
+
+        UNTDID 2005 subset used in EN16931.
+      enum:
+      - "5"
+      - "29"
+      - "72"
+      title: VATPointDateCode
+      type: string
     ValidateCDARRequest:
       description: Requête de validation CDAR.
       example:
@@ -12890,6 +14197,81 @@ components:
       required:
       - hasSecret
       title: WebhookSecretStatusResponse
+    facture_electronique__models__InvoiceTypeCode:
+      description: |-
+        Document type according to BR-FR-04 (UNTDID 1001 codes).
+
+        | Code | Name | Description |
+        |------|------|-------------|
+        | 380 | INVOICE | Commercial invoice |
+        | 389 | SELF_BILLED_INVOICE | Self-billed invoice |
+        | 393 | FACTORED_INVOICE | Factored invoice |
+        | 501 | SELF_BILLED_FACTORED_INVOICE | Self-billed factored invoice |
+        | 386 | PREPAYMENT_INVOICE | Prepayment invoice |
+        | 500 | SELF_BILLED_PREPAYMENT_INVOICE | Self-billed prepayment invoice |
+        | 384 | CORRECTIVE_INVOICE | Corrective invoice |
+        | 471 | SELF_BILLED_CORRECTIVE_INVOICE | Self-billed corrective invoice |
+        | 472 | FACTORED_CORRECTIVE_INVOICE | Factored corrective invoice |
+        | 473 | SELF_BILLED_FACTORED_CORRECTIVE_INVOICE | Self-billed factored corrective invoice |
+        | 381 | CREDIT_NOTE | Credit note |
+        | 261 | SELF_BILLED_CREDIT_NOTE | Self-billed credit note |
+        | 262 | GLOBAL_ALLOWANCE_CREDIT_NOTE | Credit note for global allowance |
+        | 396 | FACTORED_CREDIT_NOTE | Factored credit note |
+        | 502 | SELF_BILLED_FACTORED_CREDIT_NOTE | Self-billed factored credit note |
+        | 503 | PREPAYMENT_CREDIT_NOTE | Credit note for prepayment invoice |
+      enum:
+      - "380"
+      - "389"
+      - "393"
+      - "501"
+      - "386"
+      - "500"
+      - "384"
+      - "471"
+      - "472"
+      - "473"
+      - "381"
+      - "261"
+      - "262"
+      - "396"
+      - "502"
+      - "503"
+      title: InvoiceTypeCode
+      type: string
+      x-enum-descriptions:
+      - Commercial Invoice
+      - Self-billed Invoice
+      - Factored Invoice
+      - Self-billed Factored Invoice
+      - Prepayment Invoice
+      - Self-billed Prepayment Invoice
+      - Corrective Invoice
+      - Self-billed Corrective Invoice
+      - Factored Corrective Invoice
+      - Self-billed Factored Corrective Invoice
+      - Credit Note
+      - Self-billed Credit Note
+      - Global Allowance Credit Note
+      - Factored Credit Note
+      - Self-billed Factored Credit Note
+      - Prepayment Credit Note
+      x-enum-varnames:
+      - INVOICE
+      - SELF_BILLED_INVOICE
+      - FACTORED_INVOICE
+      - SELF_BILLED_FACTORED_INVOICE
+      - PREPAYMENT_INVOICE
+      - SELF_BILLED_PREPAYMENT_INVOICE
+      - CORRECTIVE_INVOICE
+      - SELF_BILLED_CORRECTIVE_INVOICE
+      - FACTORED_CORRECTIVE_INVOICE
+      - SELF_BILLED_FACTORED_CORRECTIVE_INVOICE
+      - CREDIT_NOTE
+      - SELF_BILLED_CREDIT_NOTE
+      - GLOBAL_ALLOWANCE_CREDIT_NOTE
+      - FACTORED_CREDIT_NOTE
+      - SELF_BILLED_FACTORED_CREDIT_NOTE
+      - PREPAYMENT_CREDIT_NOTE
     facture_electronique__rest_api__schemas__cdar__ValidationErrorResponse:
       description: Erreur de validation.
       example:
@@ -12918,1111 +14300,100 @@ components:
       - field
       - message
       title: ValidationErrorResponse
-    facture_electronique__rest_api__schemas__ereporting__InvoiceTypeCode:
-      description: Invoice type codes (UNTDID 1001).
-      enum:
-      - "380"
-      - "381"
-      - "384"
-      - "389"
-      - "386"
-      title: InvoiceTypeCode
-      type: string
-    facture_electronique__rest_api__schemas__processing__ChorusProCredentials:
+    facture_electronique__rest_api__schemas__chorus_pro__ChorusProCredentials:
       description: |-
-        Optional Chorus Pro credentials.
+        Chorus Pro credentials for Zero-Trust mode.
 
-        **MODE 1 - JWT retrieval (recommended):**
-        Do not provide this `credentials` field in the payload.
-        Credentials will be automatically retrieved via client_uid from JWT (0-trust).
+        **Zero-Trust Mode**: Credentials are passed in each request and are NEVER stored.
 
-        **MODE 2 - Credentials in payload:**
-        Provide all required fields below.
-        Useful for tests or third-party integrations.
+        **Security**:
+        - Credentials are never persisted in the database
+        - They are used only for the duration of the request
+        - Secure transmission via HTTPS
+
+        **Use cases**:
+        - High-security environments (banks, administrations)
+        - Strict GDPR compliance
+        - Tests with temporary credentials
+        - Users who don't want to store their credentials
       example:
-        chorusLogin: my_login@company.fr
-        chorusPassword: MyPassword123!
-        pisteClientId: my_piste_client_id
-        pisteClientSecret: my_piste_secret
-        sandboxMode: true
+        chorusProLogin: my_login@company.fr
+        chorusProPassword: MyPassword123!
+        pisteClientId: my_client_id
+        pisteClientSecret: my_secret
+        sandbox: true
       properties:
         pisteClientId:
-          nullable: true
+          description: PISTE Client ID (government API portal)
+          title: Pisteclientid
           type: string
         pisteClientSecret:
-          nullable: true
+          description: PISTE Client Secret
+          title: Pisteclientsecret
           type: string
-        chorusLogin:
-          nullable: true
+        chorusProLogin:
+          description: Chorus Pro login
+          title: Chorusprologin
           type: string
-        chorusPassword:
-          nullable: true
+        chorusProPassword:
+          description: Chorus Pro password
+          title: Choruspropassword
           type: string
-        sandboxMode:
+        sandbox:
           default: true
-          description: "[MODE 2] Use sandbox mode (default: True)"
-          title: Sandboxmode
+          description: Use sandbox environment (true) or production (false)
+          title: Sandbox
           type: boolean
+      required:
+      - chorusProLogin
+      - chorusProPassword
+      - pisteClientId
+      - pisteClientSecret
       title: ChorusProCredentials
-    AdditionalDocument:
+    ElectronicAddress:
       description: |-
-        Additional supporting document (BG-24).
-
-        References to external documents or embedded attachments.
+        Represents an electronic invoicing address, composed of an identifier
+        and its scheme (SchemeID) in accordance with EN16931.
+        Example: { "identifier": "123456789", "scheme_id": "0225" }
       properties:
-        id:
-          description: Document reference identifier (BT-122).
-          title: Id
+        identifier:
+          description: "Electronic address identifier (e.g., SIREN, SIRET, routing\
+            \ code)"
+          title: Identifier
           type: string
-        type_code:
-          nullable: true
-          type: string
-        name:
-          nullable: true
-          type: string
-        uri:
-          nullable: true
-          type: string
-        reference_type_code:
-          nullable: true
-          type: string
+        scheme_id:
+          allOf:
+          - $ref: "#/components/schemas/SchemeID"
+          default: "0225"
+          description: Identification scheme (EAS code)
       required:
-      - id
-      title: AdditionalDocument
-    AllowanceCharge:
-      description: |-
-        Document-level or line-level allowance/charge.
-
-        Represents BG-20 (Document level allowances), BG-21 (Document level charges),
-        BG-27 (Invoice line allowances), or BG-28 (Invoice line charges).
+      - identifier
+      title: ElectronicAddress
+    PostalAddress:
+      description: "Represents a postal address (BG-5, BG-8, BG-12, BG-15)."
       properties:
-        is_charge:
-          description: "True for charge, False for allowance (ChargeIndicator)."
-          title: Is Charge
-          type: boolean
-        amount:
-          $ref: "#/components/schemas/Amount_2"
-        base_amount:
-          $ref: "#/components/schemas/Base_Amount"
-        percentage:
-          $ref: "#/components/schemas/Percentage"
-        reason:
+        postal_code:
           nullable: true
           type: string
-        reason_code:
-          allOf:
-          - $ref: "#/components/schemas/AllowanceChargeReasonCode"
+        line_one:
           nullable: true
-        vat_category:
-          allOf:
-          - $ref: "#/components/schemas/VATCategory"
-          nullable: true
-        vat_rate:
-          $ref: "#/components/schemas/Vat_Rate"
-      required:
-      - amount
-      - is_charge
-      title: AllowanceCharge
-    AllowanceChargeReasonCode:
-      description: |-
-        Standardized reason codes for document-level allowances and charges.
-
-        Codes from UNTDID 5189 (allowances) and UNTDID 7161 (charges).
-      enum:
-      - "41"
-      - "42"
-      - "60"
-      - "62"
-      - "63"
-      - "64"
-      - "65"
-      - "66"
-      - "67"
-      - "68"
-      - "70"
-      - "71"
-      - "88"
-      - "95"
-      - "100"
-      - "102"
-      - "103"
-      - "104"
-      - "105"
-      - AA
-      - AAA
-      - AAC
-      - AAD
-      - AAE
-      - AAH
-      - AAI
-      - AAS
-      - ABK
-      - ABL
-      - ABN
-      - ABR
-      - ADR
-      - ADL
-      - ADT
-      - FC
-      - FI
-      - LA
-      - PC
-      title: AllowanceChargeReasonCode
-      type: string
-    AllowanceReasonCode:
-      description: |-
-        Standardized codes for allowance or charge reasons (EN 16931 standard).
-
-        **Possible values:**
-        - `AA`: ADVERTISING_ALLOWANCE - Advertising discount or rebate
-        - `ABL`: PACKAGING_SURCHARGE - Packaging surcharge
-        - `ADR`: OTHER_SERVICES - Other services
-        - `ADT`: PICKUP_COST - Pickup cost
-        - `FC`: FREIGHT_CHARGES - Freight/transport costs
-        - `FI`: FINANCING_CHARGES - Financing charges
-        - `LA`: LABELING - Labeling
-      enum:
-      - AA
-      - ABL
-      - ADR
-      - ADT
-      - FC
-      - FI
-      - LA
-      title: AllowanceReasonCode
-      type: string
-    Contact:
-      description: |-
-        Contact information (BG-6 Seller Contact, BG-9 Buyer Contact).
-
-        Used for seller and buyer contact details.
-      properties:
-        name:
-          nullable: true
-          type: string
-        department_name:
-          nullable: true
-          type: string
-        phone:
-          nullable: true
-          type: string
-        email:
-          nullable: true
-          type: string
-      title: Contact
-    DeliveryParty:
-      description: |-
-        Delivery location information (BG-15 Deliver to).
-
-        Represents the party or location where goods/services are delivered.
-      properties:
-        id:
-          nullable: true
-          type: string
-        global_id:
-          allOf:
-          - $ref: "#/components/schemas/ElectronicAddress"
-          nullable: true
-        name:
-          nullable: true
-          type: string
-        postal_address:
-          allOf:
-          - $ref: "#/components/schemas/PostalAddress"
-          nullable: true
-      title: DeliveryParty
-    InvoiceLine:
-      description: Represents an invoice line item (BG-25).
-      properties:
-        line_number:
-          description: Invoice line identifier (BT-126).
-          title: Line Number
-          type: integer
-        line_note:
-          nullable: true
-          type: string
-        parent_line_id:
-          nullable: true
-          type: string
-        line_sub_type:
-          allOf:
-          - $ref: "#/components/schemas/LineSubType"
-          nullable: true
-        reference:
-          nullable: true
-          type: string
-        buyer_assigned_id:
-          nullable: true
-          type: string
-        product_global_id:
-          nullable: true
-          type: string
-        product_global_id_scheme:
-          nullable: true
-          type: string
-        item_name:
-          description: Item name (BT-153).
-          title: Item Name
-          type: string
-        item_description:
-          nullable: true
-          type: string
-        origin_country:
-          nullable: true
-          type: string
-        characteristics:
-          items:
-            $ref: "#/components/schemas/ProductCharacteristic"
-          nullable: true
-          type: array
-        classifications:
-          items:
-            $ref: "#/components/schemas/ProductClassification"
-          nullable: true
-          type: array
-        quantity:
-          $ref: "#/components/schemas/Quantity"
-        unit:
-          allOf:
-          - $ref: "#/components/schemas/UnitOfMeasure"
-          description: Invoiced quantity unit of measure code (BT-130).
-        gross_unit_price:
-          $ref: "#/components/schemas/Gross_Unit_Price"
-        unit_net_price:
-          $ref: "#/components/schemas/UnitNetPrice"
-        price_basis_quantity:
-          $ref: "#/components/schemas/Price_Basis_Quantity"
-        price_basis_unit:
-          nullable: true
-          type: string
-        price_allowance_amount:
-          $ref: "#/components/schemas/Price_Allowance_Amount"
-        lineNetAmount:
-          $ref: "#/components/schemas/LineNetAmount"
-        allowanceAmount:
-          $ref: "#/components/schemas/InvoiceLine_allowanceAmount"
-        allowanceReasonCode:
-          allOf:
-          - $ref: "#/components/schemas/AllowanceReasonCode"
-          nullable: true
-        allowanceReason:
-          nullable: true
-          type: string
-        allowances_charges:
-          items:
-            $ref: "#/components/schemas/AllowanceCharge"
-          nullable: true
-          type: array
-        vat_rate:
-          nullable: true
-          type: string
-        manual_vat_rate:
-          $ref: "#/components/schemas/Manual_Vat_Rate"
-        vat_category:
-          allOf:
-          - $ref: "#/components/schemas/VATCategory"
-          nullable: true
-        period_start_date:
-          nullable: true
-          type: string
-        period_end_date:
-          nullable: true
-          type: string
-        purchase_order_line_ref:
-          nullable: true
-          type: string
-        accounting_account:
-          nullable: true
-          type: string
-        additional_documents:
-          items:
-            $ref: "#/components/schemas/AdditionalDocument"
-          nullable: true
-          type: array
-        line_notes:
-          items:
-            $ref: "#/components/schemas/InvoiceNote"
-          nullable: true
-          type: array
-      required:
-      - item_name
-      - line_number
-      - quantity
-      - unit
-      - unit_net_price
-      title: InvoiceLine
-    InvoiceNote:
-      description: |-
-        Invoice note (IncludedNote in Factur-X).
-
-        Mandatory notes for BR-FR-05 are:
-        - PMT: Fixed recovery fee
-        - PMD: Late payment penalties
-        - AAB: Early payment discount
-      properties:
-        subject_code:
-          nullable: true
-          type: string
-        content:
-          description: Note content
-          title: Content
-          type: string
-      required:
-      - content
-      title: InvoiceNote
-    InvoiceReferences:
-      description: "Contains various invoice references (currency, type, etc.)."
-      properties:
-        business_process_id:
-          nullable: true
-          type: string
-        invoice_currency:
-          default: EUR
-          description: Invoice currency code (BT-5). ISO 4217.
-          title: Invoice Currency
-          type: string
-        payment_means:
-          allOf:
-          - $ref: "#/components/schemas/PaymentMeans"
-          description: Payment means type code (BT-81).
-        payment_means_text:
-          nullable: true
-          type: string
-        invoice_type:
-          $ref: "#/components/schemas/InvoiceTypeCode"
-        vat_accounting_code:
-          allOf:
-          - $ref: "#/components/schemas/VATAccountingCode"
-          description: VAT accounting code.
-        buyer_reference:
-          nullable: true
-          type: string
-        contract_reference:
-          nullable: true
-          type: string
-        purchase_order_reference:
-          nullable: true
-          type: string
-        seller_order_reference:
-          nullable: true
-          type: string
-        receiving_advice_reference:
-          nullable: true
-          type: string
-        despatch_advice_reference:
-          nullable: true
-          type: string
-        tender_reference:
-          nullable: true
-          type: string
-        preceding_invoice_reference:
-          nullable: true
-          type: string
-        preceding_invoice_date:
-          nullable: true
-          type: string
-        project_reference:
-          nullable: true
-          type: string
-        project_name:
-          nullable: true
-          type: string
-        vat_exemption_reason:
-          nullable: true
-          type: string
-      required:
-      - invoice_type
-      - payment_means
-      - vat_accounting_code
-      title: InvoiceReferences
-    InvoiceTotals:
-      description: Contains all invoice total amounts (BG-22).
-      properties:
-        line_total_amount:
-          $ref: "#/components/schemas/Line_Total_Amount"
-        allowance_total_amount:
-          $ref: "#/components/schemas/Allowance_Total_Amount"
-        charge_total_amount:
-          $ref: "#/components/schemas/Charge_Total_Amount"
-        total_net_amount:
-          $ref: "#/components/schemas/TotalNetAmount"
-        vat_amount:
-          $ref: "#/components/schemas/TotalVATAmount"
-        total_gross_amount:
-          $ref: "#/components/schemas/TotalGrossAmount"
-        prepayment:
-          $ref: "#/components/schemas/InvoiceTotals_prepayment"
-        rounding_amount:
-          $ref: "#/components/schemas/Rounding_Amount"
-        amount_due:
-          $ref: "#/components/schemas/AmountDue"
-        globalAllowanceAmount:
-          $ref: "#/components/schemas/GlobalAllowanceAmount"
-        globalAllowanceReason:
-          nullable: true
-          type: string
-      required:
-      - amount_due
-      - total_gross_amount
-      - total_net_amount
-      - vat_amount
-      title: InvoiceTotals
-    InvoicingFramework:
-      description: |-
-        Defines the invoicing framework.
-
-        - invoicing_framework_code: Chorus Pro code (A1, A2, A9, A12) - used for B2G
-        - operation_nature: Operation nature (B1, S1, M1, etc.) - priority for Factur-X
-
-        If operation_nature is provided, it will be used directly in Factur-X XML (BT-23).
-        Otherwise, the code will be derived from invoicing_framework_code via automatic mapping.
-
-        Example:
-            >>> framework = InvoicingFramework(
-            ...     invoicing_framework_code=InvoicingFrameworkCode.A1_SUPPLIER_INVOICE,
-            ...     operation_nature=OperationNature.GOODS  # Forces B1 instead of S1
-            ... )
-      properties:
-        invoicing_framework_code:
-          allOf:
-          - $ref: "#/components/schemas/InvoicingFrameworkCode"
-          nullable: true
-        operation_nature:
-          allOf:
-          - $ref: "#/components/schemas/OperationNature"
-          nullable: true
-        approver_service_code:
-          nullable: true
-          type: string
-        approver_structure_code:
-          nullable: true
-          type: string
-      title: InvoicingFramework
-    LineSubType:
-      description: |-
-        Sub-line type for EXTENDED profile (BT-X-8 / EXT-FR-FE-163).
-
-        Defines the role of an invoice line in a hierarchical structure:
-        - DETAIL: Standard billing line, included in VAT calculations
-        - INFORMATION: Additional information line, not included in VAT calculations
-        - GROUP: Grouping/subtotal line, not included in VAT calculations
-      enum:
-      - DETAIL
-      - INFORMATION
-      - GROUP
-      title: LineSubType
-      type: string
-    Payee:
-      description: |-
-        Information about the payment beneficiary (BG-10 / PayeeTradeParty).
-
-        The payee is the party receiving payment. This block is used
-        only if the payee is different from the seller (supplier).
-
-        **Main use case**: Factoring
-        When an invoice is factored, the factor (factoring company) becomes
-        the payment beneficiary instead of the supplier.
-
-        **Business Terms (EN16931)**:
-        - BT-59: Payee name (mandatory)
-        - BT-60: Payee identifier (SIRET with schemeID 0009)
-        - BT-61: Payee legal identifier (SIREN with schemeID 0002)
-
-        **Reference**: docs/guide_affacturage.md
-      properties:
-        nom:
-          description: Payee name (BT-59). Mandatory.
-          minLength: 1
-          title: Nom
-          type: string
-        payeeId:
-          nullable: true
           type: string
-        siret:
+        line_two:
           nullable: true
-          pattern: "^\\d{14}$"
           type: string
-        siren:
+        line_three:
           nullable: true
-          pattern: "^\\d{9}$"
           type: string
-        electronicAddress:
-          allOf:
-          - $ref: "#/components/schemas/ElectronicAddress"
+        city:
           nullable: true
-        iban:
-          nullable: true
-          type: string
-        bic:
-          nullable: true
-          type: string
-        global_ids:
-          items:
-            $ref: "#/components/schemas/ElectronicAddress"
-          nullable: true
-          type: array
-      required:
-      - nom
-      title: Payee
-    PaymentCard:
-      description: |-
-        Payment card information (BG-18).
-
-        Used when payment is made by payment card.
-      properties:
-        card_id:
-          nullable: true
-          type: string
-        cardholder_name:
-          nullable: true
-          type: string
-      title: PaymentCard
-    PaymentMeans:
-      description: |-
-        Payment methods - Chorus Pro API codes (modePaiement).
-
-        Values are official Chorus Pro enum values, automatically mapped
-        to UNTDID 4461 codes for Factur-X/UBL XML generation.
-
-        | Chorus Pro code | Name | UNTDID 4461 |
-        |-----------------|------|-------------|
-        | CHEQUE | CHECK | 20 |
-        | PRELEVEMENT | DIRECT_DEBIT | 49 |
-        | VIREMENT | CREDIT_TRANSFER | 30 |
-        | ESPECE | CASH | 10 |
-        | AUTRE | OTHER | 57 |
-        | REPORT | CLEARING | 97 |
-      enum:
-      - CHEQUE
-      - PRELEVEMENT
-      - VIREMENT
-      - ESPECE
-      - AUTRE
-      - REPORT
-      title: PaymentMeans
-      type: string
-    ProductCharacteristic:
-      description: |-
-        Item attribute (BG-32).
-
-        Additional product characteristics as key-value pairs.
-      properties:
-        name:
-          description: Attribute name (BT-160).
-          title: Name
-          type: string
-        value:
-          description: Attribute value (BT-161).
-          title: Value
-          type: string
-      required:
-      - name
-      - value
-      title: ProductCharacteristic
-    ProductClassification:
-      description: |-
-        Item classification identifier (BG-31).
-
-        Product classification according to a classification scheme.
-      properties:
-        class_code:
-          description: Classification code (BT-158).
-          title: Class Code
-          type: string
-        list_id:
-          nullable: true
-          type: string
-        list_version_id:
-          nullable: true
-          type: string
-      required:
-      - class_code
-      title: ProductClassification
-    Recipient:
-      description: Information about the invoice recipient / buyer (BG-7).
-      properties:
-        electronic_address:
-          allOf:
-          - $ref: "#/components/schemas/ElectronicAddress"
-          nullable: true
-        executing_service_code:
-          nullable: true
-          type: string
-        name:
-          nullable: true
-          type: string
-        siren:
-          nullable: true
-          type: string
-        siret:
-          nullable: true
-          type: string
-        vat_number:
-          nullable: true
-          type: string
-        postal_address:
-          allOf:
-          - $ref: "#/components/schemas/PostalAddress"
-          nullable: true
-        contact:
-          allOf:
-          - $ref: "#/components/schemas/Contact"
-          nullable: true
-        global_ids:
-          items:
-            $ref: "#/components/schemas/ElectronicAddress"
-          nullable: true
-          type: array
-      title: Recipient
-    SubmissionMode:
-      description: Invoice submission mode on Chorus Pro.
-      enum:
-      - SAISIE_API
-      - DEPOT_PDF_API
-      - DEPOT_PDF_SIGNE_API
-      title: SubmissionMode
-      type: string
-    SupplementaryAttachment:
-      description: Represents a supplementary attachment.
-      properties:
-        description:
-          description: Attachment description
-          title: Description
-          type: string
-        id:
-          description: Attachment ID
-          title: Id
-          type: integer
-        linkId:
-          description: Link ID
-          title: Linkid
-          type: integer
-        invoiceLineNumber:
-          description: Invoice line number
-          title: Invoicelinenumber
-          type: integer
-        type:
-          description: Attachment type
-          title: Type
-          type: string
-      required:
-      - description
-      - id
-      - invoiceLineNumber
-      - linkId
-      - type
-      title: SupplementaryAttachment
-    Supplier:
-      description: Information about the supplier / seller (BG-4).
-      properties:
-        electronic_address:
-          allOf:
-          - $ref: "#/components/schemas/ElectronicAddress"
-          nullable: true
-        supplier_id:
-          default: 0
-          description: Chorus Pro supplier structure ID (idFournisseur). Only required
-            for B2G.
-          title: Supplier Id
-          type: integer
-        private_id:
-          nullable: true
-          type: string
-        supplier_bank_account_code:
-          nullable: true
-          type: integer
-        supplier_service_id:
-          nullable: true
-          type: integer
-        name:
-          nullable: true
-          type: string
-        trading_business_name:
-          nullable: true
-          type: string
-        legal_description:
-          nullable: true
-          type: string
-        siren:
-          nullable: true
-          type: string
-        siret:
-          nullable: true
-          type: string
-        vat_number:
-          nullable: true
           type: string
-        iban:
+        country_code:
           nullable: true
           type: string
-        bic:
+        country_subdivision:
           nullable: true
           type: string
-        bank_account_name:
-          nullable: true
-          type: string
-        proprietaryId:
-          nullable: true
-          type: string
-        postal_address:
-          allOf:
-          - $ref: "#/components/schemas/PostalAddress"
-          nullable: true
-        contact:
-          allOf:
-          - $ref: "#/components/schemas/Contact"
-          nullable: true
-        global_ids:
-          items:
-            $ref: "#/components/schemas/ElectronicAddress"
-          nullable: true
-          type: array
-      title: Supplier
-    TaxRepresentative:
-      description: |-
-        Seller tax representative (BG-11).
-
-        The tax representative is required when the seller is not established
-        in the country where VAT is due.
-      properties:
-        name:
-          description: Tax representative name (BT-62).
-          title: Name
-          type: string
-        vat_number:
-          description: Tax representative VAT identifier (BT-63).
-          title: Vat Number
-          type: string
-        postal_address:
-          allOf:
-          - $ref: "#/components/schemas/PostalAddress"
-          description: Tax representative postal address (BG-12).
-      required:
-      - name
-      - postal_address
-      - vat_number
-      title: TaxRepresentative
-    UnitOfMeasure:
-      description: |-
-        Units of measure for invoice lines (BT-130).
-
-        Accepts both legacy French labels and UN/ECE Recommendation 20 codes.
-        UN/ECE codes are preferred for new integrations.
-
-        | UN/ECE code | Legacy alias | Description |
-        |-------------|--------------|-------------|
-        | C62 | PIECE | Unit / piece |
-        | H87 | - | Piece (ISO synonym) |
-        | HUR | HEURE | Hour |
-        | DAY | JOUR | Day |
-        | MON | - | Month |
-        | MIN | - | Minute |
-        | KGM | KILOGRAMME | Kilogram |
-        | LTR | LITRE | Litre |
-        | MTR | - | Metre |
-        | MTK | - | Square metre |
-        | TNE | - | Metric ton |
-        | KWH | - | Kilowatt-hour |
-        | SET | - | Set |
-        | LS | FORFAIT | Lump sum |
-      enum:
-      - PIECE
-      - HEURE
-      - JOUR
-      - KILOGRAMME
-      - LITRE
-      - FORFAIT
-      - C62
-      - H87
-      - HUR
-      - DAY
-      - MON
-      - MIN
-      - KGM
-      - LTR
-      - MTR
-      - MTK
-      - TNE
-      - KWH
-      - SET
-      - LS
-      title: UnitOfMeasure
-      type: string
-    VATAccountingCode:
-      description: |-
-        VAT accounting regime - Chorus Pro API codes (typeTva).
-
-        Values are official Chorus Pro enum values, automatically mapped
-        to UNTDID 2005 codes for Factur-X XML generation (BT-8 DueDateTypeCode).
-
-        | Chorus Pro code | Name | UNTDID 2005 |
-        |-----------------|------|-------------|
-        | TVA_SUR_DEBIT | ON_INVOICE | 5 (due on invoice date) |
-        | TVA_SUR_ENCAISSEMENT | ON_PAYMENT | 72 (due on payment date) |
-        | EXONERATION | EXEMPTION | - |
-        | SANS_TVA | NO_VAT | - |
-      enum:
-      - TVA_SUR_DEBIT
-      - TVA_SUR_ENCAISSEMENT
-      - EXONERATION
-      - SANS_TVA
-      title: VATAccountingCode
-      type: string
-    VATCategory:
-      description: |-
-        Standardized VAT categories for Factur-X (EN 16931 standard).
-
-        **Possible values:**
-        - `S`: STANDARD - Standard VAT rate
-        - `Z`: ZERO - Zero VAT rate
-        - `E`: EXEMPT - VAT exemption
-        - `AE`: REVERSE_CHARGE - Reverse charge (auto-liquidation)
-        - `K`: INTRA_COMMUNITY - Intra-community supply
-        - `G`: EXPORT - Export outside EU
-        - `O`: OUT_OF_SCOPE - Outside VAT scope
-        - `L`: CANARY_ISLANDS - Canary Islands VAT
-        - `M`: CEUTA_MELILLA - Ceuta/Melilla VAT
-      enum:
-      - S
-      - Z
-      - E
-      - AE
-      - K
-      - G
-      - O
-      - L
-      - M
-      title: VATCategory
-      type: string
-    VATLine:
-      description: |-
-        Represents a VAT breakdown line by rate (BG-23).
-
-        For exemptions (categories E, AE, K, G, O), the fields
-        `exemption_reason` and `vatex_code` are required per EN16931.
-      properties:
-        taxable_amount:
-          $ref: "#/components/schemas/TaxableAmount"
-        vat_amount:
-          $ref: "#/components/schemas/VATAmount"
-        rate:
-          nullable: true
-          type: string
-        manual_rate:
-          $ref: "#/components/schemas/Manual_Rate"
-        category:
-          allOf:
-          - $ref: "#/components/schemas/VATCategory"
-          nullable: true
-        due_date_type_code:
-          allOf:
-          - $ref: "#/components/schemas/VATPointDateCode"
-          nullable: true
-        exemption_reason:
-          nullable: true
-          type: string
-        vatex_code:
-          nullable: true
-          type: string
-      required:
-      - taxable_amount
-      - vat_amount
-      title: VATLine
-    VATPointDateCode:
-      description: |-
-        VAT point date code (BT-8) - When VAT becomes due.
-
-        UNTDID 2005 subset used in EN16931.
-      enum:
-      - "5"
-      - "29"
-      - "72"
-      title: VATPointDateCode
-      type: string
-    FacturXInvoice:
-      description: Data model for an invoice to be converted to Factur-X.
-      example:
-        invoiceNumber: FACT-2025-001
-        invoiceDate: 2025-10-27
-        paymentDueDate: 2025-11-27
-        submissionMode: DEPOT_PDF_API
-        recipient:
-          name: Client Test SAS
-          electronicAddress:
-            identifier: "12345678901234"
-            schemeId: "0225"
-          postalAddress:
-            lineOne: 456 Avenue des Champs
-            postalCode: "69001"
-            city: Lyon
-            countryCode: FR
-          executingServiceCode: SERVICE01
-        supplier:
-          name: Ma Société SAS
-          supplierId: 12345
-          siret: "12345678900001"
-          vatNumber: FR12345678900
-          iban: FR7630006000011234567890189
-          electronicAddress:
-            identifier: "12345678900001"
-            schemeId: "0225"
-          postalAddress:
-            lineOne: 123 Rue de la République
-            lineTwo: Bâtiment A
-            postalCode: "75001"
-            city: Paris
-            countryCode: FR
-        invoicingFramework:
-          invoicingFrameworkCode: A1_FACTURE_FOURNISSEUR
-        references:
-          invoiceType: FACTURE
-          vatAccountingCode: TVA_SUR_DEBIT
-          paymentMeans: VIREMENT
-          invoiceCurrency: EUR
-          purchaseOrderReference: CMD-2025-042
-        invoiceLines:
-        - lineNumber: 1
-          itemName: Prestation de conseil
-          quantity: "5.00"
-          unit: HEURE
-          unitNetPrice: "200.00"
-          lineNetAmount: "1000.00"
-          manualVatRate: "20.00"
-          vatCategory: S
-          reference: REF-CONSEIL-001
-        - lineNumber: 2
-          itemName: Formation développeurs
-          quantity: "3.00"
-          unit: JOUR
-          unitNetPrice: "500.00"
-          lineNetAmount: "1500.00"
-          vatCategory: S
-          manualVatRate: "20.00"
-          reference: REF-FORM-002
-        vatLines:
-        - taxableAmount: "2500.00"
-          vatAmount: "500.00"
-          manualRate: "20.00"
-          category: S
-        totals:
-          totalNetAmount: "2500.00"
-          vatAmount: "500.00"
-          totalGrossAmount: "3000.00"
-          amountDue: "3000.00"
-        comment: Invoice for October 2025 services
-      properties:
-        invoice_number:
-          title: Invoice Number
-          type: string
-        payment_due_date:
-          title: Payment Due Date
-          type: string
-        invoice_date:
-          title: Invoice Date
-          type: string
-        submission_mode:
-          allOf:
-          - $ref: "#/components/schemas/SubmissionMode"
-          default: DEPOT_PDF_API
-        recipient:
-          $ref: "#/components/schemas/Recipient"
-        supplier:
-          $ref: "#/components/schemas/Supplier"
-        invoicing_framework:
-          allOf:
-          - $ref: "#/components/schemas/InvoicingFramework"
-          nullable: true
-        references:
-          $ref: "#/components/schemas/InvoiceReferences"
-        totals:
-          $ref: "#/components/schemas/InvoiceTotals"
-        invoice_lines:
-          items:
-            $ref: "#/components/schemas/InvoiceLine"
-          title: Invoice Lines
-          type: array
-        vat_lines:
-          items:
-            $ref: "#/components/schemas/VATLine"
-          title: Vat Lines
-          type: array
-        notes:
-          items:
-            $ref: "#/components/schemas/InvoiceNote"
-          title: Notes
-          type: array
-        comment:
-          nullable: true
-          type: string
-        current_user_id:
-          nullable: true
-          type: integer
-        supplementary_attachments:
-          items:
-            $ref: "#/components/schemas/SupplementaryAttachment"
-          nullable: true
-          type: array
-        payee:
-          allOf:
-          - $ref: "#/components/schemas/Payee"
-          nullable: true
-        delivery_party:
-          allOf:
-          - $ref: "#/components/schemas/DeliveryParty"
-          nullable: true
-        tax_representative:
-          allOf:
-          - $ref: "#/components/schemas/TaxRepresentative"
-          nullable: true
-        delivery_date:
-          nullable: true
-          type: string
-        billing_period_start:
-          nullable: true
-          type: string
-        billing_period_end:
-          nullable: true
-          type: string
-        payment_reference:
-          nullable: true
-          type: string
-        creditor_reference_id:
-          nullable: true
-          type: string
-        direct_debit_mandate_id:
-          nullable: true
-          type: string
-        debtor_iban:
-          nullable: true
-          type: string
-        payment_terms:
-          nullable: true
-          type: string
-        allowances_charges:
-          items:
-            $ref: "#/components/schemas/AllowanceCharge"
-          nullable: true
-          type: array
-        additional_documents:
-          items:
-            $ref: "#/components/schemas/AdditionalDocument"
-          nullable: true
-          type: array
-        buyer_accounting_reference:
-          nullable: true
-          type: string
-        payment_card:
-          allOf:
-          - $ref: "#/components/schemas/PaymentCard"
-          nullable: true
-      required:
-      - invoice_number
-      - payment_due_date
-      - recipient
-      - references
-      - supplier
-      - totals
-      title: FacturXInvoice
+      title: PostalAddress
     PDPCredentials:
       description: |-
         PDP credentials for zero-storage strategy (Strategy B).
@@ -14076,6 +14447,7 @@ components:
       - Basic
       - CIUS
       - Extended-CTC-FR
+      - Undefined
       title: FlowProfile
       type: string
     SubmitFlowRequest:
@@ -14132,14 +14504,16 @@ components:
       description: |-
         AFNOR XP Z12-013 FlowType enum.
 
-        Values from swagger specification v1.2.0:
+        Values from swagger specification v1.3.0:
         - Invoice flows (factures)
         - Lifecycle flows (cycle de vie)
         - E-reporting flows (transactions/paiements)
+        - "State*" flows sent to DFH and Undefined (added in v1.3.0)
       enum:
       - CustomerInvoice
       - SupplierInvoice
-      - StateInvoice
+      - StateCustomerInvoice
+      - StateSupplierInvoice
       - CustomerInvoiceLC
       - SupplierInvoiceLC
       - StateCustomerInvoiceLC
@@ -14149,7 +14523,12 @@ components:
       - UnitarySupplierTransactionReport
       - UnitaryCustomerPaymentReport
       - AggregatedCustomerPaymentReport
+      - StateTransactionReport
+      - StateTransactionReportLC
+      - StatePaymentReport
+      - StatePaymentReportLC
       - MultiFlowReport
+      - Undefined
       title: FlowType
       type: string
     SearchFlowRequest:
@@ -14346,8 +14725,18 @@ components:
     AFNOR_NotOnlyUuid:
       description: "Unique identifier supporting UUID but not only, for flexibility\
         \ purpose"
-      maxLength: 36
+      maxLength: 64
       type: string
+    AFNOR_Cursor:
+      description: "Pagination, Opaque cursor for pagination management, acts as a\
+        \ bookmark"
+      example: eyJjcmVhdGVkX2F0IjoiMjAyNS0wNi0wOVQxMDowMDowMFoiLCJpZCI6MTIzNH0=
+      type: string
+    AFNOR_Limit:
+      default: 25
+      description: "Pagination, Maximum number of results that may be returned"
+      maximum: 100
+      type: integer
     AFNOR_ProcessingRule:
       description: |
         - B2B                 : e-invoicing
@@ -14359,6 +14748,7 @@ components:
         - B2GOutOfScope
         - ArchiveOnly         : Archive only, no transmission
         - NotApplicable       : Not Applicable
+        - Undefined           : Not yet defined when in Pending state or unable to define when in Error state
       enum:
       - B2B
       - B2BInt
@@ -14369,6 +14759,7 @@ components:
       - B2GOutOfScope
       - ArchiveOnly
       - NotApplicable
+      - Undefined
       type: string
     AFNOR_FlowSyntax:
       description: Syntax of the original file belonging to a flow
@@ -14385,26 +14776,32 @@ components:
       - Basic
       - CIUS
       - Extended-CTC-FR
+      - Undefined
       type: string
     AFNOR_FlowType:
       description: |
         - `CustomerInvoice`: a non-self-billed outgoing invoice or a self-billed incoming invoice
         - `SupplierInvoice`: a non-self-billed incoming invoice or self-billed outgoing invoice
-        - `StateInvoice`: an invoice Flow sent to DFH
         - `CustomerInvoiceLC`: a lifecycle (CDAR) related to a customer invoice
         - `SupplierInvoiceLC`: a lifecycle (CDAR) related to supplier invoice
         - `StateCustomerInvoiceLC`: a customer invoice LC sent to DFH
         - `StateSupplierInvoiceLC`: a supplier invoice LC sent to DFH
-        - `AggregatedCustomerTransactionReport` : a transaction E-Reporting flow containing aggregated B2C sales (FRR 10.3)
-        - `IndividualCustomerTransactionReport`: a transaction E-Reporting flow containing international B2B sales or a B2C transaction flow reported individually (FRR 10.1)
-        - `AggregatedCustomerPaymentReport` : a E-Reporting of collections flow containing collections linked to B2C sales (FRR 10.4)
-        - `UnitaryCustomerPaymentReport` : an E-Reporting of collections flow containing collections linked to unit international B2B sales or B2C sales (FRR 10.2)
-        - `UnitarySupplierTransactionReport`: a transaction E-Reporting flow containing international B2B purchases (FRR 10.1)
-        - `MultiFlowReport`: an E-Reporting flow which contains at least 2 different flow types (FRR 10)
+        - `AggregatedCustomerTransactionReport` : a transaction e-reporting flow containing aggregated B2C sales (FRR 10.3)
+        - `UnitaryCustomerTransactionReport`: a transaction e-reporting flow containing international B2B sales or a B2C transaction flow reported individually (FRR 10.1)
+        - `AggregatedCustomerPaymentReport` : an e-reporting of collections flow containing collections linked to B2C sales (FRR 10.4)
+        - `UnitaryCustomerPaymentReport` : an e-reporting of collections flow containing collections linked to unit international B2B sales or B2C sales (FRR 10.2)
+        - `UnitarySupplierTransactionReport`: a transaction e-reporting flow containing international B2B purchases (FRR 10.1)
+        - `MultiFlowReport`: an e-reporting flow which contains at least 2 different flow types (FRR 10)
+        - `StateCustomerInvoice` : a reporting flow 1 sent to DFH related to an invoice of type ‘CustomerInvoice’
+        - `StateSupplierInvoice` : a reporting flow 1 sent to DFH related to an invoice of type ‘SupplierInvoice’ for self-billing
+        - `StateTransactionReport` : a transaction e-reporting flow 10.1 or 10.3 sent to the DFH
+        - `StateTransactionReportLC` : a lifecycle for a StateTransactionReport flow
+        - `StatePaymentReport` : a payment e-reporting flow 10.2 or 10.4 sent to DFH
+        - `StatePaymentReportLC` : a lifecycle for a StatePaymentReport flow
+        - `Undefined`            : Not yet defined when in Pending state or unable to define when in Error state
       enum:
       - CustomerInvoice
       - SupplierInvoice
-      - StateInvoice
       - CustomerInvoiceLC
       - SupplierInvoiceLC
       - StateCustomerInvoiceLC
@@ -14415,6 +14812,13 @@ components:
       - UnitaryCustomerPaymentReport
       - UnitarySupplierTransactionReport
       - MultiFlowReport
+      - StateCustomerInvoice
+      - StateSupplierInvoice
+      - StateTransactionReport
+      - StateTransactionReportLC
+      - StatePaymentReport
+      - StatePaymentReportLC
+      - Undefined
       example: SupplierInvoice
       type: string
     AFNOR_FlowDirection:
@@ -14481,16 +14885,6 @@ components:
       - InvoiceLCAccessDenied
       - InvoiceLCAmountError
       type: string
-    AFNOR_Algorithm:
-      enum:
-      - RS256
-      - HS256
-      - ECDSA
-      - EDDSA_25519
-      - RSA_PSS
-      - EDDSA_448
-      - null
-      type: string
     AFNOR_CoreFlowInfo:
       description: "Core schema to build FlowInfo, FullFlowInfo, Flow schemas"
       properties:
@@ -14532,9 +14926,14 @@ components:
       properties:
         limit:
           default: 25
-          description: Maximum number of results that may be returned
+          description: "Pagination, Maximum number of results that may be returned"
           maximum: 100
           type: integer
+        cursor:
+          allOf:
+          - $ref: "#/components/schemas/AFNOR_Cursor"
+          description: "If cursor is provided, then start search starting from that\
+            \ cursor"
         where:
           $ref: "#/components/schemas/AFNOR_SearchFlowFilters"
       required:
@@ -14578,17 +14977,17 @@ components:
         trackingId:
           description: "Unique identifier supporting UUID but not only, for flexibility\
             \ purpose"
-          maxLength: 36
+          maxLength: 64
           type: string
         ackStatus:
           $ref: "#/components/schemas/AFNOR_FlowAckStatus"
     AFNOR_FullFlowInfoExtension:
-      description: "Extension schema to build FFullFlowInfo, Flow schemas"
+      description: "Extension schema to build FullFlowInfo, Flow schemas"
       properties:
         flowId:
           description: "Unique identifier supporting UUID but not only, for flexibility\
             \ purpose"
-          maxLength: 36
+          maxLength: 64
           type: string
         submittedAt:
           description: |
@@ -14721,10 +15120,14 @@ components:
         trackingId: ""
         updatedAt: 2000-01-23T04:56:07.000+00:00
         flowType: SupplierInvoice
+      required:
+      - flowProfile
+      - processingRule
     AFNOR_SearchFlowContent:
       description: "A set of flows matching criterias, provided into the request"
       example:
-        limit: 0
+        nextCursor: ""
+        limit: 8
         filters:
           updatedBefore: 2000-01-23T04:56:07.000+00:00
           updatedAfter: 2000-01-23T04:56:07.000+00:00
@@ -14786,132 +15189,38 @@ components:
           flowType: SupplierInvoice
       properties:
         limit:
+          default: 25
+          description: "Pagination, Maximum number of results that may be returned"
+          maximum: 100
           type: integer
+        nextCursor:
+          allOf:
+          - $ref: "#/components/schemas/AFNOR_Cursor"
+          description: |
+            Pagination management:
+            - If present, says where to start for next page, set nextCursor as the cursor in the next request
+            - If omitted, says that pagination is finished
         filters:
           $ref: "#/components/schemas/AFNOR_SearchFlowFilters"
         results:
           items:
             $ref: "#/components/schemas/AFNOR_Flow"
           type: array
-    AFNOR_CallbackParameters:
-      example:
-        headers:
-        - headerName: headerName
-          headerValue: headerValue
-        - headerName: headerName
-          headerValue: headerValue
-        signature:
-          algo: RS256
-          key: key
-        url: https://openapi-generator.tech
-        authentication:
-          authType: BASIC
+    AFNOR_WebhookParams:
       properties:
-        url:
+        callbackUrl:
           format: uri
           type: string
-        headers:
+        flowTypes:
           items:
-            $ref: "#/components/schemas/AFNOR_CallbackHeader"
+            $ref: "#/components/schemas/AFNOR_FlowType"
           type: array
-        authentication:
-          $ref: "#/components/schemas/AFNOR_CallbackAuthentication"
-        signature:
-          $ref: "#/components/schemas/AFNOR_CallbackSignature"
-      required:
-      - url
-    AFNOR_CallbackHeader:
-      example:
-        headerName: headerName
-        headerValue: headerValue
-      properties:
-        headerName:
-          type: string
-        headerValue:
-          type: string
-      required:
-      - headerName
-      - headerValue
-    AFNOR_OAuth2Authentication:
-      properties:
-        tokenUrl:
-          format: uri
-          type: string
-        clientId:
-          type: string
-        clientSecret:
-          format: password
-          type: string
-      required:
-      - clientId
-      - clientSecret
-      - tokenUrl
-    AFNOR_BasicAuthentication:
-      properties:
-        userId:
-          type: string
-        userPassword:
-          format: password
-          type: string
-      required:
-      - userId
-      - userPassword
-    AFNOR_CallbackAuthentication:
-      description: The authentication mode required for the callback call
-      example:
-        authType: BASIC
-      oneOf:
-      - $ref: "#/components/schemas/AFNOR_BasicAuthentication"
-      - $ref: "#/components/schemas/AFNOR_OAuth2Authentication"
-      properties:
-        authType:
-          enum:
-          - BASIC
-          - OAUTH2
-          type: string
-      required:
-      - authType
-    AFNOR_CallbackSignature:
-      example:
-        algo: RS256
-        key: key
-      properties:
-        algo:
-          $ref: "#/components/schemas/AFNOR_Algorithm"
-        key:
-          description: Base 64 encoded string
-          format: byte
-          type: string
-      required:
-      - algo
-      - key
-    AFNOR_WebhookMetadata:
-      example:
-        processingRule: B2B
-        flowDirection: Out
-        ackStatus: Pending
-        flowType: SupplierInvoice
-      properties:
-        processingRule:
-          $ref: "#/components/schemas/AFNOR_ProcessingRule"
-        flowType:
-          $ref: "#/components/schemas/AFNOR_FlowType"
         flowDirection:
           $ref: "#/components/schemas/AFNOR_FlowDirection"
         ackStatus:
           $ref: "#/components/schemas/AFNOR_FlowAckStatus"
       required:
-      - flowDirection
-      - flowType
-    AFNOR_WebhookParams:
-      properties:
-        callback:
-          $ref: "#/components/schemas/AFNOR_CallbackParameters"
-        metadata:
-          $ref: "#/components/schemas/AFNOR_WebhookMetadata"
-      required:
-      - callback
-      - metadata
+      - callbackUrl
     AFNOR_WebhookId:
       format: uuid
       type: string
@@ -14920,39 +15229,26 @@ components:
         webhookId:
           format: uuid
           type: string
+        signingKey:
+          format: byte
+          type: string
+        createdAt:
+          format: date-time
+          type: string
     AFNOR_Webhook:
       allOf:
       - $ref: "#/components/schemas/AFNOR_WebhookIdParam"
       - $ref: "#/components/schemas/AFNOR_WebhookParams"
       example:
-        metadata:
-          processingRule: B2B
-          flowDirection: Out
-          ackStatus: Pending
-          flowType: SupplierInvoice
+        createdAt: 2000-01-23T04:56:07.000+00:00
         webhookId: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
-        callback:
-          headers:
-          - headerName: headerName
-            headerValue: headerValue
-          - headerName: headerName
-            headerValue: headerValue
-          signature:
-            algo: RS256
-            key: key
-          url: https://openapi-generator.tech
-          authentication:
-            authType: BASIC
-    AFNOR_WebhookPatchPayload:
-      properties:
-        headers:
-          items:
-            $ref: "#/components/schemas/AFNOR_CallbackHeader"
-          type: array
-        authentication:
-          $ref: "#/components/schemas/AFNOR_CallbackAuthentication"
-        signature:
-          $ref: "#/components/schemas/AFNOR_CallbackSignature"
+        flowTypes:
+        - SupplierInvoice
+        - SupplierInvoice
+        flowDirection: Out
+        ackStatus: Pending
+        signingKey: signingKey
+        callbackUrl: https://openapi-generator.tech
     AFNOR_Error:
       description: Error code
       example:
@@ -14995,7 +15291,7 @@ components:
         - field: administrativeStatus
           order: descending
         limit: 50
-        ignore: 20
+        ignore: 0
         filters:
           siren:
             op: strict
@@ -15046,12 +15342,14 @@ components:
           type: integer
         ignore:
           description: Number of results to skip
-          example: 20
+          example: 0
           format: int32
           type: integer
       title: searchSiren
     AFNOR_totalNumberOfResults:
-      description: The total number of results
+      default: -1
+      description: "The total number of results, if -1 is returned then this value\
+        \ is not managed due to performance issue"
       example: 1500
       format: int32
       type: integer
@@ -15102,7 +15400,7 @@ components:
         - field: name
           order: descending
         limit: 50
-        ignore: 20
+        ignore: 0
         filters:
           siren:
             op: strict
@@ -15192,7 +15490,7 @@ components:
           type: integer
         ignore:
           description: Number of results to skip
-          example: 20
+          example: 0
           format: int32
           type: integer
       title: searchSiret
@@ -15221,6 +15519,8 @@ components:
           isSalesProspectingForbidden: false
         name: Boulangerie Pascale
         legalUnit:
+          instructions:
+            isSalesProspectingForbidden: false
           siren: "702042755"
           administrativeStatus: A
           entityType: Public
@@ -15319,11 +15619,11 @@ components:
         - siret
         sorting:
         - field: siret
-          order: ascendant
+          order: ascending
         - field: routingIdentifier
-          order: ascendant
+          order: ascending
         limit: 50
-        ignore: 20
+        ignore: 0
         filters:
           routingIdentifier:
             op: contains
@@ -15361,9 +15661,9 @@ components:
           description: Sorting criteria on a field and an order (ascending or descending).
           example:
           - field: siret
-            order: ascendant
+            order: ascending
           - field: routingIdentifier
-            order: ascendant
+            order: ascending
           items:
             $ref: "#/components/schemas/AFNOR_routingCodeSearchSortingInner"
           type: array
@@ -15397,7 +15697,7 @@ components:
           type: integer
         ignore:
           description: Number of results to skip
-          example: 20
+          example: 0
           format: int32
           type: integer
       title: routingCodeSearch
@@ -15416,6 +15716,8 @@ components:
         administrativeStatus: A
         managesLegalCommitmentCode: true
         legalUnit:
+          instructions:
+            isSalesProspectingForbidden: false
           siren: "702042755"
           administrativeStatus: A
           entityType: Public
@@ -15423,6 +15725,8 @@ components:
         routingIdentifierType: "0224"
         siret: "70204275500240"
         facility:
+          instructions:
+            isSalesProspectingForbidden: false
           siren: "702042755"
           address:
             countryCode: FR
@@ -15502,11 +15806,15 @@ components:
       type: string
     AFNOR_searchDirectoryLine:
       example:
+        include:
+        - siren
+        - siret
+        - routingCode
         sorting:
         - field: addressingIdentifier
           order: ascending
         limit: 50
-        ignore: 20
+        ignore: 0
         filters:
           addressingSuffix:
             op: contains
@@ -15528,6 +15836,7 @@ components:
         - siren
         - siret
         - addressingSuffix
+        - routingIdentifier
       properties:
         filters:
           $ref: "#/components/schemas/AFNOR_searchDirectoryLineFilters"
@@ -15546,8 +15855,21 @@ components:
           - siren
           - siret
           - addressingSuffix
+          - routingIdentifier
           items:
             $ref: "#/components/schemas/AFNOR_directoryLineField"
+          type: array
+        include:
+          example:
+          - siren
+          - siret
+          - routingCode
+          items:
+            enum:
+            - siren
+            - siret
+            - routingCode
+            type: string
           type: array
         limit:
           description: Maximum number of results
@@ -15556,7 +15878,7 @@ components:
           type: integer
         ignore:
           description: Number of results to skip
-          example: 20
+          example: 0
           format: int32
           type: integer
       title: searchDirectoryLine
@@ -15564,16 +15886,21 @@ components:
       example:
         addressingSuffix: dcsc456sdcsdcs556
         siren: "702042755"
+        routingIdentifier: dcsc456sdcsdcs556
         addressingIdentifier: dcsc456sdcsdcs556
         platformType: WK
         directoryLineStatus: Enabled
         legalUnit:
+          instructions:
+            isSalesProspectingForbidden: false
           siren: "702042755"
           administrativeStatus: A
           entityType: Public
           businessName: Boulangerie Pascale
         siret: "70204275500240"
         facility:
+          instructions:
+            isSalesProspectingForbidden: false
           siren: "702042755"
           address:
             countryCode: FR
@@ -15632,6 +15959,12 @@ components:
           maxLength: 14
           pattern: "^([0-9]{14})$"
           type: string
+        routingIdentifier:
+          description: Routing identifier od a routing code.
+          example: dcsc456sdcsdcs556
+          maxLength: 100
+          pattern: "^(?!\\s+$)[\\-_/a-zA-Z0-9]{1,100}$"
+          type: string
         addressingSuffix:
           description: suffix of the directory line which defines an address mesh
             not attached to a facility
@@ -15649,15 +15982,21 @@ components:
       example:
         addressingSuffix: dcsc456sdcsdcs556
         siren: "702042755"
+        routingIdentifier: dcsc456sdcsdcs556
         addressingIdentifier: dcsc456sdcsdcs556
         platformType: WK
+        directoryLineStatus: Enabled
         legalUnit:
+          instructions:
+            isSalesProspectingForbidden: false
           siren: "702042755"
           administrativeStatus: A
           entityType: Public
           businessName: Boulangerie Pascale
         siret: "70204275500240"
         facility:
+          instructions:
+            isSalesProspectingForbidden: false
           siren: "702042755"
           address:
             countryCode: FR
@@ -15702,6 +16041,8 @@ components:
           type: string
         platformType:
           $ref: "#/components/schemas/AFNOR_recipientPlatformType"
+        directoryLineStatus:
+          $ref: "#/components/schemas/AFNOR_uniqueDirectoryLineStatus"
         siren:
           description: SIREN number
           example: "702042755"
@@ -15713,6 +16054,12 @@ components:
           example: "70204275500240"
           maxLength: 14
           pattern: "^([0-9]{14})$"
+          type: string
+        routingIdentifier:
+          description: Routing identifier od a routing code.
+          example: dcsc456sdcsdcs556
+          maxLength: 100
+          pattern: "^(?!\\s+$)[\\-_/a-zA-Z0-9]{1,100}$"
           type: string
         addressingSuffix:
           description: suffix of the directory line which defines an address mesh
@@ -15742,17 +16089,27 @@ components:
       - addressingSuffix
       example: siren
       type: string
-    AFNOR_containsOperator:
-      description: \"contains\" comparison operator
-      enum:
-      - contains
-      example: contains
-      type: string
     AFNOR_containsOrStrictOperator:
       description: \"contains\" or \"strict\" comparison operator
       enum:
       - contains
       - strict
+      example: contains
+      type: string
+    AFNOR_containsOrStartWithOperator:
+      description: \"contains\" or \"startWith\" comparison operator
+      enum:
+      - contains
+      - startWith
+      example: contains
+      type: string
+    AFNOR_containsOrStrictOrStartWithOperator:
+      description: "\\\"contains\\\", \\\"strict\\\" or \\\"startWith\\\" comparison\
+        \ operator"
+      enum:
+      - contains
+      - strict
+      - startWith
       example: contains
       type: string
     AFNOR_strictOperator:
@@ -15802,7 +16159,6 @@ components:
       - ascending
       - descending
       example: ascending
-      title: sortingOrder
       type: string
     AFNOR_limit:
       description: Maximum number of results
@@ -15811,7 +16167,7 @@ components:
       type: integer
     AFNOR_ignore:
       description: Number of results to skip
-      example: 20
+      example: 0
       format: int32
       type: integer
     AFNOR_siren:
@@ -16005,6 +16361,8 @@ components:
       type: string
     AFNOR_legalUnitPayloadIncluded:
       example:
+        instructions:
+          isSalesProspectingForbidden: false
         siren: "702042755"
         administrativeStatus: A
         entityType: Public
@@ -16025,9 +16383,13 @@ components:
           $ref: "#/components/schemas/AFNOR_entityType"
         administrativeStatus:
           $ref: "#/components/schemas/AFNOR_legalUnitAdministrativeStatus"
+        instructions:
+          $ref: "#/components/schemas/AFNOR_sirenInstructions"
       title: legalUnitPayloadIncluded
     AFNOR_facilityPayloadIncluded:
       example:
+        instructions:
+          isSalesProspectingForbidden: false
         siren: "702042755"
         address:
           countryCode: FR
@@ -16071,6 +16433,8 @@ components:
           $ref: "#/components/schemas/AFNOR_facilityType"
         administrativeStatus:
           $ref: "#/components/schemas/AFNOR_facilityAdministrativeStatus"
+        instructions:
+          $ref: "#/components/schemas/AFNOR_siretInstructions"
         address:
           $ref: "#/components/schemas/AFNOR_addressRead"
         b2gAdditionalData:
@@ -16103,6 +16467,17 @@ components:
       - Enabled
       - Disabled
       - Upcoming
+      example: Enabled
+      maxLength: 7
+      type: string
+    AFNOR_uniqueDirectoryLineStatus:
+      description: |
+        Current line status of the platform.
+          - Enabled : Active line linked to a platform
+          - Disabled : No platform linked to the line
+      enum:
+      - Enabled
+      - Disabled
       example: Enabled
       maxLength: 7
       type: string
@@ -16145,7 +16520,7 @@ components:
           - field: administrativeStatus
             order: descending
           limit: 50
-          ignore: 20
+          ignore: 0
           filters:
             siren:
               op: strict
@@ -16182,7 +16557,9 @@ components:
         search:
           $ref: "#/components/schemas/AFNOR_searchSiren"
         totalNumberOfResults:
-          description: The total number of results
+          default: -1
+          description: "The total number of results, if -1 is returned then this value\
+            \ is not managed due to performance issue"
           example: 1500
           format: int32
           type: integer
@@ -16202,7 +16579,7 @@ components:
           - field: name
             order: descending
           limit: 50
-          ignore: 20
+          ignore: 0
           filters:
             siren:
               op: strict
@@ -16269,6 +16646,8 @@ components:
             isSalesProspectingForbidden: false
           name: Boulangerie Pascale
           legalUnit:
+            instructions:
+              isSalesProspectingForbidden: false
             siren: "702042755"
             administrativeStatus: A
             entityType: Public
@@ -16297,6 +16676,8 @@ components:
             isSalesProspectingForbidden: false
           name: Boulangerie Pascale
           legalUnit:
+            instructions:
+              isSalesProspectingForbidden: false
             siren: "702042755"
             administrativeStatus: A
             entityType: Public
@@ -16306,7 +16687,9 @@ components:
         search:
           $ref: "#/components/schemas/AFNOR_searchSiret"
         totalNumberOfResults:
-          description: The total number of results
+          default: -1
+          description: "The total number of results, if -1 is returned then this value\
+            \ is not managed due to performance issue"
           example: 1500
           format: int32
           type: integer
@@ -16323,11 +16706,11 @@ components:
           - siret
           sorting:
           - field: siret
-            order: ascendant
+            order: ascending
           - field: routingIdentifier
-            order: ascendant
+            order: ascending
           limit: 50
-          ignore: 20
+          ignore: 0
           filters:
             routingIdentifier:
               op: contains
@@ -16372,6 +16755,8 @@ components:
           administrativeStatus: A
           managesLegalCommitmentCode: true
           legalUnit:
+            instructions:
+              isSalesProspectingForbidden: false
             siren: "702042755"
             administrativeStatus: A
             entityType: Public
@@ -16379,6 +16764,8 @@ components:
           routingIdentifierType: "0224"
           siret: "70204275500240"
           facility:
+            instructions:
+              isSalesProspectingForbidden: false
             siren: "702042755"
             address:
               countryCode: FR
@@ -16414,6 +16801,8 @@ components:
           administrativeStatus: A
           managesLegalCommitmentCode: true
           legalUnit:
+            instructions:
+              isSalesProspectingForbidden: false
             siren: "702042755"
             administrativeStatus: A
             entityType: Public
@@ -16421,6 +16810,8 @@ components:
           routingIdentifierType: "0224"
           siret: "70204275500240"
           facility:
+            instructions:
+              isSalesProspectingForbidden: false
             siren: "702042755"
             address:
               countryCode: FR
@@ -16447,7 +16838,9 @@ components:
         search:
           $ref: "#/components/schemas/AFNOR_routingCodeSearch"
         totalNumberOfResults:
-          description: The total number of results
+          default: -1
+          description: "The total number of results, if -1 is returned then this value\
+            \ is not managed due to performance issue"
           example: 1500
           format: int32
           type: integer
@@ -16459,11 +16852,15 @@ components:
       example:
         totalNumberOfResults: 1500
         search:
+          include:
+          - siren
+          - siret
+          - routingCode
           sorting:
           - field: addressingIdentifier
             order: ascending
           limit: 50
-          ignore: 20
+          ignore: 0
           filters:
             addressingSuffix:
               op: contains
@@ -16485,19 +16882,25 @@ components:
           - siren
           - siret
           - addressingSuffix
+          - routingIdentifier
         results:
         - addressingSuffix: dcsc456sdcsdcs556
           siren: "702042755"
+          routingIdentifier: dcsc456sdcsdcs556
           addressingIdentifier: dcsc456sdcsdcs556
           platformType: WK
           directoryLineStatus: Enabled
           legalUnit:
+            instructions:
+              isSalesProspectingForbidden: false
             siren: "702042755"
             administrativeStatus: A
             entityType: Public
             businessName: Boulangerie Pascale
           siret: "70204275500240"
           facility:
+            instructions:
+              isSalesProspectingForbidden: false
             siren: "702042755"
             address:
               countryCode: FR
@@ -16536,16 +16939,21 @@ components:
             routingCodeName: Libellé Code routage
         - addressingSuffix: dcsc456sdcsdcs556
           siren: "702042755"
+          routingIdentifier: dcsc456sdcsdcs556
           addressingIdentifier: dcsc456sdcsdcs556
           platformType: WK
           directoryLineStatus: Enabled
           legalUnit:
+            instructions:
+              isSalesProspectingForbidden: false
             siren: "702042755"
             administrativeStatus: A
             entityType: Public
             businessName: Boulangerie Pascale
           siret: "70204275500240"
           facility:
+            instructions:
+              isSalesProspectingForbidden: false
             siren: "702042755"
             address:
               countryCode: FR
@@ -16586,7 +16994,9 @@ components:
         search:
           $ref: "#/components/schemas/AFNOR_searchDirectoryLine"
         totalNumberOfResults:
-          description: The total number of results
+          default: -1
+          description: "The total number of results, if -1 is returned then this value\
+            \ is not managed due to performance issue"
           example: 1500
           format: int32
           type: integer
@@ -16613,7 +17023,7 @@ components:
         value: Boulangerie Pascale
       properties:
         op:
-          $ref: "#/components/schemas/AFNOR_containsOrStrictOperator"
+          $ref: "#/components/schemas/AFNOR_containsOrStrictOrStartWithOperator"
         value:
           description: Business name
           example: Boulangerie Pascale
@@ -16665,11 +17075,11 @@ components:
         or descending).
       example:
         field: siren
-        order: ascendant
+        order: ascending
       properties:
         field:
           $ref: "#/components/schemas/AFNOR_sirenField"
-        sortingOrder:
+        order:
           $ref: "#/components/schemas/AFNOR_sortingOrder"
     AFNOR_searchSiretFiltersSiret:
       example:
@@ -16699,7 +17109,7 @@ components:
         value: Boulangerie Pascale
       properties:
         op:
-          $ref: "#/components/schemas/AFNOR_containsOrStrictOperator"
+          $ref: "#/components/schemas/AFNOR_containsOrStrictOrStartWithOperator"
         value:
           description: business name
           example: Boulangerie Pascale
@@ -16711,7 +17121,7 @@ components:
         value: 16 BIS RUE HENRI BARBUSSE - CEDEX 1 - Bâtiment le Callipso
       properties:
         op:
-          $ref: "#/components/schemas/AFNOR_containsOperator"
+          $ref: "#/components/schemas/AFNOR_containsOrStartWithOperator"
         value:
           description: address lines of the recipient structure having defined the
             directory line(s).
@@ -16749,7 +17159,7 @@ components:
         value: Grenoble
       properties:
         op:
-          $ref: "#/components/schemas/AFNOR_containsOrStrictOperator"
+          $ref: "#/components/schemas/AFNOR_containsOrStrictOrStartWithOperator"
         value:
           description: Municipality of the recipient structure having defined the
             directory line(s).
@@ -16818,11 +17228,11 @@ components:
         or descending).
       example:
         field: siret
-        sortingOrder: ascending
+        order: ascending
       properties:
         field:
           $ref: "#/components/schemas/AFNOR_siretField"
-        sortingOrder:
+        order:
           $ref: "#/components/schemas/AFNOR_sortingOrder"
     AFNOR_facilityPayloadHistoryUleB2gAdditionalData:
       example:
@@ -16952,7 +17362,7 @@ components:
         descending).
       example:
         field: siret
-        order: descendant
+        order: descending
       properties:
         field:
           $ref: "#/components/schemas/AFNOR_routingCodeField"
@@ -17020,7 +17430,7 @@ components:
       properties:
         field:
           $ref: "#/components/schemas/AFNOR_directoryLineField"
-        sortingOrder:
+        order:
           $ref: "#/components/schemas/AFNOR_sortingOrder"
     AFNOR_directoryLinePayloadHistoryLegalUnitFacilityRoutingCodeRoutingCode:
       example:
@@ -17105,6 +17515,37 @@ components:
       description: Total VAT amount
       example: "2000.00"
       title: Taxamount
+    Amount:
+      anyOf:
+      - type: number
+      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+        type: string
+      description: Allowance/charge amount (BT-92/99/136/141).
+      title: Amount
+    Base_Amount:
+      anyOf:
+      - type: number
+      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+        type: string
+      description: Base amount for percentage calculation (BT-93/100/137/142).
+      nullable: true
+      title: Base Amount
+    Percentage:
+      anyOf:
+      - type: number
+      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+        type: string
+      description: Percentage applied to base amount (BT-94/101/138/143).
+      nullable: true
+      title: Percentage
+    Vat_Rate:
+      anyOf:
+      - type: number
+      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+        type: string
+      description: VAT rate applicable to this allowance/charge (BT-96/103).
+      nullable: true
+      title: Vat Rate
     ConversionTaskStatus_result:
       discriminator:
         mapping:
@@ -17127,7 +17568,7 @@ components:
       description: Montant encaissé (requis pour statut 212)
       nullable: true
       title: Encaisseamount
-    Amount:
+    Amount_1:
       anyOf:
       - exclusiveMinimum: true
         minimum: 0.0
@@ -17179,154 +17620,15 @@ components:
       description: VAT amount
       example: "0.00"
       title: Taxamount
-    Rate:
-      anyOf:
-      - maximum: 100.0
-        minimum: 0.0
-        type: number
-      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
-        type: string
-      description: VAT rate
-      example: "20.00"
-      title: Rate
-    Amount_1:
+    Taxamounteur:
       anyOf:
       - type: number
       - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
         type: string
-      description: Payment amount
-      example: "12000.00"
-      title: Amount
-    SignatureTaskStatus_result:
-      discriminator:
-        mapping:
-          ERROR: "#/components/schemas/TaskErrorResult"
-          SUCCESS: "#/components/schemas/SignatureSuccessResult"
-        propertyName: status
+      description: VAT amount in EUR for a non-EUR invoice. Computed automatically
+        from the exchange rate when omitted.
       nullable: true
-      oneOf:
-      - $ref: "#/components/schemas/SignatureSuccessResult"
-      - $ref: "#/components/schemas/TaskErrorResult"
-    Destination:
-      description: Destination configuration (Chorus Pro or AFNOR)
-      discriminator:
-        mapping:
-          afnor: "#/components/schemas/AFNORDestination"
-          chorus_pro: "#/components/schemas/ChorusProDestination"
-        propertyName: type
-      oneOf:
-      - $ref: "#/components/schemas/ChorusProDestination"
-      - $ref: "#/components/schemas/AFNORDestination"
-      title: Destination
-    SubmitNetAmount:
-      anyOf:
-      - type: number
-      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
-        type: string
-      description: Total net amount
-      title: SubmitNetAmount
-    SubmitVatAmount:
-      anyOf:
-      - type: number
-      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
-        type: string
-      description: VAT amount
-      title: SubmitVatAmount
-    SubmitGrossAmount:
-      anyOf:
-      - type: number
-      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
-        type: string
-      description: Total gross amount
-      title: SubmitGrossAmount
-    Rate_1:
-      anyOf:
-      - maximum: 100.0
-        minimum: 0.0
-        type: number
-      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
-        type: string
-      description: "VAT rate (e.g., 20.00 for 20%)"
-      example: "20.00"
-      title: Rate
-    Taxableamount:
-      anyOf:
-      - type: number
-      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
-        type: string
-      description: Taxable amount (base)
-      example: "10000.00"
-      title: Taxableamount
-    Taxamount_2:
-      anyOf:
-      - type: number
-      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
-        type: string
-      description: VAT amount
-      example: "2000.00"
-      title: Taxamount
-    Encaisseamount_1:
-      anyOf:
-      - type: number
-      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
-        type: string
-      nullable: true
-      title: Encaisseamount
-    Location_inner:
-      anyOf:
-      - type: string
-      - type: integer
-    ValidationTaskStatus_result:
-      discriminator:
-        mapping:
-          ERROR: "#/components/schemas/TaskErrorResult"
-          SUCCESS: "#/components/schemas/ValidationSuccessTaskResult"
-        propertyName: status
-      nullable: true
-      oneOf:
-      - $ref: "#/components/schemas/ValidationSuccessTaskResult"
-      - $ref: "#/components/schemas/TaskErrorResult"
-    VerificationTypedTaskStatus_result:
-      discriminator:
-        mapping:
-          ERROR: "#/components/schemas/TaskErrorResult"
-          SUCCESS: "#/components/schemas/VerificationSuccessTaskResult"
-        propertyName: status
-      nullable: true
-      oneOf:
-      - $ref: "#/components/schemas/VerificationSuccessTaskResult"
-      - $ref: "#/components/schemas/TaskErrorResult"
-    Amount_2:
-      anyOf:
-      - type: number
-      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
-        type: string
-      description: Allowance/charge amount (BT-92/99/136/141).
-      title: Amount
-    Base_Amount:
-      anyOf:
-      - type: number
-      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
-        type: string
-      description: Base amount for percentage calculation (BT-93/100/137/142).
-      nullable: true
-      title: Base Amount
-    Percentage:
-      anyOf:
-      - type: number
-      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
-        type: string
-      description: Percentage applied to base amount (BT-94/101/138/143).
-      nullable: true
-      title: Percentage
-    Vat_Rate:
-      anyOf:
-      - type: number
-      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
-        type: string
-      description: VAT rate applicable to this allowance/charge (BT-96/103).
-      nullable: true
-      title: Vat Rate
+      title: Taxamounteur
     Quantity:
       anyOf:
       - type: number
@@ -17486,6 +17788,110 @@ components:
         \ (Accepte number, string ou integer)"
       format: decimal
       title: GlobalAllowanceAmount
+    Rate:
+      anyOf:
+      - maximum: 100.0
+        minimum: 0.0
+        type: number
+      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+        type: string
+      description: VAT rate
+      example: "20.00"
+      title: Rate
+    Amount_2:
+      anyOf:
+      - type: number
+      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+        type: string
+      description: Payment amount
+      example: "12000.00"
+      title: Amount
+    Amounteur:
+      anyOf:
+      - type: number
+      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+        type: string
+      description: Payment amount in EUR for a non-EUR payment (G6.27). Computed automatically
+        from the exchange rate when omitted.
+      nullable: true
+      title: Amounteur
+    SignatureTaskStatus_result:
+      discriminator:
+        mapping:
+          ERROR: "#/components/schemas/TaskErrorResult"
+          SUCCESS: "#/components/schemas/SignatureSuccessResult"
+        propertyName: status
+      nullable: true
+      oneOf:
+      - $ref: "#/components/schemas/SignatureSuccessResult"
+      - $ref: "#/components/schemas/TaskErrorResult"
+    Invoicedata:
+      description: |-
+        Invoice data, in either of the two accepted formats (detected automatically, same rule as /generate-invoice):
+        1. **Simplified format**: `number` + `lines`, with auto-enrichment. Any field of the complete model may be added on top.
+        2. **Complete format**: full `FacturXInvoice` structure, recognised by the presence of `invoiceLines`. No auto-enrichment of totals.
+      oneOf:
+      - $ref: "#/components/schemas/SimplifiedInvoiceData"
+      - $ref: "#/components/schemas/FacturXInvoice"
+      title: Invoicedata
+    Destination:
+      description: Destination configuration (Chorus Pro or AFNOR)
+      discriminator:
+        mapping:
+          afnor: "#/components/schemas/AFNORDestination"
+          chorus_pro: "#/components/schemas/ChorusProDestination"
+        propertyName: type
+      oneOf:
+      - $ref: "#/components/schemas/ChorusProDestination"
+      - $ref: "#/components/schemas/AFNORDestination"
+      title: Destination
+    SubmitNetAmount:
+      anyOf:
+      - type: number
+      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+        type: string
+      description: Total net amount
+      title: SubmitNetAmount
+    SubmitVatAmount:
+      anyOf:
+      - type: number
+      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+        type: string
+      description: VAT amount
+      title: SubmitVatAmount
+    SubmitGrossAmount:
+      anyOf:
+      - type: number
+      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+        type: string
+      description: Total gross amount
+      title: SubmitGrossAmount
+    Rate_1:
+      anyOf:
+      - maximum: 100.0
+        minimum: 0.0
+        type: number
+      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+        type: string
+      description: "VAT rate (e.g., 20.00 for 20%)"
+      example: "20.00"
+      title: Rate
+    Taxableamount:
+      anyOf:
+      - type: number
+      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+        type: string
+      description: Taxable amount (base)
+      example: "10000.00"
+      title: Taxableamount
+    Taxamount_2:
+      anyOf:
+      - type: number
+      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+        type: string
+      description: VAT amount
+      example: "2000.00"
+      title: Taxamount
     TaxableAmount:
       anyOf:
       - type: number
@@ -17513,6 +17919,37 @@ components:
       description: "VAT category rate (BT-119). (Accepte number, string ou integer)"
       format: decimal
       title: Manual Rate
+    Encaisseamount_1:
+      anyOf:
+      - type: number
+      - pattern: "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$"
+        type: string
+      nullable: true
+      title: Encaisseamount
+    Location_inner:
+      anyOf:
+      - type: string
+      - type: integer
+    ValidationTaskStatus_result:
+      discriminator:
+        mapping:
+          ERROR: "#/components/schemas/TaskErrorResult"
+          SUCCESS: "#/components/schemas/ValidationSuccessTaskResult"
+        propertyName: status
+      nullable: true
+      oneOf:
+      - $ref: "#/components/schemas/ValidationSuccessTaskResult"
+      - $ref: "#/components/schemas/TaskErrorResult"
+    VerificationTypedTaskStatus_result:
+      discriminator:
+        mapping:
+          ERROR: "#/components/schemas/TaskErrorResult"
+          SUCCESS: "#/components/schemas/VerificationSuccessTaskResult"
+        propertyName: status
+      nullable: true
+      oneOf:
+      - $ref: "#/components/schemas/VerificationSuccessTaskResult"
+      - $ref: "#/components/schemas/TaskErrorResult"
   securitySchemes:
     HTTPBearer:
       description: Token JWT Bearer. Voir la section **Authentication** ci-dessus

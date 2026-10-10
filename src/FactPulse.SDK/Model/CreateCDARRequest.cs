@@ -52,8 +52,9 @@ namespace FactPulse.SDK.Model
         /// <param name="reasonText">reasonText</param>
         /// <param name="actionCode">actionCode</param>
         /// <param name="encaisseAmount">encaisseAmount</param>
+        /// <param name="encaisseVatRate">Taux de TVA du montant encaissé en % (MDT-224, requis par BR-FR-CDV-14 pour le statut 212 ; défaut 20) (default to 20M)</param>
         [JsonConstructor]
-        public CreateCDARRequest(string documentId, string senderSiren, string invoiceId, DateOnly invoiceIssueDate, string status, Option<string?> businessProcess = default, Option<string?> typeCode = default, Option<string?> senderRole = default, Option<string?> senderName = default, Option<string?> senderEmail = default, Option<List<RecipientInput>?> recipients = default, Option<string?> invoiceTypeCode = default, Option<string?> invoiceSellerSiren = default, Option<string?> invoiceBuyerSiren = default, Option<string?> reasonCode = default, Option<string?> reasonText = default, Option<string?> actionCode = default, Option<Encaisseamount?> encaisseAmount = default)
+        public CreateCDARRequest(string documentId, string senderSiren, string invoiceId, DateOnly invoiceIssueDate, string status, Option<string?> businessProcess = default, Option<string?> typeCode = default, Option<string?> senderRole = default, Option<string?> senderName = default, Option<string?> senderEmail = default, Option<List<RecipientInput>?> recipients = default, Option<string?> invoiceTypeCode = default, Option<string?> invoiceSellerSiren = default, Option<string?> invoiceBuyerSiren = default, Option<string?> reasonCode = default, Option<string?> reasonText = default, Option<string?> actionCode = default, Option<Encaisseamount?> encaisseAmount = default, Option<decimal?> encaisseVatRate = default)
         {
             DocumentId = documentId;
             SenderSiren = senderSiren;
@@ -73,6 +74,7 @@ namespace FactPulse.SDK.Model
             ReasonTextOption = reasonText;
             ActionCodeOption = actionCode;
             EncaisseAmountOption = encaisseAmount;
+            EncaisseVatRateOption = encaisseVatRate;
             OnCreated();
         }
 
@@ -288,6 +290,20 @@ namespace FactPulse.SDK.Model
         public Encaisseamount? EncaisseAmount { get { return this.EncaisseAmountOption; } set { this.EncaisseAmountOption = new(value); } }
 
         /// <summary>
+        /// Used to track the state of EncaisseVatRate
+        /// </summary>
+        [JsonIgnore]
+        [global::System.ComponentModel.EditorBrowsable(global::System.ComponentModel.EditorBrowsableState.Never)]
+        public Option<decimal?> EncaisseVatRateOption { get; private set; }
+
+        /// <summary>
+        /// Taux de TVA du montant encaissé en % (MDT-224, requis par BR-FR-CDV-14 pour le statut 212 ; défaut 20)
+        /// </summary>
+        /// <value>Taux de TVA du montant encaissé en % (MDT-224, requis par BR-FR-CDV-14 pour le statut 212 ; défaut 20)</value>
+        [JsonPropertyName("encaisseVatRate")]
+        public decimal? EncaisseVatRate { get { return this.EncaisseVatRateOption; } set { this.EncaisseVatRateOption = new(value); } }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -313,6 +329,7 @@ namespace FactPulse.SDK.Model
             sb.Append("  ReasonText: ").Append(ReasonText).Append("\n");
             sb.Append("  ActionCode: ").Append(ActionCode).Append("\n");
             sb.Append("  EncaisseAmount: ").Append(EncaisseAmount).Append("\n");
+            sb.Append("  EncaisseVatRate: ").Append(EncaisseVatRate).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -373,6 +390,7 @@ namespace FactPulse.SDK.Model
             Option<string?> reasonText = default;
             Option<string?> actionCode = default;
             Option<Encaisseamount?> encaisseAmount = default;
+            Option<decimal?> encaisseVatRate = default;
 
             while (utf8JsonReader.Read())
             {
@@ -443,6 +461,9 @@ namespace FactPulse.SDK.Model
                         case "encaisseAmount":
                             encaisseAmount = new Option<Encaisseamount?>(JsonSerializer.Deserialize<Encaisseamount>(ref utf8JsonReader, jsonSerializerOptions));
                             break;
+                        case "encaisseVatRate":
+                            encaisseVatRate = new Option<decimal?>(utf8JsonReader.TokenType == JsonTokenType.Null ? (decimal?)null : utf8JsonReader.GetDecimal());
+                            break;
                         default:
                             break;
                     }
@@ -494,7 +515,10 @@ namespace FactPulse.SDK.Model
             if (invoiceTypeCode.IsSet && invoiceTypeCode.Value == null)
                 throw new ArgumentNullException(nameof(invoiceTypeCode), "Property is not nullable for class CreateCDARRequest.");
 
-            return new CreateCDARRequest(documentId.Value!, senderSiren.Value!, invoiceId.Value!, invoiceIssueDate.Value!.Value!, status.Value!, businessProcess, typeCode, senderRole, senderName, senderEmail, recipients, invoiceTypeCode, invoiceSellerSiren, invoiceBuyerSiren, reasonCode, reasonText, actionCode, encaisseAmount);
+            if (encaisseVatRate.IsSet && encaisseVatRate.Value == null)
+                throw new ArgumentNullException(nameof(encaisseVatRate), "Property is not nullable for class CreateCDARRequest.");
+
+            return new CreateCDARRequest(documentId.Value!, senderSiren.Value!, invoiceId.Value!, invoiceIssueDate.Value!.Value!, status.Value!, businessProcess, typeCode, senderRole, senderName, senderEmail, recipients, invoiceTypeCode, invoiceSellerSiren, invoiceBuyerSiren, reasonCode, reasonText, actionCode, encaisseAmount, encaisseVatRate);
         }
 
         /// <summary>
@@ -625,6 +649,8 @@ namespace FactPulse.SDK.Model
                 }
                 else
                     writer.WriteNull("encaisseAmount");
+            if (createCDARRequest.EncaisseVatRateOption.IsSet)
+                writer.WriteNumber("encaisseVatRate", createCDARRequest.EncaisseVatRateOption.Value!.Value);
         }
     }
 }

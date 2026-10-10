@@ -64,6 +64,15 @@ namespace FactPulse.SDK.Test.Model
         }
 
         /// <summary>
+        /// Test the property 'NextCursor'
+        /// </summary>
+        [Fact]
+        public void NextCursorTest()
+        {
+            // TODO unit test for the property 'NextCursor'
+        }
+
+        /// <summary>
         /// Test the property 'Filters'
         /// </summary>
         [Fact]
